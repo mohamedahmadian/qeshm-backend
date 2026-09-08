@@ -43,3 +43,13 @@ export const LocationSource = {
 } as const
 
 export type LocationSource = (typeof LocationSource)[keyof typeof LocationSource]
+
+
+export const ProjectImportance = {
+  VERY_HIGH: 'VERY_HIGH',
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW'
+} as const
+
+export type ProjectImportance = (typeof ProjectImportance)[keyof typeof ProjectImportance]

@@ -314,6 +314,23 @@ export type EnumLocationSourceWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumLocationSourceFilter<$PrismaModel>
 }
 
+export type EnumProjectImportanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProjectImportance | Prisma.EnumProjectImportanceFieldRefInput<$PrismaModel>
+  in?: $Enums.ProjectImportance[] | Prisma.ListEnumProjectImportanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProjectImportance[] | Prisma.ListEnumProjectImportanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProjectImportanceFilter<$PrismaModel> | $Enums.ProjectImportance
+}
+
+export type EnumProjectImportanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProjectImportance | Prisma.EnumProjectImportanceFieldRefInput<$PrismaModel>
+  in?: $Enums.ProjectImportance[] | Prisma.ListEnumProjectImportanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProjectImportance[] | Prisma.ListEnumProjectImportanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProjectImportanceWithAggregatesFilter<$PrismaModel> | $Enums.ProjectImportance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumProjectImportanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumProjectImportanceFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -625,6 +642,23 @@ export type NestedEnumLocationSourceWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLocationSourceFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLocationSourceFilter<$PrismaModel>
+}
+
+export type NestedEnumProjectImportanceFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProjectImportance | Prisma.EnumProjectImportanceFieldRefInput<$PrismaModel>
+  in?: $Enums.ProjectImportance[] | Prisma.ListEnumProjectImportanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProjectImportance[] | Prisma.ListEnumProjectImportanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProjectImportanceFilter<$PrismaModel> | $Enums.ProjectImportance
+}
+
+export type NestedEnumProjectImportanceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProjectImportance | Prisma.EnumProjectImportanceFieldRefInput<$PrismaModel>
+  in?: $Enums.ProjectImportance[] | Prisma.ListEnumProjectImportanceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProjectImportance[] | Prisma.ListEnumProjectImportanceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProjectImportanceWithAggregatesFilter<$PrismaModel> | $Enums.ProjectImportance
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumProjectImportanceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumProjectImportanceFilter<$PrismaModel>
 }
 
 

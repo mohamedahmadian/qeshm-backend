@@ -56,7 +56,8 @@ export const ModelName = {
   Province: 'Province',
   City: 'City',
   User: 'User',
-  UserLocationHistory: 'UserLocationHistory'
+  UserLocationHistory: 'UserLocationHistory',
+  Project: 'Project'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -202,6 +203,27 @@ export const UserLocationHistoryScalarFieldEnum = {
 } as const
 
 export type UserLocationHistoryScalarFieldEnum = (typeof UserLocationHistoryScalarFieldEnum)[keyof typeof UserLocationHistoryScalarFieldEnum]
+
+
+export const ProjectScalarFieldEnum = {
+  id: 'id',
+  vicePresidency: 'vicePresidency',
+  management: 'management',
+  unit: 'unit',
+  systemName: 'systemName',
+  isActive: 'isActive',
+  companyName: 'companyName',
+  systemUrl: 'systemUrl',
+  launchYear: 'launchYear',
+  isSupportActive: 'isSupportActive',
+  replacementProjectId: 'replacementProjectId',
+  description: 'description',
+  importance: 'importance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
 export const SortOrder = {

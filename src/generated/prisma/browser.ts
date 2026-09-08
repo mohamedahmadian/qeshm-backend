@@ -47,3 +47,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type UserLocationHistory = Prisma.UserLocationHistoryModel
+/**
+ * Model Project
+ * 
+ */
+export type Project = Prisma.ProjectModel

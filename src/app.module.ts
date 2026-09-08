@@ -6,6 +6,7 @@ import { JwtUserInterceptor } from './auth/jwt-user.interceptor';
 import { GeoModule } from './geo/geo.module';
 import { ImagesModule } from './images/images.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { ProjectsModule } from './projects/projects.module';
 import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
 
@@ -16,6 +17,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     UsersModule,
     GeoModule,
+    ProjectsModule,
     ImagesModule,
     SmsModule,
   ],

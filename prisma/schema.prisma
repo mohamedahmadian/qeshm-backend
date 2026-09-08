@@ -32,6 +32,13 @@ enum LocationSource {
   STATION
 }
 
+enum ProjectImportance {
+  VERY_HIGH
+  HIGH
+  MEDIUM
+  LOW
+}
+
 model StoredImage {
   id           String   @id @default(uuid())
   mimeType     String
@@ -197,4 +204,34 @@ model UserLocationHistory {
   @@index([provinceId])
   @@index([cityId])
   @@map("user_location_histories")
+}
+
+model Project {
+  id                   String             @id @default(uuid())
+  vicePresidency       String
+  management           String
+  unit                 String
+  systemName           String
+  isActive             Boolean            @default(true)
+  companyName          String?
+  systemUrl            String?
+  launchYear           Int?
+  isSupportActive      Boolean            @default(true)
+  replacementProjectId String?
+  replacementProject   Project?           @relation("ProjectReplacement", fields: [replacementProjectId], references: [id], onDelete: SetNull)
+  replacedBy           Project[]          @relation("ProjectReplacement")
+  description          String?
+  importance           ProjectImportance  @default(HIGH)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  @@index([vicePresidency])
+  @@index([management])
+  @@index([unit])
+  @@index([systemName])
+  @@index([isActive])
+  @@index([isSupportActive])
+  @@index([importance])
+  @@index([createdAt])
+  @@map("projects")
 }
