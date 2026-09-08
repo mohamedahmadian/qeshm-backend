@@ -1,0 +1,200 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum UserGender {
+  MALE
+  FEMALE
+}
+
+enum Religion {
+  ISLAM
+  CHRISTIANITY
+  JUDAISM
+  ZOROASTRIANISM
+  OTHER
+}
+
+enum LocationSource {
+  MANUAL
+  APP
+  STATION
+}
+
+model StoredImage {
+  id           String   @id @default(uuid())
+  mimeType     String
+  data         Bytes
+  byteSize     Int
+  width        Int?
+  height       Int?
+  originalName String?
+  photoUsers             User[] @relation("UserPhoto")
+  nationalCardUsers      User[] @relation("UserNationalCard")
+  passportUsers          User[] @relation("UserPassport")
+  identityBookletUsers   User[] @relation("UserIdentityBooklet")
+  createdAt              DateTime @default(now())
+
+  @@map("stored_images")
+}
+
+model Country {
+  id        String     @id @default(uuid())
+  iso2      String     @unique
+  iso3      String?    @unique
+  phoneCode String?
+  nameFa    String
+  nameEn    String
+  isActive  Boolean    @default(true)
+  sortOrder Int        @default(0)
+  provinces Province[]
+  users     User[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([isActive, sortOrder])
+  @@map("countries")
+}
+
+model Province {
+  id                String                @id @default(uuid())
+  countryId         String
+  country           Country               @relation(fields: [countryId], references: [id], onDelete: Restrict)
+  code              String
+  nameFa            String
+  nameEn            String
+  neshanAddress     String?
+  latitude          Decimal?              @db.Decimal(10, 7)
+  longitude         Decimal?              @db.Decimal(10, 7)
+  hasRailway        Boolean               @default(false)
+  hasAirport        Boolean               @default(false)
+  isActive          Boolean               @default(true)
+  sortOrder         Int                   @default(0)
+  cities            City[]
+  users             User[]                @relation("UserHomeProvince")
+  locatedUsers      User[]                @relation("UserLocationProvince")
+  locationHistories UserLocationHistory[] @relation("UserLocationHistoryProvince")
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  @@unique([countryId, code])
+  @@index([countryId, isActive, sortOrder])
+  @@map("provinces")
+}
+
+model City {
+  id                 String                @id @default(uuid())
+  provinceId         String
+  province           Province              @relation(fields: [provinceId], references: [id], onDelete: Restrict)
+  code               String
+  nameFa             String
+  nameEn             String
+  neshanAddress      String?
+  latitude           Decimal?              @db.Decimal(10, 7)
+  longitude          Decimal?              @db.Decimal(10, 7)
+  isProvinceCapital  Boolean               @default(false)
+  hasRailway         Boolean               @default(false)
+  hasAirport         Boolean               @default(false)
+  isActive           Boolean               @default(true)
+  sortOrder          Int                   @default(0)
+  users              User[]                @relation("UserHomeCity")
+  locatedUsers       User[]                @relation("UserLocationCity")
+  locationHistories  UserLocationHistory[] @relation("UserLocationHistoryCity")
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+
+  @@unique([provinceId, code])
+  @@index([provinceId, isActive, sortOrder])
+  @@map("cities")
+}
+
+model User {
+  id                 String                @id @default(uuid())
+  username           String                @unique
+  passwordHash       String
+  firstName          String
+  lastName           String
+  fullName           String
+  locale             String                @default("fa")
+  status             UserStatus            @default(ACTIVE)
+  nationalId         String?               @unique
+  phone              String?               @unique
+  email              String?               @unique
+  gender             UserGender?
+  address            String?
+  notes              String?
+  religion           Religion?
+  religionOther      String?
+  telegram           String?
+  bale               String?
+  eitaa              String?
+  whatsapp           String?
+  otherSocial        String?
+  vehiclePlates      String[]              @default([])
+  countryId          String?
+  country            Country?              @relation(fields: [countryId], references: [id], onDelete: SetNull)
+  provinceId         String?
+  province           Province?             @relation("UserHomeProvince", fields: [provinceId], references: [id], onDelete: SetNull)
+  cityId             String?
+  city               City?                 @relation("UserHomeCity", fields: [cityId], references: [id], onDelete: SetNull)
+  locationProvinceId String?
+  locationProvince   Province?             @relation("UserLocationProvince", fields: [locationProvinceId], references: [id], onDelete: SetNull)
+  locationCityId     String?
+  locationCity       City?                 @relation("UserLocationCity", fields: [locationCityId], references: [id], onDelete: SetNull)
+  latitude           Decimal?              @db.Decimal(10, 7)
+  longitude          Decimal?              @db.Decimal(10, 7)
+  locationNotes      String?
+  locationUpdatedAt  DateTime?
+  photoId                  String?
+  photo                    StoredImage?          @relation("UserPhoto", fields: [photoId], references: [id], onDelete: SetNull)
+  nationalCardPhotoId      String?
+  nationalCardPhoto        StoredImage?          @relation("UserNationalCard", fields: [nationalCardPhotoId], references: [id], onDelete: SetNull)
+  passportPhotoId          String?
+  passportPhoto            StoredImage?          @relation("UserPassport", fields: [passportPhotoId], references: [id], onDelete: SetNull)
+  identityBookletPhotoId   String?
+  identityBookletPhoto     StoredImage?          @relation("UserIdentityBooklet", fields: [identityBookletPhotoId], references: [id], onDelete: SetNull)
+  locationHistories        UserLocationHistory[]
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+
+  @@index([status])
+  @@index([fullName])
+  @@index([createdAt])
+  @@index([countryId])
+  @@index([provinceId])
+  @@index([cityId])
+  @@index([locationProvinceId])
+  @@index([locationCityId])
+  @@map("users")
+}
+
+model UserLocationHistory {
+  id         String         @id @default(uuid())
+  userId     String
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provinceId String?
+  province   Province?      @relation("UserLocationHistoryProvince", fields: [provinceId], references: [id], onDelete: SetNull)
+  cityId     String?
+  city       City?          @relation("UserLocationHistoryCity", fields: [cityId], references: [id], onDelete: SetNull)
+  latitude   Decimal?       @db.Decimal(10, 7)
+  longitude  Decimal?       @db.Decimal(10, 7)
+  notes      String?
+  source     LocationSource @default(MANUAL)
+  createdAt  DateTime       @default(now())
+
+  @@index([userId, createdAt])
+  @@index([provinceId])
+  @@index([cityId])
+  @@map("user_location_histories")
+}
