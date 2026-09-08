@@ -14,6 +14,14 @@ export function toLatinDigits(input: string) {
     .replace(/[٠-٩]/g, (digit) => String(AR_DIGITS.indexOf(digit)));
 }
 
+export function normalizeLegalNationalId(input: string) {
+  return toLatinDigits(input.trim()).replace(/\D/g, '');
+}
+
+export function isValidIranianLegalNationalId(input: string) {
+  return /^\d{11}$/.test(normalizeLegalNationalId(input));
+}
+
 export function normalizeNationalId(input: string) {
   const digits = toLatinDigits(input.trim()).replace(/\D/g, '');
   if (digits.length === 9) {
@@ -75,6 +83,29 @@ export function IsIranianNationalId(validationOptions?: ValidationOptions) {
       propertyName,
       options: validationOptions,
       validator: IsIranianNationalIdConstraint,
+    });
+  };
+}
+
+@ValidatorConstraint({ name: 'isIranianLegalNationalId', async: false })
+class IsIranianLegalNationalIdConstraint implements ValidatorConstraintInterface {
+  validate(value: unknown) {
+    return typeof value === 'string' && isValidIranianLegalNationalId(value);
+  }
+
+  defaultMessage() {
+    return 'شناسه ملی معتبر نیست';
+  }
+}
+
+export function IsIranianLegalNationalId(validationOptions?: ValidationOptions) {
+  return function (object: object, propertyName: string) {
+    registerDecorator({
+      name: 'isIranianLegalNationalId',
+      target: object.constructor,
+      propertyName,
+      options: validationOptions,
+      validator: IsIranianLegalNationalIdConstraint,
     });
   };
 }

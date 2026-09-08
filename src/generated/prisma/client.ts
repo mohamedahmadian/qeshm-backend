@@ -74,3 +74,23 @@ export type UserLocationHistory = Prisma.UserLocationHistoryModel
  * 
  */
 export type Project = Prisma.ProjectModel
+/**
+ * Model ProjectContractor
+ * 
+ */
+export type ProjectContractor = Prisma.ProjectContractorModel
+/**
+ * Model ProjectContractorMember
+ * 
+ */
+export type ProjectContractorMember = Prisma.ProjectContractorMemberModel
+/**
+ * Model ProjectContractorPhase
+ * 
+ */
+export type ProjectContractorPhase = Prisma.ProjectContractorPhaseModel
+/**
+ * Model ProjectContractorPayment
+ * 
+ */
+export type ProjectContractorPayment = Prisma.ProjectContractorPaymentModel

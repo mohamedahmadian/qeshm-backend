@@ -35,6 +35,7 @@ const projectSelect = {
   replacementProject: {
     select: { id: true, systemName: true },
   },
+  _count: { select: { contractors: true } },
 } satisfies Prisma.ProjectSelect;
 
 @Injectable()

@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../src/generated/prisma/client';
 import { geoSeed } from './geo-data';
+import { importProjects } from './import-projects';
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL as string,
@@ -103,6 +104,7 @@ async function main() {
       status: 'ACTIVE',
     },
   });
+  await importProjects(prisma);
 }
 
 main()

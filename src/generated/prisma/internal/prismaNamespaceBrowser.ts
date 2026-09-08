@@ -57,7 +57,11 @@ export const ModelName = {
   City: 'City',
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
-  Project: 'Project'
+  Project: 'Project',
+  ProjectContractor: 'ProjectContractor',
+  ProjectContractorMember: 'ProjectContractorMember',
+  ProjectContractorPhase: 'ProjectContractorPhase',
+  ProjectContractorPayment: 'ProjectContractorPayment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -224,6 +228,64 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const ProjectContractorScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  name: 'name',
+  nationalId: 'nationalId',
+  description: 'description',
+  ceoName: 'ceoName',
+  timeEstimate: 'timeEstimate',
+  costEstimate: 'costEstimate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectContractorScalarFieldEnum = (typeof ProjectContractorScalarFieldEnum)[keyof typeof ProjectContractorScalarFieldEnum]
+
+
+export const ProjectContractorMemberScalarFieldEnum = {
+  id: 'id',
+  contractorId: 'contractorId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  role: 'role',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectContractorMemberScalarFieldEnum = (typeof ProjectContractorMemberScalarFieldEnum)[keyof typeof ProjectContractorMemberScalarFieldEnum]
+
+
+export const ProjectContractorPhaseScalarFieldEnum = {
+  id: 'id',
+  contractorId: 'contractorId',
+  name: 'name',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  goals: 'goals',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectContractorPhaseScalarFieldEnum = (typeof ProjectContractorPhaseScalarFieldEnum)[keyof typeof ProjectContractorPhaseScalarFieldEnum]
+
+
+export const ProjectContractorPaymentScalarFieldEnum = {
+  id: 'id',
+  contractorId: 'contractorId',
+  paidAt: 'paidAt',
+  amount: 'amount',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectContractorPaymentScalarFieldEnum = (typeof ProjectContractorPaymentScalarFieldEnum)[keyof typeof ProjectContractorPaymentScalarFieldEnum]
 
 
 export const SortOrder = {
