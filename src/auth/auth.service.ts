@@ -32,6 +32,8 @@ const userSelect = {
   provinceId: true,
   cityId: true,
   photoId: true,
+  orgUnitId: true,
+  orgUnit: { select: { id: true, name: true, nutritionRepId: true } },
 } as const;
 
 type ProfileExtras = {
@@ -72,13 +74,17 @@ export class AuthService {
       throw new UnauthorizedException('نام کاربری یا رمز عبور نادرست است');
     }
 
-    let profile = user;
     if (dto.locale && dto.locale !== user.locale) {
-      profile = await this.prisma.user.update({
+      await this.prisma.user.update({
         where: { id: user.id },
         data: { locale: dto.locale },
       });
     }
+
+    const profile = await this.prisma.user.findUniqueOrThrow({
+      where: { id: user.id },
+      select: userSelect,
+    });
 
     const token = await this.jwt.signAsync({ sub: profile.id });
     return { token, user: this.toProfile(profile) };
@@ -228,11 +234,16 @@ export class AuthService {
       provinceId?: string | null;
       cityId?: string | null;
       photoId?: string | null;
+      orgUnitId?: string | null;
+      orgUnit?: { id: string; name: string; nutritionRepId: string | null } | null;
     },
     extras?: ProfileExtras,
   ) {
+    const { orgUnit, ...rest } = user;
     return {
-      ...user,
+      ...rest,
+      orgUnit: orgUnit ? { id: orgUnit.id, name: orgUnit.name } : null,
+      isNutritionRep: Boolean(orgUnit && orgUnit.nutritionRepId === user.id),
       roles: [],
       modules: [],
       ...extras,

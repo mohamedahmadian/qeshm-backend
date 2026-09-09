@@ -138,7 +138,7 @@ export class ProjectsService {
     return { ok: true };
   }
 
-  private listWhere(query: FindProjectsQueryDto): Prisma.ProjectWhereInput {
+  listWhere(query: FindProjectsQueryDto): Prisma.ProjectWhereInput {
     return {
       vicePresidency: query.vicePresidency,
       management: query.management,

@@ -173,4 +173,16 @@ export class CreateUserDto {
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
   identityBookletPhotoId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  orgUnitId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  positionId?: string | null;
 }

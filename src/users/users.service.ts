@@ -10,6 +10,7 @@ import {
   normalizeSearchDigits,
   paginatedResult,
   paginationArgs,
+  wantsPagination,
 } from '../common/pagination';
 import {
   normalizeNationalId,
@@ -64,8 +65,12 @@ const userSelect = {
   nationalCardPhotoId: true,
   passportPhotoId: true,
   identityBookletPhotoId: true,
+  orgUnitId: true,
+  positionId: true,
   createdAt: true,
   updatedAt: true,
+  orgUnit: { select: { id: true, name: true } },
+  position: { select: { id: true, name: true } },
   country: { select: geoNameSelect },
   province: { select: { ...geoNameSelect, countryId: true } },
   city: { select: { ...geoNameSelect, provinceId: true } },
@@ -117,6 +122,9 @@ export class UsersService {
     const where: Prisma.UserWhereInput = {
       status: query.status,
       countryId: query.countryId,
+      orgUnitId: query.orgUnitId,
+      positionId: query.positionId,
+      ...(query.employeesOnly ? { orgUnitId: query.orgUnitId ?? { not: null } } : {}),
       provinceId: query.provinceId,
       cityId:
         query.cityId === CITY_ID_NONE
@@ -149,9 +157,19 @@ export class UsersService {
         nationalId: (dir) => ({ nationalId: dir }),
         city: (dir) => ({ city: { nameFa: dir } }),
         createdAt: (dir) => ({ createdAt: dir }),
+        orgUnit: (dir) => ({ orgUnit: { name: dir } }),
+        position: (dir) => ({ position: { name: dir } }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
+    if (!wantsPagination(query)) {
+      const items = await this.prisma.user.findMany({
+        where,
+        orderBy,
+        select: userSelect,
+      });
+      return items.map(mapUser);
+    }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
       this.prisma.user.findMany({
@@ -203,6 +221,7 @@ export class UsersService {
     await this.assertUnique(dto);
     await this.assertGeo(dto.countryId, dto.provinceId, dto.cityId);
     await this.assertImages(dto);
+    await this.assertOrgAssignment(dto.orgUnitId, dto.positionId);
     const passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
     const user = await this.prisma.user.create({
       data: {
@@ -234,6 +253,8 @@ export class UsersService {
         nationalCardPhotoId: dto.nationalCardPhotoId ?? null,
         passportPhotoId: dto.passportPhotoId ?? null,
         identityBookletPhotoId: dto.identityBookletPhotoId ?? null,
+        orgUnitId: dto.orgUnitId ?? null,
+        positionId: dto.positionId ?? null,
       },
       select: userSelect,
     });
@@ -244,6 +265,13 @@ export class UsersService {
     await this.findOne(id);
     await this.assertUnique(dto, id);
     await this.assertImages(dto);
+    if (dto.orgUnitId !== undefined || dto.positionId !== undefined) {
+      const current = await this.prisma.user.findUnique({ where: { id } });
+      await this.assertOrgAssignment(
+        dto.orgUnitId !== undefined ? dto.orgUnitId : current?.orgUnitId,
+        dto.positionId !== undefined ? dto.positionId : current?.positionId,
+      );
+    }
     if (dto.countryId !== undefined || dto.provinceId !== undefined || dto.cityId !== undefined) {
       const current = await this.prisma.user.findUnique({ where: { id } });
       await this.assertGeo(
@@ -286,7 +314,18 @@ export class UsersService {
       nationalCardPhoto: optionalConnect(dto.nationalCardPhotoId),
       passportPhoto: optionalConnect(dto.passportPhotoId),
       identityBookletPhoto: optionalConnect(dto.identityBookletPhotoId),
+      orgUnit: optionalConnect(dto.orgUnitId),
+      position: optionalConnect(dto.positionId),
     };
+    if (dto.orgUnitId !== undefined) {
+      await this.prisma.organizationUnit.updateMany({
+        where: {
+          nutritionRepId: id,
+          ...(dto.orgUnitId ? { id: { not: dto.orgUnitId } } : {}),
+        },
+        data: { nutritionRepId: null },
+      });
+    }
     if (dto.password) {
       data.passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
     }
@@ -586,6 +625,26 @@ export class UsersService {
     });
     if (count !== ids.length) {
       throw new BadRequestException('تصویر معتبر نیست');
+    }
+  }
+
+  private async assertOrgAssignment(
+    orgUnitId?: string | null,
+    positionId?: string | null,
+  ) {
+    if (orgUnitId) {
+      const unit = await this.prisma.organizationUnit.findUnique({
+        where: { id: orgUnitId },
+        select: { id: true },
+      });
+      if (!unit) throw new BadRequestException('واحد سازمانی معتبر نیست');
+    }
+    if (positionId) {
+      const position = await this.prisma.organizationPosition.findUnique({
+        where: { id: positionId },
+        select: { id: true },
+      });
+      if (!position) throw new BadRequestException('سمت معتبر نیست');
     }
   }
 

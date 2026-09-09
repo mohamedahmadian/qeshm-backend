@@ -53,3 +53,11 @@ export const ProjectImportance = {
 } as const
 
 export type ProjectImportance = (typeof ProjectImportance)[keyof typeof ProjectImportance]
+
+
+export const FoodReservationStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED'
+} as const
+
+export type FoodReservationStatus = (typeof FoodReservationStatus)[keyof typeof FoodReservationStatus]

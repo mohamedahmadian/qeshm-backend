@@ -61,7 +61,16 @@ export const ModelName = {
   ProjectContractor: 'ProjectContractor',
   ProjectContractorMember: 'ProjectContractorMember',
   ProjectContractorPhase: 'ProjectContractorPhase',
-  ProjectContractorPayment: 'ProjectContractorPayment'
+  ProjectContractorPayment: 'ProjectContractorPayment',
+  Food: 'Food',
+  Restaurant: 'Restaurant',
+  RestaurantMenuItem: 'RestaurantMenuItem',
+  Organization: 'Organization',
+  OrganizationPhone: 'OrganizationPhone',
+  OrganizationPosition: 'OrganizationPosition',
+  OrganizationUnit: 'OrganizationUnit',
+  OrganizationUnitRestaurant: 'OrganizationUnitRestaurant',
+  FoodReservation: 'FoodReservation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -187,6 +196,8 @@ export const UserScalarFieldEnum = {
   nationalCardPhotoId: 'nationalCardPhotoId',
   passportPhotoId: 'passportPhotoId',
   identityBookletPhotoId: 'identityBookletPhotoId',
+  orgUnitId: 'orgUnitId',
+  positionId: 'positionId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -286,6 +297,136 @@ export const ProjectContractorPaymentScalarFieldEnum = {
 } as const
 
 export type ProjectContractorPaymentScalarFieldEnum = (typeof ProjectContractorPaymentScalarFieldEnum)[keyof typeof ProjectContractorPaymentScalarFieldEnum]
+
+
+export const FoodScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  photoId: 'photoId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FoodScalarFieldEnum = (typeof FoodScalarFieldEnum)[keyof typeof FoodScalarFieldEnum]
+
+
+export const RestaurantScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  address: 'address',
+  logoId: 'logoId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RestaurantScalarFieldEnum = (typeof RestaurantScalarFieldEnum)[keyof typeof RestaurantScalarFieldEnum]
+
+
+export const RestaurantMenuItemScalarFieldEnum = {
+  id: 'id',
+  restaurantId: 'restaurantId',
+  foodId: 'foodId',
+  price: 'price',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RestaurantMenuItemScalarFieldEnum = (typeof RestaurantMenuItemScalarFieldEnum)[keyof typeof RestaurantMenuItemScalarFieldEnum]
+
+
+export const OrganizationScalarFieldEnum = {
+  id: 'id',
+  singletonKey: 'singletonKey',
+  name: 'name',
+  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  eitaa: 'eitaa',
+  bale: 'bale',
+  rubika: 'rubika',
+  instagram: 'instagram',
+  telegram: 'telegram',
+  whatsapp: 'whatsapp',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationScalarFieldEnum = (typeof OrganizationScalarFieldEnum)[keyof typeof OrganizationScalarFieldEnum]
+
+
+export const OrganizationPhoneScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  title: 'title',
+  phone: 'phone',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationPhoneScalarFieldEnum = (typeof OrganizationPhoneScalarFieldEnum)[keyof typeof OrganizationPhoneScalarFieldEnum]
+
+
+export const OrganizationPositionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationPositionScalarFieldEnum = (typeof OrganizationPositionScalarFieldEnum)[keyof typeof OrganizationPositionScalarFieldEnum]
+
+
+export const OrganizationUnitScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  eitaa: 'eitaa',
+  bale: 'bale',
+  rubika: 'rubika',
+  instagram: 'instagram',
+  telegram: 'telegram',
+  whatsapp: 'whatsapp',
+  nutritionRepId: 'nutritionRepId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationUnitScalarFieldEnum = (typeof OrganizationUnitScalarFieldEnum)[keyof typeof OrganizationUnitScalarFieldEnum]
+
+
+export const OrganizationUnitRestaurantScalarFieldEnum = {
+  id: 'id',
+  unitId: 'unitId',
+  restaurantId: 'restaurantId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationUnitRestaurantScalarFieldEnum = (typeof OrganizationUnitRestaurantScalarFieldEnum)[keyof typeof OrganizationUnitRestaurantScalarFieldEnum]
+
+
+export const FoodReservationScalarFieldEnum = {
+  id: 'id',
+  reservedAt: 'reservedAt',
+  restaurantId: 'restaurantId',
+  foodId: 'foodId',
+  userId: 'userId',
+  orgUnitId: 'orgUnitId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FoodReservationScalarFieldEnum = (typeof FoodReservationScalarFieldEnum)[keyof typeof FoodReservationScalarFieldEnum]
 
 
 export const SortOrder = {

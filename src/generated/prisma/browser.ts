@@ -72,3 +72,48 @@ export type ProjectContractorPhase = Prisma.ProjectContractorPhaseModel
  * 
  */
 export type ProjectContractorPayment = Prisma.ProjectContractorPaymentModel
+/**
+ * Model Food
+ * 
+ */
+export type Food = Prisma.FoodModel
+/**
+ * Model Restaurant
+ * 
+ */
+export type Restaurant = Prisma.RestaurantModel
+/**
+ * Model RestaurantMenuItem
+ * 
+ */
+export type RestaurantMenuItem = Prisma.RestaurantMenuItemModel
+/**
+ * Model Organization
+ * 
+ */
+export type Organization = Prisma.OrganizationModel
+/**
+ * Model OrganizationPhone
+ * 
+ */
+export type OrganizationPhone = Prisma.OrganizationPhoneModel
+/**
+ * Model OrganizationPosition
+ * 
+ */
+export type OrganizationPosition = Prisma.OrganizationPositionModel
+/**
+ * Model OrganizationUnit
+ * 
+ */
+export type OrganizationUnit = Prisma.OrganizationUnitModel
+/**
+ * Model OrganizationUnitRestaurant
+ * 
+ */
+export type OrganizationUnitRestaurant = Prisma.OrganizationUnitRestaurantModel
+/**
+ * Model FoodReservation
+ * 
+ */
+export type FoodReservation = Prisma.FoodReservationModel

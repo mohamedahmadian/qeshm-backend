@@ -39,6 +39,11 @@ enum ProjectImportance {
   LOW
 }
 
+enum FoodReservationStatus {
+  PENDING
+  CONFIRMED
+}
+
 model StoredImage {
   id           String   @id @default(uuid())
   mimeType     String
@@ -51,6 +56,8 @@ model StoredImage {
   nationalCardUsers      User[] @relation("UserNationalCard")
   passportUsers          User[] @relation("UserPassport")
   identityBookletUsers   User[] @relation("UserIdentityBooklet")
+  foodPhotos             Food[] @relation("FoodPhoto")
+  restaurantLogos        Restaurant[] @relation("RestaurantLogo")
   createdAt              DateTime @default(now())
 
   @@map("stored_images")
@@ -172,6 +179,12 @@ model User {
   identityBookletPhotoId   String?
   identityBookletPhoto     StoredImage?          @relation("UserIdentityBooklet", fields: [identityBookletPhotoId], references: [id], onDelete: SetNull)
   locationHistories        UserLocationHistory[]
+  orgUnitId          String?
+  orgUnit            OrganizationUnit?     @relation("UnitEmployees", fields: [orgUnitId], references: [id], onDelete: SetNull)
+  positionId         String?
+  position           OrganizationPosition? @relation(fields: [positionId], references: [id], onDelete: SetNull)
+  nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
+  foodReservations   FoodReservation[]
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
@@ -183,6 +196,8 @@ model User {
   @@index([cityId])
   @@index([locationProvinceId])
   @@index([locationCityId])
+  @@index([orgUnitId])
+  @@index([positionId])
   @@map("users")
 }
 
@@ -303,4 +318,177 @@ model ProjectContractorPayment {
 
   @@index([contractorId, paidAt])
   @@map("project_contractor_payments")
+}
+
+model Food {
+  id          String       @id @default(uuid())
+  name        String
+  description String?
+  photoId     String?
+  photo       StoredImage? @relation("FoodPhoto", fields: [photoId], references: [id], onDelete: SetNull)
+  menuItems     RestaurantMenuItem[]
+  reservations  FoodReservation[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("foods")
+}
+
+model Restaurant {
+  id        String       @id @default(uuid())
+  name      String
+  phone     String?
+  address   String?
+  logoId    String?
+  logo      StoredImage? @relation("RestaurantLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  menuItems    RestaurantMenuItem[]
+  orgUnits     OrganizationUnitRestaurant[]
+  reservations FoodReservation[]
+  createdAt    DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([name])
+  @@index([phone])
+  @@index([createdAt])
+  @@map("restaurants")
+}
+
+model RestaurantMenuItem {
+  id           String     @id @default(uuid())
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  foodId       String
+  food         Food       @relation(fields: [foodId], references: [id], onDelete: Restrict)
+  price        Decimal    @db.Decimal(18, 0)
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([restaurantId, foodId])
+  @@index([restaurantId])
+  @@index([foodId])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("restaurant_menu_items")
+}
+
+model Organization {
+  id           String              @id @default(uuid())
+  singletonKey String              @unique @default("default")
+  name         String
+  address      String?
+  latitude     Decimal?            @db.Decimal(10, 7)
+  longitude    Decimal?            @db.Decimal(10, 7)
+  eitaa        String?
+  bale         String?
+  rubika       String?
+  instagram    String?
+  telegram     String?
+  whatsapp     String?
+  phones       OrganizationPhone[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  @@map("organizations")
+}
+
+model OrganizationPhone {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  title          String
+  phone          String
+  description    String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@index([title])
+  @@index([phone])
+  @@index([createdAt])
+  @@map("organization_phones")
+}
+
+model OrganizationPosition {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("organization_positions")
+}
+
+model OrganizationUnit {
+  id             String   @id @default(uuid())
+  name           String
+  phone          String?
+  address        String?
+  latitude       Decimal? @db.Decimal(10, 7)
+  longitude      Decimal? @db.Decimal(10, 7)
+  eitaa          String?
+  bale           String?
+  rubika         String?
+  instagram      String?
+  telegram       String?
+  whatsapp       String?
+  nutritionRepId String?
+  nutritionRep   User?    @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
+  employees      User[]   @relation("UnitEmployees")
+  restaurants    OrganizationUnitRestaurant[]
+  reservations   FoodReservation[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([name])
+  @@index([phone])
+  @@index([nutritionRepId])
+  @@index([createdAt])
+  @@map("organization_units")
+}
+
+model OrganizationUnitRestaurant {
+  id           String           @id @default(uuid())
+  unitId       String
+  unit         OrganizationUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  restaurantId String
+  restaurant   Restaurant       @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@unique([unitId, restaurantId])
+  @@index([unitId])
+  @@index([restaurantId])
+  @@index([createdAt])
+  @@map("organization_unit_restaurants")
+}
+
+model FoodReservation {
+  id           String                @id @default(uuid())
+  reservedAt   DateTime              @db.Date
+  restaurantId String
+  restaurant   Restaurant            @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  foodId       String
+  food         Food                  @relation(fields: [foodId], references: [id], onDelete: Restrict)
+  userId       String
+  user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orgUnitId    String
+  orgUnit      OrganizationUnit      @relation(fields: [orgUnitId], references: [id], onDelete: Restrict)
+  quantity     Int
+  unitPrice    Decimal               @db.Decimal(18, 0)
+  status       FoodReservationStatus @default(PENDING)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  @@index([userId, reservedAt])
+  @@index([orgUnitId, reservedAt])
+  @@index([restaurantId, reservedAt])
+  @@index([foodId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("food_reservations")
 }

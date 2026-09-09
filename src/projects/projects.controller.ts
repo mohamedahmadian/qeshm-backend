@@ -11,11 +11,15 @@ import {
 import { CreateProjectDto } from './dto/create-project.dto';
 import { FindProjectsQueryDto } from './dto/find-projects-query.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { ProjectReportsService } from './project-reports.service';
 import { ProjectsService } from './projects.service';
 
 @Controller('projects')
 export class ProjectsController {
-  constructor(private readonly projects: ProjectsService) {}
+  constructor(
+    private readonly projects: ProjectsService,
+    private readonly reports: ProjectReportsService,
+  ) {}
 
   @Get()
   findAll(@Query() query: FindProjectsQueryDto) {
@@ -25,6 +29,11 @@ export class ProjectsController {
   @Get('lookups')
   lookups(@Query() query: FindProjectsQueryDto) {
     return this.projects.lookups(query);
+  }
+
+  @Get('reports')
+  reportsOverview(@Query() query: FindProjectsQueryDto) {
+    return this.reports.overview(query);
   }
 
   @Get(':id')

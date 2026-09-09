@@ -1,9 +1,16 @@
 import { Transform } from 'class-transformer';
-import { IsEnum, IsIn, IsOptional, IsUUID, ValidateIf } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsIn,
+  IsOptional,
+  IsUUID,
+  ValidateIf,
+} from 'class-validator';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 import { UserStatus } from '../../generated/prisma/client';
-import { emptyToUndefined } from '../../common/dto-transform';
+import { emptyToUndefined, toOptionalBoolean } from '../../common/dto-transform';
 
 export const userSortFields = [
   'fullName',
@@ -13,6 +20,8 @@ export const userSortFields = [
   'nationalId',
   'city',
   'createdAt',
+  'orgUnit',
+  'position',
 ] as const;
 
 export type UserSortField = (typeof userSortFields)[number];
@@ -40,6 +49,21 @@ export class FindUsersQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsEnum(UserStatus)
   status?: UserStatus;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsUUID()
+  orgUnitId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsUUID()
+  positionId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalBoolean(value))
+  @IsBoolean()
+  employeesOnly?: boolean;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
