@@ -38,6 +38,11 @@ export class FindProjectsQueryDto extends PaginationQueryDto {
   unit?: string;
 
   @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
+  companyName?: string;
+
+  @IsOptional()
   @Transform(({ value }) => toOptionalBoolean(value))
   @IsBoolean()
   isActive?: boolean;

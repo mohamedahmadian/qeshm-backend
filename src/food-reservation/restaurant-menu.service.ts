@@ -4,6 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { parseIsoDate, toIsoDateOnly } from '../common/iso-date';
 import {
   containsInsensitive,
   paginatedResult,
@@ -22,6 +23,7 @@ const menuItemSelect = {
   id: true,
   restaurantId: true,
   foodId: true,
+  offeredAt: true,
   price: true,
   isActive: true,
   createdAt: true,
@@ -35,8 +37,14 @@ function toMoney(value: Prisma.Decimal) {
   return Number(value);
 }
 
-function withPrice<T extends { price: Prisma.Decimal }>(item: T) {
-  return { ...item, price: toMoney(item.price) };
+function withMenuItem<T extends { price: Prisma.Decimal; offeredAt: Date }>(
+  item: T,
+) {
+  return {
+    ...item,
+    price: toMoney(item.price),
+    offeredAt: toIsoDateOnly(item.offeredAt),
+  };
 }
 
 @Injectable()
@@ -51,6 +59,7 @@ export class RestaurantMenuService {
     const where: Prisma.RestaurantMenuItemWhereInput = {
       restaurantId,
       isActive: query.isActive,
+      offeredAt: query.offeredAt ? parseIsoDate(query.offeredAt) : undefined,
       OR: query.q
         ? [
             { food: { name: containsInsensitive(query.q) } },
@@ -63,11 +72,12 @@ export class RestaurantMenuService {
         query.sortBy,
         query.sortDir,
         {
+          offeredAt: (dir) => ({ offeredAt: dir }),
           food: (dir) => ({ food: { name: dir } }),
           price: (dir) => ({ price: dir }),
           isActive: (dir) => ({ isActive: dir }),
         },
-        [{ createdAt: 'desc' }, { id: 'asc' }],
+        [{ offeredAt: 'desc' }, { id: 'asc' }],
       );
     if (!wantsPagination(query)) {
       const items = await this.prisma.restaurantMenuItem.findMany({
@@ -75,7 +85,7 @@ export class RestaurantMenuService {
         orderBy,
         select: menuItemSelect,
       });
-      return items.map(withPrice);
+      return items.map(withMenuItem);
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
@@ -88,7 +98,7 @@ export class RestaurantMenuService {
       }),
       this.prisma.restaurantMenuItem.count({ where }),
     ]);
-    return paginatedResult(items.map(withPrice), total, page, pageSize);
+    return paginatedResult(items.map(withMenuItem), total, page, pageSize);
   }
 
   async findOne(restaurantId: string, id: string) {
@@ -100,7 +110,7 @@ export class RestaurantMenuService {
     if (!item) {
       throw new NotFoundException('آیتم برنامه غذایی یافت نشد');
     }
-    return withPrice(item);
+    return withMenuItem(item);
   }
 
   async create(restaurantId: string, dto: CreateRestaurantMenuItemDto) {
@@ -111,12 +121,13 @@ export class RestaurantMenuService {
         data: {
           restaurantId,
           foodId: dto.foodId,
+          offeredAt: parseIsoDate(dto.offeredAt),
           price: new Prisma.Decimal(dto.price),
           isActive: dto.isActive ?? true,
         },
         select: menuItemSelect,
       });
-      return withPrice(item);
+      return withMenuItem(item);
     } catch (error) {
       this.rethrowUnique(error);
     }
@@ -136,13 +147,17 @@ export class RestaurantMenuService {
         where: { id },
         data: {
           foodId: dto.foodId,
+          offeredAt:
+            dto.offeredAt === undefined
+              ? undefined
+              : parseIsoDate(dto.offeredAt),
           price:
             dto.price === undefined ? undefined : new Prisma.Decimal(dto.price),
           isActive: dto.isActive,
         },
         select: menuItemSelect,
       });
-      return withPrice(item);
+      return withMenuItem(item);
     } catch (error) {
       this.rethrowUnique(error);
     }
@@ -166,7 +181,9 @@ export class RestaurantMenuService {
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === 'P2002'
     ) {
-      throw new ConflictException('این غذا قبلاً برای این رستوران ثبت شده است');
+      throw new ConflictException(
+        'این غذا برای این تاریخ قبلاً ثبت شده است',
+      );
     }
     throw error;
   }

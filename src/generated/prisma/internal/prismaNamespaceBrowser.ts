@@ -70,7 +70,10 @@ export const ModelName = {
   OrganizationPosition: 'OrganizationPosition',
   OrganizationUnit: 'OrganizationUnit',
   OrganizationUnitRestaurant: 'OrganizationUnitRestaurant',
-  FoodReservation: 'FoodReservation'
+  FoodReservation: 'FoodReservation',
+  VehicleBrand: 'VehicleBrand',
+  Vehicle: 'Vehicle',
+  VehicleAssignment: 'VehicleAssignment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -328,6 +331,7 @@ export const RestaurantMenuItemScalarFieldEnum = {
   id: 'id',
   restaurantId: 'restaurantId',
   foodId: 'foodId',
+  offeredAt: 'offeredAt',
   price: 'price',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -427,6 +431,54 @@ export const FoodReservationScalarFieldEnum = {
 } as const
 
 export type FoodReservationScalarFieldEnum = (typeof FoodReservationScalarFieldEnum)[keyof typeof FoodReservationScalarFieldEnum]
+
+
+export const VehicleBrandScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VehicleBrandScalarFieldEnum = (typeof VehicleBrandScalarFieldEnum)[keyof typeof VehicleBrandScalarFieldEnum]
+
+
+export const VehicleScalarFieldEnum = {
+  id: 'id',
+  assetCode: 'assetCode',
+  plate: 'plate',
+  type: 'type',
+  brandId: 'brandId',
+  model: 'model',
+  color: 'color',
+  year: 'year',
+  chassisNumber: 'chassisNumber',
+  engineNumber: 'engineNumber',
+  status: 'status',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
+
+
+export const VehicleAssignmentScalarFieldEnum = {
+  id: 'id',
+  vehicleId: 'vehicleId',
+  organizationUnitId: 'organizationUnitId',
+  personId: 'personId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  returnedAt: 'returnedAt',
+  type: 'type',
+  status: 'status',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VehicleAssignmentScalarFieldEnum = (typeof VehicleAssignmentScalarFieldEnum)[keyof typeof VehicleAssignmentScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -31,6 +31,11 @@ export class FoodReservationsController {
     return this.reservations.report(query);
   }
 
+  @Get('cost-estimate')
+  costEstimate(@Query() query: FindFoodReservationsQueryDto) {
+    return this.reservations.costEstimate(query);
+  }
+
   @Get()
   findAll(
     @Query() query: FindFoodReservationsQueryDto,

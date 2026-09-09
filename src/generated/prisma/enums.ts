@@ -61,3 +61,42 @@ export const FoodReservationStatus = {
 } as const
 
 export type FoodReservationStatus = (typeof FoodReservationStatus)[keyof typeof FoodReservationStatus]
+
+
+export const VehicleType = {
+  SEDAN: 'SEDAN',
+  PICKUP: 'PICKUP',
+  TRUCK: 'TRUCK',
+  MINIBUS: 'MINIBUS',
+  MOTORCYCLE: 'MOTORCYCLE',
+  OTHER: 'OTHER'
+} as const
+
+export type VehicleType = (typeof VehicleType)[keyof typeof VehicleType]
+
+
+export const VehicleStatus = {
+  ACTIVE: 'ACTIVE',
+  IN_REPAIR: 'IN_REPAIR',
+  SCRAPPED: 'SCRAPPED',
+  TRANSFERRED: 'TRANSFERRED',
+  MISSING: 'MISSING'
+} as const
+
+export type VehicleStatus = (typeof VehicleStatus)[keyof typeof VehicleStatus]
+
+
+export const VehicleAssignmentType = {
+  UNIT: 'UNIT',
+  PERSON: 'PERSON'
+} as const
+
+export type VehicleAssignmentType = (typeof VehicleAssignmentType)[keyof typeof VehicleAssignmentType]
+
+
+export const VehicleAssignmentStatus = {
+  LENT: 'LENT',
+  RETURNED: 'RETURNED'
+} as const
+
+export type VehicleAssignmentStatus = (typeof VehicleAssignmentStatus)[keyof typeof VehicleAssignmentStatus]

@@ -6,7 +6,12 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { parseIsoDate, todayIsoDateTehran, toIsoDateOnly } from '../common/iso-date';
+import {
+  parseIsoDate,
+  startOfIranWeekIso,
+  todayIsoDateTehran,
+  toIsoDateOnly,
+} from '../common/iso-date';
 import {
   containsInsensitive,
   paginatedResult,
@@ -52,6 +57,100 @@ function withReservation<
     unitPrice: Number(item.unitPrice),
     totalPrice: Number(item.unitPrice) * item.quantity,
   };
+}
+
+type CostGroup = {
+  id: string;
+  name: string;
+  count: number;
+  quantity: number;
+  totalPrice: number;
+};
+
+type FoodCostGroup = CostGroup & {
+  priceSum: number;
+  minUnitPrice: number;
+  maxUnitPrice: number;
+};
+
+type PeriodCostGroup = {
+  period: string;
+  count: number;
+  quantity: number;
+  totalPrice: number;
+};
+
+function bumpCost(
+  map: Map<string, CostGroup>,
+  id: string,
+  name: string,
+  amount: number,
+  quantity: number,
+) {
+  const current = map.get(id) ?? {
+    id,
+    name,
+    count: 0,
+    quantity: 0,
+    totalPrice: 0,
+  };
+  current.count += 1;
+  current.quantity += quantity;
+  current.totalPrice += amount;
+  map.set(id, current);
+}
+
+function bumpFood(
+  map: Map<string, FoodCostGroup>,
+  id: string,
+  name: string,
+  amount: number,
+  quantity: number,
+  unitPrice: number,
+) {
+  const current = map.get(id) ?? {
+    id,
+    name,
+    count: 0,
+    quantity: 0,
+    totalPrice: 0,
+    priceSum: 0,
+    minUnitPrice: unitPrice,
+    maxUnitPrice: unitPrice,
+  };
+  current.count += 1;
+  current.quantity += quantity;
+  current.totalPrice += amount;
+  current.priceSum += unitPrice * quantity;
+  current.minUnitPrice = Math.min(current.minUnitPrice, unitPrice);
+  current.maxUnitPrice = Math.max(current.maxUnitPrice, unitPrice);
+  map.set(id, current);
+}
+
+function bumpPeriod(
+  map: Map<string, PeriodCostGroup>,
+  period: string,
+  amount: number,
+  quantity: number,
+) {
+  const current = map.get(period) ?? {
+    period,
+    count: 0,
+    quantity: 0,
+    totalPrice: 0,
+  };
+  current.count += 1;
+  current.quantity += quantity;
+  current.totalPrice += amount;
+  map.set(period, current);
+}
+
+function byCost(a: { totalPrice: number }, b: { totalPrice: number }) {
+  return b.totalPrice - a.totalPrice;
+}
+
+function byPeriod(a: { period: string }, b: { period: string }) {
+  return a.period.localeCompare(b.period);
 }
 
 @Injectable()
@@ -203,6 +302,137 @@ export class FoodReservationsService {
     };
   }
 
+  async costEstimate(query: FindFoodReservationsQueryDto) {
+    const where = this.buildWhere({ ...query, mine: undefined });
+    const rows = await foodReservations(this.prisma).findMany({
+      where,
+      select: {
+        reservedAt: true,
+        quantity: true,
+        unitPrice: true,
+        status: true,
+        foodId: true,
+        orgUnitId: true,
+        restaurantId: true,
+        userId: true,
+        food: { select: { name: true } },
+        orgUnit: { select: { name: true } },
+        restaurant: { select: { name: true } },
+      },
+    });
+
+    const summary = {
+      totalCost: 0,
+      confirmedCost: 0,
+      pendingCost: 0,
+      totalQuantity: 0,
+      confirmedQuantity: 0,
+      pendingQuantity: 0,
+      reservationCount: 0,
+      confirmedCount: 0,
+      pendingCount: 0,
+      avgCostPerServing: 0,
+      avgCostPerReservation: 0,
+      avgDailyCost: 0,
+      uniqueDays: 0,
+      uniqueEmployees: 0,
+    };
+    const unitMap = new Map<string, CostGroup>();
+    const restaurantMap = new Map<string, CostGroup>();
+    const foodMap = new Map<string, FoodCostGroup>();
+    const dayMap = new Map<string, PeriodCostGroup>();
+    const weekMap = new Map<string, PeriodCostGroup>();
+    const monthMap = new Map<string, PeriodCostGroup>();
+    const days = new Set<string>();
+    const employees = new Set<string>();
+
+    for (const row of rows) {
+      const amount = Number(row.unitPrice) * row.quantity;
+      const unitPrice = Number(row.unitPrice);
+      const day = toIsoDateOnly(row.reservedAt) ?? '';
+      if (day) days.add(day);
+      employees.add(row.userId);
+
+      summary.reservationCount += 1;
+      summary.totalQuantity += row.quantity;
+      summary.totalCost += amount;
+      if (row.status === FoodReservationStatus.CONFIRMED) {
+        summary.confirmedCount += 1;
+        summary.confirmedQuantity += row.quantity;
+        summary.confirmedCost += amount;
+      } else {
+        summary.pendingCount += 1;
+        summary.pendingQuantity += row.quantity;
+        summary.pendingCost += amount;
+      }
+
+      bumpCost(unitMap, row.orgUnitId, row.orgUnit.name, amount, row.quantity);
+      bumpCost(
+        restaurantMap,
+        row.restaurantId,
+        row.restaurant.name,
+        amount,
+        row.quantity,
+      );
+      bumpFood(foodMap, row.foodId, row.food.name, amount, row.quantity, unitPrice);
+      if (day) {
+        bumpPeriod(dayMap, day, amount, row.quantity);
+        bumpPeriod(weekMap, startOfIranWeekIso(day), amount, row.quantity);
+        bumpPeriod(monthMap, day.slice(0, 7), amount, row.quantity);
+      }
+    }
+
+    summary.uniqueDays = days.size;
+    summary.uniqueEmployees = employees.size;
+    summary.avgCostPerServing =
+      summary.totalQuantity > 0 ? summary.totalCost / summary.totalQuantity : 0;
+    summary.avgCostPerReservation =
+      summary.reservationCount > 0
+        ? summary.totalCost / summary.reservationCount
+        : 0;
+    summary.avgDailyCost =
+      summary.uniqueDays > 0 ? summary.totalCost / summary.uniqueDays : 0;
+
+    const byUnit = [...unitMap.values()].sort(byCost);
+    const byFood = [...foodMap.values()]
+      .map((item) => ({
+        id: item.id,
+        name: item.name,
+        count: item.count,
+        quantity: item.quantity,
+        totalPrice: item.totalPrice,
+        avgUnitPrice:
+          item.quantity > 0 ? item.priceSum / item.quantity : 0,
+        minUnitPrice: item.minUnitPrice,
+        maxUnitPrice: item.maxUnitPrice,
+      }))
+      .sort(byCost);
+    const byRestaurant = [...restaurantMap.values()].sort(byCost);
+    const byAvgPrice = [...byFood].sort(
+      (a, b) => b.avgUnitPrice - a.avgUnitPrice || b.totalPrice - a.totalPrice,
+    );
+
+    return {
+      summary,
+      extremes: {
+        highestCostUnit: byUnit[0] ?? null,
+        lowestCostUnit: byUnit.length ? byUnit[byUnit.length - 1] : null,
+        mostExpensiveFood: byAvgPrice[0] ?? null,
+        cheapestFood: byAvgPrice.length
+          ? byAvgPrice[byAvgPrice.length - 1]
+          : null,
+        topSpendFood: byFood[0] ?? null,
+        topSpendRestaurant: byRestaurant[0] ?? null,
+      },
+      byUnit,
+      byFood,
+      byRestaurant,
+      byDay: [...dayMap.values()].sort(byPeriod),
+      byWeek: [...weekMap.values()].sort(byPeriod),
+      byMonth: [...monthMap.values()].sort(byPeriod),
+    };
+  }
+
   async findOne(id: string, userId?: string, mineOnly = false) {
     const item = await foodReservations(this.prisma).findUnique({
       where: { id },
@@ -235,16 +465,17 @@ export class FoodReservationsService {
         'این رستوران برای واحد سازمانی شما تعریف نشده است',
       );
     }
-    const menuItem = await this.prisma.restaurantMenuItem.findUnique({
+    const menuItem = await this.prisma.restaurantMenuItem.findFirst({
       where: {
-        restaurantId_foodId: {
-          restaurantId: dto.restaurantId,
-          foodId: dto.foodId,
-        },
+        restaurantId: dto.restaurantId,
+        foodId: dto.foodId,
+        offeredAt: parseIsoDate(dto.reservedAt),
       },
     });
     if (!menuItem) {
-      throw new BadRequestException('این غذا در برنامه غذایی رستوران نیست');
+      throw new BadRequestException(
+        'این غذا در برنامه غذایی این تاریخ نیست',
+      );
     }
     if (!menuItem.isActive) {
       throw new BadRequestException('این غذا در برنامه غذایی رستوران غیرفعال است');

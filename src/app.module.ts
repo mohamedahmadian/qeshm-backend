@@ -11,6 +11,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ProjectsModule } from './projects/projects.module';
 import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
+import { VehiclesModule } from './vehicles/vehicles.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { UsersModule } from './users/users.module';
     ProjectsModule,
     FoodReservationModule,
     OrganizationModule,
+    VehiclesModule,
     ImagesModule,
     SmsModule,
   ],

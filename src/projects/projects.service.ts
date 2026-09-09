@@ -67,7 +67,7 @@ export class ProjectsService {
   }
 
   async lookups(query: FindProjectsQueryDto) {
-    const [vicePresidencies, managements, units] = await Promise.all([
+    const [vicePresidencies, managements, units, companies] = await Promise.all([
       this.prisma.project.findMany({
         distinct: ['vicePresidency'],
         select: { vicePresidency: true },
@@ -92,11 +92,20 @@ export class ProjectsService {
         select: { unit: true },
         orderBy: { unit: 'asc' },
       }),
+      this.prisma.project.findMany({
+        where: { companyName: { not: null } },
+        distinct: ['companyName'],
+        select: { companyName: true },
+        orderBy: { companyName: 'asc' },
+      }),
     ]);
     return {
       vicePresidencies: vicePresidencies.map((item) => item.vicePresidency),
       managements: managements.map((item) => item.management),
       units: units.map((item) => item.unit),
+      companies: companies
+        .map((item) => item.companyName)
+        .filter((item): item is string => Boolean(item)),
     };
   }
 
@@ -143,6 +152,7 @@ export class ProjectsService {
       vicePresidency: query.vicePresidency,
       management: query.management,
       unit: query.unit,
+      companyName: query.companyName,
       isActive: query.isActive,
       isSupportActive: query.isSupportActive,
       importance: query.importance,

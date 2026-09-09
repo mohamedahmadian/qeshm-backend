@@ -139,3 +139,18 @@ export type OrganizationUnitRestaurant = Prisma.OrganizationUnitRestaurantModel
  * 
  */
 export type FoodReservation = Prisma.FoodReservationModel
+/**
+ * Model VehicleBrand
+ * 
+ */
+export type VehicleBrand = Prisma.VehicleBrandModel
+/**
+ * Model Vehicle
+ * 
+ */
+export type Vehicle = Prisma.VehicleModel
+/**
+ * Model VehicleAssignment
+ * 
+ */
+export type VehicleAssignment = Prisma.VehicleAssignmentModel

@@ -375,6 +375,74 @@ export type EnumFoodReservationStatusWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumFoodReservationStatusFilter<$PrismaModel>
 }
 
+export type EnumVehicleTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel> | $Enums.VehicleType
+}
+
+export type EnumVehicleStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleStatus | Prisma.EnumVehicleStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleStatus[] | Prisma.ListEnumVehicleStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleStatus[] | Prisma.ListEnumVehicleStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleStatusFilter<$PrismaModel> | $Enums.VehicleStatus
+}
+
+export type EnumVehicleTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleTypeWithAggregatesFilter<$PrismaModel> | $Enums.VehicleType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel>
+}
+
+export type EnumVehicleStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleStatus | Prisma.EnumVehicleStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleStatus[] | Prisma.ListEnumVehicleStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleStatus[] | Prisma.ListEnumVehicleStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleStatusWithAggregatesFilter<$PrismaModel> | $Enums.VehicleStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleStatusFilter<$PrismaModel>
+}
+
+export type EnumVehicleAssignmentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleAssignmentType | Prisma.EnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleAssignmentType[] | Prisma.ListEnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleAssignmentType[] | Prisma.ListEnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleAssignmentTypeFilter<$PrismaModel> | $Enums.VehicleAssignmentType
+}
+
+export type EnumVehicleAssignmentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleAssignmentStatus | Prisma.EnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleAssignmentStatus[] | Prisma.ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleAssignmentStatus[] | Prisma.ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel> | $Enums.VehicleAssignmentStatus
+}
+
+export type EnumVehicleAssignmentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleAssignmentType | Prisma.EnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleAssignmentType[] | Prisma.ListEnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleAssignmentType[] | Prisma.ListEnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleAssignmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.VehicleAssignmentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleAssignmentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleAssignmentTypeFilter<$PrismaModel>
+}
+
+export type EnumVehicleAssignmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleAssignmentStatus | Prisma.EnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleAssignmentStatus[] | Prisma.ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleAssignmentStatus[] | Prisma.ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleAssignmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.VehicleAssignmentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -747,6 +815,74 @@ export type NestedEnumFoodReservationStatusWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumFoodReservationStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumFoodReservationStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumVehicleTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel> | $Enums.VehicleType
+}
+
+export type NestedEnumVehicleStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleStatus | Prisma.EnumVehicleStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleStatus[] | Prisma.ListEnumVehicleStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleStatus[] | Prisma.ListEnumVehicleStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleStatusFilter<$PrismaModel> | $Enums.VehicleStatus
+}
+
+export type NestedEnumVehicleTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleTypeWithAggregatesFilter<$PrismaModel> | $Enums.VehicleType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumVehicleStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleStatus | Prisma.EnumVehicleStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleStatus[] | Prisma.ListEnumVehicleStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleStatus[] | Prisma.ListEnumVehicleStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleStatusWithAggregatesFilter<$PrismaModel> | $Enums.VehicleStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumVehicleAssignmentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleAssignmentType | Prisma.EnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleAssignmentType[] | Prisma.ListEnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleAssignmentType[] | Prisma.ListEnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleAssignmentTypeFilter<$PrismaModel> | $Enums.VehicleAssignmentType
+}
+
+export type NestedEnumVehicleAssignmentStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleAssignmentStatus | Prisma.EnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleAssignmentStatus[] | Prisma.ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleAssignmentStatus[] | Prisma.ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel> | $Enums.VehicleAssignmentStatus
+}
+
+export type NestedEnumVehicleAssignmentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleAssignmentType | Prisma.EnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleAssignmentType[] | Prisma.ListEnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleAssignmentType[] | Prisma.ListEnumVehicleAssignmentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleAssignmentTypeWithAggregatesFilter<$PrismaModel> | $Enums.VehicleAssignmentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleAssignmentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleAssignmentTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumVehicleAssignmentStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VehicleAssignmentStatus | Prisma.EnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VehicleAssignmentStatus[] | Prisma.ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VehicleAssignmentStatus[] | Prisma.ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVehicleAssignmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.VehicleAssignmentStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel>
 }
 
 

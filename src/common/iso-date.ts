@@ -37,6 +37,13 @@ export function addDaysIso(value: string, days: number) {
   return date.toISOString().slice(0, 10);
 }
 
+/** شنبهٔ همان هفته در تقویم ایران */
+export function startOfIranWeekIso(iso: string) {
+  const date = parseIsoDate(iso);
+  const daysSinceSaturday = (date.getUTCDay() + 1) % 7;
+  return addDaysIso(iso, -daysSinceSaturday);
+}
+
 export function toIsoDateOnly(value?: Date | string | null) {
   if (!value) return null;
   if (typeof value === 'string') return value.slice(0, 10);

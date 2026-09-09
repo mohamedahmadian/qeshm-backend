@@ -344,6 +344,14 @@ export class UsersService {
 
   async remove(id: string) {
     await this.findOne(id);
+    const assigned = await this.prisma.vehicleAssignment.count({
+      where: { personId: id },
+    });
+    if (assigned > 0) {
+      throw new ConflictException(
+        'ابتدا تخصیص وسایل نقلیه این شخص را ببندید یا حذف کنید',
+      );
+    }
     await this.prisma.user.delete({ where: { id } });
     return { ok: true };
   }

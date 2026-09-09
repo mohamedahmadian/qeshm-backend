@@ -177,6 +177,14 @@ export class OrganizationUnitsService {
     if (used > 0) {
       throw new ConflictException('ابتدا کارمندان این واحد را منتقل یا حذف کنید');
     }
+    const assigned = await this.prisma.vehicleAssignment.count({
+      where: { organizationUnitId: id },
+    });
+    if (assigned > 0) {
+      throw new ConflictException(
+        'ابتدا تخصیص وسایل نقلیه این واحد را ببندید یا حذف کنید',
+      );
+    }
     await this.prisma.organizationUnit.delete({ where: { id } });
     return { ok: true };
   }

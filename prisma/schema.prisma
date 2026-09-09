@@ -44,6 +44,33 @@ enum FoodReservationStatus {
   CONFIRMED
 }
 
+enum VehicleType {
+  SEDAN
+  PICKUP
+  TRUCK
+  MINIBUS
+  MOTORCYCLE
+  OTHER
+}
+
+enum VehicleStatus {
+  ACTIVE
+  IN_REPAIR
+  SCRAPPED
+  TRANSFERRED
+  MISSING
+}
+
+enum VehicleAssignmentType {
+  UNIT
+  PERSON
+}
+
+enum VehicleAssignmentStatus {
+  LENT
+  RETURNED
+}
+
 model StoredImage {
   id           String   @id @default(uuid())
   mimeType     String
@@ -185,6 +212,7 @@ model User {
   position           OrganizationPosition? @relation(fields: [positionId], references: [id], onDelete: SetNull)
   nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
   foodReservations   FoodReservation[]
+  vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
@@ -361,14 +389,16 @@ model RestaurantMenuItem {
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   foodId       String
   food         Food       @relation(fields: [foodId], references: [id], onDelete: Restrict)
+  offeredAt    DateTime   @db.Date
   price        Decimal    @db.Decimal(18, 0)
   isActive     Boolean    @default(true)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 
-  @@unique([restaurantId, foodId])
+  @@unique([restaurantId, foodId, offeredAt])
   @@index([restaurantId])
   @@index([foodId])
+  @@index([offeredAt])
   @@index([isActive])
   @@index([createdAt])
   @@map("restaurant_menu_items")
@@ -441,6 +471,7 @@ model OrganizationUnit {
   employees      User[]   @relation("UnitEmployees")
   restaurants    OrganizationUnitRestaurant[]
   reservations   FoodReservation[]
+  vehicleAssignments VehicleAssignment[]
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
@@ -491,4 +522,67 @@ model FoodReservation {
   @@index([status])
   @@index([createdAt])
   @@map("food_reservations")
+}
+
+model VehicleBrand {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  vehicles  Vehicle[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("vehicle_brands")
+}
+
+model Vehicle {
+  id            String        @id @default(uuid())
+  assetCode     String        @unique
+  plate         String        @unique
+  type          VehicleType
+  brandId       String
+  brand         VehicleBrand  @relation(fields: [brandId], references: [id], onDelete: Restrict)
+  model         String
+  color         String?
+  year          Int?
+  chassisNumber String?
+  engineNumber  String?
+  status        VehicleStatus @default(ACTIVE)
+  description   String?
+  assignments   VehicleAssignment[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([brandId])
+  @@index([createdAt])
+  @@map("vehicles")
+}
+
+model VehicleAssignment {
+  id                 String                 @id @default(uuid())
+  vehicleId          String
+  vehicle            Vehicle                @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  organizationUnitId String?
+  organizationUnit   OrganizationUnit?      @relation(fields: [organizationUnitId], references: [id], onDelete: Restrict)
+  personId           String?
+  person             User?                  @relation("VehicleAssignmentPerson", fields: [personId], references: [id], onDelete: Restrict)
+  startDate          DateTime                 @db.Date
+  endDate            DateTime?                @db.Date
+  returnedAt         DateTime?                @db.Date
+  type               VehicleAssignmentType
+  status             VehicleAssignmentStatus  @default(LENT)
+  description        String?
+  createdAt          DateTime                 @default(now())
+  updatedAt          DateTime                 @updatedAt
+
+  @@index([vehicleId, startDate])
+  @@index([organizationUnitId])
+  @@index([personId])
+  @@index([endDate])
+  @@index([status])
+  @@index([returnedAt])
+  @@map("vehicle_assignments")
 }
