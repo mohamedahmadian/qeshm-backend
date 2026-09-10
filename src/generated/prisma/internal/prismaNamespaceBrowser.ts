@@ -77,7 +77,10 @@ export const ModelName = {
   FoodReservation: 'FoodReservation',
   VehicleBrand: 'VehicleBrand',
   Vehicle: 'Vehicle',
-  VehicleAssignment: 'VehicleAssignment'
+  VehicleAssignment: 'VehicleAssignment',
+  Role: 'Role',
+  UserRole: 'UserRole',
+  RolePermission: 'RolePermission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -548,6 +551,35 @@ export const VehicleAssignmentScalarFieldEnum = {
 } as const
 
 export type VehicleAssignmentScalarFieldEnum = (typeof VehicleAssignmentScalarFieldEnum)[keyof typeof VehicleAssignmentScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const UserRoleScalarFieldEnum = {
+  userId: 'userId',
+  roleId: 'roleId'
+} as const
+
+export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
+
+
+export const RolePermissionScalarFieldEnum = {
+  roleId: 'roleId',
+  code: 'code'
+} as const
+
+export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
 
 
 export const SortOrder = {

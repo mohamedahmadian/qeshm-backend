@@ -174,3 +174,18 @@ export type Vehicle = Prisma.VehicleModel
  * 
  */
 export type VehicleAssignment = Prisma.VehicleAssignmentModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
+ * Model UserRole
+ * 
+ */
+export type UserRole = Prisma.UserRoleModel
+/**
+ * Model RolePermission
+ * 
+ */
+export type RolePermission = Prisma.RolePermissionModel

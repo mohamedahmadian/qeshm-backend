@@ -67,6 +67,11 @@ export class FindUsersQueryDto extends PaginationQueryDto {
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
+  @IsUUID()
+  roleId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...userSortFields])
   sortBy?: UserSortField;
 

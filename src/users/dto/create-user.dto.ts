@@ -185,4 +185,9 @@ export class CreateUserDto {
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
   positionId?: string | null;
+
+  @IsOptional()
+  @IsArray()
+  @IsUUID('4', { each: true })
+  roleIds?: string[];
 }

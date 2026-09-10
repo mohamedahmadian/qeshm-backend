@@ -1,30 +1,22 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Observable } from 'rxjs';
+import { loadUserAccess } from '../access/access.util';
 import { UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
-export class JwtUserInterceptor implements NestInterceptor {
+export class JwtUserGuard implements CanActivate {
   constructor(
     private readonly jwt: JwtService,
     private readonly prisma: PrismaService,
   ) {}
 
-  async intercept(
-    context: ExecutionContext,
-    next: CallHandler,
-  ): Promise<Observable<unknown>> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const header = request.headers.authorization as string | undefined;
     const token = header?.startsWith('Bearer ') ? header.slice(7) : undefined;
     if (!token) {
-      return next.handle();
+      return true;
     }
 
     try {
@@ -35,9 +27,16 @@ export class JwtUserInterceptor implements NestInterceptor {
       }>(token);
       const user = await this.prisma.user.findUnique({
         where: { id: payload.sub },
+        select: { id: true, status: true },
       });
       if (user && user.status === UserStatus.ACTIVE) {
-        request.user = { id: user.id };
+        const access = await loadUserAccess(this.prisma, user.id);
+        request.user = {
+          id: user.id,
+          isAdmin: access.isAdmin,
+          roleCodes: access.roleCodes,
+          permissionCodes: access.permissionCodes,
+        };
         request.impersonating = payload.impersonating === true;
         request.impersonatedById =
           payload.impersonating === true && typeof payload.act === 'string'
@@ -45,9 +44,9 @@ export class JwtUserInterceptor implements NestInterceptor {
             : null;
       }
     } catch {
-      /* token optional — no guards in this template */
+      /* invalid token — treated as anonymous */
     }
 
-    return next.handle();
+    return true;
   }
 }

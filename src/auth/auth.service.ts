@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { loadUserAccess } from '../access/access.util';
 import { normalizeNationalId, toLatinDigits } from '../common/national-id';
 import { phoneLookupValues } from '../common/phone';
 import { Prisma, UserStatus } from '../generated/prisma/client';
@@ -87,7 +88,7 @@ export class AuthService {
     });
 
     const token = await this.jwt.signAsync({ sub: profile.id });
-    return { token, user: this.toProfile(profile) };
+    return { token, user: await this.toProfile(profile) };
   }
 
   async profile(userId: string, impersonatedById?: string | null) {
@@ -116,6 +117,11 @@ export class AuthService {
     }
     if (!actorId) {
       throw new UnauthorizedException();
+    }
+
+    const actorAccess = await loadUserAccess(this.prisma, actorId);
+    if (!actorAccess.isAdmin) {
+      throw new ForbiddenException('فقط نقش مدیریت می‌تواند وارد پنل کاربر شود');
     }
 
     const target = await this.prisma.user.findUnique({
@@ -147,7 +153,7 @@ export class AuthService {
 
     return {
       token,
-      user: this.toProfile(target, {
+      user: await this.toProfile(target, {
         impersonating: true,
         impersonatedBy: actor,
       }),
@@ -219,7 +225,7 @@ export class AuthService {
     return { impersonating: true, impersonatedBy: actor };
   }
 
-  private toProfile(
+  private async toProfile(
     user: {
       id: string;
       username: string;
@@ -240,11 +246,19 @@ export class AuthService {
     extras?: ProfileExtras,
   ) {
     const { orgUnit, ...rest } = user;
+    const access = await loadUserAccess(this.prisma, user.id);
+    const roles = await this.prisma.role.findMany({
+      where: { users: { some: { userId: user.id } } },
+      select: { id: true, code: true, name: true },
+      orderBy: [{ name: 'asc' }, { code: 'asc' }],
+    });
     return {
       ...rest,
       orgUnit: orgUnit ? { id: orgUnit.id, name: orgUnit.name } : null,
       isNutritionRep: Boolean(orgUnit && orgUnit.nutritionRepId === user.id),
-      roles: [],
+      roles,
+      isAdmin: access.isAdmin,
+      permissionCodes: access.permissionCodes,
       modules: [],
       ...extras,
     };

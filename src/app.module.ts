@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessModule } from './access/access.module';
+import { PermissionsGuard } from './access/permissions.guard';
 import { AuthModule } from './auth/auth.module';
-import { JwtUserInterceptor } from './auth/jwt-user.interceptor';
+import { JwtUserGuard } from './auth/jwt-user.guard';
 import { FoodReservationModule } from './food-reservation/food-reservation.module';
 import { GeoModule } from './geo/geo.module';
 import { FilesModule } from './files/files.module';
@@ -10,6 +12,7 @@ import { ImagesModule } from './images/images.module';
 import { OrganizationModule } from './organization/organization.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ProjectsModule } from './projects/projects.module';
+import { RolesModule } from './roles/roles.module';
 import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
@@ -18,8 +21,10 @@ import { VehiclesModule } from './vehicles/vehicles.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
+    AccessModule,
     AuthModule,
     UsersModule,
+    RolesModule,
     GeoModule,
     ProjectsModule,
     FoodReservationModule,
@@ -31,8 +36,12 @@ import { VehiclesModule } from './vehicles/vehicles.module';
   ],
   providers: [
     {
-      provide: APP_INTERCEPTOR,
-      useClass: JwtUserInterceptor,
+      provide: APP_GUARD,
+      useClass: JwtUserGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionsGuard,
     },
   ],
 })

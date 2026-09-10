@@ -85,7 +85,7 @@ async function seedGeo() {
 async function main() {
   await seedGeo();
   const passwordHash = await bcrypt.hash('Admin1234', 10);
-  await prisma.user.upsert({
+  const adminUser = await prisma.user.upsert({
     where: { username: 'admin' },
     update: {
       passwordHash,
@@ -103,6 +103,27 @@ async function main() {
       locale: 'fa',
       status: 'ACTIVE',
     },
+  });
+  const adminRole = await prisma.role.upsert({
+    where: { code: 'ADMIN' },
+    update: {
+      name: 'مدیریت',
+      description: 'دسترسی کامل به همه منوها و بخش‌های سامانه',
+      isSystem: true,
+    },
+    create: {
+      code: 'ADMIN',
+      name: 'مدیریت',
+      description: 'دسترسی کامل به همه منوها و بخش‌های سامانه',
+      isSystem: true,
+    },
+  });
+  await prisma.userRole.upsert({
+    where: {
+      userId_roleId: { userId: adminUser.id, roleId: adminRole.id },
+    },
+    update: {},
+    create: { userId: adminUser.id, roleId: adminRole.id },
   });
   await importProjects(prisma);
 }

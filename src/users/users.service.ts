@@ -71,6 +71,12 @@ const userSelect = {
   updatedAt: true,
   orgUnit: { select: { id: true, name: true } },
   position: { select: { id: true, name: true } },
+  userRoles: {
+    select: {
+      role: { select: { id: true, code: true, name: true } },
+    },
+    orderBy: { role: { name: 'asc' } },
+  },
   country: { select: geoNameSelect },
   province: { select: { ...geoNameSelect, countryId: true } },
   city: { select: { ...geoNameSelect, provinceId: true } },
@@ -91,13 +97,15 @@ function mapUser<
   T extends {
     latitude: Prisma.Decimal | null;
     longitude: Prisma.Decimal | null;
+    userRoles?: { role: { id: string; code: string; name: string } }[];
   },
 >(user: T) {
+  const { userRoles, ...rest } = user;
   return {
-    ...user,
+    ...rest,
     latitude: toCoord(user.latitude),
     longitude: toCoord(user.longitude),
-    roles: [],
+    roles: userRoles?.map((item) => item.role) ?? [],
     birthDate: null,
     activityStartYear: null,
     issuingOrganizationId: null,
@@ -124,6 +132,7 @@ export class UsersService {
       countryId: query.countryId,
       orgUnitId: query.orgUnitId,
       positionId: query.positionId,
+      ...(query.roleId ? { userRoles: { some: { roleId: query.roleId } } } : {}),
       ...(query.employeesOnly ? { orgUnitId: query.orgUnitId ?? { not: null } } : {}),
       provinceId: query.provinceId,
       cityId:
@@ -258,6 +267,10 @@ export class UsersService {
       },
       select: userSelect,
     });
+    if (dto.roleIds !== undefined) {
+      await this.syncUserRoles(user.id, dto.roleIds);
+      return this.findOne(user.id);
+    }
     return mapUser(user);
   }
 
@@ -334,11 +347,16 @@ export class UsersService {
       data,
       select: userSelect,
     });
+    if (dto.roleIds !== undefined) {
+      await this.syncUserRoles(id, dto.roleIds);
+      return this.findOne(id);
+    }
     return mapUser(user);
   }
 
   async updateOwnAccount(id: string, dto: UpdateUserDto) {
-    const { status: _status, password: _password, ...rest } = dto;
+    const { status: _status, password: _password, roleIds: _roleIds, ...rest } =
+      dto;
     return this.update(id, rest);
   }
 
@@ -685,5 +703,26 @@ export class UsersService {
         throw new BadRequestException('شهر متعلق به این استان نیست');
       }
     }
+  }
+
+  private async syncUserRoles(userId: string, roleIds: string[]) {
+    const unique = [...new Set(roleIds.filter(Boolean))];
+    if (!unique.length) {
+      throw new BadRequestException('حداقل یک نقش را انتخاب کنید');
+    }
+    const found = await this.prisma.role.findMany({
+      where: { id: { in: unique } },
+      select: { id: true },
+    });
+    if (found.length !== unique.length) {
+      throw new BadRequestException('نقش انتخاب‌شده معتبر نیست');
+    }
+    await this.prisma.userRole.deleteMany({
+      where: { userId, roleId: { notIn: unique } },
+    });
+    await this.prisma.userRole.createMany({
+      data: unique.map((roleId) => ({ userId, roleId })),
+      skipDuplicates: true,
+    });
   }
 }
