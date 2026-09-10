@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtUserInterceptor } from './auth/jwt-user.interceptor';
 import { FoodReservationModule } from './food-reservation/food-reservation.module';
 import { GeoModule } from './geo/geo.module';
+import { FilesModule } from './files/files.module';
 import { ImagesModule } from './images/images.module';
 import { OrganizationModule } from './organization/organization.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -25,6 +26,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
     OrganizationModule,
     VehiclesModule,
     ImagesModule,
+    FilesModule,
     SmsModule,
   ],
   providers: [

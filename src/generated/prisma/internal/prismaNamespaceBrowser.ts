@@ -58,6 +58,10 @@ export const ModelName = {
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
   Project: 'Project',
+  ProjectPhase: 'ProjectPhase',
+  StoredFile: 'StoredFile',
+  ProjectProgressEntry: 'ProjectProgressEntry',
+  ProjectProgressImage: 'ProjectProgressImage',
   ProjectContractor: 'ProjectContractor',
   ProjectContractorMember: 'ProjectContractorMember',
   ProjectContractorPhase: 'ProjectContractorPhase',
@@ -229,7 +233,14 @@ export const ProjectScalarFieldEnum = {
   management: 'management',
   unit: 'unit',
   systemName: 'systemName',
+  code: 'code',
   isActive: 'isActive',
+  status: 'status',
+  progressPercent: 'progressPercent',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  latitude: 'latitude',
+  longitude: 'longitude',
   companyName: 'companyName',
   systemUrl: 'systemUrl',
   launchYear: 'launchYear',
@@ -242,6 +253,64 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const ProjectPhaseScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  name: 'name',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  progressPercent: 'progressPercent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectPhaseScalarFieldEnum = (typeof ProjectPhaseScalarFieldEnum)[keyof typeof ProjectPhaseScalarFieldEnum]
+
+
+export const StoredFileScalarFieldEnum = {
+  id: 'id',
+  mimeType: 'mimeType',
+  data: 'data',
+  byteSize: 'byteSize',
+  originalName: 'originalName',
+  durationMs: 'durationMs',
+  createdAt: 'createdAt'
+} as const
+
+export type StoredFileScalarFieldEnum = (typeof StoredFileScalarFieldEnum)[keyof typeof StoredFileScalarFieldEnum]
+
+
+export const ProjectProgressEntryScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  occurredAt: 'occurredAt',
+  body: 'body',
+  transcript: 'transcript',
+  summary: 'summary',
+  progressPercent: 'progressPercent',
+  processingMode: 'processingMode',
+  transcriptionStatus: 'transcriptionStatus',
+  transcriptionError: 'transcriptionError',
+  audioId: 'audioId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectProgressEntryScalarFieldEnum = (typeof ProjectProgressEntryScalarFieldEnum)[keyof typeof ProjectProgressEntryScalarFieldEnum]
+
+
+export const ProjectProgressImageScalarFieldEnum = {
+  id: 'id',
+  entryId: 'entryId',
+  imageId: 'imageId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type ProjectProgressImageScalarFieldEnum = (typeof ProjectProgressImageScalarFieldEnum)[keyof typeof ProjectProgressImageScalarFieldEnum]
 
 
 export const ProjectContractorScalarFieldEnum = {

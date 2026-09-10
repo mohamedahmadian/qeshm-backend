@@ -404,6 +404,10 @@ export const ModelName = {
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
   Project: 'Project',
+  ProjectPhase: 'ProjectPhase',
+  StoredFile: 'StoredFile',
+  ProjectProgressEntry: 'ProjectProgressEntry',
+  ProjectProgressImage: 'ProjectProgressImage',
   ProjectContractor: 'ProjectContractor',
   ProjectContractorMember: 'ProjectContractorMember',
   ProjectContractorPhase: 'ProjectContractorPhase',
@@ -435,7 +439,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectContractor" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -954,6 +958,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProjectCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProjectCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectPhase: {
+      payload: Prisma.$ProjectPhasePayload<ExtArgs>
+      fields: Prisma.ProjectPhaseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectPhaseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectPhaseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectPhaseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectPhaseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>
+        }
+        findMany: {
+          args: Prisma.ProjectPhaseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>[]
+        }
+        create: {
+          args: Prisma.ProjectPhaseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>
+        }
+        createMany: {
+          args: Prisma.ProjectPhaseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectPhaseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectPhaseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>
+        }
+        update: {
+          args: Prisma.ProjectPhaseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectPhaseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectPhaseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectPhaseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectPhaseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectPhasePayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectPhaseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectPhase>
+        }
+        groupBy: {
+          args: Prisma.ProjectPhaseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectPhaseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectPhaseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectPhaseCountAggregateOutputType> | number
+        }
+      }
+    }
+    StoredFile: {
+      payload: Prisma.$StoredFilePayload<ExtArgs>
+      fields: Prisma.StoredFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StoredFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StoredFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>
+        }
+        findFirst: {
+          args: Prisma.StoredFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StoredFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>
+        }
+        findMany: {
+          args: Prisma.StoredFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>[]
+        }
+        create: {
+          args: Prisma.StoredFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>
+        }
+        createMany: {
+          args: Prisma.StoredFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StoredFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>[]
+        }
+        delete: {
+          args: Prisma.StoredFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>
+        }
+        update: {
+          args: Prisma.StoredFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.StoredFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StoredFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StoredFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.StoredFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoredFilePayload>
+        }
+        aggregate: {
+          args: Prisma.StoredFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStoredFile>
+        }
+        groupBy: {
+          args: Prisma.StoredFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StoredFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StoredFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StoredFileCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectProgressEntry: {
+      payload: Prisma.$ProjectProgressEntryPayload<ExtArgs>
+      fields: Prisma.ProjectProgressEntryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectProgressEntryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectProgressEntryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectProgressEntryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectProgressEntryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectProgressEntryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectProgressEntryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectProgressEntryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectProgressEntryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectProgressEntryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>
+        }
+        update: {
+          args: Prisma.ProjectProgressEntryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectProgressEntryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectProgressEntryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectProgressEntryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectProgressEntryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressEntryPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectProgressEntryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectProgressEntry>
+        }
+        groupBy: {
+          args: Prisma.ProjectProgressEntryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectProgressEntryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectProgressEntryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectProgressEntryCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectProgressImage: {
+      payload: Prisma.$ProjectProgressImagePayload<ExtArgs>
+      fields: Prisma.ProjectProgressImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectProgressImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectProgressImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectProgressImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectProgressImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>
+        }
+        findMany: {
+          args: Prisma.ProjectProgressImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>[]
+        }
+        create: {
+          args: Prisma.ProjectProgressImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>
+        }
+        createMany: {
+          args: Prisma.ProjectProgressImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectProgressImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectProgressImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>
+        }
+        update: {
+          args: Prisma.ProjectProgressImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectProgressImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectProgressImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectProgressImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectProgressImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectProgressImagePayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectProgressImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectProgressImage>
+        }
+        groupBy: {
+          args: Prisma.ProjectProgressImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectProgressImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectProgressImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectProgressImageCountAggregateOutputType> | number
         }
       }
     }
@@ -2317,7 +2617,14 @@ export const ProjectScalarFieldEnum = {
   management: 'management',
   unit: 'unit',
   systemName: 'systemName',
+  code: 'code',
   isActive: 'isActive',
+  status: 'status',
+  progressPercent: 'progressPercent',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  latitude: 'latitude',
+  longitude: 'longitude',
   companyName: 'companyName',
   systemUrl: 'systemUrl',
   launchYear: 'launchYear',
@@ -2330,6 +2637,64 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const ProjectPhaseScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  name: 'name',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  progressPercent: 'progressPercent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectPhaseScalarFieldEnum = (typeof ProjectPhaseScalarFieldEnum)[keyof typeof ProjectPhaseScalarFieldEnum]
+
+
+export const StoredFileScalarFieldEnum = {
+  id: 'id',
+  mimeType: 'mimeType',
+  data: 'data',
+  byteSize: 'byteSize',
+  originalName: 'originalName',
+  durationMs: 'durationMs',
+  createdAt: 'createdAt'
+} as const
+
+export type StoredFileScalarFieldEnum = (typeof StoredFileScalarFieldEnum)[keyof typeof StoredFileScalarFieldEnum]
+
+
+export const ProjectProgressEntryScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  occurredAt: 'occurredAt',
+  body: 'body',
+  transcript: 'transcript',
+  summary: 'summary',
+  progressPercent: 'progressPercent',
+  processingMode: 'processingMode',
+  transcriptionStatus: 'transcriptionStatus',
+  transcriptionError: 'transcriptionError',
+  audioId: 'audioId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectProgressEntryScalarFieldEnum = (typeof ProjectProgressEntryScalarFieldEnum)[keyof typeof ProjectProgressEntryScalarFieldEnum]
+
+
+export const ProjectProgressImageScalarFieldEnum = {
+  id: 'id',
+  entryId: 'entryId',
+  imageId: 'imageId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type ProjectProgressImageScalarFieldEnum = (typeof ProjectProgressImageScalarFieldEnum)[keyof typeof ProjectProgressImageScalarFieldEnum]
 
 
 export const ProjectContractorScalarFieldEnum = {
@@ -2733,6 +3098,20 @@ export type ListEnumLocationSourceFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'ProjectStatus'
+ */
+export type EnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectStatus[]'
+ */
+export type ListEnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ProjectImportance'
  */
 export type EnumProjectImportanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectImportance'>
@@ -2743,6 +3122,34 @@ export type EnumProjectImportanceFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'ProjectImportance[]'
  */
 export type ListEnumProjectImportanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectImportance[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectProgressProcessingMode'
+ */
+export type EnumProjectProgressProcessingModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectProgressProcessingMode'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectProgressProcessingMode[]'
+ */
+export type ListEnumProjectProgressProcessingModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectProgressProcessingMode[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectProgressTranscriptionStatus'
+ */
+export type EnumProjectProgressTranscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectProgressTranscriptionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectProgressTranscriptionStatus[]'
+ */
+export type ListEnumProjectProgressTranscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectProgressTranscriptionStatus[]'>
     
 
 
@@ -2987,6 +3394,10 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   userLocationHistory?: Prisma.UserLocationHistoryOmit
   project?: Prisma.ProjectOmit
+  projectPhase?: Prisma.ProjectPhaseOmit
+  storedFile?: Prisma.StoredFileOmit
+  projectProgressEntry?: Prisma.ProjectProgressEntryOmit
+  projectProgressImage?: Prisma.ProjectProgressImageOmit
   projectContractor?: Prisma.ProjectContractorOmit
   projectContractorMember?: Prisma.ProjectContractorMemberOmit
   projectContractorPhase?: Prisma.ProjectContractorPhaseOmit

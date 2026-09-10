@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { todayIsoDateTehran, toIsoDateOnly } from '../common/iso-date';
-import { Prisma, ProjectImportance } from '../generated/prisma/client';
+import { Prisma, ProjectImportance, ProjectStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { FindProjectsQueryDto } from './dto/find-projects-query.dto';
 import { ProjectsService } from './projects.service';
@@ -10,6 +10,13 @@ const IMPORTANCE_ORDER: ProjectImportance[] = [
   'HIGH',
   'MEDIUM',
   'LOW',
+];
+
+const LIFECYCLE_ORDER: ProjectStatus[] = [
+  'NOT_STARTED',
+  'IN_PROGRESS',
+  'SUSPENDED',
+  'COMPLETED',
 ];
 
 type OrgBucket = {
@@ -80,6 +87,8 @@ export class ProjectReportsService {
         unit: true,
         systemName: true,
         isActive: true,
+        status: true,
+        progressPercent: true,
         isSupportActive: true,
         companyName: true,
         systemUrl: true,
@@ -102,6 +111,10 @@ export class ProjectReportsService {
     const byImportance = new Map<ProjectImportance, number>(
       IMPORTANCE_ORDER.map((key) => [key, 0]),
     );
+    const byLifecycle = new Map<ProjectStatus | 'unset', number>([
+      ...LIFECYCLE_ORDER.map((key): [ProjectStatus, number] => [key, 0]),
+      ['unset', 0],
+    ]);
     const byVice = new Map<string, OrgBucket>();
     const byManagement = new Map<string, OrgBucket>();
     const byUnit = new Map<string, OrgBucket>();
@@ -150,9 +163,19 @@ export class ProjectReportsService {
     let ongoingPhases = 0;
     let endedPhases = 0;
     let phaseDays = 0;
+    let progressTotal = 0;
+    let progressCount = 0;
 
     for (const project of projects) {
       if (project.isActive) activeProjects += 1;
+      byLifecycle.set(
+        project.status ?? 'unset',
+        (byLifecycle.get(project.status ?? 'unset') ?? 0) + 1,
+      );
+      if (project.progressPercent != null) {
+        progressTotal += project.progressPercent;
+        progressCount += 1;
+      }
       if (project.isSupportActive) supportActive += 1;
       if (project.replacementProjectId) withReplacement += 1;
       if (project.systemUrl) withUrl += 1;
@@ -290,12 +313,20 @@ export class ProjectReportsService {
         avgContractorsPerProject: this.avg(totalContractors, totalProjects),
         avgMembersPerContractor: this.avg(totalMembers, totalContractors),
         avgPhaseDays: this.avg(phaseDays, totalPhases),
+        avgProgressPercent: this.avg(progressTotal, progressCount),
         paidRatio: totalCostEstimate > 0 ? totalPaid / totalCostEstimate : null,
       },
       byImportance: IMPORTANCE_ORDER.map((key) => ({
         key,
         count: byImportance.get(key) ?? 0,
       })),
+      byLifecycleStatus: [
+        ...LIFECYCLE_ORDER.map((key) => ({
+          key,
+          count: byLifecycle.get(key) ?? 0,
+        })),
+        { key: 'unset', count: byLifecycle.get('unset') ?? 0 },
+      ],
       byStatus: [
         { key: 'active', count: activeProjects },
         { key: 'inactive', count: totalProjects - activeProjects },

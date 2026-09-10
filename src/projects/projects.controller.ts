@@ -36,6 +36,11 @@ export class ProjectsController {
     return this.reports.overview(query);
   }
 
+  @Get('live-board')
+  liveBoard(@Query() query: FindProjectsQueryDto) {
+    return this.projects.liveBoard(query);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.projects.findOne(id);

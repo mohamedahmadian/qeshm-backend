@@ -39,6 +39,13 @@ enum ProjectImportance {
   LOW
 }
 
+enum ProjectStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUSPENDED
+  COMPLETED
+}
+
 enum FoodReservationStatus {
   PENDING
   CONFIRMED
@@ -71,6 +78,19 @@ enum VehicleAssignmentStatus {
   RETURNED
 }
 
+enum ProjectProgressProcessingMode {
+  IMMEDIATE
+  DEFERRED
+}
+
+enum ProjectProgressTranscriptionStatus {
+  NONE
+  PENDING
+  PROCESSING
+  READY
+  FAILED
+}
+
 model StoredImage {
   id           String   @id @default(uuid())
   mimeType     String
@@ -85,6 +105,7 @@ model StoredImage {
   identityBookletUsers   User[] @relation("UserIdentityBooklet")
   foodPhotos             Food[] @relation("FoodPhoto")
   restaurantLogos        Restaurant[] @relation("RestaurantLogo")
+  progressImages         ProjectProgressImage[]
   createdAt              DateTime @default(now())
 
   @@map("stored_images")
@@ -255,7 +276,14 @@ model Project {
   management           String
   unit                 String
   systemName           String
+  code                 String             @unique
   isActive             Boolean            @default(true)
+  status               ProjectStatus      @default(NOT_STARTED)
+  progressPercent      Int?
+  startDate            DateTime?          @db.Date
+  endDate              DateTime?          @db.Date
+  latitude             Decimal?           @db.Decimal(10, 7)
+  longitude            Decimal?           @db.Decimal(10, 7)
   companyName          String?
   systemUrl            String?
   launchYear           Int?
@@ -266,6 +294,8 @@ model Project {
   description          String?
   importance           ProjectImportance  @default(HIGH)
   contractors          ProjectContractor[]
+  phases               ProjectPhase[]
+  progressEntries      ProjectProgressEntry[]
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
 
@@ -273,11 +303,86 @@ model Project {
   @@index([management])
   @@index([unit])
   @@index([systemName])
+  @@index([code])
   @@index([isActive])
+  @@index([status])
+  @@index([startDate])
+  @@index([endDate])
   @@index([isSupportActive])
   @@index([importance])
   @@index([createdAt])
   @@map("projects")
+}
+
+model ProjectPhase {
+  id              String         @id @default(uuid())
+  projectId       String
+  project         Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name            String
+  startDate       DateTime?      @db.Date
+  endDate         DateTime?      @db.Date
+  status          ProjectStatus?
+  progressPercent Int?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([projectId, name])
+  @@index([projectId, startDate])
+  @@index([status])
+  @@index([createdAt])
+  @@map("project_phases")
+}
+
+model StoredFile {
+  id           String                 @id @default(uuid())
+  mimeType     String
+  data         Bytes
+  byteSize     Int
+  originalName String?
+  durationMs   Int?
+  createdAt    DateTime               @default(now())
+  progressEntries ProjectProgressEntry[]
+
+  @@map("stored_files")
+}
+
+model ProjectProgressEntry {
+  id                  String                              @id @default(uuid())
+  projectId           String
+  project             Project                             @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  occurredAt          DateTime                            @db.Date
+  body                String?
+  transcript          String?
+  summary             String?
+  progressPercent     Int?
+  processingMode      ProjectProgressProcessingMode       @default(DEFERRED)
+  transcriptionStatus ProjectProgressTranscriptionStatus  @default(NONE)
+  transcriptionError  String?
+  audioId             String?
+  audio               StoredFile?                         @relation(fields: [audioId], references: [id], onDelete: SetNull)
+  images              ProjectProgressImage[]
+  createdAt           DateTime                            @default(now())
+  updatedAt           DateTime                            @updatedAt
+
+  @@index([projectId, occurredAt])
+  @@index([projectId, createdAt])
+  @@index([transcriptionStatus])
+  @@index([audioId])
+  @@map("project_progress_entries")
+}
+
+model ProjectProgressImage {
+  id        String               @id @default(uuid())
+  entryId   String
+  entry     ProjectProgressEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  imageId   String
+  image     StoredImage          @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  sortOrder Int                  @default(0)
+  createdAt DateTime             @default(now())
+
+  @@index([entryId, sortOrder])
+  @@index([imageId])
+  @@map("project_progress_images")
 }
 
 model ProjectContractor {

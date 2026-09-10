@@ -55,6 +55,16 @@ export const ProjectImportance = {
 export type ProjectImportance = (typeof ProjectImportance)[keyof typeof ProjectImportance]
 
 
+export const ProjectStatus = {
+  NOT_STARTED: 'NOT_STARTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  SUSPENDED: 'SUSPENDED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
+
+
 export const FoodReservationStatus = {
   PENDING: 'PENDING',
   CONFIRMED: 'CONFIRMED'
@@ -100,3 +110,22 @@ export const VehicleAssignmentStatus = {
 } as const
 
 export type VehicleAssignmentStatus = (typeof VehicleAssignmentStatus)[keyof typeof VehicleAssignmentStatus]
+
+
+export const ProjectProgressProcessingMode = {
+  IMMEDIATE: 'IMMEDIATE',
+  DEFERRED: 'DEFERRED'
+} as const
+
+export type ProjectProgressProcessingMode = (typeof ProjectProgressProcessingMode)[keyof typeof ProjectProgressProcessingMode]
+
+
+export const ProjectProgressTranscriptionStatus = {
+  NONE: 'NONE',
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  FAILED: 'FAILED'
+} as const
+
+export type ProjectProgressTranscriptionStatus = (typeof ProjectProgressTranscriptionStatus)[keyof typeof ProjectProgressTranscriptionStatus]

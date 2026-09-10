@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { parseIsoDate, toIsoDateOnly } from '../common/iso-date';
 import {
   containsInsensitive,
   paginatedResult,
@@ -22,7 +23,14 @@ const projectSelect = {
   management: true,
   unit: true,
   systemName: true,
+  code: true,
   isActive: true,
+  status: true,
+  progressPercent: true,
+  startDate: true,
+  endDate: true,
+  latitude: true,
+  longitude: true,
   companyName: true,
   systemUrl: true,
   launchYear: true,
@@ -35,8 +43,55 @@ const projectSelect = {
   replacementProject: {
     select: { id: true, systemName: true },
   },
-  _count: { select: { contractors: true } },
+  _count: { select: { contractors: true, phases: true } },
 } satisfies Prisma.ProjectSelect;
+
+function toCoord(value: Prisma.Decimal | null) {
+  return value == null ? null : Number(value);
+}
+
+function toDecimal(value: number | null | undefined) {
+  if (value === undefined) {
+    return undefined;
+  }
+  return value == null ? null : new Prisma.Decimal(value);
+}
+
+function activitySource(entry: {
+  body: string | null;
+  summary: string | null;
+  transcript: string | null;
+}) {
+  const body = entry.body?.trim() ?? '';
+  const summary = entry.summary?.trim() ?? '';
+  const transcript = entry.transcript?.trim() ?? '';
+  const text = body || summary || transcript;
+  const lines = text
+    .split(/\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const title = lines[0] ?? '';
+  const rest = lines.slice(1).join(' ');
+  const excerpt = rest && rest !== title ? rest : summary && summary !== title ? summary : '';
+  return { title, excerpt };
+}
+
+function serializeProject<
+  T extends {
+    latitude: Prisma.Decimal | null;
+    longitude: Prisma.Decimal | null;
+    startDate: Date | null;
+    endDate: Date | null;
+  },
+>(item: T) {
+  return {
+    ...item,
+    latitude: toCoord(item.latitude),
+    longitude: toCoord(item.longitude),
+    startDate: toIsoDateOnly(item.startDate),
+    endDate: toIsoDateOnly(item.endDate),
+  };
+}
 
 @Injectable()
 export class ProjectsService {
@@ -46,11 +101,12 @@ export class ProjectsService {
     const where = this.listWhere(query);
     const orderBy = this.orderBy(query);
     if (!wantsPagination(query)) {
-      return this.prisma.project.findMany({
+      const items = await this.prisma.project.findMany({
         where,
         orderBy,
         select: projectSelect,
       });
+      return items.map(serializeProject);
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
@@ -63,7 +119,100 @@ export class ProjectsService {
       }),
       this.prisma.project.count({ where }),
     ]);
-    return paginatedResult(items, total, page, pageSize);
+    return paginatedResult(items.map(serializeProject), total, page, pageSize);
+  }
+
+  async liveBoard(query: FindProjectsQueryDto) {
+    const where = this.listWhere(query);
+    const orderBy = this.orderBy(query);
+    const items = await this.prisma.project.findMany({
+      where,
+      orderBy,
+      select: {
+        ...projectSelect,
+        _count: {
+          select: { contractors: true, phases: true, progressEntries: true },
+        },
+        contractors: {
+          select: { id: true, name: true },
+          orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+        },
+        progressEntries: {
+          select: {
+            id: true,
+            occurredAt: true,
+            body: true,
+            summary: true,
+            transcript: true,
+          },
+          orderBy: [{ occurredAt: 'desc' }, { createdAt: 'desc' }],
+          take: 1,
+        },
+      },
+    });
+
+    const byStatus: Record<string, number> = {
+      NOT_STARTED: 0,
+      IN_PROGRESS: 0,
+      SUSPENDED: 0,
+      COMPLETED: 0,
+      unset: 0,
+    };
+    let withLocation = 0;
+    let progressTotal = 0;
+    let progressCount = 0;
+
+    const serialized = items.map((item) => {
+      const { contractors, progressEntries, ...rest } = item;
+      if (rest.status) {
+        byStatus[rest.status] += 1;
+      } else {
+        byStatus.unset += 1;
+      }
+      if (rest.latitude != null && rest.longitude != null) {
+        withLocation += 1;
+      }
+      if (rest.progressPercent != null) {
+        progressTotal += rest.progressPercent;
+        progressCount += 1;
+      }
+      const last = progressEntries[0] ?? null;
+      const source = last ? activitySource(last) : null;
+      return {
+        ...serializeProject(rest),
+        mainContractor: contractors[0] ?? null,
+        contractors,
+        activityCount: rest._count.progressEntries,
+        lastActivity: last
+          ? {
+              id: last.id,
+              occurredAt: toIsoDateOnly(last.occurredAt),
+              title: source?.title ?? '',
+              excerpt: source?.excerpt ?? '',
+            }
+          : null,
+      };
+    });
+
+    return {
+      items: serialized,
+      stats: {
+        total: items.length,
+        withLocation,
+        withoutLocation: items.length - withLocation,
+        avgProgressPercent:
+          progressCount > 0
+            ? Math.round((progressTotal / progressCount) * 10) / 10
+            : null,
+        byStatus: [
+          { key: 'NOT_STARTED', count: byStatus.NOT_STARTED },
+          { key: 'IN_PROGRESS', count: byStatus.IN_PROGRESS },
+          { key: 'SUSPENDED', count: byStatus.SUSPENDED },
+          { key: 'COMPLETED', count: byStatus.COMPLETED },
+          { key: 'unset', count: byStatus.unset },
+        ],
+      },
+    };
   }
 
   async lookups(query: FindProjectsQueryDto) {
@@ -117,28 +266,45 @@ export class ProjectsService {
     if (!project) {
       throw new NotFoundException('پروژه یافت نشد');
     }
-    return project;
+    return serializeProject(project);
   }
 
   async create(dto: CreateProjectDto) {
+    this.assertTimeline(dto.startDate, dto.endDate);
+    this.assertCoordinates(dto.latitude, dto.longitude);
     await this.assertReplacement(dto.replacementProjectId);
-    return this.prisma.project.create({
+    await this.assertUniqueCode(dto.code);
+    const project = await this.prisma.project.create({
       data: this.createData(dto),
       select: projectSelect,
     });
+    return serializeProject(project);
   }
 
   async update(id: string, dto: UpdateProjectDto) {
-    await this.findOne(id);
+    const current = await this.findOne(id);
+    this.assertTimeline(dto.startDate, dto.endDate);
+    this.assertCoordinates(dto.latitude, dto.longitude);
     if (dto.replacementProjectId === id) {
       throw new BadRequestException('سامانه جایگزین نمی‌تواند همین پروژه باشد');
     }
     await this.assertReplacement(dto.replacementProjectId);
-    return this.prisma.project.update({
+    if (dto.code !== undefined) {
+      await this.assertUniqueCode(dto.code, id);
+    }
+    const data = this.updateData(dto);
+    if (
+      dto.progressPercent !== undefined &&
+      dto.progressPercent !== current.progressPercent
+    ) {
+      data.status = 'IN_PROGRESS';
+    }
+    const project = await this.prisma.project.update({
       where: { id },
-      data: this.updateData(dto),
+      data,
       select: projectSelect,
     });
+    return serializeProject(project);
   }
 
   async remove(id: string) {
@@ -154,12 +320,14 @@ export class ProjectsService {
       unit: query.unit,
       companyName: query.companyName,
       isActive: query.isActive,
+      status: query.status,
       isSupportActive: query.isSupportActive,
       importance: query.importance,
       id: query.excludeId ? { not: query.excludeId } : undefined,
       OR: query.q
         ? [
             { systemName: containsInsensitive(query.q) },
+            { code: containsInsensitive(query.q) },
             { companyName: containsInsensitive(query.q) },
             { systemUrl: containsInsensitive(query.q) },
             { description: containsInsensitive(query.q) },
@@ -182,7 +350,12 @@ export class ProjectsService {
         management: (dir) => ({ management: dir }),
         unit: (dir) => ({ unit: dir }),
         systemName: (dir) => ({ systemName: dir }),
+        code: (dir) => ({ code: dir }),
         isActive: (dir) => ({ isActive: dir }),
+        status: (dir) => ({ status: dir }),
+        progressPercent: (dir) => ({ progressPercent: dir }),
+        startDate: (dir) => ({ startDate: dir }),
+        endDate: (dir) => ({ endDate: dir }),
         companyName: (dir) => ({ companyName: dir }),
         systemUrl: (dir) => ({ systemUrl: dir }),
         launchYear: (dir) => ({ launchYear: dir }),
@@ -191,6 +364,7 @@ export class ProjectsService {
           replacementProject: { systemName: dir },
         }),
         importance: (dir) => ({ importance: dir }),
+        activityCount: (dir) => ({ progressEntries: { _count: dir } }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -202,7 +376,14 @@ export class ProjectsService {
       management: dto.management,
       unit: dto.unit,
       systemName: dto.systemName,
+      code: dto.code,
       isActive: dto.isActive,
+      status: dto.status ?? 'NOT_STARTED',
+      progressPercent: dto.progressPercent,
+      startDate: dto.startDate ? parseIsoDate(dto.startDate) : null,
+      endDate: dto.endDate ? parseIsoDate(dto.endDate) : null,
+      latitude: toDecimal(dto.latitude ?? null),
+      longitude: toDecimal(dto.longitude ?? null),
       companyName: dto.companyName,
       systemUrl: dto.systemUrl,
       launchYear: dto.launchYear,
@@ -219,7 +400,24 @@ export class ProjectsService {
       management: dto.management,
       unit: dto.unit,
       systemName: dto.systemName,
+      code: dto.code,
       isActive: dto.isActive,
+      status: dto.status,
+      progressPercent: dto.progressPercent,
+      startDate:
+        dto.startDate === undefined
+          ? undefined
+          : dto.startDate
+            ? parseIsoDate(dto.startDate)
+            : null,
+      endDate:
+        dto.endDate === undefined
+          ? undefined
+          : dto.endDate
+            ? parseIsoDate(dto.endDate)
+            : null,
+      latitude: toDecimal(dto.latitude),
+      longitude: toDecimal(dto.longitude),
       companyName: dto.companyName,
       systemUrl: dto.systemUrl,
       launchYear: dto.launchYear,
@@ -228,6 +426,18 @@ export class ProjectsService {
       description: dto.description,
       importance: dto.importance,
     };
+  }
+
+  private assertTimeline(startDate?: string | null, endDate?: string | null) {
+    if (startDate && endDate && endDate < startDate) {
+      throw new BadRequestException('تاریخ پایان نباید قبل از تاریخ شروع باشد');
+    }
+  }
+
+  private assertCoordinates(latitude?: number | null, longitude?: number | null) {
+    if ((latitude == null) !== (longitude == null)) {
+      throw new BadRequestException('موقعیت مکانی باید هر دو مختصات را داشته باشد');
+    }
   }
 
   private async assertReplacement(id?: string | null) {
@@ -240,6 +450,19 @@ export class ProjectsService {
     });
     if (!exists) {
       throw new BadRequestException('سامانه جایگزین یافت نشد');
+    }
+  }
+
+  private async assertUniqueCode(code: string, excludeId?: string) {
+    const existing = await this.prisma.project.findFirst({
+      where: {
+        code,
+        ...(excludeId ? { id: { not: excludeId } } : {}),
+      },
+      select: { id: true },
+    });
+    if (existing) {
+      throw new BadRequestException('کد پروژه تکراری است');
     }
   }
 }

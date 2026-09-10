@@ -254,6 +254,7 @@ export type StoredImageWhereInput = {
   identityBookletUsers?: Prisma.UserListRelationFilter
   foodPhotos?: Prisma.FoodListRelationFilter
   restaurantLogos?: Prisma.RestaurantListRelationFilter
+  progressImages?: Prisma.ProjectProgressImageListRelationFilter
 }
 
 export type StoredImageOrderByWithRelationInput = {
@@ -271,6 +272,7 @@ export type StoredImageOrderByWithRelationInput = {
   identityBookletUsers?: Prisma.UserOrderByRelationAggregateInput
   foodPhotos?: Prisma.FoodOrderByRelationAggregateInput
   restaurantLogos?: Prisma.RestaurantOrderByRelationAggregateInput
+  progressImages?: Prisma.ProjectProgressImageOrderByRelationAggregateInput
 }
 
 export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
@@ -291,6 +293,7 @@ export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
   identityBookletUsers?: Prisma.UserListRelationFilter
   foodPhotos?: Prisma.FoodListRelationFilter
   restaurantLogos?: Prisma.RestaurantListRelationFilter
+  progressImages?: Prisma.ProjectProgressImageListRelationFilter
 }, "id">
 
 export type StoredImageOrderByWithAggregationInput = {
@@ -338,6 +341,7 @@ export type StoredImageCreateInput = {
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateInput = {
@@ -355,6 +359,7 @@ export type StoredImageUncheckedCreateInput = {
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUpdateInput = {
@@ -372,6 +377,7 @@ export type StoredImageUpdateInput = {
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateInput = {
@@ -389,6 +395,7 @@ export type StoredImageUncheckedUpdateInput = {
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateManyInput = {
@@ -472,6 +479,11 @@ export type StoredImageSumOrderByAggregateInput = {
 export type StoredImageNullableScalarRelationFilter = {
   is?: Prisma.StoredImageWhereInput | null
   isNot?: Prisma.StoredImageWhereInput | null
+}
+
+export type StoredImageScalarRelationFilter = {
+  is?: Prisma.StoredImageWhereInput
+  isNot?: Prisma.StoredImageWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -570,6 +582,20 @@ export type StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutIdentityBookletUsersInput, Prisma.StoredImageUpdateWithoutIdentityBookletUsersInput>, Prisma.StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput>
 }
 
+export type StoredImageCreateNestedOneWithoutProgressImagesInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutProgressImagesInput, Prisma.StoredImageUncheckedCreateWithoutProgressImagesInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutProgressImagesInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+}
+
+export type StoredImageUpdateOneRequiredWithoutProgressImagesNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutProgressImagesInput, Prisma.StoredImageUncheckedCreateWithoutProgressImagesInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutProgressImagesInput
+  upsert?: Prisma.StoredImageUpsertWithoutProgressImagesInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutProgressImagesInput, Prisma.StoredImageUpdateWithoutProgressImagesInput>, Prisma.StoredImageUncheckedUpdateWithoutProgressImagesInput>
+}
+
 export type StoredImageCreateNestedOneWithoutFoodPhotosInput = {
   create?: Prisma.XOR<Prisma.StoredImageCreateWithoutFoodPhotosInput, Prisma.StoredImageUncheckedCreateWithoutFoodPhotosInput>
   connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutFoodPhotosInput
@@ -616,6 +642,7 @@ export type StoredImageCreateWithoutPhotoUsersInput = {
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
@@ -632,6 +659,7 @@ export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutPhotoUsersInput = {
@@ -653,6 +681,7 @@ export type StoredImageCreateWithoutNationalCardUsersInput = {
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutNationalCardUsersInput = {
@@ -669,6 +698,7 @@ export type StoredImageUncheckedCreateWithoutNationalCardUsersInput = {
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutNationalCardUsersInput = {
@@ -690,6 +720,7 @@ export type StoredImageCreateWithoutPassportUsersInput = {
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutPassportUsersInput = {
@@ -706,6 +737,7 @@ export type StoredImageUncheckedCreateWithoutPassportUsersInput = {
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutPassportUsersInput = {
@@ -727,6 +759,7 @@ export type StoredImageCreateWithoutIdentityBookletUsersInput = {
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutIdentityBookletUsersInput = {
@@ -743,6 +776,7 @@ export type StoredImageUncheckedCreateWithoutIdentityBookletUsersInput = {
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutIdentityBookletUsersInput = {
@@ -775,6 +809,7 @@ export type StoredImageUpdateWithoutPhotoUsersInput = {
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
@@ -791,6 +826,7 @@ export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUpsertWithoutNationalCardUsersInput = {
@@ -818,6 +854,7 @@ export type StoredImageUpdateWithoutNationalCardUsersInput = {
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutNationalCardUsersInput = {
@@ -834,6 +871,7 @@ export type StoredImageUncheckedUpdateWithoutNationalCardUsersInput = {
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUpsertWithoutPassportUsersInput = {
@@ -861,6 +899,7 @@ export type StoredImageUpdateWithoutPassportUsersInput = {
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutPassportUsersInput = {
@@ -877,6 +916,7 @@ export type StoredImageUncheckedUpdateWithoutPassportUsersInput = {
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUpsertWithoutIdentityBookletUsersInput = {
@@ -904,6 +944,7 @@ export type StoredImageUpdateWithoutIdentityBookletUsersInput = {
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput = {
@@ -918,6 +959,91 @@ export type StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput = {
   photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
+  foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
+}
+
+export type StoredImageCreateWithoutProgressImagesInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+}
+
+export type StoredImageUncheckedCreateWithoutProgressImagesInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+}
+
+export type StoredImageCreateOrConnectWithoutProgressImagesInput = {
+  where: Prisma.StoredImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutProgressImagesInput, Prisma.StoredImageUncheckedCreateWithoutProgressImagesInput>
+}
+
+export type StoredImageUpsertWithoutProgressImagesInput = {
+  update: Prisma.XOR<Prisma.StoredImageUpdateWithoutProgressImagesInput, Prisma.StoredImageUncheckedUpdateWithoutProgressImagesInput>
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutProgressImagesInput, Prisma.StoredImageUncheckedCreateWithoutProgressImagesInput>
+  where?: Prisma.StoredImageWhereInput
+}
+
+export type StoredImageUpdateToOneWithWhereWithoutProgressImagesInput = {
+  where?: Prisma.StoredImageWhereInput
+  data: Prisma.XOR<Prisma.StoredImageUpdateWithoutProgressImagesInput, Prisma.StoredImageUncheckedUpdateWithoutProgressImagesInput>
+}
+
+export type StoredImageUpdateWithoutProgressImagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+}
+
+export type StoredImageUncheckedUpdateWithoutProgressImagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
 }
@@ -936,6 +1062,7 @@ export type StoredImageCreateWithoutFoodPhotosInput = {
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
@@ -952,6 +1079,7 @@ export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutFoodPhotosInput = {
@@ -984,6 +1112,7 @@ export type StoredImageUpdateWithoutFoodPhotosInput = {
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
@@ -1000,6 +1129,7 @@ export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutRestaurantLogosInput = {
@@ -1016,6 +1146,7 @@ export type StoredImageCreateWithoutRestaurantLogosInput = {
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
@@ -1032,6 +1163,7 @@ export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutRestaurantLogosInput = {
@@ -1064,6 +1196,7 @@ export type StoredImageUpdateWithoutRestaurantLogosInput = {
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
@@ -1080,6 +1213,7 @@ export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
 }
 
 
@@ -1094,6 +1228,7 @@ export type StoredImageCountOutputType = {
   identityBookletUsers: number
   foodPhotos: number
   restaurantLogos: number
+  progressImages: number
 }
 
 export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1103,6 +1238,7 @@ export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   identityBookletUsers?: boolean | StoredImageCountOutputTypeCountIdentityBookletUsersArgs
   foodPhotos?: boolean | StoredImageCountOutputTypeCountFoodPhotosArgs
   restaurantLogos?: boolean | StoredImageCountOutputTypeCountRestaurantLogosArgs
+  progressImages?: boolean | StoredImageCountOutputTypeCountProgressImagesArgs
 }
 
 /**
@@ -1157,6 +1293,13 @@ export type StoredImageCountOutputTypeCountRestaurantLogosArgs<ExtArgs extends r
   where?: Prisma.RestaurantWhereInput
 }
 
+/**
+ * StoredImageCountOutputType without action
+ */
+export type StoredImageCountOutputTypeCountProgressImagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectProgressImageWhereInput
+}
+
 
 export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1173,6 +1316,7 @@ export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   identityBookletUsers?: boolean | Prisma.StoredImage$identityBookletUsersArgs<ExtArgs>
   foodPhotos?: boolean | Prisma.StoredImage$foodPhotosArgs<ExtArgs>
   restaurantLogos?: boolean | Prisma.StoredImage$restaurantLogosArgs<ExtArgs>
+  progressImages?: boolean | Prisma.StoredImage$progressImagesArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["storedImage"]>
 
@@ -1217,6 +1361,7 @@ export type StoredImageInclude<ExtArgs extends runtime.Types.Extensions.Internal
   identityBookletUsers?: boolean | Prisma.StoredImage$identityBookletUsersArgs<ExtArgs>
   foodPhotos?: boolean | Prisma.StoredImage$foodPhotosArgs<ExtArgs>
   restaurantLogos?: boolean | Prisma.StoredImage$restaurantLogosArgs<ExtArgs>
+  progressImages?: boolean | Prisma.StoredImage$progressImagesArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoredImageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1231,6 +1376,7 @@ export type $StoredImagePayload<ExtArgs extends runtime.Types.Extensions.Interna
     identityBookletUsers: Prisma.$UserPayload<ExtArgs>[]
     foodPhotos: Prisma.$FoodPayload<ExtArgs>[]
     restaurantLogos: Prisma.$RestaurantPayload<ExtArgs>[]
+    progressImages: Prisma.$ProjectProgressImagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1641,6 +1787,7 @@ export interface Prisma__StoredImageClient<T, Null = never, ExtArgs extends runt
   identityBookletUsers<T extends Prisma.StoredImage$identityBookletUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$identityBookletUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   foodPhotos<T extends Prisma.StoredImage$foodPhotosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$foodPhotosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restaurantLogos<T extends Prisma.StoredImage$restaurantLogosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$restaurantLogosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  progressImages<T extends Prisma.StoredImage$progressImagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$progressImagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectProgressImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2212,6 +2359,30 @@ export type StoredImage$restaurantLogosArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.RestaurantScalarFieldEnum | Prisma.RestaurantScalarFieldEnum[]
+}
+
+/**
+ * StoredImage.progressImages
+ */
+export type StoredImage$progressImagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectProgressImage
+   */
+  select?: Prisma.ProjectProgressImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectProgressImage
+   */
+  omit?: Prisma.ProjectProgressImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectProgressImageInclude<ExtArgs> | null
+  where?: Prisma.ProjectProgressImageWhereInput
+  orderBy?: Prisma.ProjectProgressImageOrderByWithRelationInput | Prisma.ProjectProgressImageOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectProgressImageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectProgressImageScalarFieldEnum | Prisma.ProjectProgressImageScalarFieldEnum[]
 }
 
 /**

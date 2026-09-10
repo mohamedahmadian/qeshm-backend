@@ -53,6 +53,26 @@ export type UserLocationHistory = Prisma.UserLocationHistoryModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model ProjectPhase
+ * 
+ */
+export type ProjectPhase = Prisma.ProjectPhaseModel
+/**
+ * Model StoredFile
+ * 
+ */
+export type StoredFile = Prisma.StoredFileModel
+/**
+ * Model ProjectProgressEntry
+ * 
+ */
+export type ProjectProgressEntry = Prisma.ProjectProgressEntryModel
+/**
+ * Model ProjectProgressImage
+ * 
+ */
+export type ProjectProgressImage = Prisma.ProjectProgressImageModel
+/**
  * Model ProjectContractor
  * 
  */

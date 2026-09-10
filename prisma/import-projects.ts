@@ -21,6 +21,19 @@ function normalizeName(value: string) {
   return value.replace(/[\/\s]+/g, ' ').trim();
 }
 
+function codeFromName(name: string, used: Set<string>) {
+  const base =
+    normalizeName(name).split(' ').slice(0, 2).join(' ').slice(0, 36) || name.slice(0, 20);
+  let next = base;
+  let index = 2;
+  while (used.has(next.toLowerCase())) {
+    next = `${base}-${index}`;
+    index += 1;
+  }
+  used.add(next.toLowerCase());
+  return next;
+}
+
 function loadSeed(): SeedProject[] {
   const path = join(__dirname, 'project-seed.json');
   return JSON.parse(readFileSync(path, 'utf8')) as SeedProject[];
@@ -60,6 +73,7 @@ export async function importProjects(
   }
 
   const created: { id: string; systemName: string }[] = [];
+  const usedCodes = new Set<string>();
   for (const item of items) {
     const project = await prisma.project.create({
       data: {
@@ -67,6 +81,7 @@ export async function importProjects(
         management: item.management,
         unit: item.unit,
         systemName: item.systemName,
+        code: codeFromName(item.systemName, usedCodes),
         isActive: item.isActive,
         companyName: item.companyName,
         systemUrl: item.systemUrl,
