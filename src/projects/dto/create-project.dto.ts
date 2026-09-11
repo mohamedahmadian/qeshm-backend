@@ -104,6 +104,13 @@ export class CreateProjectDto {
   @Transform(({ value }) => emptyToNull(trimString(value)))
   @ValidateIf((_, value) => value != null)
   @IsString()
+  @MaxLength(2000)
+  address?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
   @MaxLength(200)
   companyName?: string | null;
 

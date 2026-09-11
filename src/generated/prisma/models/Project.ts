@@ -51,6 +51,7 @@ export type ProjectMinAggregateOutputType = {
   endDate: Date | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
+  address: string | null
   companyName: string | null
   systemUrl: string | null
   launchYear: number | null
@@ -73,6 +74,7 @@ export type ProjectMaxAggregateOutputType = {
   endDate: Date | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
+  address: string | null
   companyName: string | null
   systemUrl: string | null
   launchYear: number | null
@@ -95,6 +97,7 @@ export type ProjectCountAggregateOutputType = {
   endDate: number
   latitude: number
   longitude: number
+  address: number
   companyName: number
   systemUrl: number
   launchYear: number
@@ -133,6 +136,7 @@ export type ProjectMinAggregateInputType = {
   endDate?: true
   latitude?: true
   longitude?: true
+  address?: true
   companyName?: true
   systemUrl?: true
   launchYear?: true
@@ -155,6 +159,7 @@ export type ProjectMaxAggregateInputType = {
   endDate?: true
   latitude?: true
   longitude?: true
+  address?: true
   companyName?: true
   systemUrl?: true
   launchYear?: true
@@ -177,6 +182,7 @@ export type ProjectCountAggregateInputType = {
   endDate?: true
   latitude?: true
   longitude?: true
+  address?: true
   companyName?: true
   systemUrl?: true
   launchYear?: true
@@ -286,6 +292,7 @@ export type ProjectGroupByOutputType = {
   endDate: Date | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
+  address: string | null
   companyName: string | null
   systemUrl: string | null
   launchYear: number | null
@@ -331,6 +338,7 @@ export type ProjectWhereInput = {
   endDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   latitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.StringNullableFilter<"Project"> | string | null
   companyName?: Prisma.StringNullableFilter<"Project"> | string | null
   systemUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   launchYear?: Prisma.IntNullableFilter<"Project"> | number | null
@@ -360,6 +368,7 @@ export type ProjectOrderByWithRelationInput = {
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   companyName?: Prisma.SortOrderInput | Prisma.SortOrder
   systemUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   launchYear?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -392,6 +401,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   endDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   latitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.StringNullableFilter<"Project"> | string | null
   companyName?: Prisma.StringNullableFilter<"Project"> | string | null
   systemUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   launchYear?: Prisma.IntNullableFilter<"Project"> | number | null
@@ -421,6 +431,7 @@ export type ProjectOrderByWithAggregationInput = {
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   companyName?: Prisma.SortOrderInput | Prisma.SortOrder
   systemUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   launchYear?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -451,6 +462,7 @@ export type ProjectScalarWhereWithAggregatesInput = {
   endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
   latitude?: Prisma.DecimalNullableWithAggregatesFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableWithAggregatesFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   companyName?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   systemUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   launchYear?: Prisma.IntNullableWithAggregatesFilter<"Project"> | number | null
@@ -473,6 +485,7 @@ export type ProjectCreateInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -501,6 +514,7 @@ export type ProjectUncheckedCreateInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -529,6 +543,7 @@ export type ProjectUpdateInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -557,6 +572,7 @@ export type ProjectUncheckedUpdateInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -585,6 +601,7 @@ export type ProjectCreateManyInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -607,6 +624,7 @@ export type ProjectUpdateManyMutationInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -628,6 +646,7 @@ export type ProjectUncheckedUpdateManyInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -665,6 +684,7 @@ export type ProjectCountOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
   systemUrl?: Prisma.SortOrder
   launchYear?: Prisma.SortOrder
@@ -694,6 +714,7 @@ export type ProjectMaxOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
   systemUrl?: Prisma.SortOrder
   launchYear?: Prisma.SortOrder
@@ -716,6 +737,7 @@ export type ProjectMinOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   companyName?: Prisma.SortOrder
   systemUrl?: Prisma.SortOrder
   launchYear?: Prisma.SortOrder
@@ -886,6 +908,7 @@ export type ProjectCreateWithoutReplacedByInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -913,6 +936,7 @@ export type ProjectUncheckedCreateWithoutReplacedByInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -945,6 +969,7 @@ export type ProjectCreateWithoutReplacementProjectInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -972,6 +997,7 @@ export type ProjectUncheckedCreateWithoutReplacementProjectInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1020,6 +1046,7 @@ export type ProjectUpdateWithoutReplacedByInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1047,6 +1074,7 @@ export type ProjectUncheckedUpdateWithoutReplacedByInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1093,6 +1121,7 @@ export type ProjectScalarWhereInput = {
   endDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   latitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.StringNullableFilter<"Project"> | string | null
   companyName?: Prisma.StringNullableFilter<"Project"> | string | null
   systemUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   launchYear?: Prisma.IntNullableFilter<"Project"> | number | null
@@ -1115,6 +1144,7 @@ export type ProjectCreateWithoutOperatorsInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1142,6 +1172,7 @@ export type ProjectUncheckedCreateWithoutOperatorsInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1185,6 +1216,7 @@ export type ProjectUpdateWithoutOperatorsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1212,6 +1244,7 @@ export type ProjectUncheckedUpdateWithoutOperatorsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1239,6 +1272,7 @@ export type ProjectCreateWithoutPhasesInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1266,6 +1300,7 @@ export type ProjectUncheckedCreateWithoutPhasesInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1309,6 +1344,7 @@ export type ProjectUpdateWithoutPhasesInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1336,6 +1372,7 @@ export type ProjectUncheckedUpdateWithoutPhasesInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1363,6 +1400,7 @@ export type ProjectCreateWithoutProgressEntriesInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1390,6 +1428,7 @@ export type ProjectUncheckedCreateWithoutProgressEntriesInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1433,6 +1472,7 @@ export type ProjectUpdateWithoutProgressEntriesInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1460,6 +1500,7 @@ export type ProjectUncheckedUpdateWithoutProgressEntriesInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1487,6 +1528,7 @@ export type ProjectCreateWithoutContractorsInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1514,6 +1556,7 @@ export type ProjectUncheckedCreateWithoutContractorsInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1557,6 +1600,7 @@ export type ProjectUpdateWithoutContractorsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1584,6 +1628,7 @@ export type ProjectUncheckedUpdateWithoutContractorsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1611,6 +1656,7 @@ export type ProjectCreateWithoutContractorLinksInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1638,6 +1684,7 @@ export type ProjectUncheckedCreateWithoutContractorLinksInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1681,6 +1728,7 @@ export type ProjectUpdateWithoutContractorLinksInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1708,6 +1756,7 @@ export type ProjectUncheckedUpdateWithoutContractorLinksInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1735,6 +1784,7 @@ export type ProjectCreateManyReplacementProjectInput = {
   endDate?: Date | string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
   companyName?: string | null
   systemUrl?: string | null
   launchYear?: number | null
@@ -1756,6 +1806,7 @@ export type ProjectUpdateWithoutReplacementProjectInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1783,6 +1834,7 @@ export type ProjectUncheckedUpdateWithoutReplacementProjectInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1810,6 +1862,7 @@ export type ProjectUncheckedUpdateManyWithoutReplacementProjectInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1907,6 +1960,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   endDate?: boolean
   latitude?: boolean
   longitude?: boolean
+  address?: boolean
   companyName?: boolean
   systemUrl?: boolean
   launchYear?: boolean
@@ -1937,6 +1991,7 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   endDate?: boolean
   latitude?: boolean
   longitude?: boolean
+  address?: boolean
   companyName?: boolean
   systemUrl?: boolean
   launchYear?: boolean
@@ -1960,6 +2015,7 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   endDate?: boolean
   latitude?: boolean
   longitude?: boolean
+  address?: boolean
   companyName?: boolean
   systemUrl?: boolean
   launchYear?: boolean
@@ -1983,6 +2039,7 @@ export type ProjectSelectScalar = {
   endDate?: boolean
   latitude?: boolean
   longitude?: boolean
+  address?: boolean
   companyName?: boolean
   systemUrl?: boolean
   launchYear?: boolean
@@ -1994,7 +2051,7 @@ export type ProjectSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "systemName" | "code" | "isActive" | "status" | "progressPercent" | "startDate" | "endDate" | "latitude" | "longitude" | "companyName" | "systemUrl" | "launchYear" | "isSupportActive" | "replacementProjectId" | "description" | "importance" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "systemName" | "code" | "isActive" | "status" | "progressPercent" | "startDate" | "endDate" | "latitude" | "longitude" | "address" | "companyName" | "systemUrl" | "launchYear" | "isSupportActive" | "replacementProjectId" | "description" | "importance" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   replacementProject?: boolean | Prisma.Project$replacementProjectArgs<ExtArgs>
   replacedBy?: boolean | Prisma.Project$replacedByArgs<ExtArgs>
@@ -2034,6 +2091,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     endDate: Date | null
     latitude: runtime.Decimal | null
     longitude: runtime.Decimal | null
+    address: string | null
     companyName: string | null
     systemUrl: string | null
     launchYear: number | null
@@ -2483,6 +2541,7 @@ export interface ProjectFieldRefs {
   readonly endDate: Prisma.FieldRef<"Project", 'DateTime'>
   readonly latitude: Prisma.FieldRef<"Project", 'Decimal'>
   readonly longitude: Prisma.FieldRef<"Project", 'Decimal'>
+  readonly address: Prisma.FieldRef<"Project", 'String'>
   readonly companyName: Prisma.FieldRef<"Project", 'String'>
   readonly systemUrl: Prisma.FieldRef<"Project", 'String'>
   readonly launchYear: Prisma.FieldRef<"Project", 'Int'>

@@ -244,6 +244,7 @@ export const ProjectScalarFieldEnum = {
   endDate: 'endDate',
   latitude: 'latitude',
   longitude: 'longitude',
+  address: 'address',
   companyName: 'companyName',
   systemUrl: 'systemUrl',
   launchYear: 'launchYear',
