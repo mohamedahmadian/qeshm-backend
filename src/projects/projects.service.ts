@@ -12,16 +12,29 @@ import {
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
 import { Prisma } from '../generated/prisma/client';
+import {
+  buildOrganizationUnitPaths,
+  organizationUnitSubtreeIds,
+} from '../organization/organization-unit-tree';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { FindProjectsQueryDto } from './dto/find-projects-query.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 
+const operatorSelect = {
+  organizationUnitId: true,
+  organizationUnit: {
+    select: {
+      id: true,
+      name: true,
+      parentId: true,
+      kind: { select: { id: true, name: true } },
+    },
+  },
+} satisfies Prisma.ProjectOperatorSelect;
+
 const projectSelect = {
   id: true,
-  vicePresidency: true,
-  management: true,
-  unit: true,
   systemName: true,
   code: true,
   isActive: true,
@@ -42,6 +55,10 @@ const projectSelect = {
   updatedAt: true,
   replacementProject: {
     select: { id: true, systemName: true },
+  },
+  operators: {
+    select: operatorSelect,
+    orderBy: { organizationUnit: { name: 'asc' } },
   },
   _count: { select: { contractors: true, phases: true } },
 } satisfies Prisma.ProjectSelect;
@@ -82,14 +99,30 @@ function serializeProject<
     longitude: Prisma.Decimal | null;
     startDate: Date | null;
     endDate: Date | null;
+    operators?: Array<{
+      organizationUnit: {
+        id: string;
+        name: string;
+        parentId: string | null;
+        kind: { id: string; name: string };
+      };
+    }>;
   },
->(item: T) {
+>(item: T, paths: Map<string, string>) {
+  const { operators = [], ...rest } = item;
   return {
-    ...item,
+    ...rest,
     latitude: toCoord(item.latitude),
     longitude: toCoord(item.longitude),
     startDate: toIsoDateOnly(item.startDate),
     endDate: toIsoDateOnly(item.endDate),
+    operators: operators.map((link) => ({
+      id: link.organizationUnit.id,
+      name: link.organizationUnit.name,
+      parentId: link.organizationUnit.parentId,
+      kind: link.organizationUnit.kind,
+      pathLabel: paths.get(link.organizationUnit.id) ?? link.organizationUnit.name,
+    })),
   };
 }
 
@@ -98,15 +131,16 @@ export class ProjectsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll(query: FindProjectsQueryDto) {
-    const where = this.listWhere(query);
+    const where = await this.listWhere(query);
     const orderBy = this.orderBy(query);
+    const paths = await this.unitPathMap();
     if (!wantsPagination(query)) {
       const items = await this.prisma.project.findMany({
         where,
         orderBy,
         select: projectSelect,
       });
-      return items.map(serializeProject);
+      return items.map((item) => serializeProject(item, paths));
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
@@ -119,12 +153,18 @@ export class ProjectsService {
       }),
       this.prisma.project.count({ where }),
     ]);
-    return paginatedResult(items.map(serializeProject), total, page, pageSize);
+    return paginatedResult(
+      items.map((item) => serializeProject(item, paths)),
+      total,
+      page,
+      pageSize,
+    );
   }
 
   async liveBoard(query: FindProjectsQueryDto) {
-    const where = this.listWhere(query);
+    const where = await this.listWhere(query);
     const orderBy = this.orderBy(query);
+    const paths = await this.unitPathMap();
     const items = await this.prisma.project.findMany({
       where,
       orderBy,
@@ -179,7 +219,7 @@ export class ProjectsService {
       const last = progressEntries[0] ?? null;
       const source = last ? activitySource(last) : null;
       return {
-        ...serializeProject(rest),
+        ...serializeProject(rest, paths),
         mainContractor: contractors[0] ?? null,
         contractors,
         activityCount: rest._count.progressEntries,
@@ -215,43 +255,14 @@ export class ProjectsService {
     };
   }
 
-  async lookups(query: FindProjectsQueryDto) {
-    const [vicePresidencies, managements, units, companies] = await Promise.all([
-      this.prisma.project.findMany({
-        distinct: ['vicePresidency'],
-        select: { vicePresidency: true },
-        orderBy: { vicePresidency: 'asc' },
-      }),
-      this.prisma.project.findMany({
-        where: query.vicePresidency
-          ? { vicePresidency: query.vicePresidency }
-          : undefined,
-        distinct: ['management'],
-        select: { management: true },
-        orderBy: { management: 'asc' },
-      }),
-      this.prisma.project.findMany({
-        where: {
-          ...(query.vicePresidency
-            ? { vicePresidency: query.vicePresidency }
-            : {}),
-          ...(query.management ? { management: query.management } : {}),
-        },
-        distinct: ['unit'],
-        select: { unit: true },
-        orderBy: { unit: 'asc' },
-      }),
-      this.prisma.project.findMany({
-        where: { companyName: { not: null } },
-        distinct: ['companyName'],
-        select: { companyName: true },
-        orderBy: { companyName: 'asc' },
-      }),
-    ]);
+  async lookups() {
+    const companies = await this.prisma.project.findMany({
+      where: { companyName: { not: null } },
+      distinct: ['companyName'],
+      select: { companyName: true },
+      orderBy: { companyName: 'asc' },
+    });
     return {
-      vicePresidencies: vicePresidencies.map((item) => item.vicePresidency),
-      managements: managements.map((item) => item.management),
-      units: units.map((item) => item.unit),
       companies: companies
         .map((item) => item.companyName)
         .filter((item): item is string => Boolean(item)),
@@ -266,7 +277,7 @@ export class ProjectsService {
     if (!project) {
       throw new NotFoundException('پروژه یافت نشد');
     }
-    return serializeProject(project);
+    return serializeProject(project, await this.unitPathMap());
   }
 
   async create(dto: CreateProjectDto) {
@@ -274,11 +285,12 @@ export class ProjectsService {
     this.assertCoordinates(dto.latitude, dto.longitude);
     await this.assertReplacement(dto.replacementProjectId);
     await this.assertUniqueCode(dto.code);
+    const operatorIds = await this.assertOperatorUnits(dto.operatorIds);
     const project = await this.prisma.project.create({
-      data: this.createData(dto),
+      data: this.createData(dto, operatorIds),
       select: projectSelect,
     });
-    return serializeProject(project);
+    return serializeProject(project, await this.unitPathMap());
   }
 
   async update(id: string, dto: UpdateProjectDto) {
@@ -292,6 +304,10 @@ export class ProjectsService {
     if (dto.code !== undefined) {
       await this.assertUniqueCode(dto.code, id);
     }
+    const operatorIds =
+      dto.operatorIds === undefined
+        ? undefined
+        : await this.assertOperatorUnits(dto.operatorIds);
     const data = this.updateData(dto);
     if (
       dto.progressPercent !== undefined &&
@@ -299,12 +315,17 @@ export class ProjectsService {
     ) {
       data.status = 'IN_PROGRESS';
     }
-    const project = await this.prisma.project.update({
-      where: { id },
-      data,
-      select: projectSelect,
+    const project = await this.prisma.$transaction(async (tx) => {
+      if (operatorIds) {
+        await this.syncOperators(tx, id, operatorIds);
+      }
+      return tx.project.update({
+        where: { id },
+        data,
+        select: projectSelect,
+      });
     });
-    return serializeProject(project);
+    return serializeProject(project, await this.unitPathMap());
   }
 
   async remove(id: string) {
@@ -313,17 +334,16 @@ export class ProjectsService {
     return { ok: true };
   }
 
-  listWhere(query: FindProjectsQueryDto): Prisma.ProjectWhereInput {
+  async listWhere(query: FindProjectsQueryDto): Promise<Prisma.ProjectWhereInput> {
+    const operators = await this.operatorUnitFilter(query.operatorUnitId);
     return {
-      vicePresidency: query.vicePresidency,
-      management: query.management,
-      unit: query.unit,
       companyName: query.companyName,
       isActive: query.isActive,
       status: query.status,
       isSupportActive: query.isSupportActive,
       importance: query.importance,
       id: query.excludeId ? { not: query.excludeId } : undefined,
+      operators,
       OR: query.q
         ? [
             { systemName: containsInsensitive(query.q) },
@@ -331,9 +351,13 @@ export class ProjectsService {
             { companyName: containsInsensitive(query.q) },
             { systemUrl: containsInsensitive(query.q) },
             { description: containsInsensitive(query.q) },
-            { vicePresidency: containsInsensitive(query.q) },
-            { management: containsInsensitive(query.q) },
-            { unit: containsInsensitive(query.q) },
+            {
+              operators: {
+                some: {
+                  organizationUnit: { name: containsInsensitive(query.q) },
+                },
+              },
+            },
           ]
         : undefined,
     };
@@ -346,9 +370,7 @@ export class ProjectsService {
       query.sortBy,
       query.sortDir,
       {
-        vicePresidency: (dir) => ({ vicePresidency: dir }),
-        management: (dir) => ({ management: dir }),
-        unit: (dir) => ({ unit: dir }),
+        operators: (dir) => ({ operators: { _count: dir } }),
         systemName: (dir) => ({ systemName: dir }),
         code: (dir) => ({ code: dir }),
         isActive: (dir) => ({ isActive: dir }),
@@ -370,11 +392,11 @@ export class ProjectsService {
     );
   }
 
-  private createData(dto: CreateProjectDto): Prisma.ProjectUncheckedCreateInput {
+  private createData(
+    dto: CreateProjectDto,
+    operatorIds: string[],
+  ): Prisma.ProjectUncheckedCreateInput {
     return {
-      vicePresidency: dto.vicePresidency,
-      management: dto.management,
-      unit: dto.unit,
       systemName: dto.systemName,
       code: dto.code,
       isActive: dto.isActive,
@@ -391,14 +413,14 @@ export class ProjectsService {
       replacementProjectId: dto.replacementProjectId,
       description: dto.description,
       importance: dto.importance,
+      operators: {
+        create: operatorIds.map((organizationUnitId) => ({ organizationUnitId })),
+      },
     };
   }
 
   private updateData(dto: UpdateProjectDto): Prisma.ProjectUncheckedUpdateInput {
     return {
-      vicePresidency: dto.vicePresidency,
-      management: dto.management,
-      unit: dto.unit,
       systemName: dto.systemName,
       code: dto.code,
       isActive: dto.isActive,
@@ -426,6 +448,58 @@ export class ProjectsService {
       description: dto.description,
       importance: dto.importance,
     };
+  }
+
+  private async unitPathMap() {
+    const units = await this.prisma.organizationUnit.findMany({
+      select: { id: true, name: true, parentId: true },
+    });
+    return buildOrganizationUnitPaths(units);
+  }
+
+  private async operatorUnitFilter(
+    operatorUnitId?: string,
+  ): Promise<Prisma.ProjectOperatorListRelationFilter | undefined> {
+    if (!operatorUnitId) {
+      return undefined;
+    }
+    const units = await this.prisma.organizationUnit.findMany({
+      select: { id: true, parentId: true },
+    });
+    const ids = organizationUnitSubtreeIds(units, operatorUnitId);
+    return { some: { organizationUnitId: { in: ids } } };
+  }
+
+  private async assertOperatorUnits(ids: string[]) {
+    const unique = [...new Set(ids.filter(Boolean))];
+    if (!unique.length) {
+      throw new BadRequestException('حداقل یک بهره‌بردار را انتخاب کنید');
+    }
+    const found = await this.prisma.organizationUnit.findMany({
+      where: { id: { in: unique } },
+      select: { id: true },
+    });
+    if (found.length !== unique.length) {
+      throw new BadRequestException('بهره‌بردار انتخاب‌شده معتبر نیست');
+    }
+    return unique;
+  }
+
+  private async syncOperators(
+    tx: Prisma.TransactionClient,
+    projectId: string,
+    operatorIds: string[],
+  ) {
+    await tx.projectOperator.deleteMany({
+      where: { projectId, organizationUnitId: { notIn: operatorIds } },
+    });
+    await tx.projectOperator.createMany({
+      data: operatorIds.map((organizationUnitId) => ({
+        projectId,
+        organizationUnitId,
+      })),
+      skipDuplicates: true,
+    });
   }
 
   private assertTimeline(startDate?: string | null, endDate?: string | null) {

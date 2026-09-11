@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -21,6 +22,7 @@ import {
   FindContractorMembersQueryDto,
   FindContractorPaymentsQueryDto,
   FindContractorPhasesQueryDto,
+  FindContractorProjectsQueryDto,
   FindContractorsQueryDto,
 } from './dto/find-contractors-query.dto';
 import { UpdateContractorDto } from './dto/update-contractor.dto';
@@ -40,8 +42,55 @@ const contractorSelect = {
   createdAt: true,
   updatedAt: true,
   project: { select: { id: true, systemName: true } },
-  _count: { select: { members: true, phases: true, payments: true } },
+  _count: { select: { members: true, phases: true, payments: true, projectLinks: true } },
 } satisfies Prisma.ProjectContractorSelect;
+
+const contractorProjectSelect = {
+  id: true,
+  systemName: true,
+  code: true,
+  isActive: true,
+  status: true,
+  progressPercent: true,
+  operators: {
+    select: {
+      organizationUnit: {
+        select: {
+          id: true,
+          name: true,
+          parentId: true,
+          kind: { select: { id: true, name: true } },
+        },
+      },
+    },
+    orderBy: { organizationUnit: { name: 'asc' } },
+  },
+} satisfies Prisma.ProjectSelect;
+
+function serializeContractorProject<
+  T extends {
+    operators: Array<{
+      organizationUnit: {
+        id: string;
+        name: string;
+        parentId: string | null;
+        kind: { id: string; name: string };
+      };
+    }>;
+  },
+>(item: T) {
+  const { operators, ...rest } = item;
+  return {
+    ...rest,
+    operators: operators.map((link) => ({
+      id: link.organizationUnit.id,
+      name: link.organizationUnit.name,
+      parentId: link.organizationUnit.parentId,
+      kind: link.organizationUnit.kind,
+      pathLabel: link.organizationUnit.name,
+    })),
+  };
+}
 
 const memberSelect = {
   id: true,
@@ -110,19 +159,46 @@ function withPaymentMoney<T extends { paidAt: Date; amount: Prisma.Decimal }>(
 export class ContractorsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(projectId: string, query: FindContractorsQueryDto) {
-    await this.assertProject(projectId);
-    const where: Prisma.ProjectContractorWhereInput = {
-      projectId,
-      OR: query.q
-        ? [
+  async findAll(projectId: string | undefined, query: FindContractorsQueryDto) {
+    if (projectId) {
+      await this.assertProject(projectId);
+    }
+    const scopedProjectId = projectId ?? query.projectId;
+    const search = query.q
+      ? {
+          OR: [
             { name: containsInsensitive(query.q) },
             { nationalId: containsInsensitive(query.q) },
             { ceoName: containsInsensitive(query.q) },
             { description: containsInsensitive(query.q) },
             { timeEstimate: containsInsensitive(query.q) },
-          ]
-        : undefined,
+            { project: { systemName: containsInsensitive(query.q) } },
+            { project: { code: containsInsensitive(query.q) } },
+            {
+              projectLinks: {
+                some: { project: { systemName: containsInsensitive(query.q) } },
+              },
+            },
+            {
+              projectLinks: {
+                some: { project: { code: containsInsensitive(query.q) } },
+              },
+            },
+          ],
+        }
+      : undefined;
+    const where: Prisma.ProjectContractorWhereInput = {
+      AND: [
+        scopedProjectId
+          ? {
+              OR: [
+                { projectId: scopedProjectId },
+                { projectLinks: { some: { projectId: scopedProjectId } } },
+              ],
+            }
+          : {},
+        search ?? {},
+      ],
     };
     const orderBy = resolveSortOrder<Prisma.ProjectContractorOrderByWithRelationInput>(
       query.sortBy,
@@ -133,6 +209,8 @@ export class ContractorsService {
         ceoName: (dir) => ({ ceoName: dir }),
         timeEstimate: (dir) => ({ timeEstimate: dir }),
         costEstimate: (dir) => ({ costEstimate: dir }),
+        project: (dir) => ({ project: { systemName: dir } }),
+        projectCount: (dir) => ({ projectLinks: { _count: dir } }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -158,9 +236,19 @@ export class ContractorsService {
     return paginatedResult(items.map(withContractorMoney), total, page, pageSize);
   }
 
-  async findOne(projectId: string, id: string) {
+  async findOne(projectId: string | undefined, id: string) {
     const contractor = await this.prisma.projectContractor.findFirst({
-      where: { id, projectId },
+      where: {
+        id,
+        ...(projectId
+          ? {
+              OR: [
+                { projectId },
+                { projectLinks: { some: { projectId } } },
+              ],
+            }
+          : {}),
+      },
       select: contractorSelect,
     });
     if (!contractor) {
@@ -181,13 +269,14 @@ export class ContractorsService {
           ceoName: dto.ceoName,
           timeEstimate: dto.timeEstimate,
           costEstimate: dto.costEstimate,
+          projectLinks: { create: { projectId } },
         },
         select: contractorSelect,
       }),
     );
   }
 
-  async update(projectId: string, id: string, dto: UpdateContractorDto) {
+  async update(projectId: string | undefined, id: string, dto: UpdateContractorDto) {
     await this.findOne(projectId, id);
     return withContractorMoney(
       await this.prisma.projectContractor.update({
@@ -205,9 +294,107 @@ export class ContractorsService {
     );
   }
 
-  async remove(projectId: string, id: string) {
+  async remove(projectId: string | undefined, id: string) {
     await this.findOne(projectId, id);
     await this.prisma.projectContractor.delete({ where: { id } });
+    return { ok: true };
+  }
+
+  async findProjects(contractorId: string, query: FindContractorProjectsQueryDto) {
+    await this.findOne(undefined, contractorId);
+    const where: Prisma.ProjectWhereInput = {
+      contractorLinks: { some: { contractorId } },
+      OR: query.q
+        ? [
+            { systemName: containsInsensitive(query.q) },
+            { code: containsInsensitive(query.q) },
+            {
+              operators: {
+                some: {
+                  organizationUnit: { name: containsInsensitive(query.q) },
+                },
+              },
+            },
+            { description: containsInsensitive(query.q) },
+          ]
+        : undefined,
+    };
+    const orderBy = resolveSortOrder<Prisma.ProjectOrderByWithRelationInput>(
+      query.sortBy,
+      query.sortDir,
+      {
+        systemName: (dir) => ({ systemName: dir }),
+        code: (dir) => ({ code: dir }),
+        status: (dir) => ({ status: dir }),
+        progressPercent: (dir) => ({ progressPercent: dir }),
+        operators: (dir) => ({ operators: { _count: dir } }),
+      },
+      [{ systemName: 'asc' }, { id: 'asc' }],
+    );
+    if (!wantsPagination(query)) {
+      const items = await this.prisma.project.findMany({
+        where,
+        orderBy,
+        select: contractorProjectSelect,
+      });
+      return items.map(serializeContractorProject);
+    }
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    const [items, total] = await Promise.all([
+      this.prisma.project.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        select: contractorProjectSelect,
+      }),
+      this.prisma.project.count({ where }),
+    ]);
+    return paginatedResult(items.map(serializeContractorProject), total, page, pageSize);
+  }
+
+  async addProject(contractorId: string, projectId: string) {
+    await this.findOne(undefined, contractorId);
+    await this.assertProject(projectId);
+    const existing = await this.prisma.projectContractorProject.findUnique({
+      where: { contractorId_projectId: { contractorId, projectId } },
+    });
+    if (existing) {
+      throw new ConflictException('این پروژه قبلاً برای این پیمانکار ثبت شده است');
+    }
+    await this.prisma.projectContractorProject.create({
+      data: { contractorId, projectId },
+    });
+    return this.findOne(undefined, contractorId);
+  }
+
+  async removeProject(contractorId: string, projectId: string) {
+    const contractor = await this.findOne(undefined, contractorId);
+    const link = await this.prisma.projectContractorProject.findUnique({
+      where: { contractorId_projectId: { contractorId, projectId } },
+    });
+    if (!link) {
+      throw new NotFoundException('این پروژه برای پیمانکار ثبت نشده است');
+    }
+    const remaining = await this.prisma.projectContractorProject.count({
+      where: { contractorId },
+    });
+    if (remaining <= 1) {
+      throw new BadRequestException('حداقل یک پروژه باید برای پیمانکار باقی بماند');
+    }
+    await this.prisma.projectContractorProject.delete({ where: { id: link.id } });
+    if (contractor.projectId === projectId) {
+      const next = await this.prisma.projectContractorProject.findFirst({
+        where: { contractorId },
+        orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+      });
+      if (next) {
+        await this.prisma.projectContractor.update({
+          where: { id: contractorId },
+          data: { projectId: next.projectId },
+        });
+      }
+    }
     return { ok: true };
   }
 

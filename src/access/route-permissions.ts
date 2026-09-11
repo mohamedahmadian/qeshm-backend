@@ -19,6 +19,7 @@ const LOOKUP_COLLECTIONS = new Set([
   '/roles',
   '/users',
   '/organization/positions',
+  '/organization/unit-kinds',
   '/organization/units',
   '/vehicle-brands',
   '/vehicles',
@@ -44,6 +45,7 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   },
   { prefix: '/projects/reports', permissions: ['projects.reports'] },
   { prefix: '/projects/live-board', permissions: ['projects.liveBoard'] },
+  { prefix: '/contractors', permissions: ['projects.contractors'] },
   { prefix: '/projects', permissions: ['projects.list'] },
   { prefix: '/foods', permissions: ['food-reservation.foods'] },
   { prefix: '/restaurants', permissions: ['food-reservation.restaurants'] },
@@ -71,6 +73,10 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   {
     prefix: '/organization/positions',
     permissions: ['qeshm-organization.positions'],
+  },
+  {
+    prefix: '/organization/unit-kinds',
+    permissions: ['qeshm-organization.unit-kinds'],
   },
   { prefix: '/organization/units', permissions: ['qeshm-organization.units'] },
   {

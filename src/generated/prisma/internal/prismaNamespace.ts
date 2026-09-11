@@ -404,11 +404,13 @@ export const ModelName = {
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
   Project: 'Project',
+  ProjectOperator: 'ProjectOperator',
   ProjectPhase: 'ProjectPhase',
   StoredFile: 'StoredFile',
   ProjectProgressEntry: 'ProjectProgressEntry',
   ProjectProgressImage: 'ProjectProgressImage',
   ProjectContractor: 'ProjectContractor',
+  ProjectContractorProject: 'ProjectContractorProject',
   ProjectContractorMember: 'ProjectContractorMember',
   ProjectContractorPhase: 'ProjectContractorPhase',
   ProjectContractorPayment: 'ProjectContractorPayment',
@@ -418,6 +420,7 @@ export const ModelName = {
   Organization: 'Organization',
   OrganizationPhone: 'OrganizationPhone',
   OrganizationPosition: 'OrganizationPosition',
+  OrganizationUnitKind: 'OrganizationUnitKind',
   OrganizationUnit: 'OrganizationUnit',
   OrganizationUnitRestaurant: 'OrganizationUnitRestaurant',
   FoodReservation: 'FoodReservation',
@@ -442,7 +445,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -964,6 +967,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ProjectOperator: {
+      payload: Prisma.$ProjectOperatorPayload<ExtArgs>
+      fields: Prisma.ProjectOperatorFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectOperatorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectOperatorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectOperatorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectOperatorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectOperatorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectOperatorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectOperatorCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectOperatorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectOperatorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>
+        }
+        update: {
+          args: Prisma.ProjectOperatorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectOperatorDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectOperatorUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectOperatorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectOperatorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectOperatorPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectOperatorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectOperator>
+        }
+        groupBy: {
+          args: Prisma.ProjectOperatorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectOperatorGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectOperatorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectOperatorCountAggregateOutputType> | number
+        }
+      }
+    }
     ProjectPhase: {
       payload: Prisma.$ProjectPhasePayload<ExtArgs>
       fields: Prisma.ProjectPhaseFieldRefs
@@ -1331,6 +1408,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProjectContractorCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProjectContractorCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectContractorProject: {
+      payload: Prisma.$ProjectContractorProjectPayload<ExtArgs>
+      fields: Prisma.ProjectContractorProjectFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectContractorProjectFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectContractorProjectFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectContractorProjectFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectContractorProjectFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectContractorProjectFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectContractorProjectCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectContractorProjectCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectContractorProjectCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectContractorProjectDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>
+        }
+        update: {
+          args: Prisma.ProjectContractorProjectUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectContractorProjectDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectContractorProjectUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectContractorProjectUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectContractorProjectUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorProjectPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectContractorProjectAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectContractorProject>
+        }
+        groupBy: {
+          args: Prisma.ProjectContractorProjectGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectContractorProjectGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectContractorProjectCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectContractorProjectCountAggregateOutputType> | number
         }
       }
     }
@@ -1997,6 +2148,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.OrganizationPositionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.OrganizationPositionCountAggregateOutputType> | number
+        }
+      }
+    }
+    OrganizationUnitKind: {
+      payload: Prisma.$OrganizationUnitKindPayload<ExtArgs>
+      fields: Prisma.OrganizationUnitKindFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationUnitKindFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationUnitKindFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationUnitKindFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationUnitKindFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationUnitKindFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationUnitKindCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationUnitKindCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationUnitKindCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationUnitKindDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>
+        }
+        update: {
+          args: Prisma.OrganizationUnitKindUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationUnitKindDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationUnitKindUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationUnitKindUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationUnitKindUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationUnitKindPayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationUnitKindAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationUnitKind>
+        }
+        groupBy: {
+          args: Prisma.OrganizationUnitKindGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationUnitKindGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationUnitKindCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationUnitKindCountAggregateOutputType> | number
         }
       }
     }
@@ -2838,9 +3063,6 @@ export type UserLocationHistoryScalarFieldEnum = (typeof UserLocationHistoryScal
 
 export const ProjectScalarFieldEnum = {
   id: 'id',
-  vicePresidency: 'vicePresidency',
-  management: 'management',
-  unit: 'unit',
   systemName: 'systemName',
   code: 'code',
   isActive: 'isActive',
@@ -2862,6 +3084,15 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const ProjectOperatorScalarFieldEnum = {
+  projectId: 'projectId',
+  organizationUnitId: 'organizationUnitId',
+  createdAt: 'createdAt'
+} as const
+
+export type ProjectOperatorScalarFieldEnum = (typeof ProjectOperatorScalarFieldEnum)[keyof typeof ProjectOperatorScalarFieldEnum]
 
 
 export const ProjectPhaseScalarFieldEnum = {
@@ -2936,6 +3167,17 @@ export const ProjectContractorScalarFieldEnum = {
 } as const
 
 export type ProjectContractorScalarFieldEnum = (typeof ProjectContractorScalarFieldEnum)[keyof typeof ProjectContractorScalarFieldEnum]
+
+
+export const ProjectContractorProjectScalarFieldEnum = {
+  id: 'id',
+  contractorId: 'contractorId',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectContractorProjectScalarFieldEnum = (typeof ProjectContractorProjectScalarFieldEnum)[keyof typeof ProjectContractorProjectScalarFieldEnum]
 
 
 export const ProjectContractorMemberScalarFieldEnum = {
@@ -3062,10 +3304,20 @@ export const OrganizationPositionScalarFieldEnum = {
 export type OrganizationPositionScalarFieldEnum = (typeof OrganizationPositionScalarFieldEnum)[keyof typeof OrganizationPositionScalarFieldEnum]
 
 
+export const OrganizationUnitKindScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationUnitKindScalarFieldEnum = (typeof OrganizationUnitKindScalarFieldEnum)[keyof typeof OrganizationUnitKindScalarFieldEnum]
+
+
 export const OrganizationUnitScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  kind: 'kind',
+  kindId: 'kindId',
   parentId: 'parentId',
   phone: 'phone',
   address: 'address',
@@ -3410,20 +3662,6 @@ export type ListEnumProjectProgressTranscriptionStatusFieldRefInput<$PrismaModel
 
 
 /**
- * Reference to a field of type 'OrganizationUnitKind'
- */
-export type EnumOrganizationUnitKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrganizationUnitKind'>
-    
-
-
-/**
- * Reference to a field of type 'OrganizationUnitKind[]'
- */
-export type ListEnumOrganizationUnitKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrganizationUnitKind[]'>
-    
-
-
-/**
  * Reference to a field of type 'FoodReservationStatus'
  */
 export type EnumFoodReservationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FoodReservationStatus'>
@@ -3664,11 +3902,13 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   userLocationHistory?: Prisma.UserLocationHistoryOmit
   project?: Prisma.ProjectOmit
+  projectOperator?: Prisma.ProjectOperatorOmit
   projectPhase?: Prisma.ProjectPhaseOmit
   storedFile?: Prisma.StoredFileOmit
   projectProgressEntry?: Prisma.ProjectProgressEntryOmit
   projectProgressImage?: Prisma.ProjectProgressImageOmit
   projectContractor?: Prisma.ProjectContractorOmit
+  projectContractorProject?: Prisma.ProjectContractorProjectOmit
   projectContractorMember?: Prisma.ProjectContractorMemberOmit
   projectContractorPhase?: Prisma.ProjectContractorPhaseOmit
   projectContractorPayment?: Prisma.ProjectContractorPaymentOmit
@@ -3678,6 +3918,7 @@ export type GlobalOmitConfig = {
   organization?: Prisma.OrganizationOmit
   organizationPhone?: Prisma.OrganizationPhoneOmit
   organizationPosition?: Prisma.OrganizationPositionOmit
+  organizationUnitKind?: Prisma.OrganizationUnitKindOmit
   organizationUnit?: Prisma.OrganizationUnitOmit
   organizationUnitRestaurant?: Prisma.OrganizationUnitRestaurantOmit
   foodReservation?: Prisma.FoodReservationOmit

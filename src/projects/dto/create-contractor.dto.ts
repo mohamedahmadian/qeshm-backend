@@ -3,6 +3,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  IsUUID,
   MaxLength,
   Min,
   MinLength,
@@ -62,4 +63,9 @@ export class CreateContractorDto {
   @IsNumber()
   @Min(0)
   costEstimate?: number | null;
+}
+
+export class CreateGlobalContractorDto extends CreateContractorDto {
+  @IsUUID()
+  projectId: string;
 }

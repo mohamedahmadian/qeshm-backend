@@ -11,7 +11,7 @@ import {
   wantsPagination,
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
-import { OrganizationUnitKind, Prisma } from '../generated/prisma/client';
+import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateOrganizationUnitDto } from './dto/create-organization-unit.dto';
 import { FindOrganizationUnitsQueryDto } from './dto/find-organization-units-query.dto';
@@ -21,7 +21,8 @@ import { buildOrganizationUnitPaths } from './organization-unit-tree';
 const unitSelect = {
   id: true,
   name: true,
-  kind: true,
+  kindId: true,
+  kind: { select: { id: true, name: true } },
   parentId: true,
   phone: true,
   address: true,
@@ -36,7 +37,9 @@ const unitSelect = {
   nutritionRepId: true,
   createdAt: true,
   updatedAt: true,
-  parent: { select: { id: true, name: true, kind: true } },
+  parent: {
+    select: { id: true, name: true, kind: { select: { id: true, name: true } } },
+  },
   nutritionRep: {
     select: { id: true, firstName: true, lastName: true, fullName: true },
   },
@@ -70,7 +73,7 @@ export class OrganizationUnitsService {
 
   async findAll(query: FindOrganizationUnitsQueryDto) {
     const where: Prisma.OrganizationUnitWhereInput = {
-      kind: query.kind,
+      kindId: query.kindId,
       parentId: query.parentId,
       OR: query.q
         ? [
@@ -79,6 +82,7 @@ export class OrganizationUnitsService {
             { address: containsInsensitive(query.q) },
             { nutritionRep: { fullName: containsInsensitive(query.q) } },
             { parent: { name: containsInsensitive(query.q) } },
+            { kind: { name: containsInsensitive(query.q) } },
           ]
         : undefined,
     };
@@ -87,12 +91,10 @@ export class OrganizationUnitsService {
       query.sortDir,
       {
         name: (dir) => ({ name: dir }),
-        kind: (dir) => ({ kind: dir }),
+        kind: (dir) => ({ kind: { name: dir } }),
         parent: (dir) => ({ parent: { name: dir } }),
         phone: (dir) => ({ phone: dir }),
-        nutritionRep: (dir) => ({ nutritionRep: { fullName: dir } }),
         employeeCount: (dir) => ({ employees: { _count: dir } }),
-        restaurantCount: (dir) => ({ restaurants: { _count: dir } }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -138,10 +140,11 @@ export class OrganizationUnitsService {
 
   async create(dto: CreateOrganizationUnitDto) {
     await this.assertValidParent(null, dto.parentId);
+    await this.assertKind(dto.kindId);
     const unit = await this.prisma.organizationUnit.create({
       data: {
         name: dto.name,
-        kind: dto.kind ?? OrganizationUnitKind.DEPARTMENT,
+        kind: { connect: { id: dto.kindId } },
         parent: dto.parentId ? { connect: { id: dto.parentId } } : undefined,
         phone: dto.phone,
         address: dto.address,
@@ -165,6 +168,9 @@ export class OrganizationUnitsService {
     if (dto.parentId !== undefined) {
       await this.assertValidParent(id, dto.parentId);
     }
+    if (dto.kindId !== undefined) {
+      await this.assertKind(dto.kindId);
+    }
     if (dto.nutritionRepId !== undefined) {
       await this.assertNutritionRep(id, dto.nutritionRepId);
     }
@@ -172,7 +178,7 @@ export class OrganizationUnitsService {
       where: { id },
       data: {
         name: dto.name,
-        kind: dto.kind,
+        kind: dto.kindId ? { connect: { id: dto.kindId } } : undefined,
         parent:
           dto.parentId === undefined
             ? undefined
@@ -245,6 +251,16 @@ export class OrganizationUnitsService {
       ...withCoords(item),
       pathLabel: paths.get(item.id) ?? item.name,
     };
+  }
+
+  private async assertKind(kindId: string) {
+    const kind = await this.prisma.organizationUnitKind.findUnique({
+      where: { id: kindId },
+      select: { id: true },
+    });
+    if (!kind) {
+      throw new BadRequestException('نوع واحد یافت نشد');
+    }
   }
 
   private async assertValidParent(

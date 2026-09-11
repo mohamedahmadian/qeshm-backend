@@ -1,5 +1,9 @@
 import { Transform } from 'class-transformer';
 import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  ArrayUnique,
+  IsArray,
   IsBoolean,
   IsEnum,
   IsInt,
@@ -24,24 +28,23 @@ function trimString(value: unknown) {
   return typeof value === 'string' ? value.trim() : value;
 }
 
+function toUniqueIds(value: unknown) {
+  const list = Array.isArray(value)
+    ? value
+    : typeof value === 'string' && value.trim()
+      ? [value.trim()]
+      : [];
+  return [...new Set(list.filter((item) => typeof item === 'string' && item.trim()))];
+}
+
 export class CreateProjectDto {
-  @Transform(({ value }) => trimString(value))
-  @IsString()
-  @MinLength(2)
-  @MaxLength(200)
-  vicePresidency: string;
-
-  @Transform(({ value }) => trimString(value))
-  @IsString()
-  @MinLength(2)
-  @MaxLength(200)
-  management: string;
-
-  @Transform(({ value }) => trimString(value))
-  @IsString()
-  @MinLength(2)
-  @MaxLength(200)
-  unit: string;
+  @Transform(({ value }) => toUniqueIds(value))
+  @IsArray()
+  @ArrayMinSize(1)
+  @ArrayMaxSize(200)
+  @ArrayUnique()
+  @IsUUID('4', { each: true })
+  operatorIds: string[];
 
   @Transform(({ value }) => trimString(value))
   @IsString()

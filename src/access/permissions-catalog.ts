@@ -28,6 +28,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
         kind: 'MENU',
         nameKey: 'menus.digitalTransformationLiveBoard',
       },
+      {
+        code: 'projects.contractors',
+        kind: 'MENU',
+        nameKey: 'menus.contractorManagement',
+      },
     ],
   },
   {
@@ -78,14 +83,19 @@ export const PERMISSION_TREE: PermissionNode[] = [
         nameKey: 'menus.organization',
       },
       {
-        code: 'qeshm-organization.positions',
-        kind: 'MENU',
-        nameKey: 'menus.organizationPositions',
-      },
-      {
         code: 'qeshm-organization.units',
         kind: 'MENU',
         nameKey: 'menus.organizationUnits',
+      },
+      {
+        code: 'qeshm-organization.unit-kinds',
+        kind: 'MENU',
+        nameKey: 'menus.organizationUnitKinds',
+      },
+      {
+        code: 'qeshm-organization.positions',
+        kind: 'MENU',
+        nameKey: 'menus.organizationPositions',
       },
       {
         code: 'qeshm-organization.employees',

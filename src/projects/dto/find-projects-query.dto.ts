@@ -6,9 +6,7 @@ import { sortDirections } from '../../common/sort-query';
 import { ProjectImportance, ProjectStatus } from '../../generated/prisma/client';
 
 export const projectSortFields = [
-  'vicePresidency',
-  'management',
-  'unit',
+  'operators',
   'systemName',
   'code',
   'isActive',
@@ -30,18 +28,8 @@ export type ProjectSortField = (typeof projectSortFields)[number];
 export class FindProjectsQueryDto extends PaginationQueryDto {
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
-  @IsString()
-  vicePresidency?: string;
-
-  @IsOptional()
-  @Transform(({ value }) => emptyToUndefined(value))
-  @IsString()
-  management?: string;
-
-  @IsOptional()
-  @Transform(({ value }) => emptyToUndefined(value))
-  @IsString()
-  unit?: string;
+  @IsUUID('4')
+  operatorUnitId?: string;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

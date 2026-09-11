@@ -27,8 +27,8 @@ export class ProjectsController {
   }
 
   @Get('lookups')
-  lookups(@Query() query: FindProjectsQueryDto) {
-    return this.projects.lookups(query);
+  lookups() {
+    return this.projects.lookups();
   }
 
   @Get('reports')

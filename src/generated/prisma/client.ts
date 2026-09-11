@@ -75,6 +75,11 @@ export type UserLocationHistory = Prisma.UserLocationHistoryModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model ProjectOperator
+ * 
+ */
+export type ProjectOperator = Prisma.ProjectOperatorModel
+/**
  * Model ProjectPhase
  * 
  */
@@ -99,6 +104,11 @@ export type ProjectProgressImage = Prisma.ProjectProgressImageModel
  * 
  */
 export type ProjectContractor = Prisma.ProjectContractorModel
+/**
+ * Model ProjectContractorProject
+ * 
+ */
+export type ProjectContractorProject = Prisma.ProjectContractorProjectModel
 /**
  * Model ProjectContractorMember
  * 
@@ -144,6 +154,11 @@ export type OrganizationPhone = Prisma.OrganizationPhoneModel
  * 
  */
 export type OrganizationPosition = Prisma.OrganizationPositionModel
+/**
+ * Model OrganizationUnitKind
+ * 
+ */
+export type OrganizationUnitKind = Prisma.OrganizationUnitKindModel
 /**
  * Model OrganizationUnit
  * 

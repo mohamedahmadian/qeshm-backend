@@ -79,12 +79,9 @@ export class ProjectReportsService {
   async overview(query: FindProjectsQueryDto) {
     const today = todayIsoDateTehran();
     const projects = await this.prisma.project.findMany({
-      where: this.projects.listWhere(query),
+      where: await this.projects.listWhere(query),
       select: {
         id: true,
-        vicePresidency: true,
-        management: true,
-        unit: true,
         systemName: true,
         isActive: true,
         status: true,
@@ -95,6 +92,11 @@ export class ProjectReportsService {
         launchYear: true,
         replacementProjectId: true,
         importance: true,
+        operators: {
+          select: {
+            organizationUnit: { select: { id: true, name: true } },
+          },
+        },
         contractors: {
           select: {
             id: true,
@@ -115,9 +117,7 @@ export class ProjectReportsService {
       ...LIFECYCLE_ORDER.map((key): [ProjectStatus, number] => [key, 0]),
       ['unset', 0],
     ]);
-    const byVice = new Map<string, OrgBucket>();
-    const byManagement = new Map<string, OrgBucket>();
-    const byUnit = new Map<string, OrgBucket>();
+    const byOperator = new Map<string, OrgBucket>();
     const byCompany = new Map<string, number>();
     const byLaunchYear = new Map<
       string,
@@ -127,7 +127,7 @@ export class ProjectReportsService {
     const topProjects: Array<{
       id: string;
       name: string;
-      vicePresidency: string;
+      operators: string;
       contractorCount: number;
       memberCount: number;
       phaseCount: number;
@@ -266,14 +266,17 @@ export class ProjectReportsService {
 
       if (project.contractors.length > 0) withContractors += 1;
 
-      this.touchOrg(byVice, project.vicePresidency, project, projectEstimate, projectPaid);
-      this.touchOrg(byManagement, project.management, project, projectEstimate, projectPaid);
-      this.touchOrg(byUnit, project.unit, project, projectEstimate, projectPaid);
+      const operatorNames = project.operators.map(
+        (link) => link.organizationUnit.name,
+      );
+      for (const name of operatorNames) {
+        this.touchOrg(byOperator, name, project, projectEstimate, projectPaid);
+      }
 
       topProjects.push({
         id: project.id,
         name: project.systemName,
-        vicePresidency: project.vicePresidency,
+        operators: operatorNames.join('، '),
         contractorCount: project.contractors.length,
         memberCount: projectMembers,
         phaseCount: projectPhases,
@@ -344,9 +347,7 @@ export class ProjectReportsService {
         { key: 'ongoing', count: ongoingPhases },
         { key: 'ended', count: endedPhases },
       ],
-      byVicePresidency: sortByCount([...byVice.values()]),
-      byManagement: sortByCount([...byManagement.values()], 12),
-      byUnit: sortByCount([...byUnit.values()], 12),
+      byOperator: sortByCount([...byOperator.values()], 12),
       byCompany: sortByCount(
         [...byCompany.entries()].map(([name, count]) => ({ name, count })),
         10,
@@ -359,7 +360,7 @@ export class ProjectReportsService {
       paymentByMonth: [...paymentByMonth.entries()]
         .sort(([a], [b]) => a.localeCompare(b))
         .map(([month, item]) => ({ month, ...item })),
-      financeByVicePresidency: this.financeRows(byVice),
+      financeByOperator: this.financeRows(byOperator),
       topProjects: sortByPaid(topProjects, 8),
       topContractors: sortByPaid(topContractors, 8),
     };

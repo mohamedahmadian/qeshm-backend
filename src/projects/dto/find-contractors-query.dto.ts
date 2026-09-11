@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsIn, IsOptional } from 'class-validator';
+import { IsIn, IsOptional, IsUUID } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
@@ -10,6 +10,8 @@ export const contractorSortFields = [
   'ceoName',
   'timeEstimate',
   'costEstimate',
+  'project',
+  'projectCount',
 ] as const;
 
 export const contractorMemberSortFields = [
@@ -31,7 +33,20 @@ export const contractorPaymentSortFields = [
   'description',
 ] as const;
 
+export const contractorProjectSortFields = [
+  'systemName',
+  'code',
+  'status',
+  'progressPercent',
+  'operators',
+] as const;
+
 export class FindContractorsQueryDto extends PaginationQueryDto {
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsUUID()
+  projectId?: string;
+
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...contractorSortFields])
@@ -72,6 +87,18 @@ export class FindContractorPaymentsQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...contractorPaymentSortFields])
   sortBy?: (typeof contractorPaymentSortFields)[number];
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...sortDirections])
+  sortDir?: (typeof sortDirections)[number];
+}
+
+export class FindContractorProjectsQueryDto extends PaginationQueryDto {
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...contractorProjectSortFields])
+  sortBy?: (typeof contractorProjectSortFields)[number];
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

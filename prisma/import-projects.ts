@@ -39,6 +39,30 @@ function loadSeed(): SeedProject[] {
   return JSON.parse(readFileSync(path, 'utf8')) as SeedProject[];
 }
 
+async function operatorCreates(
+  prisma: PrismaClient,
+  names: string[],
+) {
+  const unique = [
+    ...new Set(names.map((name) => normalizeName(name)).filter(Boolean)),
+  ];
+  if (!unique.length) {
+    return [];
+  }
+  const units = await prisma.organizationUnit.findMany({
+    where: { name: { in: unique } },
+    select: { id: true },
+  });
+  const seen = new Set<string>();
+  const creates: { organizationUnitId: string }[] = [];
+  for (const unit of units) {
+    if (seen.has(unit.id)) continue;
+    seen.add(unit.id);
+    creates.push({ organizationUnitId: unit.id });
+  }
+  return creates;
+}
+
 function findReplacementId(
   name: string,
   created: { id: string; systemName: string }[],
@@ -77,9 +101,6 @@ export async function importProjects(
   for (const item of items) {
     const project = await prisma.project.create({
       data: {
-        vicePresidency: item.vicePresidency,
-        management: item.management,
-        unit: item.unit,
         systemName: item.systemName,
         code: codeFromName(item.systemName, usedCodes),
         isActive: item.isActive,
@@ -89,6 +110,13 @@ export async function importProjects(
         isSupportActive: item.isSupportActive,
         description: item.description,
         importance: item.importance,
+        operators: {
+          create: await operatorCreates(prisma, [
+            item.vicePresidency,
+            item.management,
+            item.unit,
+          ]),
+        },
       } satisfies Prisma.ProjectUncheckedCreateInput,
       select: { id: true, systemName: true },
     });

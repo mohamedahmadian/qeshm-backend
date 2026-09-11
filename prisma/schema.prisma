@@ -78,15 +78,6 @@ enum VehicleAssignmentStatus {
   RETURNED
 }
 
-enum OrganizationUnitKind {
-  BOARD
-  ADVISORS
-  OFFICE
-  VICE
-  MANAGEMENT
-  DEPARTMENT
-}
-
 enum ProjectProgressProcessingMode {
   IMMEDIATE
   DEFERRED
@@ -282,9 +273,6 @@ model UserLocationHistory {
 
 model Project {
   id                   String             @id @default(uuid())
-  vicePresidency       String
-  management           String
-  unit                 String
   systemName           String
   code                 String             @unique
   isActive             Boolean            @default(true)
@@ -303,15 +291,14 @@ model Project {
   replacedBy           Project[]          @relation("ProjectReplacement")
   description          String?
   importance           ProjectImportance  @default(HIGH)
+  operators            ProjectOperator[]
   contractors          ProjectContractor[]
+  contractorLinks      ProjectContractorProject[]
   phases               ProjectPhase[]
   progressEntries      ProjectProgressEntry[]
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
 
-  @@index([vicePresidency])
-  @@index([management])
-  @@index([unit])
   @@index([systemName])
   @@index([code])
   @@index([isActive])
@@ -322,6 +309,18 @@ model Project {
   @@index([importance])
   @@index([createdAt])
   @@map("projects")
+}
+
+model ProjectOperator {
+  projectId          String
+  organizationUnitId String
+  project            Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organizationUnit   OrganizationUnit @relation(fields: [organizationUnitId], references: [id], onDelete: Restrict)
+  createdAt          DateTime         @default(now())
+
+  @@id([projectId, organizationUnitId])
+  @@index([organizationUnitId])
+  @@map("project_operators")
 }
 
 model ProjectPhase {
@@ -408,6 +407,7 @@ model ProjectContractor {
   members      ProjectContractorMember[]
   phases       ProjectContractorPhase[]
   payments     ProjectContractorPayment[]
+  projectLinks ProjectContractorProject[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -415,6 +415,22 @@ model ProjectContractor {
   @@index([nationalId])
   @@index([createdAt])
   @@map("project_contractors")
+}
+
+model ProjectContractorProject {
+  id           String            @id @default(uuid())
+  contractorId String
+  contractor   ProjectContractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  projectId    String
+  project      Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@unique([contractorId, projectId])
+  @@index([contractorId])
+  @@index([projectId])
+  @@index([createdAt])
+  @@map("project_contractor_projects")
 }
 
 model ProjectContractorMember {
@@ -568,10 +584,23 @@ model OrganizationPosition {
   @@map("organization_positions")
 }
 
+model OrganizationUnitKind {
+  id        String             @id @default(uuid())
+  name      String             @unique
+  units     OrganizationUnit[]
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("organization_unit_kinds")
+}
+
 model OrganizationUnit {
   id             String               @id @default(uuid())
   name           String
-  kind           OrganizationUnitKind @default(DEPARTMENT)
+  kindId         String
+  kind           OrganizationUnitKind @relation(fields: [kindId], references: [id], onDelete: Restrict)
   parentId       String?
   parent         OrganizationUnit?    @relation("UnitTree", fields: [parentId], references: [id], onDelete: Restrict)
   children       OrganizationUnit[]   @relation("UnitTree")
@@ -591,11 +620,12 @@ model OrganizationUnit {
   restaurants    OrganizationUnitRestaurant[]
   reservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[]
+  projectOperators ProjectOperator[]
   createdAt      DateTime             @default(now())
   updatedAt      DateTime             @updatedAt
 
   @@index([name])
-  @@index([kind])
+  @@index([kindId])
   @@index([parentId])
   @@index([phone])
   @@index([nutritionRepId])

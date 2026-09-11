@@ -3,6 +3,8 @@ import { OrganizationPhonesController } from './organization-phones.controller';
 import { OrganizationPhonesService } from './organization-phones.service';
 import { OrganizationPositionsController } from './organization-positions.controller';
 import { OrganizationPositionsService } from './organization-positions.service';
+import { OrganizationUnitKindsController } from './organization-unit-kinds.controller';
+import { OrganizationUnitKindsService } from './organization-unit-kinds.service';
 import { OrganizationUnitRestaurantsController } from './organization-unit-restaurants.controller';
 import { OrganizationUnitRestaurantsService } from './organization-unit-restaurants.service';
 import { OrganizationUnitsController } from './organization-units.controller';
@@ -15,6 +17,7 @@ import { OrganizationService } from './organization.service';
     OrganizationController,
     OrganizationPhonesController,
     OrganizationPositionsController,
+    OrganizationUnitKindsController,
     OrganizationUnitsController,
     OrganizationUnitRestaurantsController,
   ],
@@ -22,6 +25,7 @@ import { OrganizationService } from './organization.service';
     OrganizationService,
     OrganizationPhonesService,
     OrganizationPositionsService,
+    OrganizationUnitKindsService,
     OrganizationUnitsService,
     OrganizationUnitRestaurantsService,
   ],

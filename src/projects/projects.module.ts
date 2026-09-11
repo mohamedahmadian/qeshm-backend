@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ContractorsController } from './contractors.controller';
 import { ContractorsService } from './contractors.service';
+import { GlobalContractorsController } from './global-contractors.controller';
 import { ProgressTranscriptionService } from './progress-transcription.service';
 import { ProjectPhasesController } from './project-phases.controller';
 import { ProjectPhasesService } from './project-phases.service';
@@ -13,6 +14,7 @@ import { ProjectsService } from './projects.service';
 @Module({
   controllers: [
     ProjectsController,
+    GlobalContractorsController,
     ContractorsController,
     ProjectPhasesController,
     ProjectProgressController,

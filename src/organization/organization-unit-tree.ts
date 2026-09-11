@@ -1,3 +1,34 @@
+export function descendantOrganizationUnitIds(
+  units: { id: string; parentId: string | null }[],
+  rootId: string,
+) {
+  const children = new Map<string, string[]>();
+  for (const unit of units) {
+    if (!unit.parentId) continue;
+    const list = children.get(unit.parentId) ?? [];
+    list.push(unit.id);
+    children.set(unit.parentId, list);
+  }
+  const out: string[] = [];
+  const seen = new Set<string>();
+  const stack = [...(children.get(rootId) ?? [])];
+  while (stack.length) {
+    const id = stack.pop();
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    out.push(id);
+    stack.push(...(children.get(id) ?? []));
+  }
+  return out;
+}
+
+export function organizationUnitSubtreeIds(
+  units: { id: string; parentId: string | null }[],
+  rootId: string,
+) {
+  return [rootId, ...descendantOrganizationUnitIds(units, rootId)];
+}
+
 export function buildOrganizationUnitPaths(
   units: { id: string; name: string; parentId: string | null }[],
 ) {

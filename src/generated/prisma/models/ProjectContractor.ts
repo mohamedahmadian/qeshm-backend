@@ -260,6 +260,7 @@ export type ProjectContractorWhereInput = {
   members?: Prisma.ProjectContractorMemberListRelationFilter
   phases?: Prisma.ProjectContractorPhaseListRelationFilter
   payments?: Prisma.ProjectContractorPaymentListRelationFilter
+  projectLinks?: Prisma.ProjectContractorProjectListRelationFilter
 }
 
 export type ProjectContractorOrderByWithRelationInput = {
@@ -277,6 +278,7 @@ export type ProjectContractorOrderByWithRelationInput = {
   members?: Prisma.ProjectContractorMemberOrderByRelationAggregateInput
   phases?: Prisma.ProjectContractorPhaseOrderByRelationAggregateInput
   payments?: Prisma.ProjectContractorPaymentOrderByRelationAggregateInput
+  projectLinks?: Prisma.ProjectContractorProjectOrderByRelationAggregateInput
 }
 
 export type ProjectContractorWhereUniqueInput = Prisma.AtLeast<{
@@ -297,6 +299,7 @@ export type ProjectContractorWhereUniqueInput = Prisma.AtLeast<{
   members?: Prisma.ProjectContractorMemberListRelationFilter
   phases?: Prisma.ProjectContractorPhaseListRelationFilter
   payments?: Prisma.ProjectContractorPaymentListRelationFilter
+  projectLinks?: Prisma.ProjectContractorProjectListRelationFilter
 }, "id">
 
 export type ProjectContractorOrderByWithAggregationInput = {
@@ -347,6 +350,7 @@ export type ProjectContractorCreateInput = {
   members?: Prisma.ProjectContractorMemberCreateNestedManyWithoutContractorInput
   phases?: Prisma.ProjectContractorPhaseCreateNestedManyWithoutContractorInput
   payments?: Prisma.ProjectContractorPaymentCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateInput = {
@@ -363,6 +367,7 @@ export type ProjectContractorUncheckedCreateInput = {
   members?: Prisma.ProjectContractorMemberUncheckedCreateNestedManyWithoutContractorInput
   phases?: Prisma.ProjectContractorPhaseUncheckedCreateNestedManyWithoutContractorInput
   payments?: Prisma.ProjectContractorPaymentUncheckedCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUpdateInput = {
@@ -379,6 +384,7 @@ export type ProjectContractorUpdateInput = {
   members?: Prisma.ProjectContractorMemberUpdateManyWithoutContractorNestedInput
   phases?: Prisma.ProjectContractorPhaseUpdateManyWithoutContractorNestedInput
   payments?: Prisma.ProjectContractorPaymentUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateInput = {
@@ -395,6 +401,7 @@ export type ProjectContractorUncheckedUpdateInput = {
   members?: Prisma.ProjectContractorMemberUncheckedUpdateManyWithoutContractorNestedInput
   phases?: Prisma.ProjectContractorPhaseUncheckedUpdateManyWithoutContractorNestedInput
   payments?: Prisma.ProjectContractorPaymentUncheckedUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateManyInput = {
@@ -539,6 +546,20 @@ export type ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.ProjectContractorScalarWhereInput | Prisma.ProjectContractorScalarWhereInput[]
 }
 
+export type ProjectContractorCreateNestedOneWithoutProjectLinksInput = {
+  create?: Prisma.XOR<Prisma.ProjectContractorCreateWithoutProjectLinksInput, Prisma.ProjectContractorUncheckedCreateWithoutProjectLinksInput>
+  connectOrCreate?: Prisma.ProjectContractorCreateOrConnectWithoutProjectLinksInput
+  connect?: Prisma.ProjectContractorWhereUniqueInput
+}
+
+export type ProjectContractorUpdateOneRequiredWithoutProjectLinksNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectContractorCreateWithoutProjectLinksInput, Prisma.ProjectContractorUncheckedCreateWithoutProjectLinksInput>
+  connectOrCreate?: Prisma.ProjectContractorCreateOrConnectWithoutProjectLinksInput
+  upsert?: Prisma.ProjectContractorUpsertWithoutProjectLinksInput
+  connect?: Prisma.ProjectContractorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectContractorUpdateToOneWithWhereWithoutProjectLinksInput, Prisma.ProjectContractorUpdateWithoutProjectLinksInput>, Prisma.ProjectContractorUncheckedUpdateWithoutProjectLinksInput>
+}
+
 export type ProjectContractorCreateNestedOneWithoutMembersInput = {
   create?: Prisma.XOR<Prisma.ProjectContractorCreateWithoutMembersInput, Prisma.ProjectContractorUncheckedCreateWithoutMembersInput>
   connectOrCreate?: Prisma.ProjectContractorCreateOrConnectWithoutMembersInput
@@ -594,6 +615,7 @@ export type ProjectContractorCreateWithoutProjectInput = {
   members?: Prisma.ProjectContractorMemberCreateNestedManyWithoutContractorInput
   phases?: Prisma.ProjectContractorPhaseCreateNestedManyWithoutContractorInput
   payments?: Prisma.ProjectContractorPaymentCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutProjectInput = {
@@ -609,6 +631,7 @@ export type ProjectContractorUncheckedCreateWithoutProjectInput = {
   members?: Prisma.ProjectContractorMemberUncheckedCreateNestedManyWithoutContractorInput
   phases?: Prisma.ProjectContractorPhaseUncheckedCreateNestedManyWithoutContractorInput
   payments?: Prisma.ProjectContractorPaymentUncheckedCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutProjectInput = {
@@ -653,6 +676,86 @@ export type ProjectContractorScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"ProjectContractor"> | Date | string
 }
 
+export type ProjectContractorCreateWithoutProjectLinksInput = {
+  id?: string
+  name: string
+  nationalId?: string | null
+  description?: string | null
+  ceoName?: string | null
+  timeEstimate?: string | null
+  costEstimate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutContractorsInput
+  members?: Prisma.ProjectContractorMemberCreateNestedManyWithoutContractorInput
+  phases?: Prisma.ProjectContractorPhaseCreateNestedManyWithoutContractorInput
+  payments?: Prisma.ProjectContractorPaymentCreateNestedManyWithoutContractorInput
+}
+
+export type ProjectContractorUncheckedCreateWithoutProjectLinksInput = {
+  id?: string
+  projectId: string
+  name: string
+  nationalId?: string | null
+  description?: string | null
+  ceoName?: string | null
+  timeEstimate?: string | null
+  costEstimate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.ProjectContractorMemberUncheckedCreateNestedManyWithoutContractorInput
+  phases?: Prisma.ProjectContractorPhaseUncheckedCreateNestedManyWithoutContractorInput
+  payments?: Prisma.ProjectContractorPaymentUncheckedCreateNestedManyWithoutContractorInput
+}
+
+export type ProjectContractorCreateOrConnectWithoutProjectLinksInput = {
+  where: Prisma.ProjectContractorWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectContractorCreateWithoutProjectLinksInput, Prisma.ProjectContractorUncheckedCreateWithoutProjectLinksInput>
+}
+
+export type ProjectContractorUpsertWithoutProjectLinksInput = {
+  update: Prisma.XOR<Prisma.ProjectContractorUpdateWithoutProjectLinksInput, Prisma.ProjectContractorUncheckedUpdateWithoutProjectLinksInput>
+  create: Prisma.XOR<Prisma.ProjectContractorCreateWithoutProjectLinksInput, Prisma.ProjectContractorUncheckedCreateWithoutProjectLinksInput>
+  where?: Prisma.ProjectContractorWhereInput
+}
+
+export type ProjectContractorUpdateToOneWithWhereWithoutProjectLinksInput = {
+  where?: Prisma.ProjectContractorWhereInput
+  data: Prisma.XOR<Prisma.ProjectContractorUpdateWithoutProjectLinksInput, Prisma.ProjectContractorUncheckedUpdateWithoutProjectLinksInput>
+}
+
+export type ProjectContractorUpdateWithoutProjectLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEstimate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costEstimate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutContractorsNestedInput
+  members?: Prisma.ProjectContractorMemberUpdateManyWithoutContractorNestedInput
+  phases?: Prisma.ProjectContractorPhaseUpdateManyWithoutContractorNestedInput
+  payments?: Prisma.ProjectContractorPaymentUpdateManyWithoutContractorNestedInput
+}
+
+export type ProjectContractorUncheckedUpdateWithoutProjectLinksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEstimate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costEstimate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.ProjectContractorMemberUncheckedUpdateManyWithoutContractorNestedInput
+  phases?: Prisma.ProjectContractorPhaseUncheckedUpdateManyWithoutContractorNestedInput
+  payments?: Prisma.ProjectContractorPaymentUncheckedUpdateManyWithoutContractorNestedInput
+}
+
 export type ProjectContractorCreateWithoutMembersInput = {
   id?: string
   name: string
@@ -666,6 +769,7 @@ export type ProjectContractorCreateWithoutMembersInput = {
   project: Prisma.ProjectCreateNestedOneWithoutContractorsInput
   phases?: Prisma.ProjectContractorPhaseCreateNestedManyWithoutContractorInput
   payments?: Prisma.ProjectContractorPaymentCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutMembersInput = {
@@ -681,6 +785,7 @@ export type ProjectContractorUncheckedCreateWithoutMembersInput = {
   updatedAt?: Date | string
   phases?: Prisma.ProjectContractorPhaseUncheckedCreateNestedManyWithoutContractorInput
   payments?: Prisma.ProjectContractorPaymentUncheckedCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutMembersInput = {
@@ -712,6 +817,7 @@ export type ProjectContractorUpdateWithoutMembersInput = {
   project?: Prisma.ProjectUpdateOneRequiredWithoutContractorsNestedInput
   phases?: Prisma.ProjectContractorPhaseUpdateManyWithoutContractorNestedInput
   payments?: Prisma.ProjectContractorPaymentUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutMembersInput = {
@@ -727,6 +833,7 @@ export type ProjectContractorUncheckedUpdateWithoutMembersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   phases?: Prisma.ProjectContractorPhaseUncheckedUpdateManyWithoutContractorNestedInput
   payments?: Prisma.ProjectContractorPaymentUncheckedUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateWithoutPhasesInput = {
@@ -742,6 +849,7 @@ export type ProjectContractorCreateWithoutPhasesInput = {
   project: Prisma.ProjectCreateNestedOneWithoutContractorsInput
   members?: Prisma.ProjectContractorMemberCreateNestedManyWithoutContractorInput
   payments?: Prisma.ProjectContractorPaymentCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutPhasesInput = {
@@ -757,6 +865,7 @@ export type ProjectContractorUncheckedCreateWithoutPhasesInput = {
   updatedAt?: Date | string
   members?: Prisma.ProjectContractorMemberUncheckedCreateNestedManyWithoutContractorInput
   payments?: Prisma.ProjectContractorPaymentUncheckedCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutPhasesInput = {
@@ -788,6 +897,7 @@ export type ProjectContractorUpdateWithoutPhasesInput = {
   project?: Prisma.ProjectUpdateOneRequiredWithoutContractorsNestedInput
   members?: Prisma.ProjectContractorMemberUpdateManyWithoutContractorNestedInput
   payments?: Prisma.ProjectContractorPaymentUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutPhasesInput = {
@@ -803,6 +913,7 @@ export type ProjectContractorUncheckedUpdateWithoutPhasesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ProjectContractorMemberUncheckedUpdateManyWithoutContractorNestedInput
   payments?: Prisma.ProjectContractorPaymentUncheckedUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateWithoutPaymentsInput = {
@@ -818,6 +929,7 @@ export type ProjectContractorCreateWithoutPaymentsInput = {
   project: Prisma.ProjectCreateNestedOneWithoutContractorsInput
   members?: Prisma.ProjectContractorMemberCreateNestedManyWithoutContractorInput
   phases?: Prisma.ProjectContractorPhaseCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutPaymentsInput = {
@@ -833,6 +945,7 @@ export type ProjectContractorUncheckedCreateWithoutPaymentsInput = {
   updatedAt?: Date | string
   members?: Prisma.ProjectContractorMemberUncheckedCreateNestedManyWithoutContractorInput
   phases?: Prisma.ProjectContractorPhaseUncheckedCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutPaymentsInput = {
@@ -864,6 +977,7 @@ export type ProjectContractorUpdateWithoutPaymentsInput = {
   project?: Prisma.ProjectUpdateOneRequiredWithoutContractorsNestedInput
   members?: Prisma.ProjectContractorMemberUpdateManyWithoutContractorNestedInput
   phases?: Prisma.ProjectContractorPhaseUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutPaymentsInput = {
@@ -879,6 +993,7 @@ export type ProjectContractorUncheckedUpdateWithoutPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ProjectContractorMemberUncheckedUpdateManyWithoutContractorNestedInput
   phases?: Prisma.ProjectContractorPhaseUncheckedUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateManyProjectInput = {
@@ -906,6 +1021,7 @@ export type ProjectContractorUpdateWithoutProjectInput = {
   members?: Prisma.ProjectContractorMemberUpdateManyWithoutContractorNestedInput
   phases?: Prisma.ProjectContractorPhaseUpdateManyWithoutContractorNestedInput
   payments?: Prisma.ProjectContractorPaymentUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutProjectInput = {
@@ -921,6 +1037,7 @@ export type ProjectContractorUncheckedUpdateWithoutProjectInput = {
   members?: Prisma.ProjectContractorMemberUncheckedUpdateManyWithoutContractorNestedInput
   phases?: Prisma.ProjectContractorPhaseUncheckedUpdateManyWithoutContractorNestedInput
   payments?: Prisma.ProjectContractorPaymentUncheckedUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateManyWithoutProjectInput = {
@@ -944,12 +1061,14 @@ export type ProjectContractorCountOutputType = {
   members: number
   phases: number
   payments: number
+  projectLinks: number
 }
 
 export type ProjectContractorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   members?: boolean | ProjectContractorCountOutputTypeCountMembersArgs
   phases?: boolean | ProjectContractorCountOutputTypeCountPhasesArgs
   payments?: boolean | ProjectContractorCountOutputTypeCountPaymentsArgs
+  projectLinks?: boolean | ProjectContractorCountOutputTypeCountProjectLinksArgs
 }
 
 /**
@@ -983,6 +1102,13 @@ export type ProjectContractorCountOutputTypeCountPaymentsArgs<ExtArgs extends ru
   where?: Prisma.ProjectContractorPaymentWhereInput
 }
 
+/**
+ * ProjectContractorCountOutputType without action
+ */
+export type ProjectContractorCountOutputTypeCountProjectLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectContractorProjectWhereInput
+}
+
 
 export type ProjectContractorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -999,6 +1125,7 @@ export type ProjectContractorSelect<ExtArgs extends runtime.Types.Extensions.Int
   members?: boolean | Prisma.ProjectContractor$membersArgs<ExtArgs>
   phases?: boolean | Prisma.ProjectContractor$phasesArgs<ExtArgs>
   payments?: boolean | Prisma.ProjectContractor$paymentsArgs<ExtArgs>
+  projectLinks?: boolean | Prisma.ProjectContractor$projectLinksArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectContractorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectContractor"]>
 
@@ -1049,6 +1176,7 @@ export type ProjectContractorInclude<ExtArgs extends runtime.Types.Extensions.In
   members?: boolean | Prisma.ProjectContractor$membersArgs<ExtArgs>
   phases?: boolean | Prisma.ProjectContractor$phasesArgs<ExtArgs>
   payments?: boolean | Prisma.ProjectContractor$paymentsArgs<ExtArgs>
+  projectLinks?: boolean | Prisma.ProjectContractor$projectLinksArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectContractorCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectContractorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1065,6 +1193,7 @@ export type $ProjectContractorPayload<ExtArgs extends runtime.Types.Extensions.I
     members: Prisma.$ProjectContractorMemberPayload<ExtArgs>[]
     phases: Prisma.$ProjectContractorPhasePayload<ExtArgs>[]
     payments: Prisma.$ProjectContractorPaymentPayload<ExtArgs>[]
+    projectLinks: Prisma.$ProjectContractorProjectPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1475,6 +1604,7 @@ export interface Prisma__ProjectContractorClient<T, Null = never, ExtArgs extend
   members<T extends Prisma.ProjectContractor$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectContractorMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   phases<T extends Prisma.ProjectContractor$phasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$phasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectContractorPhasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.ProjectContractor$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectContractorPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  projectLinks<T extends Prisma.ProjectContractor$projectLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$projectLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectContractorProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1984,6 +2114,30 @@ export type ProjectContractor$paymentsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.ProjectContractorPaymentScalarFieldEnum | Prisma.ProjectContractorPaymentScalarFieldEnum[]
+}
+
+/**
+ * ProjectContractor.projectLinks
+ */
+export type ProjectContractor$projectLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectContractorProject
+   */
+  select?: Prisma.ProjectContractorProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectContractorProject
+   */
+  omit?: Prisma.ProjectContractorProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectContractorProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectContractorProjectWhereInput
+  orderBy?: Prisma.ProjectContractorProjectOrderByWithRelationInput | Prisma.ProjectContractorProjectOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectContractorProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectContractorProjectScalarFieldEnum | Prisma.ProjectContractorProjectScalarFieldEnum[]
 }
 
 /**

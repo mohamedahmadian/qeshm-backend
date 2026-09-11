@@ -58,11 +58,13 @@ export const ModelName = {
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
   Project: 'Project',
+  ProjectOperator: 'ProjectOperator',
   ProjectPhase: 'ProjectPhase',
   StoredFile: 'StoredFile',
   ProjectProgressEntry: 'ProjectProgressEntry',
   ProjectProgressImage: 'ProjectProgressImage',
   ProjectContractor: 'ProjectContractor',
+  ProjectContractorProject: 'ProjectContractorProject',
   ProjectContractorMember: 'ProjectContractorMember',
   ProjectContractorPhase: 'ProjectContractorPhase',
   ProjectContractorPayment: 'ProjectContractorPayment',
@@ -72,6 +74,7 @@ export const ModelName = {
   Organization: 'Organization',
   OrganizationPhone: 'OrganizationPhone',
   OrganizationPosition: 'OrganizationPosition',
+  OrganizationUnitKind: 'OrganizationUnitKind',
   OrganizationUnit: 'OrganizationUnit',
   OrganizationUnitRestaurant: 'OrganizationUnitRestaurant',
   FoodReservation: 'FoodReservation',
@@ -232,9 +235,6 @@ export type UserLocationHistoryScalarFieldEnum = (typeof UserLocationHistoryScal
 
 export const ProjectScalarFieldEnum = {
   id: 'id',
-  vicePresidency: 'vicePresidency',
-  management: 'management',
-  unit: 'unit',
   systemName: 'systemName',
   code: 'code',
   isActive: 'isActive',
@@ -256,6 +256,15 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const ProjectOperatorScalarFieldEnum = {
+  projectId: 'projectId',
+  organizationUnitId: 'organizationUnitId',
+  createdAt: 'createdAt'
+} as const
+
+export type ProjectOperatorScalarFieldEnum = (typeof ProjectOperatorScalarFieldEnum)[keyof typeof ProjectOperatorScalarFieldEnum]
 
 
 export const ProjectPhaseScalarFieldEnum = {
@@ -330,6 +339,17 @@ export const ProjectContractorScalarFieldEnum = {
 } as const
 
 export type ProjectContractorScalarFieldEnum = (typeof ProjectContractorScalarFieldEnum)[keyof typeof ProjectContractorScalarFieldEnum]
+
+
+export const ProjectContractorProjectScalarFieldEnum = {
+  id: 'id',
+  contractorId: 'contractorId',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectContractorProjectScalarFieldEnum = (typeof ProjectContractorProjectScalarFieldEnum)[keyof typeof ProjectContractorProjectScalarFieldEnum]
 
 
 export const ProjectContractorMemberScalarFieldEnum = {
@@ -456,10 +476,20 @@ export const OrganizationPositionScalarFieldEnum = {
 export type OrganizationPositionScalarFieldEnum = (typeof OrganizationPositionScalarFieldEnum)[keyof typeof OrganizationPositionScalarFieldEnum]
 
 
+export const OrganizationUnitKindScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationUnitKindScalarFieldEnum = (typeof OrganizationUnitKindScalarFieldEnum)[keyof typeof OrganizationUnitKindScalarFieldEnum]
+
+
 export const OrganizationUnitScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  kind: 'kind',
+  kindId: 'kindId',
   parentId: 'parentId',
   phone: 'phone',
   address: 'address',
