@@ -3065,6 +3065,8 @@ export type OrganizationPositionScalarFieldEnum = (typeof OrganizationPositionSc
 export const OrganizationUnitScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  kind: 'kind',
+  parentId: 'parentId',
   phone: 'phone',
   address: 'address',
   latitude: 'latitude',
@@ -3404,6 +3406,20 @@ export type EnumProjectProgressTranscriptionStatusFieldRefInput<$PrismaModel> = 
  * Reference to a field of type 'ProjectProgressTranscriptionStatus[]'
  */
 export type ListEnumProjectProgressTranscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectProgressTranscriptionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OrganizationUnitKind'
+ */
+export type EnumOrganizationUnitKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrganizationUnitKind'>
+    
+
+
+/**
+ * Reference to a field of type 'OrganizationUnitKind[]'
+ */
+export type ListEnumOrganizationUnitKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrganizationUnitKind[]'>
     
 
 

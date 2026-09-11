@@ -39,6 +39,8 @@ export type OrganizationUnitSumAggregateOutputType = {
 export type OrganizationUnitMinAggregateOutputType = {
   id: string | null
   name: string | null
+  kind: $Enums.OrganizationUnitKind | null
+  parentId: string | null
   phone: string | null
   address: string | null
   latitude: runtime.Decimal | null
@@ -57,6 +59,8 @@ export type OrganizationUnitMinAggregateOutputType = {
 export type OrganizationUnitMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  kind: $Enums.OrganizationUnitKind | null
+  parentId: string | null
   phone: string | null
   address: string | null
   latitude: runtime.Decimal | null
@@ -75,6 +79,8 @@ export type OrganizationUnitMaxAggregateOutputType = {
 export type OrganizationUnitCountAggregateOutputType = {
   id: number
   name: number
+  kind: number
+  parentId: number
   phone: number
   address: number
   latitude: number
@@ -105,6 +111,8 @@ export type OrganizationUnitSumAggregateInputType = {
 export type OrganizationUnitMinAggregateInputType = {
   id?: true
   name?: true
+  kind?: true
+  parentId?: true
   phone?: true
   address?: true
   latitude?: true
@@ -123,6 +131,8 @@ export type OrganizationUnitMinAggregateInputType = {
 export type OrganizationUnitMaxAggregateInputType = {
   id?: true
   name?: true
+  kind?: true
+  parentId?: true
   phone?: true
   address?: true
   latitude?: true
@@ -141,6 +151,8 @@ export type OrganizationUnitMaxAggregateInputType = {
 export type OrganizationUnitCountAggregateInputType = {
   id?: true
   name?: true
+  kind?: true
+  parentId?: true
   phone?: true
   address?: true
   latitude?: true
@@ -246,6 +258,8 @@ export type OrganizationUnitGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type OrganizationUnitGroupByOutputType = {
   id: string
   name: string
+  kind: $Enums.OrganizationUnitKind
+  parentId: string | null
   phone: string | null
   address: string | null
   latitude: runtime.Decimal | null
@@ -287,6 +301,8 @@ export type OrganizationUnitWhereInput = {
   NOT?: Prisma.OrganizationUnitWhereInput | Prisma.OrganizationUnitWhereInput[]
   id?: Prisma.StringFilter<"OrganizationUnit"> | string
   name?: Prisma.StringFilter<"OrganizationUnit"> | string
+  kind?: Prisma.EnumOrganizationUnitKindFilter<"OrganizationUnit"> | $Enums.OrganizationUnitKind
+  parentId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   phone?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   address?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   latitude?: Prisma.DecimalNullableFilter<"OrganizationUnit"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -300,6 +316,8 @@ export type OrganizationUnitWhereInput = {
   nutritionRepId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
+  parent?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
+  children?: Prisma.OrganizationUnitListRelationFilter
   nutritionRep?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   employees?: Prisma.UserListRelationFilter
   restaurants?: Prisma.OrganizationUnitRestaurantListRelationFilter
@@ -310,6 +328,8 @@ export type OrganizationUnitWhereInput = {
 export type OrganizationUnitOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -323,6 +343,8 @@ export type OrganizationUnitOrderByWithRelationInput = {
   nutritionRepId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  parent?: Prisma.OrganizationUnitOrderByWithRelationInput
+  children?: Prisma.OrganizationUnitOrderByRelationAggregateInput
   nutritionRep?: Prisma.UserOrderByWithRelationInput
   employees?: Prisma.UserOrderByRelationAggregateInput
   restaurants?: Prisma.OrganizationUnitRestaurantOrderByRelationAggregateInput
@@ -336,6 +358,8 @@ export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.OrganizationUnitWhereInput[]
   NOT?: Prisma.OrganizationUnitWhereInput | Prisma.OrganizationUnitWhereInput[]
   name?: Prisma.StringFilter<"OrganizationUnit"> | string
+  kind?: Prisma.EnumOrganizationUnitKindFilter<"OrganizationUnit"> | $Enums.OrganizationUnitKind
+  parentId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   phone?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   address?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   latitude?: Prisma.DecimalNullableFilter<"OrganizationUnit"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -349,6 +373,8 @@ export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
   nutritionRepId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
+  parent?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
+  children?: Prisma.OrganizationUnitListRelationFilter
   nutritionRep?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   employees?: Prisma.UserListRelationFilter
   restaurants?: Prisma.OrganizationUnitRestaurantListRelationFilter
@@ -359,6 +385,8 @@ export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
 export type OrganizationUnitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -385,6 +413,8 @@ export type OrganizationUnitScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OrganizationUnitScalarWhereWithAggregatesInput | Prisma.OrganizationUnitScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"OrganizationUnit"> | string
   name?: Prisma.StringWithAggregatesFilter<"OrganizationUnit"> | string
+  kind?: Prisma.EnumOrganizationUnitKindWithAggregatesFilter<"OrganizationUnit"> | $Enums.OrganizationUnitKind
+  parentId?: Prisma.StringNullableWithAggregatesFilter<"OrganizationUnit"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"OrganizationUnit"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"OrganizationUnit"> | string | null
   latitude?: Prisma.DecimalNullableWithAggregatesFilter<"OrganizationUnit"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -403,6 +433,7 @@ export type OrganizationUnitScalarWhereWithAggregatesInput = {
 export type OrganizationUnitCreateInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -415,6 +446,8 @@ export type OrganizationUnitCreateInput = {
   whatsapp?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
   nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
@@ -425,6 +458,8 @@ export type OrganizationUnitCreateInput = {
 export type OrganizationUnitUncheckedCreateInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -438,6 +473,7 @@ export type OrganizationUnitUncheckedCreateInput = {
   nutritionRepId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -447,6 +483,7 @@ export type OrganizationUnitUncheckedCreateInput = {
 export type OrganizationUnitUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -459,6 +496,8 @@ export type OrganizationUnitUpdateInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
   nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
@@ -469,6 +508,8 @@ export type OrganizationUnitUpdateInput = {
 export type OrganizationUnitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -482,6 +523,7 @@ export type OrganizationUnitUncheckedUpdateInput = {
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -491,6 +533,8 @@ export type OrganizationUnitUncheckedUpdateInput = {
 export type OrganizationUnitCreateManyInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -509,6 +553,7 @@ export type OrganizationUnitCreateManyInput = {
 export type OrganizationUnitUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -526,6 +571,8 @@ export type OrganizationUnitUpdateManyMutationInput = {
 export type OrganizationUnitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -559,6 +606,8 @@ export type OrganizationUnitOrderByRelationAggregateInput = {
 export type OrganizationUnitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
@@ -582,6 +631,8 @@ export type OrganizationUnitAvgOrderByAggregateInput = {
 export type OrganizationUnitMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
@@ -600,6 +651,8 @@ export type OrganizationUnitMaxOrderByAggregateInput = {
 export type OrganizationUnitMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   address?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
@@ -683,6 +736,68 @@ export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput = 
   deleteMany?: Prisma.OrganizationUnitScalarWhereInput | Prisma.OrganizationUnitScalarWhereInput[]
 }
 
+export type OrganizationUnitCreateNestedOneWithoutChildrenInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutChildrenInput, Prisma.OrganizationUnitUncheckedCreateWithoutChildrenInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutChildrenInput
+  connect?: Prisma.OrganizationUnitWhereUniqueInput
+}
+
+export type OrganizationUnitCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutParentInput, Prisma.OrganizationUnitUncheckedCreateWithoutParentInput> | Prisma.OrganizationUnitCreateWithoutParentInput[] | Prisma.OrganizationUnitUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutParentInput | Prisma.OrganizationUnitCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.OrganizationUnitCreateManyParentInputEnvelope
+  connect?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+}
+
+export type OrganizationUnitUncheckedCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutParentInput, Prisma.OrganizationUnitUncheckedCreateWithoutParentInput> | Prisma.OrganizationUnitCreateWithoutParentInput[] | Prisma.OrganizationUnitUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutParentInput | Prisma.OrganizationUnitCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.OrganizationUnitCreateManyParentInputEnvelope
+  connect?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+}
+
+export type EnumOrganizationUnitKindFieldUpdateOperationsInput = {
+  set?: $Enums.OrganizationUnitKind
+}
+
+export type OrganizationUnitUpdateOneWithoutChildrenNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutChildrenInput, Prisma.OrganizationUnitUncheckedCreateWithoutChildrenInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutChildrenInput
+  upsert?: Prisma.OrganizationUnitUpsertWithoutChildrenInput
+  disconnect?: Prisma.OrganizationUnitWhereInput | boolean
+  delete?: Prisma.OrganizationUnitWhereInput | boolean
+  connect?: Prisma.OrganizationUnitWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutChildrenInput, Prisma.OrganizationUnitUpdateWithoutChildrenInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutChildrenInput>
+}
+
+export type OrganizationUnitUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutParentInput, Prisma.OrganizationUnitUncheckedCreateWithoutParentInput> | Prisma.OrganizationUnitCreateWithoutParentInput[] | Prisma.OrganizationUnitUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutParentInput | Prisma.OrganizationUnitCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.OrganizationUnitUpsertWithWhereUniqueWithoutParentInput | Prisma.OrganizationUnitUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.OrganizationUnitCreateManyParentInputEnvelope
+  set?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+  disconnect?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+  delete?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+  connect?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+  update?: Prisma.OrganizationUnitUpdateWithWhereUniqueWithoutParentInput | Prisma.OrganizationUnitUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.OrganizationUnitUpdateManyWithWhereWithoutParentInput | Prisma.OrganizationUnitUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.OrganizationUnitScalarWhereInput | Prisma.OrganizationUnitScalarWhereInput[]
+}
+
+export type OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutParentInput, Prisma.OrganizationUnitUncheckedCreateWithoutParentInput> | Prisma.OrganizationUnitCreateWithoutParentInput[] | Prisma.OrganizationUnitUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutParentInput | Prisma.OrganizationUnitCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.OrganizationUnitUpsertWithWhereUniqueWithoutParentInput | Prisma.OrganizationUnitUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.OrganizationUnitCreateManyParentInputEnvelope
+  set?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+  disconnect?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+  delete?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+  connect?: Prisma.OrganizationUnitWhereUniqueInput | Prisma.OrganizationUnitWhereUniqueInput[]
+  update?: Prisma.OrganizationUnitUpdateWithWhereUniqueWithoutParentInput | Prisma.OrganizationUnitUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.OrganizationUnitUpdateManyWithWhereWithoutParentInput | Prisma.OrganizationUnitUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.OrganizationUnitScalarWhereInput | Prisma.OrganizationUnitScalarWhereInput[]
+}
+
 export type OrganizationUnitCreateNestedOneWithoutRestaurantsInput = {
   create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutRestaurantsInput, Prisma.OrganizationUnitUncheckedCreateWithoutRestaurantsInput>
   connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutRestaurantsInput
@@ -730,6 +845,7 @@ export type OrganizationUnitUpdateOneWithoutVehicleAssignmentsNestedInput = {
 export type OrganizationUnitCreateWithoutEmployeesInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -742,6 +858,8 @@ export type OrganizationUnitCreateWithoutEmployeesInput = {
   whatsapp?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
   nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
@@ -751,6 +869,8 @@ export type OrganizationUnitCreateWithoutEmployeesInput = {
 export type OrganizationUnitUncheckedCreateWithoutEmployeesInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -764,6 +884,7 @@ export type OrganizationUnitUncheckedCreateWithoutEmployeesInput = {
   nutritionRepId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
@@ -777,6 +898,7 @@ export type OrganizationUnitCreateOrConnectWithoutEmployeesInput = {
 export type OrganizationUnitCreateWithoutNutritionRepInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -789,6 +911,8 @@ export type OrganizationUnitCreateWithoutNutritionRepInput = {
   whatsapp?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
@@ -798,6 +922,8 @@ export type OrganizationUnitCreateWithoutNutritionRepInput = {
 export type OrganizationUnitUncheckedCreateWithoutNutritionRepInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -810,6 +936,7 @@ export type OrganizationUnitUncheckedCreateWithoutNutritionRepInput = {
   whatsapp?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -840,6 +967,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutEmployeesInput = {
 export type OrganizationUnitUpdateWithoutEmployeesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -852,6 +980,8 @@ export type OrganizationUnitUpdateWithoutEmployeesInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
   nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
@@ -861,6 +991,8 @@ export type OrganizationUnitUpdateWithoutEmployeesInput = {
 export type OrganizationUnitUncheckedUpdateWithoutEmployeesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -874,6 +1006,7 @@ export type OrganizationUnitUncheckedUpdateWithoutEmployeesInput = {
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
@@ -901,6 +1034,8 @@ export type OrganizationUnitScalarWhereInput = {
   NOT?: Prisma.OrganizationUnitScalarWhereInput | Prisma.OrganizationUnitScalarWhereInput[]
   id?: Prisma.StringFilter<"OrganizationUnit"> | string
   name?: Prisma.StringFilter<"OrganizationUnit"> | string
+  kind?: Prisma.EnumOrganizationUnitKindFilter<"OrganizationUnit"> | $Enums.OrganizationUnitKind
+  parentId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   phone?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   address?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   latitude?: Prisma.DecimalNullableFilter<"OrganizationUnit"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -916,9 +1051,10 @@ export type OrganizationUnitScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
 }
 
-export type OrganizationUnitCreateWithoutRestaurantsInput = {
+export type OrganizationUnitCreateWithoutChildrenInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -931,15 +1067,19 @@ export type OrganizationUnitCreateWithoutRestaurantsInput = {
   whatsapp?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
   nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
 }
 
-export type OrganizationUnitUncheckedCreateWithoutRestaurantsInput = {
+export type OrganizationUnitUncheckedCreateWithoutChildrenInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -953,6 +1093,193 @@ export type OrganizationUnitUncheckedCreateWithoutRestaurantsInput = {
   nutritionRepId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
+}
+
+export type OrganizationUnitCreateOrConnectWithoutChildrenInput = {
+  where: Prisma.OrganizationUnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutChildrenInput, Prisma.OrganizationUnitUncheckedCreateWithoutChildrenInput>
+}
+
+export type OrganizationUnitCreateWithoutParentInput = {
+  id?: string
+  name: string
+  kind?: $Enums.OrganizationUnitKind
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
+  nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
+  employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
+}
+
+export type OrganizationUnitUncheckedCreateWithoutParentInput = {
+  id?: string
+  name: string
+  kind?: $Enums.OrganizationUnitKind
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  nutritionRepId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
+  employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
+}
+
+export type OrganizationUnitCreateOrConnectWithoutParentInput = {
+  where: Prisma.OrganizationUnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutParentInput, Prisma.OrganizationUnitUncheckedCreateWithoutParentInput>
+}
+
+export type OrganizationUnitCreateManyParentInputEnvelope = {
+  data: Prisma.OrganizationUnitCreateManyParentInput | Prisma.OrganizationUnitCreateManyParentInput[]
+  skipDuplicates?: boolean
+}
+
+export type OrganizationUnitUpsertWithoutChildrenInput = {
+  update: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutChildrenInput, Prisma.OrganizationUnitUncheckedUpdateWithoutChildrenInput>
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutChildrenInput, Prisma.OrganizationUnitUncheckedCreateWithoutChildrenInput>
+  where?: Prisma.OrganizationUnitWhereInput
+}
+
+export type OrganizationUnitUpdateToOneWithWhereWithoutChildrenInput = {
+  where?: Prisma.OrganizationUnitWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutChildrenInput, Prisma.OrganizationUnitUncheckedUpdateWithoutChildrenInput>
+}
+
+export type OrganizationUnitUpdateWithoutChildrenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
+  employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
+}
+
+export type OrganizationUnitUncheckedUpdateWithoutChildrenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+}
+
+export type OrganizationUnitUpsertWithWhereUniqueWithoutParentInput = {
+  where: Prisma.OrganizationUnitWhereUniqueInput
+  update: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutParentInput, Prisma.OrganizationUnitUncheckedUpdateWithoutParentInput>
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutParentInput, Prisma.OrganizationUnitUncheckedCreateWithoutParentInput>
+}
+
+export type OrganizationUnitUpdateWithWhereUniqueWithoutParentInput = {
+  where: Prisma.OrganizationUnitWhereUniqueInput
+  data: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutParentInput, Prisma.OrganizationUnitUncheckedUpdateWithoutParentInput>
+}
+
+export type OrganizationUnitUpdateManyWithWhereWithoutParentInput = {
+  where: Prisma.OrganizationUnitScalarWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUnitUpdateManyMutationInput, Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentInput>
+}
+
+export type OrganizationUnitCreateWithoutRestaurantsInput = {
+  id?: string
+  name: string
+  kind?: $Enums.OrganizationUnitKind
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
+  nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
+  employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
+  reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
+}
+
+export type OrganizationUnitUncheckedCreateWithoutRestaurantsInput = {
+  id?: string
+  name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  nutritionRepId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
@@ -977,6 +1304,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutRestaurantsInput = {
 export type OrganizationUnitUpdateWithoutRestaurantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -989,6 +1317,8 @@ export type OrganizationUnitUpdateWithoutRestaurantsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
   nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
@@ -998,6 +1328,8 @@ export type OrganizationUnitUpdateWithoutRestaurantsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1011,6 +1343,7 @@ export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
@@ -1019,6 +1352,7 @@ export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
 export type OrganizationUnitCreateWithoutReservationsInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1031,6 +1365,8 @@ export type OrganizationUnitCreateWithoutReservationsInput = {
   whatsapp?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
   nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
@@ -1040,6 +1376,8 @@ export type OrganizationUnitCreateWithoutReservationsInput = {
 export type OrganizationUnitUncheckedCreateWithoutReservationsInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1053,6 +1391,7 @@ export type OrganizationUnitUncheckedCreateWithoutReservationsInput = {
   nutritionRepId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
@@ -1077,6 +1416,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutReservationsInput = {
 export type OrganizationUnitUpdateWithoutReservationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1089,6 +1429,8 @@ export type OrganizationUnitUpdateWithoutReservationsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
   nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
@@ -1098,6 +1440,8 @@ export type OrganizationUnitUpdateWithoutReservationsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1111,6 +1455,7 @@ export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
@@ -1119,6 +1464,7 @@ export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
 export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1131,6 +1477,8 @@ export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
   whatsapp?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
   nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
@@ -1140,6 +1488,8 @@ export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
 export type OrganizationUnitUncheckedCreateWithoutVehicleAssignmentsInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1153,6 +1503,7 @@ export type OrganizationUnitUncheckedCreateWithoutVehicleAssignmentsInput = {
   nutritionRepId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -1177,6 +1528,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutVehicleAssignmentsInput =
 export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1189,6 +1541,8 @@ export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
   nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
@@ -1198,6 +1552,8 @@ export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1211,6 +1567,7 @@ export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -1219,6 +1576,8 @@ export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
 export type OrganizationUnitCreateManyNutritionRepInput = {
   id?: string
   name: string
+  kind?: $Enums.OrganizationUnitKind
+  parentId?: string | null
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1236,6 +1595,7 @@ export type OrganizationUnitCreateManyNutritionRepInput = {
 export type OrganizationUnitUpdateWithoutNutritionRepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1248,6 +1608,8 @@ export type OrganizationUnitUpdateWithoutNutritionRepInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
@@ -1257,6 +1619,8 @@ export type OrganizationUnitUpdateWithoutNutritionRepInput = {
 export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1269,6 +1633,7 @@ export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -1278,6 +1643,8 @@ export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
 export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1288,6 +1655,92 @@ export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepInput = {
   instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OrganizationUnitCreateManyParentInput = {
+  id?: string
+  name: string
+  kind?: $Enums.OrganizationUnitKind
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  nutritionRepId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OrganizationUnitUpdateWithoutParentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
+  nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
+  employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
+}
+
+export type OrganizationUnitUncheckedUpdateWithoutParentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
+  employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+}
+
+export type OrganizationUnitUncheckedUpdateManyWithoutParentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumOrganizationUnitKindFieldUpdateOperationsInput | $Enums.OrganizationUnitKind
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1298,6 +1751,7 @@ export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepInput = {
  */
 
 export type OrganizationUnitCountOutputType = {
+  children: number
   employees: number
   restaurants: number
   reservations: number
@@ -1305,6 +1759,7 @@ export type OrganizationUnitCountOutputType = {
 }
 
 export type OrganizationUnitCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  children?: boolean | OrganizationUnitCountOutputTypeCountChildrenArgs
   employees?: boolean | OrganizationUnitCountOutputTypeCountEmployeesArgs
   restaurants?: boolean | OrganizationUnitCountOutputTypeCountRestaurantsArgs
   reservations?: boolean | OrganizationUnitCountOutputTypeCountReservationsArgs
@@ -1319,6 +1774,13 @@ export type OrganizationUnitCountOutputTypeDefaultArgs<ExtArgs extends runtime.T
    * Select specific fields to fetch from the OrganizationUnitCountOutputType
    */
   select?: Prisma.OrganizationUnitCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * OrganizationUnitCountOutputType without action
+ */
+export type OrganizationUnitCountOutputTypeCountChildrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrganizationUnitWhereInput
 }
 
 /**
@@ -1353,6 +1815,8 @@ export type OrganizationUnitCountOutputTypeCountVehicleAssignmentsArgs<ExtArgs e
 export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  kind?: boolean
+  parentId?: boolean
   phone?: boolean
   address?: boolean
   latitude?: boolean
@@ -1366,6 +1830,8 @@ export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.Inte
   nutritionRepId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  parent?: boolean | Prisma.OrganizationUnit$parentArgs<ExtArgs>
+  children?: boolean | Prisma.OrganizationUnit$childrenArgs<ExtArgs>
   nutritionRep?: boolean | Prisma.OrganizationUnit$nutritionRepArgs<ExtArgs>
   employees?: boolean | Prisma.OrganizationUnit$employeesArgs<ExtArgs>
   restaurants?: boolean | Prisma.OrganizationUnit$restaurantsArgs<ExtArgs>
@@ -1377,6 +1843,8 @@ export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.Inte
 export type OrganizationUnitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  kind?: boolean
+  parentId?: boolean
   phone?: boolean
   address?: boolean
   latitude?: boolean
@@ -1390,12 +1858,15 @@ export type OrganizationUnitSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   nutritionRepId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  parent?: boolean | Prisma.OrganizationUnit$parentArgs<ExtArgs>
   nutritionRep?: boolean | Prisma.OrganizationUnit$nutritionRepArgs<ExtArgs>
 }, ExtArgs["result"]["organizationUnit"]>
 
 export type OrganizationUnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  kind?: boolean
+  parentId?: boolean
   phone?: boolean
   address?: boolean
   latitude?: boolean
@@ -1409,12 +1880,15 @@ export type OrganizationUnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   nutritionRepId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  parent?: boolean | Prisma.OrganizationUnit$parentArgs<ExtArgs>
   nutritionRep?: boolean | Prisma.OrganizationUnit$nutritionRepArgs<ExtArgs>
 }, ExtArgs["result"]["organizationUnit"]>
 
 export type OrganizationUnitSelectScalar = {
   id?: boolean
   name?: boolean
+  kind?: boolean
+  parentId?: boolean
   phone?: boolean
   address?: boolean
   latitude?: boolean
@@ -1430,8 +1904,10 @@ export type OrganizationUnitSelectScalar = {
   updatedAt?: boolean
 }
 
-export type OrganizationUnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "phone" | "address" | "latitude" | "longitude" | "eitaa" | "bale" | "rubika" | "instagram" | "telegram" | "whatsapp" | "nutritionRepId" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationUnit"]>
+export type OrganizationUnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "kind" | "parentId" | "phone" | "address" | "latitude" | "longitude" | "eitaa" | "bale" | "rubika" | "instagram" | "telegram" | "whatsapp" | "nutritionRepId" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationUnit"]>
 export type OrganizationUnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  parent?: boolean | Prisma.OrganizationUnit$parentArgs<ExtArgs>
+  children?: boolean | Prisma.OrganizationUnit$childrenArgs<ExtArgs>
   nutritionRep?: boolean | Prisma.OrganizationUnit$nutritionRepArgs<ExtArgs>
   employees?: boolean | Prisma.OrganizationUnit$employeesArgs<ExtArgs>
   restaurants?: boolean | Prisma.OrganizationUnit$restaurantsArgs<ExtArgs>
@@ -1440,15 +1916,19 @@ export type OrganizationUnitInclude<ExtArgs extends runtime.Types.Extensions.Int
   _count?: boolean | Prisma.OrganizationUnitCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationUnitIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  parent?: boolean | Prisma.OrganizationUnit$parentArgs<ExtArgs>
   nutritionRep?: boolean | Prisma.OrganizationUnit$nutritionRepArgs<ExtArgs>
 }
 export type OrganizationUnitIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  parent?: boolean | Prisma.OrganizationUnit$parentArgs<ExtArgs>
   nutritionRep?: boolean | Prisma.OrganizationUnit$nutritionRepArgs<ExtArgs>
 }
 
 export type $OrganizationUnitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OrganizationUnit"
   objects: {
+    parent: Prisma.$OrganizationUnitPayload<ExtArgs> | null
+    children: Prisma.$OrganizationUnitPayload<ExtArgs>[]
     nutritionRep: Prisma.$UserPayload<ExtArgs> | null
     employees: Prisma.$UserPayload<ExtArgs>[]
     restaurants: Prisma.$OrganizationUnitRestaurantPayload<ExtArgs>[]
@@ -1458,6 +1938,8 @@ export type $OrganizationUnitPayload<ExtArgs extends runtime.Types.Extensions.In
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    kind: $Enums.OrganizationUnitKind
+    parentId: string | null
     phone: string | null
     address: string | null
     latitude: runtime.Decimal | null
@@ -1865,6 +2347,8 @@ readonly fields: OrganizationUnitFieldRefs;
  */
 export interface Prisma__OrganizationUnitClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  parent<T extends Prisma.OrganizationUnit$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$parentArgs<ExtArgs>>): Prisma.Prisma__OrganizationUnitClient<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  children<T extends Prisma.OrganizationUnit$childrenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   nutritionRep<T extends Prisma.OrganizationUnit$nutritionRepArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$nutritionRepArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   employees<T extends Prisma.OrganizationUnit$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restaurants<T extends Prisma.OrganizationUnit$restaurantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$restaurantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitRestaurantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1901,6 +2385,8 @@ export interface Prisma__OrganizationUnitClient<T, Null = never, ExtArgs extends
 export interface OrganizationUnitFieldRefs {
   readonly id: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly name: Prisma.FieldRef<"OrganizationUnit", 'String'>
+  readonly kind: Prisma.FieldRef<"OrganizationUnit", 'OrganizationUnitKind'>
+  readonly parentId: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly phone: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly address: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly latitude: Prisma.FieldRef<"OrganizationUnit", 'Decimal'>
@@ -2312,6 +2798,49 @@ export type OrganizationUnitDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many OrganizationUnits to delete.
    */
   limit?: number
+}
+
+/**
+ * OrganizationUnit.parent
+ */
+export type OrganizationUnit$parentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationUnit
+   */
+  select?: Prisma.OrganizationUnitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationUnit
+   */
+  omit?: Prisma.OrganizationUnitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationUnitInclude<ExtArgs> | null
+  where?: Prisma.OrganizationUnitWhereInput
+}
+
+/**
+ * OrganizationUnit.children
+ */
+export type OrganizationUnit$childrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationUnit
+   */
+  select?: Prisma.OrganizationUnitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationUnit
+   */
+  omit?: Prisma.OrganizationUnitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationUnitInclude<ExtArgs> | null
+  where?: Prisma.OrganizationUnitWhereInput
+  orderBy?: Prisma.OrganizationUnitOrderByWithRelationInput | Prisma.OrganizationUnitOrderByWithRelationInput[]
+  cursor?: Prisma.OrganizationUnitWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrganizationUnitScalarFieldEnum | Prisma.OrganizationUnitScalarFieldEnum[]
 }
 
 /**

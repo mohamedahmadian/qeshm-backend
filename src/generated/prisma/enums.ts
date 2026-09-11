@@ -112,6 +112,18 @@ export const VehicleAssignmentStatus = {
 export type VehicleAssignmentStatus = (typeof VehicleAssignmentStatus)[keyof typeof VehicleAssignmentStatus]
 
 
+export const OrganizationUnitKind = {
+  BOARD: 'BOARD',
+  ADVISORS: 'ADVISORS',
+  OFFICE: 'OFFICE',
+  VICE: 'VICE',
+  MANAGEMENT: 'MANAGEMENT',
+  DEPARTMENT: 'DEPARTMENT'
+} as const
+
+export type OrganizationUnitKind = (typeof OrganizationUnitKind)[keyof typeof OrganizationUnitKind]
+
+
 export const ProjectProgressProcessingMode = {
   IMMEDIATE: 'IMMEDIATE',
   DEFERRED: 'DEFERRED'

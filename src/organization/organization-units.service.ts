@@ -11,15 +11,18 @@ import {
   wantsPagination,
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
-import { Prisma } from '../generated/prisma/client';
+import { OrganizationUnitKind, Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateOrganizationUnitDto } from './dto/create-organization-unit.dto';
 import { FindOrganizationUnitsQueryDto } from './dto/find-organization-units-query.dto';
 import { UpdateOrganizationUnitDto } from './dto/update-organization-unit.dto';
+import { buildOrganizationUnitPaths } from './organization-unit-tree';
 
 const unitSelect = {
   id: true,
   name: true,
+  kind: true,
+  parentId: true,
   phone: true,
   address: true,
   latitude: true,
@@ -33,10 +36,11 @@ const unitSelect = {
   nutritionRepId: true,
   createdAt: true,
   updatedAt: true,
+  parent: { select: { id: true, name: true, kind: true } },
   nutritionRep: {
     select: { id: true, firstName: true, lastName: true, fullName: true },
   },
-  _count: { select: { employees: true, restaurants: true } },
+  _count: { select: { employees: true, restaurants: true, children: true } },
 } satisfies Prisma.OrganizationUnitSelect;
 
 function toCoord(value: Prisma.Decimal | null) {
@@ -66,12 +70,15 @@ export class OrganizationUnitsService {
 
   async findAll(query: FindOrganizationUnitsQueryDto) {
     const where: Prisma.OrganizationUnitWhereInput = {
+      kind: query.kind,
+      parentId: query.parentId,
       OR: query.q
         ? [
             { name: containsInsensitive(query.q) },
             { phone: containsInsensitive(query.q) },
             { address: containsInsensitive(query.q) },
             { nutritionRep: { fullName: containsInsensitive(query.q) } },
+            { parent: { name: containsInsensitive(query.q) } },
           ]
         : undefined,
     };
@@ -80,6 +87,8 @@ export class OrganizationUnitsService {
       query.sortDir,
       {
         name: (dir) => ({ name: dir }),
+        kind: (dir) => ({ kind: dir }),
+        parent: (dir) => ({ parent: { name: dir } }),
         phone: (dir) => ({ phone: dir }),
         nutritionRep: (dir) => ({ nutritionRep: { fullName: dir } }),
         employeeCount: (dir) => ({ employees: { _count: dir } }),
@@ -87,13 +96,14 @@ export class OrganizationUnitsService {
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
+    const paths = await this.unitPaths();
     if (!wantsPagination(query)) {
       const items = await this.prisma.organizationUnit.findMany({
         where,
         orderBy,
         select: unitSelect,
       });
-      return items.map(withCoords);
+      return items.map((item) => this.withMeta(item, paths));
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
@@ -106,7 +116,12 @@ export class OrganizationUnitsService {
       }),
       this.prisma.organizationUnit.count({ where }),
     ]);
-    return paginatedResult(items.map(withCoords), total, page, pageSize);
+    return paginatedResult(
+      items.map((item) => this.withMeta(item, paths)),
+      total,
+      page,
+      pageSize,
+    );
   }
 
   async findOne(id: string) {
@@ -117,13 +132,17 @@ export class OrganizationUnitsService {
     if (!unit) {
       throw new NotFoundException('واحد سازمانی یافت نشد');
     }
-    return withCoords(unit);
+    const paths = await this.unitPaths();
+    return this.withMeta(unit, paths);
   }
 
   async create(dto: CreateOrganizationUnitDto) {
+    await this.assertValidParent(null, dto.parentId);
     const unit = await this.prisma.organizationUnit.create({
       data: {
         name: dto.name,
+        kind: dto.kind ?? OrganizationUnitKind.DEPARTMENT,
+        parent: dto.parentId ? { connect: { id: dto.parentId } } : undefined,
         phone: dto.phone,
         address: dto.address,
         latitude: toDecimal(dto.latitude),
@@ -137,11 +156,15 @@ export class OrganizationUnitsService {
       },
       select: unitSelect,
     });
-    return withCoords(unit);
+    const paths = await this.unitPaths();
+    return this.withMeta(unit, paths);
   }
 
   async update(id: string, dto: UpdateOrganizationUnitDto) {
     await this.findOne(id);
+    if (dto.parentId !== undefined) {
+      await this.assertValidParent(id, dto.parentId);
+    }
     if (dto.nutritionRepId !== undefined) {
       await this.assertNutritionRep(id, dto.nutritionRepId);
     }
@@ -149,6 +172,13 @@ export class OrganizationUnitsService {
       where: { id },
       data: {
         name: dto.name,
+        kind: dto.kind,
+        parent:
+          dto.parentId === undefined
+            ? undefined
+            : dto.parentId
+              ? { connect: { id: dto.parentId } }
+              : { disconnect: true },
         phone: dto.phone,
         address: dto.address,
         latitude: toDecimal(dto.latitude),
@@ -168,11 +198,18 @@ export class OrganizationUnitsService {
       },
       select: unitSelect,
     });
-    return withCoords(unit);
+    const paths = await this.unitPaths();
+    return this.withMeta(unit, paths);
   }
 
   async remove(id: string) {
     await this.findOne(id);
+    const childCount = await this.prisma.organizationUnit.count({
+      where: { parentId: id },
+    });
+    if (childCount > 0) {
+      throw new ConflictException('ابتدا واحدهای زیرمجموعه را منتقل یا حذف کنید');
+    }
     const used = await this.prisma.user.count({ where: { orgUnitId: id } });
     if (used > 0) {
       throw new ConflictException('ابتدا کارمندان این واحد را منتقل یا حذف کنید');
@@ -187,6 +224,61 @@ export class OrganizationUnitsService {
     }
     await this.prisma.organizationUnit.delete({ where: { id } });
     return { ok: true };
+  }
+
+  private async unitPaths() {
+    const catalog = await this.prisma.organizationUnit.findMany({
+      select: { id: true, name: true, parentId: true },
+    });
+    return buildOrganizationUnitPaths(catalog);
+  }
+
+  private withMeta<
+    T extends {
+      id: string;
+      name: string;
+      latitude: Prisma.Decimal | null;
+      longitude: Prisma.Decimal | null;
+    },
+  >(item: T, paths: Map<string, string>) {
+    return {
+      ...withCoords(item),
+      pathLabel: paths.get(item.id) ?? item.name,
+    };
+  }
+
+  private async assertValidParent(
+    unitId: string | null,
+    parentId: string | null | undefined,
+  ) {
+    if (!parentId) return;
+    if (unitId && parentId === unitId) {
+      throw new BadRequestException('واحد نمی‌تواند زیرمجموعهٔ خودش باشد');
+    }
+    const parent = await this.prisma.organizationUnit.findUnique({
+      where: { id: parentId },
+      select: { id: true, parentId: true },
+    });
+    if (!parent) {
+      throw new BadRequestException('واحد بالادست یافت نشد');
+    }
+    if (!unitId) return;
+    let current = parent.parentId;
+    const seen = new Set<string>([parent.id]);
+    while (current) {
+      if (current === unitId) {
+        throw new BadRequestException(
+          'واحد بالادست نمی‌تواند از زیرمجموعه‌های همین واحد باشد',
+        );
+      }
+      if (seen.has(current)) break;
+      seen.add(current);
+      const node = await this.prisma.organizationUnit.findUnique({
+        where: { id: current },
+        select: { parentId: true },
+      });
+      current = node?.parentId ?? null;
+    }
   }
 
   private async assertNutritionRep(unitId: string, userId: string | null) {

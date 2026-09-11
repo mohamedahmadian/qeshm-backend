@@ -459,6 +459,8 @@ export type OrganizationPositionScalarFieldEnum = (typeof OrganizationPositionSc
 export const OrganizationUnitScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  kind: 'kind',
+  parentId: 'parentId',
   phone: 'phone',
   address: 'address',
   latitude: 'latitude',

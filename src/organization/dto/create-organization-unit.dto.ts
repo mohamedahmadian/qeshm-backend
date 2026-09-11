@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
 import {
+  IsEnum,
   IsLatitude,
   IsLongitude,
   IsOptional,
@@ -11,6 +12,7 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { emptyToNull, toOptionalNumber } from '../../common/dto-transform';
+import { OrganizationUnitKind } from '../../generated/prisma/client';
 import { normalizePhone } from '../../common/phone';
 
 function trimString(value: unknown) {
@@ -31,6 +33,16 @@ export class CreateOrganizationUnitDto {
   @MinLength(2)
   @MaxLength(200)
   name: string;
+
+  @IsOptional()
+  @IsEnum(OrganizationUnitKind)
+  kind?: OrganizationUnitKind;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  parentId?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => normalizeOrgPhone(value))

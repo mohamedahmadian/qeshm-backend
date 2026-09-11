@@ -78,6 +78,15 @@ enum VehicleAssignmentStatus {
   RETURNED
 }
 
+enum OrganizationUnitKind {
+  BOARD
+  ADVISORS
+  OFFICE
+  VICE
+  MANAGEMENT
+  DEPARTMENT
+}
+
 enum ProjectProgressProcessingMode {
   IMMEDIATE
   DEFERRED
@@ -560,12 +569,16 @@ model OrganizationPosition {
 }
 
 model OrganizationUnit {
-  id             String   @id @default(uuid())
+  id             String               @id @default(uuid())
   name           String
+  kind           OrganizationUnitKind @default(DEPARTMENT)
+  parentId       String?
+  parent         OrganizationUnit?    @relation("UnitTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children       OrganizationUnit[]   @relation("UnitTree")
   phone          String?
   address        String?
-  latitude       Decimal? @db.Decimal(10, 7)
-  longitude      Decimal? @db.Decimal(10, 7)
+  latitude       Decimal?             @db.Decimal(10, 7)
+  longitude      Decimal?             @db.Decimal(10, 7)
   eitaa          String?
   bale           String?
   rubika         String?
@@ -573,15 +586,17 @@ model OrganizationUnit {
   telegram       String?
   whatsapp       String?
   nutritionRepId String?
-  nutritionRep   User?    @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
-  employees      User[]   @relation("UnitEmployees")
+  nutritionRep   User?                @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
+  employees      User[]               @relation("UnitEmployees")
   restaurants    OrganizationUnitRestaurant[]
   reservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[]
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
 
   @@index([name])
+  @@index([kind])
+  @@index([parentId])
   @@index([phone])
   @@index([nutritionRepId])
   @@index([createdAt])
