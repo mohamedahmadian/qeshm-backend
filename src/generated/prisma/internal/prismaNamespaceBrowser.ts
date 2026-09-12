@@ -251,6 +251,8 @@ export const ProjectScalarFieldEnum = {
   isSupportActive: 'isSupportActive',
   replacementProjectId: 'replacementProjectId',
   description: 'description',
+  color: 'color',
+  showOnLiveBoard: 'showOnLiveBoard',
   importance: 'importance',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

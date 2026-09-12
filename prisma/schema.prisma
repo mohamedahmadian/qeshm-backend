@@ -291,6 +291,8 @@ model Project {
   replacementProject   Project?           @relation("ProjectReplacement", fields: [replacementProjectId], references: [id], onDelete: SetNull)
   replacedBy           Project[]          @relation("ProjectReplacement")
   description          String?
+  color                String?
+  showOnLiveBoard      Boolean            @default(true)
   importance           ProjectImportance  @default(HIGH)
   operators            ProjectOperator[]
   contractors          ProjectContractor[]
@@ -307,6 +309,7 @@ model Project {
   @@index([startDate])
   @@index([endDate])
   @@index([isSupportActive])
+  @@index([showOnLiveBoard])
   @@index([importance])
   @@index([createdAt])
   @@map("projects")

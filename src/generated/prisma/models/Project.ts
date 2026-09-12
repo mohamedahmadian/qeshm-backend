@@ -58,6 +58,8 @@ export type ProjectMinAggregateOutputType = {
   isSupportActive: boolean | null
   replacementProjectId: string | null
   description: string | null
+  color: string | null
+  showOnLiveBoard: boolean | null
   importance: $Enums.ProjectImportance | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -81,6 +83,8 @@ export type ProjectMaxAggregateOutputType = {
   isSupportActive: boolean | null
   replacementProjectId: string | null
   description: string | null
+  color: string | null
+  showOnLiveBoard: boolean | null
   importance: $Enums.ProjectImportance | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -104,6 +108,8 @@ export type ProjectCountAggregateOutputType = {
   isSupportActive: number
   replacementProjectId: number
   description: number
+  color: number
+  showOnLiveBoard: number
   importance: number
   createdAt: number
   updatedAt: number
@@ -143,6 +149,8 @@ export type ProjectMinAggregateInputType = {
   isSupportActive?: true
   replacementProjectId?: true
   description?: true
+  color?: true
+  showOnLiveBoard?: true
   importance?: true
   createdAt?: true
   updatedAt?: true
@@ -166,6 +174,8 @@ export type ProjectMaxAggregateInputType = {
   isSupportActive?: true
   replacementProjectId?: true
   description?: true
+  color?: true
+  showOnLiveBoard?: true
   importance?: true
   createdAt?: true
   updatedAt?: true
@@ -189,6 +199,8 @@ export type ProjectCountAggregateInputType = {
   isSupportActive?: true
   replacementProjectId?: true
   description?: true
+  color?: true
+  showOnLiveBoard?: true
   importance?: true
   createdAt?: true
   updatedAt?: true
@@ -299,6 +311,8 @@ export type ProjectGroupByOutputType = {
   isSupportActive: boolean
   replacementProjectId: string | null
   description: string | null
+  color: string | null
+  showOnLiveBoard: boolean
   importance: $Enums.ProjectImportance
   createdAt: Date
   updatedAt: Date
@@ -345,6 +359,8 @@ export type ProjectWhereInput = {
   isSupportActive?: Prisma.BoolFilter<"Project"> | boolean
   replacementProjectId?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
+  color?: Prisma.StringNullableFilter<"Project"> | string | null
+  showOnLiveBoard?: Prisma.BoolFilter<"Project"> | boolean
   importance?: Prisma.EnumProjectImportanceFilter<"Project"> | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
@@ -375,6 +391,8 @@ export type ProjectOrderByWithRelationInput = {
   isSupportActive?: Prisma.SortOrder
   replacementProjectId?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  color?: Prisma.SortOrderInput | Prisma.SortOrder
+  showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -408,6 +426,8 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   isSupportActive?: Prisma.BoolFilter<"Project"> | boolean
   replacementProjectId?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
+  color?: Prisma.StringNullableFilter<"Project"> | string | null
+  showOnLiveBoard?: Prisma.BoolFilter<"Project"> | boolean
   importance?: Prisma.EnumProjectImportanceFilter<"Project"> | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
@@ -438,6 +458,8 @@ export type ProjectOrderByWithAggregationInput = {
   isSupportActive?: Prisma.SortOrder
   replacementProjectId?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  color?: Prisma.SortOrderInput | Prisma.SortOrder
+  showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -469,6 +491,8 @@ export type ProjectScalarWhereWithAggregatesInput = {
   isSupportActive?: Prisma.BoolWithAggregatesFilter<"Project"> | boolean
   replacementProjectId?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  color?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  showOnLiveBoard?: Prisma.BoolWithAggregatesFilter<"Project"> | boolean
   importance?: Prisma.EnumProjectImportanceWithAggregatesFilter<"Project"> | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
@@ -491,6 +515,8 @@ export type ProjectCreateInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -521,6 +547,8 @@ export type ProjectUncheckedCreateInput = {
   isSupportActive?: boolean
   replacementProjectId?: string | null
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -549,6 +577,8 @@ export type ProjectUpdateInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -579,6 +609,8 @@ export type ProjectUncheckedUpdateInput = {
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -608,6 +640,8 @@ export type ProjectCreateManyInput = {
   isSupportActive?: boolean
   replacementProjectId?: string | null
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -630,6 +664,8 @@ export type ProjectUpdateManyMutationInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -653,6 +689,8 @@ export type ProjectUncheckedUpdateManyInput = {
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -691,6 +729,8 @@ export type ProjectCountOrderByAggregateInput = {
   isSupportActive?: Prisma.SortOrder
   replacementProjectId?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -721,6 +761,8 @@ export type ProjectMaxOrderByAggregateInput = {
   isSupportActive?: Prisma.SortOrder
   replacementProjectId?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -744,6 +786,8 @@ export type ProjectMinOrderByAggregateInput = {
   isSupportActive?: Prisma.SortOrder
   replacementProjectId?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -914,6 +958,8 @@ export type ProjectCreateWithoutReplacedByInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -943,6 +989,8 @@ export type ProjectUncheckedCreateWithoutReplacedByInput = {
   isSupportActive?: boolean
   replacementProjectId?: string | null
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -975,6 +1023,8 @@ export type ProjectCreateWithoutReplacementProjectInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1003,6 +1053,8 @@ export type ProjectUncheckedCreateWithoutReplacementProjectInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1052,6 +1104,8 @@ export type ProjectUpdateWithoutReplacedByInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1081,6 +1135,8 @@ export type ProjectUncheckedUpdateWithoutReplacedByInput = {
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1128,6 +1184,8 @@ export type ProjectScalarWhereInput = {
   isSupportActive?: Prisma.BoolFilter<"Project"> | boolean
   replacementProjectId?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
+  color?: Prisma.StringNullableFilter<"Project"> | string | null
+  showOnLiveBoard?: Prisma.BoolFilter<"Project"> | boolean
   importance?: Prisma.EnumProjectImportanceFilter<"Project"> | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
@@ -1150,6 +1208,8 @@ export type ProjectCreateWithoutOperatorsInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1179,6 +1239,8 @@ export type ProjectUncheckedCreateWithoutOperatorsInput = {
   isSupportActive?: boolean
   replacementProjectId?: string | null
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1222,6 +1284,8 @@ export type ProjectUpdateWithoutOperatorsInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1251,6 +1315,8 @@ export type ProjectUncheckedUpdateWithoutOperatorsInput = {
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1278,6 +1344,8 @@ export type ProjectCreateWithoutPhasesInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1307,6 +1375,8 @@ export type ProjectUncheckedCreateWithoutPhasesInput = {
   isSupportActive?: boolean
   replacementProjectId?: string | null
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1350,6 +1420,8 @@ export type ProjectUpdateWithoutPhasesInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1379,6 +1451,8 @@ export type ProjectUncheckedUpdateWithoutPhasesInput = {
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1406,6 +1480,8 @@ export type ProjectCreateWithoutProgressEntriesInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1435,6 +1511,8 @@ export type ProjectUncheckedCreateWithoutProgressEntriesInput = {
   isSupportActive?: boolean
   replacementProjectId?: string | null
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1478,6 +1556,8 @@ export type ProjectUpdateWithoutProgressEntriesInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1507,6 +1587,8 @@ export type ProjectUncheckedUpdateWithoutProgressEntriesInput = {
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1534,6 +1616,8 @@ export type ProjectCreateWithoutContractorsInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1563,6 +1647,8 @@ export type ProjectUncheckedCreateWithoutContractorsInput = {
   isSupportActive?: boolean
   replacementProjectId?: string | null
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1606,6 +1692,8 @@ export type ProjectUpdateWithoutContractorsInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1635,6 +1723,8 @@ export type ProjectUncheckedUpdateWithoutContractorsInput = {
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1662,6 +1752,8 @@ export type ProjectCreateWithoutContractorLinksInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1691,6 +1783,8 @@ export type ProjectUncheckedCreateWithoutContractorLinksInput = {
   isSupportActive?: boolean
   replacementProjectId?: string | null
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1734,6 +1828,8 @@ export type ProjectUpdateWithoutContractorLinksInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1763,6 +1859,8 @@ export type ProjectUncheckedUpdateWithoutContractorLinksInput = {
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1790,6 +1888,8 @@ export type ProjectCreateManyReplacementProjectInput = {
   launchYear?: number | null
   isSupportActive?: boolean
   description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1812,6 +1912,8 @@ export type ProjectUpdateWithoutReplacementProjectInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1840,6 +1942,8 @@ export type ProjectUncheckedUpdateWithoutReplacementProjectInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1868,6 +1972,8 @@ export type ProjectUncheckedUpdateManyWithoutReplacementProjectInput = {
   launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1967,6 +2073,8 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   isSupportActive?: boolean
   replacementProjectId?: boolean
   description?: boolean
+  color?: boolean
+  showOnLiveBoard?: boolean
   importance?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1998,6 +2106,8 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   isSupportActive?: boolean
   replacementProjectId?: boolean
   description?: boolean
+  color?: boolean
+  showOnLiveBoard?: boolean
   importance?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2022,6 +2132,8 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   isSupportActive?: boolean
   replacementProjectId?: boolean
   description?: boolean
+  color?: boolean
+  showOnLiveBoard?: boolean
   importance?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2046,12 +2158,14 @@ export type ProjectSelectScalar = {
   isSupportActive?: boolean
   replacementProjectId?: boolean
   description?: boolean
+  color?: boolean
+  showOnLiveBoard?: boolean
   importance?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "systemName" | "code" | "isActive" | "status" | "progressPercent" | "startDate" | "endDate" | "latitude" | "longitude" | "address" | "companyName" | "systemUrl" | "launchYear" | "isSupportActive" | "replacementProjectId" | "description" | "importance" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "systemName" | "code" | "isActive" | "status" | "progressPercent" | "startDate" | "endDate" | "latitude" | "longitude" | "address" | "companyName" | "systemUrl" | "launchYear" | "isSupportActive" | "replacementProjectId" | "description" | "color" | "showOnLiveBoard" | "importance" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   replacementProject?: boolean | Prisma.Project$replacementProjectArgs<ExtArgs>
   replacedBy?: boolean | Prisma.Project$replacedByArgs<ExtArgs>
@@ -2098,6 +2212,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     isSupportActive: boolean
     replacementProjectId: string | null
     description: string | null
+    color: string | null
+    showOnLiveBoard: boolean
     importance: $Enums.ProjectImportance
     createdAt: Date
     updatedAt: Date
@@ -2548,6 +2664,8 @@ export interface ProjectFieldRefs {
   readonly isSupportActive: Prisma.FieldRef<"Project", 'Boolean'>
   readonly replacementProjectId: Prisma.FieldRef<"Project", 'String'>
   readonly description: Prisma.FieldRef<"Project", 'String'>
+  readonly color: Prisma.FieldRef<"Project", 'String'>
+  readonly showOnLiveBoard: Prisma.FieldRef<"Project", 'Boolean'>
   readonly importance: Prisma.FieldRef<"Project", 'ProjectImportance'>
   readonly createdAt: Prisma.FieldRef<"Project", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Project", 'DateTime'>

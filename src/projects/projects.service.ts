@@ -51,6 +51,8 @@ const projectSelect = {
   isSupportActive: true,
   replacementProjectId: true,
   description: true,
+  color: true,
+  showOnLiveBoard: true,
   importance: true,
   createdAt: true,
   updatedAt: true,
@@ -167,7 +169,7 @@ export class ProjectsService {
     const orderBy = this.orderBy(query);
     const paths = await this.unitPathMap();
     const items = await this.prisma.project.findMany({
-      where,
+      where: { AND: [where, { showOnLiveBoard: true }] },
       orderBy,
       select: {
         ...projectSelect,
@@ -415,6 +417,8 @@ export class ProjectsService {
       isSupportActive: dto.isSupportActive,
       replacementProjectId: dto.replacementProjectId,
       description: dto.description,
+      color: dto.color ?? '#2ebdb6',
+      showOnLiveBoard: dto.showOnLiveBoard ?? true,
       importance: dto.importance,
       operators: {
         create: operatorIds.map((organizationUnitId) => ({ organizationUnitId })),
@@ -450,6 +454,8 @@ export class ProjectsService {
       isSupportActive: dto.isSupportActive,
       replacementProjectId: dto.replacementProjectId,
       description: dto.description,
+      color: dto.color,
+      showOnLiveBoard: dto.showOnLiveBoard,
       importance: dto.importance,
     };
   }

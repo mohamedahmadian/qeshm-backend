@@ -23,6 +23,7 @@ import { emptyToNull, toOptionalNumber } from '../../common/dto-transform';
 import { ProjectImportance, ProjectStatus } from '../../generated/prisma/client';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+const hexColor = /^#[0-9A-Fa-f]{6}$/;
 
 function trimString(value: unknown) {
   return typeof value === 'string' ? value.trim() : value;
@@ -149,4 +150,15 @@ export class CreateProjectDto {
   @IsOptional()
   @IsEnum(ProjectImportance)
   importance?: ProjectImportance;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @Matches(hexColor, { message: 'رنگ پروژه معتبر نیست' })
+  color?: string | null;
+
+  @IsOptional()
+  @IsBoolean()
+  showOnLiveBoard?: boolean;
 }
