@@ -11,7 +11,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import type { Response } from 'express';
-import { FilesService } from './files.service';
+import { FilesService, normalizeMediaType } from './files.service';
 
 type AudioUpload = {
   buffer: Buffer;
@@ -45,7 +45,11 @@ export class FilesController {
   @Get(':id')
   async get(@Param('id') id: string, @Res() res: Response) {
     const file = await this.files.find(id);
-    res.setHeader('Content-Type', file.mimeType);
+    const mime = normalizeMediaType(file.mimeType);
+    const body = Buffer.from(file.data);
+    res.setHeader('Content-Type', mime);
+    res.setHeader('Content-Length', String(body.length));
+    res.setHeader('Accept-Ranges', 'bytes');
     res.setHeader('Cache-Control', 'public, max-age=86400');
     const name = file.originalName?.trim() || 'audio';
     const ascii = name.replace(/[^\w.\-]+/g, '_') || 'audio';
@@ -53,6 +57,6 @@ export class FilesController {
       'Content-Disposition',
       `inline; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(name)}`,
     );
-    res.send(Buffer.from(file.data));
+    res.send(body);
   }
 }

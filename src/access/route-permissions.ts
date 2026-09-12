@@ -5,6 +5,7 @@ const PUBLIC_ROUTES: { method?: string; prefix: string }[] = [
   { prefix: '/public/projects' },
   { prefix: '/public/singard' },
   { method: 'GET', prefix: '/images' },
+  { method: 'GET', prefix: '/files' },
 ];
 
 const AUTH_ONLY_PREFIXES = [

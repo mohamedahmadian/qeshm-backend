@@ -11,6 +11,14 @@ type FileUpload = {
   originalname: string;
 };
 
+export function normalizeMediaType(mime: string | undefined) {
+  const base = (mime ?? '').split(';')[0].trim().toLowerCase();
+  if (base.startsWith('audio/') || base.startsWith('video/')) {
+    return base;
+  }
+  return 'application/octet-stream';
+}
+
 @Injectable()
 export class FilesService {
   constructor(private readonly prisma: PrismaService) {}
@@ -19,8 +27,9 @@ export class FilesService {
     if (!file?.buffer) {
       throw new BadRequestException('فایل ارسال نشده است');
     }
-    const isAudio = file.mimetype?.startsWith('audio/');
-    const isVideo = file.mimetype?.startsWith('video/');
+    const mimeType = normalizeMediaType(file.mimetype);
+    const isAudio = mimeType.startsWith('audio/');
+    const isVideo = mimeType.startsWith('video/');
     if (!isAudio && !isVideo) {
       throw new BadRequestException('فقط فایل صوتی یا ویدیو مجاز است');
     }
@@ -33,7 +42,7 @@ export class FilesService {
 
     return this.prisma.storedFile.create({
       data: {
-        mimeType: file.mimetype,
+        mimeType,
         data: Buffer.from(file.buffer),
         byteSize: file.size,
         originalName: file.originalname?.trim() || (file.mimetype.startsWith('video/') ? 'video' : 'audio'),
