@@ -10,9 +10,11 @@ import { ProjectProgressService } from './project-progress.service';
 import { ProjectReportsService } from './project-reports.service';
 import { ProjectsController } from './projects.controller';
 import { ProjectsService } from './projects.service';
+import { PublicProjectsController } from './public-projects.controller';
 
 @Module({
   controllers: [
+    PublicProjectsController,
     ProjectsController,
     GlobalContractorsController,
     ContractorsController,

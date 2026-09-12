@@ -2,6 +2,7 @@ const PUBLIC_ROUTES: { method?: string; prefix: string }[] = [
   { method: 'POST', prefix: '/auth/login' },
   { method: 'POST', prefix: '/auth/forgot-password' },
   { prefix: '/public/profiles' },
+  { prefix: '/public/projects' },
   { method: 'GET', prefix: '/images' },
 ];
 
