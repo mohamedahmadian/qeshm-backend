@@ -23,6 +23,7 @@ export const PERMISSION_TREE: PermissionNode[] = [
     children: [
       { code: 'projects.list', kind: 'MENU', nameKey: 'menus.projects' },
       { code: 'projects.reports', kind: 'MENU', nameKey: 'menus.projectReports' },
+      { code: 'projects.calendar', kind: 'MENU', nameKey: 'menus.projectCalendar' },
       {
         code: 'projects.liveBoard',
         kind: 'MENU',
