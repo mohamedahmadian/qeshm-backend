@@ -194,30 +194,34 @@ export class ProjectsService {
       },
     });
 
-    const byStatus: Record<string, number> = {
+    const byStatus = {
       NOT_STARTED: 0,
       IN_PROGRESS: 0,
-      SUSPENDED: 0,
       COMPLETED: 0,
-      unset: 0,
     };
-    let withLocation = 0;
     let progressTotal = 0;
     let progressCount = 0;
+    let minProgressPercent: number | null = null;
+    let maxProgressPercent: number | null = null;
 
     const serialized = items.map((item) => {
       const { contractors, progressEntries, ...rest } = item;
-      if (rest.status) {
-        byStatus[rest.status] += 1;
+      if (rest.status === 'COMPLETED') {
+        byStatus.COMPLETED += 1;
+      } else if (rest.status === 'IN_PROGRESS' || rest.status === 'SUSPENDED') {
+        byStatus.IN_PROGRESS += 1;
       } else {
-        byStatus.unset += 1;
-      }
-      if (rest.latitude != null && rest.longitude != null) {
-        withLocation += 1;
+        byStatus.NOT_STARTED += 1;
       }
       if (rest.progressPercent != null) {
         progressTotal += rest.progressPercent;
         progressCount += 1;
+        if (minProgressPercent == null || rest.progressPercent < minProgressPercent) {
+          minProgressPercent = rest.progressPercent;
+        }
+        if (maxProgressPercent == null || rest.progressPercent > maxProgressPercent) {
+          maxProgressPercent = rest.progressPercent;
+        }
       }
       const last = progressEntries[0] ?? null;
       const source = last ? activitySource(last) : null;
@@ -241,18 +245,16 @@ export class ProjectsService {
       items: serialized,
       stats: {
         total: items.length,
-        withLocation,
-        withoutLocation: items.length - withLocation,
         avgProgressPercent:
           progressCount > 0
             ? Math.round((progressTotal / progressCount) * 10) / 10
             : null,
+        maxProgressPercent,
+        minProgressPercent,
         byStatus: [
           { key: 'NOT_STARTED', count: byStatus.NOT_STARTED },
           { key: 'IN_PROGRESS', count: byStatus.IN_PROGRESS },
-          { key: 'SUSPENDED', count: byStatus.SUSPENDED },
           { key: 'COMPLETED', count: byStatus.COMPLETED },
-          { key: 'unset', count: byStatus.unset },
         ],
       },
     };
