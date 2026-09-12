@@ -3,6 +3,7 @@ const PUBLIC_ROUTES: { method?: string; prefix: string }[] = [
   { method: 'POST', prefix: '/auth/forgot-password' },
   { prefix: '/public/profiles' },
   { prefix: '/public/projects' },
+  { prefix: '/public/singard' },
   { method: 'GET', prefix: '/images' },
 ];
 
@@ -11,6 +12,7 @@ const AUTH_ONLY_PREFIXES = [
   '/account',
   '/images',
   '/files',
+  '/singard/mine',
 ];
 
 const LOOKUP_COLLECTIONS = new Set([
@@ -28,6 +30,7 @@ const LOOKUP_COLLECTIONS = new Set([
   '/restaurants',
   '/projects',
   '/projects/lookups',
+  '/singard/categories',
 ]);
 
 type RoutePermission = {
@@ -88,6 +91,9 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/vehicle-brands', permissions: ['light-assets.vehicle-brands'] },
   { prefix: '/vehicles/reports', permissions: ['light-assets.vehicle-reports'] },
   { prefix: '/vehicles', permissions: ['light-assets.vehicles'] },
+  { prefix: '/singard/reports', permissions: ['singard.reports'] },
+  { prefix: '/singard/categories', permissions: ['singard.categories'] },
+  { prefix: '/singard/feedbacks', permissions: ['singard.inbox'] },
 ].sort((a, b) => b.prefix.length - a.prefix.length);
 
 export type AccessDecision =

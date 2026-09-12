@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
-const MAX_INPUT_BYTES = 15 * 1024 * 1024;
-const ALLOWED_PREFIX = 'audio/';
+const MAX_AUDIO_BYTES = 15 * 1024 * 1024;
+const MAX_VIDEO_BYTES = 25 * 1024 * 1024;
 
 type FileUpload = {
   buffer: Buffer;
@@ -17,13 +17,18 @@ export class FilesService {
 
   async store(file: FileUpload, durationMs?: number | null) {
     if (!file?.buffer) {
-      throw new BadRequestException('فایل صوتی ارسال نشده است');
+      throw new BadRequestException('فایل ارسال نشده است');
     }
-    if (file.size > MAX_INPUT_BYTES) {
-      throw new BadRequestException('حجم فایل صوتی بیش از حد مجاز است');
+    const isAudio = file.mimetype?.startsWith('audio/');
+    const isVideo = file.mimetype?.startsWith('video/');
+    if (!isAudio && !isVideo) {
+      throw new BadRequestException('فقط فایل صوتی یا ویدیو مجاز است');
     }
-    if (!file.mimetype?.startsWith(ALLOWED_PREFIX)) {
-      throw new BadRequestException('فقط فایل صوتی مجاز است');
+    const maxBytes = isVideo ? MAX_VIDEO_BYTES : MAX_AUDIO_BYTES;
+    if (file.size > maxBytes) {
+      throw new BadRequestException(
+        isVideo ? 'حجم ویدیو بیش از حد مجاز است' : 'حجم فایل صوتی بیش از حد مجاز است',
+      );
     }
 
     return this.prisma.storedFile.create({
@@ -31,7 +36,7 @@ export class FilesService {
         mimeType: file.mimetype,
         data: Buffer.from(file.buffer),
         byteSize: file.size,
-        originalName: file.originalname?.trim() || 'audio',
+        originalName: file.originalname?.trim() || (file.mimetype.startsWith('video/') ? 'video' : 'audio'),
         durationMs: durationMs ?? null,
       },
       select: {

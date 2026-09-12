@@ -119,6 +119,7 @@ export class ProjectReportsService {
     ]);
     const byOperator = new Map<string, OrgBucket>();
     const byCompany = new Map<string, number>();
+    const byContractor = new Map<string, number>();
     const byLaunchYear = new Map<
       string,
       { year: number | null; count: number; activeCount: number }
@@ -264,6 +265,22 @@ export class ProjectReportsService {
         });
       }
 
+      const contractorNames = new Set(
+        project.contractors
+          .map((item) => item.name.trim())
+          .filter((name) => name.length > 0),
+      );
+      if (contractorNames.size > 0) {
+        for (const name of contractorNames) {
+          byContractor.set(name, (byContractor.get(name) ?? 0) + 1);
+        }
+      } else if (project.companyName) {
+        byContractor.set(
+          project.companyName,
+          (byContractor.get(project.companyName) ?? 0) + 1,
+        );
+      }
+
       if (project.contractors.length > 0) withContractors += 1;
 
       const operatorNames = project.operators.map(
@@ -351,6 +368,9 @@ export class ProjectReportsService {
       byCompany: sortByCount(
         [...byCompany.entries()].map(([name, count]) => ({ name, count })),
         10,
+      ),
+      byContractor: sortByCount(
+        [...byContractor.entries()].map(([name, count]) => ({ name, count })),
       ),
       byLaunchYear: [...byLaunchYear.values()].sort((a, b) => {
         if (a.year == null) return 1;

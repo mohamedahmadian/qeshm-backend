@@ -83,7 +83,11 @@ export const ModelName = {
   VehicleAssignment: 'VehicleAssignment',
   Role: 'Role',
   UserRole: 'UserRole',
-  RolePermission: 'RolePermission'
+  RolePermission: 'RolePermission',
+  SingardCategory: 'SingardCategory',
+  SingardFeedback: 'SingardFeedback',
+  SingardAttachment: 'SingardAttachment',
+  SingardActivity: 'SingardActivity'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -615,6 +619,70 @@ export const RolePermissionScalarFieldEnum = {
 } as const
 
 export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
+export const SingardCategoryScalarFieldEnum = {
+  id: 'id',
+  parentId: 'parentId',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SingardCategoryScalarFieldEnum = (typeof SingardCategoryScalarFieldEnum)[keyof typeof SingardCategoryScalarFieldEnum]
+
+
+export const SingardFeedbackScalarFieldEnum = {
+  id: 'id',
+  trackingCode: 'trackingCode',
+  kind: 'kind',
+  status: 'status',
+  categoryId: 'categoryId',
+  userId: 'userId',
+  isAnonymous: 'isAnonymous',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  body: 'body',
+  replyBody: 'replyBody',
+  repliedAt: 'repliedAt',
+  repliedById: 'repliedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SingardFeedbackScalarFieldEnum = (typeof SingardFeedbackScalarFieldEnum)[keyof typeof SingardFeedbackScalarFieldEnum]
+
+
+export const SingardAttachmentScalarFieldEnum = {
+  id: 'id',
+  feedbackId: 'feedbackId',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type SingardAttachmentScalarFieldEnum = (typeof SingardAttachmentScalarFieldEnum)[keyof typeof SingardAttachmentScalarFieldEnum]
+
+
+export const SingardActivityScalarFieldEnum = {
+  id: 'id',
+  feedbackId: 'feedbackId',
+  kind: 'kind',
+  occurredAt: 'occurredAt',
+  title: 'title',
+  body: 'body',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SingardActivityScalarFieldEnum = (typeof SingardActivityScalarFieldEnum)[keyof typeof SingardActivityScalarFieldEnum]
 
 
 export const SortOrder = {

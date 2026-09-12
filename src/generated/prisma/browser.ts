@@ -182,3 +182,23 @@ export type UserRole = Prisma.UserRoleModel
  * 
  */
 export type RolePermission = Prisma.RolePermissionModel
+/**
+ * Model SingardCategory
+ * 
+ */
+export type SingardCategory = Prisma.SingardCategoryModel
+/**
+ * Model SingardFeedback
+ * 
+ */
+export type SingardFeedback = Prisma.SingardFeedbackModel
+/**
+ * Model SingardAttachment
+ * 
+ */
+export type SingardAttachment = Prisma.SingardAttachmentModel
+/**
+ * Model SingardActivity
+ * 
+ */
+export type SingardActivity = Prisma.SingardActivityModel

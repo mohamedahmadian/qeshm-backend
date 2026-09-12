@@ -511,6 +511,74 @@ export type EnumVehicleAssignmentStatusWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel>
 }
 
+export type EnumSingardFeedbackKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardFeedbackKind | Prisma.EnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardFeedbackKind[] | Prisma.ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardFeedbackKind[] | Prisma.ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardFeedbackKindFilter<$PrismaModel> | $Enums.SingardFeedbackKind
+}
+
+export type EnumSingardFeedbackStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardFeedbackStatus | Prisma.EnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardFeedbackStatus[] | Prisma.ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardFeedbackStatus[] | Prisma.ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardFeedbackStatusFilter<$PrismaModel> | $Enums.SingardFeedbackStatus
+}
+
+export type EnumSingardFeedbackKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardFeedbackKind | Prisma.EnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardFeedbackKind[] | Prisma.ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardFeedbackKind[] | Prisma.ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardFeedbackKindWithAggregatesFilter<$PrismaModel> | $Enums.SingardFeedbackKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSingardFeedbackKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSingardFeedbackKindFilter<$PrismaModel>
+}
+
+export type EnumSingardFeedbackStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardFeedbackStatus | Prisma.EnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardFeedbackStatus[] | Prisma.ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardFeedbackStatus[] | Prisma.ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardFeedbackStatusWithAggregatesFilter<$PrismaModel> | $Enums.SingardFeedbackStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSingardFeedbackStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSingardFeedbackStatusFilter<$PrismaModel>
+}
+
+export type EnumSingardAttachmentKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardAttachmentKind | Prisma.EnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardAttachmentKind[] | Prisma.ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardAttachmentKind[] | Prisma.ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardAttachmentKindFilter<$PrismaModel> | $Enums.SingardAttachmentKind
+}
+
+export type EnumSingardAttachmentKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardAttachmentKind | Prisma.EnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardAttachmentKind[] | Prisma.ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardAttachmentKind[] | Prisma.ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardAttachmentKindWithAggregatesFilter<$PrismaModel> | $Enums.SingardAttachmentKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSingardAttachmentKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSingardAttachmentKindFilter<$PrismaModel>
+}
+
+export type EnumSingardActivityKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardActivityKind | Prisma.EnumSingardActivityKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardActivityKind[] | Prisma.ListEnumSingardActivityKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardActivityKind[] | Prisma.ListEnumSingardActivityKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardActivityKindFilter<$PrismaModel> | $Enums.SingardActivityKind
+}
+
+export type EnumSingardActivityKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardActivityKind | Prisma.EnumSingardActivityKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardActivityKind[] | Prisma.ListEnumSingardActivityKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardActivityKind[] | Prisma.ListEnumSingardActivityKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardActivityKindWithAggregatesFilter<$PrismaModel> | $Enums.SingardActivityKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSingardActivityKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSingardActivityKindFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1019,6 +1087,74 @@ export type NestedEnumVehicleAssignmentStatusWithAggregatesFilter<$PrismaModel =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumVehicleAssignmentStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumSingardFeedbackKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardFeedbackKind | Prisma.EnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardFeedbackKind[] | Prisma.ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardFeedbackKind[] | Prisma.ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardFeedbackKindFilter<$PrismaModel> | $Enums.SingardFeedbackKind
+}
+
+export type NestedEnumSingardFeedbackStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardFeedbackStatus | Prisma.EnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardFeedbackStatus[] | Prisma.ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardFeedbackStatus[] | Prisma.ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardFeedbackStatusFilter<$PrismaModel> | $Enums.SingardFeedbackStatus
+}
+
+export type NestedEnumSingardFeedbackKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardFeedbackKind | Prisma.EnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardFeedbackKind[] | Prisma.ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardFeedbackKind[] | Prisma.ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardFeedbackKindWithAggregatesFilter<$PrismaModel> | $Enums.SingardFeedbackKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSingardFeedbackKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSingardFeedbackKindFilter<$PrismaModel>
+}
+
+export type NestedEnumSingardFeedbackStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardFeedbackStatus | Prisma.EnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardFeedbackStatus[] | Prisma.ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardFeedbackStatus[] | Prisma.ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardFeedbackStatusWithAggregatesFilter<$PrismaModel> | $Enums.SingardFeedbackStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSingardFeedbackStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSingardFeedbackStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumSingardAttachmentKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardAttachmentKind | Prisma.EnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardAttachmentKind[] | Prisma.ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardAttachmentKind[] | Prisma.ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardAttachmentKindFilter<$PrismaModel> | $Enums.SingardAttachmentKind
+}
+
+export type NestedEnumSingardAttachmentKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardAttachmentKind | Prisma.EnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardAttachmentKind[] | Prisma.ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardAttachmentKind[] | Prisma.ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardAttachmentKindWithAggregatesFilter<$PrismaModel> | $Enums.SingardAttachmentKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSingardAttachmentKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSingardAttachmentKindFilter<$PrismaModel>
+}
+
+export type NestedEnumSingardActivityKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardActivityKind | Prisma.EnumSingardActivityKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardActivityKind[] | Prisma.ListEnumSingardActivityKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardActivityKind[] | Prisma.ListEnumSingardActivityKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardActivityKindFilter<$PrismaModel> | $Enums.SingardActivityKind
+}
+
+export type NestedEnumSingardActivityKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SingardActivityKind | Prisma.EnumSingardActivityKindFieldRefInput<$PrismaModel>
+  in?: $Enums.SingardActivityKind[] | Prisma.ListEnumSingardActivityKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SingardActivityKind[] | Prisma.ListEnumSingardActivityKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSingardActivityKindWithAggregatesFilter<$PrismaModel> | $Enums.SingardActivityKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSingardActivityKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSingardActivityKindFilter<$PrismaModel>
 }
 
 

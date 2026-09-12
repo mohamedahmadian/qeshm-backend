@@ -15,6 +15,7 @@ import { ProjectsModule } from './projects/projects.module';
 import { RolesModule } from './roles/roles.module';
 import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
+import { SingardModule } from './singard/singard.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
 
 @Module({
@@ -30,6 +31,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
     FoodReservationModule,
     OrganizationModule,
     VehiclesModule,
+    SingardModule,
     ImagesModule,
     FilesModule,
     SmsModule,

@@ -125,6 +125,20 @@ async function main() {
     update: {},
     create: { userId: adminUser.id, roleId: adminRole.id },
   });
+  await prisma.role.upsert({
+    where: { code: 'CITIZEN' },
+    update: {
+      name: 'شهروند و گردشگر',
+      description: 'ثبت نظر در سینگارد و پیگیری نظرهای خود',
+      isSystem: true,
+    },
+    create: {
+      code: 'CITIZEN',
+      name: 'شهروند و گردشگر',
+      description: 'ثبت نظر در سینگارد و پیگیری نظرهای خود',
+      isSystem: true,
+    },
+  });
   await importProjects(prisma);
 }
 

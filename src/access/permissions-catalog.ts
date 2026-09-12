@@ -22,13 +22,13 @@ export const PERMISSION_TREE: PermissionNode[] = [
     nameKey: 'modules.projects',
     children: [
       { code: 'projects.list', kind: 'MENU', nameKey: 'menus.projects' },
-      { code: 'projects.reports', kind: 'MENU', nameKey: 'menus.projectReports' },
       { code: 'projects.calendar', kind: 'MENU', nameKey: 'menus.projectCalendar' },
       {
         code: 'projects.liveBoard',
         kind: 'MENU',
         nameKey: 'menus.digitalTransformationLiveBoard',
       },
+      { code: 'projects.reports', kind: 'MENU', nameKey: 'menus.projectReports' },
       {
         code: 'projects.contractors',
         kind: 'MENU',
@@ -140,6 +140,18 @@ export const PERMISSION_TREE: PermissionNode[] = [
     children: [
       { code: 'management.users', kind: 'MENU', nameKey: 'menus.users' },
       { code: 'management.roles', kind: 'MENU', nameKey: 'menus.roles' },
+    ],
+  },
+  {
+    code: 'singard',
+    kind: 'MODULE',
+    nameKey: 'modules.singard',
+    children: [
+      { code: 'singard.submit', kind: 'MENU', nameKey: 'menus.singardSubmit' },
+      { code: 'singard.mine', kind: 'MENU', nameKey: 'menus.singardMine' },
+      { code: 'singard.inbox', kind: 'MENU', nameKey: 'menus.singardInbox' },
+      { code: 'singard.categories', kind: 'MENU', nameKey: 'menus.singardCategories' },
+      { code: 'singard.reports', kind: 'MENU', nameKey: 'menus.singardReports' },
     ],
   },
 ];

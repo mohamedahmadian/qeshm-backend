@@ -129,3 +129,41 @@ export const ProjectProgressTranscriptionStatus = {
 } as const
 
 export type ProjectProgressTranscriptionStatus = (typeof ProjectProgressTranscriptionStatus)[keyof typeof ProjectProgressTranscriptionStatus]
+
+
+export const SingardFeedbackKind = {
+  SUGGESTION: 'SUGGESTION',
+  COMPLAINT: 'COMPLAINT',
+  CRITICISM: 'CRITICISM',
+  REPORT: 'REPORT'
+} as const
+
+export type SingardFeedbackKind = (typeof SingardFeedbackKind)[keyof typeof SingardFeedbackKind]
+
+
+export const SingardFeedbackStatus = {
+  NEW: 'NEW',
+  IN_PROGRESS: 'IN_PROGRESS',
+  ANSWERED: 'ANSWERED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type SingardFeedbackStatus = (typeof SingardFeedbackStatus)[keyof typeof SingardFeedbackStatus]
+
+
+export const SingardAttachmentKind = {
+  IMAGE: 'IMAGE',
+  AUDIO: 'AUDIO',
+  VIDEO: 'VIDEO'
+} as const
+
+export type SingardAttachmentKind = (typeof SingardAttachmentKind)[keyof typeof SingardAttachmentKind]
+
+
+export const SingardActivityKind = {
+  NOTE: 'NOTE',
+  CONTACT: 'CONTACT',
+  REPLY: 'REPLY'
+} as const
+
+export type SingardActivityKind = (typeof SingardActivityKind)[keyof typeof SingardActivityKind]

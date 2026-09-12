@@ -429,7 +429,11 @@ export const ModelName = {
   VehicleAssignment: 'VehicleAssignment',
   Role: 'Role',
   UserRole: 'UserRole',
-  RolePermission: 'RolePermission'
+  RolePermission: 'RolePermission',
+  SingardCategory: 'SingardCategory',
+  SingardFeedback: 'SingardFeedback',
+  SingardAttachment: 'SingardAttachment',
+  SingardActivity: 'SingardActivity'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -445,7 +449,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2891,6 +2895,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SingardCategory: {
+      payload: Prisma.$SingardCategoryPayload<ExtArgs>
+      fields: Prisma.SingardCategoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SingardCategoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SingardCategoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>
+        }
+        findFirst: {
+          args: Prisma.SingardCategoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SingardCategoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>
+        }
+        findMany: {
+          args: Prisma.SingardCategoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>[]
+        }
+        create: {
+          args: Prisma.SingardCategoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>
+        }
+        createMany: {
+          args: Prisma.SingardCategoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SingardCategoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>[]
+        }
+        delete: {
+          args: Prisma.SingardCategoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>
+        }
+        update: {
+          args: Prisma.SingardCategoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.SingardCategoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SingardCategoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SingardCategoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.SingardCategoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardCategoryPayload>
+        }
+        aggregate: {
+          args: Prisma.SingardCategoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSingardCategory>
+        }
+        groupBy: {
+          args: Prisma.SingardCategoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SingardCategoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SingardCategoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SingardCategoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    SingardFeedback: {
+      payload: Prisma.$SingardFeedbackPayload<ExtArgs>
+      fields: Prisma.SingardFeedbackFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SingardFeedbackFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SingardFeedbackFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>
+        }
+        findFirst: {
+          args: Prisma.SingardFeedbackFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SingardFeedbackFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>
+        }
+        findMany: {
+          args: Prisma.SingardFeedbackFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>[]
+        }
+        create: {
+          args: Prisma.SingardFeedbackCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>
+        }
+        createMany: {
+          args: Prisma.SingardFeedbackCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SingardFeedbackCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>[]
+        }
+        delete: {
+          args: Prisma.SingardFeedbackDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>
+        }
+        update: {
+          args: Prisma.SingardFeedbackUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>
+        }
+        deleteMany: {
+          args: Prisma.SingardFeedbackDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SingardFeedbackUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SingardFeedbackUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>[]
+        }
+        upsert: {
+          args: Prisma.SingardFeedbackUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardFeedbackPayload>
+        }
+        aggregate: {
+          args: Prisma.SingardFeedbackAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSingardFeedback>
+        }
+        groupBy: {
+          args: Prisma.SingardFeedbackGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SingardFeedbackGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SingardFeedbackCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SingardFeedbackCountAggregateOutputType> | number
+        }
+      }
+    }
+    SingardAttachment: {
+      payload: Prisma.$SingardAttachmentPayload<ExtArgs>
+      fields: Prisma.SingardAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SingardAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SingardAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.SingardAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SingardAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.SingardAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.SingardAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.SingardAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SingardAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.SingardAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>
+        }
+        update: {
+          args: Prisma.SingardAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.SingardAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SingardAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SingardAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.SingardAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.SingardAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSingardAttachment>
+        }
+        groupBy: {
+          args: Prisma.SingardAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SingardAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SingardAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SingardAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    SingardActivity: {
+      payload: Prisma.$SingardActivityPayload<ExtArgs>
+      fields: Prisma.SingardActivityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SingardActivityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SingardActivityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>
+        }
+        findFirst: {
+          args: Prisma.SingardActivityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SingardActivityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>
+        }
+        findMany: {
+          args: Prisma.SingardActivityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>[]
+        }
+        create: {
+          args: Prisma.SingardActivityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>
+        }
+        createMany: {
+          args: Prisma.SingardActivityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SingardActivityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>[]
+        }
+        delete: {
+          args: Prisma.SingardActivityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>
+        }
+        update: {
+          args: Prisma.SingardActivityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>
+        }
+        deleteMany: {
+          args: Prisma.SingardActivityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SingardActivityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SingardActivityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>[]
+        }
+        upsert: {
+          args: Prisma.SingardActivityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SingardActivityPayload>
+        }
+        aggregate: {
+          args: Prisma.SingardActivityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSingardActivity>
+        }
+        groupBy: {
+          args: Prisma.SingardActivityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SingardActivityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SingardActivityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SingardActivityCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3445,6 +3745,70 @@ export const RolePermissionScalarFieldEnum = {
 export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
 
 
+export const SingardCategoryScalarFieldEnum = {
+  id: 'id',
+  parentId: 'parentId',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SingardCategoryScalarFieldEnum = (typeof SingardCategoryScalarFieldEnum)[keyof typeof SingardCategoryScalarFieldEnum]
+
+
+export const SingardFeedbackScalarFieldEnum = {
+  id: 'id',
+  trackingCode: 'trackingCode',
+  kind: 'kind',
+  status: 'status',
+  categoryId: 'categoryId',
+  userId: 'userId',
+  isAnonymous: 'isAnonymous',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  body: 'body',
+  replyBody: 'replyBody',
+  repliedAt: 'repliedAt',
+  repliedById: 'repliedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SingardFeedbackScalarFieldEnum = (typeof SingardFeedbackScalarFieldEnum)[keyof typeof SingardFeedbackScalarFieldEnum]
+
+
+export const SingardAttachmentScalarFieldEnum = {
+  id: 'id',
+  feedbackId: 'feedbackId',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type SingardAttachmentScalarFieldEnum = (typeof SingardAttachmentScalarFieldEnum)[keyof typeof SingardAttachmentScalarFieldEnum]
+
+
+export const SingardActivityScalarFieldEnum = {
+  id: 'id',
+  feedbackId: 'feedbackId',
+  kind: 'kind',
+  occurredAt: 'occurredAt',
+  title: 'title',
+  body: 'body',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SingardActivityScalarFieldEnum = (typeof SingardActivityScalarFieldEnum)[keyof typeof SingardActivityScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3735,6 +4099,62 @@ export type ListEnumVehicleAssignmentStatusFieldRefInput<$PrismaModel> = FieldRe
 
 
 /**
+ * Reference to a field of type 'SingardFeedbackKind'
+ */
+export type EnumSingardFeedbackKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SingardFeedbackKind'>
+    
+
+
+/**
+ * Reference to a field of type 'SingardFeedbackKind[]'
+ */
+export type ListEnumSingardFeedbackKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SingardFeedbackKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SingardFeedbackStatus'
+ */
+export type EnumSingardFeedbackStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SingardFeedbackStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SingardFeedbackStatus[]'
+ */
+export type ListEnumSingardFeedbackStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SingardFeedbackStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SingardAttachmentKind'
+ */
+export type EnumSingardAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SingardAttachmentKind'>
+    
+
+
+/**
+ * Reference to a field of type 'SingardAttachmentKind[]'
+ */
+export type ListEnumSingardAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SingardAttachmentKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SingardActivityKind'
+ */
+export type EnumSingardActivityKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SingardActivityKind'>
+    
+
+
+/**
+ * Reference to a field of type 'SingardActivityKind[]'
+ */
+export type ListEnumSingardActivityKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SingardActivityKind[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3931,6 +4351,10 @@ export type GlobalOmitConfig = {
   role?: Prisma.RoleOmit
   userRole?: Prisma.UserRoleOmit
   rolePermission?: Prisma.RolePermissionOmit
+  singardCategory?: Prisma.SingardCategoryOmit
+  singardFeedback?: Prisma.SingardFeedbackOmit
+  singardAttachment?: Prisma.SingardAttachmentOmit
+  singardActivity?: Prisma.SingardActivityOmit
 }
 
 /* Types for Logging */
