@@ -86,6 +86,9 @@ const feedbackListSelect = {
   lastName: true,
   phone: true,
   body: true,
+  address: true,
+  latitude: true,
+  longitude: true,
   repliedAt: true,
   createdAt: true,
   updatedAt: true,
@@ -111,11 +114,27 @@ function submitterName(item: {
   return joinFullName(item.firstName ?? '', item.lastName ?? '') || null;
 }
 
-function mapFeedback<T extends { firstName: string | null; lastName: string | null; isAnonymous: boolean }>(
-  item: T,
-) {
+function toCoord(value: Prisma.Decimal | null) {
+  return value == null ? null : Number(value);
+}
+
+function toDecimal(value: number | null | undefined) {
+  return value == null ? null : new Prisma.Decimal(value);
+}
+
+function mapFeedback<
+  T extends {
+    firstName: string | null;
+    lastName: string | null;
+    isAnonymous: boolean;
+    latitude: Prisma.Decimal | null;
+    longitude: Prisma.Decimal | null;
+  },
+>(item: T) {
   return {
     ...item,
+    latitude: toCoord(item.latitude),
+    longitude: toCoord(item.longitude),
     submitterName: submitterName(item),
   };
 }
@@ -194,6 +213,7 @@ export class SingardFeedbacksService {
     if (!dto.body?.trim() && !imageIds.length && !audioIds.length && !videoIds.length) {
       throw new BadRequestException('لطفاً متن، عکس، صدا یا فیلم بگذارید');
     }
+    this.assertCoordinates(dto.latitude, dto.longitude);
     await this.assertImages(imageIds);
     await this.assertFiles(audioIds, 'audio');
     await this.assertFiles(videoIds, 'video');
@@ -233,6 +253,9 @@ export class SingardFeedbacksService {
         lastName,
         phone,
         body: dto.body?.trim() || null,
+        address: dto.address?.trim() || null,
+        latitude: toDecimal(dto.latitude),
+        longitude: toDecimal(dto.longitude),
       });
       const attachments: Prisma.SingardAttachmentCreateManyInput[] = [
         ...imageIds.map((imageId, index) => ({
@@ -413,6 +436,7 @@ export class SingardFeedbacksService {
             { lastName: containsInsensitive(query.q) },
             { phone: containsInsensitive(query.q) },
             { body: containsInsensitive(query.q) },
+            { address: containsInsensitive(query.q) },
             { category: { name: containsInsensitive(query.q) } },
           ]
         : undefined,
@@ -431,6 +455,9 @@ export class SingardFeedbacksService {
       lastName: string | null;
       phone: string | null;
       body: string | null;
+      address: string | null;
+      latitude: Prisma.Decimal | null;
+      longitude: Prisma.Decimal | null;
     },
   ) {
     for (let attempt = 0; attempt < 8; attempt += 1) {
@@ -498,6 +525,12 @@ export class SingardFeedbacksService {
       });
     }
     return user;
+  }
+
+  private assertCoordinates(latitude?: number | null, longitude?: number | null) {
+    if ((latitude == null) !== (longitude == null)) {
+      throw new BadRequestException('موقعیت مکانی باید هر دو مختصات را داشته باشد');
+    }
   }
 
   private async assertLeafOrExistingCategory(categoryId: string) {

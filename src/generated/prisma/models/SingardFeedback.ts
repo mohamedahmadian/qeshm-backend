@@ -20,8 +20,20 @@ export type SingardFeedbackModel = runtime.Types.Result.DefaultSelection<Prisma.
 
 export type AggregateSingardFeedback = {
   _count: SingardFeedbackCountAggregateOutputType | null
+  _avg: SingardFeedbackAvgAggregateOutputType | null
+  _sum: SingardFeedbackSumAggregateOutputType | null
   _min: SingardFeedbackMinAggregateOutputType | null
   _max: SingardFeedbackMaxAggregateOutputType | null
+}
+
+export type SingardFeedbackAvgAggregateOutputType = {
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+}
+
+export type SingardFeedbackSumAggregateOutputType = {
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
 }
 
 export type SingardFeedbackMinAggregateOutputType = {
@@ -36,6 +48,9 @@ export type SingardFeedbackMinAggregateOutputType = {
   lastName: string | null
   phone: string | null
   body: string | null
+  address: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
   replyBody: string | null
   repliedAt: Date | null
   repliedById: string | null
@@ -55,6 +70,9 @@ export type SingardFeedbackMaxAggregateOutputType = {
   lastName: string | null
   phone: string | null
   body: string | null
+  address: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
   replyBody: string | null
   repliedAt: Date | null
   repliedById: string | null
@@ -74,6 +92,9 @@ export type SingardFeedbackCountAggregateOutputType = {
   lastName: number
   phone: number
   body: number
+  address: number
+  latitude: number
+  longitude: number
   replyBody: number
   repliedAt: number
   repliedById: number
@@ -82,6 +103,16 @@ export type SingardFeedbackCountAggregateOutputType = {
   _all: number
 }
 
+
+export type SingardFeedbackAvgAggregateInputType = {
+  latitude?: true
+  longitude?: true
+}
+
+export type SingardFeedbackSumAggregateInputType = {
+  latitude?: true
+  longitude?: true
+}
 
 export type SingardFeedbackMinAggregateInputType = {
   id?: true
@@ -95,6 +126,9 @@ export type SingardFeedbackMinAggregateInputType = {
   lastName?: true
   phone?: true
   body?: true
+  address?: true
+  latitude?: true
+  longitude?: true
   replyBody?: true
   repliedAt?: true
   repliedById?: true
@@ -114,6 +148,9 @@ export type SingardFeedbackMaxAggregateInputType = {
   lastName?: true
   phone?: true
   body?: true
+  address?: true
+  latitude?: true
+  longitude?: true
   replyBody?: true
   repliedAt?: true
   repliedById?: true
@@ -133,6 +170,9 @@ export type SingardFeedbackCountAggregateInputType = {
   lastName?: true
   phone?: true
   body?: true
+  address?: true
+  latitude?: true
+  longitude?: true
   replyBody?: true
   repliedAt?: true
   repliedById?: true
@@ -179,6 +219,18 @@ export type SingardFeedbackAggregateArgs<ExtArgs extends runtime.Types.Extension
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: SingardFeedbackAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: SingardFeedbackSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: SingardFeedbackMinAggregateInputType
@@ -209,6 +261,8 @@ export type SingardFeedbackGroupByArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   _count?: SingardFeedbackCountAggregateInputType | true
+  _avg?: SingardFeedbackAvgAggregateInputType
+  _sum?: SingardFeedbackSumAggregateInputType
   _min?: SingardFeedbackMinAggregateInputType
   _max?: SingardFeedbackMaxAggregateInputType
 }
@@ -225,12 +279,17 @@ export type SingardFeedbackGroupByOutputType = {
   lastName: string | null
   phone: string | null
   body: string | null
+  address: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
   replyBody: string | null
   repliedAt: Date | null
   repliedById: string | null
   createdAt: Date
   updatedAt: Date
   _count: SingardFeedbackCountAggregateOutputType | null
+  _avg: SingardFeedbackAvgAggregateOutputType | null
+  _sum: SingardFeedbackSumAggregateOutputType | null
   _min: SingardFeedbackMinAggregateOutputType | null
   _max: SingardFeedbackMaxAggregateOutputType | null
 }
@@ -265,6 +324,9 @@ export type SingardFeedbackWhereInput = {
   lastName?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   phone?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   body?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
+  address?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"SingardFeedback"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"SingardFeedback"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   repliedAt?: Prisma.DateTimeNullableFilter<"SingardFeedback"> | Date | string | null
   repliedById?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
@@ -289,6 +351,9 @@ export type SingardFeedbackOrderByWithRelationInput = {
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   replyBody?: Prisma.SortOrderInput | Prisma.SortOrder
   repliedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   repliedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -316,6 +381,9 @@ export type SingardFeedbackWhereUniqueInput = Prisma.AtLeast<{
   lastName?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   phone?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   body?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
+  address?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"SingardFeedback"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"SingardFeedback"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   repliedAt?: Prisma.DateTimeNullableFilter<"SingardFeedback"> | Date | string | null
   repliedById?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
@@ -340,14 +408,19 @@ export type SingardFeedbackOrderByWithAggregationInput = {
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   replyBody?: Prisma.SortOrderInput | Prisma.SortOrder
   repliedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   repliedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SingardFeedbackCountOrderByAggregateInput
+  _avg?: Prisma.SingardFeedbackAvgOrderByAggregateInput
   _max?: Prisma.SingardFeedbackMaxOrderByAggregateInput
   _min?: Prisma.SingardFeedbackMinOrderByAggregateInput
+  _sum?: Prisma.SingardFeedbackSumOrderByAggregateInput
 }
 
 export type SingardFeedbackScalarWhereWithAggregatesInput = {
@@ -365,6 +438,9 @@ export type SingardFeedbackScalarWhereWithAggregatesInput = {
   lastName?: Prisma.StringNullableWithAggregatesFilter<"SingardFeedback"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"SingardFeedback"> | string | null
   body?: Prisma.StringNullableWithAggregatesFilter<"SingardFeedback"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"SingardFeedback"> | string | null
+  latitude?: Prisma.DecimalNullableWithAggregatesFilter<"SingardFeedback"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableWithAggregatesFilter<"SingardFeedback"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.StringNullableWithAggregatesFilter<"SingardFeedback"> | string | null
   repliedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SingardFeedback"> | Date | string | null
   repliedById?: Prisma.StringNullableWithAggregatesFilter<"SingardFeedback"> | string | null
@@ -382,6 +458,9 @@ export type SingardFeedbackCreateInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   createdAt?: Date | string
@@ -405,6 +484,9 @@ export type SingardFeedbackUncheckedCreateInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   repliedById?: string | null
@@ -424,6 +506,9 @@ export type SingardFeedbackUpdateInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -447,6 +532,9 @@ export type SingardFeedbackUncheckedUpdateInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -468,6 +556,9 @@ export type SingardFeedbackCreateManyInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   repliedById?: string | null
@@ -485,6 +576,9 @@ export type SingardFeedbackUpdateManyMutationInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -503,6 +597,9 @@ export type SingardFeedbackUncheckedUpdateManyInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -532,11 +629,19 @@ export type SingardFeedbackCountOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   replyBody?: Prisma.SortOrder
   repliedAt?: Prisma.SortOrder
   repliedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type SingardFeedbackAvgOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
 }
 
 export type SingardFeedbackMaxOrderByAggregateInput = {
@@ -551,6 +656,9 @@ export type SingardFeedbackMaxOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   replyBody?: Prisma.SortOrder
   repliedAt?: Prisma.SortOrder
   repliedById?: Prisma.SortOrder
@@ -570,11 +678,19 @@ export type SingardFeedbackMinOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   replyBody?: Prisma.SortOrder
   repliedAt?: Prisma.SortOrder
   repliedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type SingardFeedbackSumOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
 }
 
 export type SingardFeedbackScalarRelationFilter = {
@@ -754,6 +870,9 @@ export type SingardFeedbackCreateWithoutUserInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   createdAt?: Date | string
@@ -775,6 +894,9 @@ export type SingardFeedbackUncheckedCreateWithoutUserInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   repliedById?: string | null
@@ -804,6 +926,9 @@ export type SingardFeedbackCreateWithoutRepliedByInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   createdAt?: Date | string
@@ -826,6 +951,9 @@ export type SingardFeedbackUncheckedCreateWithoutRepliedByInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   createdAt?: Date | string
@@ -875,6 +1003,9 @@ export type SingardFeedbackScalarWhereInput = {
   lastName?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   phone?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   body?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
+  address?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
+  latitude?: Prisma.DecimalNullableFilter<"SingardFeedback"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"SingardFeedback"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   repliedAt?: Prisma.DateTimeNullableFilter<"SingardFeedback"> | Date | string | null
   repliedById?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
@@ -908,6 +1039,9 @@ export type SingardFeedbackCreateWithoutCategoryInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   createdAt?: Date | string
@@ -929,6 +1063,9 @@ export type SingardFeedbackUncheckedCreateWithoutCategoryInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   repliedById?: string | null
@@ -974,6 +1111,9 @@ export type SingardFeedbackCreateWithoutAttachmentsInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   createdAt?: Date | string
@@ -996,6 +1136,9 @@ export type SingardFeedbackUncheckedCreateWithoutAttachmentsInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   repliedById?: string | null
@@ -1030,6 +1173,9 @@ export type SingardFeedbackUpdateWithoutAttachmentsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1052,6 +1198,9 @@ export type SingardFeedbackUncheckedUpdateWithoutAttachmentsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1070,6 +1219,9 @@ export type SingardFeedbackCreateWithoutActivitiesInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   createdAt?: Date | string
@@ -1092,6 +1244,9 @@ export type SingardFeedbackUncheckedCreateWithoutActivitiesInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   repliedById?: string | null
@@ -1126,6 +1281,9 @@ export type SingardFeedbackUpdateWithoutActivitiesInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1148,6 +1306,9 @@ export type SingardFeedbackUncheckedUpdateWithoutActivitiesInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1167,6 +1328,9 @@ export type SingardFeedbackCreateManyUserInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   repliedById?: string | null
@@ -1186,6 +1350,9 @@ export type SingardFeedbackCreateManyRepliedByInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   createdAt?: Date | string
@@ -1202,6 +1369,9 @@ export type SingardFeedbackUpdateWithoutUserInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1223,6 +1393,9 @@ export type SingardFeedbackUncheckedUpdateWithoutUserInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1243,6 +1416,9 @@ export type SingardFeedbackUncheckedUpdateManyWithoutUserInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1260,6 +1436,9 @@ export type SingardFeedbackUpdateWithoutRepliedByInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1282,6 +1461,9 @@ export type SingardFeedbackUncheckedUpdateWithoutRepliedByInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1302,6 +1484,9 @@ export type SingardFeedbackUncheckedUpdateManyWithoutRepliedByInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1319,6 +1504,9 @@ export type SingardFeedbackCreateManyCategoryInput = {
   lastName?: string | null
   phone?: string | null
   body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: string | null
   repliedAt?: Date | string | null
   repliedById?: string | null
@@ -1336,6 +1524,9 @@ export type SingardFeedbackUpdateWithoutCategoryInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1357,6 +1548,9 @@ export type SingardFeedbackUncheckedUpdateWithoutCategoryInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1377,6 +1571,9 @@ export type SingardFeedbackUncheckedUpdateManyWithoutCategoryInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1436,6 +1633,9 @@ export type SingardFeedbackSelect<ExtArgs extends runtime.Types.Extensions.Inter
   lastName?: boolean
   phone?: boolean
   body?: boolean
+  address?: boolean
+  latitude?: boolean
+  longitude?: boolean
   replyBody?: boolean
   repliedAt?: boolean
   repliedById?: boolean
@@ -1461,6 +1661,9 @@ export type SingardFeedbackSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   lastName?: boolean
   phone?: boolean
   body?: boolean
+  address?: boolean
+  latitude?: boolean
+  longitude?: boolean
   replyBody?: boolean
   repliedAt?: boolean
   repliedById?: boolean
@@ -1483,6 +1686,9 @@ export type SingardFeedbackSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   lastName?: boolean
   phone?: boolean
   body?: boolean
+  address?: boolean
+  latitude?: boolean
+  longitude?: boolean
   replyBody?: boolean
   repliedAt?: boolean
   repliedById?: boolean
@@ -1505,6 +1711,9 @@ export type SingardFeedbackSelectScalar = {
   lastName?: boolean
   phone?: boolean
   body?: boolean
+  address?: boolean
+  latitude?: boolean
+  longitude?: boolean
   replyBody?: boolean
   repliedAt?: boolean
   repliedById?: boolean
@@ -1512,7 +1721,7 @@ export type SingardFeedbackSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SingardFeedbackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackingCode" | "kind" | "status" | "categoryId" | "userId" | "isAnonymous" | "firstName" | "lastName" | "phone" | "body" | "replyBody" | "repliedAt" | "repliedById" | "createdAt" | "updatedAt", ExtArgs["result"]["singardFeedback"]>
+export type SingardFeedbackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackingCode" | "kind" | "status" | "categoryId" | "userId" | "isAnonymous" | "firstName" | "lastName" | "phone" | "body" | "address" | "latitude" | "longitude" | "replyBody" | "repliedAt" | "repliedById" | "createdAt" | "updatedAt", ExtArgs["result"]["singardFeedback"]>
 export type SingardFeedbackInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.SingardCategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.SingardFeedback$userArgs<ExtArgs>
@@ -1553,6 +1762,9 @@ export type $SingardFeedbackPayload<ExtArgs extends runtime.Types.Extensions.Int
     lastName: string | null
     phone: string | null
     body: string | null
+    address: string | null
+    latitude: runtime.Decimal | null
+    longitude: runtime.Decimal | null
     replyBody: string | null
     repliedAt: Date | null
     repliedById: string | null
@@ -1997,6 +2209,9 @@ export interface SingardFeedbackFieldRefs {
   readonly lastName: Prisma.FieldRef<"SingardFeedback", 'String'>
   readonly phone: Prisma.FieldRef<"SingardFeedback", 'String'>
   readonly body: Prisma.FieldRef<"SingardFeedback", 'String'>
+  readonly address: Prisma.FieldRef<"SingardFeedback", 'String'>
+  readonly latitude: Prisma.FieldRef<"SingardFeedback", 'Decimal'>
+  readonly longitude: Prisma.FieldRef<"SingardFeedback", 'Decimal'>
   readonly replyBody: Prisma.FieldRef<"SingardFeedback", 'String'>
   readonly repliedAt: Prisma.FieldRef<"SingardFeedback", 'DateTime'>
   readonly repliedById: Prisma.FieldRef<"SingardFeedback", 'String'>

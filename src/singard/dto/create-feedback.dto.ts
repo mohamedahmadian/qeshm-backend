@@ -4,6 +4,8 @@ import {
   IsArray,
   IsBoolean,
   IsIn,
+  IsLatitude,
+  IsLongitude,
   IsOptional,
   IsString,
   IsUUID,
@@ -11,7 +13,7 @@ import {
   MinLength,
   ValidateIf,
 } from 'class-validator';
-import { emptyToNull, toBoolean } from '../../common/dto-transform';
+import { emptyToNull, toBoolean, toOptionalNumber } from '../../common/dto-transform';
 import {
   SINGARD_MAX_AUDIO,
   SINGARD_MAX_IMAGES,
@@ -65,6 +67,25 @@ export class CreateSingardFeedbackDto {
   @IsString()
   @MaxLength(8000)
   body?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(2000)
+  address?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalNumber(value))
+  @ValidateIf((_, value) => value != null)
+  @IsLatitude()
+  latitude?: number | null;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalNumber(value))
+  @ValidateIf((_, value) => value != null)
+  @IsLongitude()
+  longitude?: number | null;
 
   @IsOptional()
   @IsArray()
