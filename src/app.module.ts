@@ -17,6 +17,7 @@ import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
 import { SingardModule } from './singard/singard.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
+import { BoardModule } from './board/board.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
     OrganizationModule,
     VehiclesModule,
     SingardModule,
+    BoardModule,
     ImagesModule,
     FilesModule,
     SmsModule,

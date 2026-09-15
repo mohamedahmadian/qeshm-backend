@@ -485,6 +485,22 @@ export class FoodReservationsService {
     if (!isRep && dto.quantity != null && dto.quantity !== 1) {
       throw new BadRequestException('فقط نماینده واحد می‌تواند بیش از یک غذا رزرو کند');
     }
+    const maxMeals = user.orgUnit.maxMeals;
+    if (maxMeals != null) {
+      const used = await foodReservations(this.prisma).aggregate({
+        where: {
+          orgUnitId: user.orgUnitId,
+          reservedAt: parseIsoDate(dto.reservedAt),
+        },
+        _sum: { quantity: true },
+      });
+      const usedQty = used._sum.quantity ?? 0;
+      if (usedQty + quantity > maxMeals) {
+        throw new BadRequestException(
+          'سقف تعداد غذای قابل سفارش این واحد برای این تاریخ تکمیل شده است',
+        );
+      }
+    }
     const item = await foodReservations(this.prisma).create({
       data: {
         reservedAt: parseIsoDate(dto.reservedAt),
@@ -573,7 +589,7 @@ export class FoodReservationsService {
 
   private isNutritionRep(user: {
     id: string;
-    orgUnit: { nutritionRepId: string | null } | null;
+    orgUnit: { nutritionRepId: string | null; maxMeals: number | null } | null;
   }) {
     return Boolean(user.orgUnit && user.orgUnit.nutritionRepId === user.id);
   }
@@ -584,7 +600,9 @@ export class FoodReservationsService {
       select: {
         id: true,
         orgUnitId: true,
-        orgUnit: { select: { id: true, name: true, nutritionRepId: true } },
+        orgUnit: {
+          select: { id: true, name: true, nutritionRepId: true, maxMeals: true },
+        },
       },
     });
     if (!user) {

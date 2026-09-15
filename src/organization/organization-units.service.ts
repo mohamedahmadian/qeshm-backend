@@ -35,6 +35,7 @@ const unitSelect = {
   telegram: true,
   whatsapp: true,
   nutritionRepId: true,
+  maxMeals: true,
   createdAt: true,
   updatedAt: true,
   parent: {
@@ -156,6 +157,7 @@ export class OrganizationUnitsService {
         instagram: dto.instagram,
         telegram: dto.telegram,
         whatsapp: dto.whatsapp,
+        maxMeals: dto.maxMeals,
       },
       select: unitSelect,
     });
@@ -201,6 +203,7 @@ export class OrganizationUnitsService {
             : dto.nutritionRepId
               ? { connect: { id: dto.nutritionRepId } }
               : { disconnect: true },
+        maxMeals: dto.maxMeals,
       },
       select: unitSelect,
     });
@@ -305,7 +308,7 @@ export class OrganizationUnitsService {
     });
     if (!employee) {
       throw new BadRequestException(
-        'نماینده تغذیه باید از کارمندان همین واحد باشد',
+        'نماینده باید از کارمندان همین واحد باشد',
       );
     }
   }

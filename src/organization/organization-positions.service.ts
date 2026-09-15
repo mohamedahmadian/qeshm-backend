@@ -18,7 +18,9 @@ import { UpdateOrganizationPositionDto } from './dto/update-organization-positio
 
 const positionSelect = {
   id: true,
+  code: true,
   name: true,
+  isSystem: true,
   createdAt: true,
   updatedAt: true,
   _count: { select: { users: true } },
@@ -99,7 +101,10 @@ export class OrganizationPositionsService {
   }
 
   async remove(id: string) {
-    await this.findOne(id);
+    const current = await this.findOne(id);
+    if (current.isSystem) {
+      throw new ConflictException('سمت‌های سیستمی قابل حذف نیستند');
+    }
     const used = await this.prisma.user.count({ where: { positionId: id } });
     if (used > 0) {
       throw new ConflictException('ابتدا این سمت را از کارمندان بردارید');

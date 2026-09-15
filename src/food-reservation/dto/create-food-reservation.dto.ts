@@ -1,5 +1,5 @@
 import { Transform, Type } from 'class-transformer';
-import { IsInt, IsString, IsUUID, Matches, Max, Min } from 'class-validator';
+import { IsInt, IsOptional, IsString, IsUUID, Matches, Max, Min } from 'class-validator';
 import { toOptionalNumber } from '../../common/dto-transform';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
@@ -20,6 +20,7 @@ export class CreateFoodReservationDto {
   @IsUUID('4')
   foodId: string;
 
+  @IsOptional()
   @Transform(({ value }) => toOptionalNumber(value) ?? 1)
   @Type(() => Number)
   @IsInt()

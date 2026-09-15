@@ -60,3 +60,13 @@ export function eachIsoDateInclusive(start: string, end: string) {
   }
   return dates;
 }
+
+/** پنجشنبه و جمعه در تقویم ایران */
+export function isIranWeekendIso(iso: string) {
+  const day = parseIsoDate(iso).getUTCDay();
+  return day === 4 || day === 5;
+}
+
+export function eachWorkingIsoDatesInclusive(start: string, end = start) {
+  return eachIsoDateInclusive(start, end).filter((iso) => !isIranWeekendIso(iso));
+}

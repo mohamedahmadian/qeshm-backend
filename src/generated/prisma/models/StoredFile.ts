@@ -238,6 +238,8 @@ export type StoredFileWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"StoredFile"> | Date | string
   progressEntries?: Prisma.ProjectProgressEntryListRelationFilter
   singardAttachments?: Prisma.SingardAttachmentListRelationFilter
+  boardAttachments?: Prisma.BoardAttachmentListRelationFilter
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
 }
 
 export type StoredFileOrderByWithRelationInput = {
@@ -250,6 +252,8 @@ export type StoredFileOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   progressEntries?: Prisma.ProjectProgressEntryOrderByRelationAggregateInput
   singardAttachments?: Prisma.SingardAttachmentOrderByRelationAggregateInput
+  boardAttachments?: Prisma.BoardAttachmentOrderByRelationAggregateInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentOrderByRelationAggregateInput
 }
 
 export type StoredFileWhereUniqueInput = Prisma.AtLeast<{
@@ -265,6 +269,8 @@ export type StoredFileWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"StoredFile"> | Date | string
   progressEntries?: Prisma.ProjectProgressEntryListRelationFilter
   singardAttachments?: Prisma.SingardAttachmentListRelationFilter
+  boardAttachments?: Prisma.BoardAttachmentListRelationFilter
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
 }, "id">
 
 export type StoredFileOrderByWithAggregationInput = {
@@ -305,6 +311,8 @@ export type StoredFileCreateInput = {
   createdAt?: Date | string
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUncheckedCreateInput = {
@@ -317,6 +325,8 @@ export type StoredFileUncheckedCreateInput = {
   createdAt?: Date | string
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUpdateInput = {
@@ -329,6 +339,8 @@ export type StoredFileUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileUncheckedUpdateInput = {
@@ -341,6 +353,8 @@ export type StoredFileUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileCreateManyInput = {
@@ -450,6 +464,38 @@ export type StoredFileUpdateOneWithoutSingardAttachmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredFileUpdateToOneWithWhereWithoutSingardAttachmentsInput, Prisma.StoredFileUpdateWithoutSingardAttachmentsInput>, Prisma.StoredFileUncheckedUpdateWithoutSingardAttachmentsInput>
 }
 
+export type StoredFileCreateNestedOneWithoutBoardAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutBoardAttachmentsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutBoardAttachmentsInput
+  connect?: Prisma.StoredFileWhereUniqueInput
+}
+
+export type StoredFileUpdateOneWithoutBoardAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutBoardAttachmentsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutBoardAttachmentsInput
+  upsert?: Prisma.StoredFileUpsertWithoutBoardAttachmentsInput
+  disconnect?: Prisma.StoredFileWhereInput | boolean
+  delete?: Prisma.StoredFileWhereInput | boolean
+  connect?: Prisma.StoredFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredFileUpdateToOneWithWhereWithoutBoardAttachmentsInput, Prisma.StoredFileUpdateWithoutBoardAttachmentsInput>, Prisma.StoredFileUncheckedUpdateWithoutBoardAttachmentsInput>
+}
+
+export type StoredFileCreateNestedOneWithoutBoardMinutesAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutBoardMinutesAttachmentsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutBoardMinutesAttachmentsInput
+  connect?: Prisma.StoredFileWhereUniqueInput
+}
+
+export type StoredFileUpdateOneWithoutBoardMinutesAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutBoardMinutesAttachmentsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutBoardMinutesAttachmentsInput
+  upsert?: Prisma.StoredFileUpsertWithoutBoardMinutesAttachmentsInput
+  disconnect?: Prisma.StoredFileWhereInput | boolean
+  delete?: Prisma.StoredFileWhereInput | boolean
+  connect?: Prisma.StoredFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredFileUpdateToOneWithWhereWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUpdateWithoutBoardMinutesAttachmentsInput>, Prisma.StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput>
+}
+
 export type StoredFileCreateWithoutProgressEntriesInput = {
   id?: string
   mimeType: string
@@ -459,6 +505,8 @@ export type StoredFileCreateWithoutProgressEntriesInput = {
   durationMs?: number | null
   createdAt?: Date | string
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUncheckedCreateWithoutProgressEntriesInput = {
@@ -470,6 +518,8 @@ export type StoredFileUncheckedCreateWithoutProgressEntriesInput = {
   durationMs?: number | null
   createdAt?: Date | string
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileCreateOrConnectWithoutProgressEntriesInput = {
@@ -497,6 +547,8 @@ export type StoredFileUpdateWithoutProgressEntriesInput = {
   durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileUncheckedUpdateWithoutProgressEntriesInput = {
@@ -508,6 +560,8 @@ export type StoredFileUncheckedUpdateWithoutProgressEntriesInput = {
   durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileCreateWithoutSingardAttachmentsInput = {
@@ -519,6 +573,8 @@ export type StoredFileCreateWithoutSingardAttachmentsInput = {
   durationMs?: number | null
   createdAt?: Date | string
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUncheckedCreateWithoutSingardAttachmentsInput = {
@@ -530,6 +586,8 @@ export type StoredFileUncheckedCreateWithoutSingardAttachmentsInput = {
   durationMs?: number | null
   createdAt?: Date | string
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileCreateOrConnectWithoutSingardAttachmentsInput = {
@@ -557,6 +615,8 @@ export type StoredFileUpdateWithoutSingardAttachmentsInput = {
   durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileUncheckedUpdateWithoutSingardAttachmentsInput = {
@@ -568,6 +628,144 @@ export type StoredFileUncheckedUpdateWithoutSingardAttachmentsInput = {
   durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileCreateWithoutBoardAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileUncheckedCreateWithoutBoardAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileCreateOrConnectWithoutBoardAttachmentsInput = {
+  where: Prisma.StoredFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutBoardAttachmentsInput>
+}
+
+export type StoredFileUpsertWithoutBoardAttachmentsInput = {
+  update: Prisma.XOR<Prisma.StoredFileUpdateWithoutBoardAttachmentsInput, Prisma.StoredFileUncheckedUpdateWithoutBoardAttachmentsInput>
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutBoardAttachmentsInput>
+  where?: Prisma.StoredFileWhereInput
+}
+
+export type StoredFileUpdateToOneWithWhereWithoutBoardAttachmentsInput = {
+  where?: Prisma.StoredFileWhereInput
+  data: Prisma.XOR<Prisma.StoredFileUpdateWithoutBoardAttachmentsInput, Prisma.StoredFileUncheckedUpdateWithoutBoardAttachmentsInput>
+}
+
+export type StoredFileUpdateWithoutBoardAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileUncheckedUpdateWithoutBoardAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileCreateWithoutBoardMinutesAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileCreateOrConnectWithoutBoardMinutesAttachmentsInput = {
+  where: Prisma.StoredFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutBoardMinutesAttachmentsInput>
+}
+
+export type StoredFileUpsertWithoutBoardMinutesAttachmentsInput = {
+  update: Prisma.XOR<Prisma.StoredFileUpdateWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput>
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutBoardMinutesAttachmentsInput>
+  where?: Prisma.StoredFileWhereInput
+}
+
+export type StoredFileUpdateToOneWithWhereWithoutBoardMinutesAttachmentsInput = {
+  where?: Prisma.StoredFileWhereInput
+  data: Prisma.XOR<Prisma.StoredFileUpdateWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput>
+}
+
+export type StoredFileUpdateWithoutBoardMinutesAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
 
@@ -578,11 +776,15 @@ export type StoredFileUncheckedUpdateWithoutSingardAttachmentsInput = {
 export type StoredFileCountOutputType = {
   progressEntries: number
   singardAttachments: number
+  boardAttachments: number
+  boardMinutesAttachments: number
 }
 
 export type StoredFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   progressEntries?: boolean | StoredFileCountOutputTypeCountProgressEntriesArgs
   singardAttachments?: boolean | StoredFileCountOutputTypeCountSingardAttachmentsArgs
+  boardAttachments?: boolean | StoredFileCountOutputTypeCountBoardAttachmentsArgs
+  boardMinutesAttachments?: boolean | StoredFileCountOutputTypeCountBoardMinutesAttachmentsArgs
 }
 
 /**
@@ -609,6 +811,20 @@ export type StoredFileCountOutputTypeCountSingardAttachmentsArgs<ExtArgs extends
   where?: Prisma.SingardAttachmentWhereInput
 }
 
+/**
+ * StoredFileCountOutputType without action
+ */
+export type StoredFileCountOutputTypeCountBoardAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardAttachmentWhereInput
+}
+
+/**
+ * StoredFileCountOutputType without action
+ */
+export type StoredFileCountOutputTypeCountBoardMinutesAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardMinutesAttachmentWhereInput
+}
+
 
 export type StoredFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -620,6 +836,8 @@ export type StoredFileSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   createdAt?: boolean
   progressEntries?: boolean | Prisma.StoredFile$progressEntriesArgs<ExtArgs>
   singardAttachments?: boolean | Prisma.StoredFile$singardAttachmentsArgs<ExtArgs>
+  boardAttachments?: boolean | Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>
+  boardMinutesAttachments?: boolean | Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredFileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["storedFile"]>
 
@@ -657,6 +875,8 @@ export type StoredFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type StoredFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   progressEntries?: boolean | Prisma.StoredFile$progressEntriesArgs<ExtArgs>
   singardAttachments?: boolean | Prisma.StoredFile$singardAttachmentsArgs<ExtArgs>
+  boardAttachments?: boolean | Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>
+  boardMinutesAttachments?: boolean | Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredFileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoredFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -667,6 +887,8 @@ export type $StoredFilePayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     progressEntries: Prisma.$ProjectProgressEntryPayload<ExtArgs>[]
     singardAttachments: Prisma.$SingardAttachmentPayload<ExtArgs>[]
+    boardAttachments: Prisma.$BoardAttachmentPayload<ExtArgs>[]
+    boardMinutesAttachments: Prisma.$BoardMinutesAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1072,6 +1294,8 @@ export interface Prisma__StoredFileClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   progressEntries<T extends Prisma.StoredFile$progressEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$progressEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectProgressEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   singardAttachments<T extends Prisma.StoredFile$singardAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$singardAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SingardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardAttachments<T extends Prisma.StoredFile$boardAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardMinutesAttachments<T extends Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1546,6 +1770,54 @@ export type StoredFile$singardAttachmentsArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.SingardAttachmentScalarFieldEnum | Prisma.SingardAttachmentScalarFieldEnum[]
+}
+
+/**
+ * StoredFile.boardAttachments
+ */
+export type StoredFile$boardAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardAttachment
+   */
+  select?: Prisma.BoardAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardAttachment
+   */
+  omit?: Prisma.BoardAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardAttachmentInclude<ExtArgs> | null
+  where?: Prisma.BoardAttachmentWhereInput
+  orderBy?: Prisma.BoardAttachmentOrderByWithRelationInput | Prisma.BoardAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.BoardAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardAttachmentScalarFieldEnum | Prisma.BoardAttachmentScalarFieldEnum[]
+}
+
+/**
+ * StoredFile.boardMinutesAttachments
+ */
+export type StoredFile$boardMinutesAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardMinutesAttachment
+   */
+  select?: Prisma.BoardMinutesAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardMinutesAttachment
+   */
+  omit?: Prisma.BoardMinutesAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardMinutesAttachmentInclude<ExtArgs> | null
+  where?: Prisma.BoardMinutesAttachmentWhereInput
+  orderBy?: Prisma.BoardMinutesAttachmentOrderByWithRelationInput | Prisma.BoardMinutesAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.BoardMinutesAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardMinutesAttachmentScalarFieldEnum | Prisma.BoardMinutesAttachmentScalarFieldEnum[]
 }
 
 /**

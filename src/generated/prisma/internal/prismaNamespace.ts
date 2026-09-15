@@ -433,7 +433,15 @@ export const ModelName = {
   SingardCategory: 'SingardCategory',
   SingardFeedback: 'SingardFeedback',
   SingardAttachment: 'SingardAttachment',
-  SingardActivity: 'SingardActivity'
+  SingardActivity: 'SingardActivity',
+  BoardRequest: 'BoardRequest',
+  BoardAttachment: 'BoardAttachment',
+  BoardStageUnit: 'BoardStageUnit',
+  BoardStagePosition: 'BoardStagePosition',
+  BoardMinutes: 'BoardMinutes',
+  BoardMinutesMember: 'BoardMinutesMember',
+  BoardMinutesAttachment: 'BoardMinutesAttachment',
+  BoardMinutesResolution: 'BoardMinutesResolution'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -449,7 +457,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3191,6 +3199,598 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BoardRequest: {
+      payload: Prisma.$BoardRequestPayload<ExtArgs>
+      fields: Prisma.BoardRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>
+        }
+        findMany: {
+          args: Prisma.BoardRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>[]
+        }
+        create: {
+          args: Prisma.BoardRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>
+        }
+        createMany: {
+          args: Prisma.BoardRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>
+        }
+        update: {
+          args: Prisma.BoardRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardRequest>
+        }
+        groupBy: {
+          args: Prisma.BoardRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoardAttachment: {
+      payload: Prisma.$BoardAttachmentPayload<ExtArgs>
+      fields: Prisma.BoardAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.BoardAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.BoardAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.BoardAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>
+        }
+        update: {
+          args: Prisma.BoardAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardAttachment>
+        }
+        groupBy: {
+          args: Prisma.BoardAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoardStageUnit: {
+      payload: Prisma.$BoardStageUnitPayload<ExtArgs>
+      fields: Prisma.BoardStageUnitFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardStageUnitFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardStageUnitFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardStageUnitFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardStageUnitFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>
+        }
+        findMany: {
+          args: Prisma.BoardStageUnitFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>[]
+        }
+        create: {
+          args: Prisma.BoardStageUnitCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>
+        }
+        createMany: {
+          args: Prisma.BoardStageUnitCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardStageUnitCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardStageUnitDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>
+        }
+        update: {
+          args: Prisma.BoardStageUnitUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardStageUnitDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardStageUnitUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardStageUnitUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardStageUnitUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStageUnitPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardStageUnitAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardStageUnit>
+        }
+        groupBy: {
+          args: Prisma.BoardStageUnitGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardStageUnitGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardStageUnitCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardStageUnitCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoardStagePosition: {
+      payload: Prisma.$BoardStagePositionPayload<ExtArgs>
+      fields: Prisma.BoardStagePositionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardStagePositionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardStagePositionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardStagePositionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardStagePositionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>
+        }
+        findMany: {
+          args: Prisma.BoardStagePositionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>[]
+        }
+        create: {
+          args: Prisma.BoardStagePositionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>
+        }
+        createMany: {
+          args: Prisma.BoardStagePositionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardStagePositionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardStagePositionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>
+        }
+        update: {
+          args: Prisma.BoardStagePositionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardStagePositionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardStagePositionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardStagePositionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardStagePositionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardStagePositionPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardStagePositionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardStagePosition>
+        }
+        groupBy: {
+          args: Prisma.BoardStagePositionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardStagePositionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardStagePositionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardStagePositionCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoardMinutes: {
+      payload: Prisma.$BoardMinutesPayload<ExtArgs>
+      fields: Prisma.BoardMinutesFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardMinutesFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardMinutesFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardMinutesFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardMinutesFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>
+        }
+        findMany: {
+          args: Prisma.BoardMinutesFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>[]
+        }
+        create: {
+          args: Prisma.BoardMinutesCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>
+        }
+        createMany: {
+          args: Prisma.BoardMinutesCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardMinutesCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardMinutesDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>
+        }
+        update: {
+          args: Prisma.BoardMinutesUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardMinutesDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardMinutesUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardMinutesUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardMinutesUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardMinutesAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardMinutes>
+        }
+        groupBy: {
+          args: Prisma.BoardMinutesGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardMinutesGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardMinutesCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardMinutesCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoardMinutesMember: {
+      payload: Prisma.$BoardMinutesMemberPayload<ExtArgs>
+      fields: Prisma.BoardMinutesMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardMinutesMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardMinutesMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardMinutesMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardMinutesMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>
+        }
+        findMany: {
+          args: Prisma.BoardMinutesMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>[]
+        }
+        create: {
+          args: Prisma.BoardMinutesMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>
+        }
+        createMany: {
+          args: Prisma.BoardMinutesMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardMinutesMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardMinutesMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>
+        }
+        update: {
+          args: Prisma.BoardMinutesMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardMinutesMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardMinutesMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardMinutesMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardMinutesMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardMinutesMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardMinutesMember>
+        }
+        groupBy: {
+          args: Prisma.BoardMinutesMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardMinutesMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardMinutesMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardMinutesMemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoardMinutesAttachment: {
+      payload: Prisma.$BoardMinutesAttachmentPayload<ExtArgs>
+      fields: Prisma.BoardMinutesAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardMinutesAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardMinutesAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardMinutesAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardMinutesAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.BoardMinutesAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.BoardMinutesAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.BoardMinutesAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardMinutesAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardMinutesAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>
+        }
+        update: {
+          args: Prisma.BoardMinutesAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardMinutesAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardMinutesAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardMinutesAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardMinutesAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardMinutesAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardMinutesAttachment>
+        }
+        groupBy: {
+          args: Prisma.BoardMinutesAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardMinutesAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardMinutesAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardMinutesAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoardMinutesResolution: {
+      payload: Prisma.$BoardMinutesResolutionPayload<ExtArgs>
+      fields: Prisma.BoardMinutesResolutionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardMinutesResolutionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardMinutesResolutionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardMinutesResolutionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardMinutesResolutionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>
+        }
+        findMany: {
+          args: Prisma.BoardMinutesResolutionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>[]
+        }
+        create: {
+          args: Prisma.BoardMinutesResolutionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>
+        }
+        createMany: {
+          args: Prisma.BoardMinutesResolutionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardMinutesResolutionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardMinutesResolutionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>
+        }
+        update: {
+          args: Prisma.BoardMinutesResolutionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardMinutesResolutionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardMinutesResolutionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardMinutesResolutionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardMinutesResolutionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardMinutesResolutionPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardMinutesResolutionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardMinutesResolution>
+        }
+        groupBy: {
+          args: Prisma.BoardMinutesResolutionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardMinutesResolutionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardMinutesResolutionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardMinutesResolutionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3599,7 +4199,9 @@ export type OrganizationPhoneScalarFieldEnum = (typeof OrganizationPhoneScalarFi
 
 export const OrganizationPositionScalarFieldEnum = {
   id: 'id',
+  code: 'code',
   name: 'name',
+  isSystem: 'isSystem',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3633,6 +4235,7 @@ export const OrganizationUnitScalarFieldEnum = {
   telegram: 'telegram',
   whatsapp: 'whatsapp',
   nutritionRepId: 'nutritionRepId',
+  maxMeals: 'maxMeals',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -3810,6 +4413,131 @@ export const SingardActivityScalarFieldEnum = {
 } as const
 
 export type SingardActivityScalarFieldEnum = (typeof SingardActivityScalarFieldEnum)[keyof typeof SingardActivityScalarFieldEnum]
+
+
+export const BoardRequestScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  requestedAt: 'requestedAt',
+  unitId: 'unitId',
+  orgPositionText: 'orgPositionText',
+  subject: 'subject',
+  justification: 'justification',
+  topicHistory: 'topicHistory',
+  description: 'description',
+  createdById: 'createdById',
+  managementComment: 'managementComment',
+  managementAt: 'managementAt',
+  managementById: 'managementById',
+  legalOrgMatch: 'legalOrgMatch',
+  legalRegulationsMatch: 'legalRegulationsMatch',
+  legalComment: 'legalComment',
+  legalAt: 'legalAt',
+  legalById: 'legalById',
+  budgetProgramHistory: 'budgetProgramHistory',
+  budgetCurrentYearFunding: 'budgetCurrentYearFunding',
+  budgetComment: 'budgetComment',
+  budgetAt: 'budgetAt',
+  budgetById: 'budgetById',
+  secretaryComment: 'secretaryComment',
+  secretaryAt: 'secretaryAt',
+  secretaryById: 'secretaryById',
+  rejectedStage: 'rejectedStage',
+  rejectedComment: 'rejectedComment',
+  rejectedAt: 'rejectedAt',
+  rejectedById: 'rejectedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardRequestScalarFieldEnum = (typeof BoardRequestScalarFieldEnum)[keyof typeof BoardRequestScalarFieldEnum]
+
+
+export const BoardAttachmentScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  stage: 'stage',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  originalName: 'originalName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardAttachmentScalarFieldEnum = (typeof BoardAttachmentScalarFieldEnum)[keyof typeof BoardAttachmentScalarFieldEnum]
+
+
+export const BoardStageUnitScalarFieldEnum = {
+  stage: 'stage',
+  unitId: 'unitId',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardStageUnitScalarFieldEnum = (typeof BoardStageUnitScalarFieldEnum)[keyof typeof BoardStageUnitScalarFieldEnum]
+
+
+export const BoardStagePositionScalarFieldEnum = {
+  stage: 'stage',
+  positionId: 'positionId',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardStagePositionScalarFieldEnum = (typeof BoardStagePositionScalarFieldEnum)[keyof typeof BoardStagePositionScalarFieldEnum]
+
+
+export const BoardMinutesScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  heldAt: 'heldAt',
+  subject: 'subject',
+  body: 'body',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardMinutesScalarFieldEnum = (typeof BoardMinutesScalarFieldEnum)[keyof typeof BoardMinutesScalarFieldEnum]
+
+
+export const BoardMinutesMemberScalarFieldEnum = {
+  id: 'id',
+  minutesId: 'minutesId',
+  userId: 'userId',
+  attendance: 'attendance',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardMinutesMemberScalarFieldEnum = (typeof BoardMinutesMemberScalarFieldEnum)[keyof typeof BoardMinutesMemberScalarFieldEnum]
+
+
+export const BoardMinutesAttachmentScalarFieldEnum = {
+  id: 'id',
+  minutesId: 'minutesId',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  originalName: 'originalName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardMinutesAttachmentScalarFieldEnum = (typeof BoardMinutesAttachmentScalarFieldEnum)[keyof typeof BoardMinutesAttachmentScalarFieldEnum]
+
+
+export const BoardMinutesResolutionScalarFieldEnum = {
+  id: 'id',
+  minutesId: 'minutesId',
+  title: 'title',
+  description: 'description',
+  unitId: 'unitId',
+  dueDate: 'dueDate',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardMinutesResolutionScalarFieldEnum = (typeof BoardMinutesResolutionScalarFieldEnum)[keyof typeof BoardMinutesResolutionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -4158,6 +4886,76 @@ export type ListEnumSingardActivityKindFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'BoardRequestStatus'
+ */
+export type EnumBoardRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardRequestStatus[]'
+ */
+export type ListEnumBoardRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardRequestStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardStage'
+ */
+export type EnumBoardStageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardStage'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardStage[]'
+ */
+export type ListEnumBoardStageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardStage[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardAttachmentKind'
+ */
+export type EnumBoardAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardAttachmentKind'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardAttachmentKind[]'
+ */
+export type ListEnumBoardAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardAttachmentKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardMinutesAttendance'
+ */
+export type EnumBoardMinutesAttendanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMinutesAttendance'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardMinutesAttendance[]'
+ */
+export type ListEnumBoardMinutesAttendanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMinutesAttendance[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardMinutesAttachmentKind'
+ */
+export type EnumBoardMinutesAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMinutesAttachmentKind'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardMinutesAttachmentKind[]'
+ */
+export type ListEnumBoardMinutesAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMinutesAttachmentKind[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -4358,6 +5156,14 @@ export type GlobalOmitConfig = {
   singardFeedback?: Prisma.SingardFeedbackOmit
   singardAttachment?: Prisma.SingardAttachmentOmit
   singardActivity?: Prisma.SingardActivityOmit
+  boardRequest?: Prisma.BoardRequestOmit
+  boardAttachment?: Prisma.BoardAttachmentOmit
+  boardStageUnit?: Prisma.BoardStageUnitOmit
+  boardStagePosition?: Prisma.BoardStagePositionOmit
+  boardMinutes?: Prisma.BoardMinutesOmit
+  boardMinutesMember?: Prisma.BoardMinutesMemberOmit
+  boardMinutesAttachment?: Prisma.BoardMinutesAttachmentOmit
+  boardMinutesResolution?: Prisma.BoardMinutesResolutionOmit
 }
 
 /* Types for Logging */

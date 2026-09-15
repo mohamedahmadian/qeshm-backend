@@ -17,6 +17,18 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
+    code: 'singard',
+    kind: 'MODULE',
+    nameKey: 'modules.singard',
+    children: [
+      { code: 'singard.submit', kind: 'MENU', nameKey: 'menus.singardSubmit' },
+      { code: 'singard.mine', kind: 'MENU', nameKey: 'menus.singardMine' },
+      { code: 'singard.inbox', kind: 'MENU', nameKey: 'menus.singardInbox' },
+      { code: 'singard.categories', kind: 'MENU', nameKey: 'menus.singardCategories' },
+      { code: 'singard.reports', kind: 'MENU', nameKey: 'menus.singardReports' },
+    ],
+  },
+  {
     code: 'projects',
     kind: 'MODULE',
     nameKey: 'modules.projects',
@@ -143,15 +155,18 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
-    code: 'singard',
+    code: 'board',
     kind: 'MODULE',
-    nameKey: 'modules.singard',
+    nameKey: 'modules.board',
     children: [
-      { code: 'singard.submit', kind: 'MENU', nameKey: 'menus.singardSubmit' },
-      { code: 'singard.mine', kind: 'MENU', nameKey: 'menus.singardMine' },
-      { code: 'singard.inbox', kind: 'MENU', nameKey: 'menus.singardInbox' },
-      { code: 'singard.categories', kind: 'MENU', nameKey: 'menus.singardCategories' },
-      { code: 'singard.reports', kind: 'MENU', nameKey: 'menus.singardReports' },
+      { code: 'board.requests', kind: 'MENU', nameKey: 'menus.boardRequests' },
+      { code: 'board.plans', kind: 'MENU', nameKey: 'menus.boardPlans' },
+      { code: 'board.minutes', kind: 'MENU', nameKey: 'menus.boardMinutes' },
+      {
+        code: 'board.permissions',
+        kind: 'MENU',
+        nameKey: 'menus.boardPermissions',
+      },
     ],
   },
 ];

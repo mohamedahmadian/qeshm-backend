@@ -87,7 +87,15 @@ export const ModelName = {
   SingardCategory: 'SingardCategory',
   SingardFeedback: 'SingardFeedback',
   SingardAttachment: 'SingardAttachment',
-  SingardActivity: 'SingardActivity'
+  SingardActivity: 'SingardActivity',
+  BoardRequest: 'BoardRequest',
+  BoardAttachment: 'BoardAttachment',
+  BoardStageUnit: 'BoardStageUnit',
+  BoardStagePosition: 'BoardStagePosition',
+  BoardMinutes: 'BoardMinutes',
+  BoardMinutesMember: 'BoardMinutesMember',
+  BoardMinutesAttachment: 'BoardMinutesAttachment',
+  BoardMinutesResolution: 'BoardMinutesResolution'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -475,7 +483,9 @@ export type OrganizationPhoneScalarFieldEnum = (typeof OrganizationPhoneScalarFi
 
 export const OrganizationPositionScalarFieldEnum = {
   id: 'id',
+  code: 'code',
   name: 'name',
+  isSystem: 'isSystem',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -509,6 +519,7 @@ export const OrganizationUnitScalarFieldEnum = {
   telegram: 'telegram',
   whatsapp: 'whatsapp',
   nutritionRepId: 'nutritionRepId',
+  maxMeals: 'maxMeals',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -686,6 +697,131 @@ export const SingardActivityScalarFieldEnum = {
 } as const
 
 export type SingardActivityScalarFieldEnum = (typeof SingardActivityScalarFieldEnum)[keyof typeof SingardActivityScalarFieldEnum]
+
+
+export const BoardRequestScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  requestedAt: 'requestedAt',
+  unitId: 'unitId',
+  orgPositionText: 'orgPositionText',
+  subject: 'subject',
+  justification: 'justification',
+  topicHistory: 'topicHistory',
+  description: 'description',
+  createdById: 'createdById',
+  managementComment: 'managementComment',
+  managementAt: 'managementAt',
+  managementById: 'managementById',
+  legalOrgMatch: 'legalOrgMatch',
+  legalRegulationsMatch: 'legalRegulationsMatch',
+  legalComment: 'legalComment',
+  legalAt: 'legalAt',
+  legalById: 'legalById',
+  budgetProgramHistory: 'budgetProgramHistory',
+  budgetCurrentYearFunding: 'budgetCurrentYearFunding',
+  budgetComment: 'budgetComment',
+  budgetAt: 'budgetAt',
+  budgetById: 'budgetById',
+  secretaryComment: 'secretaryComment',
+  secretaryAt: 'secretaryAt',
+  secretaryById: 'secretaryById',
+  rejectedStage: 'rejectedStage',
+  rejectedComment: 'rejectedComment',
+  rejectedAt: 'rejectedAt',
+  rejectedById: 'rejectedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardRequestScalarFieldEnum = (typeof BoardRequestScalarFieldEnum)[keyof typeof BoardRequestScalarFieldEnum]
+
+
+export const BoardAttachmentScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  stage: 'stage',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  originalName: 'originalName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardAttachmentScalarFieldEnum = (typeof BoardAttachmentScalarFieldEnum)[keyof typeof BoardAttachmentScalarFieldEnum]
+
+
+export const BoardStageUnitScalarFieldEnum = {
+  stage: 'stage',
+  unitId: 'unitId',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardStageUnitScalarFieldEnum = (typeof BoardStageUnitScalarFieldEnum)[keyof typeof BoardStageUnitScalarFieldEnum]
+
+
+export const BoardStagePositionScalarFieldEnum = {
+  stage: 'stage',
+  positionId: 'positionId',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardStagePositionScalarFieldEnum = (typeof BoardStagePositionScalarFieldEnum)[keyof typeof BoardStagePositionScalarFieldEnum]
+
+
+export const BoardMinutesScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  heldAt: 'heldAt',
+  subject: 'subject',
+  body: 'body',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardMinutesScalarFieldEnum = (typeof BoardMinutesScalarFieldEnum)[keyof typeof BoardMinutesScalarFieldEnum]
+
+
+export const BoardMinutesMemberScalarFieldEnum = {
+  id: 'id',
+  minutesId: 'minutesId',
+  userId: 'userId',
+  attendance: 'attendance',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardMinutesMemberScalarFieldEnum = (typeof BoardMinutesMemberScalarFieldEnum)[keyof typeof BoardMinutesMemberScalarFieldEnum]
+
+
+export const BoardMinutesAttachmentScalarFieldEnum = {
+  id: 'id',
+  minutesId: 'minutesId',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  originalName: 'originalName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardMinutesAttachmentScalarFieldEnum = (typeof BoardMinutesAttachmentScalarFieldEnum)[keyof typeof BoardMinutesAttachmentScalarFieldEnum]
+
+
+export const BoardMinutesResolutionScalarFieldEnum = {
+  id: 'id',
+  minutesId: 'minutesId',
+  title: 'title',
+  description: 'description',
+  unitId: 'unitId',
+  dueDate: 'dueDate',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardMinutesResolutionScalarFieldEnum = (typeof BoardMinutesResolutionScalarFieldEnum)[keyof typeof BoardMinutesResolutionScalarFieldEnum]
 
 
 export const SortOrder = {

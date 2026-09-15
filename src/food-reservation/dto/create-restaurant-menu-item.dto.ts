@@ -8,7 +8,11 @@ import {
   Matches,
   Min,
 } from 'class-validator';
-import { toOptionalBoolean, toOptionalNumber } from '../../common/dto-transform';
+import {
+  emptyToUndefined,
+  toOptionalBoolean,
+  toOptionalNumber,
+} from '../../common/dto-transform';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -24,6 +28,14 @@ export class CreateRestaurantMenuItemDto {
   @IsString()
   @Matches(isoDate, { message: 'تاریخ معتبر نیست' })
   offeredAt: string;
+
+  @IsOptional()
+  @Transform(({ value }) =>
+    emptyToUndefined(typeof value === 'string' ? value.trim() : value),
+  )
+  @IsString()
+  @Matches(isoDate, { message: 'تاریخ معتبر نیست' })
+  offeredUntil?: string;
 
   @Transform(({ value }) => toOptionalNumber(value))
   @IsNumber()

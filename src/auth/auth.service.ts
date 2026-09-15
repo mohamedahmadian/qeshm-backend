@@ -35,6 +35,8 @@ const userSelect = {
   photoId: true,
   orgUnitId: true,
   orgUnit: { select: { id: true, name: true, nutritionRepId: true } },
+  positionId: true,
+  position: { select: { id: true, code: true, name: true } },
 } as const;
 
 type ProfileExtras = {
@@ -242,10 +244,12 @@ export class AuthService {
       photoId?: string | null;
       orgUnitId?: string | null;
       orgUnit?: { id: string; name: string; nutritionRepId: string | null } | null;
+      positionId?: string | null;
+      position?: { id: string; code: string | null; name: string } | null;
     },
     extras?: ProfileExtras,
   ) {
-    const { orgUnit, ...rest } = user;
+    const { orgUnit, position, ...rest } = user;
     const access = await loadUserAccess(this.prisma, user.id);
     const roles = await this.prisma.role.findMany({
       where: { users: { some: { userId: user.id } } },
@@ -255,6 +259,9 @@ export class AuthService {
     return {
       ...rest,
       orgUnit: orgUnit ? { id: orgUnit.id, name: orgUnit.name } : null,
+      position: position
+        ? { id: position.id, code: position.code, name: position.name }
+        : null,
       isNutritionRep: Boolean(orgUnit && orgUnit.nutritionRepId === user.id),
       roles,
       isAdmin: access.isAdmin,

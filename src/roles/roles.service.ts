@@ -4,8 +4,14 @@ import {
   ForbiddenException,
   Injectable,
   NotFoundException,
+  OnModuleInit,
 } from '@nestjs/common';
-import { ADMIN_ROLE_CODE } from '../access/access.constants';
+import {
+  ADMIN_ROLE_CODE,
+  ensureSystemRoles,
+  isReservedRoleCode,
+  isRolePermissionsLocked,
+} from '../access/access.constants';
 import { isKnownPermissionCode } from '../access/permissions-catalog';
 import {
   containsInsensitive,
@@ -55,8 +61,12 @@ function assertPermissionCodes(codes: string[] | undefined) {
 }
 
 @Injectable()
-export class RolesService {
+export class RolesService implements OnModuleInit {
   constructor(private readonly prisma: PrismaService) {}
+
+  async onModuleInit() {
+    await ensureSystemRoles(this.prisma);
+  }
 
   async findAll(query: FindRolesQueryDto) {
     const q = query.q?.trim();
@@ -115,7 +125,7 @@ export class RolesService {
 
   async create(dto: CreateRoleDto) {
     const code = dto.code.trim().toUpperCase();
-    if (code === ADMIN_ROLE_CODE) {
+    if (isReservedRoleCode(code)) {
       throw new BadRequestException('این کد نقش برای نقش سیستمی رزرو شده است');
     }
     await this.assertUniqueCode(code);
@@ -142,12 +152,11 @@ export class RolesService {
       }
       await this.assertUniqueCode(dto.code.trim().toUpperCase(), id);
     }
-    const permissionCodes =
-      current.isSystem || current.code === ADMIN_ROLE_CODE
-        ? undefined
-        : dto.permissionCodes !== undefined
-          ? assertPermissionCodes(dto.permissionCodes)
-          : undefined;
+    const permissionCodes = isRolePermissionsLocked(current.code)
+      ? undefined
+      : dto.permissionCodes !== undefined
+        ? assertPermissionCodes(dto.permissionCodes)
+        : undefined;
     const role = await this.prisma.role.update({
       where: { id },
       data: {
@@ -160,7 +169,7 @@ export class RolesService {
           dto.description === undefined
             ? undefined
             : dto.description.trim() || null,
-        ...(permissionCodes
+        ...(permissionCodes !== undefined
           ? {
               permissions: {
                 deleteMany: {},

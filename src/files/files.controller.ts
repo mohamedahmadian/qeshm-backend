@@ -11,7 +11,11 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import type { Response } from 'express';
-import { FilesService, normalizeMediaType } from './files.service';
+import {
+  FilesService,
+  normalizeDocumentType,
+  normalizeMediaType,
+} from './files.service';
 
 type AudioUpload = {
   buffer: Buffer;
@@ -42,10 +46,23 @@ export class FilesController {
     );
   }
 
+  @Post('documents')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: memoryStorage(),
+      limits: { fileSize: 10 * 1024 * 1024 },
+    }),
+  )
+  uploadDocument(@UploadedFile() file: AudioUpload) {
+    return this.files.storeDocument(file);
+  }
+
   @Get(':id')
   async get(@Param('id') id: string, @Res() res: Response) {
     const file = await this.files.find(id);
-    const mime = normalizeMediaType(file.mimeType);
+    const mime =
+      normalizeDocumentType(file.mimeType, file.originalName) ??
+      normalizeMediaType(file.mimeType);
     const body = Buffer.from(file.data);
     res.setHeader('Content-Type', mime);
     res.setHeader('Content-Length', String(body.length));

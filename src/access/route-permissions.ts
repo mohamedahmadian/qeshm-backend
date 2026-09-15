@@ -14,6 +14,7 @@ const AUTH_ONLY_PREFIXES = [
   '/images',
   '/files',
   '/singard/mine',
+  '/board',
 ];
 
 const LOOKUP_COLLECTIONS = new Set([

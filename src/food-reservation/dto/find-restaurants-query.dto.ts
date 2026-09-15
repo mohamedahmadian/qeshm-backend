@@ -9,6 +9,7 @@ export const restaurantSortFields = [
   'phone',
   'address',
   'menuItemCount',
+  'unitCount',
 ] as const;
 
 export class FindRestaurantsQueryDto extends PaginationQueryDto {

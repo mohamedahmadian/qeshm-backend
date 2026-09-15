@@ -9,6 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { CreateRestaurantMenuItemDto } from './dto/create-restaurant-menu-item.dto';
+import { CancelRestaurantMenuDto } from './dto/cancel-restaurant-menu.dto';
 import { FindRestaurantMenuItemsQueryDto } from './dto/find-restaurant-menu-items-query.dto';
 import { UpdateRestaurantMenuItemDto } from './dto/update-restaurant-menu-item.dto';
 import { RestaurantMenuService } from './restaurant-menu.service';
@@ -31,6 +32,14 @@ export class RestaurantMenuController {
     @Body() dto: CreateRestaurantMenuItemDto,
   ) {
     return this.menu.create(restaurantId, dto);
+  }
+
+  @Post('cancel')
+  cancelRange(
+    @Param('restaurantId') restaurantId: string,
+    @Body() dto: CancelRestaurantMenuDto,
+  ) {
+    return this.menu.cancelRange(restaurantId, dto);
   }
 
   @Get(':id')

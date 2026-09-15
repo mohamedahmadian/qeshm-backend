@@ -224,3 +224,43 @@ export type SingardAttachment = Prisma.SingardAttachmentModel
  * 
  */
 export type SingardActivity = Prisma.SingardActivityModel
+/**
+ * Model BoardRequest
+ * 
+ */
+export type BoardRequest = Prisma.BoardRequestModel
+/**
+ * Model BoardAttachment
+ * 
+ */
+export type BoardAttachment = Prisma.BoardAttachmentModel
+/**
+ * Model BoardStageUnit
+ * 
+ */
+export type BoardStageUnit = Prisma.BoardStageUnitModel
+/**
+ * Model BoardStagePosition
+ * 
+ */
+export type BoardStagePosition = Prisma.BoardStagePositionModel
+/**
+ * Model BoardMinutes
+ * 
+ */
+export type BoardMinutes = Prisma.BoardMinutesModel
+/**
+ * Model BoardMinutesMember
+ * 
+ */
+export type BoardMinutesMember = Prisma.BoardMinutesMemberModel
+/**
+ * Model BoardMinutesAttachment
+ * 
+ */
+export type BoardMinutesAttachment = Prisma.BoardMinutesAttachmentModel
+/**
+ * Model BoardMinutesResolution
+ * 
+ */
+export type BoardMinutesResolution = Prisma.BoardMinutesResolutionModel

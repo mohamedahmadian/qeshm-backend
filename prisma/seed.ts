@@ -2,6 +2,7 @@ import 'dotenv/config';
 import * as bcrypt from 'bcrypt';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../src/generated/prisma/client';
+import { ensureSystemRoles, ADMIN_ROLE_CODE } from '../src/access/access.constants';
 import { geoSeed } from './geo-data';
 import { importProjects } from './import-projects';
 
@@ -82,8 +83,36 @@ async function seedGeo() {
   }
 }
 
+const SYSTEM_POSITIONS = [
+  { code: 'DEPUTY', name: 'معاون' },
+  { code: 'MANAGER', name: 'مدیر' },
+  { code: 'HEAD', name: 'رئیس' },
+  { code: 'SUPERVISOR', name: 'سرپرست' },
+  { code: 'SECRETARY', name: 'دبیر' },
+  { code: 'EXPERT', name: 'کارشناس' },
+] as const;
+
+async function seedPositions() {
+  for (const item of SYSTEM_POSITIONS) {
+    const existing = await prisma.organizationPosition.findFirst({
+      where: { OR: [{ code: item.code }, { name: item.name }] },
+    });
+    if (existing) {
+      await prisma.organizationPosition.update({
+        where: { id: existing.id },
+        data: { code: item.code, name: item.name, isSystem: true },
+      });
+      continue;
+    }
+    await prisma.organizationPosition.create({
+      data: { code: item.code, name: item.name, isSystem: true },
+    });
+  }
+}
+
 async function main() {
   await seedGeo();
+  await seedPositions();
   const passwordHash = await bcrypt.hash('Admin1234', 10);
   const adminUser = await prisma.user.upsert({
     where: { username: 'admin' },
@@ -104,19 +133,9 @@ async function main() {
       status: 'ACTIVE',
     },
   });
-  const adminRole = await prisma.role.upsert({
-    where: { code: 'ADMIN' },
-    update: {
-      name: 'مدیریت',
-      description: 'دسترسی کامل به همه منوها و بخش‌های سامانه',
-      isSystem: true,
-    },
-    create: {
-      code: 'ADMIN',
-      name: 'مدیریت',
-      description: 'دسترسی کامل به همه منوها و بخش‌های سامانه',
-      isSystem: true,
-    },
+  await ensureSystemRoles(prisma, true);
+  const adminRole = await prisma.role.findUniqueOrThrow({
+    where: { code: ADMIN_ROLE_CODE },
   });
   await prisma.userRole.upsert({
     where: {
@@ -124,20 +143,6 @@ async function main() {
     },
     update: {},
     create: { userId: adminUser.id, roleId: adminRole.id },
-  });
-  await prisma.role.upsert({
-    where: { code: 'CITIZEN' },
-    update: {
-      name: 'شهروند و گردشگر',
-      description: 'ثبت نظر در سینگارد و پیگیری نظرهای خود',
-      isSystem: true,
-    },
-    create: {
-      code: 'CITIZEN',
-      name: 'شهروند و گردشگر',
-      description: 'ثبت نظر در سینگارد و پیگیری نظرهای خود',
-      isSystem: true,
-    },
   });
   await importProjects(prisma);
 }

@@ -1,12 +1,15 @@
 import { Transform } from 'class-transformer';
 import {
+  IsInt,
   IsLatitude,
   IsLongitude,
   IsOptional,
   IsString,
   IsUUID,
   Matches,
+  Max,
   MaxLength,
+  Min,
   MinLength,
   ValidateIf,
 } from 'class-validator';
@@ -114,4 +117,12 @@ export class CreateOrganizationUnitDto {
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
   nutritionRepId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalNumber(value))
+  @ValidateIf((_, value) => value != null)
+  @IsInt()
+  @Min(1)
+  @Max(9999)
+  maxMeals?: number | null;
 }

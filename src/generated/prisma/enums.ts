@@ -167,3 +167,50 @@ export const SingardActivityKind = {
 } as const
 
 export type SingardActivityKind = (typeof SingardActivityKind)[keyof typeof SingardActivityKind]
+
+
+export const BoardRequestStatus = {
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  PENDING_LEGAL: 'PENDING_LEGAL',
+  PENDING_BUDGET: 'PENDING_BUDGET',
+  PENDING_SECRETARY: 'PENDING_SECRETARY',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type BoardRequestStatus = (typeof BoardRequestStatus)[keyof typeof BoardRequestStatus]
+
+
+export const BoardStage = {
+  REQUEST: 'REQUEST',
+  MANAGEMENT: 'MANAGEMENT',
+  LEGAL: 'LEGAL',
+  BUDGET: 'BUDGET',
+  SECRETARY: 'SECRETARY'
+} as const
+
+export type BoardStage = (typeof BoardStage)[keyof typeof BoardStage]
+
+
+export const BoardAttachmentKind = {
+  IMAGE: 'IMAGE',
+  FILE: 'FILE'
+} as const
+
+export type BoardAttachmentKind = (typeof BoardAttachmentKind)[keyof typeof BoardAttachmentKind]
+
+
+export const BoardMinutesAttendance = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT'
+} as const
+
+export type BoardMinutesAttendance = (typeof BoardMinutesAttendance)[keyof typeof BoardMinutesAttendance]
+
+
+export const BoardMinutesAttachmentKind = {
+  IMAGE: 'IMAGE',
+  AUDIO: 'AUDIO'
+} as const
+
+export type BoardMinutesAttachmentKind = (typeof BoardMinutesAttachmentKind)[keyof typeof BoardMinutesAttachmentKind]

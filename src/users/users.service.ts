@@ -18,6 +18,7 @@ import {
 } from '../common/national-id';
 import { normalizePhone, phoneLookupValues } from '../common/phone';
 import { resolveSortOrder } from '../common/sort-query';
+import { ensureEmployeeRole } from '../access/access.constants';
 import { Prisma, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
@@ -267,11 +268,8 @@ export class UsersService {
       },
       select: userSelect,
     });
-    if (dto.roleIds !== undefined) {
-      await this.syncUserRoles(user.id, dto.roleIds);
-      return this.findOne(user.id);
-    }
-    return mapUser(user);
+    await this.assignRolesOnCreate(user.id, dto.roleIds);
+    return this.findOne(user.id);
   }
 
   async update(id: string, dto: UpdateUserDto) {
@@ -355,8 +353,14 @@ export class UsersService {
   }
 
   async updateOwnAccount(id: string, dto: UpdateUserDto) {
-    const { status: _status, password: _password, roleIds: _roleIds, ...rest } =
-      dto;
+    const {
+      status: _status,
+      password: _password,
+      roleIds: _roleIds,
+      orgUnitId: _orgUnitId,
+      positionId: _positionId,
+      ...rest
+    } = dto;
     return this.update(id, rest);
   }
 
@@ -703,6 +707,18 @@ export class UsersService {
         throw new BadRequestException('شهر متعلق به این استان نیست');
       }
     }
+  }
+
+  private async assignRolesOnCreate(userId: string, roleIds?: string[]) {
+    const unique = [...new Set((roleIds ?? []).filter(Boolean))];
+    if (unique.length) {
+      await this.syncUserRoles(userId, unique);
+      return;
+    }
+    const employee = await ensureEmployeeRole(this.prisma);
+    await this.prisma.userRole.create({
+      data: { userId, roleId: employee.id },
+    });
   }
 
   private async syncUserRoles(userId: string, roleIds: string[]) {

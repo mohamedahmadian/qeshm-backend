@@ -107,6 +107,8 @@ model StoredImage {
   restaurantLogos        Restaurant[] @relation("RestaurantLogo")
   progressImages         ProjectProgressImage[]
   singardAttachments     SingardAttachment[]
+  boardAttachments       BoardAttachment[]
+  boardMinutesAttachments BoardMinutesAttachment[]
   createdAt              DateTime @default(now())
 
   @@map("stored_images")
@@ -239,6 +241,14 @@ model User {
   singardFeedbacks   SingardFeedback[]     @relation("SingardFeedbackAuthor")
   singardReplies     SingardFeedback[]     @relation("SingardFeedbackReplier")
   singardActivities  SingardActivity[]
+  boardRequestsCreated    BoardRequest[] @relation("BoardRequestAuthor")
+  boardRequestsRejected   BoardRequest[] @relation("BoardRequestRejecter")
+  boardManagementReviews  BoardRequest[] @relation("BoardManagementReviewer")
+  boardLegalReviews       BoardRequest[] @relation("BoardLegalReviewer")
+  boardBudgetReviews      BoardRequest[] @relation("BoardBudgetReviewer")
+  boardSecretaryReviews   BoardRequest[] @relation("BoardSecretaryReviewer")
+  boardMinutesCreated     BoardMinutes[] @relation("BoardMinutesAuthor")
+  boardMinutesMemberships BoardMinutesMember[]
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
@@ -360,6 +370,8 @@ model StoredFile {
   createdAt    DateTime               @default(now())
   progressEntries ProjectProgressEntry[]
   singardAttachments SingardAttachment[]
+  boardAttachments   BoardAttachment[]
+  boardMinutesAttachments BoardMinutesAttachment[]
 
   @@map("stored_files")
 }
@@ -582,13 +594,17 @@ model OrganizationPhone {
 }
 
 model OrganizationPosition {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  users     User[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                  String               @id @default(uuid())
+  code                String?              @unique
+  name                String               @unique
+  isSystem            Boolean              @default(false)
+  users               User[]
+  boardStagePositions BoardStagePosition[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
 
   @@index([name])
+  @@index([isSystem])
   @@index([createdAt])
   @@map("organization_positions")
 }
@@ -625,11 +641,15 @@ model OrganizationUnit {
   whatsapp       String?
   nutritionRepId String?
   nutritionRep   User?                @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
+  maxMeals       Int?
   employees      User[]               @relation("UnitEmployees")
   restaurants    OrganizationUnitRestaurant[]
   reservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[]
   projectOperators ProjectOperator[]
+  boardRequests    BoardRequest[]
+  boardStageUnits  BoardStageUnit[]
+  boardMinutesResolutions BoardMinutesResolution[]
   createdAt      DateTime             @default(now())
   updatedAt      DateTime             @updatedAt
 
@@ -899,4 +919,209 @@ model SingardActivity {
   @@index([createdById])
   @@index([createdAt])
   @@map("singard_activities")
+}
+
+enum BoardRequestStatus {
+  PENDING_REVIEW
+  PENDING_LEGAL
+  PENDING_BUDGET
+  PENDING_SECRETARY
+  APPROVED
+  REJECTED
+}
+
+enum BoardStage {
+  REQUEST
+  MANAGEMENT
+  LEGAL
+  BUDGET
+  SECRETARY
+}
+
+enum BoardAttachmentKind {
+  IMAGE
+  FILE
+}
+
+model BoardRequest {
+  id              String             @id @default(uuid())
+  status          BoardRequestStatus @default(PENDING_REVIEW)
+  requestedAt     DateTime           @db.Date
+  unitId          String
+  unit            OrganizationUnit   @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  orgPositionText String
+  subject         String
+  justification   String?
+  topicHistory    String?
+  description     String?
+  createdById     String
+  createdBy       User               @relation("BoardRequestAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  managementComment String?
+  managementAt      DateTime?        @db.Date
+  managementById    String?
+  managementBy      User?            @relation("BoardManagementReviewer", fields: [managementById], references: [id], onDelete: SetNull)
+  legalOrgMatch            Boolean?
+  legalRegulationsMatch    Boolean?
+  legalComment             String?
+  legalAt                  DateTime? @db.Date
+  legalById                String?
+  legalBy                  User?     @relation("BoardLegalReviewer", fields: [legalById], references: [id], onDelete: SetNull)
+  budgetProgramHistory       Boolean?
+  budgetCurrentYearFunding   Boolean?
+  budgetComment              String?
+  budgetAt                   DateTime? @db.Date
+  budgetById                 String?
+  budgetBy                   User?     @relation("BoardBudgetReviewer", fields: [budgetById], references: [id], onDelete: SetNull)
+  secretaryComment String?
+  secretaryAt      DateTime?         @db.Date
+  secretaryById    String?
+  secretaryBy      User?             @relation("BoardSecretaryReviewer", fields: [secretaryById], references: [id], onDelete: SetNull)
+  rejectedStage    BoardStage?
+  rejectedComment  String?
+  rejectedAt       DateTime?         @db.Date
+  rejectedById     String?
+  rejectedBy       User?             @relation("BoardRequestRejecter", fields: [rejectedById], references: [id], onDelete: SetNull)
+  attachments      BoardAttachment[]
+  minutes          BoardMinutes[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  @@index([status])
+  @@index([unitId])
+  @@index([createdById])
+  @@index([requestedAt])
+  @@index([subject])
+  @@index([createdAt])
+  @@map("board_requests")
+}
+
+model BoardAttachment {
+  id           String               @id @default(uuid())
+  requestId    String
+  request      BoardRequest         @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  stage        BoardStage
+  kind         BoardAttachmentKind
+  imageId      String?
+  image        StoredImage?         @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  fileId       String?
+  file         StoredFile?          @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  originalName String?
+  sortOrder    Int                  @default(0)
+  createdAt    DateTime             @default(now())
+
+  @@index([requestId, sortOrder])
+  @@index([stage])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("board_attachments")
+}
+
+model BoardStageUnit {
+  stage     BoardStage
+  unitId    String
+  unit      OrganizationUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  createdAt DateTime         @default(now())
+
+  @@id([stage, unitId])
+  @@index([unitId])
+  @@map("board_stage_units")
+}
+
+model BoardStagePosition {
+  stage      BoardStage
+  positionId String
+  position   OrganizationPosition @relation(fields: [positionId], references: [id], onDelete: Cascade)
+  createdAt  DateTime             @default(now())
+
+  @@id([stage, positionId])
+  @@index([positionId])
+  @@map("board_stage_positions")
+}
+
+enum BoardMinutesAttendance {
+  PRESENT
+  ABSENT
+}
+
+enum BoardMinutesAttachmentKind {
+  IMAGE
+  AUDIO
+}
+
+model BoardMinutes {
+  id          String                     @id @default(uuid())
+  requestId   String?
+  request     BoardRequest?              @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  heldAt      DateTime                   @db.Date
+  subject     String
+  body        String?
+  createdById String
+  createdBy   User                       @relation("BoardMinutesAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  members     BoardMinutesMember[]
+  attachments BoardMinutesAttachment[]
+  resolutions BoardMinutesResolution[]
+  createdAt   DateTime                   @default(now())
+  updatedAt   DateTime                   @updatedAt
+
+  @@index([requestId])
+  @@index([heldAt])
+  @@index([subject])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("board_minutes")
+}
+
+model BoardMinutesMember {
+  id          String                   @id @default(uuid())
+  minutesId   String
+  minutes     BoardMinutes             @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User                     @relation(fields: [userId], references: [id], onDelete: Restrict)
+  attendance  BoardMinutesAttendance   @default(PRESENT)
+  createdAt   DateTime                 @default(now())
+
+  @@unique([minutesId, userId])
+  @@index([userId])
+  @@index([minutesId])
+  @@map("board_minutes_members")
+}
+
+model BoardMinutesAttachment {
+  id           String                      @id @default(uuid())
+  minutesId    String
+  minutes      BoardMinutes                @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  kind         BoardMinutesAttachmentKind
+  imageId      String?
+  image        StoredImage?                @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  fileId       String?
+  file         StoredFile?                 @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  originalName String?
+  sortOrder    Int                         @default(0)
+  createdAt    DateTime                    @default(now())
+
+  @@index([minutesId, sortOrder])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("board_minutes_attachments")
+}
+
+model BoardMinutesResolution {
+  id          String           @id @default(uuid())
+  minutesId   String
+  minutes     BoardMinutes     @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  unitId      String
+  unit        OrganizationUnit @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  dueDate     DateTime?        @db.Date
+  notes       String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([minutesId])
+  @@index([unitId])
+  @@index([dueDate])
+  @@index([title])
+  @@index([createdAt])
+  @@map("board_minutes_resolutions")
 }

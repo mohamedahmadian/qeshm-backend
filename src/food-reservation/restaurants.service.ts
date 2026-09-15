@@ -25,7 +25,7 @@ const restaurantSelect = {
   logoId: true,
   createdAt: true,
   updatedAt: true,
-  _count: { select: { menuItems: true } },
+  _count: { select: { menuItems: true, orgUnits: true } },
 } satisfies Prisma.RestaurantSelect;
 
 function optionalConnect(id: string | null | undefined) {
@@ -55,6 +55,7 @@ export class RestaurantsService {
         phone: (dir) => ({ phone: dir }),
         address: (dir) => ({ address: dir }),
         menuItemCount: (dir) => ({ menuItems: { _count: dir } }),
+        unitCount: (dir) => ({ orgUnits: { _count: dir } }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );

@@ -26,21 +26,27 @@ export type AggregateOrganizationPosition = {
 
 export type OrganizationPositionMinAggregateOutputType = {
   id: string | null
+  code: string | null
   name: string | null
+  isSystem: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type OrganizationPositionMaxAggregateOutputType = {
   id: string | null
+  code: string | null
   name: string | null
+  isSystem: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type OrganizationPositionCountAggregateOutputType = {
   id: number
+  code: number
   name: number
+  isSystem: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -49,21 +55,27 @@ export type OrganizationPositionCountAggregateOutputType = {
 
 export type OrganizationPositionMinAggregateInputType = {
   id?: true
+  code?: true
   name?: true
+  isSystem?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type OrganizationPositionMaxAggregateInputType = {
   id?: true
+  code?: true
   name?: true
+  isSystem?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type OrganizationPositionCountAggregateInputType = {
   id?: true
+  code?: true
   name?: true
+  isSystem?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -143,7 +155,9 @@ export type OrganizationPositionGroupByArgs<ExtArgs extends runtime.Types.Extens
 
 export type OrganizationPositionGroupByOutputType = {
   id: string
+  code: string | null
   name: string
+  isSystem: boolean
   createdAt: Date
   updatedAt: Date
   _count: OrganizationPositionCountAggregateOutputType | null
@@ -171,34 +185,45 @@ export type OrganizationPositionWhereInput = {
   OR?: Prisma.OrganizationPositionWhereInput[]
   NOT?: Prisma.OrganizationPositionWhereInput | Prisma.OrganizationPositionWhereInput[]
   id?: Prisma.StringFilter<"OrganizationPosition"> | string
+  code?: Prisma.StringNullableFilter<"OrganizationPosition"> | string | null
   name?: Prisma.StringFilter<"OrganizationPosition"> | string
+  isSystem?: Prisma.BoolFilter<"OrganizationPosition"> | boolean
   createdAt?: Prisma.DateTimeFilter<"OrganizationPosition"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationPosition"> | Date | string
   users?: Prisma.UserListRelationFilter
+  boardStagePositions?: Prisma.BoardStagePositionListRelationFilter
 }
 
 export type OrganizationPositionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
+  boardStagePositions?: Prisma.BoardStagePositionOrderByRelationAggregateInput
 }
 
 export type OrganizationPositionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  code?: string
   name?: string
   AND?: Prisma.OrganizationPositionWhereInput | Prisma.OrganizationPositionWhereInput[]
   OR?: Prisma.OrganizationPositionWhereInput[]
   NOT?: Prisma.OrganizationPositionWhereInput | Prisma.OrganizationPositionWhereInput[]
+  isSystem?: Prisma.BoolFilter<"OrganizationPosition"> | boolean
   createdAt?: Prisma.DateTimeFilter<"OrganizationPosition"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationPosition"> | Date | string
   users?: Prisma.UserListRelationFilter
-}, "id" | "name">
+  boardStagePositions?: Prisma.BoardStagePositionListRelationFilter
+}, "id" | "code" | "name">
 
 export type OrganizationPositionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrganizationPositionCountOrderByAggregateInput
@@ -211,60 +236,80 @@ export type OrganizationPositionScalarWhereWithAggregatesInput = {
   OR?: Prisma.OrganizationPositionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OrganizationPositionScalarWhereWithAggregatesInput | Prisma.OrganizationPositionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"OrganizationPosition"> | string
+  code?: Prisma.StringNullableWithAggregatesFilter<"OrganizationPosition"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"OrganizationPosition"> | string
+  isSystem?: Prisma.BoolWithAggregatesFilter<"OrganizationPosition"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationPosition"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationPosition"> | Date | string
 }
 
 export type OrganizationPositionCreateInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutPositionInput
+  boardStagePositions?: Prisma.BoardStagePositionCreateNestedManyWithoutPositionInput
 }
 
 export type OrganizationPositionUncheckedCreateInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutPositionInput
+  boardStagePositions?: Prisma.BoardStagePositionUncheckedCreateNestedManyWithoutPositionInput
 }
 
 export type OrganizationPositionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutPositionNestedInput
+  boardStagePositions?: Prisma.BoardStagePositionUpdateManyWithoutPositionNestedInput
 }
 
 export type OrganizationPositionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutPositionNestedInput
+  boardStagePositions?: Prisma.BoardStagePositionUncheckedUpdateManyWithoutPositionNestedInput
 }
 
 export type OrganizationPositionCreateManyInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type OrganizationPositionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrganizationPositionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -276,23 +321,34 @@ export type OrganizationPositionNullableScalarRelationFilter = {
 
 export type OrganizationPositionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OrganizationPositionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OrganizationPositionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type OrganizationPositionScalarRelationFilter = {
+  is?: Prisma.OrganizationPositionWhereInput
+  isNot?: Prisma.OrganizationPositionWhereInput
 }
 
 export type OrganizationPositionCreateNestedOneWithoutUsersInput = {
@@ -311,18 +367,38 @@ export type OrganizationPositionUpdateOneWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationPositionUpdateToOneWithWhereWithoutUsersInput, Prisma.OrganizationPositionUpdateWithoutUsersInput>, Prisma.OrganizationPositionUncheckedUpdateWithoutUsersInput>
 }
 
+export type OrganizationPositionCreateNestedOneWithoutBoardStagePositionsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPositionCreateWithoutBoardStagePositionsInput, Prisma.OrganizationPositionUncheckedCreateWithoutBoardStagePositionsInput>
+  connectOrCreate?: Prisma.OrganizationPositionCreateOrConnectWithoutBoardStagePositionsInput
+  connect?: Prisma.OrganizationPositionWhereUniqueInput
+}
+
+export type OrganizationPositionUpdateOneRequiredWithoutBoardStagePositionsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationPositionCreateWithoutBoardStagePositionsInput, Prisma.OrganizationPositionUncheckedCreateWithoutBoardStagePositionsInput>
+  connectOrCreate?: Prisma.OrganizationPositionCreateOrConnectWithoutBoardStagePositionsInput
+  upsert?: Prisma.OrganizationPositionUpsertWithoutBoardStagePositionsInput
+  connect?: Prisma.OrganizationPositionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationPositionUpdateToOneWithWhereWithoutBoardStagePositionsInput, Prisma.OrganizationPositionUpdateWithoutBoardStagePositionsInput>, Prisma.OrganizationPositionUncheckedUpdateWithoutBoardStagePositionsInput>
+}
+
 export type OrganizationPositionCreateWithoutUsersInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  boardStagePositions?: Prisma.BoardStagePositionCreateNestedManyWithoutPositionInput
 }
 
 export type OrganizationPositionUncheckedCreateWithoutUsersInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  boardStagePositions?: Prisma.BoardStagePositionUncheckedCreateNestedManyWithoutPositionInput
 }
 
 export type OrganizationPositionCreateOrConnectWithoutUsersInput = {
@@ -343,16 +419,78 @@ export type OrganizationPositionUpdateToOneWithWhereWithoutUsersInput = {
 
 export type OrganizationPositionUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  boardStagePositions?: Prisma.BoardStagePositionUpdateManyWithoutPositionNestedInput
 }
 
 export type OrganizationPositionUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  boardStagePositions?: Prisma.BoardStagePositionUncheckedUpdateManyWithoutPositionNestedInput
+}
+
+export type OrganizationPositionCreateWithoutBoardStagePositionsInput = {
+  id?: string
+  code?: string | null
+  name: string
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutPositionInput
+}
+
+export type OrganizationPositionUncheckedCreateWithoutBoardStagePositionsInput = {
+  id?: string
+  code?: string | null
+  name: string
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutPositionInput
+}
+
+export type OrganizationPositionCreateOrConnectWithoutBoardStagePositionsInput = {
+  where: Prisma.OrganizationPositionWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationPositionCreateWithoutBoardStagePositionsInput, Prisma.OrganizationPositionUncheckedCreateWithoutBoardStagePositionsInput>
+}
+
+export type OrganizationPositionUpsertWithoutBoardStagePositionsInput = {
+  update: Prisma.XOR<Prisma.OrganizationPositionUpdateWithoutBoardStagePositionsInput, Prisma.OrganizationPositionUncheckedUpdateWithoutBoardStagePositionsInput>
+  create: Prisma.XOR<Prisma.OrganizationPositionCreateWithoutBoardStagePositionsInput, Prisma.OrganizationPositionUncheckedCreateWithoutBoardStagePositionsInput>
+  where?: Prisma.OrganizationPositionWhereInput
+}
+
+export type OrganizationPositionUpdateToOneWithWhereWithoutBoardStagePositionsInput = {
+  where?: Prisma.OrganizationPositionWhereInput
+  data: Prisma.XOR<Prisma.OrganizationPositionUpdateWithoutBoardStagePositionsInput, Prisma.OrganizationPositionUncheckedUpdateWithoutBoardStagePositionsInput>
+}
+
+export type OrganizationPositionUpdateWithoutBoardStagePositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutPositionNestedInput
+}
+
+export type OrganizationPositionUncheckedUpdateWithoutBoardStagePositionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutPositionNestedInput
 }
 
 
@@ -362,10 +500,12 @@ export type OrganizationPositionUncheckedUpdateWithoutUsersInput = {
 
 export type OrganizationPositionCountOutputType = {
   users: number
+  boardStagePositions: number
 }
 
 export type OrganizationPositionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | OrganizationPositionCountOutputTypeCountUsersArgs
+  boardStagePositions?: boolean | OrganizationPositionCountOutputTypeCountBoardStagePositionsArgs
 }
 
 /**
@@ -385,40 +525,57 @@ export type OrganizationPositionCountOutputTypeCountUsersArgs<ExtArgs extends ru
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * OrganizationPositionCountOutputType without action
+ */
+export type OrganizationPositionCountOutputTypeCountBoardStagePositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardStagePositionWhereInput
+}
+
 
 export type OrganizationPositionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
   name?: boolean
+  isSystem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   users?: boolean | Prisma.OrganizationPosition$usersArgs<ExtArgs>
+  boardStagePositions?: boolean | Prisma.OrganizationPosition$boardStagePositionsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationPositionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationPosition"]>
 
 export type OrganizationPositionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
   name?: boolean
+  isSystem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["organizationPosition"]>
 
 export type OrganizationPositionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
   name?: boolean
+  isSystem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["organizationPosition"]>
 
 export type OrganizationPositionSelectScalar = {
   id?: boolean
+  code?: boolean
   name?: boolean
+  isSystem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrganizationPositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationPosition"]>
+export type OrganizationPositionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "isSystem" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationPosition"]>
 export type OrganizationPositionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.OrganizationPosition$usersArgs<ExtArgs>
+  boardStagePositions?: boolean | Prisma.OrganizationPosition$boardStagePositionsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationPositionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationPositionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -428,10 +585,13 @@ export type $OrganizationPositionPayload<ExtArgs extends runtime.Types.Extension
   name: "OrganizationPosition"
   objects: {
     users: Prisma.$UserPayload<ExtArgs>[]
+    boardStagePositions: Prisma.$BoardStagePositionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    code: string | null
     name: string
+    isSystem: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["organizationPosition"]>
@@ -829,6 +989,7 @@ readonly fields: OrganizationPositionFieldRefs;
 export interface Prisma__OrganizationPositionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.OrganizationPosition$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPosition$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardStagePositions<T extends Prisma.OrganizationPosition$boardStagePositionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationPosition$boardStagePositionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardStagePositionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -859,7 +1020,9 @@ export interface Prisma__OrganizationPositionClient<T, Null = never, ExtArgs ext
  */
 export interface OrganizationPositionFieldRefs {
   readonly id: Prisma.FieldRef<"OrganizationPosition", 'String'>
+  readonly code: Prisma.FieldRef<"OrganizationPosition", 'String'>
   readonly name: Prisma.FieldRef<"OrganizationPosition", 'String'>
+  readonly isSystem: Prisma.FieldRef<"OrganizationPosition", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"OrganizationPosition", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"OrganizationPosition", 'DateTime'>
 }
@@ -1276,6 +1439,30 @@ export type OrganizationPosition$usersArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * OrganizationPosition.boardStagePositions
+ */
+export type OrganizationPosition$boardStagePositionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardStagePosition
+   */
+  select?: Prisma.BoardStagePositionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardStagePosition
+   */
+  omit?: Prisma.BoardStagePositionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardStagePositionInclude<ExtArgs> | null
+  where?: Prisma.BoardStagePositionWhereInput
+  orderBy?: Prisma.BoardStagePositionOrderByWithRelationInput | Prisma.BoardStagePositionOrderByWithRelationInput[]
+  cursor?: Prisma.BoardStagePositionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardStagePositionScalarFieldEnum | Prisma.BoardStagePositionScalarFieldEnum[]
 }
 
 /**
