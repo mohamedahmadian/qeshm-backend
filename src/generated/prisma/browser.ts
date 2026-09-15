@@ -58,6 +58,11 @@ export type ProjectGroup = Prisma.ProjectGroupModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model ProjectDocument
+ * 
+ */
+export type ProjectDocument = Prisma.ProjectDocumentModel
+/**
  * Model ProjectOperator
  * 
  */

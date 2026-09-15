@@ -378,8 +378,8 @@ export class ProjectsService {
 
   async remove(id: string) {
     await this.findOne(id);
-    await this.documents.removeProjectFiles(id);
     await this.prisma.project.delete({ where: { id } });
+    await this.documents.removeProjectFiles(id);
     return { ok: true };
   }
 

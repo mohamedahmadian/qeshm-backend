@@ -31,7 +31,7 @@ const fileUpload = FileInterceptor('file', {
   limits: { fileSize: 10 * 1024 * 1024 },
 });
 
-function sendDocument(
+export function sendDocument(
   res: Response,
   file: { data: Buffer; mimeType: string; originalName: string },
 ) {

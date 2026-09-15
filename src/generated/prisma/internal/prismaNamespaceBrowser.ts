@@ -59,6 +59,7 @@ export const ModelName = {
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
   Project: 'Project',
+  ProjectDocument: 'ProjectDocument',
   ProjectOperator: 'ProjectOperator',
   ProjectPhase: 'ProjectPhase',
   StoredFile: 'StoredFile',
@@ -287,6 +288,22 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const ProjectDocumentScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  title: 'title',
+  description: 'description',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  storageKey: 'storageKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectDocumentScalarFieldEnum = (typeof ProjectDocumentScalarFieldEnum)[keyof typeof ProjectDocumentScalarFieldEnum]
 
 
 export const ProjectOperatorScalarFieldEnum = {

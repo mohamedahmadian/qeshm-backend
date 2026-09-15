@@ -393,6 +393,7 @@ export type ProjectWhereInput = {
   contractorLinks?: Prisma.ProjectContractorProjectListRelationFilter
   phases?: Prisma.ProjectPhaseListRelationFilter
   progressEntries?: Prisma.ProjectProgressEntryListRelationFilter
+  documents?: Prisma.ProjectDocumentListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -430,6 +431,7 @@ export type ProjectOrderByWithRelationInput = {
   contractorLinks?: Prisma.ProjectContractorProjectOrderByRelationAggregateInput
   phases?: Prisma.ProjectPhaseOrderByRelationAggregateInput
   progressEntries?: Prisma.ProjectProgressEntryOrderByRelationAggregateInput
+  documents?: Prisma.ProjectDocumentOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -470,6 +472,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   contractorLinks?: Prisma.ProjectContractorProjectListRelationFilter
   phases?: Prisma.ProjectPhaseListRelationFilter
   progressEntries?: Prisma.ProjectProgressEntryListRelationFilter
+  documents?: Prisma.ProjectDocumentListRelationFilter
 }, "id" | "code">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -568,6 +571,7 @@ export type ProjectCreateInput = {
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -602,6 +606,7 @@ export type ProjectUncheckedCreateInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -636,6 +641,7 @@ export type ProjectUpdateInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -670,6 +676,7 @@ export type ProjectUncheckedUpdateInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -977,6 +984,20 @@ export type ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput = {
   deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
 }
 
+export type ProjectCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutDocumentsInput, Prisma.ProjectUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutDocumentsInput, Prisma.ProjectUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.ProjectUpsertWithoutDocumentsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutDocumentsInput, Prisma.ProjectUpdateWithoutDocumentsInput>, Prisma.ProjectUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type ProjectCreateNestedOneWithoutOperatorsInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutOperatorsInput, Prisma.ProjectUncheckedCreateWithoutOperatorsInput>
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutOperatorsInput
@@ -1120,6 +1141,7 @@ export type ProjectCreateWithoutGroupInput = {
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutGroupInput = {
@@ -1153,6 +1175,7 @@ export type ProjectUncheckedCreateWithoutGroupInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutGroupInput = {
@@ -1243,6 +1266,7 @@ export type ProjectCreateWithoutReplacedByInput = {
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutReplacedByInput = {
@@ -1276,6 +1300,7 @@ export type ProjectUncheckedCreateWithoutReplacedByInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutReplacedByInput = {
@@ -1314,6 +1339,7 @@ export type ProjectCreateWithoutReplacementProjectInput = {
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutReplacementProjectInput = {
@@ -1347,6 +1373,7 @@ export type ProjectUncheckedCreateWithoutReplacementProjectInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutReplacementProjectInput = {
@@ -1401,6 +1428,7 @@ export type ProjectUpdateWithoutReplacedByInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutReplacedByInput = {
@@ -1434,6 +1462,7 @@ export type ProjectUncheckedUpdateWithoutReplacedByInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUpsertWithWhereUniqueWithoutReplacementProjectInput = {
@@ -1450,6 +1479,158 @@ export type ProjectUpdateWithWhereUniqueWithoutReplacementProjectInput = {
 export type ProjectUpdateManyWithWhereWithoutReplacementProjectInput = {
   where: Prisma.ProjectScalarWhereInput
   data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectInput>
+}
+
+export type ProjectCreateWithoutDocumentsInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  importance?: $Enums.ProjectImportance
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
+  replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
+  operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  replacementProjectId?: string | null
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
+  operators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorUncheckedCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutDocumentsInput, Prisma.ProjectUncheckedCreateWithoutDocumentsInput>
+}
+
+export type ProjectUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutDocumentsInput, Prisma.ProjectUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutDocumentsInput, Prisma.ProjectUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutDocumentsInput, Prisma.ProjectUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type ProjectUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
+  replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
+  operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
+  operators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutOperatorsInput = {
@@ -1483,6 +1664,7 @@ export type ProjectCreateWithoutOperatorsInput = {
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutOperatorsInput = {
@@ -1516,6 +1698,7 @@ export type ProjectUncheckedCreateWithoutOperatorsInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutOperatorsInput = {
@@ -1565,6 +1748,7 @@ export type ProjectUpdateWithoutOperatorsInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutOperatorsInput = {
@@ -1598,6 +1782,7 @@ export type ProjectUncheckedUpdateWithoutOperatorsInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPhasesInput = {
@@ -1631,6 +1816,7 @@ export type ProjectCreateWithoutPhasesInput = {
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPhasesInput = {
@@ -1664,6 +1850,7 @@ export type ProjectUncheckedCreateWithoutPhasesInput = {
   contractors?: Prisma.ProjectContractorUncheckedCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPhasesInput = {
@@ -1713,6 +1900,7 @@ export type ProjectUpdateWithoutPhasesInput = {
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPhasesInput = {
@@ -1746,6 +1934,7 @@ export type ProjectUncheckedUpdateWithoutPhasesInput = {
   contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutProgressEntriesInput = {
@@ -1779,6 +1968,7 @@ export type ProjectCreateWithoutProgressEntriesInput = {
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutProgressEntriesInput = {
@@ -1812,6 +2002,7 @@ export type ProjectUncheckedCreateWithoutProgressEntriesInput = {
   contractors?: Prisma.ProjectContractorUncheckedCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutProgressEntriesInput = {
@@ -1861,6 +2052,7 @@ export type ProjectUpdateWithoutProgressEntriesInput = {
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutProgressEntriesInput = {
@@ -1894,6 +2086,7 @@ export type ProjectUncheckedUpdateWithoutProgressEntriesInput = {
   contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutContractorsInput = {
@@ -1927,6 +2120,7 @@ export type ProjectCreateWithoutContractorsInput = {
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutContractorsInput = {
@@ -1960,6 +2154,7 @@ export type ProjectUncheckedCreateWithoutContractorsInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutContractorsInput = {
@@ -2009,6 +2204,7 @@ export type ProjectUpdateWithoutContractorsInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutContractorsInput = {
@@ -2042,6 +2238,7 @@ export type ProjectUncheckedUpdateWithoutContractorsInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutContractorLinksInput = {
@@ -2075,6 +2272,7 @@ export type ProjectCreateWithoutContractorLinksInput = {
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutContractorLinksInput = {
@@ -2108,6 +2306,7 @@ export type ProjectUncheckedCreateWithoutContractorLinksInput = {
   contractors?: Prisma.ProjectContractorUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutContractorLinksInput = {
@@ -2157,6 +2356,7 @@ export type ProjectUpdateWithoutContractorLinksInput = {
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutContractorLinksInput = {
@@ -2190,6 +2390,7 @@ export type ProjectUncheckedUpdateWithoutContractorLinksInput = {
   contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutOrgUnitInput = {
@@ -2223,6 +2424,7 @@ export type ProjectCreateWithoutOrgUnitInput = {
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutOrgUnitInput = {
@@ -2256,6 +2458,7 @@ export type ProjectUncheckedCreateWithoutOrgUnitInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutOrgUnitInput = {
@@ -2342,6 +2545,7 @@ export type ProjectUpdateWithoutGroupInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutGroupInput = {
@@ -2375,6 +2579,7 @@ export type ProjectUncheckedUpdateWithoutGroupInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutGroupInput = {
@@ -2462,6 +2667,7 @@ export type ProjectUpdateWithoutReplacementProjectInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutReplacementProjectInput = {
@@ -2495,6 +2701,7 @@ export type ProjectUncheckedUpdateWithoutReplacementProjectInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutReplacementProjectInput = {
@@ -2582,6 +2789,7 @@ export type ProjectUpdateWithoutOrgUnitInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutOrgUnitInput = {
@@ -2615,6 +2823,7 @@ export type ProjectUncheckedUpdateWithoutOrgUnitInput = {
   contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutOrgUnitInput = {
@@ -2656,6 +2865,7 @@ export type ProjectCountOutputType = {
   contractorLinks: number
   phases: number
   progressEntries: number
+  documents: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2665,6 +2875,7 @@ export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   contractorLinks?: boolean | ProjectCountOutputTypeCountContractorLinksArgs
   phases?: boolean | ProjectCountOutputTypeCountPhasesArgs
   progressEntries?: boolean | ProjectCountOutputTypeCountProgressEntriesArgs
+  documents?: boolean | ProjectCountOutputTypeCountDocumentsArgs
 }
 
 /**
@@ -2719,6 +2930,13 @@ export type ProjectCountOutputTypeCountProgressEntriesArgs<ExtArgs extends runti
   where?: Prisma.ProjectProgressEntryWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectDocumentWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2755,6 +2973,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   contractorLinks?: boolean | Prisma.Project$contractorLinksArgs<ExtArgs>
   phases?: boolean | Prisma.Project$phasesArgs<ExtArgs>
   progressEntries?: boolean | Prisma.Project$progressEntriesArgs<ExtArgs>
+  documents?: boolean | Prisma.Project$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -2859,6 +3078,7 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   contractorLinks?: boolean | Prisma.Project$contractorLinksArgs<ExtArgs>
   phases?: boolean | Prisma.Project$phasesArgs<ExtArgs>
   progressEntries?: boolean | Prisma.Project$progressEntriesArgs<ExtArgs>
+  documents?: boolean | Prisma.Project$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2884,6 +3104,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     contractorLinks: Prisma.$ProjectContractorProjectPayload<ExtArgs>[]
     phases: Prisma.$ProjectPhasePayload<ExtArgs>[]
     progressEntries: Prisma.$ProjectProgressEntryPayload<ExtArgs>[]
+    documents: Prisma.$ProjectDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3314,6 +3535,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   contractorLinks<T extends Prisma.Project$contractorLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$contractorLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectContractorProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   phases<T extends Prisma.Project$phasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$phasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPhasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   progressEntries<T extends Prisma.Project$progressEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$progressEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectProgressEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Project$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3967,6 +4189,30 @@ export type Project$progressEntriesArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ProjectProgressEntryScalarFieldEnum | Prisma.ProjectProgressEntryScalarFieldEnum[]
+}
+
+/**
+ * Project.documents
+ */
+export type Project$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectDocument
+   */
+  select?: Prisma.ProjectDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectDocument
+   */
+  omit?: Prisma.ProjectDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectDocumentInclude<ExtArgs> | null
+  where?: Prisma.ProjectDocumentWhereInput
+  orderBy?: Prisma.ProjectDocumentOrderByWithRelationInput | Prisma.ProjectDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectDocumentScalarFieldEnum | Prisma.ProjectDocumentScalarFieldEnum[]
 }
 
 /**
