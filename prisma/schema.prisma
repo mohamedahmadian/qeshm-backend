@@ -310,6 +310,7 @@ model Project {
   endDate              DateTime?          @db.Date
   latitude             Decimal?           @db.Decimal(10, 7)
   longitude            Decimal?           @db.Decimal(10, 7)
+  boundary             Json?
   address              String?
   companyName          String?
   systemUrl            String?
@@ -331,6 +332,7 @@ model Project {
   contractorLinks      ProjectContractorProject[]
   phases               ProjectPhase[]
   progressEntries      ProjectProgressEntry[]
+  documents            ProjectDocument[]
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
 
@@ -347,6 +349,24 @@ model Project {
   @@index([groupId])
   @@index([createdAt])
   @@map("projects")
+}
+
+model ProjectDocument {
+  id           String   @id @default(uuid())
+  projectId    String
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?
+  originalName String
+  mimeType     String
+  byteSize     Int
+  storageKey   String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([projectId, createdAt])
+  @@index([title])
+  @@map("project_documents")
 }
 
 model ProjectOperator {

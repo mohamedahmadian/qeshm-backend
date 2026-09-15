@@ -17,6 +17,7 @@ import {
   organizationUnitSubtreeIds,
 } from '../organization/organization-unit-tree';
 import { PrismaService } from '../prisma/prisma.service';
+import { ProjectDocumentsService } from './project-documents.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import {
   FindProjectsQueryDto,
@@ -60,6 +61,7 @@ const projectSelect = {
   endDate: true,
   latitude: true,
   longitude: true,
+  boundary: true,
   address: true,
   companyName: true,
   systemUrl: true,
@@ -165,7 +167,10 @@ function serializeProject<
 
 @Injectable()
 export class ProjectsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly documents: ProjectDocumentsService,
+  ) {}
 
   async findAll(query: FindProjectsQueryDto) {
     const where = await this.listWhere(query);
@@ -373,6 +378,7 @@ export class ProjectsService {
 
   async remove(id: string) {
     await this.findOne(id);
+    await this.documents.removeProjectFiles(id);
     await this.prisma.project.delete({ where: { id } });
     return { ok: true };
   }
