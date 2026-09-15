@@ -271,13 +271,13 @@ export class BoardMinutesService {
   async createResolution(minutesId: string, dto: CreateBoardResolutionDto, userId: string) {
     await this.requireMinutesActor(userId);
     await this.loadMinutes(minutesId);
-    await this.assertUnitExists(dto.unitId);
+    if (dto.unitId) await this.assertUnitExists(dto.unitId);
     const created = await this.prisma.boardMinutesResolution.create({
       data: {
         minutesId,
         title: dto.title,
         description: dto.description ?? null,
-        unitId: dto.unitId,
+        unitId: dto.unitId ?? null,
         dueDate: parseOptionalIsoDate(dto.dueDate) ?? null,
         notes: dto.notes ?? null,
       },

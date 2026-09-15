@@ -1009,10 +1009,12 @@ export type OrganizationUnitCreateNestedOneWithoutBoardMinutesResolutionsInput =
   connect?: Prisma.OrganizationUnitWhereUniqueInput
 }
 
-export type OrganizationUnitUpdateOneRequiredWithoutBoardMinutesResolutionsNestedInput = {
+export type OrganizationUnitUpdateOneWithoutBoardMinutesResolutionsNestedInput = {
   create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput>
   connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutBoardMinutesResolutionsInput
   upsert?: Prisma.OrganizationUnitUpsertWithoutBoardMinutesResolutionsInput
+  disconnect?: Prisma.OrganizationUnitWhereInput | boolean
+  delete?: Prisma.OrganizationUnitWhereInput | boolean
   connect?: Prisma.OrganizationUnitWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput>
 }

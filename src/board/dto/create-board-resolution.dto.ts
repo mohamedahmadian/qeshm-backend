@@ -30,8 +30,11 @@ export class CreateBoardResolutionDto {
   @MaxLength(8000)
   description?: string | null;
 
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
   @IsUUID('4')
-  unitId: string;
+  unitId?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(trimString(value)))

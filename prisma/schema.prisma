@@ -1132,8 +1132,8 @@ model BoardMinutesResolution {
   minutes     BoardMinutes     @relation(fields: [minutesId], references: [id], onDelete: Cascade)
   title       String
   description String?
-  unitId      String
-  unit        OrganizationUnit @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  unitId      String?
+  unit        OrganizationUnit? @relation(fields: [unitId], references: [id], onDelete: SetNull)
   dueDate     DateTime?        @db.Date
   notes       String?
   createdAt   DateTime         @default(now())
