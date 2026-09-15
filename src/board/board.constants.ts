@@ -56,6 +56,8 @@ export const boardMinutesResolutionSortFields = [
   'title',
   'unit',
   'dueDate',
+  'minutes',
+  'request',
   'createdAt',
 ] as const;
 

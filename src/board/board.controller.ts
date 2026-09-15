@@ -10,6 +10,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { BoardMinutesService } from './board-minutes.service';
 import { BoardService } from './board.service';
 import {
   ReviewBoardRequestDto,
@@ -18,13 +19,17 @@ import {
 } from './dto/board-actions.dto';
 import { CreateBoardRequestDto } from './dto/create-board-request.dto';
 import { FindBoardRequestsQueryDto } from './dto/find-board-requests-query.dto';
+import { FindBoardResolutionsQueryDto } from './dto/find-board-resolutions-query.dto';
 import { UpdateBoardRequestDto } from './dto/update-board-request.dto';
 
 type RequestUser = { id: string };
 
 @Controller('board')
 export class BoardController {
-  constructor(private readonly board: BoardService) {}
+  constructor(
+    private readonly board: BoardService,
+    private readonly minutes: BoardMinutesService,
+  ) {}
 
   @Get('access')
   access(@CurrentUser() user: RequestUser | undefined) {
@@ -45,6 +50,15 @@ export class BoardController {
   ) {
     if (!user) throw new UnauthorizedException();
     return this.board.updatePermissions(user.id, dto);
+  }
+
+  @Get('resolutions')
+  resolutions(
+    @Query() query: FindBoardResolutionsQueryDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.minutes.findAllResolutions(query, user.id);
   }
 
   @Get('plans/stats')

@@ -67,6 +67,15 @@ const minutesInclude = {
 
 const resolutionInclude = {
   unit: { select: unitSelect },
+  minutes: {
+    select: {
+      id: true,
+      subject: true,
+      heldAt: true,
+      requestId: true,
+      request: { select: { id: true, subject: true, status: true } },
+    },
+  },
 } satisfies Prisma.BoardMinutesResolutionInclude;
 
 type Actor = {
@@ -234,6 +243,13 @@ export class BoardMinutesService {
     await this.prisma.boardMinutes.delete({ where: { id } });
   }
 
+  async findAllResolutions(query: FindBoardResolutionsQueryDto, userId: string) {
+    await this.requireMinutesActor(userId);
+    return this.listResolutions({ OR: this.resolutionSearch(query.q) }, query, wantsPagination(query)
+      ? [{ createdAt: 'desc' }, { id: 'asc' }]
+      : [{ dueDate: 'asc' }, { createdAt: 'asc' }, { id: 'asc' }]);
+  }
+
   async findResolutions(
     minutesId: string,
     query: FindBoardResolutionsQueryDto,
@@ -241,52 +257,9 @@ export class BoardMinutesService {
   ) {
     await this.requireMinutesActor(userId);
     await this.loadMinutes(minutesId);
-    const where: Prisma.BoardMinutesResolutionWhereInput = {
-      minutesId,
-      OR: query.q
-        ? [
-            { title: containsInsensitive(query.q) },
-            { description: containsInsensitive(query.q) },
-            { notes: containsInsensitive(query.q) },
-            { unit: { name: containsInsensitive(query.q) } },
-          ]
-        : undefined,
-    };
-    const orderBy = resolveSortOrder<Prisma.BoardMinutesResolutionOrderByWithRelationInput>(
-      query.sortBy,
-      query.sortDir,
-      {
-        title: (dir) => ({ title: dir }),
-        unit: (dir) => ({ unit: { name: dir } }),
-        dueDate: (dir) => ({ dueDate: dir }),
-        createdAt: (dir) => ({ createdAt: dir }),
-      },
-      [{ createdAt: 'desc' }, { id: 'asc' }],
-    );
-    if (!wantsPagination(query)) {
-      const items = await this.prisma.boardMinutesResolution.findMany({
-        where,
-        orderBy,
-        include: resolutionInclude,
-      });
-      return items.map((item) => this.serializeResolution(item));
-    }
-    const { page, pageSize, skip, take } = paginationArgs(query);
-    const [items, total] = await Promise.all([
-      this.prisma.boardMinutesResolution.findMany({
-        where,
-        orderBy,
-        skip,
-        take,
-        include: resolutionInclude,
-      }),
-      this.prisma.boardMinutesResolution.count({ where }),
-    ]);
-    return paginatedResult(
-      items.map((item) => this.serializeResolution(item)),
-      total,
-      page,
-      pageSize,
+    return this.listResolutions(
+      { minutesId, OR: this.resolutionSearch(query.q) },
+      query,
     );
   }
 
@@ -504,6 +477,74 @@ export class BoardMinutesService {
     };
   }
 
+  private resolutionSearch(q?: string): Prisma.BoardMinutesResolutionWhereInput['OR'] {
+    if (!q) return undefined;
+    return [
+      { title: containsInsensitive(q) },
+      { description: containsInsensitive(q) },
+      { notes: containsInsensitive(q) },
+      { unit: { name: containsInsensitive(q) } },
+      { minutes: { subject: containsInsensitive(q) } },
+      { minutes: { body: containsInsensitive(q) } },
+      { minutes: { request: { subject: containsInsensitive(q) } } },
+    ];
+  }
+
+  private resolutionOrderBy(
+    query: FindBoardResolutionsQueryDto,
+    fallback: Prisma.BoardMinutesResolutionOrderByWithRelationInput[] = [
+      { createdAt: 'desc' },
+      { id: 'asc' },
+    ],
+  ) {
+    return resolveSortOrder<Prisma.BoardMinutesResolutionOrderByWithRelationInput>(
+      query.sortBy,
+      query.sortDir,
+      {
+        title: (dir) => ({ title: dir }),
+        unit: (dir) => ({ unit: { name: dir } }),
+        dueDate: (dir) => ({ dueDate: dir }),
+        minutes: (dir) => ({ minutes: { subject: dir } }),
+        request: (dir) => ({ minutes: { request: { subject: dir } } }),
+        createdAt: (dir) => ({ createdAt: dir }),
+      },
+      fallback,
+    );
+  }
+
+  private async listResolutions(
+    where: Prisma.BoardMinutesResolutionWhereInput,
+    query: FindBoardResolutionsQueryDto,
+    fallback?: Prisma.BoardMinutesResolutionOrderByWithRelationInput[],
+  ) {
+    const orderBy = this.resolutionOrderBy(query, fallback);
+    if (!wantsPagination(query)) {
+      const items = await this.prisma.boardMinutesResolution.findMany({
+        where,
+        orderBy,
+        include: resolutionInclude,
+      });
+      return items.map((item) => this.serializeResolution(item));
+    }
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    const [items, total] = await Promise.all([
+      this.prisma.boardMinutesResolution.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        include: resolutionInclude,
+      }),
+      this.prisma.boardMinutesResolution.count({ where }),
+    ]);
+    return paginatedResult(
+      items.map((item) => this.serializeResolution(item)),
+      total,
+      page,
+      pageSize,
+    );
+  }
+
   private serializeResolution(
     item: Prisma.BoardMinutesResolutionGetPayload<{ include: typeof resolutionInclude }>,
   ) {
@@ -518,6 +559,13 @@ export class BoardMinutesService {
       notes: item.notes,
       createdAt: item.createdAt.toISOString(),
       updatedAt: item.updatedAt.toISOString(),
+      minutes: {
+        id: item.minutes.id,
+        subject: item.minutes.subject,
+        heldAt: toIsoDateOnly(item.minutes.heldAt),
+        requestId: item.minutes.requestId,
+        request: item.minutes.request,
+      },
     };
   }
 }

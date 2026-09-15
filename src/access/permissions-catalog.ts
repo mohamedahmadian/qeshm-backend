@@ -162,6 +162,12 @@ export const PERMISSION_TREE: PermissionNode[] = [
       { code: 'board.requests', kind: 'MENU', nameKey: 'menus.boardRequests' },
       { code: 'board.plans', kind: 'MENU', nameKey: 'menus.boardPlans' },
       { code: 'board.minutes', kind: 'MENU', nameKey: 'menus.boardMinutes' },
+      { code: 'board.resolutions', kind: 'MENU', nameKey: 'menus.boardResolutions' },
+      {
+        code: 'board.calendar',
+        kind: 'MENU',
+        nameKey: 'menus.boardCalendar',
+      },
       {
         code: 'board.permissions',
         kind: 'MENU',

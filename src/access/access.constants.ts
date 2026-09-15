@@ -10,6 +10,8 @@ export const BOARD_ADMIN_PERMISSION_CODES = [
   'board.requests',
   'board.plans',
   'board.minutes',
+  'board.resolutions',
+  'board.calendar',
   'board.permissions',
 ] as const;
 
