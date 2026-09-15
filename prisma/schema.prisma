@@ -285,6 +285,20 @@ model UserLocationHistory {
   @@map("user_location_histories")
 }
 
+model ProjectGroup {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  color       String?
+  projects    Project[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("project_groups")
+}
+
 model Project {
   id                   String             @id @default(uuid())
   systemName           String
@@ -308,6 +322,10 @@ model Project {
   color                String?
   showOnLiveBoard      Boolean            @default(true)
   importance           ProjectImportance  @default(HIGH)
+  orgUnitId            String?
+  orgUnit              OrganizationUnit?  @relation("ProjectOrgUnit", fields: [orgUnitId], references: [id], onDelete: SetNull)
+  groupId              String?
+  group                ProjectGroup?      @relation(fields: [groupId], references: [id], onDelete: Restrict)
   operators            ProjectOperator[]
   contractors          ProjectContractor[]
   contractorLinks      ProjectContractorProject[]
@@ -325,6 +343,8 @@ model Project {
   @@index([isSupportActive])
   @@index([showOnLiveBoard])
   @@index([importance])
+  @@index([orgUnitId])
+  @@index([groupId])
   @@index([createdAt])
   @@map("projects")
 }
@@ -647,6 +667,7 @@ model OrganizationUnit {
   reservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[]
   projectOperators ProjectOperator[]
+  projects         Project[]          @relation("ProjectOrgUnit")
   boardRequests    BoardRequest[]
   boardStageUnits  BoardStageUnit[]
   boardMinutesResolutions BoardMinutesResolution[]

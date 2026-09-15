@@ -403,6 +403,7 @@ export const ModelName = {
   City: 'City',
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
+  ProjectGroup: 'ProjectGroup',
   Project: 'Project',
   ProjectOperator: 'ProjectOperator',
   ProjectPhase: 'ProjectPhase',
@@ -457,7 +458,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "project" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -902,6 +903,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserLocationHistoryCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserLocationHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectGroup: {
+      payload: Prisma.$ProjectGroupPayload<ExtArgs>
+      fields: Prisma.ProjectGroupFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectGroupFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectGroupFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectGroupFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectGroupFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectGroupFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectGroupCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectGroupCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectGroupCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectGroupDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>
+        }
+        update: {
+          args: Prisma.ProjectGroupUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectGroupDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectGroupUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectGroupUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectGroupUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectGroupPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectGroupAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectGroup>
+        }
+        groupBy: {
+          args: Prisma.ProjectGroupGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectGroupGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectGroupCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectGroupCountAggregateOutputType> | number
         }
       }
     }
@@ -3961,6 +4036,18 @@ export const UserLocationHistoryScalarFieldEnum = {
 export type UserLocationHistoryScalarFieldEnum = (typeof UserLocationHistoryScalarFieldEnum)[keyof typeof UserLocationHistoryScalarFieldEnum]
 
 
+export const ProjectGroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  color: 'color',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectGroupScalarFieldEnum = (typeof ProjectGroupScalarFieldEnum)[keyof typeof ProjectGroupScalarFieldEnum]
+
+
 export const ProjectScalarFieldEnum = {
   id: 'id',
   systemName: 'systemName',
@@ -3982,6 +4069,8 @@ export const ProjectScalarFieldEnum = {
   color: 'color',
   showOnLiveBoard: 'showOnLiveBoard',
   importance: 'importance',
+  orgUnitId: 'orgUnitId',
+  groupId: 'groupId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -5125,6 +5214,7 @@ export type GlobalOmitConfig = {
   city?: Prisma.CityOmit
   user?: Prisma.UserOmit
   userLocationHistory?: Prisma.UserLocationHistoryOmit
+  projectGroup?: Prisma.ProjectGroupOmit
   project?: Prisma.ProjectOmit
   projectOperator?: Prisma.ProjectOperatorOmit
   projectPhase?: Prisma.ProjectPhaseOmit

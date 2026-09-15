@@ -337,6 +337,7 @@ export type OrganizationUnitWhereInput = {
   reservations?: Prisma.FoodReservationListRelationFilter
   vehicleAssignments?: Prisma.VehicleAssignmentListRelationFilter
   projectOperators?: Prisma.ProjectOperatorListRelationFilter
+  projects?: Prisma.ProjectListRelationFilter
   boardRequests?: Prisma.BoardRequestListRelationFilter
   boardStageUnits?: Prisma.BoardStageUnitListRelationFilter
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionListRelationFilter
@@ -370,6 +371,7 @@ export type OrganizationUnitOrderByWithRelationInput = {
   reservations?: Prisma.FoodReservationOrderByRelationAggregateInput
   vehicleAssignments?: Prisma.VehicleAssignmentOrderByRelationAggregateInput
   projectOperators?: Prisma.ProjectOperatorOrderByRelationAggregateInput
+  projects?: Prisma.ProjectOrderByRelationAggregateInput
   boardRequests?: Prisma.BoardRequestOrderByRelationAggregateInput
   boardStageUnits?: Prisma.BoardStageUnitOrderByRelationAggregateInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionOrderByRelationAggregateInput
@@ -406,6 +408,7 @@ export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
   reservations?: Prisma.FoodReservationListRelationFilter
   vehicleAssignments?: Prisma.VehicleAssignmentListRelationFilter
   projectOperators?: Prisma.ProjectOperatorListRelationFilter
+  projects?: Prisma.ProjectListRelationFilter
   boardRequests?: Prisma.BoardRequestListRelationFilter
   boardStageUnits?: Prisma.BoardStageUnitListRelationFilter
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionListRelationFilter
@@ -486,6 +489,7 @@ export type OrganizationUnitCreateInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -516,6 +520,7 @@ export type OrganizationUnitUncheckedCreateInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -546,6 +551,7 @@ export type OrganizationUnitUpdateInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -576,6 +582,7 @@ export type OrganizationUnitUncheckedUpdateInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -792,6 +799,22 @@ export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput = 
   update?: Prisma.OrganizationUnitUpdateWithWhereUniqueWithoutNutritionRepInput | Prisma.OrganizationUnitUpdateWithWhereUniqueWithoutNutritionRepInput[]
   updateMany?: Prisma.OrganizationUnitUpdateManyWithWhereWithoutNutritionRepInput | Prisma.OrganizationUnitUpdateManyWithWhereWithoutNutritionRepInput[]
   deleteMany?: Prisma.OrganizationUnitScalarWhereInput | Prisma.OrganizationUnitScalarWhereInput[]
+}
+
+export type OrganizationUnitCreateNestedOneWithoutProjectsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutProjectsInput, Prisma.OrganizationUnitUncheckedCreateWithoutProjectsInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutProjectsInput
+  connect?: Prisma.OrganizationUnitWhereUniqueInput
+}
+
+export type OrganizationUnitUpdateOneWithoutProjectsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutProjectsInput, Prisma.OrganizationUnitUncheckedCreateWithoutProjectsInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutProjectsInput
+  upsert?: Prisma.OrganizationUnitUpsertWithoutProjectsInput
+  disconnect?: Prisma.OrganizationUnitWhereInput | boolean
+  delete?: Prisma.OrganizationUnitWhereInput | boolean
+  connect?: Prisma.OrganizationUnitWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutProjectsInput, Prisma.OrganizationUnitUpdateWithoutProjectsInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutProjectsInput>
 }
 
 export type OrganizationUnitCreateNestedOneWithoutProjectOperatorsInput = {
@@ -1018,6 +1041,7 @@ export type OrganizationUnitCreateWithoutEmployeesInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1047,6 +1071,7 @@ export type OrganizationUnitUncheckedCreateWithoutEmployeesInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -1081,6 +1106,7 @@ export type OrganizationUnitCreateWithoutNutritionRepInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1110,6 +1136,7 @@ export type OrganizationUnitUncheckedCreateWithoutNutritionRepInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -1160,6 +1187,7 @@ export type OrganizationUnitUpdateWithoutEmployeesInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -1189,6 +1217,7 @@ export type OrganizationUnitUncheckedUpdateWithoutEmployeesInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -1234,6 +1263,142 @@ export type OrganizationUnitScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
 }
 
+export type OrganizationUnitCreateWithoutProjectsInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  maxMeals?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
+  nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
+  employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
+  projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
+  boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
+  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+}
+
+export type OrganizationUnitUncheckedCreateWithoutProjectsInput = {
+  id?: string
+  name: string
+  kindId: string
+  parentId?: string | null
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  nutritionRepId?: string | null
+  maxMeals?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
+  employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
+  boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+}
+
+export type OrganizationUnitCreateOrConnectWithoutProjectsInput = {
+  where: Prisma.OrganizationUnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutProjectsInput, Prisma.OrganizationUnitUncheckedCreateWithoutProjectsInput>
+}
+
+export type OrganizationUnitUpsertWithoutProjectsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutProjectsInput, Prisma.OrganizationUnitUncheckedUpdateWithoutProjectsInput>
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutProjectsInput, Prisma.OrganizationUnitUncheckedCreateWithoutProjectsInput>
+  where?: Prisma.OrganizationUnitWhereInput
+}
+
+export type OrganizationUnitUpdateToOneWithWhereWithoutProjectsInput = {
+  where?: Prisma.OrganizationUnitWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutProjectsInput, Prisma.OrganizationUnitUncheckedUpdateWithoutProjectsInput>
+}
+
+export type OrganizationUnitUpdateWithoutProjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
+  nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
+  employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
+  projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
+  boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
+  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+}
+
+export type OrganizationUnitUncheckedUpdateWithoutProjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
+  employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
+  boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+}
+
 export type OrganizationUnitCreateWithoutProjectOperatorsInput = {
   id?: string
   name: string
@@ -1258,6 +1423,7 @@ export type OrganizationUnitCreateWithoutProjectOperatorsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1287,6 +1453,7 @@ export type OrganizationUnitUncheckedCreateWithoutProjectOperatorsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -1332,6 +1499,7 @@ export type OrganizationUnitUpdateWithoutProjectOperatorsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -1361,6 +1529,7 @@ export type OrganizationUnitUncheckedUpdateWithoutProjectOperatorsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -1390,6 +1559,7 @@ export type OrganizationUnitCreateWithoutKindInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1419,6 +1589,7 @@ export type OrganizationUnitUncheckedCreateWithoutKindInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -1474,6 +1645,7 @@ export type OrganizationUnitCreateWithoutChildrenInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1503,6 +1675,7 @@ export type OrganizationUnitUncheckedCreateWithoutChildrenInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -1537,6 +1710,7 @@ export type OrganizationUnitCreateWithoutParentInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1566,6 +1740,7 @@ export type OrganizationUnitUncheckedCreateWithoutParentInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -1616,6 +1791,7 @@ export type OrganizationUnitUpdateWithoutChildrenInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -1645,6 +1821,7 @@ export type OrganizationUnitUncheckedUpdateWithoutChildrenInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -1690,6 +1867,7 @@ export type OrganizationUnitCreateWithoutRestaurantsInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1719,6 +1897,7 @@ export type OrganizationUnitUncheckedCreateWithoutRestaurantsInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -1764,6 +1943,7 @@ export type OrganizationUnitUpdateWithoutRestaurantsInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -1793,6 +1973,7 @@ export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -1822,6 +2003,7 @@ export type OrganizationUnitCreateWithoutReservationsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1851,6 +2033,7 @@ export type OrganizationUnitUncheckedCreateWithoutReservationsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -1896,6 +2079,7 @@ export type OrganizationUnitUpdateWithoutReservationsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -1925,6 +2109,7 @@ export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -1954,6 +2139,7 @@ export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
@@ -1983,6 +2169,7 @@ export type OrganizationUnitUncheckedCreateWithoutVehicleAssignmentsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
@@ -2028,6 +2215,7 @@ export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -2057,6 +2245,7 @@ export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -2087,6 +2276,7 @@ export type OrganizationUnitCreateWithoutBoardRequestsInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
 }
@@ -2116,6 +2306,7 @@ export type OrganizationUnitUncheckedCreateWithoutBoardRequestsInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
 }
@@ -2161,6 +2352,7 @@ export type OrganizationUnitUpdateWithoutBoardRequestsInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
 }
@@ -2190,6 +2382,7 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardRequestsInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
 }
@@ -2219,6 +2412,7 @@ export type OrganizationUnitCreateWithoutBoardStageUnitsInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
 }
@@ -2248,6 +2442,7 @@ export type OrganizationUnitUncheckedCreateWithoutBoardStageUnitsInput = {
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
 }
@@ -2293,6 +2488,7 @@ export type OrganizationUnitUpdateWithoutBoardStageUnitsInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
 }
@@ -2322,6 +2518,7 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardStageUnitsInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
 }
@@ -2351,6 +2548,7 @@ export type OrganizationUnitCreateWithoutBoardMinutesResolutionsInput = {
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
 }
@@ -2380,6 +2578,7 @@ export type OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput =
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
 }
@@ -2425,6 +2624,7 @@ export type OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
 }
@@ -2454,6 +2654,7 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput =
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
 }
@@ -2502,6 +2703,7 @@ export type OrganizationUnitUpdateWithoutNutritionRepInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -2531,6 +2733,7 @@ export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -2600,6 +2803,7 @@ export type OrganizationUnitUpdateWithoutKindInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -2629,6 +2833,7 @@ export type OrganizationUnitUncheckedUpdateWithoutKindInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -2698,6 +2903,7 @@ export type OrganizationUnitUpdateWithoutParentInput = {
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
@@ -2727,6 +2933,7 @@ export type OrganizationUnitUncheckedUpdateWithoutParentInput = {
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
@@ -2764,6 +2971,7 @@ export type OrganizationUnitCountOutputType = {
   reservations: number
   vehicleAssignments: number
   projectOperators: number
+  projects: number
   boardRequests: number
   boardStageUnits: number
   boardMinutesResolutions: number
@@ -2776,6 +2984,7 @@ export type OrganizationUnitCountOutputTypeSelect<ExtArgs extends runtime.Types.
   reservations?: boolean | OrganizationUnitCountOutputTypeCountReservationsArgs
   vehicleAssignments?: boolean | OrganizationUnitCountOutputTypeCountVehicleAssignmentsArgs
   projectOperators?: boolean | OrganizationUnitCountOutputTypeCountProjectOperatorsArgs
+  projects?: boolean | OrganizationUnitCountOutputTypeCountProjectsArgs
   boardRequests?: boolean | OrganizationUnitCountOutputTypeCountBoardRequestsArgs
   boardStageUnits?: boolean | OrganizationUnitCountOutputTypeCountBoardStageUnitsArgs
   boardMinutesResolutions?: boolean | OrganizationUnitCountOutputTypeCountBoardMinutesResolutionsArgs
@@ -2836,6 +3045,13 @@ export type OrganizationUnitCountOutputTypeCountProjectOperatorsArgs<ExtArgs ext
 /**
  * OrganizationUnitCountOutputType without action
  */
+export type OrganizationUnitCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectWhereInput
+}
+
+/**
+ * OrganizationUnitCountOutputType without action
+ */
 export type OrganizationUnitCountOutputTypeCountBoardRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BoardRequestWhereInput
 }
@@ -2883,6 +3099,7 @@ export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.Inte
   reservations?: boolean | Prisma.OrganizationUnit$reservationsArgs<ExtArgs>
   vehicleAssignments?: boolean | Prisma.OrganizationUnit$vehicleAssignmentsArgs<ExtArgs>
   projectOperators?: boolean | Prisma.OrganizationUnit$projectOperatorsArgs<ExtArgs>
+  projects?: boolean | Prisma.OrganizationUnit$projectsArgs<ExtArgs>
   boardRequests?: boolean | Prisma.OrganizationUnit$boardRequestsArgs<ExtArgs>
   boardStageUnits?: boolean | Prisma.OrganizationUnit$boardStageUnitsArgs<ExtArgs>
   boardMinutesResolutions?: boolean | Prisma.OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs>
@@ -2969,6 +3186,7 @@ export type OrganizationUnitInclude<ExtArgs extends runtime.Types.Extensions.Int
   reservations?: boolean | Prisma.OrganizationUnit$reservationsArgs<ExtArgs>
   vehicleAssignments?: boolean | Prisma.OrganizationUnit$vehicleAssignmentsArgs<ExtArgs>
   projectOperators?: boolean | Prisma.OrganizationUnit$projectOperatorsArgs<ExtArgs>
+  projects?: boolean | Prisma.OrganizationUnit$projectsArgs<ExtArgs>
   boardRequests?: boolean | Prisma.OrganizationUnit$boardRequestsArgs<ExtArgs>
   boardStageUnits?: boolean | Prisma.OrganizationUnit$boardStageUnitsArgs<ExtArgs>
   boardMinutesResolutions?: boolean | Prisma.OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs>
@@ -2997,6 +3215,7 @@ export type $OrganizationUnitPayload<ExtArgs extends runtime.Types.Extensions.In
     reservations: Prisma.$FoodReservationPayload<ExtArgs>[]
     vehicleAssignments: Prisma.$VehicleAssignmentPayload<ExtArgs>[]
     projectOperators: Prisma.$ProjectOperatorPayload<ExtArgs>[]
+    projects: Prisma.$ProjectPayload<ExtArgs>[]
     boardRequests: Prisma.$BoardRequestPayload<ExtArgs>[]
     boardStageUnits: Prisma.$BoardStageUnitPayload<ExtArgs>[]
     boardMinutesResolutions: Prisma.$BoardMinutesResolutionPayload<ExtArgs>[]
@@ -3423,6 +3642,7 @@ export interface Prisma__OrganizationUnitClient<T, Null = never, ExtArgs extends
   reservations<T extends Prisma.OrganizationUnit$reservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vehicleAssignments<T extends Prisma.OrganizationUnit$vehicleAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$vehicleAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VehicleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projectOperators<T extends Prisma.OrganizationUnit$projectOperatorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$projectOperatorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectOperatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  projects<T extends Prisma.OrganizationUnit$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardRequests<T extends Prisma.OrganizationUnit$boardRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$boardRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardStageUnits<T extends Prisma.OrganizationUnit$boardStageUnitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$boardStageUnitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardStageUnitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesResolutions<T extends Prisma.OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4053,6 +4273,30 @@ export type OrganizationUnit$projectOperatorsArgs<ExtArgs extends runtime.Types.
   take?: number
   skip?: number
   distinct?: Prisma.ProjectOperatorScalarFieldEnum | Prisma.ProjectOperatorScalarFieldEnum[]
+}
+
+/**
+ * OrganizationUnit.projects
+ */
+export type OrganizationUnit$projectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Project
+   */
+  select?: Prisma.ProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Project
+   */
+  omit?: Prisma.ProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectWhereInput
+  orderBy?: Prisma.ProjectOrderByWithRelationInput | Prisma.ProjectOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
 }
 
 /**

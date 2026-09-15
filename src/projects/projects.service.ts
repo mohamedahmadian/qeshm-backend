@@ -18,8 +18,24 @@ import {
 } from '../organization/organization-unit-tree';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateProjectDto } from './dto/create-project.dto';
-import { FindProjectsQueryDto } from './dto/find-projects-query.dto';
+import {
+  FindProjectsQueryDto,
+  unspecifiedProjectFilter,
+} from './dto/find-projects-query.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+
+const unitSelect = {
+  id: true,
+  name: true,
+  parentId: true,
+  kind: { select: { id: true, name: true } },
+} satisfies Prisma.OrganizationUnitSelect;
+
+const groupSelect = {
+  id: true,
+  name: true,
+  color: true,
+} satisfies Prisma.ProjectGroupSelect;
 
 const operatorSelect = {
   organizationUnitId: true,
@@ -54,11 +70,15 @@ const projectSelect = {
   color: true,
   showOnLiveBoard: true,
   importance: true,
+  orgUnitId: true,
+  groupId: true,
   createdAt: true,
   updatedAt: true,
   replacementProject: {
     select: { id: true, systemName: true },
   },
+  orgUnit: { select: unitSelect },
+  group: { select: groupSelect },
   operators: {
     select: operatorSelect,
     orderBy: { organizationUnit: { name: 'asc' } },
@@ -102,6 +122,13 @@ function serializeProject<
     longitude: Prisma.Decimal | null;
     startDate: Date | null;
     endDate: Date | null;
+    orgUnit?: {
+      id: string;
+      name: string;
+      parentId: string | null;
+      kind: { id: string; name: string };
+    } | null;
+    group?: { id: string; name: string; color: string | null } | null;
     operators?: Array<{
       organizationUnit: {
         id: string;
@@ -112,13 +139,20 @@ function serializeProject<
     }>;
   },
 >(item: T, paths: Map<string, string>) {
-  const { operators = [], ...rest } = item;
+  const { operators = [], orgUnit, group, ...rest } = item;
   return {
     ...rest,
     latitude: toCoord(item.latitude),
     longitude: toCoord(item.longitude),
     startDate: toIsoDateOnly(item.startDate),
     endDate: toIsoDateOnly(item.endDate),
+    orgUnit: orgUnit
+      ? {
+          ...orgUnit,
+          pathLabel: paths.get(orgUnit.id) ?? orgUnit.name,
+        }
+      : null,
+    group: group ?? null,
     operators: operators.map((link) => ({
       id: link.organizationUnit.id,
       name: link.organizationUnit.name,
@@ -290,6 +324,8 @@ export class ProjectsService {
     this.assertCoordinates(dto.latitude, dto.longitude);
     await this.assertReplacement(dto.replacementProjectId);
     await this.assertUniqueCode(dto.code);
+    await this.assertOwnerUnit(dto.orgUnitId);
+    await this.assertGroup(dto.groupId);
     const operatorIds = await this.assertOperatorUnits(dto.operatorIds);
     const project = await this.prisma.project.create({
       data: this.createData(dto, operatorIds),
@@ -306,6 +342,8 @@ export class ProjectsService {
       throw new BadRequestException('سامانه جایگزین نمی‌تواند همین پروژه باشد');
     }
     await this.assertReplacement(dto.replacementProjectId);
+    await this.assertOwnerUnit(dto.orgUnitId);
+    await this.assertGroup(dto.groupId);
     if (dto.code !== undefined) {
       await this.assertUniqueCode(dto.code, id);
     }
@@ -341,6 +379,7 @@ export class ProjectsService {
 
   async listWhere(query: FindProjectsQueryDto): Promise<Prisma.ProjectWhereInput> {
     const operators = await this.operatorUnitFilter(query.operatorUnitId);
+    const orgUnitId = await this.ownerUnitFilter(query.orgUnitId);
     return {
       companyName: query.companyName,
       isActive: query.isActive,
@@ -348,6 +387,7 @@ export class ProjectsService {
       isSupportActive: query.isSupportActive,
       importance: query.importance,
       id: query.excludeId ? { not: query.excludeId } : undefined,
+      orgUnitId,
       operators,
       OR: query.q
         ? [
@@ -357,6 +397,8 @@ export class ProjectsService {
             { address: containsInsensitive(query.q) },
             { systemUrl: containsInsensitive(query.q) },
             { description: containsInsensitive(query.q) },
+            { orgUnit: { name: containsInsensitive(query.q) } },
+            { group: { name: containsInsensitive(query.q) } },
             {
               operators: {
                 some: {
@@ -377,6 +419,8 @@ export class ProjectsService {
       query.sortDir,
       {
         operators: (dir) => ({ operators: { _count: dir } }),
+        orgUnit: (dir) => ({ orgUnit: { name: dir } }),
+        group: (dir) => ({ group: { name: dir } }),
         systemName: (dir) => ({ systemName: dir }),
         code: (dir) => ({ code: dir }),
         isActive: (dir) => ({ isActive: dir }),
@@ -422,6 +466,8 @@ export class ProjectsService {
       color: dto.color ?? '#2ebdb6',
       showOnLiveBoard: dto.showOnLiveBoard ?? true,
       importance: dto.importance,
+      orgUnitId: dto.orgUnitId ?? null,
+      groupId: dto.groupId ?? null,
       operators: {
         create: operatorIds.map((organizationUnitId) => ({ organizationUnitId })),
       },
@@ -459,6 +505,8 @@ export class ProjectsService {
       color: dto.color,
       showOnLiveBoard: dto.showOnLiveBoard,
       importance: dto.importance,
+      orgUnitId: dto.orgUnitId,
+      groupId: dto.groupId,
     };
   }
 
@@ -467,6 +515,22 @@ export class ProjectsService {
       select: { id: true, name: true, parentId: true },
     });
     return buildOrganizationUnitPaths(units);
+  }
+
+  private async ownerUnitFilter(
+    orgUnitId?: string,
+  ): Promise<Prisma.ProjectWhereInput['orgUnitId']> {
+    if (!orgUnitId) {
+      return undefined;
+    }
+    if (orgUnitId === unspecifiedProjectFilter) {
+      return null;
+    }
+    const units = await this.prisma.organizationUnit.findMany({
+      select: { id: true, parentId: true },
+    });
+    const ids = organizationUnitSubtreeIds(units, orgUnitId);
+    return { in: ids };
   }
 
   private async operatorUnitFilter(
@@ -523,6 +587,32 @@ export class ProjectsService {
   private assertCoordinates(latitude?: number | null, longitude?: number | null) {
     if ((latitude == null) !== (longitude == null)) {
       throw new BadRequestException('موقعیت مکانی باید هر دو مختصات را داشته باشد');
+    }
+  }
+
+  private async assertOwnerUnit(id?: string | null) {
+    if (id == null) {
+      return;
+    }
+    const exists = await this.prisma.organizationUnit.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!exists) {
+      throw new BadRequestException('واحد سازمانی یافت نشد');
+    }
+  }
+
+  private async assertGroup(id?: string | null) {
+    if (id == null) {
+      return;
+    }
+    const exists = await this.prisma.projectGroup.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!exists) {
+      throw new BadRequestException('گروه انتخاب‌شده معتبر نیست');
     }
   }
 

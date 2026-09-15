@@ -141,6 +141,18 @@ export class CreateProjectDto {
   replacementProjectId?: string | null;
 
   @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID()
+  orgUnitId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID()
+  groupId?: string | null;
+
+  @IsOptional()
   @Transform(({ value }) => emptyToNull(trimString(value)))
   @ValidateIf((_, value) => value != null)
   @IsString()

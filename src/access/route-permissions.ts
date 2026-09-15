@@ -32,6 +32,7 @@ const LOOKUP_COLLECTIONS = new Set([
   '/restaurants',
   '/projects',
   '/projects/lookups',
+  '/projects/groups',
   '/singard/categories',
 ]);
 
@@ -51,6 +52,7 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   },
   { prefix: '/projects/reports', permissions: ['projects.reports'] },
   { prefix: '/projects/live-board', permissions: ['projects.liveBoard'] },
+  { prefix: '/projects/groups', permissions: ['projects.groups'] },
   { prefix: '/contractors', permissions: ['projects.contractors'] },
   { prefix: '/projects', permissions: ['projects.list'] },
   { prefix: '/foods', permissions: ['food-reservation.foods'] },

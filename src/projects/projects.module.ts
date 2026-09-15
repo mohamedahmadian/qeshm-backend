@@ -3,6 +3,8 @@ import { ContractorsController } from './contractors.controller';
 import { ContractorsService } from './contractors.service';
 import { GlobalContractorsController } from './global-contractors.controller';
 import { ProgressTranscriptionService } from './progress-transcription.service';
+import { ProjectGroupsController } from './project-groups.controller';
+import { ProjectGroupsService } from './project-groups.service';
 import { ProjectPhasesController } from './project-phases.controller';
 import { ProjectPhasesService } from './project-phases.service';
 import { ProjectProgressController } from './project-progress.controller';
@@ -15,6 +17,7 @@ import { PublicProjectsController } from './public-projects.controller';
 @Module({
   controllers: [
     PublicProjectsController,
+    ProjectGroupsController,
     ProjectsController,
     GlobalContractorsController,
     ContractorsController,
@@ -23,6 +26,7 @@ import { PublicProjectsController } from './public-projects.controller';
   ],
   providers: [
     ProjectsService,
+    ProjectGroupsService,
     ContractorsService,
     ProjectPhasesService,
     ProjectProgressService,

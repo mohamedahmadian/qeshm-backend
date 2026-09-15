@@ -1,12 +1,24 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsEnum, IsIn, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsIn,
+  IsOptional,
+  IsString,
+  IsUUID,
+  ValidateIf,
+} from 'class-validator';
 import { emptyToUndefined, toOptionalBoolean } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 import { ProjectImportance, ProjectStatus } from '../../generated/prisma/client';
 
+export const unspecifiedProjectFilter = 'none';
+
 export const projectSortFields = [
   'operators',
+  'orgUnit',
+  'group',
   'systemName',
   'code',
   'isActive',
@@ -30,6 +42,12 @@ export class FindProjectsQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsUUID('4')
   operatorUnitId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @ValidateIf((_, value) => value !== unspecifiedProjectFilter)
+  @IsUUID('4')
+  orgUnitId?: string;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

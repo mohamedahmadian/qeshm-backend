@@ -57,6 +57,7 @@ export const ModelName = {
   City: 'City',
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
+  ProjectGroup: 'ProjectGroup',
   Project: 'Project',
   ProjectOperator: 'ProjectOperator',
   ProjectPhase: 'ProjectPhase',
@@ -245,6 +246,18 @@ export const UserLocationHistoryScalarFieldEnum = {
 export type UserLocationHistoryScalarFieldEnum = (typeof UserLocationHistoryScalarFieldEnum)[keyof typeof UserLocationHistoryScalarFieldEnum]
 
 
+export const ProjectGroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  color: 'color',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectGroupScalarFieldEnum = (typeof ProjectGroupScalarFieldEnum)[keyof typeof ProjectGroupScalarFieldEnum]
+
+
 export const ProjectScalarFieldEnum = {
   id: 'id',
   systemName: 'systemName',
@@ -266,6 +279,8 @@ export const ProjectScalarFieldEnum = {
   color: 'color',
   showOnLiveBoard: 'showOnLiveBoard',
   importance: 'importance',
+  orgUnitId: 'orgUnitId',
+  groupId: 'groupId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

@@ -34,6 +34,7 @@ export const PERMISSION_TREE: PermissionNode[] = [
     nameKey: 'modules.projects',
     children: [
       { code: 'projects.list', kind: 'MENU', nameKey: 'menus.projects' },
+      { code: 'projects.groups', kind: 'MENU', nameKey: 'menus.projectGroups' },
       { code: 'projects.calendar', kind: 'MENU', nameKey: 'menus.projectCalendar' },
       {
         code: 'projects.liveBoard',

@@ -61,6 +61,8 @@ export type ProjectMinAggregateOutputType = {
   color: string | null
   showOnLiveBoard: boolean | null
   importance: $Enums.ProjectImportance | null
+  orgUnitId: string | null
+  groupId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -86,6 +88,8 @@ export type ProjectMaxAggregateOutputType = {
   color: string | null
   showOnLiveBoard: boolean | null
   importance: $Enums.ProjectImportance | null
+  orgUnitId: string | null
+  groupId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -111,6 +115,8 @@ export type ProjectCountAggregateOutputType = {
   color: number
   showOnLiveBoard: number
   importance: number
+  orgUnitId: number
+  groupId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -152,6 +158,8 @@ export type ProjectMinAggregateInputType = {
   color?: true
   showOnLiveBoard?: true
   importance?: true
+  orgUnitId?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -177,6 +185,8 @@ export type ProjectMaxAggregateInputType = {
   color?: true
   showOnLiveBoard?: true
   importance?: true
+  orgUnitId?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -202,6 +212,8 @@ export type ProjectCountAggregateInputType = {
   color?: true
   showOnLiveBoard?: true
   importance?: true
+  orgUnitId?: true
+  groupId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -314,6 +326,8 @@ export type ProjectGroupByOutputType = {
   color: string | null
   showOnLiveBoard: boolean
   importance: $Enums.ProjectImportance
+  orgUnitId: string | null
+  groupId: string | null
   createdAt: Date
   updatedAt: Date
   _count: ProjectCountAggregateOutputType | null
@@ -362,10 +376,14 @@ export type ProjectWhereInput = {
   color?: Prisma.StringNullableFilter<"Project"> | string | null
   showOnLiveBoard?: Prisma.BoolFilter<"Project"> | boolean
   importance?: Prisma.EnumProjectImportanceFilter<"Project"> | $Enums.ProjectImportance
+  orgUnitId?: Prisma.StringNullableFilter<"Project"> | string | null
+  groupId?: Prisma.StringNullableFilter<"Project"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   replacementProject?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   replacedBy?: Prisma.ProjectListRelationFilter
+  orgUnit?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
+  group?: Prisma.XOR<Prisma.ProjectGroupNullableScalarRelationFilter, Prisma.ProjectGroupWhereInput> | null
   operators?: Prisma.ProjectOperatorListRelationFilter
   contractors?: Prisma.ProjectContractorListRelationFilter
   contractorLinks?: Prisma.ProjectContractorProjectListRelationFilter
@@ -394,10 +412,14 @@ export type ProjectOrderByWithRelationInput = {
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
+  orgUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
+  groupId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   replacementProject?: Prisma.ProjectOrderByWithRelationInput
   replacedBy?: Prisma.ProjectOrderByRelationAggregateInput
+  orgUnit?: Prisma.OrganizationUnitOrderByWithRelationInput
+  group?: Prisma.ProjectGroupOrderByWithRelationInput
   operators?: Prisma.ProjectOperatorOrderByRelationAggregateInput
   contractors?: Prisma.ProjectContractorOrderByRelationAggregateInput
   contractorLinks?: Prisma.ProjectContractorProjectOrderByRelationAggregateInput
@@ -429,10 +451,14 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   color?: Prisma.StringNullableFilter<"Project"> | string | null
   showOnLiveBoard?: Prisma.BoolFilter<"Project"> | boolean
   importance?: Prisma.EnumProjectImportanceFilter<"Project"> | $Enums.ProjectImportance
+  orgUnitId?: Prisma.StringNullableFilter<"Project"> | string | null
+  groupId?: Prisma.StringNullableFilter<"Project"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   replacementProject?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   replacedBy?: Prisma.ProjectListRelationFilter
+  orgUnit?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
+  group?: Prisma.XOR<Prisma.ProjectGroupNullableScalarRelationFilter, Prisma.ProjectGroupWhereInput> | null
   operators?: Prisma.ProjectOperatorListRelationFilter
   contractors?: Prisma.ProjectContractorListRelationFilter
   contractorLinks?: Prisma.ProjectContractorProjectListRelationFilter
@@ -461,6 +487,8 @@ export type ProjectOrderByWithAggregationInput = {
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
+  orgUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
+  groupId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ProjectCountOrderByAggregateInput
@@ -494,6 +522,8 @@ export type ProjectScalarWhereWithAggregatesInput = {
   color?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   showOnLiveBoard?: Prisma.BoolWithAggregatesFilter<"Project"> | boolean
   importance?: Prisma.EnumProjectImportanceWithAggregatesFilter<"Project"> | $Enums.ProjectImportance
+  orgUnitId?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  groupId?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
 }
@@ -522,6 +552,8 @@ export type ProjectCreateInput = {
   updatedAt?: Date | string
   replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
   replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
   operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
@@ -550,6 +582,8 @@ export type ProjectUncheckedCreateInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
@@ -584,6 +618,8 @@ export type ProjectUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
   replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
   operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
@@ -612,6 +648,8 @@ export type ProjectUncheckedUpdateInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
@@ -643,6 +681,8 @@ export type ProjectCreateManyInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -692,13 +732,10 @@ export type ProjectUncheckedUpdateManyInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ProjectNullableScalarRelationFilter = {
-  is?: Prisma.ProjectWhereInput | null
-  isNot?: Prisma.ProjectWhereInput | null
 }
 
 export type ProjectListRelationFilter = {
@@ -709,6 +746,11 @@ export type ProjectListRelationFilter = {
 
 export type ProjectOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ProjectNullableScalarRelationFilter = {
+  is?: Prisma.ProjectWhereInput | null
+  isNot?: Prisma.ProjectWhereInput | null
 }
 
 export type ProjectCountOrderByAggregateInput = {
@@ -732,6 +774,8 @@ export type ProjectCountOrderByAggregateInput = {
   color?: Prisma.SortOrder
   showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
+  orgUnitId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -764,6 +808,8 @@ export type ProjectMaxOrderByAggregateInput = {
   color?: Prisma.SortOrder
   showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
+  orgUnitId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -789,6 +835,8 @@ export type ProjectMinOrderByAggregateInput = {
   color?: Prisma.SortOrder
   showOnLiveBoard?: Prisma.SortOrder
   importance?: Prisma.SortOrder
+  orgUnitId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -803,6 +851,48 @@ export type ProjectSumOrderByAggregateInput = {
 export type ProjectScalarRelationFilter = {
   is?: Prisma.ProjectWhereInput
   isNot?: Prisma.ProjectWhereInput
+}
+
+export type ProjectCreateNestedManyWithoutGroupInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGroupInput, Prisma.ProjectUncheckedCreateWithoutGroupInput> | Prisma.ProjectCreateWithoutGroupInput[] | Prisma.ProjectUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGroupInput | Prisma.ProjectCreateOrConnectWithoutGroupInput[]
+  createMany?: Prisma.ProjectCreateManyGroupInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUncheckedCreateNestedManyWithoutGroupInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGroupInput, Prisma.ProjectUncheckedCreateWithoutGroupInput> | Prisma.ProjectCreateWithoutGroupInput[] | Prisma.ProjectUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGroupInput | Prisma.ProjectCreateOrConnectWithoutGroupInput[]
+  createMany?: Prisma.ProjectCreateManyGroupInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUpdateManyWithoutGroupNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGroupInput, Prisma.ProjectUncheckedCreateWithoutGroupInput> | Prisma.ProjectCreateWithoutGroupInput[] | Prisma.ProjectUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGroupInput | Prisma.ProjectCreateOrConnectWithoutGroupInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutGroupInput | Prisma.ProjectUpsertWithWhereUniqueWithoutGroupInput[]
+  createMany?: Prisma.ProjectCreateManyGroupInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutGroupInput | Prisma.ProjectUpdateWithWhereUniqueWithoutGroupInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutGroupInput | Prisma.ProjectUpdateManyWithWhereWithoutGroupInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
+export type ProjectUncheckedUpdateManyWithoutGroupNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGroupInput, Prisma.ProjectUncheckedCreateWithoutGroupInput> | Prisma.ProjectCreateWithoutGroupInput[] | Prisma.ProjectUncheckedCreateWithoutGroupInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGroupInput | Prisma.ProjectCreateOrConnectWithoutGroupInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutGroupInput | Prisma.ProjectUpsertWithWhereUniqueWithoutGroupInput[]
+  createMany?: Prisma.ProjectCreateManyGroupInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutGroupInput | Prisma.ProjectUpdateWithWhereUniqueWithoutGroupInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutGroupInput | Prisma.ProjectUpdateManyWithWhereWithoutGroupInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
 }
 
 export type ProjectCreateNestedOneWithoutReplacedByInput = {
@@ -941,6 +1031,168 @@ export type ProjectUpdateOneRequiredWithoutContractorLinksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutContractorLinksInput, Prisma.ProjectUpdateWithoutContractorLinksInput>, Prisma.ProjectUncheckedUpdateWithoutContractorLinksInput>
 }
 
+export type ProjectCreateNestedManyWithoutOrgUnitInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutOrgUnitInput, Prisma.ProjectUncheckedCreateWithoutOrgUnitInput> | Prisma.ProjectCreateWithoutOrgUnitInput[] | Prisma.ProjectUncheckedCreateWithoutOrgUnitInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutOrgUnitInput | Prisma.ProjectCreateOrConnectWithoutOrgUnitInput[]
+  createMany?: Prisma.ProjectCreateManyOrgUnitInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUncheckedCreateNestedManyWithoutOrgUnitInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutOrgUnitInput, Prisma.ProjectUncheckedCreateWithoutOrgUnitInput> | Prisma.ProjectCreateWithoutOrgUnitInput[] | Prisma.ProjectUncheckedCreateWithoutOrgUnitInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutOrgUnitInput | Prisma.ProjectCreateOrConnectWithoutOrgUnitInput[]
+  createMany?: Prisma.ProjectCreateManyOrgUnitInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUpdateManyWithoutOrgUnitNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutOrgUnitInput, Prisma.ProjectUncheckedCreateWithoutOrgUnitInput> | Prisma.ProjectCreateWithoutOrgUnitInput[] | Prisma.ProjectUncheckedCreateWithoutOrgUnitInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutOrgUnitInput | Prisma.ProjectCreateOrConnectWithoutOrgUnitInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutOrgUnitInput | Prisma.ProjectUpsertWithWhereUniqueWithoutOrgUnitInput[]
+  createMany?: Prisma.ProjectCreateManyOrgUnitInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutOrgUnitInput | Prisma.ProjectUpdateWithWhereUniqueWithoutOrgUnitInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutOrgUnitInput | Prisma.ProjectUpdateManyWithWhereWithoutOrgUnitInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
+export type ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutOrgUnitInput, Prisma.ProjectUncheckedCreateWithoutOrgUnitInput> | Prisma.ProjectCreateWithoutOrgUnitInput[] | Prisma.ProjectUncheckedCreateWithoutOrgUnitInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutOrgUnitInput | Prisma.ProjectCreateOrConnectWithoutOrgUnitInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutOrgUnitInput | Prisma.ProjectUpsertWithWhereUniqueWithoutOrgUnitInput[]
+  createMany?: Prisma.ProjectCreateManyOrgUnitInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutOrgUnitInput | Prisma.ProjectUpdateWithWhereUniqueWithoutOrgUnitInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutOrgUnitInput | Prisma.ProjectUpdateManyWithWhereWithoutOrgUnitInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
+export type ProjectCreateWithoutGroupInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  importance?: $Enums.ProjectImportance
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
+  replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutGroupInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  replacementProjectId?: string | null
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
+  operators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorUncheckedCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutGroupInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutGroupInput, Prisma.ProjectUncheckedCreateWithoutGroupInput>
+}
+
+export type ProjectCreateManyGroupInputEnvelope = {
+  data: Prisma.ProjectCreateManyGroupInput | Prisma.ProjectCreateManyGroupInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectUpsertWithWhereUniqueWithoutGroupInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutGroupInput, Prisma.ProjectUncheckedUpdateWithoutGroupInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutGroupInput, Prisma.ProjectUncheckedCreateWithoutGroupInput>
+}
+
+export type ProjectUpdateWithWhereUniqueWithoutGroupInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutGroupInput, Prisma.ProjectUncheckedUpdateWithoutGroupInput>
+}
+
+export type ProjectUpdateManyWithWhereWithoutGroupInput = {
+  where: Prisma.ProjectScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutGroupInput>
+}
+
+export type ProjectScalarWhereInput = {
+  AND?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+  OR?: Prisma.ProjectScalarWhereInput[]
+  NOT?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+  id?: Prisma.StringFilter<"Project"> | string
+  systemName?: Prisma.StringFilter<"Project"> | string
+  code?: Prisma.StringFilter<"Project"> | string
+  isActive?: Prisma.BoolFilter<"Project"> | boolean
+  status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
+  progressPercent?: Prisma.IntNullableFilter<"Project"> | number | null
+  startDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
+  endDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
+  latitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.StringNullableFilter<"Project"> | string | null
+  companyName?: Prisma.StringNullableFilter<"Project"> | string | null
+  systemUrl?: Prisma.StringNullableFilter<"Project"> | string | null
+  launchYear?: Prisma.IntNullableFilter<"Project"> | number | null
+  isSupportActive?: Prisma.BoolFilter<"Project"> | boolean
+  replacementProjectId?: Prisma.StringNullableFilter<"Project"> | string | null
+  description?: Prisma.StringNullableFilter<"Project"> | string | null
+  color?: Prisma.StringNullableFilter<"Project"> | string | null
+  showOnLiveBoard?: Prisma.BoolFilter<"Project"> | boolean
+  importance?: Prisma.EnumProjectImportanceFilter<"Project"> | $Enums.ProjectImportance
+  orgUnitId?: Prisma.StringNullableFilter<"Project"> | string | null
+  groupId?: Prisma.StringNullableFilter<"Project"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+}
+
 export type ProjectCreateWithoutReplacedByInput = {
   id?: string
   systemName: string
@@ -964,6 +1216,8 @@ export type ProjectCreateWithoutReplacedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
   operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
@@ -992,6 +1246,8 @@ export type ProjectUncheckedCreateWithoutReplacedByInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   operators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutProjectInput
@@ -1029,6 +1285,8 @@ export type ProjectCreateWithoutReplacementProjectInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
   operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
@@ -1056,6 +1314,8 @@ export type ProjectUncheckedCreateWithoutReplacementProjectInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
@@ -1110,6 +1370,8 @@ export type ProjectUpdateWithoutReplacedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
   operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
@@ -1138,6 +1400,8 @@ export type ProjectUncheckedUpdateWithoutReplacedByInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   operators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutProjectNestedInput
@@ -1161,34 +1425,6 @@ export type ProjectUpdateWithWhereUniqueWithoutReplacementProjectInput = {
 export type ProjectUpdateManyWithWhereWithoutReplacementProjectInput = {
   where: Prisma.ProjectScalarWhereInput
   data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectInput>
-}
-
-export type ProjectScalarWhereInput = {
-  AND?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
-  OR?: Prisma.ProjectScalarWhereInput[]
-  NOT?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
-  id?: Prisma.StringFilter<"Project"> | string
-  systemName?: Prisma.StringFilter<"Project"> | string
-  code?: Prisma.StringFilter<"Project"> | string
-  isActive?: Prisma.BoolFilter<"Project"> | boolean
-  status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
-  progressPercent?: Prisma.IntNullableFilter<"Project"> | number | null
-  startDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
-  endDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
-  latitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  address?: Prisma.StringNullableFilter<"Project"> | string | null
-  companyName?: Prisma.StringNullableFilter<"Project"> | string | null
-  systemUrl?: Prisma.StringNullableFilter<"Project"> | string | null
-  launchYear?: Prisma.IntNullableFilter<"Project"> | number | null
-  isSupportActive?: Prisma.BoolFilter<"Project"> | boolean
-  replacementProjectId?: Prisma.StringNullableFilter<"Project"> | string | null
-  description?: Prisma.StringNullableFilter<"Project"> | string | null
-  color?: Prisma.StringNullableFilter<"Project"> | string | null
-  showOnLiveBoard?: Prisma.BoolFilter<"Project"> | boolean
-  importance?: Prisma.EnumProjectImportanceFilter<"Project"> | $Enums.ProjectImportance
-  createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
 }
 
 export type ProjectCreateWithoutOperatorsInput = {
@@ -1215,6 +1451,8 @@ export type ProjectCreateWithoutOperatorsInput = {
   updatedAt?: Date | string
   replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
   replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
@@ -1242,6 +1480,8 @@ export type ProjectUncheckedCreateWithoutOperatorsInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
@@ -1291,6 +1531,8 @@ export type ProjectUpdateWithoutOperatorsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
   replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
@@ -1318,6 +1560,8 @@ export type ProjectUncheckedUpdateWithoutOperatorsInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
@@ -1351,6 +1595,8 @@ export type ProjectCreateWithoutPhasesInput = {
   updatedAt?: Date | string
   replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
   replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
   operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
@@ -1378,6 +1624,8 @@ export type ProjectUncheckedCreateWithoutPhasesInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
@@ -1427,6 +1675,8 @@ export type ProjectUpdateWithoutPhasesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
   replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
   operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
@@ -1454,6 +1704,8 @@ export type ProjectUncheckedUpdateWithoutPhasesInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
@@ -1487,6 +1739,8 @@ export type ProjectCreateWithoutProgressEntriesInput = {
   updatedAt?: Date | string
   replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
   replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
   operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
@@ -1514,6 +1768,8 @@ export type ProjectUncheckedCreateWithoutProgressEntriesInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
@@ -1563,6 +1819,8 @@ export type ProjectUpdateWithoutProgressEntriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
   replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
   operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
@@ -1590,6 +1848,8 @@ export type ProjectUncheckedUpdateWithoutProgressEntriesInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
@@ -1623,6 +1883,8 @@ export type ProjectCreateWithoutContractorsInput = {
   updatedAt?: Date | string
   replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
   replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
   operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
   contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
@@ -1650,6 +1912,8 @@ export type ProjectUncheckedCreateWithoutContractorsInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
@@ -1699,6 +1963,8 @@ export type ProjectUpdateWithoutContractorsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
   replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
   operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
@@ -1726,6 +1992,8 @@ export type ProjectUncheckedUpdateWithoutContractorsInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
@@ -1759,6 +2027,8 @@ export type ProjectCreateWithoutContractorLinksInput = {
   updatedAt?: Date | string
   replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
   replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
   operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
   contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
@@ -1786,6 +2056,8 @@ export type ProjectUncheckedCreateWithoutContractorLinksInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
@@ -1835,6 +2107,8 @@ export type ProjectUpdateWithoutContractorLinksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
   replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
   operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
@@ -1862,6 +2136,8 @@ export type ProjectUncheckedUpdateWithoutContractorLinksInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
@@ -1869,6 +2145,212 @@ export type ProjectUncheckedUpdateWithoutContractorLinksInput = {
   contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutOrgUnitInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  importance?: $Enums.ProjectImportance
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
+  replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
+  operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutOrgUnitInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  replacementProjectId?: string | null
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  importance?: $Enums.ProjectImportance
+  groupId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
+  operators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorUncheckedCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutOrgUnitInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutOrgUnitInput, Prisma.ProjectUncheckedCreateWithoutOrgUnitInput>
+}
+
+export type ProjectCreateManyOrgUnitInputEnvelope = {
+  data: Prisma.ProjectCreateManyOrgUnitInput | Prisma.ProjectCreateManyOrgUnitInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectUpsertWithWhereUniqueWithoutOrgUnitInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutOrgUnitInput, Prisma.ProjectUncheckedUpdateWithoutOrgUnitInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutOrgUnitInput, Prisma.ProjectUncheckedCreateWithoutOrgUnitInput>
+}
+
+export type ProjectUpdateWithWhereUniqueWithoutOrgUnitInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutOrgUnitInput, Prisma.ProjectUncheckedUpdateWithoutOrgUnitInput>
+}
+
+export type ProjectUpdateManyWithWhereWithoutOrgUnitInput = {
+  where: Prisma.ProjectScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitInput>
+}
+
+export type ProjectCreateManyGroupInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  replacementProjectId?: string | null
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ProjectUpdateWithoutGroupInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
+  replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutGroupInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
+  operators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateManyWithoutGroupInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProjectCreateManyReplacementProjectInput = {
@@ -1891,6 +2373,8 @@ export type ProjectCreateManyReplacementProjectInput = {
   color?: string | null
   showOnLiveBoard?: boolean
   importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1918,6 +2402,8 @@ export type ProjectUpdateWithoutReplacementProjectInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
   operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
   contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
   contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
@@ -1945,6 +2431,8 @@ export type ProjectUncheckedUpdateWithoutReplacementProjectInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
@@ -1975,6 +2463,124 @@ export type ProjectUncheckedUpdateManyWithoutReplacementProjectInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
   importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ProjectCreateManyOrgUnitInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  replacementProjectId?: string | null
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  importance?: $Enums.ProjectImportance
+  groupId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ProjectUpdateWithoutOrgUnitInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
+  replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
+  operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutOrgUnitInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
+  operators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateManyWithoutOrgUnitInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2076,10 +2682,14 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   color?: boolean
   showOnLiveBoard?: boolean
   importance?: boolean
+  orgUnitId?: boolean
+  groupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   replacementProject?: boolean | Prisma.Project$replacementProjectArgs<ExtArgs>
   replacedBy?: boolean | Prisma.Project$replacedByArgs<ExtArgs>
+  orgUnit?: boolean | Prisma.Project$orgUnitArgs<ExtArgs>
+  group?: boolean | Prisma.Project$groupArgs<ExtArgs>
   operators?: boolean | Prisma.Project$operatorsArgs<ExtArgs>
   contractors?: boolean | Prisma.Project$contractorsArgs<ExtArgs>
   contractorLinks?: boolean | Prisma.Project$contractorLinksArgs<ExtArgs>
@@ -2109,9 +2719,13 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   color?: boolean
   showOnLiveBoard?: boolean
   importance?: boolean
+  orgUnitId?: boolean
+  groupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   replacementProject?: boolean | Prisma.Project$replacementProjectArgs<ExtArgs>
+  orgUnit?: boolean | Prisma.Project$orgUnitArgs<ExtArgs>
+  group?: boolean | Prisma.Project$groupArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2135,9 +2749,13 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   color?: boolean
   showOnLiveBoard?: boolean
   importance?: boolean
+  orgUnitId?: boolean
+  groupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   replacementProject?: boolean | Prisma.Project$replacementProjectArgs<ExtArgs>
+  orgUnit?: boolean | Prisma.Project$orgUnitArgs<ExtArgs>
+  group?: boolean | Prisma.Project$groupArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectScalar = {
@@ -2161,14 +2779,18 @@ export type ProjectSelectScalar = {
   color?: boolean
   showOnLiveBoard?: boolean
   importance?: boolean
+  orgUnitId?: boolean
+  groupId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "systemName" | "code" | "isActive" | "status" | "progressPercent" | "startDate" | "endDate" | "latitude" | "longitude" | "address" | "companyName" | "systemUrl" | "launchYear" | "isSupportActive" | "replacementProjectId" | "description" | "color" | "showOnLiveBoard" | "importance" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "systemName" | "code" | "isActive" | "status" | "progressPercent" | "startDate" | "endDate" | "latitude" | "longitude" | "address" | "companyName" | "systemUrl" | "launchYear" | "isSupportActive" | "replacementProjectId" | "description" | "color" | "showOnLiveBoard" | "importance" | "orgUnitId" | "groupId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   replacementProject?: boolean | Prisma.Project$replacementProjectArgs<ExtArgs>
   replacedBy?: boolean | Prisma.Project$replacedByArgs<ExtArgs>
+  orgUnit?: boolean | Prisma.Project$orgUnitArgs<ExtArgs>
+  group?: boolean | Prisma.Project$groupArgs<ExtArgs>
   operators?: boolean | Prisma.Project$operatorsArgs<ExtArgs>
   contractors?: boolean | Prisma.Project$contractorsArgs<ExtArgs>
   contractorLinks?: boolean | Prisma.Project$contractorLinksArgs<ExtArgs>
@@ -2178,9 +2800,13 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   replacementProject?: boolean | Prisma.Project$replacementProjectArgs<ExtArgs>
+  orgUnit?: boolean | Prisma.Project$orgUnitArgs<ExtArgs>
+  group?: boolean | Prisma.Project$groupArgs<ExtArgs>
 }
 export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   replacementProject?: boolean | Prisma.Project$replacementProjectArgs<ExtArgs>
+  orgUnit?: boolean | Prisma.Project$orgUnitArgs<ExtArgs>
+  group?: boolean | Prisma.Project$groupArgs<ExtArgs>
 }
 
 export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2188,6 +2814,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     replacementProject: Prisma.$ProjectPayload<ExtArgs> | null
     replacedBy: Prisma.$ProjectPayload<ExtArgs>[]
+    orgUnit: Prisma.$OrganizationUnitPayload<ExtArgs> | null
+    group: Prisma.$ProjectGroupPayload<ExtArgs> | null
     operators: Prisma.$ProjectOperatorPayload<ExtArgs>[]
     contractors: Prisma.$ProjectContractorPayload<ExtArgs>[]
     contractorLinks: Prisma.$ProjectContractorProjectPayload<ExtArgs>[]
@@ -2215,6 +2843,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     color: string | null
     showOnLiveBoard: boolean
     importance: $Enums.ProjectImportance
+    orgUnitId: string | null
+    groupId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["project"]>
@@ -2613,6 +3243,8 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   replacementProject<T extends Prisma.Project$replacementProjectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$replacementProjectArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   replacedBy<T extends Prisma.Project$replacedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$replacedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orgUnit<T extends Prisma.Project$orgUnitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$orgUnitArgs<ExtArgs>>): Prisma.Prisma__OrganizationUnitClient<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  group<T extends Prisma.Project$groupArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$groupArgs<ExtArgs>>): Prisma.Prisma__ProjectGroupClient<runtime.Types.Result.GetResult<Prisma.$ProjectGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   operators<T extends Prisma.Project$operatorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$operatorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectOperatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contractors<T extends Prisma.Project$contractorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$contractorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectContractorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contractorLinks<T extends Prisma.Project$contractorLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$contractorLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectContractorProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2667,6 +3299,8 @@ export interface ProjectFieldRefs {
   readonly color: Prisma.FieldRef<"Project", 'String'>
   readonly showOnLiveBoard: Prisma.FieldRef<"Project", 'Boolean'>
   readonly importance: Prisma.FieldRef<"Project", 'ProjectImportance'>
+  readonly orgUnitId: Prisma.FieldRef<"Project", 'String'>
+  readonly groupId: Prisma.FieldRef<"Project", 'String'>
   readonly createdAt: Prisma.FieldRef<"Project", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Project", 'DateTime'>
 }
@@ -3110,6 +3744,44 @@ export type Project$replacedByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * Project.orgUnit
+ */
+export type Project$orgUnitArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationUnit
+   */
+  select?: Prisma.OrganizationUnitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationUnit
+   */
+  omit?: Prisma.OrganizationUnitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationUnitInclude<ExtArgs> | null
+  where?: Prisma.OrganizationUnitWhereInput
+}
+
+/**
+ * Project.group
+ */
+export type Project$groupArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectGroup
+   */
+  select?: Prisma.ProjectGroupSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectGroup
+   */
+  omit?: Prisma.ProjectGroupOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectGroupInclude<ExtArgs> | null
+  where?: Prisma.ProjectGroupWhereInput
 }
 
 /**
