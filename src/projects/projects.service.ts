@@ -116,7 +116,24 @@ function activitySource(entry: {
   const title = lines[0] ?? '';
   const rest = lines.slice(1).join(' ');
   const excerpt = rest && rest !== title ? rest : summary && summary !== title ? summary : '';
-  return { title, excerpt };
+  return { title, excerpt, text };
+}
+
+function serializeLiveBoardActivity(entry: {
+  id: string;
+  occurredAt: Date;
+  body: string | null;
+  summary: string | null;
+  transcript: string | null;
+}) {
+  const source = activitySource(entry);
+  return {
+    id: entry.id,
+    occurredAt: toIsoDateOnly(entry.occurredAt),
+    title: source.title,
+    excerpt: source.excerpt,
+    text: source.text,
+  };
 }
 
 function serializeProject<
@@ -235,7 +252,7 @@ export class ProjectsService {
             transcript: true,
           },
           orderBy: [{ occurredAt: 'desc' }, { createdAt: 'desc' }],
-          take: 1,
+          take: 3,
         },
       },
     });
@@ -269,21 +286,14 @@ export class ProjectsService {
           maxProgressPercent = rest.progressPercent;
         }
       }
-      const last = progressEntries[0] ?? null;
-      const source = last ? activitySource(last) : null;
+      const recentActivities = progressEntries.map(serializeLiveBoardActivity);
       return {
         ...serializeProject(rest, paths),
         mainContractor: contractors[0] ?? null,
         contractors,
         activityCount: rest._count.progressEntries,
-        lastActivity: last
-          ? {
-              id: last.id,
-              occurredAt: toIsoDateOnly(last.occurredAt),
-              title: source?.title ?? '',
-              excerpt: source?.excerpt ?? '',
-            }
-          : null,
+        recentActivities,
+        lastActivity: recentActivities[0] ?? null,
       };
     });
 
