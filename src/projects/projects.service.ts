@@ -71,6 +71,7 @@ const projectSelect = {
   description: true,
   color: true,
   showOnLiveBoard: true,
+  showOnHomePage: true,
   importance: true,
   orgUnitId: true,
   groupId: true,
@@ -203,12 +204,18 @@ export class ProjectsService {
     );
   }
 
-  async liveBoard(query: FindProjectsQueryDto) {
+  async liveBoard(
+    query: FindProjectsQueryDto,
+    options?: { forHomePage?: boolean },
+  ) {
     const where = await this.listWhere(query);
     const orderBy = this.orderBy(query);
     const paths = await this.unitPathMap();
+    const visibility = options?.forHomePage
+      ? { showOnHomePage: true }
+      : { showOnLiveBoard: true };
     const items = await this.prisma.project.findMany({
-      where: { AND: [where, { showOnLiveBoard: true }] },
+      where: { AND: [where, visibility] },
       orderBy,
       select: {
         ...projectSelect,
@@ -471,6 +478,7 @@ export class ProjectsService {
       description: dto.description,
       color: dto.color ?? '#2ebdb6',
       showOnLiveBoard: dto.showOnLiveBoard ?? true,
+      showOnHomePage: dto.showOnHomePage ?? true,
       importance: dto.importance,
       orgUnitId: dto.orgUnitId ?? null,
       groupId: dto.groupId ?? null,
@@ -510,6 +518,7 @@ export class ProjectsService {
       description: dto.description,
       color: dto.color,
       showOnLiveBoard: dto.showOnLiveBoard,
+      showOnHomePage: dto.showOnHomePage,
       importance: dto.importance,
       orgUnitId: dto.orgUnitId,
       groupId: dto.groupId,

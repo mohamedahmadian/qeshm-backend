@@ -322,6 +322,7 @@ model Project {
   description          String?
   color                String?
   showOnLiveBoard      Boolean            @default(true)
+  showOnHomePage       Boolean            @default(true)
   importance           ProjectImportance  @default(HIGH)
   orgUnitId            String?
   orgUnit              OrganizationUnit?  @relation("ProjectOrgUnit", fields: [orgUnitId], references: [id], onDelete: SetNull)
@@ -344,6 +345,7 @@ model Project {
   @@index([endDate])
   @@index([isSupportActive])
   @@index([showOnLiveBoard])
+  @@index([showOnHomePage])
   @@index([importance])
   @@index([orgUnitId])
   @@index([groupId])

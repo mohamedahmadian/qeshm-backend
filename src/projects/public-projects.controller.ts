@@ -13,7 +13,7 @@ export class PublicProjectsController {
 
   @Get('live-board')
   liveBoard() {
-    return this.projects.liveBoard({});
+    return this.projects.liveBoard({}, { forHomePage: true });
   }
 
   @Get(':projectId/documents')

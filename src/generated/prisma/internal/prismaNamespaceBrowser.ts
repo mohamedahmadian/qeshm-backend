@@ -280,6 +280,7 @@ export const ProjectScalarFieldEnum = {
   description: 'description',
   color: 'color',
   showOnLiveBoard: 'showOnLiveBoard',
+  showOnHomePage: 'showOnHomePage',
   importance: 'importance',
   orgUnitId: 'orgUnitId',
   groupId: 'groupId',

@@ -173,4 +173,8 @@ export class CreateProjectDto {
   @IsOptional()
   @IsBoolean()
   showOnLiveBoard?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  showOnHomePage?: boolean;
 }
