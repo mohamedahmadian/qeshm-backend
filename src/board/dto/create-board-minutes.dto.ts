@@ -12,7 +12,7 @@ import {
   ValidateIf,
   ValidateNested,
 } from 'class-validator';
-import { emptyToNull, emptyToUndefined } from '../../common/dto-transform';
+import { emptyToNull } from '../../common/dto-transform';
 import {
   MAX_BOARD_ATTACHMENTS,
   MAX_BOARD_MINUTES_MEMBERS,
@@ -53,10 +53,10 @@ export class CreateBoardMinutesDto {
   body?: string | null;
 
   @IsOptional()
-  @Transform(({ value }) => emptyToUndefined(value))
+  @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
-  requestId?: string;
+  requestId?: string | null;
 
   @IsOptional()
   @IsArray()
