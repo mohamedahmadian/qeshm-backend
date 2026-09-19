@@ -7,9 +7,11 @@ export const BOARD_ADMIN_ROLE_CODE = 'BOARD_ADMIN';
 
 export const BOARD_ADMIN_PERMISSION_CODES = [
   'board',
+  'board.search',
   'board.requests',
   'board.plans',
   'board.minutes',
+  'board.reports',
   'board.resolutions',
   'board.calendar',
   'board.permissions',

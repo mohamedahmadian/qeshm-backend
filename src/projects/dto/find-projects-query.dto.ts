@@ -51,6 +51,12 @@ export class FindProjectsQueryDto extends PaginationQueryDto {
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
+  @ValidateIf((_, value) => value !== unspecifiedProjectFilter)
+  @IsUUID('4')
+  groupId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
   @IsString()
   companyName?: string;
 

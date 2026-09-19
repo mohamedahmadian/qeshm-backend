@@ -411,6 +411,8 @@ export class ProjectsService {
       importance: query.importance,
       id: query.excludeId ? { not: query.excludeId } : undefined,
       orgUnitId,
+      groupId:
+        query.groupId === unspecifiedProjectFilter ? null : query.groupId,
       operators,
       OR: query.q
         ? [

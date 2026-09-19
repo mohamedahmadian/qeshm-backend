@@ -78,6 +78,67 @@ const resolutionInclude = {
   },
 } satisfies Prisma.BoardMinutesResolutionInclude;
 
+const searchInclude = {
+  request: {
+    select: {
+      id: true,
+      subject: true,
+      status: true,
+      justification: true,
+      topicHistory: true,
+      description: true,
+      orgPositionText: true,
+      unit: { select: unitSelect },
+    },
+  },
+  createdBy: { select: personSelect },
+  members: {
+    include: { user: { select: personSelect } },
+  },
+  resolutions: {
+    orderBy: [{ createdAt: 'asc' as const }, { id: 'asc' as const }],
+    include: { unit: { select: unitSelect } },
+  },
+  _count: { select: { resolutions: true } },
+} satisfies Prisma.BoardMinutesInclude;
+
+const searchRequestInclude = {
+  unit: { select: unitSelect },
+  createdBy: { select: personSelect },
+  _count: { select: { minutes: true } },
+} satisfies Prisma.BoardRequestInclude;
+
+const dossierRequestInclude = {
+  unit: { select: unitSelect },
+  createdBy: { select: personSelect },
+  managementBy: { select: personSelect },
+  legalBy: { select: personSelect },
+  budgetBy: { select: personSelect },
+  secretaryBy: { select: personSelect },
+  rejectedBy: { select: personSelect },
+  attachments: {
+    orderBy: [{ sortOrder: 'asc' as const }, { createdAt: 'asc' as const }],
+    include: {
+      image: { select: { id: true, mimeType: true, originalName: true } },
+      file: { select: { id: true, mimeType: true, originalName: true, byteSize: true } },
+    },
+  },
+  _count: { select: { attachments: true } },
+} satisfies Prisma.BoardRequestInclude;
+
+function includesInsensitive(value: string | null | undefined, q: string) {
+  return Boolean(value && value.toLowerCase().includes(q.toLowerCase()));
+}
+
+function makeSnippet(value: string | null | undefined, q: string, radius = 48) {
+  if (!value) return null;
+  const index = value.toLowerCase().indexOf(q.toLowerCase());
+  if (index < 0) return null;
+  const start = Math.max(0, index - radius);
+  const end = Math.min(value.length, index + q.length + radius);
+  return `${start > 0 ? '…' : ''}${value.slice(start, end)}${end < value.length ? '…' : ''}`;
+}
+
 type Actor = {
   id: string;
   isAdmin: boolean;
@@ -181,6 +242,121 @@ export class BoardMinutesService {
   async findOne(id: string, userId: string) {
     await this.requireMinutesActor(userId);
     return this.serializeMinutes(await this.loadMinutes(id));
+  }
+
+  async smartSearch(query: FindBoardMinutesQueryDto, userId: string) {
+    await this.requireMinutesActor(userId);
+    const q = query.q?.trim();
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    if (!q) {
+      return {
+        ...paginatedResult([], 0, page, pageSize),
+        minutesCount: 0,
+        requestCount: 0,
+        resolutionCount: 0,
+      };
+    }
+    const minutesWhere: Prisma.BoardMinutesWhereInput = { OR: this.smartSearchWhere(q) };
+    const requestWhere: Prisma.BoardRequestWhereInput = { OR: this.requestSearchWhere(q) };
+    const [minuteRows, requestRows, resolutionCount] = await Promise.all([
+      this.prisma.boardMinutes.findMany({
+        where: minutesWhere,
+        select: { id: true, heldAt: true },
+        orderBy: [{ heldAt: 'desc' }, { id: 'asc' }],
+      }),
+      this.prisma.boardRequest.findMany({
+        where: requestWhere,
+        select: { id: true, requestedAt: true },
+        orderBy: [{ requestedAt: 'desc' }, { id: 'asc' }],
+      }),
+      this.prisma.boardMinutesResolution.count({
+        where: { OR: this.resolutionTextWhere(q) },
+      }),
+    ]);
+    const mixed = [
+      ...minuteRows.map((row) => ({ kind: 'minutes' as const, id: row.id, date: row.heldAt })),
+      ...requestRows.map((row) => ({
+        kind: 'request' as const,
+        id: row.id,
+        date: row.requestedAt,
+      })),
+    ].sort((a, b) => {
+      const byDate = b.date.getTime() - a.date.getTime();
+      if (byDate !== 0) return byDate;
+      return a.id.localeCompare(b.id);
+    });
+    const pageRows = mixed.slice(skip, skip + take);
+    const minutesIds = pageRows.filter((row) => row.kind === 'minutes').map((row) => row.id);
+    const requestIds = pageRows.filter((row) => row.kind === 'request').map((row) => row.id);
+    const [minutesItems, requestItems] = await Promise.all([
+      minutesIds.length
+        ? this.prisma.boardMinutes.findMany({
+            where: { id: { in: minutesIds } },
+            include: searchInclude,
+          })
+        : Promise.resolve([]),
+      requestIds.length
+        ? this.prisma.boardRequest.findMany({
+            where: { id: { in: requestIds } },
+            include: searchRequestInclude,
+          })
+        : Promise.resolve([]),
+    ]);
+    const minutesById = new Map(minutesItems.map((item) => [item.id, item]));
+    const requestsById = new Map(requestItems.map((item) => [item.id, item]));
+    const items: Array<
+      | ReturnType<BoardMinutesService['serializeSearchHit']>
+      | ReturnType<BoardMinutesService['serializeRequestSearchHit']>
+    > = [];
+    for (const row of pageRows) {
+      if (row.kind === 'minutes') {
+        const item = minutesById.get(row.id);
+        if (item) items.push(this.serializeSearchHit(item, q));
+        continue;
+      }
+      const item = requestsById.get(row.id);
+      if (item) items.push(this.serializeRequestSearchHit(item, q));
+    }
+    return {
+      ...paginatedResult(items, mixed.length, page, pageSize),
+      minutesCount: minuteRows.length,
+      requestCount: requestRows.length,
+      resolutionCount,
+    };
+  }
+
+  async findDossier(id: string, userId: string) {
+    await this.requireMinutesActor(userId);
+    const minutes = await this.loadMinutes(id);
+    const [request, resolutions] = await Promise.all([
+      minutes.requestId
+        ? this.prisma.boardRequest.findUnique({
+            where: { id: minutes.requestId },
+            include: dossierRequestInclude,
+          })
+        : Promise.resolve(null),
+      this.prisma.boardMinutesResolution.findMany({
+        where: { minutesId: id },
+        orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+        include: { unit: { select: unitSelect } },
+      }),
+    ]);
+    return {
+      minutes: this.serializeMinutes(minutes),
+      request: request ? this.serializeDossierRequest(request) : null,
+      resolutions: resolutions.map((item) => ({
+        id: item.id,
+        minutesId: item.minutesId,
+        title: item.title,
+        description: item.description,
+        unitId: item.unitId,
+        unit: item.unit,
+        dueDate: toIsoDateOnly(item.dueDate),
+        notes: item.notes,
+        createdAt: item.createdAt.toISOString(),
+        updatedAt: item.updatedAt.toISOString(),
+      })),
+    };
   }
 
   async create(dto: CreateBoardMinutesDto, userId: string) {
@@ -316,6 +492,10 @@ export class BoardMinutesService {
     await this.prisma.boardMinutesResolution.delete({ where: { id } });
   }
 
+  async assertMinutesAccess(userId: string) {
+    await this.requireMinutesActor(userId);
+  }
+
   private async requireMinutesActor(userId: string): Promise<Actor> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -440,6 +620,172 @@ export class BoardMinutesService {
       select: { id: true },
     });
     if (!unit) throw new BadRequestException('واحد سازمانی یافت نشد');
+  }
+
+  private resolutionTextWhere(q: string): Prisma.BoardMinutesResolutionWhereInput['OR'] {
+    const text = containsInsensitive(q);
+    return [
+      { title: text },
+      { description: text },
+      { notes: text },
+      { unit: { name: text } },
+    ];
+  }
+
+  private requestSearchWhere(q: string): Prisma.BoardRequestWhereInput['OR'] {
+    const text = containsInsensitive(q);
+    return [
+      { subject: text },
+      { orgPositionText: text },
+      { justification: text },
+      { topicHistory: text },
+      { description: text },
+      { unit: { name: text } },
+      { createdBy: { fullName: text } },
+      { managementComment: text },
+      { legalComment: text },
+      { budgetComment: text },
+      { secretaryComment: text },
+      { rejectedComment: text },
+    ];
+  }
+
+  private smartSearchWhere(q: string): Prisma.BoardMinutesWhereInput['OR'] {
+    const text = containsInsensitive(q);
+    return [
+      { subject: text },
+      { body: text },
+      { createdBy: { fullName: text } },
+      { members: { some: { user: { fullName: text } } } },
+      { request: { subject: text } },
+      { request: { justification: text } },
+      { request: { topicHistory: text } },
+      { request: { description: text } },
+      { request: { orgPositionText: text } },
+      { request: { unit: { name: text } } },
+      { resolutions: { some: { title: text } } },
+      { resolutions: { some: { description: text } } },
+      { resolutions: { some: { notes: text } } },
+      { resolutions: { some: { unit: { name: text } } } },
+    ];
+  }
+
+  private serializeSearchHit(
+    item: Prisma.BoardMinutesGetPayload<{ include: typeof searchInclude }>,
+    q: string,
+  ) {
+    const matchedResolutions = item.resolutions.filter(
+      (row) =>
+        includesInsensitive(row.title, q) ||
+        includesInsensitive(row.description, q) ||
+        includesInsensitive(row.notes, q) ||
+        includesInsensitive(row.unit?.name, q),
+    );
+    const matchIn = [
+      ...(includesInsensitive(item.subject, q) ||
+      includesInsensitive(item.body, q) ||
+      includesInsensitive(item.createdBy.fullName, q) ||
+      item.members.some((row) => includesInsensitive(row.user.fullName, q))
+        ? (['minutes'] as const)
+        : []),
+      ...(item.request &&
+      (includesInsensitive(item.request.subject, q) ||
+        includesInsensitive(item.request.justification, q) ||
+        includesInsensitive(item.request.topicHistory, q) ||
+        includesInsensitive(item.request.description, q) ||
+        includesInsensitive(item.request.orgPositionText, q) ||
+        includesInsensitive(item.request.unit.name, q))
+        ? (['request'] as const)
+        : []),
+      ...(matchedResolutions.length ? (['resolution'] as const) : []),
+    ];
+    const snippet =
+      makeSnippet(item.subject, q) ||
+      makeSnippet(item.body, q) ||
+      makeSnippet(item.request?.subject, q) ||
+      makeSnippet(item.request?.justification, q) ||
+      makeSnippet(item.request?.topicHistory, q) ||
+      makeSnippet(item.request?.description, q) ||
+      makeSnippet(matchedResolutions[0]?.title, q) ||
+      makeSnippet(matchedResolutions[0]?.description, q) ||
+      makeSnippet(matchedResolutions[0]?.notes, q) ||
+      null;
+    return {
+      kind: 'minutes' as const,
+      id: item.id,
+      subject: item.subject,
+      heldAt: toIsoDateOnly(item.heldAt),
+      body: item.body,
+      request: item.request
+        ? { id: item.request.id, subject: item.request.subject, status: item.request.status }
+        : null,
+      resolutionCount: item._count.resolutions,
+      matchIn,
+      snippet,
+      matchedResolutions: matchedResolutions.slice(0, 5).map((row) => ({
+        id: row.id,
+        title: row.title,
+      })),
+    };
+  }
+
+  private serializeRequestSearchHit(
+    item: Prisma.BoardRequestGetPayload<{ include: typeof searchRequestInclude }>,
+    q: string,
+  ) {
+    const snippet =
+      makeSnippet(item.subject, q) ||
+      makeSnippet(item.justification, q) ||
+      makeSnippet(item.topicHistory, q) ||
+      makeSnippet(item.description, q) ||
+      makeSnippet(item.orgPositionText, q) ||
+      makeSnippet(item.unit.name, q) ||
+      makeSnippet(item.createdBy.fullName, q) ||
+      makeSnippet(item.managementComment, q) ||
+      makeSnippet(item.legalComment, q) ||
+      makeSnippet(item.budgetComment, q) ||
+      makeSnippet(item.secretaryComment, q) ||
+      makeSnippet(item.rejectedComment, q) ||
+      null;
+    return {
+      kind: 'request' as const,
+      id: item.id,
+      subject: item.subject,
+      requestedAt: toIsoDateOnly(item.requestedAt),
+      status: item.status,
+      unit: item.unit,
+      snippet,
+      matchIn: ['request'] as const,
+      minutesCount: item._count.minutes,
+    };
+  }
+
+  private serializeDossierRequest(
+    item: Prisma.BoardRequestGetPayload<{ include: typeof dossierRequestInclude }>,
+  ) {
+    return {
+      ...item,
+      requestedAt: toIsoDateOnly(item.requestedAt),
+      managementAt: toIsoDateOnly(item.managementAt),
+      legalAt: toIsoDateOnly(item.legalAt),
+      budgetAt: toIsoDateOnly(item.budgetAt),
+      secretaryAt: toIsoDateOnly(item.secretaryAt),
+      rejectedAt: toIsoDateOnly(item.rejectedAt),
+      createdAt: item.createdAt.toISOString(),
+      updatedAt: item.updatedAt.toISOString(),
+      attachments: item.attachments.map((row) => ({
+        id: row.id,
+        stage: row.stage,
+        kind: row.kind,
+        imageId: row.imageId,
+        fileId: row.fileId,
+        originalName:
+          row.originalName || row.image?.originalName || row.file?.originalName || null,
+        mimeType: row.image?.mimeType || row.file?.mimeType || null,
+        byteSize: row.file?.byteSize ?? null,
+        createdAt: row.createdAt.toISOString(),
+      })),
+    };
   }
 
   private serializeMinutes(

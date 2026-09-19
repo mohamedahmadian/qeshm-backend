@@ -11,7 +11,9 @@ import {
 } from '@nestjs/common';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { BoardMinutesService } from './board-minutes.service';
+import { BoardReportsService } from './board-reports.service';
 import { BoardService } from './board.service';
+import { FindBoardReportsQueryDto } from './dto/find-board-reports-query.dto';
 import {
   ReviewBoardRequestDto,
   UpdateBoardPermissionsDto,
@@ -19,6 +21,7 @@ import {
 } from './dto/board-actions.dto';
 import { CreateBoardRequestDto } from './dto/create-board-request.dto';
 import { FindBoardRequestsQueryDto } from './dto/find-board-requests-query.dto';
+import { PaginationQueryDto } from '../common/pagination';
 import { FindBoardResolutionsQueryDto } from './dto/find-board-resolutions-query.dto';
 import { UpdateBoardRequestDto } from './dto/update-board-request.dto';
 
@@ -29,6 +32,7 @@ export class BoardController {
   constructor(
     private readonly board: BoardService,
     private readonly minutes: BoardMinutesService,
+    private readonly reports: BoardReportsService,
   ) {}
 
   @Get('access')
@@ -52,6 +56,15 @@ export class BoardController {
     return this.board.updatePermissions(user.id, dto);
   }
 
+  @Get('reports')
+  reportsOverview(
+    @Query() query: FindBoardReportsQueryDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.reports.overview(query, user.id);
+  }
+
   @Get('resolutions')
   resolutions(
     @Query() query: FindBoardResolutionsQueryDto,
@@ -59,6 +72,24 @@ export class BoardController {
   ) {
     if (!user) throw new UnauthorizedException();
     return this.minutes.findAllResolutions(query, user.id);
+  }
+
+  @Get('search')
+  search(
+    @Query() query: PaginationQueryDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.minutes.smartSearch(query, user.id);
+  }
+
+  @Get('search/:minutesId')
+  dossier(
+    @Param('minutesId') minutesId: string,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.minutes.findDossier(minutesId, user.id);
   }
 
   @Get('plans/stats')
