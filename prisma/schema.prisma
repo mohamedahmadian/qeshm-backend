@@ -52,6 +52,11 @@ enum ProjectProgressMode {
   PHASE_CHECKLIST
 }
 
+enum PhaseProgressMode {
+  MANUAL
+  CHECKLIST
+}
+
 enum FoodReservationStatus {
   PENDING
   CONFIRMED
@@ -422,6 +427,7 @@ model ProjectPhase {
   startDate       DateTime?      @db.Date
   endDate         DateTime?      @db.Date
   status          ProjectStatus?
+  progressMode    PhaseProgressMode @default(MANUAL)
   progressPercent Int?
   checklistItems  ProjectChecklistItem[]
   createdAt       DateTime       @default(now())

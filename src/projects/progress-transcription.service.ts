@@ -75,7 +75,7 @@ export class ProgressTranscriptionService {
         data: {
           transcript,
           summary,
-          body: entry.body?.trim() ? entry.body : transcript,
+          body: appendTranscript(entry.body, transcript),
           transcriptionStatus: ProjectProgressTranscriptionStatus.READY,
           transcriptionError: null,
         },
@@ -187,6 +187,14 @@ type AvanegarResponse = {
     };
   };
 };
+
+function appendTranscript(body: string | null, transcript: string) {
+  const written = body?.trim() ?? '';
+  const spoken = transcript.trim();
+  if (!written) return spoken;
+  if (!spoken || written.endsWith(spoken)) return written;
+  return `${written}\n\n${spoken}`;
+}
 
 function audioFileName(mimeType: string, originalName: string | null) {
   const trimmed = originalName?.trim();

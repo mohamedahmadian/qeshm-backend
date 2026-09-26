@@ -335,6 +335,7 @@ export const ProjectPhaseScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   status: 'status',
+  progressMode: 'progressMode',
   progressPercent: 'progressPercent',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

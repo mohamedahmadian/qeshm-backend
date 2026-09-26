@@ -12,7 +12,7 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { emptyToNull, toOptionalNumber } from '../../common/dto-transform';
-import { ProjectStatus } from '../../generated/prisma/client';
+import { PhaseProgressMode, ProjectStatus } from '../../generated/prisma/client';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -54,4 +54,8 @@ export class CreateProjectPhaseDto {
   @Min(0)
   @Max(100)
   progressPercent?: number | null;
+
+  @IsOptional()
+  @IsEnum(PhaseProgressMode)
+  progressMode?: PhaseProgressMode;
 }

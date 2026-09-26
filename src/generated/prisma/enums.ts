@@ -74,6 +74,14 @@ export const ProjectProgressMode = {
 export type ProjectProgressMode = (typeof ProjectProgressMode)[keyof typeof ProjectProgressMode]
 
 
+export const PhaseProgressMode = {
+  MANUAL: 'MANUAL',
+  CHECKLIST: 'CHECKLIST'
+} as const
+
+export type PhaseProgressMode = (typeof PhaseProgressMode)[keyof typeof PhaseProgressMode]
+
+
 export const FoodReservationStatus = {
   PENDING: 'PENDING',
   CONFIRMED: 'CONFIRMED'

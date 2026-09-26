@@ -119,8 +119,14 @@ export class ProjectChecklistService {
       (sum, item) => sum + item.weightPercent,
       0,
     );
+    const phase = phaseId
+      ? await this.prisma.projectPhase.findFirst({
+          where: { id: phaseId, projectId },
+          select: { progressMode: true },
+        })
+      : null;
     const drivesProgress = phaseId
-      ? project.progressMode === 'PHASE_CHECKLIST'
+      ? phase?.progressMode === 'CHECKLIST'
       : project.progressMode === 'PROJECT_CHECKLIST';
     return {
       allocatedWeight,
@@ -210,7 +216,12 @@ export class ProjectChecklistService {
       where: { id: projectId },
       select: { progressMode: true, status: true },
     });
-    if (!project || project.progressMode === 'MANUAL') {
+    if (!project) {
+      return;
+    }
+
+    await this.refreshChecklistPhases(db, projectId);
+    if (project.progressMode === 'MANUAL') {
       return;
     }
 
@@ -230,45 +241,51 @@ export class ProjectChecklistService {
       return;
     }
 
-    const [items, phases] = await Promise.all([
+    const phases = await db.projectPhase.findMany({
+      where: { projectId },
+      select: { progressPercent: true },
+    });
+    const progressPercent = phases.length
+      ? Math.round(
+          phases.reduce((sum, phase) => sum + (phase.progressPercent ?? 0), 0) /
+            phases.length,
+        )
+      : 0;
+    await db.project.update({
+      where: { id: projectId },
+      data: {
+        progressPercent,
+        status: statusAfterChecklistProgress(progressPercent, project.status),
+      },
+    });
+  }
+
+  private async refreshChecklistPhases(
+    db: Prisma.TransactionClient | PrismaService,
+    projectId: string,
+  ) {
+    const [phases, items] = await Promise.all([
+      db.projectPhase.findMany({
+        where: { projectId, progressMode: 'CHECKLIST' },
+        select: { id: true },
+      }),
       db.projectChecklistItem.findMany({
         where: { projectId, phaseId: { not: null } },
         select: { phaseId: true, weightPercent: true, isDone: true },
       }),
-      db.projectPhase.findMany({
-        where: { projectId },
-        select: { id: true },
-      }),
     ]);
-    const buckets = new Map<string, { done: number; total: number }>();
-    let projectDone = 0;
+    const doneByPhase = new Map<string, number>();
     for (const item of items) {
-      if (!item.phaseId) continue;
-      const bucket = buckets.get(item.phaseId) ?? { done: 0, total: 0 };
-      bucket.total += item.weightPercent;
-      if (item.isDone) {
-        bucket.done += item.weightPercent;
-        projectDone += item.weightPercent;
-      }
-      buckets.set(item.phaseId, bucket);
+      if (!item.phaseId || !item.isDone) continue;
+      doneByPhase.set(
+        item.phaseId,
+        (doneByPhase.get(item.phaseId) ?? 0) + item.weightPercent,
+      );
     }
-    await db.project.update({
-      where: { id: projectId },
-      data: {
-        progressPercent: projectDone,
-        status: statusAfterChecklistProgress(projectDone, project.status),
-      },
-    });
     for (const phase of phases) {
-      const bucket = buckets.get(phase.id);
       await db.projectPhase.update({
         where: { id: phase.id },
-        data: {
-          progressPercent:
-            bucket && bucket.total > 0
-              ? Math.round((bucket.done / bucket.total) * 100)
-              : null,
-        },
+        data: { progressPercent: doneByPhase.get(phase.id) ?? 0 },
       });
     }
   }
@@ -293,7 +310,7 @@ export class ProjectChecklistService {
   ): Prisma.ProjectChecklistItemWhereInput {
     return {
       projectId,
-      phaseId: phaseId ? { not: null } : null,
+      phaseId,
       id: excludeId ? { not: excludeId } : undefined,
     };
   }

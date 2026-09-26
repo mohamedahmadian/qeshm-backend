@@ -41,6 +41,7 @@ export type ProjectPhaseMinAggregateOutputType = {
   startDate: Date | null
   endDate: Date | null
   status: $Enums.ProjectStatus | null
+  progressMode: $Enums.PhaseProgressMode | null
   progressPercent: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -53,6 +54,7 @@ export type ProjectPhaseMaxAggregateOutputType = {
   startDate: Date | null
   endDate: Date | null
   status: $Enums.ProjectStatus | null
+  progressMode: $Enums.PhaseProgressMode | null
   progressPercent: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -65,6 +67,7 @@ export type ProjectPhaseCountAggregateOutputType = {
   startDate: number
   endDate: number
   status: number
+  progressMode: number
   progressPercent: number
   createdAt: number
   updatedAt: number
@@ -87,6 +90,7 @@ export type ProjectPhaseMinAggregateInputType = {
   startDate?: true
   endDate?: true
   status?: true
+  progressMode?: true
   progressPercent?: true
   createdAt?: true
   updatedAt?: true
@@ -99,6 +103,7 @@ export type ProjectPhaseMaxAggregateInputType = {
   startDate?: true
   endDate?: true
   status?: true
+  progressMode?: true
   progressPercent?: true
   createdAt?: true
   updatedAt?: true
@@ -111,6 +116,7 @@ export type ProjectPhaseCountAggregateInputType = {
   startDate?: true
   endDate?: true
   status?: true
+  progressMode?: true
   progressPercent?: true
   createdAt?: true
   updatedAt?: true
@@ -210,6 +216,7 @@ export type ProjectPhaseGroupByOutputType = {
   startDate: Date | null
   endDate: Date | null
   status: $Enums.ProjectStatus | null
+  progressMode: $Enums.PhaseProgressMode
   progressPercent: number | null
   createdAt: Date
   updatedAt: Date
@@ -245,6 +252,7 @@ export type ProjectPhaseWhereInput = {
   startDate?: Prisma.DateTimeNullableFilter<"ProjectPhase"> | Date | string | null
   endDate?: Prisma.DateTimeNullableFilter<"ProjectPhase"> | Date | string | null
   status?: Prisma.EnumProjectStatusNullableFilter<"ProjectPhase"> | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFilter<"ProjectPhase"> | $Enums.PhaseProgressMode
   progressPercent?: Prisma.IntNullableFilter<"ProjectPhase"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
@@ -259,6 +267,7 @@ export type ProjectPhaseOrderByWithRelationInput = {
   startDate?: Prisma.SortOrderInput | Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
+  progressMode?: Prisma.SortOrder
   progressPercent?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -276,6 +285,7 @@ export type ProjectPhaseWhereUniqueInput = Prisma.AtLeast<{
   startDate?: Prisma.DateTimeNullableFilter<"ProjectPhase"> | Date | string | null
   endDate?: Prisma.DateTimeNullableFilter<"ProjectPhase"> | Date | string | null
   status?: Prisma.EnumProjectStatusNullableFilter<"ProjectPhase"> | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFilter<"ProjectPhase"> | $Enums.PhaseProgressMode
   progressPercent?: Prisma.IntNullableFilter<"ProjectPhase"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
@@ -290,6 +300,7 @@ export type ProjectPhaseOrderByWithAggregationInput = {
   startDate?: Prisma.SortOrderInput | Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
+  progressMode?: Prisma.SortOrder
   progressPercent?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -310,6 +321,7 @@ export type ProjectPhaseScalarWhereWithAggregatesInput = {
   startDate?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectPhase"> | Date | string | null
   endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectPhase"> | Date | string | null
   status?: Prisma.EnumProjectStatusNullableWithAggregatesFilter<"ProjectPhase"> | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeWithAggregatesFilter<"ProjectPhase"> | $Enums.PhaseProgressMode
   progressPercent?: Prisma.IntNullableWithAggregatesFilter<"ProjectPhase"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ProjectPhase"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ProjectPhase"> | Date | string
@@ -321,6 +333,7 @@ export type ProjectPhaseCreateInput = {
   startDate?: Date | string | null
   endDate?: Date | string | null
   status?: $Enums.ProjectStatus | null
+  progressMode?: $Enums.PhaseProgressMode
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -335,6 +348,7 @@ export type ProjectPhaseUncheckedCreateInput = {
   startDate?: Date | string | null
   endDate?: Date | string | null
   status?: $Enums.ProjectStatus | null
+  progressMode?: $Enums.PhaseProgressMode
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -347,6 +361,7 @@ export type ProjectPhaseUpdateInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -361,6 +376,7 @@ export type ProjectPhaseUncheckedUpdateInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -374,6 +390,7 @@ export type ProjectPhaseCreateManyInput = {
   startDate?: Date | string | null
   endDate?: Date | string | null
   status?: $Enums.ProjectStatus | null
+  progressMode?: $Enums.PhaseProgressMode
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -385,6 +402,7 @@ export type ProjectPhaseUpdateManyMutationInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -397,6 +415,7 @@ export type ProjectPhaseUncheckedUpdateManyInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -419,6 +438,7 @@ export type ProjectPhaseCountOrderByAggregateInput = {
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  progressMode?: Prisma.SortOrder
   progressPercent?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -435,6 +455,7 @@ export type ProjectPhaseMaxOrderByAggregateInput = {
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  progressMode?: Prisma.SortOrder
   progressPercent?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -447,6 +468,7 @@ export type ProjectPhaseMinOrderByAggregateInput = {
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  progressMode?: Prisma.SortOrder
   progressPercent?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -507,6 +529,10 @@ export type NullableEnumProjectStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProjectStatus | null
 }
 
+export type EnumPhaseProgressModeFieldUpdateOperationsInput = {
+  set?: $Enums.PhaseProgressMode
+}
+
 export type ProjectPhaseCreateNestedOneWithoutChecklistItemsInput = {
   create?: Prisma.XOR<Prisma.ProjectPhaseCreateWithoutChecklistItemsInput, Prisma.ProjectPhaseUncheckedCreateWithoutChecklistItemsInput>
   connectOrCreate?: Prisma.ProjectPhaseCreateOrConnectWithoutChecklistItemsInput
@@ -529,6 +555,7 @@ export type ProjectPhaseCreateWithoutProjectInput = {
   startDate?: Date | string | null
   endDate?: Date | string | null
   status?: $Enums.ProjectStatus | null
+  progressMode?: $Enums.PhaseProgressMode
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -541,6 +568,7 @@ export type ProjectPhaseUncheckedCreateWithoutProjectInput = {
   startDate?: Date | string | null
   endDate?: Date | string | null
   status?: $Enums.ProjectStatus | null
+  progressMode?: $Enums.PhaseProgressMode
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -583,6 +611,7 @@ export type ProjectPhaseScalarWhereInput = {
   startDate?: Prisma.DateTimeNullableFilter<"ProjectPhase"> | Date | string | null
   endDate?: Prisma.DateTimeNullableFilter<"ProjectPhase"> | Date | string | null
   status?: Prisma.EnumProjectStatusNullableFilter<"ProjectPhase"> | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFilter<"ProjectPhase"> | $Enums.PhaseProgressMode
   progressPercent?: Prisma.IntNullableFilter<"ProjectPhase"> | number | null
   createdAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
@@ -594,6 +623,7 @@ export type ProjectPhaseCreateWithoutChecklistItemsInput = {
   startDate?: Date | string | null
   endDate?: Date | string | null
   status?: $Enums.ProjectStatus | null
+  progressMode?: $Enums.PhaseProgressMode
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -607,6 +637,7 @@ export type ProjectPhaseUncheckedCreateWithoutChecklistItemsInput = {
   startDate?: Date | string | null
   endDate?: Date | string | null
   status?: $Enums.ProjectStatus | null
+  progressMode?: $Enums.PhaseProgressMode
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -634,6 +665,7 @@ export type ProjectPhaseUpdateWithoutChecklistItemsInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -647,6 +679,7 @@ export type ProjectPhaseUncheckedUpdateWithoutChecklistItemsInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -658,6 +691,7 @@ export type ProjectPhaseCreateManyProjectInput = {
   startDate?: Date | string | null
   endDate?: Date | string | null
   status?: $Enums.ProjectStatus | null
+  progressMode?: $Enums.PhaseProgressMode
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -669,6 +703,7 @@ export type ProjectPhaseUpdateWithoutProjectInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -681,6 +716,7 @@ export type ProjectPhaseUncheckedUpdateWithoutProjectInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -693,6 +729,7 @@ export type ProjectPhaseUncheckedUpdateManyWithoutProjectInput = {
   startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressMode?: Prisma.EnumPhaseProgressModeFieldUpdateOperationsInput | $Enums.PhaseProgressMode
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -736,6 +773,7 @@ export type ProjectPhaseSelect<ExtArgs extends runtime.Types.Extensions.Internal
   startDate?: boolean
   endDate?: boolean
   status?: boolean
+  progressMode?: boolean
   progressPercent?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -751,6 +789,7 @@ export type ProjectPhaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   startDate?: boolean
   endDate?: boolean
   status?: boolean
+  progressMode?: boolean
   progressPercent?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -764,6 +803,7 @@ export type ProjectPhaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   startDate?: boolean
   endDate?: boolean
   status?: boolean
+  progressMode?: boolean
   progressPercent?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -777,12 +817,13 @@ export type ProjectPhaseSelectScalar = {
   startDate?: boolean
   endDate?: boolean
   status?: boolean
+  progressMode?: boolean
   progressPercent?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProjectPhaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "name" | "startDate" | "endDate" | "status" | "progressPercent" | "createdAt" | "updatedAt", ExtArgs["result"]["projectPhase"]>
+export type ProjectPhaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "name" | "startDate" | "endDate" | "status" | "progressMode" | "progressPercent" | "createdAt" | "updatedAt", ExtArgs["result"]["projectPhase"]>
 export type ProjectPhaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   checklistItems?: boolean | Prisma.ProjectPhase$checklistItemsArgs<ExtArgs>
@@ -808,6 +849,7 @@ export type $ProjectPhasePayload<ExtArgs extends runtime.Types.Extensions.Intern
     startDate: Date | null
     endDate: Date | null
     status: $Enums.ProjectStatus | null
+    progressMode: $Enums.PhaseProgressMode
     progressPercent: number | null
     createdAt: Date
     updatedAt: Date
@@ -1242,6 +1284,7 @@ export interface ProjectPhaseFieldRefs {
   readonly startDate: Prisma.FieldRef<"ProjectPhase", 'DateTime'>
   readonly endDate: Prisma.FieldRef<"ProjectPhase", 'DateTime'>
   readonly status: Prisma.FieldRef<"ProjectPhase", 'ProjectStatus'>
+  readonly progressMode: Prisma.FieldRef<"ProjectPhase", 'PhaseProgressMode'>
   readonly progressPercent: Prisma.FieldRef<"ProjectPhase", 'Int'>
   readonly createdAt: Prisma.FieldRef<"ProjectPhase", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ProjectPhase", 'DateTime'>

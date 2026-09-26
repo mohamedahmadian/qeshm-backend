@@ -4421,6 +4421,7 @@ export const ProjectPhaseScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   status: 'status',
+  progressMode: 'progressMode',
   progressPercent: 'progressPercent',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -5251,6 +5252,20 @@ export type EnumProjectImportanceFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'ProjectImportance[]'
  */
 export type ListEnumProjectImportanceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectImportance[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PhaseProgressMode'
+ */
+export type EnumPhaseProgressModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PhaseProgressMode'>
+    
+
+
+/**
+ * Reference to a field of type 'PhaseProgressMode[]'
+ */
+export type ListEnumPhaseProgressModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PhaseProgressMode[]'>
     
 
 

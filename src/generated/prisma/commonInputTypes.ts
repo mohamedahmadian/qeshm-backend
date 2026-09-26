@@ -423,6 +423,13 @@ export type EnumProjectStatusNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumProjectStatusNullableFilter<$PrismaModel> | $Enums.ProjectStatus | null
 }
 
+export type EnumPhaseProgressModeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PhaseProgressMode | Prisma.EnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  in?: $Enums.PhaseProgressMode[] | Prisma.ListEnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PhaseProgressMode[] | Prisma.ListEnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPhaseProgressModeFilter<$PrismaModel> | $Enums.PhaseProgressMode
+}
+
 export type EnumProjectStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ProjectStatus | Prisma.EnumProjectStatusFieldRefInput<$PrismaModel> | null
   in?: $Enums.ProjectStatus[] | Prisma.ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
@@ -431,6 +438,16 @@ export type EnumProjectStatusNullableWithAggregatesFilter<$PrismaModel = never> 
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumProjectStatusNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumProjectStatusNullableFilter<$PrismaModel>
+}
+
+export type EnumPhaseProgressModeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PhaseProgressMode | Prisma.EnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  in?: $Enums.PhaseProgressMode[] | Prisma.ListEnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PhaseProgressMode[] | Prisma.ListEnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPhaseProgressModeWithAggregatesFilter<$PrismaModel> | $Enums.PhaseProgressMode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPhaseProgressModeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPhaseProgressModeFilter<$PrismaModel>
 }
 
 export type EnumProjectProgressProcessingModeFilter<$PrismaModel = never> = {
@@ -1191,6 +1208,13 @@ export type NestedEnumProjectStatusNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumProjectStatusNullableFilter<$PrismaModel> | $Enums.ProjectStatus | null
 }
 
+export type NestedEnumPhaseProgressModeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PhaseProgressMode | Prisma.EnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  in?: $Enums.PhaseProgressMode[] | Prisma.ListEnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PhaseProgressMode[] | Prisma.ListEnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPhaseProgressModeFilter<$PrismaModel> | $Enums.PhaseProgressMode
+}
+
 export type NestedEnumProjectStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ProjectStatus | Prisma.EnumProjectStatusFieldRefInput<$PrismaModel> | null
   in?: $Enums.ProjectStatus[] | Prisma.ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
@@ -1199,6 +1223,16 @@ export type NestedEnumProjectStatusNullableWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumProjectStatusNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumProjectStatusNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumPhaseProgressModeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PhaseProgressMode | Prisma.EnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  in?: $Enums.PhaseProgressMode[] | Prisma.ListEnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PhaseProgressMode[] | Prisma.ListEnumPhaseProgressModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPhaseProgressModeWithAggregatesFilter<$PrismaModel> | $Enums.PhaseProgressMode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPhaseProgressModeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPhaseProgressModeFilter<$PrismaModel>
 }
 
 export type NestedEnumProjectProgressProcessingModeFilter<$PrismaModel = never> = {
