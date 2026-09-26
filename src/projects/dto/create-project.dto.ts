@@ -20,7 +20,11 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { emptyToNull, toOptionalNumber } from '../../common/dto-transform';
-import { ProjectImportance, ProjectStatus } from '../../generated/prisma/client';
+import {
+  ProjectImportance,
+  ProjectProgressMode,
+  ProjectStatus,
+} from '../../generated/prisma/client';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 const hexColor = /^#[0-9A-Fa-f]{6}$/;
@@ -74,6 +78,10 @@ export class CreateProjectDto {
   @Min(0)
   @Max(100)
   progressPercent?: number | null;
+
+  @IsOptional()
+  @IsEnum(ProjectProgressMode)
+  progressMode?: ProjectProgressMode;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(trimString(value)))

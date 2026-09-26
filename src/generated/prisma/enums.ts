@@ -65,6 +65,15 @@ export const ProjectStatus = {
 export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
 
 
+export const ProjectProgressMode = {
+  MANUAL: 'MANUAL',
+  PROJECT_CHECKLIST: 'PROJECT_CHECKLIST',
+  PHASE_CHECKLIST: 'PHASE_CHECKLIST'
+} as const
+
+export type ProjectProgressMode = (typeof ProjectProgressMode)[keyof typeof ProjectProgressMode]
+
+
 export const FoodReservationStatus = {
   PENDING: 'PENDING',
   CONFIRMED: 'CONFIRMED'
@@ -129,6 +138,25 @@ export const ProjectProgressTranscriptionStatus = {
 } as const
 
 export type ProjectProgressTranscriptionStatus = (typeof ProjectProgressTranscriptionStatus)[keyof typeof ProjectProgressTranscriptionStatus]
+
+
+export const PortTicketStatus = {
+  IN_TRIP: 'IN_TRIP',
+  OPERATOR_CANCELLED: 'OPERATOR_CANCELLED',
+  EXPIRED: 'EXPIRED',
+  OTHER: 'OTHER'
+} as const
+
+export type PortTicketStatus = (typeof PortTicketStatus)[keyof typeof PortTicketStatus]
+
+
+export const PortTicketQeshmondiStatus = {
+  UNKNOWN: 'UNKNOWN',
+  VALID: 'VALID',
+  INVALID: 'INVALID'
+} as const
+
+export type PortTicketQeshmondiStatus = (typeof PortTicketQeshmondiStatus)[keyof typeof PortTicketQeshmondiStatus]
 
 
 export const SingardFeedbackKind = {

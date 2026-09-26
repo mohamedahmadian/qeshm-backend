@@ -95,6 +95,11 @@ export type ProjectOperator = Prisma.ProjectOperatorModel
  */
 export type ProjectPhase = Prisma.ProjectPhaseModel
 /**
+ * Model ProjectChecklistItem
+ * 
+ */
+export type ProjectChecklistItem = Prisma.ProjectChecklistItemModel
+/**
  * Model StoredFile
  * 
  */
@@ -274,3 +279,13 @@ export type BoardMinutesAttachment = Prisma.BoardMinutesAttachmentModel
  * 
  */
 export type BoardMinutesResolution = Prisma.BoardMinutesResolutionModel
+/**
+ * Model PortSalesReport
+ * 
+ */
+export type PortSalesReport = Prisma.PortSalesReportModel
+/**
+ * Model PortTicketSale
+ * 
+ */
+export type PortTicketSale = Prisma.PortTicketSaleModel

@@ -1,21 +1,24 @@
 import { Transform } from 'class-transformer';
 import {
   IsArray,
+  IsBoolean,
   IsEmail,
   IsEnum,
   IsIn,
   IsOptional,
   IsString,
   IsUUID,
+  Matches,
   MinLength,
   ValidateIf,
 } from 'class-validator';
 import { Religion, UserGender, UserStatus } from '../../generated/prisma/client';
-import { emptyToNull } from '../../common/dto-transform';
+import { emptyToNull, toOptionalBoolean } from '../../common/dto-transform';
 import { normalizeNationalId } from '../../common/national-id';
 import { normalizePhone } from '../../common/phone';
 
 export const APP_LOCALES = ['fa', 'ar', 'ur', 'hi', 'en'] as const;
+const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
 export class CreateUserDto {
   @IsString()
@@ -190,4 +193,53 @@ export class CreateUserDto {
   @IsArray()
   @IsUUID('4', { each: true })
   roleIds?: string[];
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalBoolean(value))
+  @IsBoolean()
+  isQeshmondi?: boolean;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @Matches(isoDate, { message: 'تاریخ شروع قشموندی معتبر نیست' })
+  qeshmondiStartDate?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @Matches(isoDate, { message: 'تاریخ پایان قشموندی معتبر نیست' })
+  qeshmondiEndDate?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  occupation?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalBoolean(value))
+  @IsBoolean()
+  isResident?: boolean;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  passportNumber?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  fatherName?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @Matches(isoDate, { message: 'تاریخ تولد معتبر نیست' })
+  birthDate?: string | null;
 }

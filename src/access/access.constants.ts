@@ -99,3 +99,18 @@ export async function ensureEmployeeRole(prisma: PrismaClient) {
     select: { id: true },
   });
 }
+
+export async function ensureCitizenRole(prisma: PrismaClient) {
+  const citizen = SYSTEM_ROLES.find((role) => role.code === CITIZEN_ROLE_CODE)!;
+  return prisma.role.upsert({
+    where: { code: citizen.code },
+    update: { isSystem: true },
+    create: {
+      code: citizen.code,
+      name: citizen.name,
+      description: citizen.description,
+      isSystem: true,
+    },
+    select: { id: true },
+  });
+}

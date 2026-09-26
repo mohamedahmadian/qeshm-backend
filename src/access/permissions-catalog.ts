@@ -119,6 +119,27 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
+    code: 'qeshmondi',
+    kind: 'MODULE',
+    nameKey: 'modules.qeshmondi',
+    children: [
+      { code: 'qeshmondi.citizens', kind: 'MENU', nameKey: 'menus.qeshmondiCitizens' },
+      { code: 'qeshmondi.update', kind: 'MENU', nameKey: 'menus.qeshmondiUpdate' },
+    ],
+  },
+  {
+    code: 'ports',
+    kind: 'MODULE',
+    nameKey: 'modules.ports',
+    children: [
+      {
+        code: 'ports.sales-reports',
+        kind: 'MENU',
+        nameKey: 'menus.portSalesReports',
+      },
+    ],
+  },
+  {
     code: 'light-assets',
     kind: 'MODULE',
     nameKey: 'modules.lightAssets',

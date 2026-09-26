@@ -18,7 +18,8 @@ import {
 } from '../common/national-id';
 import { normalizePhone, phoneLookupValues } from '../common/phone';
 import { resolveSortOrder } from '../common/sort-query';
-import { ensureEmployeeRole } from '../access/access.constants';
+import { ensureCitizenRole, ensureEmployeeRole } from '../access/access.constants';
+import { parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
 import { Prisma, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
@@ -28,6 +29,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { UpdateUserLocationDto } from './dto/update-user-location.dto';
+import { parseQeshmondiExcel } from './qeshmondi-import';
+
+const QESHMONDI_IMPORT_PASSWORD = '11111111';
 
 const geoNameSelect = { id: true, nameFa: true, nameEn: true } as const;
 
@@ -40,6 +44,8 @@ const userSelect = {
   locale: true,
   status: true,
   gender: true,
+  fatherName: true,
+  birthDate: true,
   nationalId: true,
   phone: true,
   email: true,
@@ -68,6 +74,12 @@ const userSelect = {
   identityBookletPhotoId: true,
   orgUnitId: true,
   positionId: true,
+  isQeshmondi: true,
+  qeshmondiStartDate: true,
+  qeshmondiEndDate: true,
+  occupation: true,
+  isResident: true,
+  passportNumber: true,
   createdAt: true,
   updatedAt: true,
   orgUnit: { select: { id: true, name: true } },
@@ -98,16 +110,21 @@ function mapUser<
   T extends {
     latitude: Prisma.Decimal | null;
     longitude: Prisma.Decimal | null;
+    qeshmondiStartDate?: Date | null;
+    qeshmondiEndDate?: Date | null;
+    birthDate?: Date | null;
     userRoles?: { role: { id: string; code: string; name: string } }[];
   },
 >(user: T) {
-  const { userRoles, ...rest } = user;
+  const { userRoles, qeshmondiStartDate, qeshmondiEndDate, birthDate, ...rest } = user;
   return {
     ...rest,
     latitude: toCoord(user.latitude),
     longitude: toCoord(user.longitude),
+    qeshmondiStartDate: toIsoDateOnly(qeshmondiStartDate),
+    qeshmondiEndDate: toIsoDateOnly(qeshmondiEndDate),
+    birthDate: toIsoDateOnly(birthDate),
     roles: userRoles?.map((item) => item.role) ?? [],
-    birthDate: null,
     activityStartYear: null,
     issuingOrganizationId: null,
     issuingOrganization: null,
@@ -135,6 +152,8 @@ export class UsersService {
       positionId: query.positionId,
       ...(query.roleId ? { userRoles: { some: { roleId: query.roleId } } } : {}),
       ...(query.employeesOnly ? { orgUnitId: query.orgUnitId ?? { not: null } } : {}),
+      ...(query.qeshmondiOnly ? { isQeshmondi: true } : {}),
+      ...(query.isResident !== undefined ? { isResident: query.isResident } : {}),
       provinceId: query.provinceId,
       cityId:
         query.cityId === CITY_ID_NONE
@@ -147,10 +166,14 @@ export class UsersService {
             { lastName: containsInsensitive(q) },
             { username: containsInsensitive(q) },
             { email: containsInsensitive(q) },
+            { occupation: containsInsensitive(q) },
+            { passportNumber: containsInsensitive(q) },
+            { fatherName: containsInsensitive(q) },
             ...(digits
               ? [
                   { nationalId: { contains: digits } },
                   { phone: { contains: digits } },
+                  { passportNumber: { contains: digits } },
                 ]
               : []),
           ]
@@ -169,6 +192,11 @@ export class UsersService {
         createdAt: (dir) => ({ createdAt: dir }),
         orgUnit: (dir) => ({ orgUnit: { name: dir } }),
         position: (dir) => ({ position: { name: dir } }),
+        occupation: (dir) => ({ occupation: dir }),
+        isResident: (dir) => ({ isResident: dir }),
+        qeshmondiStartDate: (dir) => ({ qeshmondiStartDate: dir }),
+        qeshmondiEndDate: (dir) => ({ qeshmondiEndDate: dir }),
+        passportNumber: (dir) => ({ passportNumber: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -216,6 +244,7 @@ export class UsersService {
       nationalId: user.nationalId,
       phone: user.phone,
       photoId: user.photoId,
+      birthDate: user.birthDate,
       activityStartYear: null,
       country: user.country,
       province: user.province,
@@ -232,6 +261,7 @@ export class UsersService {
     await this.assertGeo(dto.countryId, dto.provinceId, dto.cityId);
     await this.assertImages(dto);
     await this.assertOrgAssignment(dto.orgUnitId, dto.positionId);
+    this.assertQeshmondiDates(dto.qeshmondiStartDate, dto.qeshmondiEndDate);
     const passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
     const user = await this.prisma.user.create({
       data: {
@@ -243,6 +273,8 @@ export class UsersService {
         locale: dto.locale ?? 'fa',
         status: dto.status ?? UserStatus.ACTIVE,
         gender: dto.gender ?? null,
+        fatherName: dto.fatherName ?? null,
+        birthDate: parseOptionalIsoDate(dto.birthDate) ?? null,
         nationalId: dto.nationalId || null,
         phone: dto.phone || null,
         email: dto.email || null,
@@ -265,11 +297,112 @@ export class UsersService {
         identityBookletPhotoId: dto.identityBookletPhotoId ?? null,
         orgUnitId: dto.orgUnitId ?? null,
         positionId: dto.positionId ?? null,
+        isQeshmondi: dto.isQeshmondi ?? false,
+        qeshmondiStartDate: parseOptionalIsoDate(dto.qeshmondiStartDate) ?? null,
+        qeshmondiEndDate: parseOptionalIsoDate(dto.qeshmondiEndDate) ?? null,
+        occupation: dto.occupation ?? null,
+        isResident: dto.isResident ?? false,
+        passportNumber: dto.passportNumber ?? null,
       },
       select: userSelect,
     });
-    await this.assignRolesOnCreate(user.id, dto.roleIds);
+    await this.assignRolesOnCreate(user.id, dto.roleIds, dto.isQeshmondi);
     return this.findOne(user.id);
+  }
+
+  async importQeshmondiExcel(file?: { buffer?: Buffer; originalname?: string }) {
+    if (!file?.buffer?.length) {
+      throw new BadRequestException('فایل اکسل را انتخاب کنید');
+    }
+    const name = file.originalname?.toLowerCase() ?? '';
+    if (name && !name.endsWith('.xlsx') && !name.endsWith('.xls')) {
+      throw new BadRequestException('فقط فایل اکسل با پسوند xlsx مجاز است');
+    }
+    let parsed;
+    try {
+      parsed = await parseQeshmondiExcel(file.buffer);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'خواندن فایل اکسل ممکن نبود';
+      throw new BadRequestException(message);
+    }
+
+    const passwordHash = await bcrypt.hash(QESHMONDI_IMPORT_PASSWORD, 10);
+    const citizen = await ensureCitizenRole(this.prisma);
+    let created = 0;
+    let updated = 0;
+    const seen = new Set<string>();
+
+    for (const row of parsed.rows) {
+      if (seen.has(row.nationalId)) {
+        parsed.skipped.push({
+          rowNumber: row.rowNumber,
+          reason: 'کد ملی تکراری در همین فایل',
+        });
+        continue;
+      }
+      seen.add(row.nationalId);
+
+      const existing = await this.prisma.user.findFirst({
+        where: { nationalId: row.nationalId },
+        select: { id: true, username: true },
+      });
+      const payload = {
+        firstName: row.firstName,
+        lastName: row.lastName,
+        fullName: joinFullName(row.firstName, row.lastName),
+        fatherName: row.fatherName,
+        birthDate: parseOptionalIsoDate(row.birthDate) ?? null,
+        gender: row.gender,
+        passportNumber: row.passportNumber,
+        occupation: row.occupation,
+        isResident: row.isResident,
+        qeshmondiEndDate: parseOptionalIsoDate(row.qeshmondiEndDate) ?? null,
+        isQeshmondi: true,
+      };
+
+      if (existing) {
+        await this.prisma.user.update({
+          where: { id: existing.id },
+          data: payload,
+        });
+        await this.ensureCitizenAssigned(existing.id);
+        updated += 1;
+        continue;
+      }
+
+      const username = await this.uniqueImportUsername(row.nationalId);
+      const user = await this.prisma.user.create({
+        data: {
+          username,
+          passwordHash,
+          locale: 'fa',
+          status: UserStatus.ACTIVE,
+          nationalId: row.nationalId,
+          ...payload,
+        },
+        select: { id: true },
+      });
+      await this.prisma.userRole.create({
+        data: { userId: user.id, roleId: citizen.id },
+      });
+      created += 1;
+    }
+
+    return {
+      created,
+      updated,
+      skipped: parsed.skipped.length,
+      skippedRows: parsed.skipped,
+    };
+  }
+
+  private async uniqueImportUsername(nationalId: string) {
+    const taken = await this.prisma.user.findUnique({
+      where: { username: nationalId },
+      select: { id: true },
+    });
+    if (!taken) return nationalId;
+    return `${nationalId}-${Date.now().toString(36)}`;
   }
 
   async update(id: string, dto: UpdateUserDto) {
@@ -289,6 +422,20 @@ export class UsersService {
         dto.countryId !== undefined ? dto.countryId : current?.countryId,
         dto.provinceId !== undefined ? dto.provinceId : current?.provinceId,
         dto.cityId !== undefined ? dto.cityId : current?.cityId,
+      );
+    }
+    if (dto.qeshmondiStartDate !== undefined || dto.qeshmondiEndDate !== undefined) {
+      const current = await this.prisma.user.findUnique({
+        where: { id },
+        select: { qeshmondiStartDate: true, qeshmondiEndDate: true },
+      });
+      this.assertQeshmondiDates(
+        dto.qeshmondiStartDate !== undefined
+          ? dto.qeshmondiStartDate
+          : toIsoDateOnly(current?.qeshmondiStartDate),
+        dto.qeshmondiEndDate !== undefined
+          ? dto.qeshmondiEndDate
+          : toIsoDateOnly(current?.qeshmondiEndDate),
       );
     }
     const data: Prisma.UserUpdateInput = {
@@ -327,6 +474,21 @@ export class UsersService {
       identityBookletPhoto: optionalConnect(dto.identityBookletPhotoId),
       orgUnit: optionalConnect(dto.orgUnitId),
       position: optionalConnect(dto.positionId),
+      isQeshmondi: dto.isQeshmondi,
+      qeshmondiStartDate:
+        dto.qeshmondiStartDate === undefined
+          ? undefined
+          : parseOptionalIsoDate(dto.qeshmondiStartDate),
+      qeshmondiEndDate:
+        dto.qeshmondiEndDate === undefined
+          ? undefined
+          : parseOptionalIsoDate(dto.qeshmondiEndDate),
+      occupation: dto.occupation === undefined ? undefined : dto.occupation,
+      isResident: dto.isResident,
+      passportNumber: dto.passportNumber === undefined ? undefined : dto.passportNumber,
+      fatherName: dto.fatherName === undefined ? undefined : dto.fatherName,
+      birthDate:
+        dto.birthDate === undefined ? undefined : parseOptionalIsoDate(dto.birthDate),
     };
     if (dto.orgUnitId !== undefined) {
       await this.prisma.organizationUnit.updateMany({
@@ -347,9 +509,11 @@ export class UsersService {
     });
     if (dto.roleIds !== undefined) {
       await this.syncUserRoles(id, dto.roleIds);
-      return this.findOne(id);
     }
-    return mapUser(user);
+    if (dto.isQeshmondi || (dto.isQeshmondi === undefined && user.isQeshmondi)) {
+      await this.ensureCitizenAssigned(id);
+    }
+    return this.findOne(id);
   }
 
   async updateOwnAccount(id: string, dto: UpdateUserDto) {
@@ -359,6 +523,10 @@ export class UsersService {
       roleIds: _roleIds,
       orgUnitId: _orgUnitId,
       positionId: _positionId,
+      isQeshmondi: _isQeshmondi,
+      qeshmondiStartDate: _qeshmondiStartDate,
+      qeshmondiEndDate: _qeshmondiEndDate,
+      isResident: _isResident,
       ...rest
     } = dto;
     return this.update(id, rest);
@@ -709,8 +877,24 @@ export class UsersService {
     }
   }
 
-  private async assignRolesOnCreate(userId: string, roleIds?: string[]) {
+  private assertQeshmondiDates(start?: string | null, end?: string | null) {
+    if (start && end && start > end) {
+      throw new BadRequestException('تاریخ پایان قشموندی نمی‌تواند قبل از تاریخ شروع باشد');
+    }
+  }
+
+  private async assignRolesOnCreate(
+    userId: string,
+    roleIds?: string[],
+    isQeshmondi?: boolean,
+  ) {
     const unique = [...new Set((roleIds ?? []).filter(Boolean))];
+    if (isQeshmondi) {
+      const citizen = await ensureCitizenRole(this.prisma);
+      if (!unique.includes(citizen.id)) unique.push(citizen.id);
+      await this.syncUserRoles(userId, unique);
+      return;
+    }
     if (unique.length) {
       await this.syncUserRoles(userId, unique);
       return;
@@ -718,6 +902,14 @@ export class UsersService {
     const employee = await ensureEmployeeRole(this.prisma);
     await this.prisma.userRole.create({
       data: { userId, roleId: employee.id },
+    });
+  }
+
+  private async ensureCitizenAssigned(userId: string) {
+    const citizen = await ensureCitizenRole(this.prisma);
+    await this.prisma.userRole.createMany({
+      data: [{ userId, roleId: citizen.id }],
+      skipDuplicates: true,
     });
   }
 

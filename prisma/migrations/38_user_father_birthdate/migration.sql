@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "fatherName" TEXT;
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "birthDate" DATE;

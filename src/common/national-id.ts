@@ -24,7 +24,7 @@ export function isValidIranianLegalNationalId(input: string) {
 
 export function normalizeNationalId(input: string) {
   const digits = toLatinDigits(input.trim()).replace(/\D/g, '');
-  if (digits.length === 9) {
+  if (digits.length > 0 && digits.length < 10) {
     return digits.padStart(10, '0');
   }
   return digits;

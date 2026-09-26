@@ -7,7 +7,11 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 import { CheckIdentityDto } from './dto/check-identity.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
@@ -15,6 +19,11 @@ import { FindUsersQueryDto } from './dto/find-users-query.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdateUserLocationDto } from './dto/update-user-location.dto';
 import { UsersService } from './users.service';
+
+const excelUpload = FileInterceptor('file', {
+  storage: memoryStorage(),
+  limits: { fileSize: 20 * 1024 * 1024 },
+});
 
 @Controller('users')
 export class UsersController {
@@ -28,6 +37,15 @@ export class UsersController {
   @Post('identity-check')
   checkIdentity(@Body() dto: CheckIdentityDto) {
     return this.users.checkIdentityTaken(dto);
+  }
+
+  @Post('qeshmondi-import')
+  @UseInterceptors(excelUpload)
+  importQeshmondi(
+    @UploadedFile()
+    file: { buffer: Buffer; originalname: string },
+  ) {
+    return this.users.importQeshmondiExcel(file);
   }
 
   @Get(':id')

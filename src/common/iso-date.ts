@@ -50,6 +50,23 @@ export function toIsoDateOnly(value?: Date | string | null) {
   return value.toISOString().slice(0, 10);
 }
 
+/** تاریخ تقویمی در تهران؛ برای ستون DATE که نیمه‌شب محلی برمی‌گردد. */
+export function toTehranIsoDateOnly(value?: Date | string | null) {
+  if (!value) return null;
+  if (typeof value === 'string') {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value.slice(0, 10);
+    return toTehranIsoDateOnly(parsed);
+  }
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Tehran',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(value);
+}
+
 export function eachIsoDateInclusive(start: string, end: string) {
   if (start > end) return [];
   const dates: string[] = [];

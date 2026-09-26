@@ -408,6 +408,7 @@ export const ModelName = {
   ProjectDocument: 'ProjectDocument',
   ProjectOperator: 'ProjectOperator',
   ProjectPhase: 'ProjectPhase',
+  ProjectChecklistItem: 'ProjectChecklistItem',
   StoredFile: 'StoredFile',
   ProjectProgressEntry: 'ProjectProgressEntry',
   ProjectProgressImage: 'ProjectProgressImage',
@@ -443,7 +444,9 @@ export const ModelName = {
   BoardMinutes: 'BoardMinutes',
   BoardMinutesMember: 'BoardMinutesMember',
   BoardMinutesAttachment: 'BoardMinutesAttachment',
-  BoardMinutesResolution: 'BoardMinutesResolution'
+  BoardMinutesResolution: 'BoardMinutesResolution',
+  PortSalesReport: 'PortSalesReport',
+  PortTicketSale: 'PortTicketSale'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -459,7 +462,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1274,6 +1277,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProjectPhaseCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProjectPhaseCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectChecklistItem: {
+      payload: Prisma.$ProjectChecklistItemPayload<ExtArgs>
+      fields: Prisma.ProjectChecklistItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectChecklistItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectChecklistItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectChecklistItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectChecklistItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectChecklistItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectChecklistItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectChecklistItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectChecklistItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectChecklistItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>
+        }
+        update: {
+          args: Prisma.ProjectChecklistItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectChecklistItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectChecklistItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectChecklistItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectChecklistItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectChecklistItemPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectChecklistItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectChecklistItem>
+        }
+        groupBy: {
+          args: Prisma.ProjectChecklistItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectChecklistItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectChecklistItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectChecklistItemCountAggregateOutputType> | number
         }
       }
     }
@@ -3941,6 +4018,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PortSalesReport: {
+      payload: Prisma.$PortSalesReportPayload<ExtArgs>
+      fields: Prisma.PortSalesReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PortSalesReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PortSalesReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>
+        }
+        findFirst: {
+          args: Prisma.PortSalesReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PortSalesReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>
+        }
+        findMany: {
+          args: Prisma.PortSalesReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>[]
+        }
+        create: {
+          args: Prisma.PortSalesReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>
+        }
+        createMany: {
+          args: Prisma.PortSalesReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PortSalesReportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>[]
+        }
+        delete: {
+          args: Prisma.PortSalesReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>
+        }
+        update: {
+          args: Prisma.PortSalesReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.PortSalesReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PortSalesReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PortSalesReportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>[]
+        }
+        upsert: {
+          args: Prisma.PortSalesReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortSalesReportPayload>
+        }
+        aggregate: {
+          args: Prisma.PortSalesReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePortSalesReport>
+        }
+        groupBy: {
+          args: Prisma.PortSalesReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortSalesReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PortSalesReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortSalesReportCountAggregateOutputType> | number
+        }
+      }
+    }
+    PortTicketSale: {
+      payload: Prisma.$PortTicketSalePayload<ExtArgs>
+      fields: Prisma.PortTicketSaleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PortTicketSaleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PortTicketSaleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>
+        }
+        findFirst: {
+          args: Prisma.PortTicketSaleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PortTicketSaleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>
+        }
+        findMany: {
+          args: Prisma.PortTicketSaleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>[]
+        }
+        create: {
+          args: Prisma.PortTicketSaleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>
+        }
+        createMany: {
+          args: Prisma.PortTicketSaleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PortTicketSaleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>[]
+        }
+        delete: {
+          args: Prisma.PortTicketSaleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>
+        }
+        update: {
+          args: Prisma.PortTicketSaleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>
+        }
+        deleteMany: {
+          args: Prisma.PortTicketSaleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PortTicketSaleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PortTicketSaleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>[]
+        }
+        upsert: {
+          args: Prisma.PortTicketSaleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketSalePayload>
+        }
+        aggregate: {
+          args: Prisma.PortTicketSaleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePortTicketSale>
+        }
+        groupBy: {
+          args: Prisma.PortTicketSaleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortTicketSaleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PortTicketSaleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortTicketSaleCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4064,6 +4289,8 @@ export const UserScalarFieldEnum = {
   phone: 'phone',
   email: 'email',
   gender: 'gender',
+  fatherName: 'fatherName',
+  birthDate: 'birthDate',
   address: 'address',
   notes: 'notes',
   religion: 'religion',
@@ -4089,6 +4316,12 @@ export const UserScalarFieldEnum = {
   identityBookletPhotoId: 'identityBookletPhotoId',
   orgUnitId: 'orgUnitId',
   positionId: 'positionId',
+  isQeshmondi: 'isQeshmondi',
+  qeshmondiStartDate: 'qeshmondiStartDate',
+  qeshmondiEndDate: 'qeshmondiEndDate',
+  occupation: 'occupation',
+  isResident: 'isResident',
+  passportNumber: 'passportNumber',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -4129,6 +4362,7 @@ export const ProjectScalarFieldEnum = {
   code: 'code',
   isActive: 'isActive',
   status: 'status',
+  progressMode: 'progressMode',
   progressPercent: 'progressPercent',
   startDate: 'startDate',
   endDate: 'endDate',
@@ -4193,6 +4427,21 @@ export const ProjectPhaseScalarFieldEnum = {
 } as const
 
 export type ProjectPhaseScalarFieldEnum = (typeof ProjectPhaseScalarFieldEnum)[keyof typeof ProjectPhaseScalarFieldEnum]
+
+
+export const ProjectChecklistItemScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  phaseId: 'phaseId',
+  title: 'title',
+  weightPercent: 'weightPercent',
+  isDone: 'isDone',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectChecklistItemScalarFieldEnum = (typeof ProjectChecklistItemScalarFieldEnum)[keyof typeof ProjectChecklistItemScalarFieldEnum]
 
 
 export const StoredFileScalarFieldEnum = {
@@ -4722,6 +4971,53 @@ export const BoardMinutesResolutionScalarFieldEnum = {
 export type BoardMinutesResolutionScalarFieldEnum = (typeof BoardMinutesResolutionScalarFieldEnum)[keyof typeof BoardMinutesResolutionScalarFieldEnum]
 
 
+export const PortSalesReportScalarFieldEnum = {
+  id: 'id',
+  reportDate: 'reportDate',
+  origin: 'origin',
+  destination: 'destination',
+  fileId: 'fileId',
+  originalFileName: 'originalFileName',
+  recordCount: 'recordCount',
+  uniqueNationalIdCount: 'uniqueNationalIdCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PortSalesReportScalarFieldEnum = (typeof PortSalesReportScalarFieldEnum)[keyof typeof PortSalesReportScalarFieldEnum]
+
+
+export const PortTicketSaleScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  rowNumber: 'rowNumber',
+  ticketNumber: 'ticketNumber',
+  reservationCode: 'reservationCode',
+  nationalId: 'nationalId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  fullName: 'fullName',
+  fatherName: 'fatherName',
+  gender: 'gender',
+  phone: 'phone',
+  travelDate: 'travelDate',
+  travelTime: 'travelTime',
+  origin: 'origin',
+  destination: 'destination',
+  ticketStatus: 'ticketStatus',
+  ticketStatusRaw: 'ticketStatusRaw',
+  qeshmondiStatus: 'qeshmondiStatus',
+  amount: 'amount',
+  seatNumber: 'seatNumber',
+  ticketType: 'ticketType',
+  vesselName: 'vesselName',
+  extras: 'extras',
+  createdAt: 'createdAt'
+} as const
+
+export type PortTicketSaleScalarFieldEnum = (typeof PortTicketSaleScalarFieldEnum)[keyof typeof PortTicketSaleScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4913,6 +5209,20 @@ export type EnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'ProjectStatus[]'
  */
 export type ListEnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectProgressMode'
+ */
+export type EnumProjectProgressModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectProgressMode'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectProgressMode[]'
+ */
+export type ListEnumProjectProgressModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectProgressMode[]'>
     
 
 
@@ -5169,6 +5479,34 @@ export type ListEnumBoardMinutesAttachmentKindFieldRefInput<$PrismaModel> = Fiel
 
 
 /**
+ * Reference to a field of type 'PortTicketStatus'
+ */
+export type EnumPortTicketStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortTicketStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PortTicketStatus[]'
+ */
+export type ListEnumPortTicketStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortTicketStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PortTicketQeshmondiStatus'
+ */
+export type EnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortTicketQeshmondiStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PortTicketQeshmondiStatus[]'
+ */
+export type ListEnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortTicketQeshmondiStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5343,6 +5681,7 @@ export type GlobalOmitConfig = {
   projectDocument?: Prisma.ProjectDocumentOmit
   projectOperator?: Prisma.ProjectOperatorOmit
   projectPhase?: Prisma.ProjectPhaseOmit
+  projectChecklistItem?: Prisma.ProjectChecklistItemOmit
   storedFile?: Prisma.StoredFileOmit
   projectProgressEntry?: Prisma.ProjectProgressEntryOmit
   projectProgressImage?: Prisma.ProjectProgressImageOmit
@@ -5379,6 +5718,8 @@ export type GlobalOmitConfig = {
   boardMinutesMember?: Prisma.BoardMinutesMemberOmit
   boardMinutesAttachment?: Prisma.BoardMinutesAttachmentOmit
   boardMinutesResolution?: Prisma.BoardMinutesResolutionOmit
+  portSalesReport?: Prisma.PortSalesReportOmit
+  portTicketSale?: Prisma.PortTicketSaleOmit
 }
 
 /* Types for Logging */

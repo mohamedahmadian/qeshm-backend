@@ -13,6 +13,7 @@ import {
 import { resolveSortOrder } from '../common/sort-query';
 import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { ProjectChecklistService } from './project-checklist.service';
 import { CreateProjectPhaseDto } from './dto/create-project-phase.dto';
 import { FindProjectPhasesQueryDto } from './dto/find-project-phases-query.dto';
 import { UpdateProjectPhaseDto } from './dto/update-project-phase.dto';
@@ -44,7 +45,10 @@ function serializePhase<T extends { startDate: Date | null; endDate: Date | null
 
 @Injectable()
 export class ProjectPhasesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly checklist: ProjectChecklistService,
+  ) {}
 
   async findAll(projectId: string, query: FindProjectPhasesQueryDto) {
     await this.assertProject(projectId);
@@ -100,7 +104,7 @@ export class ProjectPhasesService {
   }
 
   async create(projectId: string, dto: CreateProjectPhaseDto) {
-    await this.assertProject(projectId);
+    const mode = await this.progressMode(projectId);
     this.assertTimeline(dto.startDate, dto.endDate);
     const phase = await this.prisma.projectPhase.create({
       data: {
@@ -109,7 +113,7 @@ export class ProjectPhasesService {
         startDate: dto.startDate ? parseIsoDate(dto.startDate) : null,
         endDate: dto.endDate ? parseIsoDate(dto.endDate) : null,
         status: dto.status,
-        progressPercent: dto.progressPercent,
+        progressPercent: mode === 'PHASE_CHECKLIST' ? null : dto.progressPercent,
       },
       select: phaseSelect,
     });
@@ -118,6 +122,7 @@ export class ProjectPhasesService {
 
   async update(projectId: string, id: string, dto: UpdateProjectPhaseDto) {
     const current = await this.findOne(projectId, id);
+    const mode = await this.progressMode(projectId);
     const startDate = dto.startDate === undefined ? current.startDate : dto.startDate;
     const endDate = dto.endDate === undefined ? current.endDate : dto.endDate;
     this.assertTimeline(startDate, endDate);
@@ -138,7 +143,8 @@ export class ProjectPhasesService {
               ? parseIsoDate(dto.endDate)
               : null,
         status: dto.status,
-        progressPercent: dto.progressPercent,
+        progressPercent:
+          mode === 'PHASE_CHECKLIST' ? undefined : dto.progressPercent,
       },
       select: phaseSelect,
     });
@@ -148,7 +154,19 @@ export class ProjectPhasesService {
   async remove(projectId: string, id: string) {
     await this.findOne(projectId, id);
     await this.prisma.projectPhase.delete({ where: { id } });
+    await this.checklist.recompute(projectId);
     return { ok: true };
+  }
+
+  private async progressMode(projectId: string) {
+    const project = await this.prisma.project.findUnique({
+      where: { id: projectId },
+      select: { progressMode: true },
+    });
+    if (!project) {
+      throw new NotFoundException('پروژه یافت نشد');
+    }
+    return project.progressMode;
   }
 
   private assertTimeline(startDate?: string | null, endDate?: string | null) {

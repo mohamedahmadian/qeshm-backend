@@ -62,6 +62,7 @@ export const ModelName = {
   ProjectDocument: 'ProjectDocument',
   ProjectOperator: 'ProjectOperator',
   ProjectPhase: 'ProjectPhase',
+  ProjectChecklistItem: 'ProjectChecklistItem',
   StoredFile: 'StoredFile',
   ProjectProgressEntry: 'ProjectProgressEntry',
   ProjectProgressImage: 'ProjectProgressImage',
@@ -97,7 +98,9 @@ export const ModelName = {
   BoardMinutes: 'BoardMinutes',
   BoardMinutesMember: 'BoardMinutesMember',
   BoardMinutesAttachment: 'BoardMinutesAttachment',
-  BoardMinutesResolution: 'BoardMinutesResolution'
+  BoardMinutesResolution: 'BoardMinutesResolution',
+  PortSalesReport: 'PortSalesReport',
+  PortTicketSale: 'PortTicketSale'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -200,6 +203,8 @@ export const UserScalarFieldEnum = {
   phone: 'phone',
   email: 'email',
   gender: 'gender',
+  fatherName: 'fatherName',
+  birthDate: 'birthDate',
   address: 'address',
   notes: 'notes',
   religion: 'religion',
@@ -225,6 +230,12 @@ export const UserScalarFieldEnum = {
   identityBookletPhotoId: 'identityBookletPhotoId',
   orgUnitId: 'orgUnitId',
   positionId: 'positionId',
+  isQeshmondi: 'isQeshmondi',
+  qeshmondiStartDate: 'qeshmondiStartDate',
+  qeshmondiEndDate: 'qeshmondiEndDate',
+  occupation: 'occupation',
+  isResident: 'isResident',
+  passportNumber: 'passportNumber',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -265,6 +276,7 @@ export const ProjectScalarFieldEnum = {
   code: 'code',
   isActive: 'isActive',
   status: 'status',
+  progressMode: 'progressMode',
   progressPercent: 'progressPercent',
   startDate: 'startDate',
   endDate: 'endDate',
@@ -329,6 +341,21 @@ export const ProjectPhaseScalarFieldEnum = {
 } as const
 
 export type ProjectPhaseScalarFieldEnum = (typeof ProjectPhaseScalarFieldEnum)[keyof typeof ProjectPhaseScalarFieldEnum]
+
+
+export const ProjectChecklistItemScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  phaseId: 'phaseId',
+  title: 'title',
+  weightPercent: 'weightPercent',
+  isDone: 'isDone',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectChecklistItemScalarFieldEnum = (typeof ProjectChecklistItemScalarFieldEnum)[keyof typeof ProjectChecklistItemScalarFieldEnum]
 
 
 export const StoredFileScalarFieldEnum = {
@@ -856,6 +883,53 @@ export const BoardMinutesResolutionScalarFieldEnum = {
 } as const
 
 export type BoardMinutesResolutionScalarFieldEnum = (typeof BoardMinutesResolutionScalarFieldEnum)[keyof typeof BoardMinutesResolutionScalarFieldEnum]
+
+
+export const PortSalesReportScalarFieldEnum = {
+  id: 'id',
+  reportDate: 'reportDate',
+  origin: 'origin',
+  destination: 'destination',
+  fileId: 'fileId',
+  originalFileName: 'originalFileName',
+  recordCount: 'recordCount',
+  uniqueNationalIdCount: 'uniqueNationalIdCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PortSalesReportScalarFieldEnum = (typeof PortSalesReportScalarFieldEnum)[keyof typeof PortSalesReportScalarFieldEnum]
+
+
+export const PortTicketSaleScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  rowNumber: 'rowNumber',
+  ticketNumber: 'ticketNumber',
+  reservationCode: 'reservationCode',
+  nationalId: 'nationalId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  fullName: 'fullName',
+  fatherName: 'fatherName',
+  gender: 'gender',
+  phone: 'phone',
+  travelDate: 'travelDate',
+  travelTime: 'travelTime',
+  origin: 'origin',
+  destination: 'destination',
+  ticketStatus: 'ticketStatus',
+  ticketStatusRaw: 'ticketStatusRaw',
+  qeshmondiStatus: 'qeshmondiStatus',
+  amount: 'amount',
+  seatNumber: 'seatNumber',
+  ticketType: 'ticketType',
+  vesselName: 'vesselName',
+  extras: 'extras',
+  createdAt: 'createdAt'
+} as const
+
+export type PortTicketSaleScalarFieldEnum = (typeof PortTicketSaleScalarFieldEnum)[keyof typeof PortTicketSaleScalarFieldEnum]
 
 
 export const SortOrder = {

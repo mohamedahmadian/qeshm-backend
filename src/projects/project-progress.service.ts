@@ -161,10 +161,7 @@ export class ProjectProgressService {
         select: entrySelect,
       });
       if (dto.progressPercent != null) {
-        await tx.project.update({
-          where: { id: projectId },
-          data: { progressPercent: dto.progressPercent },
-        });
+        await syncProjectProgress(tx, projectId, dto.progressPercent);
       }
       return created;
     });
@@ -226,10 +223,7 @@ export class ProjectProgressService {
         },
       });
       if (dto.progressPercent != null) {
-        await tx.project.update({
-          where: { id: projectId },
-          data: { progressPercent: dto.progressPercent },
-        });
+        await syncProjectProgress(tx, projectId, dto.progressPercent);
       }
     });
 
@@ -340,6 +334,27 @@ export class ProjectProgressService {
 
 function uniqueIds(ids?: string[]) {
   return [...new Set((ids ?? []).filter(Boolean))];
+}
+
+async function syncProjectProgress(
+  tx: Prisma.TransactionClient,
+  projectId: string,
+  progressPercent: number,
+) {
+  const current = await tx.project.findUnique({
+    where: { id: projectId },
+    select: { status: true },
+  });
+  const status =
+    progressPercent >= 100
+      ? 'COMPLETED'
+      : current?.status === 'COMPLETED'
+        ? 'IN_PROGRESS'
+        : undefined;
+  await tx.project.update({
+    where: { id: projectId },
+    data: { progressPercent, status },
+  });
 }
 
 function resolveCreateStatus(

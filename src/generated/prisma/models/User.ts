@@ -49,6 +49,8 @@ export type UserMinAggregateOutputType = {
   phone: string | null
   email: string | null
   gender: $Enums.UserGender | null
+  fatherName: string | null
+  birthDate: Date | null
   address: string | null
   notes: string | null
   religion: $Enums.Religion | null
@@ -73,6 +75,12 @@ export type UserMinAggregateOutputType = {
   identityBookletPhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
+  isQeshmondi: boolean | null
+  qeshmondiStartDate: Date | null
+  qeshmondiEndDate: Date | null
+  occupation: string | null
+  isResident: boolean | null
+  passportNumber: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -90,6 +98,8 @@ export type UserMaxAggregateOutputType = {
   phone: string | null
   email: string | null
   gender: $Enums.UserGender | null
+  fatherName: string | null
+  birthDate: Date | null
   address: string | null
   notes: string | null
   religion: $Enums.Religion | null
@@ -114,6 +124,12 @@ export type UserMaxAggregateOutputType = {
   identityBookletPhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
+  isQeshmondi: boolean | null
+  qeshmondiStartDate: Date | null
+  qeshmondiEndDate: Date | null
+  occupation: string | null
+  isResident: boolean | null
+  passportNumber: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -131,6 +147,8 @@ export type UserCountAggregateOutputType = {
   phone: number
   email: number
   gender: number
+  fatherName: number
+  birthDate: number
   address: number
   notes: number
   religion: number
@@ -156,6 +174,12 @@ export type UserCountAggregateOutputType = {
   identityBookletPhotoId: number
   orgUnitId: number
   positionId: number
+  isQeshmondi: number
+  qeshmondiStartDate: number
+  qeshmondiEndDate: number
+  occupation: number
+  isResident: number
+  passportNumber: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -185,6 +209,8 @@ export type UserMinAggregateInputType = {
   phone?: true
   email?: true
   gender?: true
+  fatherName?: true
+  birthDate?: true
   address?: true
   notes?: true
   religion?: true
@@ -209,6 +235,12 @@ export type UserMinAggregateInputType = {
   identityBookletPhotoId?: true
   orgUnitId?: true
   positionId?: true
+  isQeshmondi?: true
+  qeshmondiStartDate?: true
+  qeshmondiEndDate?: true
+  occupation?: true
+  isResident?: true
+  passportNumber?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -226,6 +258,8 @@ export type UserMaxAggregateInputType = {
   phone?: true
   email?: true
   gender?: true
+  fatherName?: true
+  birthDate?: true
   address?: true
   notes?: true
   religion?: true
@@ -250,6 +284,12 @@ export type UserMaxAggregateInputType = {
   identityBookletPhotoId?: true
   orgUnitId?: true
   positionId?: true
+  isQeshmondi?: true
+  qeshmondiStartDate?: true
+  qeshmondiEndDate?: true
+  occupation?: true
+  isResident?: true
+  passportNumber?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -267,6 +307,8 @@ export type UserCountAggregateInputType = {
   phone?: true
   email?: true
   gender?: true
+  fatherName?: true
+  birthDate?: true
   address?: true
   notes?: true
   religion?: true
@@ -292,6 +334,12 @@ export type UserCountAggregateInputType = {
   identityBookletPhotoId?: true
   orgUnitId?: true
   positionId?: true
+  isQeshmondi?: true
+  qeshmondiStartDate?: true
+  qeshmondiEndDate?: true
+  occupation?: true
+  isResident?: true
+  passportNumber?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -396,6 +444,8 @@ export type UserGroupByOutputType = {
   phone: string | null
   email: string | null
   gender: $Enums.UserGender | null
+  fatherName: string | null
+  birthDate: Date | null
   address: string | null
   notes: string | null
   religion: $Enums.Religion | null
@@ -421,6 +471,12 @@ export type UserGroupByOutputType = {
   identityBookletPhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
+  isQeshmondi: boolean
+  qeshmondiStartDate: Date | null
+  qeshmondiEndDate: Date | null
+  occupation: string | null
+  isResident: boolean
+  passportNumber: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -461,6 +517,8 @@ export type UserWhereInput = {
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumUserGenderNullableFilter<"User"> | $Enums.UserGender | null
+  fatherName?: Prisma.StringNullableFilter<"User"> | string | null
+  birthDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   address?: Prisma.StringNullableFilter<"User"> | string | null
   notes?: Prisma.StringNullableFilter<"User"> | string | null
   religion?: Prisma.EnumReligionNullableFilter<"User"> | $Enums.Religion | null
@@ -486,6 +544,12 @@ export type UserWhereInput = {
   identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
+  isQeshmondi?: Prisma.BoolFilter<"User"> | boolean
+  qeshmondiStartDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  qeshmondiEndDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  occupation?: Prisma.StringNullableFilter<"User"> | string | null
+  isResident?: Prisma.BoolFilter<"User"> | boolean
+  passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
@@ -530,6 +594,8 @@ export type UserOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
+  fatherName?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   religion?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -555,6 +621,12 @@ export type UserOrderByWithRelationInput = {
   identityBookletPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   orgUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
   positionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isQeshmondi?: Prisma.SortOrder
+  qeshmondiStartDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  qeshmondiEndDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  occupation?: Prisma.SortOrderInput | Prisma.SortOrder
+  isResident?: Prisma.SortOrder
+  passportNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   country?: Prisma.CountryOrderByWithRelationInput
@@ -602,6 +674,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   locale?: Prisma.StringFilter<"User"> | string
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   gender?: Prisma.EnumUserGenderNullableFilter<"User"> | $Enums.UserGender | null
+  fatherName?: Prisma.StringNullableFilter<"User"> | string | null
+  birthDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   address?: Prisma.StringNullableFilter<"User"> | string | null
   notes?: Prisma.StringNullableFilter<"User"> | string | null
   religion?: Prisma.EnumReligionNullableFilter<"User"> | $Enums.Religion | null
@@ -627,6 +701,12 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
+  isQeshmondi?: Prisma.BoolFilter<"User"> | boolean
+  qeshmondiStartDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  qeshmondiEndDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  occupation?: Prisma.StringNullableFilter<"User"> | string | null
+  isResident?: Prisma.BoolFilter<"User"> | boolean
+  passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   country?: Prisma.XOR<Prisma.CountryNullableScalarRelationFilter, Prisma.CountryWhereInput> | null
@@ -671,6 +751,8 @@ export type UserOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
+  fatherName?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthDate?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   religion?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -696,6 +778,12 @@ export type UserOrderByWithAggregationInput = {
   identityBookletPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   orgUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
   positionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isQeshmondi?: Prisma.SortOrder
+  qeshmondiStartDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  qeshmondiEndDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  occupation?: Prisma.SortOrderInput | Prisma.SortOrder
+  isResident?: Prisma.SortOrder
+  passportNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -721,6 +809,8 @@ export type UserScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   gender?: Prisma.EnumUserGenderNullableWithAggregatesFilter<"User"> | $Enums.UserGender | null
+  fatherName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  birthDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   religion?: Prisma.EnumReligionNullableWithAggregatesFilter<"User"> | $Enums.Religion | null
@@ -746,6 +836,12 @@ export type UserScalarWhereWithAggregatesInput = {
   identityBookletPhotoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   positionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isQeshmondi?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  qeshmondiStartDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  qeshmondiEndDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  occupation?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isResident?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  passportNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -763,6 +859,8 @@ export type UserCreateInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -777,6 +875,12 @@ export type UserCreateInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -821,6 +925,8 @@ export type UserUncheckedCreateInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -846,6 +952,12 @@ export type UserUncheckedCreateInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -879,6 +991,8 @@ export type UserUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -893,6 +1007,12 @@ export type UserUpdateInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -937,6 +1057,8 @@ export type UserUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -962,6 +1084,12 @@ export type UserUncheckedUpdateInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -995,6 +1123,8 @@ export type UserCreateManyInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -1020,6 +1150,12 @@ export type UserCreateManyInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1037,6 +1173,8 @@ export type UserUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -1051,6 +1189,12 @@ export type UserUpdateManyMutationInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1068,6 +1212,8 @@ export type UserUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -1093,6 +1239,12 @@ export type UserUncheckedUpdateManyInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1128,6 +1280,8 @@ export type UserCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  fatherName?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
   address?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   religion?: Prisma.SortOrder
@@ -1153,6 +1307,12 @@ export type UserCountOrderByAggregateInput = {
   identityBookletPhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
+  isQeshmondi?: Prisma.SortOrder
+  qeshmondiStartDate?: Prisma.SortOrder
+  qeshmondiEndDate?: Prisma.SortOrder
+  occupation?: Prisma.SortOrder
+  isResident?: Prisma.SortOrder
+  passportNumber?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1175,6 +1335,8 @@ export type UserMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  fatherName?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
   address?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   religion?: Prisma.SortOrder
@@ -1199,6 +1361,12 @@ export type UserMaxOrderByAggregateInput = {
   identityBookletPhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
+  isQeshmondi?: Prisma.SortOrder
+  qeshmondiStartDate?: Prisma.SortOrder
+  qeshmondiEndDate?: Prisma.SortOrder
+  occupation?: Prisma.SortOrder
+  isResident?: Prisma.SortOrder
+  passportNumber?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1216,6 +1384,8 @@ export type UserMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  fatherName?: Prisma.SortOrder
+  birthDate?: Prisma.SortOrder
   address?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   religion?: Prisma.SortOrder
@@ -1240,6 +1410,12 @@ export type UserMinOrderByAggregateInput = {
   identityBookletPhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
+  isQeshmondi?: Prisma.SortOrder
+  qeshmondiStartDate?: Prisma.SortOrder
+  qeshmondiEndDate?: Prisma.SortOrder
+  occupation?: Prisma.SortOrder
+  isResident?: Prisma.SortOrder
+  passportNumber?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1649,6 +1825,10 @@ export type NullableEnumUserGenderFieldUpdateOperationsInput = {
   set?: $Enums.UserGender | null
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type NullableEnumReligionFieldUpdateOperationsInput = {
   set?: $Enums.Religion | null
 }
@@ -1656,10 +1836,6 @@ export type NullableEnumReligionFieldUpdateOperationsInput = {
 export type UserUpdatevehiclePlatesInput = {
   set?: string[]
   push?: string | string[]
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 export type UserCreateNestedOneWithoutLocationHistoriesInput = {
@@ -2001,6 +2177,8 @@ export type UserCreateWithoutPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2015,6 +2193,12 @@ export type UserCreateWithoutPhotoInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2058,6 +2242,8 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2082,6 +2268,12 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -2125,6 +2317,8 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2139,6 +2333,12 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2182,6 +2382,8 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2206,6 +2408,12 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -2249,6 +2457,8 @@ export type UserCreateWithoutPassportPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2263,6 +2473,12 @@ export type UserCreateWithoutPassportPhotoInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2306,6 +2522,8 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2330,6 +2548,12 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -2373,6 +2597,8 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2387,6 +2613,12 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2430,6 +2662,8 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2454,6 +2688,12 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   passportPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -2516,6 +2756,8 @@ export type UserScalarWhereInput = {
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumUserGenderNullableFilter<"User"> | $Enums.UserGender | null
+  fatherName?: Prisma.StringNullableFilter<"User"> | string | null
+  birthDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   address?: Prisma.StringNullableFilter<"User"> | string | null
   notes?: Prisma.StringNullableFilter<"User"> | string | null
   religion?: Prisma.EnumReligionNullableFilter<"User"> | $Enums.Religion | null
@@ -2541,6 +2783,12 @@ export type UserScalarWhereInput = {
   identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
+  isQeshmondi?: Prisma.BoolFilter<"User"> | boolean
+  qeshmondiStartDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  qeshmondiEndDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  occupation?: Prisma.StringNullableFilter<"User"> | string | null
+  isResident?: Prisma.BoolFilter<"User"> | boolean
+  passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
@@ -2606,6 +2854,8 @@ export type UserCreateWithoutCountryInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2620,6 +2870,12 @@ export type UserCreateWithoutCountryInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
@@ -2663,6 +2919,8 @@ export type UserUncheckedCreateWithoutCountryInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2687,6 +2945,12 @@ export type UserUncheckedCreateWithoutCountryInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -2746,6 +3010,8 @@ export type UserCreateWithoutProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2760,6 +3026,12 @@ export type UserCreateWithoutProvinceInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2803,6 +3075,8 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2827,6 +3101,12 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -2870,6 +3150,8 @@ export type UserCreateWithoutLocationProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2884,6 +3166,12 @@ export type UserCreateWithoutLocationProvinceInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2927,6 +3215,8 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2951,6 +3241,12 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -3026,6 +3322,8 @@ export type UserCreateWithoutCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3040,6 +3338,12 @@ export type UserCreateWithoutCityInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3083,6 +3387,8 @@ export type UserUncheckedCreateWithoutCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3107,6 +3413,12 @@ export type UserUncheckedCreateWithoutCityInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -3150,6 +3462,8 @@ export type UserCreateWithoutLocationCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3164,6 +3478,12 @@ export type UserCreateWithoutLocationCityInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3207,6 +3527,8 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3231,6 +3553,12 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -3306,6 +3634,8 @@ export type UserCreateWithoutLocationHistoriesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3320,6 +3650,12 @@ export type UserCreateWithoutLocationHistoriesInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3363,6 +3699,8 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3388,6 +3726,12 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
@@ -3436,6 +3780,8 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -3450,6 +3796,12 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -3493,6 +3845,8 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -3518,6 +3872,12 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
@@ -3550,6 +3910,8 @@ export type UserCreateWithoutPositionInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3564,6 +3926,12 @@ export type UserCreateWithoutPositionInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3607,6 +3975,8 @@ export type UserUncheckedCreateWithoutPositionInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3631,6 +4001,12 @@ export type UserUncheckedCreateWithoutPositionInput = {
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -3690,6 +4066,8 @@ export type UserCreateWithoutNutritionUnitsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3704,6 +4082,12 @@ export type UserCreateWithoutNutritionUnitsInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3747,6 +4131,8 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3772,6 +4158,12 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -3809,6 +4201,8 @@ export type UserCreateWithoutOrgUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3823,6 +4217,12 @@ export type UserCreateWithoutOrgUnitInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3866,6 +4266,8 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3890,6 +4292,12 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -3944,6 +4352,8 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -3958,6 +4368,12 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -4001,6 +4417,8 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4026,6 +4444,12 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -4074,6 +4498,8 @@ export type UserCreateWithoutFoodReservationsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4088,6 +4514,12 @@ export type UserCreateWithoutFoodReservationsInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4131,6 +4563,8 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4156,6 +4590,12 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -4204,6 +4644,8 @@ export type UserUpdateWithoutFoodReservationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4218,6 +4660,12 @@ export type UserUpdateWithoutFoodReservationsInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -4261,6 +4709,8 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4286,6 +4736,12 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -4318,6 +4774,8 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4332,6 +4790,12 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4375,6 +4839,8 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4400,6 +4866,12 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -4448,6 +4920,8 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4462,6 +4936,12 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -4505,6 +4985,8 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4530,6 +5012,12 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -4562,6 +5050,8 @@ export type UserCreateWithoutUserRolesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4576,6 +5066,12 @@ export type UserCreateWithoutUserRolesInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4619,6 +5115,8 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4644,6 +5142,12 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -4692,6 +5196,8 @@ export type UserUpdateWithoutUserRolesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4706,6 +5212,12 @@ export type UserUpdateWithoutUserRolesInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -4749,6 +5261,8 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4774,6 +5288,12 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -4806,6 +5326,8 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4820,6 +5342,12 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4863,6 +5391,8 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4888,6 +5418,12 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -4925,6 +5461,8 @@ export type UserCreateWithoutSingardRepliesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4939,6 +5477,12 @@ export type UserCreateWithoutSingardRepliesInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4982,6 +5526,8 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5007,6 +5553,12 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -5055,6 +5607,8 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5069,6 +5623,12 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -5112,6 +5672,8 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5137,6 +5699,12 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -5180,6 +5748,8 @@ export type UserUpdateWithoutSingardRepliesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5194,6 +5764,12 @@ export type UserUpdateWithoutSingardRepliesInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -5237,6 +5813,8 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5262,6 +5840,12 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -5294,6 +5878,8 @@ export type UserCreateWithoutSingardActivitiesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5308,6 +5894,12 @@ export type UserCreateWithoutSingardActivitiesInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5351,6 +5943,8 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5376,6 +5970,12 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -5424,6 +6024,8 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5438,6 +6040,12 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -5481,6 +6089,8 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5506,6 +6116,12 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -5538,6 +6154,8 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5552,6 +6170,12 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5595,6 +6219,8 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5620,6 +6246,12 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -5657,6 +6289,8 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5671,6 +6305,12 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5714,6 +6354,8 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5739,6 +6381,12 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -5776,6 +6424,8 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5790,6 +6440,12 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5833,6 +6489,8 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5858,6 +6516,12 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -5895,6 +6559,8 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5909,6 +6575,12 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5952,6 +6624,8 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5977,6 +6651,12 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -6014,6 +6694,8 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6028,6 +6710,12 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -6071,6 +6759,8 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6096,6 +6786,12 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -6133,6 +6829,8 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6147,6 +6845,12 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -6190,6 +6894,8 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6215,6 +6921,12 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -6263,6 +6975,8 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6277,6 +6991,12 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6320,6 +7040,8 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6345,6 +7067,12 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -6388,6 +7116,8 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6402,6 +7132,12 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6445,6 +7181,8 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6470,6 +7208,12 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -6513,6 +7257,8 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6527,6 +7273,12 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6570,6 +7322,8 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6595,6 +7349,12 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -6638,6 +7398,8 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6652,6 +7414,12 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6695,6 +7463,8 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6720,6 +7490,12 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -6763,6 +7539,8 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6777,6 +7555,12 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6820,6 +7604,8 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6845,6 +7631,12 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -6888,6 +7680,8 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6902,6 +7696,12 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6945,6 +7745,8 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6970,6 +7772,12 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -7002,6 +7810,8 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7016,6 +7826,12 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -7059,6 +7875,8 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7084,6 +7902,12 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -7132,6 +7956,8 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7146,6 +7972,12 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -7189,6 +8021,8 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7214,6 +8048,12 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -7246,6 +8086,8 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7260,6 +8102,12 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -7303,6 +8151,8 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7328,6 +8178,12 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -7376,6 +8232,8 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7390,6 +8248,12 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -7433,6 +8297,8 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7458,6 +8324,12 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -7490,6 +8362,8 @@ export type UserCreateManyPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7514,6 +8388,12 @@ export type UserCreateManyPhotoInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -7531,6 +8411,8 @@ export type UserCreateManyNationalCardPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7555,6 +8437,12 @@ export type UserCreateManyNationalCardPhotoInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -7572,6 +8460,8 @@ export type UserCreateManyPassportPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7596,6 +8486,12 @@ export type UserCreateManyPassportPhotoInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -7613,6 +8509,8 @@ export type UserCreateManyIdentityBookletPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7637,6 +8535,12 @@ export type UserCreateManyIdentityBookletPhotoInput = {
   passportPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -7654,6 +8558,8 @@ export type UserUpdateWithoutPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7668,6 +8574,12 @@ export type UserUpdateWithoutPhotoInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -7711,6 +8623,8 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7735,6 +8649,12 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -7768,6 +8688,8 @@ export type UserUncheckedUpdateManyWithoutPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7792,6 +8714,12 @@ export type UserUncheckedUpdateManyWithoutPhotoInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -7809,6 +8737,8 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7823,6 +8753,12 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -7866,6 +8802,8 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7890,6 +8828,12 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -7923,6 +8867,8 @@ export type UserUncheckedUpdateManyWithoutNationalCardPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7947,6 +8893,12 @@ export type UserUncheckedUpdateManyWithoutNationalCardPhotoInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -7964,6 +8916,8 @@ export type UserUpdateWithoutPassportPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7978,6 +8932,12 @@ export type UserUpdateWithoutPassportPhotoInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8021,6 +8981,8 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8045,6 +9007,12 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -8078,6 +9046,8 @@ export type UserUncheckedUpdateManyWithoutPassportPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8102,6 +9072,12 @@ export type UserUncheckedUpdateManyWithoutPassportPhotoInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -8119,6 +9095,8 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8133,6 +9111,12 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8176,6 +9160,8 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8200,6 +9186,12 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -8233,6 +9225,8 @@ export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8257,6 +9251,12 @@ export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput = {
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -8274,6 +9274,8 @@ export type UserCreateManyCountryInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8298,6 +9300,12 @@ export type UserCreateManyCountryInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -8315,6 +9323,8 @@ export type UserUpdateWithoutCountryInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8329,6 +9339,12 @@ export type UserUpdateWithoutCountryInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
@@ -8372,6 +9388,8 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8396,6 +9414,12 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -8429,6 +9453,8 @@ export type UserUncheckedUpdateManyWithoutCountryInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8453,6 +9479,12 @@ export type UserUncheckedUpdateManyWithoutCountryInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -8470,6 +9502,8 @@ export type UserCreateManyProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8494,6 +9528,12 @@ export type UserCreateManyProvinceInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -8511,6 +9551,8 @@ export type UserCreateManyLocationProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8535,6 +9577,12 @@ export type UserCreateManyLocationProvinceInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -8552,6 +9600,8 @@ export type UserUpdateWithoutProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8566,6 +9616,12 @@ export type UserUpdateWithoutProvinceInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8609,6 +9665,8 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8633,6 +9691,12 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -8666,6 +9730,8 @@ export type UserUncheckedUpdateManyWithoutProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8690,6 +9756,12 @@ export type UserUncheckedUpdateManyWithoutProvinceInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -8707,6 +9779,8 @@ export type UserUpdateWithoutLocationProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8721,6 +9795,12 @@ export type UserUpdateWithoutLocationProvinceInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8764,6 +9844,8 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8788,6 +9870,12 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -8821,6 +9909,8 @@ export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8845,6 +9935,12 @@ export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -8862,6 +9958,8 @@ export type UserCreateManyCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8886,6 +9984,12 @@ export type UserCreateManyCityInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -8903,6 +10007,8 @@ export type UserCreateManyLocationCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8927,6 +10033,12 @@ export type UserCreateManyLocationCityInput = {
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -8944,6 +10056,8 @@ export type UserUpdateWithoutCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8958,6 +10072,12 @@ export type UserUpdateWithoutCityInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -9001,6 +10121,8 @@ export type UserUncheckedUpdateWithoutCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9025,6 +10147,12 @@ export type UserUncheckedUpdateWithoutCityInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -9058,6 +10186,8 @@ export type UserUncheckedUpdateManyWithoutCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9082,6 +10212,12 @@ export type UserUncheckedUpdateManyWithoutCityInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -9099,6 +10235,8 @@ export type UserUpdateWithoutLocationCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9113,6 +10251,12 @@ export type UserUpdateWithoutLocationCityInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -9156,6 +10300,8 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9180,6 +10326,12 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -9213,6 +10365,8 @@ export type UserUncheckedUpdateManyWithoutLocationCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9237,6 +10391,12 @@ export type UserUncheckedUpdateManyWithoutLocationCityInput = {
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -9254,6 +10414,8 @@ export type UserCreateManyPositionInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9278,6 +10440,12 @@ export type UserCreateManyPositionInput = {
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
   orgUnitId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -9295,6 +10463,8 @@ export type UserUpdateWithoutPositionInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9309,6 +10479,12 @@ export type UserUpdateWithoutPositionInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -9352,6 +10528,8 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9376,6 +10554,12 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -9409,6 +10593,8 @@ export type UserUncheckedUpdateManyWithoutPositionInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9433,6 +10619,12 @@ export type UserUncheckedUpdateManyWithoutPositionInput = {
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -9450,6 +10642,8 @@ export type UserCreateManyOrgUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9474,6 +10668,12 @@ export type UserCreateManyOrgUnitInput = {
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
   positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -9491,6 +10691,8 @@ export type UserUpdateWithoutOrgUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9505,6 +10707,12 @@ export type UserUpdateWithoutOrgUnitInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -9548,6 +10756,8 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9572,6 +10782,12 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -9605,6 +10821,8 @@ export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9629,6 +10847,12 @@ export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -9812,6 +11036,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   phone?: boolean
   email?: boolean
   gender?: boolean
+  fatherName?: boolean
+  birthDate?: boolean
   address?: boolean
   notes?: boolean
   religion?: boolean
@@ -9837,6 +11063,12 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   identityBookletPhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: boolean
+  qeshmondiEndDate?: boolean
+  occupation?: boolean
+  isResident?: boolean
+  passportNumber?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
@@ -9882,6 +11114,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phone?: boolean
   email?: boolean
   gender?: boolean
+  fatherName?: boolean
+  birthDate?: boolean
   address?: boolean
   notes?: boolean
   religion?: boolean
@@ -9907,6 +11141,12 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   identityBookletPhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: boolean
+  qeshmondiEndDate?: boolean
+  occupation?: boolean
+  isResident?: boolean
+  passportNumber?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
@@ -9935,6 +11175,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phone?: boolean
   email?: boolean
   gender?: boolean
+  fatherName?: boolean
+  birthDate?: boolean
   address?: boolean
   notes?: boolean
   religion?: boolean
@@ -9960,6 +11202,12 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   identityBookletPhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: boolean
+  qeshmondiEndDate?: boolean
+  occupation?: boolean
+  isResident?: boolean
+  passportNumber?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
@@ -9988,6 +11236,8 @@ export type UserSelectScalar = {
   phone?: boolean
   email?: boolean
   gender?: boolean
+  fatherName?: boolean
+  birthDate?: boolean
   address?: boolean
   notes?: boolean
   religion?: boolean
@@ -10013,11 +11263,17 @@ export type UserSelectScalar = {
   identityBookletPhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: boolean
+  qeshmondiEndDate?: boolean
+  occupation?: boolean
+  isResident?: boolean
+  passportNumber?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "orgUnitId" | "positionId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "fatherName" | "birthDate" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "orgUnitId" | "positionId" | "isQeshmondi" | "qeshmondiStartDate" | "qeshmondiEndDate" | "occupation" | "isResident" | "passportNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
   province?: boolean | Prisma.User$provinceArgs<ExtArgs>
@@ -10119,6 +11375,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     phone: string | null
     email: string | null
     gender: $Enums.UserGender | null
+    fatherName: string | null
+    birthDate: Date | null
     address: string | null
     notes: string | null
     religion: $Enums.Religion | null
@@ -10144,6 +11402,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     identityBookletPhotoId: string | null
     orgUnitId: string | null
     positionId: string | null
+    isQeshmondi: boolean
+    qeshmondiStartDate: Date | null
+    qeshmondiEndDate: Date | null
+    occupation: string | null
+    isResident: boolean
+    passportNumber: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -10608,6 +11872,8 @@ export interface UserFieldRefs {
   readonly phone: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly gender: Prisma.FieldRef<"User", 'UserGender'>
+  readonly fatherName: Prisma.FieldRef<"User", 'String'>
+  readonly birthDate: Prisma.FieldRef<"User", 'DateTime'>
   readonly address: Prisma.FieldRef<"User", 'String'>
   readonly notes: Prisma.FieldRef<"User", 'String'>
   readonly religion: Prisma.FieldRef<"User", 'Religion'>
@@ -10633,6 +11899,12 @@ export interface UserFieldRefs {
   readonly identityBookletPhotoId: Prisma.FieldRef<"User", 'String'>
   readonly orgUnitId: Prisma.FieldRef<"User", 'String'>
   readonly positionId: Prisma.FieldRef<"User", 'String'>
+  readonly isQeshmondi: Prisma.FieldRef<"User", 'Boolean'>
+  readonly qeshmondiStartDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly qeshmondiEndDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly occupation: Prisma.FieldRef<"User", 'String'>
+  readonly isResident: Prisma.FieldRef<"User", 'Boolean'>
+  readonly passportNumber: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

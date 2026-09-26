@@ -46,6 +46,12 @@ enum ProjectStatus {
   COMPLETED
 }
 
+enum ProjectProgressMode {
+  MANUAL
+  PROJECT_CHECKLIST
+  PHASE_CHECKLIST
+}
+
 enum FoodReservationStatus {
   PENDING
   CONFIRMED
@@ -89,6 +95,19 @@ enum ProjectProgressTranscriptionStatus {
   PROCESSING
   READY
   FAILED
+}
+
+enum PortTicketStatus {
+  IN_TRIP
+  OPERATOR_CANCELLED
+  EXPIRED
+  OTHER
+}
+
+enum PortTicketQeshmondiStatus {
+  UNKNOWN
+  VALID
+  INVALID
 }
 
 model StoredImage {
@@ -197,6 +216,8 @@ model User {
   phone              String?               @unique
   email              String?               @unique
   gender             UserGender?
+  fatherName         String?
+  birthDate          DateTime?             @db.Date
   address            String?
   notes              String?
   religion           Religion?
@@ -234,6 +255,12 @@ model User {
   orgUnit            OrganizationUnit?     @relation("UnitEmployees", fields: [orgUnitId], references: [id], onDelete: SetNull)
   positionId         String?
   position           OrganizationPosition? @relation(fields: [positionId], references: [id], onDelete: SetNull)
+  isQeshmondi        Boolean               @default(false)
+  qeshmondiStartDate DateTime?             @db.Date
+  qeshmondiEndDate   DateTime?             @db.Date
+  occupation         String?
+  isResident         Boolean               @default(false)
+  passportNumber     String?
   nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
   foodReservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
@@ -262,6 +289,8 @@ model User {
   @@index([locationCityId])
   @@index([orgUnitId])
   @@index([positionId])
+  @@index([isQeshmondi])
+  @@index([nationalId(ops: raw("gin_trgm_ops"))], type: Gin, map: "users_nationalId_trgm_idx")
   @@map("users")
 }
 
@@ -305,6 +334,7 @@ model Project {
   code                 String             @unique
   isActive             Boolean            @default(true)
   status               ProjectStatus      @default(NOT_STARTED)
+  progressMode         ProjectProgressMode @default(MANUAL)
   progressPercent      Int?
   startDate            DateTime?          @db.Date
   endDate              DateTime?          @db.Date
@@ -332,6 +362,7 @@ model Project {
   contractors          ProjectContractor[]
   contractorLinks      ProjectContractorProject[]
   phases               ProjectPhase[]
+  checklistItems       ProjectChecklistItem[]
   progressEntries      ProjectProgressEntry[]
   documents            ProjectDocument[]
   createdAt            DateTime           @default(now())
@@ -392,6 +423,7 @@ model ProjectPhase {
   endDate         DateTime?      @db.Date
   status          ProjectStatus?
   progressPercent Int?
+  checklistItems  ProjectChecklistItem[]
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 
@@ -400,6 +432,27 @@ model ProjectPhase {
   @@index([status])
   @@index([createdAt])
   @@map("project_phases")
+}
+
+model ProjectChecklistItem {
+  id            String        @id @default(uuid())
+  projectId     String
+  project       Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  phaseId       String?
+  phase         ProjectPhase? @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+  title         String
+  weightPercent Int
+  isDone        Boolean       @default(false)
+  sortOrder     Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([projectId, phaseId, sortOrder])
+  @@index([phaseId])
+  @@index([title])
+  @@index([isDone])
+  @@index([createdAt])
+  @@map("project_checklist_items")
 }
 
 model StoredFile {
@@ -414,6 +467,7 @@ model StoredFile {
   singardAttachments SingardAttachment[]
   boardAttachments   BoardAttachment[]
   boardMinutesAttachments BoardMinutesAttachment[]
+  portSalesReports   PortSalesReport[]
 
   @@map("stored_files")
 }
@@ -1167,4 +1221,64 @@ model BoardMinutesResolution {
   @@index([title])
   @@index([createdAt])
   @@map("board_minutes_resolutions")
+}
+
+model PortSalesReport {
+  id                    String           @id @default(uuid())
+  reportDate            DateTime         @db.Date
+  origin                String
+  destination           String
+  fileId                String
+  file                  StoredFile       @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  originalFileName      String
+  recordCount           Int              @default(0)
+  uniqueNationalIdCount Int              @default(0)
+  tickets               PortTicketSale[]
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+
+  @@index([reportDate])
+  @@index([origin])
+  @@index([destination])
+  @@index([createdAt])
+  @@index([fileId])
+  @@map("port_sales_reports")
+}
+
+model PortTicketSale {
+  id              String           @id @default(uuid())
+  reportId        String
+  report          PortSalesReport  @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  rowNumber       Int?
+  ticketNumber    String?
+  reservationCode String?
+  nationalId      String?
+  firstName       String?
+  lastName        String?
+  fullName        String?
+  fatherName      String?
+  gender          String?
+  phone           String?
+  travelDate      DateTime?        @db.Date
+  travelTime      String?
+  origin          String?
+  destination     String?
+  ticketStatus     PortTicketStatus          @default(OTHER)
+  ticketStatusRaw  String?
+  qeshmondiStatus  PortTicketQeshmondiStatus @default(UNKNOWN)
+  amount          Int?
+  seatNumber      String?
+  ticketType      String?
+  vesselName      String?
+  extras          Json?
+  createdAt       DateTime         @default(now())
+
+  @@index([reportId])
+  @@index([reportId, ticketStatus])
+  @@index([reportId, qeshmondiStatus])
+  @@index([nationalId])
+  @@index([ticketNumber])
+  @@index([fullName])
+  @@index([travelDate])
+  @@map("port_ticket_sales")
 }

@@ -17,6 +17,7 @@ import {
   organizationUnitSubtreeIds,
 } from '../organization/organization-unit-tree';
 import { PrismaService } from '../prisma/prisma.service';
+import { ProjectChecklistService } from './project-checklist.service';
 import { ProjectDocumentsService } from './project-documents.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import {
@@ -56,6 +57,7 @@ const projectSelect = {
   code: true,
   isActive: true,
   status: true,
+  progressMode: true,
   progressPercent: true,
   startDate: true,
   endDate: true,
@@ -125,6 +127,7 @@ function serializeLiveBoardActivity(entry: {
   body: string | null;
   summary: string | null;
   transcript: string | null;
+  audioId: string | null;
 }) {
   const source = activitySource(entry);
   return {
@@ -133,6 +136,7 @@ function serializeLiveBoardActivity(entry: {
     title: source.title,
     excerpt: source.excerpt,
     text: source.text,
+    hasAudio: Boolean(entry.audioId),
   };
 }
 
@@ -188,6 +192,7 @@ export class ProjectsService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly documents: ProjectDocumentsService,
+    private readonly checklist: ProjectChecklistService,
   ) {}
 
   async findAll(query: FindProjectsQueryDto) {
@@ -250,6 +255,7 @@ export class ProjectsService {
             body: true,
             summary: true,
             transcript: true,
+            audioId: true,
           },
           orderBy: [{ occurredAt: 'desc' }, { createdAt: 'desc' }],
           take: 3,
@@ -373,20 +379,29 @@ export class ProjectsService {
       dto.operatorIds === undefined
         ? undefined
         : await this.assertOperatorUnits(dto.operatorIds);
+    const nextMode = dto.progressMode ?? current.progressMode;
     const data = this.updateData(dto);
-    if (
+    if (nextMode !== 'MANUAL') {
+      data.progressPercent = undefined;
+    } else if (
       dto.progressPercent !== undefined &&
       dto.progressPercent !== current.progressPercent
     ) {
-      data.status = 'IN_PROGRESS';
+      data.status = dto.progressPercent === 100 ? 'COMPLETED' : 'IN_PROGRESS';
     }
     const project = await this.prisma.$transaction(async (tx) => {
       if (operatorIds) {
         await this.syncOperators(tx, id, operatorIds);
       }
-      return tx.project.update({
+      await tx.project.update({
         where: { id },
         data,
+      });
+      if (nextMode !== 'MANUAL') {
+        await this.checklist.recompute(id, tx);
+      }
+      return tx.project.findUniqueOrThrow({
+        where: { id },
         select: projectSelect,
       });
     });
@@ -475,8 +490,15 @@ export class ProjectsService {
       systemName: dto.systemName,
       code: dto.code,
       isActive: dto.isActive,
-      status: dto.status ?? 'NOT_STARTED',
-      progressPercent: dto.progressPercent,
+      status:
+        (dto.progressMode ?? 'MANUAL') === 'MANUAL' && dto.progressPercent === 100
+          ? 'COMPLETED'
+          : (dto.status ?? 'NOT_STARTED'),
+      progressMode: dto.progressMode ?? 'MANUAL',
+      progressPercent:
+        (dto.progressMode ?? 'MANUAL') === 'MANUAL'
+          ? (dto.progressPercent ?? null)
+          : 0,
       startDate: dto.startDate ? parseIsoDate(dto.startDate) : null,
       endDate: dto.endDate ? parseIsoDate(dto.endDate) : null,
       latitude: toDecimal(dto.latitude ?? null),
@@ -506,6 +528,7 @@ export class ProjectsService {
       code: dto.code,
       isActive: dto.isActive,
       status: dto.status,
+      progressMode: dto.progressMode,
       progressPercent: dto.progressPercent,
       startDate:
         dto.startDate === undefined

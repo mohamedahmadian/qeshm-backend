@@ -41,9 +41,9 @@ export class ProgressTranscriptionService {
       return;
     }
 
-    const apiKey = this.config.get<string>('OPENAI_API_KEY')?.trim();
-    if (!apiKey) {
-      this.logger.warn('OPENAI_API_KEY is not set; transcription stays pending');
+    const gatewayToken = this.config.get<string>('AVANEGAR_GATEWAY_TOKEN')?.trim();
+    if (!gatewayToken) {
+      this.logger.warn('AVANEGAR_GATEWAY_TOKEN is not set; transcription stays pending');
       return;
     }
 
@@ -63,10 +63,11 @@ export class ProgressTranscriptionService {
         throw new Error('فایل صوتی یافت نشد');
       }
 
-      const transcript = await this.transcribe(apiKey, audio);
+      const transcript = await this.transcribe(gatewayToken, audio);
+      const summaryKey = this.config.get<string>('OPENAI_API_KEY')?.trim();
       const summary =
-        entry.processingMode === ProjectProgressProcessingMode.DEFERRED
-          ? await this.summarize(apiKey, transcript)
+        entry.processingMode === ProjectProgressProcessingMode.DEFERRED && summaryKey
+          ? await this.summarize(summaryKey, transcript)
           : null;
 
       await this.prisma.projectProgressEntry.update({
@@ -94,29 +95,47 @@ export class ProgressTranscriptionService {
   }
 
   private async transcribe(
-    apiKey: string,
+    gatewayToken: string,
     audio: { data: Uint8Array; mimeType: string; originalName: string | null },
   ) {
+    const mimeType = audio.mimeType.split(';')[0]?.trim() || 'audio/webm';
     const form = new FormData();
-    const name = audio.originalName?.trim() || 'audio.webm';
+    form.append('model', 'default');
+    form.append('srt', 'false');
+    form.append('inverseNormalizer', 'false');
+    form.append('timestamp', 'false');
     form.append(
-      'file',
-      new Blob([Buffer.from(audio.data)], { type: audio.mimeType }),
-      name,
+      'audio',
+      new Blob([Buffer.from(audio.data)], { type: mimeType }),
+      audioFileName(mimeType, audio.originalName),
     );
-    form.append('model', 'whisper-1');
-    form.append('language', 'fa');
+    form.append('spokenPunctuation', 'false');
+    form.append('punctuation', 'false');
+    form.append('numSpeakers', '0');
+    form.append('diarize', 'false');
 
-    const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}` },
-      body: form,
-    });
-    const payload = (await response.json()) as { text?: string; error?: { message?: string } };
-    if (!response.ok || !payload.text?.trim()) {
-      throw new Error(payload.error?.message || 'تبدیل صدا به متن ناموفق بود');
+    const response = await fetch(
+      'https://partai.gw.isahab.ir/avanegar/v2/avanegar/request',
+      {
+        method: 'POST',
+        headers: {
+          'gateway-token': gatewayToken,
+          accept: 'application/json',
+        },
+        body: form,
+      },
+    );
+    const payload = (await response.json().catch(() => null)) as AvanegarResponse | null;
+    const text = payload?.data?.data?.aiResponse?.result?.text?.trim();
+    if (!response.ok || !text) {
+      const message =
+        payload?.data?.data?.aiResponse?.message ||
+        payload?.data?.message ||
+        payload?.message ||
+        'تبدیل صدا به متن ناموفق بود';
+      throw new Error(message);
     }
-    return payload.text.trim();
+    return text;
   }
 
   private async summarize(apiKey: string, transcript: string) {
@@ -152,4 +171,37 @@ export class ProgressTranscriptionService {
     }
     return payload.choices?.[0]?.message?.content?.trim() || null;
   }
+}
+
+type AvanegarResponse = {
+  message?: string;
+  data?: {
+    status?: string;
+    message?: string;
+    data?: {
+      aiResponse?: {
+        status?: number;
+        message?: string;
+        result?: { text?: string };
+      };
+    };
+  };
+};
+
+function audioFileName(mimeType: string, originalName: string | null) {
+  const trimmed = originalName?.trim();
+  if (trimmed) {
+    return trimmed;
+  }
+  const ext =
+    mimeType === 'audio/mpeg' || mimeType === 'audio/mp3'
+      ? 'mp3'
+      : mimeType === 'audio/mp4' || mimeType === 'audio/aac' || mimeType === 'audio/x-m4a'
+        ? 'm4a'
+        : mimeType === 'audio/ogg'
+          ? 'ogg'
+          : mimeType === 'audio/wav' || mimeType === 'audio/wave'
+            ? 'wav'
+            : 'webm';
+  return `audio.${ext}`;
 }

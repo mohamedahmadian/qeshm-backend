@@ -7,6 +7,11 @@ import { ProjectDocumentsController } from './project-documents.controller';
 import { ProjectDocumentsService } from './project-documents.service';
 import { ProjectGroupsController } from './project-groups.controller';
 import { ProjectGroupsService } from './project-groups.service';
+import {
+  ProjectChecklistController,
+  ProjectPhaseChecklistController,
+} from './project-checklist.controller';
+import { ProjectChecklistService } from './project-checklist.service';
 import { ProjectPhasesController } from './project-phases.controller';
 import { ProjectPhasesService } from './project-phases.service';
 import { ProjectProgressController } from './project-progress.controller';
@@ -24,6 +29,8 @@ import { PublicProjectsController } from './public-projects.controller';
     GlobalContractorsController,
     ContractorsController,
     ProjectPhasesController,
+    ProjectChecklistController,
+    ProjectPhaseChecklistController,
     ProjectDocumentsController,
     ProjectProgressController,
   ],
@@ -32,6 +39,7 @@ import { PublicProjectsController } from './public-projects.controller';
     ProjectGroupsService,
     ContractorsService,
     ProjectPhasesService,
+    ProjectChecklistService,
     ProjectDocumentsService,
     ProjectProgressService,
     ProgressTranscriptionService,

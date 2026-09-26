@@ -22,6 +22,11 @@ export const userSortFields = [
   'createdAt',
   'orgUnit',
   'position',
+  'occupation',
+  'isResident',
+  'qeshmondiStartDate',
+  'qeshmondiEndDate',
+  'passportNumber',
 ] as const;
 
 export type UserSortField = (typeof userSortFields)[number];
@@ -64,6 +69,16 @@ export class FindUsersQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => toOptionalBoolean(value))
   @IsBoolean()
   employeesOnly?: boolean;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalBoolean(value))
+  @IsBoolean()
+  qeshmondiOnly?: boolean;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalBoolean(value))
+  @IsBoolean()
+  isResident?: boolean;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

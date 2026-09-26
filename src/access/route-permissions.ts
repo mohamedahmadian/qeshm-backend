@@ -48,7 +48,12 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/cities', permissions: ['base-info.cities'] },
   {
     prefix: '/users',
-    permissions: ['management.users', 'qeshm-organization.employees'],
+    permissions: [
+      'management.users',
+      'qeshm-organization.employees',
+      'qeshmondi.citizens',
+      'qeshmondi.update',
+    ],
   },
   { prefix: '/projects/reports', permissions: ['projects.reports'] },
   { prefix: '/projects/live-board', permissions: ['projects.liveBoard'] },
@@ -98,6 +103,7 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/singard/reports', permissions: ['singard.reports'] },
   { prefix: '/singard/categories', permissions: ['singard.categories'] },
   { prefix: '/singard/feedbacks', permissions: ['singard.inbox'] },
+  { prefix: '/port-sales-reports', permissions: ['ports.sales-reports'] },
 ].sort((a, b) => b.prefix.length - a.prefix.length);
 
 export type AccessDecision =

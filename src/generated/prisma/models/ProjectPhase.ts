@@ -249,6 +249,7 @@ export type ProjectPhaseWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  checklistItems?: Prisma.ProjectChecklistItemListRelationFilter
 }
 
 export type ProjectPhaseOrderByWithRelationInput = {
@@ -262,6 +263,7 @@ export type ProjectPhaseOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
+  checklistItems?: Prisma.ProjectChecklistItemOrderByRelationAggregateInput
 }
 
 export type ProjectPhaseWhereUniqueInput = Prisma.AtLeast<{
@@ -278,6 +280,7 @@ export type ProjectPhaseWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  checklistItems?: Prisma.ProjectChecklistItemListRelationFilter
 }, "id">
 
 export type ProjectPhaseOrderByWithAggregationInput = {
@@ -322,6 +325,7 @@ export type ProjectPhaseCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutPhasesInput
+  checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutPhaseInput
 }
 
 export type ProjectPhaseUncheckedCreateInput = {
@@ -334,6 +338,7 @@ export type ProjectPhaseUncheckedCreateInput = {
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutPhaseInput
 }
 
 export type ProjectPhaseUpdateInput = {
@@ -346,6 +351,7 @@ export type ProjectPhaseUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutPhasesNestedInput
+  checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutPhaseNestedInput
 }
 
 export type ProjectPhaseUncheckedUpdateInput = {
@@ -358,6 +364,7 @@ export type ProjectPhaseUncheckedUpdateInput = {
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutPhaseNestedInput
 }
 
 export type ProjectPhaseCreateManyInput = {
@@ -449,6 +456,11 @@ export type ProjectPhaseSumOrderByAggregateInput = {
   progressPercent?: Prisma.SortOrder
 }
 
+export type ProjectPhaseNullableScalarRelationFilter = {
+  is?: Prisma.ProjectPhaseWhereInput | null
+  isNot?: Prisma.ProjectPhaseWhereInput | null
+}
+
 export type ProjectPhaseCreateNestedManyWithoutProjectInput = {
   create?: Prisma.XOR<Prisma.ProjectPhaseCreateWithoutProjectInput, Prisma.ProjectPhaseUncheckedCreateWithoutProjectInput> | Prisma.ProjectPhaseCreateWithoutProjectInput[] | Prisma.ProjectPhaseUncheckedCreateWithoutProjectInput[]
   connectOrCreate?: Prisma.ProjectPhaseCreateOrConnectWithoutProjectInput | Prisma.ProjectPhaseCreateOrConnectWithoutProjectInput[]
@@ -495,6 +507,22 @@ export type NullableEnumProjectStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProjectStatus | null
 }
 
+export type ProjectPhaseCreateNestedOneWithoutChecklistItemsInput = {
+  create?: Prisma.XOR<Prisma.ProjectPhaseCreateWithoutChecklistItemsInput, Prisma.ProjectPhaseUncheckedCreateWithoutChecklistItemsInput>
+  connectOrCreate?: Prisma.ProjectPhaseCreateOrConnectWithoutChecklistItemsInput
+  connect?: Prisma.ProjectPhaseWhereUniqueInput
+}
+
+export type ProjectPhaseUpdateOneWithoutChecklistItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectPhaseCreateWithoutChecklistItemsInput, Prisma.ProjectPhaseUncheckedCreateWithoutChecklistItemsInput>
+  connectOrCreate?: Prisma.ProjectPhaseCreateOrConnectWithoutChecklistItemsInput
+  upsert?: Prisma.ProjectPhaseUpsertWithoutChecklistItemsInput
+  disconnect?: Prisma.ProjectPhaseWhereInput | boolean
+  delete?: Prisma.ProjectPhaseWhereInput | boolean
+  connect?: Prisma.ProjectPhaseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectPhaseUpdateToOneWithWhereWithoutChecklistItemsInput, Prisma.ProjectPhaseUpdateWithoutChecklistItemsInput>, Prisma.ProjectPhaseUncheckedUpdateWithoutChecklistItemsInput>
+}
+
 export type ProjectPhaseCreateWithoutProjectInput = {
   id?: string
   name: string
@@ -504,6 +532,7 @@ export type ProjectPhaseCreateWithoutProjectInput = {
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutPhaseInput
 }
 
 export type ProjectPhaseUncheckedCreateWithoutProjectInput = {
@@ -515,6 +544,7 @@ export type ProjectPhaseUncheckedCreateWithoutProjectInput = {
   progressPercent?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutPhaseInput
 }
 
 export type ProjectPhaseCreateOrConnectWithoutProjectInput = {
@@ -558,6 +588,70 @@ export type ProjectPhaseScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"ProjectPhase"> | Date | string
 }
 
+export type ProjectPhaseCreateWithoutChecklistItemsInput = {
+  id?: string
+  name: string
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  status?: $Enums.ProjectStatus | null
+  progressPercent?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutPhasesInput
+}
+
+export type ProjectPhaseUncheckedCreateWithoutChecklistItemsInput = {
+  id?: string
+  projectId: string
+  name: string
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  status?: $Enums.ProjectStatus | null
+  progressPercent?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ProjectPhaseCreateOrConnectWithoutChecklistItemsInput = {
+  where: Prisma.ProjectPhaseWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectPhaseCreateWithoutChecklistItemsInput, Prisma.ProjectPhaseUncheckedCreateWithoutChecklistItemsInput>
+}
+
+export type ProjectPhaseUpsertWithoutChecklistItemsInput = {
+  update: Prisma.XOR<Prisma.ProjectPhaseUpdateWithoutChecklistItemsInput, Prisma.ProjectPhaseUncheckedUpdateWithoutChecklistItemsInput>
+  create: Prisma.XOR<Prisma.ProjectPhaseCreateWithoutChecklistItemsInput, Prisma.ProjectPhaseUncheckedCreateWithoutChecklistItemsInput>
+  where?: Prisma.ProjectPhaseWhereInput
+}
+
+export type ProjectPhaseUpdateToOneWithWhereWithoutChecklistItemsInput = {
+  where?: Prisma.ProjectPhaseWhereInput
+  data: Prisma.XOR<Prisma.ProjectPhaseUpdateWithoutChecklistItemsInput, Prisma.ProjectPhaseUncheckedUpdateWithoutChecklistItemsInput>
+}
+
+export type ProjectPhaseUpdateWithoutChecklistItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutPhasesNestedInput
+}
+
+export type ProjectPhaseUncheckedUpdateWithoutChecklistItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type ProjectPhaseCreateManyProjectInput = {
   id?: string
   name: string
@@ -578,6 +672,7 @@ export type ProjectPhaseUpdateWithoutProjectInput = {
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutPhaseNestedInput
 }
 
 export type ProjectPhaseUncheckedUpdateWithoutProjectInput = {
@@ -589,6 +684,7 @@ export type ProjectPhaseUncheckedUpdateWithoutProjectInput = {
   progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutPhaseNestedInput
 }
 
 export type ProjectPhaseUncheckedUpdateManyWithoutProjectInput = {
@@ -603,6 +699,35 @@ export type ProjectPhaseUncheckedUpdateManyWithoutProjectInput = {
 }
 
 
+/**
+ * Count Type ProjectPhaseCountOutputType
+ */
+
+export type ProjectPhaseCountOutputType = {
+  checklistItems: number
+}
+
+export type ProjectPhaseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  checklistItems?: boolean | ProjectPhaseCountOutputTypeCountChecklistItemsArgs
+}
+
+/**
+ * ProjectPhaseCountOutputType without action
+ */
+export type ProjectPhaseCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectPhaseCountOutputType
+   */
+  select?: Prisma.ProjectPhaseCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProjectPhaseCountOutputType without action
+ */
+export type ProjectPhaseCountOutputTypeCountChecklistItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectChecklistItemWhereInput
+}
+
 
 export type ProjectPhaseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -615,6 +740,8 @@ export type ProjectPhaseSelect<ExtArgs extends runtime.Types.Extensions.Internal
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  checklistItems?: boolean | Prisma.ProjectPhase$checklistItemsArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjectPhaseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectPhase"]>
 
 export type ProjectPhaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -658,6 +785,8 @@ export type ProjectPhaseSelectScalar = {
 export type ProjectPhaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "name" | "startDate" | "endDate" | "status" | "progressPercent" | "createdAt" | "updatedAt", ExtArgs["result"]["projectPhase"]>
 export type ProjectPhaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  checklistItems?: boolean | Prisma.ProjectPhase$checklistItemsArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjectPhaseCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectPhaseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
@@ -670,6 +799,7 @@ export type $ProjectPhasePayload<ExtArgs extends runtime.Types.Extensions.Intern
   name: "ProjectPhase"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
+    checklistItems: Prisma.$ProjectChecklistItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1076,6 +1206,7 @@ readonly fields: ProjectPhaseFieldRefs;
 export interface Prisma__ProjectPhaseClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  checklistItems<T extends Prisma.ProjectPhase$checklistItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectPhase$checklistItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectChecklistItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1512,6 +1643,30 @@ export type ProjectPhaseDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many ProjectPhases to delete.
    */
   limit?: number
+}
+
+/**
+ * ProjectPhase.checklistItems
+ */
+export type ProjectPhase$checklistItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectChecklistItem
+   */
+  select?: Prisma.ProjectChecklistItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectChecklistItem
+   */
+  omit?: Prisma.ProjectChecklistItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectChecklistItemInclude<ExtArgs> | null
+  where?: Prisma.ProjectChecklistItemWhereInput
+  orderBy?: Prisma.ProjectChecklistItemOrderByWithRelationInput | Prisma.ProjectChecklistItemOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectChecklistItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectChecklistItemScalarFieldEnum | Prisma.ProjectChecklistItemScalarFieldEnum[]
 }
 
 /**
