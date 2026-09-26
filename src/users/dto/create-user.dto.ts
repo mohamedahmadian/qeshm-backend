@@ -195,6 +195,12 @@ export class CreateUserDto {
   roleIds?: string[];
 
   @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  contractorId?: string | null;
+
+  @IsOptional()
   @Transform(({ value }) => toOptionalBoolean(value))
   @IsBoolean()
   isQeshmondi?: boolean;

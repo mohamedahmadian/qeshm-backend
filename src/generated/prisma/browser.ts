@@ -93,6 +93,11 @@ export type ProjectProgressEntry = Prisma.ProjectProgressEntryModel
  */
 export type ProjectProgressImage = Prisma.ProjectProgressImageModel
 /**
+ * Model ProjectContractorType
+ * 
+ */
+export type ProjectContractorType = Prisma.ProjectContractorTypeModel
+/**
  * Model ProjectContractor
  * 
  */
@@ -107,11 +112,6 @@ export type ProjectContractorProject = Prisma.ProjectContractorProjectModel
  * 
  */
 export type ProjectContractorMember = Prisma.ProjectContractorMemberModel
-/**
- * Model ProjectContractorPhase
- * 
- */
-export type ProjectContractorPhase = Prisma.ProjectContractorPhaseModel
 /**
  * Model ProjectContractorPayment
  * 
@@ -267,3 +267,23 @@ export type PortSalesReport = Prisma.PortSalesReportModel
  * 
  */
 export type PortTicketSale = Prisma.PortTicketSaleModel
+/**
+ * Model StakeholderProgressReport
+ * 
+ */
+export type StakeholderProgressReport = Prisma.StakeholderProgressReportModel
+/**
+ * Model StakeholderCorrespondence
+ * 
+ */
+export type StakeholderCorrespondence = Prisma.StakeholderCorrespondenceModel
+/**
+ * Model StakeholderMessage
+ * 
+ */
+export type StakeholderMessage = Prisma.StakeholderMessageModel
+/**
+ * Model StakeholderAttachment
+ * 
+ */
+export type StakeholderAttachment = Prisma.StakeholderAttachmentModel

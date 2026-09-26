@@ -813,6 +813,74 @@ export type EnumPortTicketQeshmondiStatusWithAggregatesFilter<$PrismaModel = nev
   _max?: Prisma.NestedEnumPortTicketQeshmondiStatusFilter<$PrismaModel>
 }
 
+export type EnumStakeholderCorrespondenceKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderCorrespondenceKind | Prisma.EnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderCorrespondenceKind[] | Prisma.ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderCorrespondenceKind[] | Prisma.ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderCorrespondenceKindFilter<$PrismaModel> | $Enums.StakeholderCorrespondenceKind
+}
+
+export type EnumStakeholderCorrespondenceStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderCorrespondenceStatus | Prisma.EnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderCorrespondenceStatus[] | Prisma.ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderCorrespondenceStatus[] | Prisma.ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderCorrespondenceStatusFilter<$PrismaModel> | $Enums.StakeholderCorrespondenceStatus
+}
+
+export type EnumStakeholderActionResultNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderActionResult | Prisma.EnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  in?: $Enums.StakeholderActionResult[] | Prisma.ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.StakeholderActionResult[] | Prisma.ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumStakeholderActionResultNullableFilter<$PrismaModel> | $Enums.StakeholderActionResult | null
+}
+
+export type EnumStakeholderCorrespondenceKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderCorrespondenceKind | Prisma.EnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderCorrespondenceKind[] | Prisma.ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderCorrespondenceKind[] | Prisma.ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderCorrespondenceKindWithAggregatesFilter<$PrismaModel> | $Enums.StakeholderCorrespondenceKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStakeholderCorrespondenceKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStakeholderCorrespondenceKindFilter<$PrismaModel>
+}
+
+export type EnumStakeholderCorrespondenceStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderCorrespondenceStatus | Prisma.EnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderCorrespondenceStatus[] | Prisma.ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderCorrespondenceStatus[] | Prisma.ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderCorrespondenceStatusWithAggregatesFilter<$PrismaModel> | $Enums.StakeholderCorrespondenceStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStakeholderCorrespondenceStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStakeholderCorrespondenceStatusFilter<$PrismaModel>
+}
+
+export type EnumStakeholderActionResultNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderActionResult | Prisma.EnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  in?: $Enums.StakeholderActionResult[] | Prisma.ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.StakeholderActionResult[] | Prisma.ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumStakeholderActionResultNullableWithAggregatesFilter<$PrismaModel> | $Enums.StakeholderActionResult | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStakeholderActionResultNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStakeholderActionResultNullableFilter<$PrismaModel>
+}
+
+export type EnumStakeholderMessageSideFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderMessageSide | Prisma.EnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderMessageSide[] | Prisma.ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderMessageSide[] | Prisma.ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel> | $Enums.StakeholderMessageSide
+}
+
+export type EnumStakeholderMessageSideWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderMessageSide | Prisma.EnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderMessageSide[] | Prisma.ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderMessageSide[] | Prisma.ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderMessageSideWithAggregatesFilter<$PrismaModel> | $Enums.StakeholderMessageSide
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1596,6 +1664,74 @@ export type NestedEnumPortTicketQeshmondiStatusWithAggregatesFilter<$PrismaModel
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumPortTicketQeshmondiStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumPortTicketQeshmondiStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumStakeholderCorrespondenceKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderCorrespondenceKind | Prisma.EnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderCorrespondenceKind[] | Prisma.ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderCorrespondenceKind[] | Prisma.ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderCorrespondenceKindFilter<$PrismaModel> | $Enums.StakeholderCorrespondenceKind
+}
+
+export type NestedEnumStakeholderCorrespondenceStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderCorrespondenceStatus | Prisma.EnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderCorrespondenceStatus[] | Prisma.ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderCorrespondenceStatus[] | Prisma.ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderCorrespondenceStatusFilter<$PrismaModel> | $Enums.StakeholderCorrespondenceStatus
+}
+
+export type NestedEnumStakeholderActionResultNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderActionResult | Prisma.EnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  in?: $Enums.StakeholderActionResult[] | Prisma.ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.StakeholderActionResult[] | Prisma.ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumStakeholderActionResultNullableFilter<$PrismaModel> | $Enums.StakeholderActionResult | null
+}
+
+export type NestedEnumStakeholderCorrespondenceKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderCorrespondenceKind | Prisma.EnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderCorrespondenceKind[] | Prisma.ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderCorrespondenceKind[] | Prisma.ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderCorrespondenceKindWithAggregatesFilter<$PrismaModel> | $Enums.StakeholderCorrespondenceKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStakeholderCorrespondenceKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStakeholderCorrespondenceKindFilter<$PrismaModel>
+}
+
+export type NestedEnumStakeholderCorrespondenceStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderCorrespondenceStatus | Prisma.EnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderCorrespondenceStatus[] | Prisma.ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderCorrespondenceStatus[] | Prisma.ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderCorrespondenceStatusWithAggregatesFilter<$PrismaModel> | $Enums.StakeholderCorrespondenceStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStakeholderCorrespondenceStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStakeholderCorrespondenceStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumStakeholderActionResultNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderActionResult | Prisma.EnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  in?: $Enums.StakeholderActionResult[] | Prisma.ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.StakeholderActionResult[] | Prisma.ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumStakeholderActionResultNullableWithAggregatesFilter<$PrismaModel> | $Enums.StakeholderActionResult | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStakeholderActionResultNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStakeholderActionResultNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumStakeholderMessageSideFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderMessageSide | Prisma.EnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderMessageSide[] | Prisma.ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderMessageSide[] | Prisma.ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel> | $Enums.StakeholderMessageSide
+}
+
+export type NestedEnumStakeholderMessageSideWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StakeholderMessageSide | Prisma.EnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  in?: $Enums.StakeholderMessageSide[] | Prisma.ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StakeholderMessageSide[] | Prisma.ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStakeholderMessageSideWithAggregatesFilter<$PrismaModel> | $Enums.StakeholderMessageSide
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel>
 }
 
 

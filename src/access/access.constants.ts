@@ -4,6 +4,14 @@ export const ADMIN_ROLE_CODE = 'ADMIN';
 export const EMPLOYEE_ROLE_CODE = 'EMPLOYEE';
 export const CITIZEN_ROLE_CODE = 'CITIZEN';
 export const BOARD_ADMIN_ROLE_CODE = 'BOARD_ADMIN';
+export const CONTRACTOR_ROLE_CODE = 'CONTRACTOR';
+
+export const CONTRACTOR_PERMISSION_CODES = [
+  'stakeholders',
+  'stakeholders.projects',
+  'stakeholders.progress',
+  'stakeholders.correspondence',
+] as const;
 
 export const BOARD_ADMIN_PERMISSION_CODES = [
   'board',
@@ -38,6 +46,11 @@ export const SYSTEM_ROLES = [
     name: 'مدیر ماژول هیئت مدیره',
     description: 'مدیریت ماژول هیئت مدیره، صورت‌جلسه‌ها و انتخاب واحد و سمت هنگام ثبت درخواست',
   },
+  {
+    code: CONTRACTOR_ROLE_CODE,
+    name: 'پیمانکار',
+    description: 'دسترسی به درگاه یکپارچه ذی‌نفعان و پروژه‌های تخصیص‌یافته',
+  },
 ] as const;
 
 export const RESERVED_ROLE_CODES = new Set<string>(
@@ -49,7 +62,11 @@ export function isReservedRoleCode(code: string) {
 }
 
 export function isRolePermissionsLocked(code: string) {
-  return code === ADMIN_ROLE_CODE || code === CITIZEN_ROLE_CODE;
+  return (
+    code === ADMIN_ROLE_CODE ||
+    code === CITIZEN_ROLE_CODE ||
+    code === CONTRACTOR_ROLE_CODE
+  );
 }
 
 export async function ensureSystemRoles(
@@ -76,6 +93,21 @@ export async function ensureSystemRoles(
     if (saved.code === BOARD_ADMIN_ROLE_CODE) {
       await prisma.rolePermission.createMany({
         data: BOARD_ADMIN_PERMISSION_CODES.map((code) => ({
+          roleId: saved.id,
+          code,
+        })),
+        skipDuplicates: true,
+      });
+    }
+    if (saved.code === CONTRACTOR_ROLE_CODE) {
+      await prisma.rolePermission.deleteMany({
+        where: {
+          roleId: saved.id,
+          code: { notIn: [...CONTRACTOR_PERMISSION_CODES] },
+        },
+      });
+      await prisma.rolePermission.createMany({
+        data: CONTRACTOR_PERMISSION_CODES.map((code) => ({
           roleId: saved.id,
           code,
         })),

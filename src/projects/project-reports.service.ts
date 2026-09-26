@@ -97,13 +97,13 @@ export class ProjectReportsService {
             organizationUnit: { select: { id: true, name: true } },
           },
         },
+        phases: { select: { startDate: true, endDate: true } },
         contractors: {
           select: {
             id: true,
             name: true,
             costEstimate: true,
             _count: { select: { members: true } },
-            phases: { select: { startDate: true, endDate: true } },
             payments: { select: { paidAt: true, amount: true } },
           },
         },
@@ -141,7 +141,6 @@ export class ProjectReportsService {
       projectId: string;
       projectName: string;
       memberCount: number;
-      phaseCount: number;
       estimate: number;
       paid: number;
     }> = [];
@@ -206,7 +205,23 @@ export class ProjectReportsService {
       let projectEstimate = 0;
       let projectPaid = 0;
       let projectMembers = 0;
-      let projectPhases = 0;
+      const projectPhases = project.phases.length;
+      totalPhases += projectPhases;
+
+      for (const phase of project.phases) {
+        const start = toIsoDateOnly(phase.startDate);
+        const end = toIsoDateOnly(phase.endDate);
+        if (start && end) {
+          const startMs = Date.parse(`${start}T00:00:00.000Z`);
+          const endMs = Date.parse(`${end}T00:00:00.000Z`);
+          if (Number.isFinite(startMs) && Number.isFinite(endMs) && endMs >= startMs) {
+            phaseDays += Math.round((endMs - startMs) / 86_400_000) + 1;
+          }
+        }
+        if (start && start > today) upcomingPhases += 1;
+        else if (end && end < today) endedPhases += 1;
+        else ongoingPhases += 1;
+      }
 
       for (const contractor of project.contractors) {
         const estimate = toMoney(contractor.costEstimate);
@@ -215,18 +230,15 @@ export class ProjectReportsService {
           0,
         );
         const members = contractor._count.members;
-        const phases = contractor.phases.length;
 
         totalContractors += 1;
         totalMembers += members;
-        totalPhases += phases;
         totalPayments += contractor.payments.length;
         totalCostEstimate += estimate;
         totalPaid += paid;
         projectEstimate += estimate;
         projectPaid += paid;
         projectMembers += members;
-        projectPhases += phases;
         if (estimate > 0 && paid > estimate) overspendContractors += 1;
 
         for (const payment of contractor.payments) {
@@ -238,28 +250,12 @@ export class ProjectReportsService {
           paymentByMonth.set(month, bucket);
         }
 
-        for (const phase of contractor.phases) {
-          const start = toIsoDateOnly(phase.startDate);
-          const end = toIsoDateOnly(phase.endDate);
-          if (start && end) {
-            const startMs = Date.parse(`${start}T00:00:00.000Z`);
-            const endMs = Date.parse(`${end}T00:00:00.000Z`);
-            if (Number.isFinite(startMs) && Number.isFinite(endMs) && endMs >= startMs) {
-              phaseDays += Math.round((endMs - startMs) / 86_400_000) + 1;
-            }
-          }
-          if (start && start > today) upcomingPhases += 1;
-          else if (end && end < today) endedPhases += 1;
-          else ongoingPhases += 1;
-        }
-
         topContractors.push({
           id: contractor.id,
           name: contractor.name,
           projectId: project.id,
           projectName: project.systemName,
           memberCount: members,
-          phaseCount: phases,
           estimate,
           paid,
         });

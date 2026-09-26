@@ -6,6 +6,7 @@ import { sortDirections } from '../../common/sort-query';
 
 export const contractorSortFields = [
   'name',
+  'type',
   'nationalId',
   'ceoName',
   'timeEstimate',
@@ -19,12 +20,6 @@ export const contractorMemberSortFields = [
   'lastName',
   'phone',
   'role',
-] as const;
-
-export const contractorPhaseSortFields = [
-  'name',
-  'startDate',
-  'endDate',
 ] as const;
 
 export const contractorPaymentSortFields = [
@@ -63,18 +58,6 @@ export class FindContractorMembersQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...contractorMemberSortFields])
   sortBy?: (typeof contractorMemberSortFields)[number];
-
-  @IsOptional()
-  @Transform(({ value }) => emptyToUndefined(value))
-  @IsIn([...sortDirections])
-  sortDir?: (typeof sortDirections)[number];
-}
-
-export class FindContractorPhasesQueryDto extends PaginationQueryDto {
-  @IsOptional()
-  @Transform(({ value }) => emptyToUndefined(value))
-  @IsIn([...contractorPhaseSortFields])
-  sortBy?: (typeof contractorPhaseSortFields)[number];
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

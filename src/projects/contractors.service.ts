@@ -10,39 +10,46 @@ import {
   paginationArgs,
   wantsPagination,
 } from '../common/pagination';
-import { parseIsoDate, toIsoDateOnly } from '../common/iso-date';
+import { parseIsoDate, parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
 import { resolveSortOrder } from '../common/sort-query';
 import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateContractorDto } from './dto/create-contractor.dto';
 import { CreateContractorMemberDto } from './dto/create-contractor-member.dto';
 import { CreateContractorPaymentDto } from './dto/create-contractor-payment.dto';
-import { CreateContractorPhaseDto } from './dto/create-contractor-phase.dto';
 import {
   FindContractorMembersQueryDto,
   FindContractorPaymentsQueryDto,
-  FindContractorPhasesQueryDto,
   FindContractorProjectsQueryDto,
   FindContractorsQueryDto,
 } from './dto/find-contractors-query.dto';
 import { UpdateContractorDto } from './dto/update-contractor.dto';
 import { UpdateContractorMemberDto } from './dto/update-contractor-member.dto';
 import { UpdateContractorPaymentDto } from './dto/update-contractor-payment.dto';
-import { UpdateContractorPhaseDto } from './dto/update-contractor-phase.dto';
 
 const contractorSelect = {
   id: true,
   projectId: true,
+  typeId: true,
   name: true,
   nationalId: true,
+  registrationNumber: true,
+  phone: true,
+  email: true,
+  website: true,
   description: true,
   ceoName: true,
   timeEstimate: true,
   costEstimate: true,
+  contractStartDate: true,
+  contractEndDate: true,
+  supportStartDate: true,
+  supportEndDate: true,
   createdAt: true,
   updatedAt: true,
+  type: { select: { id: true, name: true } },
   project: { select: { id: true, systemName: true } },
-  _count: { select: { members: true, phases: true, payments: true, projectLinks: true } },
+  _count: { select: { members: true, payments: true, projectLinks: true } },
 } satisfies Prisma.ProjectContractorSelect;
 
 const contractorProjectSelect = {
@@ -104,17 +111,6 @@ const memberSelect = {
   updatedAt: true,
 } satisfies Prisma.ProjectContractorMemberSelect;
 
-const phaseSelect = {
-  id: true,
-  contractorId: true,
-  name: true,
-  startDate: true,
-  endDate: true,
-  goals: true,
-  createdAt: true,
-  updatedAt: true,
-} satisfies Prisma.ProjectContractorPhaseSelect;
-
 const paymentSelect = {
   id: true,
   contractorId: true,
@@ -130,18 +126,21 @@ function toMoney(value: Prisma.Decimal | null) {
 }
 
 function withContractorMoney<
-  T extends { costEstimate: Prisma.Decimal | null },
->(item: T) {
-  return { ...item, costEstimate: toMoney(item.costEstimate) };
-}
-
-function withPhaseDates<
-  T extends { startDate: Date; endDate: Date },
+  T extends {
+    costEstimate: Prisma.Decimal | null;
+    contractStartDate: Date | null;
+    contractEndDate: Date | null;
+    supportStartDate: Date | null;
+    supportEndDate: Date | null;
+  },
 >(item: T) {
   return {
     ...item,
-    startDate: toIsoDateOnly(item.startDate),
-    endDate: toIsoDateOnly(item.endDate),
+    costEstimate: toMoney(item.costEstimate),
+    contractStartDate: toIsoDateOnly(item.contractStartDate),
+    contractEndDate: toIsoDateOnly(item.contractEndDate),
+    supportStartDate: toIsoDateOnly(item.supportStartDate),
+    supportEndDate: toIsoDateOnly(item.supportEndDate),
   };
 }
 
@@ -168,7 +167,12 @@ export class ContractorsService {
       ? {
           OR: [
             { name: containsInsensitive(query.q) },
+            { type: { name: containsInsensitive(query.q) } },
             { nationalId: containsInsensitive(query.q) },
+            { registrationNumber: containsInsensitive(query.q) },
+            { phone: containsInsensitive(query.q) },
+            { email: containsInsensitive(query.q) },
+            { website: containsInsensitive(query.q) },
             { ceoName: containsInsensitive(query.q) },
             { description: containsInsensitive(query.q) },
             { timeEstimate: containsInsensitive(query.q) },
@@ -205,6 +209,7 @@ export class ContractorsService {
       query.sortDir,
       {
         name: (dir) => ({ name: dir }),
+        type: (dir) => ({ type: { name: dir } }),
         nationalId: (dir) => ({ nationalId: dir }),
         ceoName: (dir) => ({ ceoName: dir }),
         timeEstimate: (dir) => ({ timeEstimate: dir }),
@@ -259,16 +264,27 @@ export class ContractorsService {
 
   async create(projectId: string, dto: CreateContractorDto) {
     await this.assertProject(projectId);
+    await this.assertType(dto.typeId);
+    this.assertContractRanges(dto);
     return withContractorMoney(
       await this.prisma.projectContractor.create({
         data: {
           projectId,
+          typeId: dto.typeId,
           name: dto.name,
           nationalId: dto.nationalId,
+          registrationNumber: dto.registrationNumber,
+          phone: dto.phone,
+          email: dto.email,
+          website: dto.website,
           description: dto.description,
           ceoName: dto.ceoName,
           timeEstimate: dto.timeEstimate,
           costEstimate: dto.costEstimate,
+          contractStartDate: parseOptionalIsoDate(dto.contractStartDate) ?? null,
+          contractEndDate: parseOptionalIsoDate(dto.contractEndDate) ?? null,
+          supportStartDate: parseOptionalIsoDate(dto.supportStartDate) ?? null,
+          supportEndDate: parseOptionalIsoDate(dto.supportEndDate) ?? null,
           projectLinks: { create: { projectId } },
         },
         select: contractorSelect,
@@ -277,17 +293,47 @@ export class ContractorsService {
   }
 
   async update(projectId: string | undefined, id: string, dto: UpdateContractorDto) {
-    await this.findOne(projectId, id);
+    const current = await this.findOne(projectId, id);
+    if (dto.typeId !== undefined) {
+      await this.assertType(dto.typeId);
+    }
+    this.assertContractRanges({
+      contractStartDate:
+        dto.contractStartDate !== undefined ? dto.contractStartDate : current.contractStartDate,
+      contractEndDate:
+        dto.contractEndDate !== undefined ? dto.contractEndDate : current.contractEndDate,
+      supportStartDate:
+        dto.supportStartDate !== undefined ? dto.supportStartDate : current.supportStartDate,
+      supportEndDate:
+        dto.supportEndDate !== undefined ? dto.supportEndDate : current.supportEndDate,
+    });
     return withContractorMoney(
       await this.prisma.projectContractor.update({
         where: { id },
         data: {
           name: dto.name,
           nationalId: dto.nationalId,
+          registrationNumber: dto.registrationNumber,
+          phone: dto.phone,
+          email: dto.email,
+          website: dto.website,
           description: dto.description,
           ceoName: dto.ceoName,
           timeEstimate: dto.timeEstimate,
           costEstimate: dto.costEstimate,
+          ...(dto.typeId !== undefined ? { typeId: dto.typeId } : {}),
+          ...(dto.contractStartDate !== undefined
+            ? { contractStartDate: parseOptionalIsoDate(dto.contractStartDate) }
+            : {}),
+          ...(dto.contractEndDate !== undefined
+            ? { contractEndDate: parseOptionalIsoDate(dto.contractEndDate) }
+            : {}),
+          ...(dto.supportStartDate !== undefined
+            ? { supportStartDate: parseOptionalIsoDate(dto.supportStartDate) }
+            : {}),
+          ...(dto.supportEndDate !== undefined
+            ? { supportEndDate: parseOptionalIsoDate(dto.supportEndDate) }
+            : {}),
         },
         select: contractorSelect,
       }),
@@ -492,118 +538,6 @@ export class ContractorsService {
     return { ok: true };
   }
 
-  async findPhases(
-    projectId: string,
-    contractorId: string,
-    query: FindContractorPhasesQueryDto,
-  ) {
-    await this.findOne(projectId, contractorId);
-    const where: Prisma.ProjectContractorPhaseWhereInput = {
-      contractorId,
-      OR: query.q
-        ? [
-            { name: containsInsensitive(query.q) },
-            { goals: containsInsensitive(query.q) },
-          ]
-        : undefined,
-    };
-    const orderBy = resolveSortOrder<Prisma.ProjectContractorPhaseOrderByWithRelationInput>(
-      query.sortBy,
-      query.sortDir,
-      {
-        name: (dir) => ({ name: dir }),
-        startDate: (dir) => ({ startDate: dir }),
-        endDate: (dir) => ({ endDate: dir }),
-      },
-      [{ startDate: 'asc' }, { id: 'asc' }],
-    );
-    if (!wantsPagination(query)) {
-      const items = await this.prisma.projectContractorPhase.findMany({
-        where,
-        orderBy,
-        select: phaseSelect,
-      });
-      return items.map(withPhaseDates);
-    }
-    const { page, pageSize, skip, take } = paginationArgs(query);
-    const [items, total] = await Promise.all([
-      this.prisma.projectContractorPhase.findMany({
-        where,
-        orderBy,
-        skip,
-        take,
-        select: phaseSelect,
-      }),
-      this.prisma.projectContractorPhase.count({ where }),
-    ]);
-    return paginatedResult(items.map(withPhaseDates), total, page, pageSize);
-  }
-
-  async findPhase(projectId: string, contractorId: string, id: string) {
-    await this.findOne(projectId, contractorId);
-    const phase = await this.prisma.projectContractorPhase.findFirst({
-      where: { id, contractorId },
-      select: phaseSelect,
-    });
-    if (!phase) {
-      throw new NotFoundException('فاز یافت نشد');
-    }
-    return withPhaseDates(phase);
-  }
-
-  async createPhase(
-    projectId: string,
-    contractorId: string,
-    dto: CreateContractorPhaseDto,
-  ) {
-    await this.findOne(projectId, contractorId);
-    this.assertPhaseRange(dto.startDate, dto.endDate);
-    return withPhaseDates(
-      await this.prisma.projectContractorPhase.create({
-        data: {
-          contractorId,
-          name: dto.name,
-          startDate: parseIsoDate(dto.startDate),
-          endDate: parseIsoDate(dto.endDate),
-          goals: dto.goals,
-        },
-        select: phaseSelect,
-      }),
-    );
-  }
-
-  async updatePhase(
-    projectId: string,
-    contractorId: string,
-    id: string,
-    dto: UpdateContractorPhaseDto,
-  ) {
-    const current = await this.findPhase(projectId, contractorId, id);
-    const startDate = dto.startDate ?? current.startDate;
-    const endDate = dto.endDate ?? current.endDate;
-    if (startDate && endDate) {
-      this.assertPhaseRange(startDate, endDate);
-    }
-    return withPhaseDates(
-      await this.prisma.projectContractorPhase.update({
-        where: { id },
-        data: {
-          name: dto.name,
-          startDate: dto.startDate ? parseIsoDate(dto.startDate) : undefined,
-          endDate: dto.endDate ? parseIsoDate(dto.endDate) : undefined,
-          goals: dto.goals,
-        },
-        select: phaseSelect,
-      }),
-    );
-  }
-
-  async removePhase(projectId: string, contractorId: string, id: string) {
-    await this.findPhase(projectId, contractorId, id);
-    await this.prisma.projectContractorPhase.delete({ where: { id } });
-    return { ok: true };
-  }
-
   async findPayments(
     projectId: string,
     contractorId: string,
@@ -705,6 +639,41 @@ export class ContractorsService {
     return { ok: true };
   }
 
+  private assertContractRanges(dates: {
+    contractStartDate?: string | null;
+    contractEndDate?: string | null;
+    supportStartDate?: string | null;
+    supportEndDate?: string | null;
+  }) {
+    if (
+      dates.contractStartDate &&
+      dates.contractEndDate &&
+      dates.contractEndDate < dates.contractStartDate
+    ) {
+      throw new BadRequestException('تاریخ پایان قرارداد نباید قبل از تاریخ شروع باشد');
+    }
+    if (
+      dates.supportStartDate &&
+      dates.supportEndDate &&
+      dates.supportEndDate < dates.supportStartDate
+    ) {
+      throw new BadRequestException(
+        'تاریخ پایان قرارداد پشتیبانی نباید قبل از تاریخ شروع باشد',
+      );
+    }
+  }
+
+  private async assertType(typeId: string | null | undefined) {
+    if (!typeId) return;
+    const type = await this.prisma.projectContractorType.findUnique({
+      where: { id: typeId },
+      select: { id: true },
+    });
+    if (!type) {
+      throw new BadRequestException('نوع پیمانکار یافت نشد');
+    }
+  }
+
   private async assertProject(id: string) {
     const project = await this.prisma.project.findUnique({
       where: { id },
@@ -715,9 +684,4 @@ export class ContractorsService {
     }
   }
 
-  private assertPhaseRange(startDate: string, endDate: string) {
-    if (endDate < startDate) {
-      throw new BadRequestException('تاریخ پایان نباید قبل از تاریخ شروع باشد');
-    }
-  }
 }

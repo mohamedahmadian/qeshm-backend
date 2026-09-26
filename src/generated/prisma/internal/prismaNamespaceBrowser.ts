@@ -66,10 +66,10 @@ export const ModelName = {
   StoredFile: 'StoredFile',
   ProjectProgressEntry: 'ProjectProgressEntry',
   ProjectProgressImage: 'ProjectProgressImage',
+  ProjectContractorType: 'ProjectContractorType',
   ProjectContractor: 'ProjectContractor',
   ProjectContractorProject: 'ProjectContractorProject',
   ProjectContractorMember: 'ProjectContractorMember',
-  ProjectContractorPhase: 'ProjectContractorPhase',
   ProjectContractorPayment: 'ProjectContractorPayment',
   Food: 'Food',
   Restaurant: 'Restaurant',
@@ -100,7 +100,11 @@ export const ModelName = {
   BoardMinutesAttachment: 'BoardMinutesAttachment',
   BoardMinutesResolution: 'BoardMinutesResolution',
   PortSalesReport: 'PortSalesReport',
-  PortTicketSale: 'PortTicketSale'
+  PortTicketSale: 'PortTicketSale',
+  StakeholderProgressReport: 'StakeholderProgressReport',
+  StakeholderCorrespondence: 'StakeholderCorrespondence',
+  StakeholderMessage: 'StakeholderMessage',
+  StakeholderAttachment: 'StakeholderAttachment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -236,6 +240,7 @@ export const UserScalarFieldEnum = {
   occupation: 'occupation',
   isResident: 'isResident',
   passportNumber: 'passportNumber',
+  contractorId: 'contractorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -402,15 +407,34 @@ export const ProjectProgressImageScalarFieldEnum = {
 export type ProjectProgressImageScalarFieldEnum = (typeof ProjectProgressImageScalarFieldEnum)[keyof typeof ProjectProgressImageScalarFieldEnum]
 
 
+export const ProjectContractorTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectContractorTypeScalarFieldEnum = (typeof ProjectContractorTypeScalarFieldEnum)[keyof typeof ProjectContractorTypeScalarFieldEnum]
+
+
 export const ProjectContractorScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
+  typeId: 'typeId',
   name: 'name',
   nationalId: 'nationalId',
+  registrationNumber: 'registrationNumber',
+  phone: 'phone',
+  email: 'email',
+  website: 'website',
   description: 'description',
   ceoName: 'ceoName',
   timeEstimate: 'timeEstimate',
   costEstimate: 'costEstimate',
+  contractStartDate: 'contractStartDate',
+  contractEndDate: 'contractEndDate',
+  supportStartDate: 'supportStartDate',
+  supportEndDate: 'supportEndDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -442,20 +466,6 @@ export const ProjectContractorMemberScalarFieldEnum = {
 } as const
 
 export type ProjectContractorMemberScalarFieldEnum = (typeof ProjectContractorMemberScalarFieldEnum)[keyof typeof ProjectContractorMemberScalarFieldEnum]
-
-
-export const ProjectContractorPhaseScalarFieldEnum = {
-  id: 'id',
-  contractorId: 'contractorId',
-  name: 'name',
-  startDate: 'startDate',
-  endDate: 'endDate',
-  goals: 'goals',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ProjectContractorPhaseScalarFieldEnum = (typeof ProjectContractorPhaseScalarFieldEnum)[keyof typeof ProjectContractorPhaseScalarFieldEnum]
 
 
 export const ProjectContractorPaymentScalarFieldEnum = {
@@ -931,6 +941,68 @@ export const PortTicketSaleScalarFieldEnum = {
 } as const
 
 export type PortTicketSaleScalarFieldEnum = (typeof PortTicketSaleScalarFieldEnum)[keyof typeof PortTicketSaleScalarFieldEnum]
+
+
+export const StakeholderProgressReportScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  contractorId: 'contractorId',
+  createdById: 'createdById',
+  occurredAt: 'occurredAt',
+  progressPercent: 'progressPercent',
+  actionsDone: 'actionsDone',
+  nextPlan: 'nextPlan',
+  blockers: 'blockers',
+  needs: 'needs',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StakeholderProgressReportScalarFieldEnum = (typeof StakeholderProgressReportScalarFieldEnum)[keyof typeof StakeholderProgressReportScalarFieldEnum]
+
+
+export const StakeholderCorrespondenceScalarFieldEnum = {
+  id: 'id',
+  contractorId: 'contractorId',
+  projectId: 'projectId',
+  kind: 'kind',
+  status: 'status',
+  subject: 'subject',
+  body: 'body',
+  dueDate: 'dueDate',
+  actionResult: 'actionResult',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StakeholderCorrespondenceScalarFieldEnum = (typeof StakeholderCorrespondenceScalarFieldEnum)[keyof typeof StakeholderCorrespondenceScalarFieldEnum]
+
+
+export const StakeholderMessageScalarFieldEnum = {
+  id: 'id',
+  correspondenceId: 'correspondenceId',
+  authorId: 'authorId',
+  side: 'side',
+  body: 'body',
+  createdAt: 'createdAt'
+} as const
+
+export type StakeholderMessageScalarFieldEnum = (typeof StakeholderMessageScalarFieldEnum)[keyof typeof StakeholderMessageScalarFieldEnum]
+
+
+export const StakeholderAttachmentScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  correspondenceId: 'correspondenceId',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  originalName: 'originalName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type StakeholderAttachmentScalarFieldEnum = (typeof StakeholderAttachmentScalarFieldEnum)[keyof typeof StakeholderAttachmentScalarFieldEnum]
 
 
 export const SortOrder = {

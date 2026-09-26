@@ -133,6 +133,7 @@ model StoredImage {
   singardAttachments     SingardAttachment[]
   boardAttachments       BoardAttachment[]
   boardMinutesAttachments BoardMinutesAttachment[]
+  stakeholderAttachments StakeholderAttachment[]
   createdAt              DateTime @default(now())
 
   @@map("stored_images")
@@ -273,6 +274,11 @@ model User {
   singardFeedbacks   SingardFeedback[]     @relation("SingardFeedbackAuthor")
   singardReplies     SingardFeedback[]     @relation("SingardFeedbackReplier")
   singardActivities  SingardActivity[]
+  contractorId       String?
+  contractor         ProjectContractor? @relation("ContractorPortalUsers", fields: [contractorId], references: [id], onDelete: Restrict)
+  stakeholderReports StakeholderProgressReport[]
+  stakeholderCorrespondences StakeholderCorrespondence[] @relation("StakeholderCorrespondenceAuthor")
+  stakeholderMessages StakeholderMessage[]
   boardRequestsCreated    BoardRequest[] @relation("BoardRequestAuthor")
   boardRequestsRejected   BoardRequest[] @relation("BoardRequestRejecter")
   boardManagementReviews  BoardRequest[] @relation("BoardManagementReviewer")
@@ -294,6 +300,7 @@ model User {
   @@index([locationCityId])
   @@index([orgUnitId])
   @@index([positionId])
+  @@index([contractorId])
   @@index([isQeshmondi])
   @@index([nationalId(ops: raw("gin_trgm_ops"))], type: Gin, map: "users_nationalId_trgm_idx")
   @@map("users")
@@ -370,6 +377,8 @@ model Project {
   checklistItems       ProjectChecklistItem[]
   progressEntries      ProjectProgressEntry[]
   documents            ProjectDocument[]
+  stakeholderReports   StakeholderProgressReport[]
+  stakeholderCorrespondences StakeholderCorrespondence[]
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
 
@@ -474,6 +483,7 @@ model StoredFile {
   boardAttachments   BoardAttachment[]
   boardMinutesAttachments BoardMinutesAttachment[]
   portSalesReports   PortSalesReport[]
+  stakeholderAttachments StakeholderAttachment[]
 
   @@map("stored_files")
 }
@@ -517,25 +527,53 @@ model ProjectProgressImage {
   @@map("project_progress_images")
 }
 
+model ProjectContractorType {
+  id          String              @id @default(uuid())
+  name        String              @unique
+  contractors ProjectContractor[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("project_contractor_types")
+}
+
 model ProjectContractor {
-  id           String   @id @default(uuid())
+  id           String                 @id @default(uuid())
   projectId    String
-  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  name         String
-  nationalId   String?
-  description  String?
-  ceoName      String?
-  timeEstimate String?
-  costEstimate Decimal? @db.Decimal(18, 0)
+  project      Project                @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  typeId       String?
+  type         ProjectContractorType? @relation(fields: [typeId], references: [id], onDelete: Restrict)
+  name                   String
+  nationalId             String?
+  registrationNumber     String?
+  phone                  String?
+  email                  String?
+  website                String?
+  description            String?
+  ceoName                String?
+  timeEstimate           String?
+  costEstimate           Decimal?               @db.Decimal(18, 0)
+  contractStartDate      DateTime?              @db.Date
+  contractEndDate        DateTime?              @db.Date
+  supportStartDate       DateTime?              @db.Date
+  supportEndDate         DateTime?              @db.Date
   members      ProjectContractorMember[]
-  phases       ProjectContractorPhase[]
   payments     ProjectContractorPayment[]
   projectLinks ProjectContractorProject[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  portalUsers  User[]                 @relation("ContractorPortalUsers")
+  stakeholderReports StakeholderProgressReport[]
+  stakeholderCorrespondences StakeholderCorrespondence[]
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
 
   @@index([projectId, name])
   @@index([nationalId])
+  @@index([registrationNumber])
+  @@index([phone])
+  @@index([typeId])
+  @@index([contractStartDate])
   @@index([createdAt])
   @@map("project_contractors")
 }
@@ -571,21 +609,6 @@ model ProjectContractorMember {
   @@index([contractorId])
   @@index([lastName, firstName])
   @@map("project_contractor_members")
-}
-
-model ProjectContractorPhase {
-  id           String            @id @default(uuid())
-  contractorId String
-  contractor   ProjectContractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
-  name         String
-  startDate    DateTime          @db.Date
-  endDate      DateTime          @db.Date
-  goals        String?
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-
-  @@index([contractorId, startDate])
-  @@map("project_contractor_phases")
 }
 
 model ProjectContractorPayment {
@@ -1287,4 +1310,120 @@ model PortTicketSale {
   @@index([fullName])
   @@index([travelDate])
   @@map("port_ticket_sales")
+}
+
+enum StakeholderCorrespondenceKind {
+  ACTION_REQUEST
+  INQUIRY
+  NOTICE
+  DOCUMENT
+}
+
+enum StakeholderCorrespondenceStatus {
+  SENT
+  IN_REVIEW
+  ANSWERED
+  CLOSED
+}
+
+enum StakeholderActionResult {
+  ACCEPTED
+  REJECTED
+  DONE
+}
+
+enum StakeholderMessageSide {
+  CONTRACTOR
+  ORGANIZATION
+}
+
+model StakeholderProgressReport {
+  id              String                  @id @default(uuid())
+  projectId       String
+  project         Project                 @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  contractorId    String
+  contractor      ProjectContractor       @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  createdById     String
+  createdBy       User                    @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  occurredAt      DateTime                @db.Date
+  progressPercent Int?
+  actionsDone     String?
+  nextPlan        String?
+  blockers        String?
+  needs           String?
+  attachments     StakeholderAttachment[]
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+
+  @@index([projectId, occurredAt])
+  @@index([contractorId, occurredAt])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("stakeholder_progress_reports")
+}
+
+model StakeholderCorrespondence {
+  id           String                          @id @default(uuid())
+  contractorId String
+  contractor   ProjectContractor               @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  projectId    String?
+  project      Project?                        @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  kind         StakeholderCorrespondenceKind
+  status       StakeholderCorrespondenceStatus @default(SENT)
+  subject      String
+  body         String
+  dueDate      DateTime?                       @db.Date
+  actionResult StakeholderActionResult?
+  createdById  String
+  createdBy    User                            @relation("StakeholderCorrespondenceAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  messages     StakeholderMessage[]
+  attachments  StakeholderAttachment[]
+  createdAt    DateTime                        @default(now())
+  updatedAt    DateTime                        @updatedAt
+
+  @@index([contractorId, createdAt])
+  @@index([projectId])
+  @@index([kind, status])
+  @@index([status])
+  @@index([dueDate])
+  @@index([subject])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("stakeholder_correspondences")
+}
+
+model StakeholderMessage {
+  id               String                  @id @default(uuid())
+  correspondenceId String
+  correspondence   StakeholderCorrespondence @relation(fields: [correspondenceId], references: [id], onDelete: Cascade)
+  authorId         String
+  author           User                    @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  side             StakeholderMessageSide
+  body             String
+  createdAt        DateTime                @default(now())
+
+  @@index([correspondenceId, createdAt])
+  @@index([authorId])
+  @@map("stakeholder_messages")
+}
+
+model StakeholderAttachment {
+  id               String                     @id @default(uuid())
+  reportId         String?
+  report           StakeholderProgressReport? @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  correspondenceId String?
+  correspondence   StakeholderCorrespondence? @relation(fields: [correspondenceId], references: [id], onDelete: Cascade)
+  imageId          String?
+  image            StoredImage?               @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  fileId           String?
+  file             StoredFile?                @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  originalName     String?
+  sortOrder        Int                        @default(0)
+  createdAt        DateTime                   @default(now())
+
+  @@index([reportId, sortOrder])
+  @@index([correspondenceId, sortOrder])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("stakeholder_attachments")
 }

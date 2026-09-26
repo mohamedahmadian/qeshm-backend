@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ContractorTypesController } from './contractor-types.controller';
+import { ContractorTypesService } from './contractor-types.service';
 import { ContractorsController } from './contractors.controller';
 import { ContractorsService } from './contractors.service';
 import { GlobalContractorsController } from './global-contractors.controller';
@@ -27,6 +29,7 @@ import { PublicProjectsController } from './public-projects.controller';
     ProjectGroupsController,
     ProjectsController,
     GlobalContractorsController,
+    ContractorTypesController,
     ContractorsController,
     ProjectPhasesController,
     ProjectChecklistController,
@@ -38,6 +41,7 @@ import { PublicProjectsController } from './public-projects.controller';
     ProjectsService,
     ProjectGroupsService,
     ContractorsService,
+    ContractorTypesService,
     ProjectPhasesService,
     ProjectChecklistService,
     ProjectDocumentsService,

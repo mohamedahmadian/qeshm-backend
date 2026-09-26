@@ -104,6 +104,24 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/singard/categories', permissions: ['singard.categories'] },
   { prefix: '/singard/feedbacks', permissions: ['singard.inbox'] },
   { prefix: '/port-sales-reports', permissions: ['ports.sales-reports'] },
+  {
+    prefix: '/stakeholders/contractors',
+    permissions: ['management.users', 'stakeholders.inbox', 'stakeholders.reports'],
+  },
+  { prefix: '/stakeholders/projects', permissions: ['stakeholders.projects'] },
+  {
+    prefix: '/stakeholders/progress',
+    permissions: ['stakeholders.progress'],
+  },
+  {
+    prefix: '/stakeholders/reports',
+    permissions: ['stakeholders.reports'],
+  },
+  {
+    prefix: '/stakeholders/correspondence',
+    permissions: ['stakeholders.correspondence'],
+  },
+  { prefix: '/stakeholders/inbox', permissions: ['stakeholders.inbox'] },
 ].sort((a, b) => b.prefix.length - a.prefix.length);
 
 export type AccessDecision =

@@ -411,6 +411,8 @@ export type ProjectWhereInput = {
   checklistItems?: Prisma.ProjectChecklistItemListRelationFilter
   progressEntries?: Prisma.ProjectProgressEntryListRelationFilter
   documents?: Prisma.ProjectDocumentListRelationFilter
+  stakeholderReports?: Prisma.StakeholderProgressReportListRelationFilter
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -452,6 +454,8 @@ export type ProjectOrderByWithRelationInput = {
   checklistItems?: Prisma.ProjectChecklistItemOrderByRelationAggregateInput
   progressEntries?: Prisma.ProjectProgressEntryOrderByRelationAggregateInput
   documents?: Prisma.ProjectDocumentOrderByRelationAggregateInput
+  stakeholderReports?: Prisma.StakeholderProgressReportOrderByRelationAggregateInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -496,6 +500,8 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   checklistItems?: Prisma.ProjectChecklistItemListRelationFilter
   progressEntries?: Prisma.ProjectProgressEntryListRelationFilter
   documents?: Prisma.ProjectDocumentListRelationFilter
+  stakeholderReports?: Prisma.StakeholderProgressReportListRelationFilter
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceListRelationFilter
 }, "id" | "code">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -602,6 +608,8 @@ export type ProjectCreateInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -640,6 +648,8 @@ export type ProjectUncheckedCreateInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -678,6 +688,8 @@ export type ProjectUpdateInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -716,6 +728,8 @@ export type ProjectUncheckedUpdateInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -1179,6 +1193,36 @@ export type ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput = {
   deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
 }
 
+export type ProjectCreateNestedOneWithoutStakeholderReportsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutStakeholderReportsInput, Prisma.ProjectUncheckedCreateWithoutStakeholderReportsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutStakeholderReportsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutStakeholderReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutStakeholderReportsInput, Prisma.ProjectUncheckedCreateWithoutStakeholderReportsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutStakeholderReportsInput
+  upsert?: Prisma.ProjectUpsertWithoutStakeholderReportsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutStakeholderReportsInput, Prisma.ProjectUpdateWithoutStakeholderReportsInput>, Prisma.ProjectUncheckedUpdateWithoutStakeholderReportsInput>
+}
+
+export type ProjectCreateNestedOneWithoutStakeholderCorrespondencesInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutStakeholderCorrespondencesInput, Prisma.ProjectUncheckedCreateWithoutStakeholderCorrespondencesInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutStakeholderCorrespondencesInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneWithoutStakeholderCorrespondencesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutStakeholderCorrespondencesInput, Prisma.ProjectUncheckedCreateWithoutStakeholderCorrespondencesInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutStakeholderCorrespondencesInput
+  upsert?: Prisma.ProjectUpsertWithoutStakeholderCorrespondencesInput
+  disconnect?: Prisma.ProjectWhereInput | boolean
+  delete?: Prisma.ProjectWhereInput | boolean
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutStakeholderCorrespondencesInput, Prisma.ProjectUpdateWithoutStakeholderCorrespondencesInput>, Prisma.ProjectUncheckedUpdateWithoutStakeholderCorrespondencesInput>
+}
+
 export type ProjectCreateWithoutGroupInput = {
   id?: string
   systemName: string
@@ -1214,6 +1258,8 @@ export type ProjectCreateWithoutGroupInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutGroupInput = {
@@ -1251,6 +1297,8 @@ export type ProjectUncheckedCreateWithoutGroupInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutGroupInput = {
@@ -1347,6 +1395,8 @@ export type ProjectCreateWithoutReplacedByInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutReplacedByInput = {
@@ -1384,6 +1434,8 @@ export type ProjectUncheckedCreateWithoutReplacedByInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutReplacedByInput = {
@@ -1426,6 +1478,8 @@ export type ProjectCreateWithoutReplacementProjectInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutReplacementProjectInput = {
@@ -1463,6 +1517,8 @@ export type ProjectUncheckedCreateWithoutReplacementProjectInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutReplacementProjectInput = {
@@ -1521,6 +1577,8 @@ export type ProjectUpdateWithoutReplacedByInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutReplacedByInput = {
@@ -1558,6 +1616,8 @@ export type ProjectUncheckedUpdateWithoutReplacedByInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUpsertWithWhereUniqueWithoutReplacementProjectInput = {
@@ -1611,6 +1671,8 @@ export type ProjectCreateWithoutDocumentsInput = {
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDocumentsInput = {
@@ -1648,6 +1710,8 @@ export type ProjectUncheckedCreateWithoutDocumentsInput = {
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDocumentsInput = {
@@ -1701,6 +1765,8 @@ export type ProjectUpdateWithoutDocumentsInput = {
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDocumentsInput = {
@@ -1738,6 +1804,8 @@ export type ProjectUncheckedUpdateWithoutDocumentsInput = {
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutOperatorsInput = {
@@ -1775,6 +1843,8 @@ export type ProjectCreateWithoutOperatorsInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutOperatorsInput = {
@@ -1812,6 +1882,8 @@ export type ProjectUncheckedCreateWithoutOperatorsInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutOperatorsInput = {
@@ -1865,6 +1937,8 @@ export type ProjectUpdateWithoutOperatorsInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutOperatorsInput = {
@@ -1902,6 +1976,8 @@ export type ProjectUncheckedUpdateWithoutOperatorsInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPhasesInput = {
@@ -1939,6 +2015,8 @@ export type ProjectCreateWithoutPhasesInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPhasesInput = {
@@ -1976,6 +2054,8 @@ export type ProjectUncheckedCreateWithoutPhasesInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPhasesInput = {
@@ -2029,6 +2109,8 @@ export type ProjectUpdateWithoutPhasesInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPhasesInput = {
@@ -2066,6 +2148,8 @@ export type ProjectUncheckedUpdateWithoutPhasesInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutChecklistItemsInput = {
@@ -2103,6 +2187,8 @@ export type ProjectCreateWithoutChecklistItemsInput = {
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutChecklistItemsInput = {
@@ -2140,6 +2226,8 @@ export type ProjectUncheckedCreateWithoutChecklistItemsInput = {
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutChecklistItemsInput = {
@@ -2193,6 +2281,8 @@ export type ProjectUpdateWithoutChecklistItemsInput = {
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutChecklistItemsInput = {
@@ -2230,6 +2320,8 @@ export type ProjectUncheckedUpdateWithoutChecklistItemsInput = {
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutProgressEntriesInput = {
@@ -2267,6 +2359,8 @@ export type ProjectCreateWithoutProgressEntriesInput = {
   phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutProgressEntriesInput = {
@@ -2304,6 +2398,8 @@ export type ProjectUncheckedCreateWithoutProgressEntriesInput = {
   phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutProgressEntriesInput = {
@@ -2357,6 +2453,8 @@ export type ProjectUpdateWithoutProgressEntriesInput = {
   phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutProgressEntriesInput = {
@@ -2394,6 +2492,8 @@ export type ProjectUncheckedUpdateWithoutProgressEntriesInput = {
   phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutContractorsInput = {
@@ -2431,6 +2531,8 @@ export type ProjectCreateWithoutContractorsInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutContractorsInput = {
@@ -2468,6 +2570,8 @@ export type ProjectUncheckedCreateWithoutContractorsInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutContractorsInput = {
@@ -2521,6 +2625,8 @@ export type ProjectUpdateWithoutContractorsInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutContractorsInput = {
@@ -2558,6 +2664,8 @@ export type ProjectUncheckedUpdateWithoutContractorsInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutContractorLinksInput = {
@@ -2595,6 +2703,8 @@ export type ProjectCreateWithoutContractorLinksInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutContractorLinksInput = {
@@ -2632,6 +2742,8 @@ export type ProjectUncheckedCreateWithoutContractorLinksInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutContractorLinksInput = {
@@ -2685,6 +2797,8 @@ export type ProjectUpdateWithoutContractorLinksInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutContractorLinksInput = {
@@ -2722,6 +2836,8 @@ export type ProjectUncheckedUpdateWithoutContractorLinksInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutOrgUnitInput = {
@@ -2759,6 +2875,8 @@ export type ProjectCreateWithoutOrgUnitInput = {
   checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutOrgUnitInput = {
@@ -2796,6 +2914,8 @@ export type ProjectUncheckedCreateWithoutOrgUnitInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
   documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutOrgUnitInput = {
@@ -2822,6 +2942,350 @@ export type ProjectUpdateWithWhereUniqueWithoutOrgUnitInput = {
 export type ProjectUpdateManyWithWhereWithoutOrgUnitInput = {
   where: Prisma.ProjectScalarWhereInput
   data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitInput>
+}
+
+export type ProjectCreateWithoutStakeholderReportsInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressMode?: $Enums.ProjectProgressMode
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  showOnHomePage?: boolean
+  importance?: $Enums.ProjectImportance
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
+  replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
+  operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
+  checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutStakeholderReportsInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressMode?: $Enums.ProjectProgressMode
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  replacementProjectId?: string | null
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  showOnHomePage?: boolean
+  importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
+  operators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorUncheckedCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
+  checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutStakeholderReportsInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutStakeholderReportsInput, Prisma.ProjectUncheckedCreateWithoutStakeholderReportsInput>
+}
+
+export type ProjectUpsertWithoutStakeholderReportsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutStakeholderReportsInput, Prisma.ProjectUncheckedUpdateWithoutStakeholderReportsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutStakeholderReportsInput, Prisma.ProjectUncheckedCreateWithoutStakeholderReportsInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutStakeholderReportsInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutStakeholderReportsInput, Prisma.ProjectUncheckedUpdateWithoutStakeholderReportsInput>
+}
+
+export type ProjectUpdateWithoutStakeholderReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressMode?: Prisma.EnumProjectProgressModeFieldUpdateOperationsInput | $Enums.ProjectProgressMode
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showOnHomePage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
+  replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
+  operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
+  checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutStakeholderReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressMode?: Prisma.EnumProjectProgressModeFieldUpdateOperationsInput | $Enums.ProjectProgressMode
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showOnHomePage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
+  operators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
+  checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutStakeholderCorrespondencesInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressMode?: $Enums.ProjectProgressMode
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  showOnHomePage?: boolean
+  importance?: $Enums.ProjectImportance
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacementProject?: Prisma.ProjectCreateNestedOneWithoutReplacedByInput
+  replacedBy?: Prisma.ProjectCreateNestedManyWithoutReplacementProjectInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutProjectsInput
+  group?: Prisma.ProjectGroupCreateNestedOneWithoutProjectsInput
+  operators?: Prisma.ProjectOperatorCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseCreateNestedManyWithoutProjectInput
+  checklistItems?: Prisma.ProjectChecklistItemCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutStakeholderCorrespondencesInput = {
+  id?: string
+  systemName: string
+  code: string
+  isActive?: boolean
+  status?: $Enums.ProjectStatus
+  progressMode?: $Enums.ProjectProgressMode
+  progressPercent?: number | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: string | null
+  companyName?: string | null
+  systemUrl?: string | null
+  launchYear?: number | null
+  isSupportActive?: boolean
+  replacementProjectId?: string | null
+  description?: string | null
+  color?: string | null
+  showOnLiveBoard?: boolean
+  showOnHomePage?: boolean
+  importance?: $Enums.ProjectImportance
+  orgUnitId?: string | null
+  groupId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  replacedBy?: Prisma.ProjectUncheckedCreateNestedManyWithoutReplacementProjectInput
+  operators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutProjectInput
+  contractors?: Prisma.ProjectContractorUncheckedCreateNestedManyWithoutProjectInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutProjectInput
+  phases?: Prisma.ProjectPhaseUncheckedCreateNestedManyWithoutProjectInput
+  checklistItems?: Prisma.ProjectChecklistItemUncheckedCreateNestedManyWithoutProjectInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutProjectInput
+  documents?: Prisma.ProjectDocumentUncheckedCreateNestedManyWithoutProjectInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutStakeholderCorrespondencesInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutStakeholderCorrespondencesInput, Prisma.ProjectUncheckedCreateWithoutStakeholderCorrespondencesInput>
+}
+
+export type ProjectUpsertWithoutStakeholderCorrespondencesInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutStakeholderCorrespondencesInput, Prisma.ProjectUncheckedUpdateWithoutStakeholderCorrespondencesInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutStakeholderCorrespondencesInput, Prisma.ProjectUncheckedCreateWithoutStakeholderCorrespondencesInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutStakeholderCorrespondencesInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutStakeholderCorrespondencesInput, Prisma.ProjectUncheckedUpdateWithoutStakeholderCorrespondencesInput>
+}
+
+export type ProjectUpdateWithoutStakeholderCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressMode?: Prisma.EnumProjectProgressModeFieldUpdateOperationsInput | $Enums.ProjectProgressMode
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showOnHomePage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacementProject?: Prisma.ProjectUpdateOneWithoutReplacedByNestedInput
+  replacedBy?: Prisma.ProjectUpdateManyWithoutReplacementProjectNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutProjectsNestedInput
+  group?: Prisma.ProjectGroupUpdateOneWithoutProjectsNestedInput
+  operators?: Prisma.ProjectOperatorUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUpdateManyWithoutProjectNestedInput
+  checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  systemName?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  progressMode?: Prisma.EnumProjectProgressModeFieldUpdateOperationsInput | $Enums.ProjectProgressMode
+  progressPercent?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  systemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  launchYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isSupportActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  replacementProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showOnLiveBoard?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showOnHomePage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  importance?: Prisma.EnumProjectImportanceFieldUpdateOperationsInput | $Enums.ProjectImportance
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  replacedBy?: Prisma.ProjectUncheckedUpdateManyWithoutReplacementProjectNestedInput
+  operators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutProjectNestedInput
+  contractors?: Prisma.ProjectContractorUncheckedUpdateManyWithoutProjectNestedInput
+  contractorLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutProjectNestedInput
+  phases?: Prisma.ProjectPhaseUncheckedUpdateManyWithoutProjectNestedInput
+  checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
+  documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyGroupInput = {
@@ -2888,6 +3352,8 @@ export type ProjectUpdateWithoutGroupInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutGroupInput = {
@@ -2925,6 +3391,8 @@ export type ProjectUncheckedUpdateWithoutGroupInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutGroupInput = {
@@ -3020,6 +3488,8 @@ export type ProjectUpdateWithoutReplacementProjectInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutReplacementProjectInput = {
@@ -3057,6 +3527,8 @@ export type ProjectUncheckedUpdateWithoutReplacementProjectInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutReplacementProjectInput = {
@@ -3152,6 +3624,8 @@ export type ProjectUpdateWithoutOrgUnitInput = {
   checklistItems?: Prisma.ProjectChecklistItemUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutOrgUnitInput = {
@@ -3189,6 +3663,8 @@ export type ProjectUncheckedUpdateWithoutOrgUnitInput = {
   checklistItems?: Prisma.ProjectChecklistItemUncheckedUpdateManyWithoutProjectNestedInput
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutProjectNestedInput
   documents?: Prisma.ProjectDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutProjectNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutOrgUnitInput = {
@@ -3234,6 +3710,8 @@ export type ProjectCountOutputType = {
   checklistItems: number
   progressEntries: number
   documents: number
+  stakeholderReports: number
+  stakeholderCorrespondences: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3245,6 +3723,8 @@ export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   checklistItems?: boolean | ProjectCountOutputTypeCountChecklistItemsArgs
   progressEntries?: boolean | ProjectCountOutputTypeCountProgressEntriesArgs
   documents?: boolean | ProjectCountOutputTypeCountDocumentsArgs
+  stakeholderReports?: boolean | ProjectCountOutputTypeCountStakeholderReportsArgs
+  stakeholderCorrespondences?: boolean | ProjectCountOutputTypeCountStakeholderCorrespondencesArgs
 }
 
 /**
@@ -3313,6 +3793,20 @@ export type ProjectCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.ProjectDocumentWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountStakeholderReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StakeholderProgressReportWhereInput
+}
+
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountStakeholderCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StakeholderCorrespondenceWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3353,6 +3847,8 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   checklistItems?: boolean | Prisma.Project$checklistItemsArgs<ExtArgs>
   progressEntries?: boolean | Prisma.Project$progressEntriesArgs<ExtArgs>
   documents?: boolean | Prisma.Project$documentsArgs<ExtArgs>
+  stakeholderReports?: boolean | Prisma.Project$stakeholderReportsArgs<ExtArgs>
+  stakeholderCorrespondences?: boolean | Prisma.Project$stakeholderCorrespondencesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -3465,6 +3961,8 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   checklistItems?: boolean | Prisma.Project$checklistItemsArgs<ExtArgs>
   progressEntries?: boolean | Prisma.Project$progressEntriesArgs<ExtArgs>
   documents?: boolean | Prisma.Project$documentsArgs<ExtArgs>
+  stakeholderReports?: boolean | Prisma.Project$stakeholderReportsArgs<ExtArgs>
+  stakeholderCorrespondences?: boolean | Prisma.Project$stakeholderCorrespondencesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3492,6 +3990,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     checklistItems: Prisma.$ProjectChecklistItemPayload<ExtArgs>[]
     progressEntries: Prisma.$ProjectProgressEntryPayload<ExtArgs>[]
     documents: Prisma.$ProjectDocumentPayload<ExtArgs>[]
+    stakeholderReports: Prisma.$StakeholderProgressReportPayload<ExtArgs>[]
+    stakeholderCorrespondences: Prisma.$StakeholderCorrespondencePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3926,6 +4426,8 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   checklistItems<T extends Prisma.Project$checklistItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$checklistItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectChecklistItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   progressEntries<T extends Prisma.Project$progressEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$progressEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectProgressEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Project$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stakeholderReports<T extends Prisma.Project$stakeholderReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$stakeholderReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderProgressReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stakeholderCorrespondences<T extends Prisma.Project$stakeholderCorrespondencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$stakeholderCorrespondencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderCorrespondencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4629,6 +5131,54 @@ export type Project$documentsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.ProjectDocumentScalarFieldEnum | Prisma.ProjectDocumentScalarFieldEnum[]
+}
+
+/**
+ * Project.stakeholderReports
+ */
+export type Project$stakeholderReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StakeholderProgressReport
+   */
+  select?: Prisma.StakeholderProgressReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StakeholderProgressReport
+   */
+  omit?: Prisma.StakeholderProgressReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StakeholderProgressReportInclude<ExtArgs> | null
+  where?: Prisma.StakeholderProgressReportWhereInput
+  orderBy?: Prisma.StakeholderProgressReportOrderByWithRelationInput | Prisma.StakeholderProgressReportOrderByWithRelationInput[]
+  cursor?: Prisma.StakeholderProgressReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StakeholderProgressReportScalarFieldEnum | Prisma.StakeholderProgressReportScalarFieldEnum[]
+}
+
+/**
+ * Project.stakeholderCorrespondences
+ */
+export type Project$stakeholderCorrespondencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StakeholderCorrespondence
+   */
+  select?: Prisma.StakeholderCorrespondenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StakeholderCorrespondence
+   */
+  omit?: Prisma.StakeholderCorrespondenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StakeholderCorrespondenceInclude<ExtArgs> | null
+  where?: Prisma.StakeholderCorrespondenceWhereInput
+  orderBy?: Prisma.StakeholderCorrespondenceOrderByWithRelationInput | Prisma.StakeholderCorrespondenceOrderByWithRelationInput[]
+  cursor?: Prisma.StakeholderCorrespondenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StakeholderCorrespondenceScalarFieldEnum | Prisma.StakeholderCorrespondenceScalarFieldEnum[]
 }
 
 /**

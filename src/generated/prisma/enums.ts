@@ -250,3 +250,40 @@ export const BoardMinutesAttachmentKind = {
 } as const
 
 export type BoardMinutesAttachmentKind = (typeof BoardMinutesAttachmentKind)[keyof typeof BoardMinutesAttachmentKind]
+
+
+export const StakeholderCorrespondenceKind = {
+  ACTION_REQUEST: 'ACTION_REQUEST',
+  INQUIRY: 'INQUIRY',
+  NOTICE: 'NOTICE',
+  DOCUMENT: 'DOCUMENT'
+} as const
+
+export type StakeholderCorrespondenceKind = (typeof StakeholderCorrespondenceKind)[keyof typeof StakeholderCorrespondenceKind]
+
+
+export const StakeholderCorrespondenceStatus = {
+  SENT: 'SENT',
+  IN_REVIEW: 'IN_REVIEW',
+  ANSWERED: 'ANSWERED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type StakeholderCorrespondenceStatus = (typeof StakeholderCorrespondenceStatus)[keyof typeof StakeholderCorrespondenceStatus]
+
+
+export const StakeholderActionResult = {
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  DONE: 'DONE'
+} as const
+
+export type StakeholderActionResult = (typeof StakeholderActionResult)[keyof typeof StakeholderActionResult]
+
+
+export const StakeholderMessageSide = {
+  CONTRACTOR: 'CONTRACTOR',
+  ORGANIZATION: 'ORGANIZATION'
+} as const
+
+export type StakeholderMessageSide = (typeof StakeholderMessageSide)[keyof typeof StakeholderMessageSide]

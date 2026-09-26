@@ -50,6 +50,22 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
+    code: 'stakeholders',
+    kind: 'MODULE',
+    nameKey: 'modules.stakeholders',
+    children: [
+      { code: 'stakeholders.projects', kind: 'MENU', nameKey: 'menus.stakeholderProjects' },
+      { code: 'stakeholders.progress', kind: 'MENU', nameKey: 'menus.stakeholderProgress' },
+      {
+        code: 'stakeholders.correspondence',
+        kind: 'MENU',
+        nameKey: 'menus.stakeholderCorrespondence',
+      },
+      { code: 'stakeholders.inbox', kind: 'MENU', nameKey: 'menus.stakeholderInbox' },
+      { code: 'stakeholders.reports', kind: 'MENU', nameKey: 'menus.stakeholderReports' },
+    ],
+  },
+  {
     code: 'food-reservation',
     kind: 'MODULE',
     nameKey: 'modules.foodReservation',

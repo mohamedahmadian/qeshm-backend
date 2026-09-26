@@ -18,7 +18,11 @@ import {
 } from '../common/national-id';
 import { normalizePhone, phoneLookupValues } from '../common/phone';
 import { resolveSortOrder } from '../common/sort-query';
-import { ensureCitizenRole, ensureEmployeeRole } from '../access/access.constants';
+import {
+  CONTRACTOR_ROLE_CODE,
+  ensureCitizenRole,
+  ensureEmployeeRole,
+} from '../access/access.constants';
 import { parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
 import { Prisma, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
@@ -84,6 +88,8 @@ const userSelect = {
   updatedAt: true,
   orgUnit: { select: { id: true, name: true } },
   position: { select: { id: true, name: true } },
+  contractorId: true,
+  contractor: { select: { id: true, name: true } },
   userRoles: {
     select: {
       role: { select: { id: true, code: true, name: true } },
@@ -303,6 +309,7 @@ export class UsersService {
         occupation: dto.occupation ?? null,
         isResident: dto.isResident ?? false,
         passportNumber: dto.passportNumber ?? null,
+        contractorId: await this.resolvePortalContractor(dto.roleIds, dto.contractorId),
       },
       select: userSelect,
     });
@@ -486,6 +493,28 @@ export class UsersService {
       occupation: dto.occupation === undefined ? undefined : dto.occupation,
       isResident: dto.isResident,
       passportNumber: dto.passportNumber === undefined ? undefined : dto.passportNumber,
+      contractor:
+        dto.roleIds !== undefined || dto.contractorId !== undefined
+          ? optionalConnect(
+              await this.resolvePortalContractor(
+                dto.roleIds ??
+                  (
+                    await this.prisma.userRole.findMany({
+                      where: { userId: id },
+                      select: { roleId: true },
+                    })
+                  ).map((item) => item.roleId),
+                dto.contractorId === undefined
+                  ? (
+                      await this.prisma.user.findUnique({
+                        where: { id },
+                        select: { contractorId: true },
+                      })
+                    )?.contractorId
+                  : dto.contractorId,
+              ),
+            )
+          : undefined,
       fatherName: dto.fatherName === undefined ? undefined : dto.fatherName,
       birthDate:
         dto.birthDate === undefined ? undefined : parseOptionalIsoDate(dto.birthDate),
@@ -527,6 +556,7 @@ export class UsersService {
       qeshmondiStartDate: _qeshmondiStartDate,
       qeshmondiEndDate: _qeshmondiEndDate,
       isResident: _isResident,
+      contractorId: _contractorId,
       ...rest
     } = dto;
     return this.update(id, rest);
@@ -875,6 +905,34 @@ export class UsersService {
         throw new BadRequestException('شهر متعلق به این استان نیست');
       }
     }
+  }
+
+  private async resolvePortalContractor(
+    roleIds: string[] | undefined,
+    contractorId: string | null | undefined,
+  ) {
+    const unique = [...new Set((roleIds ?? []).filter(Boolean))];
+    if (!unique.length) {
+      return null;
+    }
+    const roles = await this.prisma.role.findMany({
+      where: { id: { in: unique } },
+      select: { code: true },
+    });
+    if (!roles.some((role) => role.code === CONTRACTOR_ROLE_CODE)) {
+      return null;
+    }
+    if (!contractorId) {
+      throw new BadRequestException('پیمانکار کاربر درگاه را انتخاب کنید');
+    }
+    const contractor = await this.prisma.projectContractor.findUnique({
+      where: { id: contractorId },
+      select: { id: true },
+    });
+    if (!contractor) {
+      throw new NotFoundException('پیمانکار یافت نشد');
+    }
+    return contractorId;
   }
 
   private assertQeshmondiDates(start?: string | null, end?: string | null) {

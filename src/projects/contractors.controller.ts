@@ -12,17 +12,14 @@ import { ContractorsService } from './contractors.service';
 import { CreateContractorDto } from './dto/create-contractor.dto';
 import { CreateContractorMemberDto } from './dto/create-contractor-member.dto';
 import { CreateContractorPaymentDto } from './dto/create-contractor-payment.dto';
-import { CreateContractorPhaseDto } from './dto/create-contractor-phase.dto';
 import {
   FindContractorMembersQueryDto,
   FindContractorPaymentsQueryDto,
-  FindContractorPhasesQueryDto,
   FindContractorsQueryDto,
 } from './dto/find-contractors-query.dto';
 import { UpdateContractorDto } from './dto/update-contractor.dto';
 import { UpdateContractorMemberDto } from './dto/update-contractor-member.dto';
 import { UpdateContractorPaymentDto } from './dto/update-contractor-payment.dto';
-import { UpdateContractorPhaseDto } from './dto/update-contractor-phase.dto';
 
 @Controller('projects/:projectId/contractors')
 export class ContractorsController {
@@ -112,52 +109,6 @@ export class ContractorsController {
     @Param('memberId') memberId: string,
   ) {
     return this.contractors.removeMember(projectId, contractorId, memberId);
-  }
-
-  @Get(':id/phases')
-  findPhases(
-    @Param('projectId') projectId: string,
-    @Param('id') contractorId: string,
-    @Query() query: FindContractorPhasesQueryDto,
-  ) {
-    return this.contractors.findPhases(projectId, contractorId, query);
-  }
-
-  @Post(':id/phases')
-  createPhase(
-    @Param('projectId') projectId: string,
-    @Param('id') contractorId: string,
-    @Body() dto: CreateContractorPhaseDto,
-  ) {
-    return this.contractors.createPhase(projectId, contractorId, dto);
-  }
-
-  @Get(':id/phases/:phaseId')
-  findPhase(
-    @Param('projectId') projectId: string,
-    @Param('id') contractorId: string,
-    @Param('phaseId') phaseId: string,
-  ) {
-    return this.contractors.findPhase(projectId, contractorId, phaseId);
-  }
-
-  @Patch(':id/phases/:phaseId')
-  updatePhase(
-    @Param('projectId') projectId: string,
-    @Param('id') contractorId: string,
-    @Param('phaseId') phaseId: string,
-    @Body() dto: UpdateContractorPhaseDto,
-  ) {
-    return this.contractors.updatePhase(projectId, contractorId, phaseId, dto);
-  }
-
-  @Delete(':id/phases/:phaseId')
-  removePhase(
-    @Param('projectId') projectId: string,
-    @Param('id') contractorId: string,
-    @Param('phaseId') phaseId: string,
-  ) {
-    return this.contractors.removePhase(projectId, contractorId, phaseId);
   }
 
   @Get(':id/payments')

@@ -412,10 +412,10 @@ export const ModelName = {
   StoredFile: 'StoredFile',
   ProjectProgressEntry: 'ProjectProgressEntry',
   ProjectProgressImage: 'ProjectProgressImage',
+  ProjectContractorType: 'ProjectContractorType',
   ProjectContractor: 'ProjectContractor',
   ProjectContractorProject: 'ProjectContractorProject',
   ProjectContractorMember: 'ProjectContractorMember',
-  ProjectContractorPhase: 'ProjectContractorPhase',
   ProjectContractorPayment: 'ProjectContractorPayment',
   Food: 'Food',
   Restaurant: 'Restaurant',
@@ -446,7 +446,11 @@ export const ModelName = {
   BoardMinutesAttachment: 'BoardMinutesAttachment',
   BoardMinutesResolution: 'BoardMinutesResolution',
   PortSalesReport: 'PortSalesReport',
-  PortTicketSale: 'PortTicketSale'
+  PortTicketSale: 'PortTicketSale',
+  StakeholderProgressReport: 'StakeholderProgressReport',
+  StakeholderCorrespondence: 'StakeholderCorrespondence',
+  StakeholderMessage: 'StakeholderMessage',
+  StakeholderAttachment: 'StakeholderAttachment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -462,7 +466,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1576,6 +1580,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ProjectContractorType: {
+      payload: Prisma.$ProjectContractorTypePayload<ExtArgs>
+      fields: Prisma.ProjectContractorTypeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectContractorTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectContractorTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectContractorTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectContractorTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>
+        }
+        findMany: {
+          args: Prisma.ProjectContractorTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>[]
+        }
+        create: {
+          args: Prisma.ProjectContractorTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>
+        }
+        createMany: {
+          args: Prisma.ProjectContractorTypeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectContractorTypeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectContractorTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>
+        }
+        update: {
+          args: Prisma.ProjectContractorTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectContractorTypeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectContractorTypeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectContractorTypeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectContractorTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorTypePayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectContractorTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectContractorType>
+        }
+        groupBy: {
+          args: Prisma.ProjectContractorTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectContractorTypeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectContractorTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectContractorTypeCountAggregateOutputType> | number
+        }
+      }
+    }
     ProjectContractor: {
       payload: Prisma.$ProjectContractorPayload<ExtArgs>
       fields: Prisma.ProjectContractorFieldRefs
@@ -1795,80 +1873,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProjectContractorMemberCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProjectContractorMemberCountAggregateOutputType> | number
-        }
-      }
-    }
-    ProjectContractorPhase: {
-      payload: Prisma.$ProjectContractorPhasePayload<ExtArgs>
-      fields: Prisma.ProjectContractorPhaseFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ProjectContractorPhaseFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ProjectContractorPhaseFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>
-        }
-        findFirst: {
-          args: Prisma.ProjectContractorPhaseFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ProjectContractorPhaseFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>
-        }
-        findMany: {
-          args: Prisma.ProjectContractorPhaseFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>[]
-        }
-        create: {
-          args: Prisma.ProjectContractorPhaseCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>
-        }
-        createMany: {
-          args: Prisma.ProjectContractorPhaseCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ProjectContractorPhaseCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>[]
-        }
-        delete: {
-          args: Prisma.ProjectContractorPhaseDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>
-        }
-        update: {
-          args: Prisma.ProjectContractorPhaseUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>
-        }
-        deleteMany: {
-          args: Prisma.ProjectContractorPhaseDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ProjectContractorPhaseUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ProjectContractorPhaseUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>[]
-        }
-        upsert: {
-          args: Prisma.ProjectContractorPhaseUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectContractorPhasePayload>
-        }
-        aggregate: {
-          args: Prisma.ProjectContractorPhaseAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectContractorPhase>
-        }
-        groupBy: {
-          args: Prisma.ProjectContractorPhaseGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProjectContractorPhaseGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ProjectContractorPhaseCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProjectContractorPhaseCountAggregateOutputType> | number
         }
       }
     }
@@ -4166,6 +4170,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    StakeholderProgressReport: {
+      payload: Prisma.$StakeholderProgressReportPayload<ExtArgs>
+      fields: Prisma.StakeholderProgressReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StakeholderProgressReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StakeholderProgressReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>
+        }
+        findFirst: {
+          args: Prisma.StakeholderProgressReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StakeholderProgressReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>
+        }
+        findMany: {
+          args: Prisma.StakeholderProgressReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>[]
+        }
+        create: {
+          args: Prisma.StakeholderProgressReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>
+        }
+        createMany: {
+          args: Prisma.StakeholderProgressReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StakeholderProgressReportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>[]
+        }
+        delete: {
+          args: Prisma.StakeholderProgressReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>
+        }
+        update: {
+          args: Prisma.StakeholderProgressReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.StakeholderProgressReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StakeholderProgressReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StakeholderProgressReportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>[]
+        }
+        upsert: {
+          args: Prisma.StakeholderProgressReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderProgressReportPayload>
+        }
+        aggregate: {
+          args: Prisma.StakeholderProgressReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStakeholderProgressReport>
+        }
+        groupBy: {
+          args: Prisma.StakeholderProgressReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StakeholderProgressReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StakeholderProgressReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StakeholderProgressReportCountAggregateOutputType> | number
+        }
+      }
+    }
+    StakeholderCorrespondence: {
+      payload: Prisma.$StakeholderCorrespondencePayload<ExtArgs>
+      fields: Prisma.StakeholderCorrespondenceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StakeholderCorrespondenceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StakeholderCorrespondenceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>
+        }
+        findFirst: {
+          args: Prisma.StakeholderCorrespondenceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StakeholderCorrespondenceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>
+        }
+        findMany: {
+          args: Prisma.StakeholderCorrespondenceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>[]
+        }
+        create: {
+          args: Prisma.StakeholderCorrespondenceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>
+        }
+        createMany: {
+          args: Prisma.StakeholderCorrespondenceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StakeholderCorrespondenceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>[]
+        }
+        delete: {
+          args: Prisma.StakeholderCorrespondenceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>
+        }
+        update: {
+          args: Prisma.StakeholderCorrespondenceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>
+        }
+        deleteMany: {
+          args: Prisma.StakeholderCorrespondenceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StakeholderCorrespondenceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StakeholderCorrespondenceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>[]
+        }
+        upsert: {
+          args: Prisma.StakeholderCorrespondenceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderCorrespondencePayload>
+        }
+        aggregate: {
+          args: Prisma.StakeholderCorrespondenceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStakeholderCorrespondence>
+        }
+        groupBy: {
+          args: Prisma.StakeholderCorrespondenceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StakeholderCorrespondenceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StakeholderCorrespondenceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StakeholderCorrespondenceCountAggregateOutputType> | number
+        }
+      }
+    }
+    StakeholderMessage: {
+      payload: Prisma.$StakeholderMessagePayload<ExtArgs>
+      fields: Prisma.StakeholderMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StakeholderMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StakeholderMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.StakeholderMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StakeholderMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>
+        }
+        findMany: {
+          args: Prisma.StakeholderMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>[]
+        }
+        create: {
+          args: Prisma.StakeholderMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>
+        }
+        createMany: {
+          args: Prisma.StakeholderMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StakeholderMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.StakeholderMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>
+        }
+        update: {
+          args: Prisma.StakeholderMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.StakeholderMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StakeholderMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StakeholderMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.StakeholderMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.StakeholderMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStakeholderMessage>
+        }
+        groupBy: {
+          args: Prisma.StakeholderMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StakeholderMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StakeholderMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StakeholderMessageCountAggregateOutputType> | number
+        }
+      }
+    }
+    StakeholderAttachment: {
+      payload: Prisma.$StakeholderAttachmentPayload<ExtArgs>
+      fields: Prisma.StakeholderAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StakeholderAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StakeholderAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.StakeholderAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StakeholderAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.StakeholderAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.StakeholderAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.StakeholderAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StakeholderAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.StakeholderAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>
+        }
+        update: {
+          args: Prisma.StakeholderAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.StakeholderAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StakeholderAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StakeholderAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.StakeholderAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StakeholderAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.StakeholderAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStakeholderAttachment>
+        }
+        groupBy: {
+          args: Prisma.StakeholderAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StakeholderAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StakeholderAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StakeholderAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4322,6 +4622,7 @@ export const UserScalarFieldEnum = {
   occupation: 'occupation',
   isResident: 'isResident',
   passportNumber: 'passportNumber',
+  contractorId: 'contractorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -4488,15 +4789,34 @@ export const ProjectProgressImageScalarFieldEnum = {
 export type ProjectProgressImageScalarFieldEnum = (typeof ProjectProgressImageScalarFieldEnum)[keyof typeof ProjectProgressImageScalarFieldEnum]
 
 
+export const ProjectContractorTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectContractorTypeScalarFieldEnum = (typeof ProjectContractorTypeScalarFieldEnum)[keyof typeof ProjectContractorTypeScalarFieldEnum]
+
+
 export const ProjectContractorScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
+  typeId: 'typeId',
   name: 'name',
   nationalId: 'nationalId',
+  registrationNumber: 'registrationNumber',
+  phone: 'phone',
+  email: 'email',
+  website: 'website',
   description: 'description',
   ceoName: 'ceoName',
   timeEstimate: 'timeEstimate',
   costEstimate: 'costEstimate',
+  contractStartDate: 'contractStartDate',
+  contractEndDate: 'contractEndDate',
+  supportStartDate: 'supportStartDate',
+  supportEndDate: 'supportEndDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -4528,20 +4848,6 @@ export const ProjectContractorMemberScalarFieldEnum = {
 } as const
 
 export type ProjectContractorMemberScalarFieldEnum = (typeof ProjectContractorMemberScalarFieldEnum)[keyof typeof ProjectContractorMemberScalarFieldEnum]
-
-
-export const ProjectContractorPhaseScalarFieldEnum = {
-  id: 'id',
-  contractorId: 'contractorId',
-  name: 'name',
-  startDate: 'startDate',
-  endDate: 'endDate',
-  goals: 'goals',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ProjectContractorPhaseScalarFieldEnum = (typeof ProjectContractorPhaseScalarFieldEnum)[keyof typeof ProjectContractorPhaseScalarFieldEnum]
 
 
 export const ProjectContractorPaymentScalarFieldEnum = {
@@ -5017,6 +5323,68 @@ export const PortTicketSaleScalarFieldEnum = {
 } as const
 
 export type PortTicketSaleScalarFieldEnum = (typeof PortTicketSaleScalarFieldEnum)[keyof typeof PortTicketSaleScalarFieldEnum]
+
+
+export const StakeholderProgressReportScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  contractorId: 'contractorId',
+  createdById: 'createdById',
+  occurredAt: 'occurredAt',
+  progressPercent: 'progressPercent',
+  actionsDone: 'actionsDone',
+  nextPlan: 'nextPlan',
+  blockers: 'blockers',
+  needs: 'needs',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StakeholderProgressReportScalarFieldEnum = (typeof StakeholderProgressReportScalarFieldEnum)[keyof typeof StakeholderProgressReportScalarFieldEnum]
+
+
+export const StakeholderCorrespondenceScalarFieldEnum = {
+  id: 'id',
+  contractorId: 'contractorId',
+  projectId: 'projectId',
+  kind: 'kind',
+  status: 'status',
+  subject: 'subject',
+  body: 'body',
+  dueDate: 'dueDate',
+  actionResult: 'actionResult',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StakeholderCorrespondenceScalarFieldEnum = (typeof StakeholderCorrespondenceScalarFieldEnum)[keyof typeof StakeholderCorrespondenceScalarFieldEnum]
+
+
+export const StakeholderMessageScalarFieldEnum = {
+  id: 'id',
+  correspondenceId: 'correspondenceId',
+  authorId: 'authorId',
+  side: 'side',
+  body: 'body',
+  createdAt: 'createdAt'
+} as const
+
+export type StakeholderMessageScalarFieldEnum = (typeof StakeholderMessageScalarFieldEnum)[keyof typeof StakeholderMessageScalarFieldEnum]
+
+
+export const StakeholderAttachmentScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  correspondenceId: 'correspondenceId',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  originalName: 'originalName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type StakeholderAttachmentScalarFieldEnum = (typeof StakeholderAttachmentScalarFieldEnum)[keyof typeof StakeholderAttachmentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -5522,6 +5890,62 @@ export type ListEnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel> = Field
 
 
 /**
+ * Reference to a field of type 'StakeholderCorrespondenceKind'
+ */
+export type EnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StakeholderCorrespondenceKind'>
+    
+
+
+/**
+ * Reference to a field of type 'StakeholderCorrespondenceKind[]'
+ */
+export type ListEnumStakeholderCorrespondenceKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StakeholderCorrespondenceKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StakeholderCorrespondenceStatus'
+ */
+export type EnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StakeholderCorrespondenceStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'StakeholderCorrespondenceStatus[]'
+ */
+export type ListEnumStakeholderCorrespondenceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StakeholderCorrespondenceStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StakeholderActionResult'
+ */
+export type EnumStakeholderActionResultFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StakeholderActionResult'>
+    
+
+
+/**
+ * Reference to a field of type 'StakeholderActionResult[]'
+ */
+export type ListEnumStakeholderActionResultFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StakeholderActionResult[]'>
+    
+
+
+/**
+ * Reference to a field of type 'StakeholderMessageSide'
+ */
+export type EnumStakeholderMessageSideFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StakeholderMessageSide'>
+    
+
+
+/**
+ * Reference to a field of type 'StakeholderMessageSide[]'
+ */
+export type ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StakeholderMessageSide[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5700,10 +6124,10 @@ export type GlobalOmitConfig = {
   storedFile?: Prisma.StoredFileOmit
   projectProgressEntry?: Prisma.ProjectProgressEntryOmit
   projectProgressImage?: Prisma.ProjectProgressImageOmit
+  projectContractorType?: Prisma.ProjectContractorTypeOmit
   projectContractor?: Prisma.ProjectContractorOmit
   projectContractorProject?: Prisma.ProjectContractorProjectOmit
   projectContractorMember?: Prisma.ProjectContractorMemberOmit
-  projectContractorPhase?: Prisma.ProjectContractorPhaseOmit
   projectContractorPayment?: Prisma.ProjectContractorPaymentOmit
   food?: Prisma.FoodOmit
   restaurant?: Prisma.RestaurantOmit
@@ -5735,6 +6159,10 @@ export type GlobalOmitConfig = {
   boardMinutesResolution?: Prisma.BoardMinutesResolutionOmit
   portSalesReport?: Prisma.PortSalesReportOmit
   portTicketSale?: Prisma.PortTicketSaleOmit
+  stakeholderProgressReport?: Prisma.StakeholderProgressReportOmit
+  stakeholderCorrespondence?: Prisma.StakeholderCorrespondenceOmit
+  stakeholderMessage?: Prisma.StakeholderMessageOmit
+  stakeholderAttachment?: Prisma.StakeholderAttachmentOmit
 }
 
 /* Types for Logging */

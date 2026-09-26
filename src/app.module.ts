@@ -19,6 +19,7 @@ import { SingardModule } from './singard/singard.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { BoardModule } from './board/board.module';
 import { PortSalesReportsModule } from './port-sales-reports/port-sales-reports.module';
+import { StakeholdersModule } from './stakeholders/stakeholders.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { PortSalesReportsModule } from './port-sales-reports/port-sales-reports.
     SingardModule,
     BoardModule,
     PortSalesReportsModule,
+    StakeholdersModule,
     ImagesModule,
     FilesModule,
     SmsModule,
