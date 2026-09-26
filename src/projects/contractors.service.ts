@@ -4,6 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import {
   containsInsensitive,
   paginatedResult,
@@ -11,8 +12,12 @@ import {
   wantsPagination,
 } from '../common/pagination';
 import { parseIsoDate, parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
+import { toLatinDigits } from '../common/national-id';
+import { normalizeMobile } from '../common/phone';
 import { resolveSortOrder } from '../common/sort-query';
-import { Prisma } from '../generated/prisma/client';
+import { CONTRACTOR_ROLE_CODE } from '../access/access.constants';
+import { Prisma, UserStatus } from '../generated/prisma/client';
+import { joinFullName } from '../users/user-profile.util';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateContractorDto } from './dto/create-contractor.dto';
 import { CreateContractorMemberDto } from './dto/create-contractor-member.dto';
@@ -20,12 +25,27 @@ import { CreateContractorPaymentDto } from './dto/create-contractor-payment.dto'
 import {
   FindContractorMembersQueryDto,
   FindContractorPaymentsQueryDto,
+  FindContractorPortalUsersQueryDto,
   FindContractorProjectsQueryDto,
   FindContractorsQueryDto,
 } from './dto/find-contractors-query.dto';
+import { CreateContractorPortalUserDto } from './dto/create-contractor-portal-user.dto';
+import { UpdateContractorPortalUserDto } from './dto/update-contractor-portal-user.dto';
 import { UpdateContractorDto } from './dto/update-contractor.dto';
 import { UpdateContractorMemberDto } from './dto/update-contractor-member.dto';
 import { UpdateContractorPaymentDto } from './dto/update-contractor-payment.dto';
+
+const portalUserSelect = {
+  id: true,
+  firstName: true,
+  lastName: true,
+  fullName: true,
+  username: true,
+  phone: true,
+  status: true,
+  contractorId: true,
+  createdAt: true,
+} as const;
 
 const contractorSelect = {
   id: true,
@@ -637,6 +657,169 @@ export class ContractorsService {
     await this.findPayment(projectId, contractorId, id);
     await this.prisma.projectContractorPayment.delete({ where: { id } });
     return { ok: true };
+  }
+
+  async findPortalUsers(
+    projectId: string,
+    contractorId: string,
+    query: FindContractorPortalUsersQueryDto,
+  ) {
+    await this.findOne(projectId, contractorId);
+    const where: Prisma.UserWhereInput = {
+      contractorId,
+      ...(query.q
+        ? {
+            OR: [
+              { fullName: containsInsensitive(query.q) },
+              { username: containsInsensitive(query.q) },
+              { phone: containsInsensitive(query.q) },
+            ],
+          }
+        : {}),
+    };
+    const orderBy = resolveSortOrder<Prisma.UserOrderByWithRelationInput>(
+      query.sortBy,
+      query.sortDir,
+      {
+        fullName: (dir) => ({ fullName: dir }),
+        username: (dir) => ({ username: dir }),
+        phone: (dir) => ({ phone: dir }),
+        status: (dir) => ({ status: dir }),
+      },
+      [{ fullName: 'asc' }, { id: 'asc' }],
+    );
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    const [items, total] = await Promise.all([
+      this.prisma.user.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        select: portalUserSelect,
+      }),
+      this.prisma.user.count({ where }),
+    ]);
+    return paginatedResult(items, total, page, pageSize);
+  }
+
+  async findPortalUser(projectId: string, contractorId: string, userId: string) {
+    await this.findOne(projectId, contractorId);
+    const user = await this.prisma.user.findFirst({
+      where: { id: userId, contractorId },
+      select: portalUserSelect,
+    });
+    if (!user) {
+      throw new NotFoundException('کاربر یافت نشد');
+    }
+    return user;
+  }
+
+  async createPortalUser(
+    projectId: string,
+    contractorId: string,
+    dto: CreateContractorPortalUserDto,
+  ) {
+    await this.findOne(projectId, contractorId);
+    const username = toLatinDigits(dto.username.trim());
+    await this.assertPortalUsername(username);
+    await this.assertPortalPhone(dto.phone);
+    const role = await this.contractorRole();
+    const passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
+    const user = await this.prisma.user.create({
+      data: {
+        username,
+        passwordHash,
+        firstName: dto.firstName.trim(),
+        lastName: dto.lastName.trim(),
+        fullName: joinFullName(dto.firstName, dto.lastName),
+        phone: dto.phone ?? null,
+        locale: 'fa',
+        status: UserStatus.ACTIVE,
+        contractorId,
+        userRoles: { create: { roleId: role.id } },
+      },
+      select: portalUserSelect,
+    });
+    return user;
+  }
+
+  async updatePortalUser(
+    projectId: string,
+    contractorId: string,
+    userId: string,
+    dto: UpdateContractorPortalUserDto,
+  ) {
+    const current = await this.findPortalUser(projectId, contractorId, userId);
+    const username = dto.username ? toLatinDigits(dto.username.trim()) : undefined;
+    if (username) {
+      await this.assertPortalUsername(username, userId);
+    }
+    if (dto.phone !== undefined) {
+      await this.assertPortalPhone(dto.phone, userId);
+    }
+    const firstName = dto.firstName?.trim() ?? current.firstName;
+    const lastName = dto.lastName?.trim() ?? current.lastName;
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        username,
+        firstName: dto.firstName?.trim(),
+        lastName: dto.lastName?.trim(),
+        fullName: joinFullName(firstName, lastName),
+        phone: dto.phone,
+        status: dto.status,
+        passwordHash: dto.password
+          ? await bcrypt.hash(toLatinDigits(dto.password), 10)
+          : undefined,
+      },
+      select: portalUserSelect,
+    });
+  }
+
+  async removePortalUser(projectId: string, contractorId: string, userId: string) {
+    await this.findPortalUser(projectId, contractorId, userId);
+    const [reports, messages, correspondences] = await Promise.all([
+      this.prisma.stakeholderProgressReport.count({ where: { createdById: userId } }),
+      this.prisma.stakeholderMessage.count({ where: { authorId: userId } }),
+      this.prisma.stakeholderCorrespondence.count({ where: { createdById: userId } }),
+    ]);
+    if (reports + messages + correspondences > 0) {
+      throw new ConflictException('این کاربر گزارش یا مکاتبه دارد؛ به‌جای حذف، وضعیت را غیرفعال کنید');
+    }
+    await this.prisma.user.delete({ where: { id: userId } });
+    return { ok: true };
+  }
+
+  private async contractorRole() {
+    const role = await this.prisma.role.findUnique({
+      where: { code: CONTRACTOR_ROLE_CODE },
+      select: { id: true },
+    });
+    if (!role) {
+      throw new BadRequestException('نقش پیمانکار در سامانه تعریف نشده است');
+    }
+    return role;
+  }
+
+  private async assertPortalUsername(username: string, excludeId?: string) {
+    const taken = await this.prisma.user.findFirst({
+      where: { username, id: excludeId ? { not: excludeId } : undefined },
+      select: { id: true },
+    });
+    if (taken) {
+      throw new ConflictException('این نام کاربری قبلاً ثبت شده است');
+    }
+  }
+
+  private async assertPortalPhone(phone: string | null | undefined, excludeId?: string) {
+    if (!phone) return;
+    const taken = await this.prisma.user.findFirst({
+      where: { phone, id: excludeId ? { not: excludeId } : undefined },
+      select: { id: true },
+    });
+    if (taken) {
+      throw new ConflictException('این تلفن همراه قبلاً ثبت شده است');
+    }
   }
 
   private assertContractRanges(dates: {

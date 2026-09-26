@@ -143,7 +143,7 @@ export class StakeholderCorrespondenceController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: CreateStakeholderMessageDto,
   ) {
-    return this.stakeholders.addMessage(user?.id, id, dto, 'CONTRACTOR');
+    return this.stakeholders.addMessage(user?.id, id, dto);
   }
 }
 
@@ -176,6 +176,6 @@ export class StakeholderInboxController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: CreateStakeholderMessageDto,
   ) {
-    return this.stakeholders.addMessage(user?.id, id, dto, 'ORGANIZATION');
+    return this.stakeholders.addMessage(user?.id, id, dto);
   }
 }

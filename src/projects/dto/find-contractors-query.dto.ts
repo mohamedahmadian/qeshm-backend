@@ -22,6 +22,13 @@ export const contractorMemberSortFields = [
   'role',
 ] as const;
 
+export const contractorPortalUserSortFields = [
+  'fullName',
+  'username',
+  'phone',
+  'status',
+] as const;
+
 export const contractorPaymentSortFields = [
   'paidAt',
   'amount',
@@ -58,6 +65,18 @@ export class FindContractorMembersQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...contractorMemberSortFields])
   sortBy?: (typeof contractorMemberSortFields)[number];
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...sortDirections])
+  sortDir?: (typeof sortDirections)[number];
+}
+
+export class FindContractorPortalUsersQueryDto extends PaginationQueryDto {
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...contractorPortalUserSortFields])
+  sortBy?: (typeof contractorPortalUserSortFields)[number];
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

@@ -37,6 +37,20 @@ const attachmentInclude = {
   select: attachmentSelect,
 };
 
+function compareReportedPercent(
+  left: number | null,
+  right: number | null,
+  direction: 1 | -1,
+  leftId: string,
+  rightId: string,
+) {
+  if (left == null && right == null) return leftId.localeCompare(rightId);
+  if (left == null) return 1;
+  if (right == null) return -1;
+  if (left !== right) return (left - right) * direction;
+  return leftId.localeCompare(rightId);
+}
+
 function blankToNull(value: string | null | undefined) {
   if (value == null) return null;
   const trimmed = value.trim();
@@ -96,44 +110,63 @@ export class StakeholdersService {
           }
         : {}),
     };
-    const orderBy = resolveSortOrder<Prisma.ProjectOrderByWithRelationInput>(
-      query.sortBy,
-      query.sortDir,
-      {
-        systemName: (dir) => ({ systemName: dir }),
-        code: (dir) => ({ code: dir }),
-        status: (dir) => ({ status: dir }),
-        progressPercent: (dir) => ({ progressPercent: dir }),
-        startDate: (dir) => ({ startDate: dir }),
-      },
-      [{ systemName: 'asc' }, { id: 'asc' }],
-    );
-    const [items, total] = await this.prisma.$transaction([
+    const reportedSort =
+      query.sortBy === 'reportedPercent' &&
+      (query.sortDir === 'asc' || query.sortDir === 'desc');
+    const orderBy = reportedSort
+      ? [{ id: 'asc' as const }]
+      : resolveSortOrder<Prisma.ProjectOrderByWithRelationInput>(
+          query.sortBy,
+          query.sortDir,
+          {
+            systemName: (dir) => ({ systemName: dir }),
+            code: (dir) => ({ code: dir }),
+            status: (dir) => ({ status: dir }),
+            progressPercent: (dir) => ({ progressPercent: dir }),
+            startDate: (dir) => ({ startDate: dir }),
+          },
+          [{ systemName: 'asc' }, { id: 'asc' }],
+        );
+    const projectSelect = {
+      id: true,
+      systemName: true,
+      code: true,
+      status: true,
+      progressPercent: true,
+      startDate: true,
+      endDate: true,
+      address: true,
+      description: true,
+      isActive: true,
+    } as const;
+    const [items, total, reportedByProject] = await Promise.all([
       this.prisma.project.findMany({
         where,
         orderBy,
-        skip,
-        take,
-        select: {
-          id: true,
-          systemName: true,
-          code: true,
-          status: true,
-          progressPercent: true,
-          startDate: true,
-          endDate: true,
-          address: true,
-          description: true,
-          isActive: true,
-        },
+        ...(reportedSort ? {} : { skip, take }),
+        select: projectSelect,
       }),
       this.prisma.project.count({ where }),
+      this.reportedPercentByProject(actor.id),
     ]);
+    const ordered = reportedSort
+      ? [...items].sort((left, right) =>
+          compareReportedPercent(
+            reportedByProject.get(left.id) ?? null,
+            reportedByProject.get(right.id) ?? null,
+            query.sortDir === 'asc' ? 1 : -1,
+            left.id,
+            right.id,
+          ),
+        )
+      : items;
+    const pageItems = reportedSort ? ordered.slice(skip, skip + take) : ordered;
     return paginatedResult(
-      items.map((item) => ({
+      pageItems.map((item) => ({
         ...item,
         startDate: toIsoDateOnly(item.startDate),
         endDate: toIsoDateOnly(item.endDate),
+        reportedPercent: reportedByProject.get(item.id) ?? null,
       })),
       total,
       page,
@@ -230,7 +263,7 @@ export class StakeholdersService {
       },
       [{ occurredAt: 'desc' }, { createdAt: 'desc' }, { id: 'asc' }],
     );
-    const [items, total] = await this.prisma.$transaction([
+    const [items, total, aggregate] = await this.prisma.$transaction([
       this.prisma.stakeholderProgressReport.findMany({
         where,
         orderBy,
@@ -239,8 +272,16 @@ export class StakeholdersService {
         select: this.progressListSelect,
       }),
       this.prisma.stakeholderProgressReport.count({ where }),
+      this.prisma.stakeholderProgressReport.aggregate({
+        where: { ...where, progressPercent: { not: null } },
+        _avg: { progressPercent: true },
+      }),
     ]);
-    return paginatedResult(items.map((item) => this.mapProgress(item)), total, page, pageSize);
+    const average = aggregate._avg.progressPercent;
+    return {
+      ...paginatedResult(items.map((item) => this.mapProgress(item)), total, page, pageSize),
+      avgProgressPercent: average == null ? null : Math.round(average),
+    };
   }
 
   async findProgress(userId: string | undefined, id: string) {
@@ -507,18 +548,9 @@ export class StakeholdersService {
     return { ok: true };
   }
 
-  async addMessage(
-    userId: string | undefined,
-    id: string,
-    dto: CreateStakeholderMessageDto,
-    side: 'CONTRACTOR' | 'ORGANIZATION',
-  ) {
+  async addMessage(userId: string | undefined, id: string, dto: CreateStakeholderMessageDto) {
     const actor = await this.access.actor(userId);
-    if (side === 'CONTRACTOR') {
-      this.access.contractorId(actor);
-    } else if (actor.contractorId) {
-      throw new ForbiddenException('پاسخ سازمان از حساب پیمانکار ثبت نمی‌شود');
-    }
+    const side = actor.contractorId ? 'CONTRACTOR' : 'ORGANIZATION';
     const current = await this.prisma.stakeholderCorrespondence.findFirst({
       where: { id, ...this.access.contractorWhere(actor) },
       select: { id: true, status: true },
@@ -581,6 +613,27 @@ export class StakeholdersService {
       },
     });
     return this.findCorrespondence(userId, id);
+  }
+
+  private async reportedPercentByProject(userId: string) {
+    const reports = await this.prisma.stakeholderProgressReport.findMany({
+      where: { createdById: userId, progressPercent: { not: null } },
+      select: { projectId: true, progressPercent: true },
+    });
+    const buckets = new Map<string, { sum: number; count: number }>();
+    for (const report of reports) {
+      if (report.progressPercent == null) continue;
+      const bucket = buckets.get(report.projectId) ?? { sum: 0, count: 0 };
+      bucket.sum += report.progressPercent;
+      bucket.count += 1;
+      buckets.set(report.projectId, bucket);
+    }
+    return new Map(
+      [...buckets.entries()].map(([projectId, bucket]) => [
+        projectId,
+        Math.round(bucket.sum / bucket.count),
+      ]),
+    );
   }
 
   private async assignedProjectIds(contractorId: string) {

@@ -40,5 +40,6 @@ export const projectSortFields = [
   'code',
   'status',
   'progressPercent',
+  'reportedPercent',
   'startDate',
 ] as const;

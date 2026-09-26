@@ -12,11 +12,14 @@ import { ContractorsService } from './contractors.service';
 import { CreateContractorDto } from './dto/create-contractor.dto';
 import { CreateContractorMemberDto } from './dto/create-contractor-member.dto';
 import { CreateContractorPaymentDto } from './dto/create-contractor-payment.dto';
+import { CreateContractorPortalUserDto } from './dto/create-contractor-portal-user.dto';
 import {
   FindContractorMembersQueryDto,
   FindContractorPaymentsQueryDto,
+  FindContractorPortalUsersQueryDto,
   FindContractorsQueryDto,
 } from './dto/find-contractors-query.dto';
+import { UpdateContractorPortalUserDto } from './dto/update-contractor-portal-user.dto';
 import { UpdateContractorDto } from './dto/update-contractor.dto';
 import { UpdateContractorMemberDto } from './dto/update-contractor-member.dto';
 import { UpdateContractorPaymentDto } from './dto/update-contractor-payment.dto';
@@ -109,6 +112,52 @@ export class ContractorsController {
     @Param('memberId') memberId: string,
   ) {
     return this.contractors.removeMember(projectId, contractorId, memberId);
+  }
+
+  @Get(':id/users')
+  findPortalUsers(
+    @Param('projectId') projectId: string,
+    @Param('id') contractorId: string,
+    @Query() query: FindContractorPortalUsersQueryDto,
+  ) {
+    return this.contractors.findPortalUsers(projectId, contractorId, query);
+  }
+
+  @Post(':id/users')
+  createPortalUser(
+    @Param('projectId') projectId: string,
+    @Param('id') contractorId: string,
+    @Body() dto: CreateContractorPortalUserDto,
+  ) {
+    return this.contractors.createPortalUser(projectId, contractorId, dto);
+  }
+
+  @Get(':id/users/:userId')
+  findPortalUser(
+    @Param('projectId') projectId: string,
+    @Param('id') contractorId: string,
+    @Param('userId') userId: string,
+  ) {
+    return this.contractors.findPortalUser(projectId, contractorId, userId);
+  }
+
+  @Patch(':id/users/:userId')
+  updatePortalUser(
+    @Param('projectId') projectId: string,
+    @Param('id') contractorId: string,
+    @Param('userId') userId: string,
+    @Body() dto: UpdateContractorPortalUserDto,
+  ) {
+    return this.contractors.updatePortalUser(projectId, contractorId, userId, dto);
+  }
+
+  @Delete(':id/users/:userId')
+  removePortalUser(
+    @Param('projectId') projectId: string,
+    @Param('id') contractorId: string,
+    @Param('userId') userId: string,
+  ) {
+    return this.contractors.removePortalUser(projectId, contractorId, userId);
   }
 
   @Get(':id/payments')

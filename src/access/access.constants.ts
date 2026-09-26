@@ -7,7 +7,6 @@ export const BOARD_ADMIN_ROLE_CODE = 'BOARD_ADMIN';
 export const CONTRACTOR_ROLE_CODE = 'CONTRACTOR';
 
 export const CONTRACTOR_PERMISSION_CODES = [
-  'stakeholders',
   'stakeholders.projects',
   'stakeholders.progress',
   'stakeholders.correspondence',
