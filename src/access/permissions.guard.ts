@@ -41,11 +41,15 @@ export class PermissionsGuard implements CanActivate {
       throw new UnauthorizedException();
     }
 
-    if (
+    const permissionCodes = user.permissionCodes ?? [];
+    const contractorWithoutSingard =
       !user.isAdmin &&
       user.roleCodes?.includes(CONTRACTOR_ROLE_CODE) &&
-      isSingardApiPath(request.originalUrl ?? request.url ?? '/')
-    ) {
+      isSingardApiPath(request.originalUrl ?? request.url ?? '/') &&
+      !permissionCodes.some(
+        (code) => code === 'singard' || code.startsWith('singard.'),
+      );
+    if (contractorWithoutSingard) {
       throw new ForbiddenException('دسترسی مجاز نیست');
     }
 

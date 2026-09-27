@@ -62,11 +62,7 @@ export function isReservedRoleCode(code: string) {
 }
 
 export function isRolePermissionsLocked(code: string) {
-  return (
-    code === ADMIN_ROLE_CODE ||
-    code === CITIZEN_ROLE_CODE ||
-    code === CONTRACTOR_ROLE_CODE
-  );
+  return code === ADMIN_ROLE_CODE || code === CITIZEN_ROLE_CODE;
 }
 
 export async function ensureSystemRoles(
@@ -74,6 +70,10 @@ export async function ensureSystemRoles(
   overwriteNames = false,
 ) {
   for (const role of SYSTEM_ROLES) {
+    const existing = await prisma.role.findUnique({
+      where: { code: role.code },
+      select: { id: true },
+    });
     const saved = await prisma.role.upsert({
       where: { code: role.code },
       update: overwriteNames
@@ -99,13 +99,7 @@ export async function ensureSystemRoles(
         skipDuplicates: true,
       });
     }
-    if (saved.code === CONTRACTOR_ROLE_CODE) {
-      await prisma.rolePermission.deleteMany({
-        where: {
-          roleId: saved.id,
-          code: { notIn: [...CONTRACTOR_PERMISSION_CODES] },
-        },
-      });
+    if (saved.code === CONTRACTOR_ROLE_CODE && !existing) {
       await prisma.rolePermission.createMany({
         data: CONTRACTOR_PERMISSION_CODES.map((code) => ({
           roleId: saved.id,
