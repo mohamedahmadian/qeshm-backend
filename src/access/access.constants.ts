@@ -10,6 +10,7 @@ export const CONTRACTOR_PERMISSION_CODES = [
   'stakeholders.projects',
   'stakeholders.progress',
   'stakeholders.correspondence',
+  'stakeholders.port-sales-reports',
 ] as const;
 
 export const BOARD_ADMIN_PERMISSION_CODES = [

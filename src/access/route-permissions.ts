@@ -135,6 +135,11 @@ export type AccessDecision =
   | { kind: 'auth' }
   | { kind: 'permission'; permissions: string[] };
 
+export function isSingardApiPath(rawPath: string) {
+  const path = normalizeApiPath(rawPath);
+  return path === '/singard' || path.startsWith('/singard/');
+}
+
 function normalizeApiPath(rawPath: string) {
   const withoutQuery = rawPath.split('?')[0] ?? '';
   const path = withoutQuery.startsWith('/api/')

@@ -5,12 +5,14 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
+import { CONTRACTOR_ROLE_CODE } from './access.constants';
 import { hasAnyPermission } from './access.util';
-import { resolveAccessDecision } from './route-permissions';
+import { isSingardApiPath, resolveAccessDecision } from './route-permissions';
 
 type RequestAccessUser = {
   id?: string;
   isAdmin?: boolean;
+  roleCodes?: string[];
   permissionCodes?: string[];
 };
 
@@ -37,6 +39,14 @@ export class PermissionsGuard implements CanActivate {
     const user = request.user;
     if (!user?.id) {
       throw new UnauthorizedException();
+    }
+
+    if (
+      !user.isAdmin &&
+      user.roleCodes?.includes(CONTRACTOR_ROLE_CODE) &&
+      isSingardApiPath(request.originalUrl ?? request.url ?? '/')
+    ) {
+      throw new ForbiddenException('دسترسی مجاز نیست');
     }
 
     if (decision.kind === 'auth' || user.isAdmin) {
