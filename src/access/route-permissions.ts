@@ -103,7 +103,7 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/singard/reports', permissions: ['singard.reports'] },
   { prefix: '/singard/categories', permissions: ['singard.categories'] },
   { prefix: '/singard/feedbacks', permissions: ['singard.inbox'] },
-  { prefix: '/port-sales-reports', permissions: ['ports.sales-reports'] },
+  { prefix: '/port-sales-reports', permissions: ['stakeholders.port-sales-reports'] },
   {
     prefix: '/stakeholders/contractors',
     permissions: ['management.users', 'stakeholders.inbox', 'stakeholders.reports'],
@@ -122,6 +122,12 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
     permissions: ['stakeholders.correspondence'],
   },
   { prefix: '/stakeholders/inbox', permissions: ['stakeholders.inbox'] },
+  { prefix: '/dashboard/stats/projects', permissions: ['projects.list'] },
+  { prefix: '/dashboard/stats/contractors', permissions: ['projects.contractors'] },
+  { prefix: '/dashboard/stats/resolutions', permissions: ['board.resolutions'] },
+  { prefix: '/dashboard/stats/qeshmondi', permissions: ['qeshmondi.citizens'] },
+  { prefix: '/dashboard/recent-reports', permissions: ['stakeholders.reports'] },
+  { prefix: '/dashboard/important-projects', permissions: ['projects.list'] },
 ].sort((a, b) => b.prefix.length - a.prefix.length);
 
 export type AccessDecision =

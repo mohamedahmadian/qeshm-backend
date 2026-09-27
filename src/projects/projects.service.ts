@@ -348,6 +348,7 @@ export class ProjectsService {
   }
 
   async create(dto: CreateProjectDto) {
+    this.assertSelectableProgressMode(dto.progressMode);
     this.assertTimeline(dto.startDate, dto.endDate);
     this.assertCoordinates(dto.latitude, dto.longitude);
     await this.assertReplacement(dto.replacementProjectId);
@@ -363,6 +364,7 @@ export class ProjectsService {
   }
 
   async update(id: string, dto: UpdateProjectDto) {
+    this.assertSelectableProgressMode(dto.progressMode);
     const current = await this.findOne(id);
     this.assertTimeline(dto.startDate, dto.endDate);
     this.assertCoordinates(dto.latitude, dto.longitude);
@@ -490,15 +492,9 @@ export class ProjectsService {
       systemName: dto.systemName,
       code: dto.code,
       isActive: dto.isActive,
-      status:
-        (dto.progressMode ?? 'MANUAL') === 'MANUAL' && dto.progressPercent === 100
-          ? 'COMPLETED'
-          : (dto.status ?? 'NOT_STARTED'),
-      progressMode: dto.progressMode ?? 'MANUAL',
-      progressPercent:
-        (dto.progressMode ?? 'MANUAL') === 'MANUAL'
-          ? (dto.progressPercent ?? null)
-          : 0,
+      status: dto.status ?? 'NOT_STARTED',
+      progressMode: dto.progressMode ?? 'PROJECT_CHECKLIST',
+      progressPercent: 0,
       startDate: dto.startDate ? parseIsoDate(dto.startDate) : null,
       endDate: dto.endDate ? parseIsoDate(dto.endDate) : null,
       latitude: toDecimal(dto.latitude ?? null),
@@ -626,6 +622,14 @@ export class ProjectsService {
       })),
       skipDuplicates: true,
     });
+  }
+
+  private assertSelectableProgressMode(mode?: string | null) {
+    if (mode === 'MANUAL') {
+      throw new BadRequestException(
+        'ثبت دستی درصد پیشرفت موقتاً غیرفعال است. چک‌لیست پروژه یا درصد پیشرفت فازها را انتخاب کنید',
+      );
+    }
   }
 
   private assertTimeline(startDate?: string | null, endDate?: string | null) {

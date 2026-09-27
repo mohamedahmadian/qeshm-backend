@@ -20,6 +20,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
 import { BoardModule } from './board/board.module';
 import { PortSalesReportsModule } from './port-sales-reports/port-sales-reports.module';
 import { StakeholdersModule } from './stakeholders/stakeholders.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { StakeholdersModule } from './stakeholders/stakeholders.module';
     BoardModule,
     PortSalesReportsModule,
     StakeholdersModule,
+    DashboardModule,
     ImagesModule,
     FilesModule,
     SmsModule,

@@ -45,7 +45,12 @@ export class UsersController {
     @UploadedFile()
     file: { buffer: Buffer; originalname: string },
   ) {
-    return this.users.importQeshmondiExcel(file);
+    return this.users.beginQeshmondiImport(file);
+  }
+
+  @Get('qeshmondi-imports/:jobId')
+  qeshmondiImportStatus(@Param('jobId') jobId: string) {
+    return this.users.qeshmondiImportStatus(jobId);
   }
 
   @Get(':id')

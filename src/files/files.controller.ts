@@ -11,6 +11,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import type { Response } from 'express';
+import { decodeUploadedFileName } from '../common/upload-filename';
 import {
   FilesService,
   normalizeDocumentType,
@@ -68,7 +69,7 @@ export class FilesController {
     res.setHeader('Content-Length', String(body.length));
     res.setHeader('Accept-Ranges', 'bytes');
     res.setHeader('Cache-Control', 'public, max-age=86400');
-    const name = file.originalName?.trim() || 'audio';
+    const name = decodeUploadedFileName(file.originalName, 'audio');
     const ascii = name.replace(/[^\w.\-]+/g, '_') || 'audio';
     res.setHeader(
       'Content-Disposition',

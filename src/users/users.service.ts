@@ -1,6 +1,8 @@
+import { randomUUID } from 'crypto';
 import {
   BadRequestException,
   ConflictException,
+  HttpException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -33,9 +35,34 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { UpdateUserLocationDto } from './dto/update-user-location.dto';
-import { parseQeshmondiExcel } from './qeshmondi-import';
+import { parseQeshmondiExcel, type QeshmondiImportRow } from './qeshmondi-import';
 
 const QESHMONDI_IMPORT_PASSWORD = '11111111';
+const QESHMONDI_LOOKUP_CHUNK = 5000;
+const QESHMONDI_WRITE_CHUNK = 2000;
+const QESHMONDI_IMPORT_JOB_TTL_MS = 30 * 60 * 1000;
+
+type QeshmondiImportJobPhase = 'parsing' | 'saving' | 'done' | 'error';
+type QeshmondiImportStep = 'lookup' | 'writing' | 'roles';
+
+type QeshmondiImportResult = {
+  created: number;
+  updated: number;
+  skipped: number;
+  skippedRows: { rowNumber: number; reason: string }[];
+};
+
+type QeshmondiImportJob = {
+  id: string;
+  phase: QeshmondiImportJobPhase;
+  step?: QeshmondiImportStep;
+  percent: number;
+  processed: number;
+  total: number;
+  result?: QeshmondiImportResult;
+  error?: string;
+  updatedAt: number;
+};
 
 const geoNameSelect = { id: true, nameFa: true, nameEn: true } as const;
 
@@ -147,6 +174,8 @@ export class UsersService {
     private readonly prisma: PrismaService,
     private readonly sms: SmsService,
   ) {}
+
+  private readonly qeshmondiImportJobs = new Map<string, QeshmondiImportJob>();
 
   async findAll(query: FindUsersQueryDto) {
     const q = query.q?.trim();
@@ -317,7 +346,7 @@ export class UsersService {
     return this.findOne(user.id);
   }
 
-  async importQeshmondiExcel(file?: { buffer?: Buffer; originalname?: string }) {
+  beginQeshmondiImport(file?: { buffer?: Buffer; originalname?: string }) {
     if (!file?.buffer?.length) {
       throw new BadRequestException('فایل اکسل را انتخاب کنید');
     }
@@ -325,35 +354,283 @@ export class UsersService {
     if (name && !name.endsWith('.xlsx') && !name.endsWith('.xls')) {
       throw new BadRequestException('فقط فایل اکسل با پسوند xlsx مجاز است');
     }
-    let parsed;
+
+    const jobId = randomUUID();
+    this.putQeshmondiJob({
+      id: jobId,
+      phase: 'parsing',
+      percent: 5,
+      processed: 0,
+      total: 0,
+      updatedAt: Date.now(),
+    });
+    const buffer = Buffer.from(file.buffer);
+    setImmediate(() => {
+      void this.runQeshmondiImport(jobId, buffer);
+    });
+    return { jobId };
+  }
+
+  qeshmondiImportStatus(jobId: string) {
+    this.pruneQeshmondiJobs();
+    const job = this.qeshmondiImportJobs.get(jobId);
+    if (!job) {
+      throw new NotFoundException('وضعیت به‌روزرسانی یافت نشد');
+    }
+    return {
+      phase: job.phase,
+      step: job.step ?? null,
+      percent: job.percent,
+      processed: job.processed,
+      total: job.total,
+      error: job.error ?? null,
+      result: job.phase === 'done' ? (job.result ?? null) : null,
+    };
+  }
+
+  private async runQeshmondiImport(jobId: string, buffer: Buffer) {
     try {
-      parsed = await parseQeshmondiExcel(file.buffer);
+      let parsed;
+      try {
+        parsed = await parseQeshmondiExcel(buffer);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'خواندن فایل اکسل ممکن نبود';
+        throw new BadRequestException(message);
+      }
+
+      const uniqueRows: QeshmondiImportRow[] = [];
+      const seen = new Set<string>();
+      for (const row of parsed.rows) {
+        if (seen.has(row.nationalId)) {
+          parsed.skipped.push({
+            rowNumber: row.rowNumber,
+            reason: 'کد ملی تکراری در همین فایل',
+          });
+          continue;
+        }
+        seen.add(row.nationalId);
+        uniqueRows.push(row);
+      }
+
+      const total = uniqueRows.length;
+      const result = {
+        created: 0,
+        updated: 0,
+        skipped: parsed.skipped.length,
+        skippedRows: parsed.skipped,
+      };
+      if (!total) {
+        this.patchQeshmondiJob(jobId, {
+          phase: 'done',
+          percent: 100,
+          processed: 0,
+          total: 0,
+          result,
+        });
+        return;
+      }
+
+      this.patchQeshmondiJob(jobId, {
+        phase: 'saving',
+        step: 'lookup',
+        percent: 15,
+        processed: 0,
+        total,
+      });
+
+      let scanned = 0;
+      const existingNationalIds = await this.findExistingNationalIds(
+        uniqueRows.map((row) => row.nationalId),
+        (count) => {
+          scanned += count;
+          const ratio = scanned / total;
+          this.patchQeshmondiJob(jobId, {
+            phase: 'saving',
+            step: 'lookup',
+            percent: 15 + Math.round(ratio * 15),
+            processed: scanned,
+            total,
+          });
+        },
+      );
+      const toUpdate: QeshmondiImportRow[] = [];
+      const toCreate: QeshmondiImportRow[] = [];
+      for (const row of uniqueRows) {
+        if (existingNationalIds.has(row.nationalId)) toUpdate.push(row);
+        else toCreate.push(row);
+      }
+
+      this.patchQeshmondiJob(jobId, {
+        phase: 'saving',
+        step: 'writing',
+        percent: 30,
+        processed: 0,
+        total,
+      });
+      let written = 0;
+      const reportWritten = (count: number) => {
+        written += count;
+        const ratio = written / total;
+        this.patchQeshmondiJob(jobId, {
+          phase: 'saving',
+          step: 'writing',
+          percent: Math.min(90, 30 + Math.round(ratio * 60)),
+          processed: written,
+          total,
+        });
+      };
+
+      if (toUpdate.length) await this.bulkUpdateQeshmondiUsers(toUpdate, reportWritten);
+      if (toCreate.length) {
+        const passwordHash = await bcrypt.hash(QESHMONDI_IMPORT_PASSWORD, 10);
+        await this.bulkCreateQeshmondiUsers(toCreate, passwordHash, reportWritten);
+      }
+
+      this.patchQeshmondiJob(jobId, {
+        phase: 'saving',
+        step: 'roles',
+        percent: 90,
+        processed: 0,
+        total,
+      });
+      let assigned = 0;
+      const citizen = await ensureCitizenRole(this.prisma);
+      await this.assignCitizenRoleForNationalIds(
+        uniqueRows.map((row) => row.nationalId),
+        citizen.id,
+        (count) => {
+          assigned += count;
+          const ratio = assigned / total;
+          this.patchQeshmondiJob(jobId, {
+            phase: 'saving',
+            step: 'roles',
+            percent: Math.min(99, 90 + Math.round(ratio * 9)),
+            processed: assigned,
+            total,
+          });
+        },
+      );
+
+      result.created = toCreate.length;
+      result.updated = toUpdate.length;
+      this.patchQeshmondiJob(jobId, {
+        phase: 'done',
+        percent: 100,
+        processed: total,
+        total,
+        result,
+      });
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'خواندن فایل اکسل ممکن نبود';
-      throw new BadRequestException(message);
+      this.patchQeshmondiJob(jobId, {
+        phase: 'error',
+        error: qeshmondiImportErrorText(error),
+      });
+    }
+  }
+
+  private async findExistingNationalIds(
+    nationalIds: string[],
+    onChunk?: (count: number) => void,
+  ) {
+    const found = new Set<string>();
+    for (const chunk of chunkList(nationalIds, QESHMONDI_LOOKUP_CHUNK)) {
+      const rows = await this.prisma.user.findMany({
+        where: { nationalId: { in: chunk } },
+        select: { nationalId: true },
+      });
+      for (const row of rows) {
+        if (row.nationalId) found.add(row.nationalId);
+      }
+      onChunk?.(chunk.length);
+    }
+    return found;
+  }
+
+  private async bulkUpdateQeshmondiUsers(
+    rows: QeshmondiImportRow[],
+    onChunk?: (count: number) => void,
+  ) {
+    for (const chunk of chunkList(rows, QESHMONDI_WRITE_CHUNK)) {
+      const payload = JSON.stringify(
+        chunk.map((row) => ({
+          national_id: row.nationalId,
+          first_name: row.firstName,
+          last_name: row.lastName,
+          full_name: joinFullName(row.firstName, row.lastName),
+          father_name: row.fatherName,
+          birth_date: row.birthDate,
+          gender: row.gender,
+          passport_number: row.passportNumber,
+          occupation: row.occupation,
+          is_resident: row.isResident,
+          end_date: row.qeshmondiEndDate,
+        })),
+      );
+      const updatedAt = new Date();
+      await this.prisma.$executeRaw`
+        UPDATE "users" AS u SET
+          "firstName" = v.first_name,
+          "lastName" = v.last_name,
+          "fullName" = v.full_name,
+          "fatherName" = v.father_name,
+          "birthDate" = CAST(v.birth_date AS date),
+          "gender" = CAST(v.gender AS "UserGender"),
+          "passportNumber" = v.passport_number,
+          "occupation" = v.occupation,
+          "isResident" = v.is_resident,
+          "qeshmondiEndDate" = CAST(v.end_date AS date),
+          "isQeshmondi" = true,
+          "updatedAt" = ${updatedAt}
+        FROM jsonb_to_recordset(CAST(${payload} AS jsonb)) AS v(
+          national_id text,
+          first_name text,
+          last_name text,
+          full_name text,
+          father_name text,
+          birth_date text,
+          gender text,
+          passport_number text,
+          occupation text,
+          is_resident boolean,
+          end_date text
+        )
+        WHERE u."nationalId" = v.national_id
+      `;
+      onChunk?.(chunk.length);
+    }
+  }
+
+  private async bulkCreateQeshmondiUsers(
+    rows: QeshmondiImportRow[],
+    passwordHash: string,
+    onChunk?: (count: number) => void,
+  ) {
+    const takenUsernames = new Set<string>();
+    for (const chunk of chunkList(
+      rows.map((row) => row.nationalId),
+      QESHMONDI_LOOKUP_CHUNK,
+    )) {
+      const existing = await this.prisma.user.findMany({
+        where: { username: { in: chunk } },
+        select: { username: true },
+      });
+      for (const item of existing) takenUsernames.add(item.username);
     }
 
-    const passwordHash = await bcrypt.hash(QESHMONDI_IMPORT_PASSWORD, 10);
-    const citizen = await ensureCitizenRole(this.prisma);
-    let created = 0;
-    let updated = 0;
-    const seen = new Set<string>();
-
-    for (const row of parsed.rows) {
-      if (seen.has(row.nationalId)) {
-        parsed.skipped.push({
-          rowNumber: row.rowNumber,
-          reason: 'کد ملی تکراری در همین فایل',
-        });
-        continue;
+    const stamp = Date.now().toString(36);
+    let collision = 0;
+    const data = rows.map((row) => {
+      let username = row.nationalId;
+      if (takenUsernames.has(username)) {
+        collision += 1;
+        username = `${row.nationalId}-${stamp}-${collision}`;
       }
-      seen.add(row.nationalId);
-
-      const existing = await this.prisma.user.findFirst({
-        where: { nationalId: row.nationalId },
-        select: { id: true, username: true },
-      });
-      const payload = {
+      return {
+        username,
+        passwordHash,
+        locale: 'fa',
+        status: UserStatus.ACTIVE,
+        nationalId: row.nationalId,
         firstName: row.firstName,
         lastName: row.lastName,
         fullName: joinFullName(row.firstName, row.lastName),
@@ -366,50 +643,47 @@ export class UsersService {
         qeshmondiEndDate: parseOptionalIsoDate(row.qeshmondiEndDate) ?? null,
         isQeshmondi: true,
       };
+    });
 
-      if (existing) {
-        await this.prisma.user.update({
-          where: { id: existing.id },
-          data: payload,
-        });
-        await this.ensureCitizenAssigned(existing.id);
-        updated += 1;
-        continue;
-      }
-
-      const username = await this.uniqueImportUsername(row.nationalId);
-      const user = await this.prisma.user.create({
-        data: {
-          username,
-          passwordHash,
-          locale: 'fa',
-          status: UserStatus.ACTIVE,
-          nationalId: row.nationalId,
-          ...payload,
-        },
-        select: { id: true },
-      });
-      await this.prisma.userRole.create({
-        data: { userId: user.id, roleId: citizen.id },
-      });
-      created += 1;
+    for (const chunk of chunkList(data, QESHMONDI_WRITE_CHUNK)) {
+      await this.prisma.user.createMany({ data: chunk });
+      onChunk?.(chunk.length);
     }
-
-    return {
-      created,
-      updated,
-      skipped: parsed.skipped.length,
-      skippedRows: parsed.skipped,
-    };
   }
 
-  private async uniqueImportUsername(nationalId: string) {
-    const taken = await this.prisma.user.findUnique({
-      where: { username: nationalId },
-      select: { id: true },
-    });
-    if (!taken) return nationalId;
-    return `${nationalId}-${Date.now().toString(36)}`;
+  private async assignCitizenRoleForNationalIds(
+    nationalIds: string[],
+    roleId: string,
+    onChunk?: (count: number) => void,
+  ) {
+    for (const chunk of chunkList(nationalIds, QESHMONDI_LOOKUP_CHUNK)) {
+      await this.prisma.$executeRaw`
+        INSERT INTO "user_roles" ("userId", "roleId")
+        SELECT u.id, ${roleId}
+        FROM "users" u
+        WHERE u."nationalId" IN (${Prisma.join(chunk)})
+        ON CONFLICT ("userId", "roleId") DO NOTHING
+      `;
+      onChunk?.(chunk.length);
+    }
+  }
+
+  private putQeshmondiJob(job: QeshmondiImportJob) {
+    this.pruneQeshmondiJobs();
+    this.qeshmondiImportJobs.set(job.id, job);
+  }
+
+  private patchQeshmondiJob(id: string, patch: Partial<QeshmondiImportJob>) {
+    const current = this.qeshmondiImportJobs.get(id);
+    if (!current || current.phase === 'done' || current.phase === 'error') return;
+    this.qeshmondiImportJobs.set(id, { ...current, ...patch, updatedAt: Date.now() });
+  }
+
+  private pruneQeshmondiJobs() {
+    const cutoff = Date.now() - QESHMONDI_IMPORT_JOB_TTL_MS;
+    for (const [id, job] of this.qeshmondiImportJobs) {
+      if (job.updatedAt < cutoff) this.qeshmondiImportJobs.delete(id);
+    }
   }
 
   async update(id: string, dto: UpdateUserDto) {
@@ -991,4 +1265,29 @@ export class UsersService {
       skipDuplicates: true,
     });
   }
+}
+
+function qeshmondiImportErrorText(error: unknown) {
+  if (error instanceof HttpException) {
+    const body = error.getResponse();
+    if (typeof body === 'string' && body.trim()) return body;
+    if (body && typeof body === 'object' && 'message' in body) {
+      const message = (body as { message?: unknown }).message;
+      if (typeof message === 'string' && message.trim()) return message;
+      if (Array.isArray(message)) {
+        const text = message.filter((item) => typeof item === 'string').join('، ');
+        if (text) return text;
+      }
+    }
+  }
+  if (error instanceof Error && error.message.trim()) return error.message;
+  return 'به‌روزرسانی اطلاعات انجام نشد';
+}
+
+function chunkList<T>(items: T[], size: number) {
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+  return chunks;
 }

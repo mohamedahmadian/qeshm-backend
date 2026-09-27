@@ -63,6 +63,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
       },
       { code: 'stakeholders.inbox', kind: 'MENU', nameKey: 'menus.stakeholderInbox' },
       { code: 'stakeholders.reports', kind: 'MENU', nameKey: 'menus.stakeholderReports' },
+      {
+        code: 'stakeholders.port-sales-reports',
+        kind: 'MENU',
+        nameKey: 'menus.portSalesReports',
+      },
     ],
   },
   {
@@ -141,18 +146,6 @@ export const PERMISSION_TREE: PermissionNode[] = [
     children: [
       { code: 'qeshmondi.citizens', kind: 'MENU', nameKey: 'menus.qeshmondiCitizens' },
       { code: 'qeshmondi.update', kind: 'MENU', nameKey: 'menus.qeshmondiUpdate' },
-    ],
-  },
-  {
-    code: 'ports',
-    kind: 'MODULE',
-    nameKey: 'modules.ports',
-    children: [
-      {
-        code: 'ports.sales-reports',
-        kind: 'MENU',
-        nameKey: 'menus.portSalesReports',
-      },
     ],
   },
   {

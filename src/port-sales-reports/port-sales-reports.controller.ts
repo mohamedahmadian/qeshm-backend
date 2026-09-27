@@ -12,7 +12,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { memoryStorage } from 'multer';
+import { memoryStorage, type Options as MulterOptions } from 'multer';
 import type { Response } from 'express';
 import { CreatePortSalesReportDto } from './dto/create-port-sales-report.dto';
 import { FindPortSalesReportsQueryDto } from './dto/find-port-sales-reports-query.dto';
@@ -32,7 +32,8 @@ type UploadedExcel = {
 const excelUpload = FileInterceptor('file', {
   storage: memoryStorage(),
   limits: { fileSize: MAX_PORT_SALES_EXCEL_BYTES },
-});
+  defParamCharset: 'utf8',
+} as MulterOptions);
 
 @Controller('port-sales-reports')
 export class PortSalesReportsController {
@@ -49,7 +50,12 @@ export class PortSalesReportsController {
     @Body() dto: CreatePortSalesReportDto,
     @UploadedFile() file: UploadedExcel,
   ) {
-    return this.reports.create(dto, file);
+    return this.reports.beginCreate(dto, file);
+  }
+
+  @Get('imports/:jobId')
+  importStatus(@Param('jobId') jobId: string) {
+    return this.reports.importStatus(jobId);
   }
 
   @Get(':id/tickets/export')
