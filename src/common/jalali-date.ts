@@ -33,6 +33,33 @@ export function jalaliToGregorian(jy: number, jm: number, jd: number) {
   return { year: gy, month: gm, day: gd };
 }
 
+/** تبدیل میلادی به جلالی (همان خانوادهٔ الگوریتم jalaali). */
+export function gregorianToJalali(gy: number, gm: number, gd: number) {
+  const gDays = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+  const gy2 = gm > 2 ? gy + 1 : gy;
+  let days =
+    355666 +
+    365 * gy +
+    Math.trunc((gy2 + 3) / 4) -
+    Math.trunc((gy2 + 99) / 100) +
+    Math.trunc((gy2 + 399) / 400) +
+    gd +
+    gDays[gm - 1];
+  let jy = -1595 + 33 * Math.trunc(days / 12053);
+  days %= 12053;
+  jy += 4 * Math.trunc(days / 1461);
+  days %= 1461;
+  if (days > 365) {
+    jy += Math.trunc((days - 1) / 365);
+    days = (days - 1) % 365;
+  }
+  if (days < 186) {
+    return { year: jy, month: 1 + Math.trunc(days / 31), day: 1 + (days % 31) };
+  }
+  const rest = days - 186;
+  return { year: jy, month: 7 + Math.trunc(rest / 30), day: 1 + (rest % 30) };
+}
+
 export function jalaliPartsToIso(year: number, month: number, day: number) {
   if (
     !Number.isInteger(year) ||

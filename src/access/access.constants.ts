@@ -13,6 +13,12 @@ export const CONTRACTOR_PERMISSION_CODES = [
   'stakeholders.port-sales-reports',
 ] as const;
 
+export const EMPLOYEE_PERMISSION_CODES = [
+  'food-reservation.reserve',
+  'food-reservation.my-orders',
+  'food-reservation.my-report',
+] as const;
+
 export const BOARD_ADMIN_PERMISSION_CODES = [
   'board',
   'board.search',
@@ -91,13 +97,10 @@ export async function ensureSystemRoles(
       },
     });
     if (saved.code === BOARD_ADMIN_ROLE_CODE) {
-      await prisma.rolePermission.createMany({
-        data: BOARD_ADMIN_PERMISSION_CODES.map((code) => ({
-          roleId: saved.id,
-          code,
-        })),
-        skipDuplicates: true,
-      });
+      await grantRolePermissions(prisma, saved.id, BOARD_ADMIN_PERMISSION_CODES);
+    }
+    if (saved.code === EMPLOYEE_ROLE_CODE) {
+      await grantRolePermissions(prisma, saved.id, EMPLOYEE_PERMISSION_CODES);
     }
     if (saved.code === CONTRACTOR_ROLE_CODE && !existing) {
       await prisma.rolePermission.createMany({
@@ -113,7 +116,7 @@ export async function ensureSystemRoles(
 
 export async function ensureEmployeeRole(prisma: PrismaClient) {
   const employee = SYSTEM_ROLES.find((role) => role.code === EMPLOYEE_ROLE_CODE)!;
-  return prisma.role.upsert({
+  const saved = await prisma.role.upsert({
     where: { code: employee.code },
     update: { isSystem: true },
     create: {
@@ -123,6 +126,19 @@ export async function ensureEmployeeRole(prisma: PrismaClient) {
       isSystem: true,
     },
     select: { id: true },
+  });
+  await grantRolePermissions(prisma, saved.id, EMPLOYEE_PERMISSION_CODES);
+  return saved;
+}
+
+async function grantRolePermissions(
+  prisma: PrismaClient,
+  roleId: string,
+  codes: readonly string[],
+) {
+  await prisma.rolePermission.createMany({
+    data: codes.map((code) => ({ roleId, code })),
+    skipDuplicates: true,
   });
 }
 

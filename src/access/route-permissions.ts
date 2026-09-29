@@ -38,6 +38,7 @@ const LOOKUP_COLLECTIONS = new Set([
 
 type RoutePermission = {
   prefix: string;
+  method?: string;
   permissions: string[];
 };
 
@@ -61,6 +62,10 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/contractors', permissions: ['projects.contractors'] },
   { prefix: '/projects', permissions: ['projects.list'] },
   { prefix: '/foods', permissions: ['food-reservation.foods'] },
+  {
+    prefix: '/food-reservation/unit-reps',
+    permissions: ['food-reservation.unit-reps'],
+  },
   { prefix: '/restaurants', permissions: ['food-reservation.restaurants'] },
   {
     prefix: '/food-reservations/report',
@@ -75,9 +80,29 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
     permissions: ['food-reservation.reserve'],
   },
   {
+    prefix: '/food-reservations/mine/summary',
+    permissions: ['food-reservation.my-report'],
+  },
+  {
+    method: 'POST',
+    prefix: '/food-reservations',
+    permissions: ['food-reservation.reserve'],
+  },
+  {
+    method: 'PATCH',
+    prefix: '/food-reservations',
+    permissions: [
+      'food-reservation.history',
+      'food-reservation.report',
+      'food-reservation.cost-estimate',
+    ],
+  },
+  {
     prefix: '/food-reservations',
     permissions: [
       'food-reservation.reserve',
+      'food-reservation.my-orders',
+      'food-reservation.my-report',
       'food-reservation.history',
       'food-reservation.report',
       'food-reservation.cost-estimate',
@@ -91,7 +116,10 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
     prefix: '/organization/unit-kinds',
     permissions: ['qeshm-organization.unit-kinds'],
   },
-  { prefix: '/organization/units', permissions: ['qeshm-organization.units'] },
+  {
+    prefix: '/organization/units',
+    permissions: ['qeshm-organization.units', 'food-reservation.units'],
+  },
   {
     prefix: '/organization/employees',
     permissions: ['qeshm-organization.employees'],
@@ -187,8 +215,10 @@ export function resolveAccessDecision(
     return { kind: 'auth' };
   }
 
-  const mapped = ROUTE_PERMISSIONS.find((route) =>
-    matchesPrefix(path, route.prefix),
+  const mapped = ROUTE_PERMISSIONS.find(
+    (route) =>
+      matchesPrefix(path, route.prefix) &&
+      (!route.method || route.method === verb),
   );
   if (mapped) {
     return { kind: 'permission', permissions: mapped.permissions };

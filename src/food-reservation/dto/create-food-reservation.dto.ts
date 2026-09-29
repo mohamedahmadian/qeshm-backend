@@ -14,6 +14,10 @@ export class CreateFoodReservationDto {
   @Matches(isoDate, { message: 'تاریخ رزرو معتبر نیست' })
   reservedAt: string;
 
+  @IsOptional()
+  @IsUUID('4')
+  orgUnitId?: string;
+
   @IsUUID('4')
   restaurantId: string;
 

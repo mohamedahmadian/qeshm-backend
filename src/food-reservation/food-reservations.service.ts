@@ -12,6 +12,7 @@ import {
   todayIsoDateTehran,
   toIsoDateOnly,
 } from '../common/iso-date';
+import { getRequestLocale } from '../common/request-locale';
 import {
   containsInsensitive,
   paginatedResult,
@@ -20,9 +21,21 @@ import {
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
 import { FoodReservationStatus, Prisma } from '../generated/prisma/client';
+import { buildOrganizationUnitPaths } from '../organization/organization-unit-tree';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateFoodReservationDto } from './dto/create-food-reservation.dto';
 import { FindFoodReservationsQueryDto } from './dto/find-food-reservations-query.dto';
+import {
+  FoodReservationLastQuantityQueryDto,
+  FoodReservationMenuQueryDto,
+} from './dto/food-reservation-menu-query.dto';
+import { MineFoodSummaryQueryDto } from './dto/mine-food-summary-query.dto';
+import {
+  bucketStart,
+  defaultMineSummaryRange,
+  eachBucket,
+  mineSummaryGrain,
+} from './mine-summary-range';
 
 function foodReservations(prisma: PrismaService) {
   return (
@@ -157,8 +170,42 @@ function byPeriod(a: { period: string }, b: { period: string }) {
 export class FoodReservationsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async context(userId: string) {
+  async context(userId: string, isAdmin = false) {
     const user = await this.requireEmployee(userId);
+    if (isAdmin) {
+      const units = await this.prisma.organizationUnit.findMany({
+        select: {
+          id: true,
+          name: true,
+          parentId: true,
+          maxMeals: true,
+          restaurants: {
+            select: {
+              restaurant: { select: { id: true, name: true, logoId: true } },
+            },
+          },
+        },
+        orderBy: [{ name: 'asc' }, { id: 'asc' }],
+      });
+      const paths = buildOrganizationUnitPaths(units);
+      return {
+        orgUnit: user.orgUnit,
+        isNutritionRep: this.isNutritionRep(user),
+        canManage: true,
+        restaurants: [],
+        units: units.map((unit) => ({
+          id: unit.id,
+          name: unit.name,
+          pathLabel: paths.get(unit.id) ?? unit.name,
+          maxMeals: unit.maxMeals,
+          restaurants: unit.restaurants
+            .map((link) => link.restaurant)
+            .sort(
+              (a, b) => a.name.localeCompare(b.name, 'fa') || a.id.localeCompare(b.id),
+            ),
+        })),
+      };
+    }
     const restaurants = user.orgUnitId
       ? await this.prisma.restaurant.findMany({
           where: { orgUnits: { some: { unitId: user.orgUnitId } } },
@@ -169,7 +216,167 @@ export class FoodReservationsService {
     return {
       orgUnit: user.orgUnit,
       isNutritionRep: this.isNutritionRep(user),
+      canManage: false,
       restaurants,
+      units: [],
+    };
+  }
+
+  async lastQuantity(
+    userId: string,
+    query: FoodReservationLastQuantityQueryDto,
+    isAdmin = false,
+  ) {
+    const user = await this.requireEmployee(userId);
+    const unitId = isAdmin && query.orgUnitId ? query.orgUnitId : user.orgUnitId;
+    if (!unitId) return { quantity: null };
+    const matched = await this.findLastQuantity(unitId, {
+      restaurantId: query.restaurantId,
+      foodId: query.foodId,
+    });
+    if (matched != null) return { quantity: matched };
+    if (!query.restaurantId && !query.foodId) return { quantity: null };
+    const unitLast = await this.findLastQuantity(unitId, {});
+    return { quantity: unitLast };
+  }
+
+  private async findLastQuantity(
+    unitId: string,
+    filter: { restaurantId?: string; foodId?: string },
+  ) {
+    const last = await foodReservations(this.prisma).findFirst({
+      where: {
+        orgUnitId: unitId,
+        restaurantId: filter.restaurantId,
+        foodId: filter.foodId,
+      },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+      select: { quantity: true },
+    });
+    return last?.quantity ?? null;
+  }
+
+  async menu(userId: string, query: FoodReservationMenuQueryDto, isAdmin = false) {
+    const user = await this.requireEmployee(userId);
+    const unitId =
+      isAdmin && query.orgUnitId ? query.orgUnitId : user.orgUnitId;
+    if (!unitId) {
+      throw new BadRequestException('ابتدا واحد سازمانی شما باید مشخص شود');
+    }
+    const linked = await this.prisma.organizationUnitRestaurant.findFirst({
+      where: { unitId, restaurantId: query.restaurantId },
+      select: { unitId: true },
+    });
+    if (!linked) {
+      throw new BadRequestException(
+        'این رستوران برای واحد سازمانی شما تعریف نشده است',
+      );
+    }
+    const items = await this.prisma.restaurantMenuItem.findMany({
+      where: {
+        restaurantId: query.restaurantId,
+        isActive: true,
+        offeredAt: parseIsoDate(query.offeredAt),
+      },
+      orderBy: [{ food: { name: 'asc' } }, { id: 'asc' }],
+      select: {
+        id: true,
+        restaurantId: true,
+        foodId: true,
+        offeredAt: true,
+        price: true,
+        isActive: true,
+        createdAt: true,
+        updatedAt: true,
+        food: {
+          select: { id: true, name: true, description: true, photoId: true },
+        },
+      },
+    });
+    return items.map((item) => ({
+      ...item,
+      price: Number(item.price),
+      offeredAt: toIsoDateOnly(item.offeredAt),
+    }));
+  }
+
+  async mineSummary(userId: string, query: MineFoodSummaryQueryDto) {
+    const locale = getRequestLocale();
+    const period = query.period ?? 'week';
+    const defaults = defaultMineSummaryRange(period, locale);
+    const reservedFrom = query.reservedFrom ?? defaults.from;
+    const reservedTo = query.reservedTo ?? defaults.to;
+    if (reservedFrom > reservedTo) {
+      throw new BadRequestException('تاریخ پایان نمی‌تواند قبل از تاریخ شروع باشد');
+    }
+    const grain = mineSummaryGrain(period);
+    const q = query.q?.trim();
+    const rows = await foodReservations(this.prisma).findMany({
+      where: {
+        userId,
+        reservedAt: {
+          gte: parseIsoDate(reservedFrom),
+          lte: parseIsoDate(reservedTo),
+        },
+        OR: q
+          ? [
+              { food: { name: containsInsensitive(q) } },
+              { restaurant: { name: containsInsensitive(q) } },
+            ]
+          : undefined,
+      },
+      select: {
+        reservedAt: true,
+        quantity: true,
+        unitPrice: true,
+        foodId: true,
+        food: { select: { name: true } },
+      },
+    });
+
+    const summary = { count: 0, quantity: 0, totalPrice: 0 };
+    const foodMap = new Map<
+      string,
+      { id: string; name: string; count: number; quantity: number; totalPrice: number }
+    >();
+    const periodMap = new Map<string, PeriodCostGroup>();
+    for (const key of eachBucket(reservedFrom, reservedTo, grain, locale)) {
+      periodMap.set(key, { period: key, count: 0, quantity: 0, totalPrice: 0 });
+    }
+
+    for (const row of rows) {
+      const amount = Number(row.unitPrice) * row.quantity;
+      summary.count += 1;
+      summary.quantity += row.quantity;
+      summary.totalPrice += amount;
+      const food = foodMap.get(row.foodId) ?? {
+        id: row.foodId,
+        name: row.food.name,
+        count: 0,
+        quantity: 0,
+        totalPrice: 0,
+      };
+      food.count += 1;
+      food.quantity += row.quantity;
+      food.totalPrice += amount;
+      foodMap.set(row.foodId, food);
+      const day = toIsoDateOnly(row.reservedAt);
+      if (day) bumpPeriod(periodMap, bucketStart(day, grain, locale), amount, row.quantity);
+    }
+
+    const byAmount = (
+      a: { quantity: number; totalPrice: number },
+      b: { quantity: number; totalPrice: number },
+    ) => b.quantity - a.quantity || b.totalPrice - a.totalPrice;
+
+    return {
+      period,
+      grain,
+      reservedFrom,
+      reservedTo,
+      summary,
+      byFood: [...foodMap.values()].sort(byAmount),
+      byPeriod: [...periodMap.values()].sort(byPeriod),
     };
   }
 
@@ -447,10 +654,18 @@ export class FoodReservationsService {
     return withReservation(item);
   }
 
-  async create(userId: string, dto: CreateFoodReservationDto) {
+  async create(userId: string, dto: CreateFoodReservationDto, isAdmin = false) {
     const user = await this.requireEmployee(userId);
-    if (!user.orgUnitId || !user.orgUnit) {
+    const unitId = isAdmin && dto.orgUnitId ? dto.orgUnitId : user.orgUnitId;
+    if (!unitId) {
       throw new BadRequestException('ابتدا واحد سازمانی شما باید مشخص شود');
+    }
+    const unit = await this.prisma.organizationUnit.findUnique({
+      where: { id: unitId },
+      select: { id: true, maxMeals: true, nutritionRepId: true },
+    });
+    if (!unit) {
+      throw new BadRequestException('واحد سازمانی یافت نشد');
     }
     if (dto.reservedAt < todayIsoDateTehran()) {
       throw new BadRequestException(
@@ -458,11 +673,13 @@ export class FoodReservationsService {
       );
     }
     const linked = await this.prisma.organizationUnitRestaurant.findFirst({
-      where: { unitId: user.orgUnitId, restaurantId: dto.restaurantId },
+      where: { unitId, restaurantId: dto.restaurantId },
     });
     if (!linked) {
       throw new BadRequestException(
-        'این رستوران برای واحد سازمانی شما تعریف نشده است',
+        isAdmin
+          ? 'این رستوران برای واحد انتخاب‌شده تعریف نشده است'
+          : 'این رستوران برای واحد سازمانی شما تعریف نشده است',
       );
     }
     const menuItem = await this.prisma.restaurantMenuItem.findFirst({
@@ -480,16 +697,16 @@ export class FoodReservationsService {
     if (!menuItem.isActive) {
       throw new BadRequestException('این غذا در برنامه غذایی رستوران غیرفعال است');
     }
-    const isRep = this.isNutritionRep(user);
-    const quantity = isRep ? (dto.quantity ?? 1) : 1;
-    if (!isRep && dto.quantity != null && dto.quantity !== 1) {
+    const canChooseQuantity = isAdmin || unit.nutritionRepId === user.id;
+    const quantity = canChooseQuantity ? (dto.quantity ?? 1) : 1;
+    if (!canChooseQuantity && dto.quantity != null && dto.quantity !== 1) {
       throw new BadRequestException('فقط نماینده واحد می‌تواند بیش از یک غذا رزرو کند');
     }
-    const maxMeals = user.orgUnit.maxMeals;
+    const maxMeals = unit.maxMeals;
     if (maxMeals != null) {
       const used = await foodReservations(this.prisma).aggregate({
         where: {
-          orgUnitId: user.orgUnitId,
+          orgUnitId: unitId,
           reservedAt: parseIsoDate(dto.reservedAt),
         },
         _sum: { quantity: true },
@@ -507,7 +724,7 @@ export class FoodReservationsService {
         restaurantId: dto.restaurantId,
         foodId: dto.foodId,
         userId,
-        orgUnitId: user.orgUnitId,
+        orgUnitId: unitId,
         quantity,
         unitPrice: menuItem.price,
         status: FoodReservationStatus.PENDING,

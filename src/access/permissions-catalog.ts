@@ -86,9 +86,29 @@ export const PERMISSION_TREE: PermissionNode[] = [
         nameKey: 'menus.restaurantManagement',
       },
       {
+        code: 'food-reservation.units',
+        kind: 'MENU',
+        nameKey: 'menus.organizationUnits',
+      },
+      {
+        code: 'food-reservation.unit-reps',
+        kind: 'MENU',
+        nameKey: 'menus.unitReps',
+      },
+      {
         code: 'food-reservation.reserve',
         kind: 'MENU',
         nameKey: 'menus.foodReserve',
+      },
+      {
+        code: 'food-reservation.my-orders',
+        kind: 'MENU',
+        nameKey: 'menus.foodMyOrders',
+      },
+      {
+        code: 'food-reservation.my-report',
+        kind: 'MENU',
+        nameKey: 'menus.foodMyReport',
       },
       {
         code: 'food-reservation.history',
