@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
+import { Controller, Get, Param, Query, Res } from '@nestjs/common';
 import type { Response } from 'express';
 import { sendDocument } from './project-documents.controller';
 import { ProjectDocumentsService } from './project-documents.service';
@@ -25,8 +25,11 @@ export class PublicProjectsController {
   async download(
     @Param('projectId') projectId: string,
     @Param('id') id: string,
+    @Query('view') view: string | undefined,
     @Res() res: Response,
   ) {
-    sendDocument(res, await this.documents.filePayload(projectId, id));
+    sendDocument(res, await this.documents.filePayload(projectId, id), {
+      inline: view === '1',
+    });
   }
 }

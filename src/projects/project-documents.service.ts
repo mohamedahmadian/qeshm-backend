@@ -12,6 +12,7 @@ import {
   paginationArgs,
   wantsPagination,
 } from '../common/pagination';
+import { decodeUploadedFileName } from '../common/upload-filename';
 import { resolveSortOrder } from '../common/sort-query';
 import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
@@ -25,6 +26,8 @@ const DOCUMENT_MIME_TYPES = new Map([
   ['pdf', 'application/pdf'],
   ['doc', 'application/msword'],
   ['docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+  ['mp4', 'video/mp4'],
+  ['webm', 'video/webm'],
 ]);
 
 type UploadedDocument = {
@@ -71,8 +74,11 @@ function normalizeDocumentType(mime: string | undefined, originalName?: string) 
 }
 
 function originalFileName(name?: string) {
-  const trimmed = name?.trim() || 'document';
-  return trimmed.slice(0, 200);
+  return decodeUploadedFileName(name, 'document').slice(0, 200);
+}
+
+function presentDocument<T extends { originalName: string }>(item: T): T {
+  return { ...item, originalName: decodeUploadedFileName(item.originalName, 'document') };
 }
 
 @Injectable()
@@ -108,7 +114,7 @@ export class ProjectDocumentsService {
         orderBy,
         select: documentSelect,
       });
-      return items;
+      return items.map(presentDocument);
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
@@ -121,7 +127,7 @@ export class ProjectDocumentsService {
       }),
       this.prisma.projectDocument.count({ where }),
     ]);
-    return paginatedResult(items, total, page, pageSize);
+    return paginatedResult(items.map(presentDocument), total, page, pageSize);
   }
 
   async findOne(projectId: string, id: string) {
@@ -133,7 +139,7 @@ export class ProjectDocumentsService {
     if (!item) {
       throw new NotFoundException('پیوست یافت نشد');
     }
-    return item;
+    return presentDocument(item);
   }
 
   async create(
@@ -145,7 +151,7 @@ export class ProjectDocumentsService {
     const stored = this.assertFile(file);
     const saved = await this.writeFile(projectId, stored);
     try {
-      return await this.prisma.projectDocument.create({
+      const created = await this.prisma.projectDocument.create({
         data: {
           projectId,
           title: dto.title,
@@ -157,6 +163,7 @@ export class ProjectDocumentsService {
         },
         select: documentSelect,
       });
+      return presentDocument(created);
     } catch (error) {
       await this.removeFile(saved.storageKey);
       throw error;
@@ -208,7 +215,7 @@ export class ProjectDocumentsService {
       if (nextFile) {
         await this.removeFile(current.storageKey);
       }
-      return updated;
+      return presentDocument(updated);
     } catch (error) {
       if (nextFile) await this.removeFile(nextFile.storageKey);
       throw error;
@@ -229,7 +236,7 @@ export class ProjectDocumentsService {
     return {
       data,
       mimeType: current.mimeType,
-      originalName: current.originalName,
+      originalName: decodeUploadedFileName(current.originalName, 'document'),
     };
   }
 
@@ -255,7 +262,7 @@ export class ProjectDocumentsService {
     }
     const mimeType = normalizeDocumentType(file.mimetype, file.originalname);
     if (!mimeType) {
-      throw new BadRequestException('فقط فایل PDF یا Word مجاز است');
+      throw new BadRequestException('فقط فایل PDF، Word یا ویدیو (MP4 و WebM) مجاز است');
     }
     if (file.size > MAX_DOCUMENT_BYTES) {
       throw new BadRequestException('حجم فایل بیش از حد مجاز است');
