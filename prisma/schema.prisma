@@ -346,7 +346,7 @@ model Project {
   code                 String             @unique
   isActive             Boolean            @default(true)
   status               ProjectStatus      @default(NOT_STARTED)
-  progressMode         ProjectProgressMode @default(MANUAL)
+  progressMode         ProjectProgressMode @default(PROJECT_CHECKLIST)
   progressPercent      Int?
   startDate            DateTime?          @db.Date
   endDate              DateTime?          @db.Date

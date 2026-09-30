@@ -19,7 +19,7 @@ import { CreateProjectDocumentDto } from './dto/create-project-document.dto';
 import { FindProjectDocumentsQueryDto } from './dto/find-project-documents-query.dto';
 import { UpdateProjectDocumentDto } from './dto/update-project-document.dto';
 
-const MAX_DOCUMENT_BYTES = 10 * 1024 * 1024;
+const MAX_DOCUMENT_BYTES = 500 * 1024 * 1024;
 
 const DOCUMENT_MIME_TYPES = new Map([
   ['pdf', 'application/pdf'],

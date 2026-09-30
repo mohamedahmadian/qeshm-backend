@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  OnModuleInit,
 } from '@nestjs/common';
 import { parseIsoDate, toIsoDateOnly } from '../common/iso-date';
 import {
@@ -188,12 +189,19 @@ function serializeProject<
 }
 
 @Injectable()
-export class ProjectsService {
+export class ProjectsService implements OnModuleInit {
   constructor(
     private readonly prisma: PrismaService,
     private readonly documents: ProjectDocumentsService,
     private readonly checklist: ProjectChecklistService,
   ) {}
+
+  async onModuleInit() {
+    await this.prisma.project.updateMany({
+      where: { progressMode: 'MANUAL' },
+      data: { progressMode: 'PROJECT_CHECKLIST' },
+    });
+  }
 
   async findAll(query: FindProjectsQueryDto) {
     const where = await this.listWhere(query);
@@ -348,7 +356,6 @@ export class ProjectsService {
   }
 
   async create(dto: CreateProjectDto) {
-    this.assertSelectableProgressMode(dto.progressMode);
     this.assertTimeline(dto.startDate, dto.endDate);
     this.assertCoordinates(dto.latitude, dto.longitude);
     await this.assertReplacement(dto.replacementProjectId);
@@ -364,7 +371,6 @@ export class ProjectsService {
   }
 
   async update(id: string, dto: UpdateProjectDto) {
-    this.assertSelectableProgressMode(dto.progressMode);
     const current = await this.findOne(id);
     this.assertTimeline(dto.startDate, dto.endDate);
     this.assertCoordinates(dto.latitude, dto.longitude);
@@ -381,16 +387,10 @@ export class ProjectsService {
       dto.operatorIds === undefined
         ? undefined
         : await this.assertOperatorUnits(dto.operatorIds);
-    const nextMode = dto.progressMode ?? current.progressMode;
+    const nextMode = this.resolveProgressMode(dto.progressMode, current.progressMode);
     const data = this.updateData(dto);
-    if (nextMode !== 'MANUAL') {
-      data.progressPercent = undefined;
-    } else if (
-      dto.progressPercent !== undefined &&
-      dto.progressPercent !== current.progressPercent
-    ) {
-      data.status = dto.progressPercent === 100 ? 'COMPLETED' : 'IN_PROGRESS';
-    }
+    data.progressMode = nextMode;
+    data.progressPercent = undefined;
     const project = await this.prisma.$transaction(async (tx) => {
       if (operatorIds) {
         await this.syncOperators(tx, id, operatorIds);
@@ -399,9 +399,7 @@ export class ProjectsService {
         where: { id },
         data,
       });
-      if (nextMode !== 'MANUAL') {
-        await this.checklist.recompute(id, tx);
-      }
+      await this.checklist.recompute(id, tx);
       return tx.project.findUniqueOrThrow({
         where: { id },
         select: projectSelect,
@@ -493,7 +491,7 @@ export class ProjectsService {
       code: dto.code,
       isActive: dto.isActive,
       status: dto.status ?? 'NOT_STARTED',
-      progressMode: dto.progressMode ?? 'PROJECT_CHECKLIST',
+      progressMode: this.resolveProgressMode(dto.progressMode),
       progressPercent: 0,
       startDate: dto.startDate ? parseIsoDate(dto.startDate) : null,
       endDate: dto.endDate ? parseIsoDate(dto.endDate) : null,
@@ -624,12 +622,14 @@ export class ProjectsService {
     });
   }
 
-  private assertSelectableProgressMode(mode?: string | null) {
-    if (mode === 'MANUAL') {
-      throw new BadRequestException(
-        'ثبت دستی درصد پیشرفت موقتاً غیرفعال است. چک‌لیست پروژه یا درصد پیشرفت فازها را انتخاب کنید',
-      );
+  private resolveProgressMode(
+    mode?: string | null,
+    current?: string | null,
+  ): 'PROJECT_CHECKLIST' | 'PHASE_CHECKLIST' {
+    if (mode === 'PHASE_CHECKLIST' || (mode == null && current === 'PHASE_CHECKLIST')) {
+      return 'PHASE_CHECKLIST';
     }
+    return 'PROJECT_CHECKLIST';
   }
 
   private assertTimeline(startDate?: string | null, endDate?: string | null) {

@@ -13,7 +13,6 @@ const AUTH_ONLY_PREFIXES = [
   '/account',
   '/images',
   '/files',
-  '/singard/mine',
   '/board',
 ];
 
@@ -128,6 +127,8 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/vehicle-brands', permissions: ['light-assets.vehicle-brands'] },
   { prefix: '/vehicles/reports', permissions: ['light-assets.vehicle-reports'] },
   { prefix: '/vehicles', permissions: ['light-assets.vehicles'] },
+  { method: 'POST', prefix: '/singard/mine', permissions: ['singard.submit'] },
+  { prefix: '/singard/mine', permissions: ['singard.mine'] },
   { prefix: '/singard/reports', permissions: ['singard.reports'] },
   { prefix: '/singard/categories', permissions: ['singard.categories'] },
   { prefix: '/singard/feedbacks', permissions: ['singard.inbox'] },

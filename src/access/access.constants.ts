@@ -13,11 +13,20 @@ export const CONTRACTOR_PERMISSION_CODES = [
   'stakeholders.port-sales-reports',
 ] as const;
 
+/** ثبت نظر و پیگیری نظرهای خود؛ بقیهٔ منوهای سینگارد فقط از مدیریت نقش‌ها. */
+export const SINGARD_SELF_PERMISSION_CODES = [
+  'singard.submit',
+  'singard.mine',
+] as const;
+
 export const EMPLOYEE_PERMISSION_CODES = [
   'food-reservation.reserve',
   'food-reservation.my-orders',
   'food-reservation.my-report',
+  ...SINGARD_SELF_PERMISSION_CODES,
 ] as const;
+
+export const CITIZEN_PERMISSION_CODES = [...SINGARD_SELF_PERMISSION_CODES] as const;
 
 export const BOARD_ADMIN_PERMISSION_CODES = [
   'board',
@@ -102,6 +111,9 @@ export async function ensureSystemRoles(
     if (saved.code === EMPLOYEE_ROLE_CODE) {
       await grantRolePermissions(prisma, saved.id, EMPLOYEE_PERMISSION_CODES);
     }
+    if (saved.code === CITIZEN_ROLE_CODE) {
+      await grantRolePermissions(prisma, saved.id, CITIZEN_PERMISSION_CODES);
+    }
     if (saved.code === CONTRACTOR_ROLE_CODE && !existing) {
       await prisma.rolePermission.createMany({
         data: CONTRACTOR_PERMISSION_CODES.map((code) => ({
@@ -144,7 +156,7 @@ async function grantRolePermissions(
 
 export async function ensureCitizenRole(prisma: PrismaClient) {
   const citizen = SYSTEM_ROLES.find((role) => role.code === CITIZEN_ROLE_CODE)!;
-  return prisma.role.upsert({
+  const saved = await prisma.role.upsert({
     where: { code: citizen.code },
     update: { isSystem: true },
     create: {
@@ -155,4 +167,6 @@ export async function ensureCitizenRole(prisma: PrismaClient) {
     },
     select: { id: true },
   });
+  await grantRolePermissions(prisma, saved.id, CITIZEN_PERMISSION_CODES);
+  return saved;
 }
