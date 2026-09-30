@@ -86,11 +86,6 @@ export const PERMISSION_TREE: PermissionNode[] = [
         nameKey: 'menus.restaurantManagement',
       },
       {
-        code: 'food-reservation.units',
-        kind: 'MENU',
-        nameKey: 'menus.organizationUnits',
-      },
-      {
         code: 'food-reservation.unit-reps',
         kind: 'MENU',
         nameKey: 'menus.unitReps',
@@ -124,6 +119,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
         code: 'food-reservation.cost-estimate',
         kind: 'MENU',
         nameKey: 'menus.foodCostEstimate',
+      },
+      {
+        code: 'food-reservation.unit-report',
+        kind: 'MENU',
+        nameKey: 'menus.foodUnitReport',
       },
     ],
   },

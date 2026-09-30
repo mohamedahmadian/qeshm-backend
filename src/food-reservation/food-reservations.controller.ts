@@ -81,6 +81,11 @@ export class FoodReservationsController {
     return this.reservations.costEstimate(query);
   }
 
+  @Get('unit-report')
+  unitReport(@Query() query: FindFoodReservationsQueryDto) {
+    return this.reservations.unitReport(query);
+  }
+
   @Get('mine/summary')
   mineSummary(
     @Query() query: MineFoodSummaryQueryDto,

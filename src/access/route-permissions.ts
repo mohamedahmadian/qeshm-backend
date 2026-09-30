@@ -75,6 +75,10 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
     permissions: ['food-reservation.cost-estimate'],
   },
   {
+    prefix: '/food-reservations/unit-report',
+    permissions: ['food-reservation.unit-report'],
+  },
+  {
     prefix: '/food-reservations/context',
     permissions: ['food-reservation.reserve'],
   },
@@ -117,7 +121,7 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   },
   {
     prefix: '/organization/units',
-    permissions: ['qeshm-organization.units', 'food-reservation.units'],
+    permissions: ['qeshm-organization.units'],
   },
   {
     prefix: '/organization/employees',
@@ -182,6 +186,14 @@ function normalizeApiPath(rawPath: string) {
   return path || '/';
 }
 
+function organizationUnitScopePermissions(path: string, method: string) {
+  const restaurant =
+    /^\/organization\/units\/[^/]+\/restaurants(?:\/[^/]+)?$/.test(path);
+  const unitRead = method === 'GET' && /^\/organization\/units\/[^/]+$/.test(path);
+  if (!restaurant && !unitRead) return null;
+  return ['qeshm-organization.units', 'food-reservation.unit-reps'];
+}
+
 function matchesPrefix(path: string, prefix: string) {
   return path === prefix || path.startsWith(`${prefix}/`);
 }
@@ -214,6 +226,11 @@ export function resolveAccessDecision(
     LOOKUP_COLLECTIONS.has(path)
   ) {
     return { kind: 'auth' };
+  }
+
+  const unitScope = organizationUnitScopePermissions(path, verb);
+  if (unitScope) {
+    return { kind: 'permission', permissions: unitScope };
   }
 
   const mapped = ROUTE_PERMISSIONS.find(

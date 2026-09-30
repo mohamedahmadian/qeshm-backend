@@ -6,13 +6,14 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { gregorianToJalali } from '../common/jalali-date';
 import {
   parseIsoDate,
   startOfIranWeekIso,
   todayIsoDateTehran,
   toIsoDateOnly,
 } from '../common/iso-date';
-import { getRequestLocale } from '../common/request-locale';
+import { getRequestLocale, isLtrLocale } from '../common/request-locale';
 import {
   containsInsensitive,
   paginatedResult,
@@ -164,6 +165,20 @@ function byCost(a: { totalPrice: number }, b: { totalPrice: number }) {
 
 function byPeriod(a: { period: string }, b: { period: string }) {
   return a.period.localeCompare(b.period);
+}
+
+function calendarPeriodKeys(iso: string, jalali: boolean) {
+  const week = startOfIranWeekIso(iso);
+  if (!jalali) {
+    return { week, month: iso.slice(0, 7), year: iso.slice(0, 4) };
+  }
+  const [gy, gm, gd] = iso.split('-').map(Number);
+  const jalaliDate = gregorianToJalali(gy, gm, gd);
+  return {
+    week,
+    month: `${jalaliDate.year}-${String(jalaliDate.month).padStart(2, '0')}`,
+    year: String(jalaliDate.year),
+  };
 }
 
 @Injectable()
@@ -637,6 +652,134 @@ export class FoodReservationsService {
       byDay: [...dayMap.values()].sort(byPeriod),
       byWeek: [...weekMap.values()].sort(byPeriod),
       byMonth: [...monthMap.values()].sort(byPeriod),
+    };
+  }
+
+  async unitReport(query: FindFoodReservationsQueryDto) {
+    const jalali = !isLtrLocale(getRequestLocale());
+    let unit: { id: string; name: string } | null = null;
+    if (query.orgUnitId) {
+      const found = await this.prisma.organizationUnit.findUnique({
+        where: { id: query.orgUnitId },
+        select: { id: true, name: true },
+      });
+      if (!found) {
+        throw new BadRequestException('واحد سازمانی یافت نشد');
+      }
+      unit = found;
+    }
+
+    const where = this.buildWhere({
+      orgUnitId: query.orgUnitId,
+      reservedFrom: query.reservedFrom,
+      reservedTo: query.reservedTo,
+    });
+    const rows = await foodReservations(this.prisma).findMany({
+      where,
+      select: {
+        reservedAt: true,
+        quantity: true,
+        unitPrice: true,
+        status: true,
+        foodId: true,
+        orgUnitId: true,
+        restaurantId: true,
+        userId: true,
+        food: { select: { name: true } },
+        orgUnit: { select: { name: true } },
+        restaurant: { select: { name: true } },
+      },
+    });
+
+    const summary = {
+      reservationCount: 0,
+      totalQuantity: 0,
+      totalCost: 0,
+      confirmedCount: 0,
+      confirmedQuantity: 0,
+      confirmedCost: 0,
+      pendingCount: 0,
+      pendingQuantity: 0,
+      pendingCost: 0,
+      avgCostPerServing: 0,
+      avgCostPerReservation: 0,
+      avgDailyCost: 0,
+      uniqueDays: 0,
+      uniqueEmployees: 0,
+      uniqueUnits: 0,
+      uniqueRestaurants: 0,
+    };
+    const unitMap = new Map<string, CostGroup>();
+    const restaurantMap = new Map<string, CostGroup>();
+    const foodMap = new Map<string, CostGroup>();
+    const weekMap = new Map<string, PeriodCostGroup>();
+    const monthMap = new Map<string, PeriodCostGroup>();
+    const yearMap = new Map<string, PeriodCostGroup>();
+    const days = new Set<string>();
+    const employees = new Set<string>();
+
+    for (const row of rows) {
+      const amount = Number(row.unitPrice) * row.quantity;
+      const day = toIsoDateOnly(row.reservedAt) ?? '';
+      if (day) days.add(day);
+      employees.add(row.userId);
+
+      summary.reservationCount += 1;
+      summary.totalQuantity += row.quantity;
+      summary.totalCost += amount;
+      if (row.status === FoodReservationStatus.CONFIRMED) {
+        summary.confirmedCount += 1;
+        summary.confirmedQuantity += row.quantity;
+        summary.confirmedCost += amount;
+      } else {
+        summary.pendingCount += 1;
+        summary.pendingQuantity += row.quantity;
+        summary.pendingCost += amount;
+      }
+
+      bumpCost(unitMap, row.orgUnitId, row.orgUnit.name, amount, row.quantity);
+      bumpCost(
+        restaurantMap,
+        row.restaurantId,
+        row.restaurant.name,
+        amount,
+        row.quantity,
+      );
+      bumpCost(foodMap, row.foodId, row.food.name, amount, row.quantity);
+      if (day) {
+        const keys = calendarPeriodKeys(day, jalali);
+        bumpPeriod(weekMap, keys.week, amount, row.quantity);
+        bumpPeriod(monthMap, keys.month, amount, row.quantity);
+        bumpPeriod(yearMap, keys.year, amount, row.quantity);
+      }
+    }
+
+    summary.uniqueDays = days.size;
+    summary.uniqueEmployees = employees.size;
+    summary.uniqueUnits = unitMap.size;
+    summary.uniqueRestaurants = restaurantMap.size;
+    summary.avgCostPerServing =
+      summary.totalQuantity > 0 ? summary.totalCost / summary.totalQuantity : 0;
+    summary.avgCostPerReservation =
+      summary.reservationCount > 0
+        ? summary.totalCost / summary.reservationCount
+        : 0;
+    summary.avgDailyCost =
+      summary.uniqueDays > 0 ? summary.totalCost / summary.uniqueDays : 0;
+
+    return {
+      scope: unit ? 'unit' : 'all',
+      calendar: jalali ? 'jalali' : 'gregorian',
+      unit,
+      reservedFrom: query.reservedFrom ?? null,
+      reservedTo: query.reservedTo ?? null,
+      summary,
+      byUnit: [...unitMap.values()].sort(byCost),
+      byFood: [...foodMap.values()].sort(byCost),
+      byRestaurant: [...restaurantMap.values()].sort(byCost),
+      byWeek: [...weekMap.values()].sort(byPeriod),
+      byMonth: [...monthMap.values()].sort(byPeriod),
+      byYear: [...yearMap.values()].sort(byPeriod),
     };
   }
 
