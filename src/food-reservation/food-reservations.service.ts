@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { gregorianToJalali } from '../common/jalali-date';
 import {
+  eachIsoDateInclusive,
   parseIsoDate,
   startOfIranWeekIso,
   todayIsoDateTehran,
@@ -26,6 +27,7 @@ import { buildOrganizationUnitPaths } from '../organization/organization-unit-tr
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateFoodReservationDto } from './dto/create-food-reservation.dto';
 import { FindFoodReservationsQueryDto } from './dto/find-food-reservations-query.dto';
+import { FoodReservationRangeActionDto } from './dto/food-reservation-range-action.dto';
 import {
   FoodReservationLastQuantityQueryDto,
   FoodReservationMenuQueryDto,
@@ -897,6 +899,47 @@ export class FoodReservationsService {
     }
     await foodReservations(this.prisma).delete({ where: { id } });
     return { ok: true };
+  }
+
+  async confirmRange(dto: FoodReservationRangeActionDto) {
+    const result = await foodReservations(this.prisma).updateMany({
+      where: this.rangeWhere(dto, FoodReservationStatus.PENDING),
+      data: { status: FoodReservationStatus.CONFIRMED },
+    });
+    return { count: result.count };
+  }
+
+  async cancelRange(dto: FoodReservationRangeActionDto) {
+    const result = await foodReservations(this.prisma).deleteMany({
+      where: this.rangeWhere(
+        dto,
+        dto.includeConfirmed ? undefined : FoodReservationStatus.PENDING,
+      ),
+    });
+    return { count: result.count };
+  }
+
+  private rangeWhere(
+    dto: FoodReservationRangeActionDto,
+    status?: FoodReservationStatus,
+  ): Prisma.FoodReservationWhereInput {
+    const start = dto.reservedFrom;
+    const end = dto.reservedTo || dto.reservedFrom;
+    if (end < start) {
+      throw new BadRequestException('تاریخ پایان نباید قبل از تاریخ شروع باشد');
+    }
+    if (eachIsoDateInclusive(start, end).length > 366) {
+      throw new BadRequestException('بازه زمانی بیش از حد طولانی است');
+    }
+    return {
+      reservedAt: {
+        gte: parseIsoDate(start),
+        lte: parseIsoDate(end),
+      },
+      orgUnitId: dto.orgUnitId,
+      restaurantId: dto.restaurantId,
+      status,
+    };
   }
 
   private buildWhere(

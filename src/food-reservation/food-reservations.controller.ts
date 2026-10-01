@@ -14,6 +14,7 @@ import { hasAnyPermission } from '../access/access.util';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CreateFoodReservationDto } from './dto/create-food-reservation.dto';
 import { FindFoodReservationsQueryDto } from './dto/find-food-reservations-query.dto';
+import { FoodReservationRangeActionDto } from './dto/food-reservation-range-action.dto';
 import {
   FoodReservationLastQuantityQueryDto,
   FoodReservationMenuQueryDto,
@@ -106,6 +107,30 @@ export class FoodReservationsController {
       query.userId = undefined;
     }
     return this.reservations.findAll(query, user.id);
+  }
+
+  @Post('confirm-range')
+  confirmRange(
+    @Body() dto: FoodReservationRangeActionDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user?.id) throw new UnauthorizedException();
+    if (!canSeeAllFoodReservations(user)) {
+      throw new ForbiddenException('دسترسی مجاز نیست');
+    }
+    return this.reservations.confirmRange(dto);
+  }
+
+  @Post('cancel-range')
+  cancelRange(
+    @Body() dto: FoodReservationRangeActionDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user?.id) throw new UnauthorizedException();
+    if (!canSeeAllFoodReservations(user)) {
+      throw new ForbiddenException('دسترسی مجاز نیست');
+    }
+    return this.reservations.cancelRange(dto);
   }
 
   @Post()

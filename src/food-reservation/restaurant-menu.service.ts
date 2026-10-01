@@ -44,6 +44,16 @@ function toMoney(value: Prisma.Decimal) {
   return Number(value);
 }
 
+function offeredAtFilter(from?: string, until?: string) {
+  if (from && until) {
+    const start = from <= until ? from : until;
+    const end = from <= until ? until : from;
+    return { gte: parseIsoDate(start), lte: parseIsoDate(end) };
+  }
+  const day = from || until;
+  return day ? parseIsoDate(day) : undefined;
+}
+
 function withMenuItem<T extends { price: Prisma.Decimal; offeredAt: Date }>(
   item: T,
 ) {
@@ -65,8 +75,9 @@ export class RestaurantMenuService {
     await this.restaurants.findOne(restaurantId);
     const where: Prisma.RestaurantMenuItemWhereInput = {
       restaurantId,
+      foodId: query.foodId,
       isActive: query.isActive,
-      offeredAt: query.offeredAt ? parseIsoDate(query.offeredAt) : undefined,
+      offeredAt: offeredAtFilter(query.offeredAt, query.offeredUntil),
       OR: query.q
         ? [
             { food: { name: containsInsensitive(query.q) } },
@@ -215,7 +226,6 @@ export class RestaurantMenuService {
 
   async cancelRange(restaurantId: string, dto: CancelRestaurantMenuDto) {
     await this.restaurants.findOne(restaurantId);
-    await this.assertFood(dto.foodId);
     const start = dto.offeredAt;
     const end = dto.offeredUntil || dto.offeredAt;
     if (end < start) {
@@ -233,14 +243,12 @@ export class RestaurantMenuService {
       this.prisma.foodReservation.deleteMany({
         where: {
           restaurantId,
-          foodId: dto.foodId,
           reservedAt: range,
         },
       }),
       this.prisma.restaurantMenuItem.deleteMany({
         where: {
           restaurantId,
-          foodId: dto.foodId,
           offeredAt: range,
         },
       }),

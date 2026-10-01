@@ -31,12 +31,12 @@ export const CITIZEN_PERMISSION_CODES = [...SINGARD_SELF_PERMISSION_CODES] as co
 export const BOARD_ADMIN_PERMISSION_CODES = [
   'board',
   'board.search',
+  'board.minutes',
+  'board.resolutions',
+  'board.reports',
+  'board.calendar',
   'board.requests',
   'board.plans',
-  'board.minutes',
-  'board.reports',
-  'board.resolutions',
-  'board.calendar',
   'board.permissions',
 ] as const;
 

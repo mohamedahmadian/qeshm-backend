@@ -211,21 +211,13 @@ export const PERMISSION_TREE: PermissionNode[] = [
     nameKey: 'modules.board',
     children: [
       { code: 'board.search', kind: 'MENU', nameKey: 'menus.boardSmartSearch' },
+      { code: 'board.minutes', kind: 'MENU', nameKey: 'menus.boardMinutes' },
+      { code: 'board.resolutions', kind: 'MENU', nameKey: 'menus.boardResolutions' },
+      { code: 'board.reports', kind: 'MENU', nameKey: 'menus.boardReports' },
+      { code: 'board.calendar', kind: 'MENU', nameKey: 'menus.boardCalendar' },
       { code: 'board.requests', kind: 'MENU', nameKey: 'menus.boardRequests' },
       { code: 'board.plans', kind: 'MENU', nameKey: 'menus.boardPlans' },
-      { code: 'board.minutes', kind: 'MENU', nameKey: 'menus.boardMinutes' },
-      { code: 'board.reports', kind: 'MENU', nameKey: 'menus.boardReports' },
-      { code: 'board.resolutions', kind: 'MENU', nameKey: 'menus.boardResolutions' },
-      {
-        code: 'board.calendar',
-        kind: 'MENU',
-        nameKey: 'menus.boardCalendar',
-      },
-      {
-        code: 'board.permissions',
-        kind: 'MENU',
-        nameKey: 'menus.boardPermissions',
-      },
+      { code: 'board.permissions', kind: 'MENU', nameKey: 'menus.boardPermissions' },
     ],
   },
 ];

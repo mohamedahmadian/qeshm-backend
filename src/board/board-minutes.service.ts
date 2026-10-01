@@ -180,7 +180,19 @@ export class BoardMinutesService {
 
   async findAll(query: FindBoardMinutesQueryDto, userId: string) {
     await this.requireMinutesActor(userId);
+    const heldFrom = query.from;
+    const heldTo = query.to;
+    const rangeStart = heldFrom && heldTo && heldFrom > heldTo ? heldTo : heldFrom;
+    const rangeEnd = heldFrom && heldTo && heldFrom > heldTo ? heldFrom : heldTo;
     const where: Prisma.BoardMinutesWhereInput = {
+      ...(rangeStart || rangeEnd
+        ? {
+            heldAt: {
+              ...(rangeStart ? { gte: parseIsoDate(rangeStart) } : {}),
+              ...(rangeEnd ? { lte: parseIsoDate(rangeEnd) } : {}),
+            },
+          }
+        : {}),
       ...(query.requestId
         ? { requestId: query.requestId }
         : query.kind === 'regular'

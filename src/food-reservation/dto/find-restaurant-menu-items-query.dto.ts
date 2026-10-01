@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsIn, IsOptional, IsString, Matches } from 'class-validator';
+import { IsBoolean, IsIn, IsOptional, IsString, IsUUID, Matches } from 'class-validator';
 import { emptyToUndefined, toOptionalBoolean } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
@@ -26,9 +26,20 @@ export class FindRestaurantMenuItemsQueryDto extends PaginationQueryDto {
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
+  @IsUUID()
+  foodId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
   @IsString()
   @Matches(isoDate)
   offeredAt?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
+  @Matches(isoDate)
+  offeredUntil?: string;
 
   @IsOptional()
   @Transform(({ value }) => toOptionalBoolean(value))
