@@ -287,3 +287,8 @@ export type StakeholderMessage = Prisma.StakeholderMessageModel
  * 
  */
 export type StakeholderAttachment = Prisma.StakeholderAttachmentModel
+/**
+ * Model TicketTariff
+ * 
+ */
+export type TicketTariff = Prisma.TicketTariffModel

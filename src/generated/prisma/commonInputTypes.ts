@@ -779,28 +779,11 @@ export type EnumBoardMinutesAttachmentKindWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumBoardMinutesAttachmentKindFilter<$PrismaModel>
 }
 
-export type EnumPortTicketStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.PortTicketStatus | Prisma.EnumPortTicketStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.PortTicketStatus[] | Prisma.ListEnumPortTicketStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.PortTicketStatus[] | Prisma.ListEnumPortTicketStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumPortTicketStatusFilter<$PrismaModel> | $Enums.PortTicketStatus
-}
-
 export type EnumPortTicketQeshmondiStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.PortTicketQeshmondiStatus | Prisma.EnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel>
   in?: $Enums.PortTicketQeshmondiStatus[] | Prisma.ListEnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.PortTicketQeshmondiStatus[] | Prisma.ListEnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumPortTicketQeshmondiStatusFilter<$PrismaModel> | $Enums.PortTicketQeshmondiStatus
-}
-
-export type EnumPortTicketStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PortTicketStatus | Prisma.EnumPortTicketStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.PortTicketStatus[] | Prisma.ListEnumPortTicketStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.PortTicketStatus[] | Prisma.ListEnumPortTicketStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumPortTicketStatusWithAggregatesFilter<$PrismaModel> | $Enums.PortTicketStatus
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPortTicketStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPortTicketStatusFilter<$PrismaModel>
 }
 
 export type EnumPortTicketQeshmondiStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1632,28 +1615,11 @@ export type NestedEnumBoardMinutesAttachmentKindWithAggregatesFilter<$PrismaMode
   _max?: Prisma.NestedEnumBoardMinutesAttachmentKindFilter<$PrismaModel>
 }
 
-export type NestedEnumPortTicketStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.PortTicketStatus | Prisma.EnumPortTicketStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.PortTicketStatus[] | Prisma.ListEnumPortTicketStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.PortTicketStatus[] | Prisma.ListEnumPortTicketStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumPortTicketStatusFilter<$PrismaModel> | $Enums.PortTicketStatus
-}
-
 export type NestedEnumPortTicketQeshmondiStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.PortTicketQeshmondiStatus | Prisma.EnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel>
   in?: $Enums.PortTicketQeshmondiStatus[] | Prisma.ListEnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.PortTicketQeshmondiStatus[] | Prisma.ListEnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumPortTicketQeshmondiStatusFilter<$PrismaModel> | $Enums.PortTicketQeshmondiStatus
-}
-
-export type NestedEnumPortTicketStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PortTicketStatus | Prisma.EnumPortTicketStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.PortTicketStatus[] | Prisma.ListEnumPortTicketStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.PortTicketStatus[] | Prisma.ListEnumPortTicketStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumPortTicketStatusWithAggregatesFilter<$PrismaModel> | $Enums.PortTicketStatus
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPortTicketStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPortTicketStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumPortTicketQeshmondiStatusWithAggregatesFilter<$PrismaModel = never> = {

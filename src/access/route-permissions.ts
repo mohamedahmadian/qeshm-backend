@@ -137,6 +137,7 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/singard/categories', permissions: ['singard.categories'] },
   { prefix: '/singard/feedbacks', permissions: ['singard.inbox'] },
   { prefix: '/port-sales-reports', permissions: ['stakeholders.port-sales-reports'] },
+  { prefix: '/ticket-tariffs', permissions: ['stakeholders.ticket-tariffs'] },
   {
     prefix: '/stakeholders/contractors',
     permissions: ['management.users', 'stakeholders.inbox', 'stakeholders.reports'],

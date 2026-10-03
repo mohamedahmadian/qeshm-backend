@@ -6,8 +6,15 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { buildStyledExcelExport } from '../common/excel-export';
+import { gregorianToJalali } from '../common/jalali-date';
+import { getRequestLocale } from '../common/request-locale';
 import { decodeUploadedFileName } from '../common/upload-filename';
-import { parseIsoDate, toIsoDateOnly, toTehranIsoDateOnly } from '../common/iso-date';
+import {
+  parseIsoDate,
+  startOfIranWeekIso,
+  toIsoDateOnly,
+  toTehranIsoDateOnly,
+} from '../common/iso-date';
 import {
   containsInsensitive,
   paginatedResult,
@@ -18,13 +25,10 @@ import { resolveSortOrder } from '../common/sort-query';
 import {
   normalizeDocumentType,
 } from '../files/files.service';
-import { PortTicketQeshmondiStatus, PortTicketStatus, Prisma } from '../generated/prisma/client';
+import { PortTicketQeshmondiStatus, Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePortSalesReportDto } from './dto/create-port-sales-report.dto';
-import {
-  ExportPortTicketSalesQueryDto,
-  type PortTicketExportGroup,
-} from './dto/export-port-ticket-sales-query.dto';
+import { ExportPortTicketSalesQueryDto } from './dto/export-port-ticket-sales-query.dto';
 import { FindPortSalesReportsQueryDto } from './dto/find-port-sales-reports-query.dto';
 import { FindPortTicketSalesQueryDto } from './dto/find-port-ticket-sales-query.dto';
 import { UpdatePortSalesReportDto } from './dto/update-port-sales-report.dto';
@@ -33,9 +37,10 @@ import {
   DEFAULT_PORT_ORIGIN,
   MAX_PORT_SALES_EXCEL_BYTES,
 } from './port-sales.constants';
-import { mapTicketStatus, parsePortTicketExcel, type PortTicketExcelRow } from './port-ticket-excel';
+import { parsePortTicketExcel, type PortTicketExcelRow } from './port-ticket-excel';
 
 const NATIONAL_ID_PREFIX = '345';
+const WEEKLY_TRIP_LIMIT = 1;
 
 const TICKET_INSERT_CHUNK = 400;
 const IMPORT_JOB_TTL_MS = 30 * 60 * 1000;
@@ -88,6 +93,7 @@ function toTicketCreateData(
     ticketNumber: row.ticketNumber,
     reservationCode: row.reservationCode,
     nationalId: row.nationalId,
+    passportNumber: row.passportNumber,
     firstName: row.firstName,
     lastName: row.lastName,
     fullName: row.fullName,
@@ -98,8 +104,7 @@ function toTicketCreateData(
     travelTime: row.travelTime,
     origin: row.origin,
     destination: row.destination,
-    ticketStatus: row.ticketStatus,
-    ticketStatusRaw: row.ticketStatusRaw,
+    citizenship: row.citizenship,
     amount: row.amount,
     seatNumber: row.seatNumber,
     ticketType: row.ticketType,
@@ -143,6 +148,7 @@ const ticketSelect = {
   ticketNumber: true,
   reservationCode: true,
   nationalId: true,
+  passportNumber: true,
   firstName: true,
   lastName: true,
   fullName: true,
@@ -153,9 +159,8 @@ const ticketSelect = {
   travelTime: true,
   origin: true,
   destination: true,
-  ticketStatus: true,
-  ticketStatusRaw: true,
   qeshmondiStatus: true,
+  citizenship: true,
   amount: true,
   seatNumber: true,
   ticketType: true,
@@ -220,70 +225,78 @@ function wasQeshmondiOn(
   return Boolean(start || end || user.isQeshmondi);
 }
 
-function ticketExportWhere(
-  reportId: string,
-  group: PortTicketExportGroup,
-): Prisma.PortTicketSaleWhereInput {
-  if (group === 'invalid') {
-    return {
-      reportId,
-      qeshmondiStatus: PortTicketQeshmondiStatus.INVALID,
-      ticketStatus: PortTicketStatus.IN_TRIP,
-    };
+function weeklyQuotaExcessInFile(
+  reportIso: string | null,
+  tickets: { id: string; nationalId: string | null; travelDate: Date | null }[],
+) {
+  const tripCounts = new Map<string, number>();
+  const placed: { id: string; nationalId: string; week: string }[] = [];
+  for (const ticket of tickets) {
+    if (!ticket.nationalId) continue;
+    const iso = toTehranIsoDateOnly(ticket.travelDate) ?? reportIso;
+    if (!iso) continue;
+    const week = startOfIranWeekIso(iso);
+    const key = `${week}\n${ticket.nationalId}`;
+    tripCounts.set(key, (tripCounts.get(key) ?? 0) + 1);
+    placed.push({ id: ticket.id, nationalId: ticket.nationalId, week });
   }
-  if (group === 'cancelled') {
-    return { reportId, ticketStatus: PortTicketStatus.OPERATOR_CANCELLED };
+  const excessIds: string[] = [];
+  const people = new Set<string>();
+  for (const ticket of placed) {
+    const count = tripCounts.get(`${ticket.week}\n${ticket.nationalId}`) ?? 0;
+    if (count <= WEEKLY_TRIP_LIMIT) continue;
+    excessIds.push(ticket.id);
+    people.add(ticket.nationalId);
   }
-  if (group === 'expired') {
-    return { reportId, ticketStatus: PortTicketStatus.EXPIRED };
+  return { excessIds, tripCounts, people };
+}
+
+const FA_DIGITS = '۰۱۲۳۴۵۶۷۸۹';
+const AR_DIGITS = '٠١٢٣٤٥٦٧٨٩';
+
+function localizeExcelDigits(value: string) {
+  const locale = getRequestLocale();
+  const alphabet = locale === 'ar' ? AR_DIGITS : locale === 'fa' || locale === 'ur' ? FA_DIGITS : '';
+  if (!alphabet) return value;
+  return value.replace(/\d/g, (digit) => alphabet[Number(digit)] ?? digit);
+}
+
+function formatShamsiDate(iso: string | null) {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return '';
+  const [year, month, day] = iso.split('-').map(Number);
+  const jalali = gregorianToJalali(year, month, day);
+  return localizeExcelDigits(`${jalali.year}/${jalali.month}/${jalali.day}`);
+}
+
+function qeshmondiExpiryCell(nationalId: string | null, endIso: string | null) {
+  if (endIso) return formatShamsiDate(endIso);
+  if (nationalId?.startsWith(NATIONAL_ID_PREFIX)) {
+    return localizeExcelDigits(`شهروند قشم ${NATIONAL_ID_PREFIX}`);
   }
-  return {
-    reportId,
-    OR: [
-      {
-        qeshmondiStatus: PortTicketQeshmondiStatus.INVALID,
-        ticketStatus: PortTicketStatus.IN_TRIP,
-      },
-      {
-        ticketStatus: {
-          in: [
-            PortTicketStatus.OPERATOR_CANCELLED,
-            PortTicketStatus.EXPIRED,
-            PortTicketStatus.OTHER,
-          ],
-        },
-      },
-    ],
-  };
+  return '';
 }
 
-function ticketExportSheetName(group: PortTicketExportGroup) {
-  if (group === 'invalid') return 'قشموندی نامعتبر';
-  if (group === 'cancelled') return 'ابطال اپراتور';
-  if (group === 'expired') return 'پایان اعتبار';
-  return 'جمع موارد فوق';
-}
-
-function ticketStatusLabel(status: PortTicketStatus) {
-  if (status === PortTicketStatus.IN_TRIP) return 'در سفر';
-  if (status === PortTicketStatus.OPERATOR_CANCELLED) return 'ابطال اپراتور';
-  if (status === PortTicketStatus.EXPIRED) return 'پایان اعتبار';
-  return 'سایر';
-}
-
-function qeshmondiStatusLabel(status: PortTicketQeshmondiStatus) {
-  if (status === PortTicketQeshmondiStatus.VALID) return 'معتبر';
-  if (status === PortTicketQeshmondiStatus.INVALID) return 'نامعتبر';
-  return 'نامشخص';
-}
-
-function emptyStatusCounts(): Record<PortTicketStatus, number> {
-  return {
-    [PortTicketStatus.IN_TRIP]: 0,
-    [PortTicketStatus.OPERATOR_CANCELLED]: 0,
-    [PortTicketStatus.EXPIRED]: 0,
-    [PortTicketStatus.OTHER]: 0,
-  };
+function invalidQeshmondiReason(
+  nationalId: string | null,
+  user:
+    | {
+        isQeshmondi: boolean;
+        qeshmondiStartDate: Date | null;
+        qeshmondiEndDate: Date | null;
+      }
+    | undefined,
+  checkIso: string,
+) {
+  if (!nationalId) return 'کد ملی ثبت نشده';
+  if (nationalId.startsWith(NATIONAL_ID_PREFIX)) {
+    return localizeExcelDigits(`شهروند قشم ${NATIONAL_ID_PREFIX}`);
+  }
+  if (!user) return 'در سامانه قشموندی ثبت نشده';
+  const start = toTehranIsoDateOnly(user.qeshmondiStartDate);
+  const end = toTehranIsoDateOnly(user.qeshmondiEndDate);
+  if (start && checkIso < start) return 'در تاریخ سفر هنوز قشموند نبوده';
+  if (end && checkIso > end) return 'تاریخ انقضای شهروندی گذشته';
+  return 'قشموند نیست';
 }
 
 @Injectable()
@@ -346,13 +359,7 @@ export class PortSalesReportsService {
     if (!item) {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
-    await this.backfillTicketStatuses(id);
-    const [grouped, prefixIds, validQeshmondiCount, invalidGrouped] = await Promise.all([
-      this.prisma.portTicketSale.groupBy({
-        by: ['ticketStatus'],
-        where: { reportId: id },
-        _count: { _all: true },
-      }),
+    const [prefixIds, validQeshmondiCount, invalidQeshmondiCount, excessPeople] = await Promise.all([
       this.prisma.portTicketSale.findMany({
         where: {
           reportId: id,
@@ -367,50 +374,38 @@ export class PortSalesReportsService {
           qeshmondiStatus: PortTicketQeshmondiStatus.VALID,
         },
       }),
-      this.prisma.portTicketSale.groupBy({
-        by: ['ticketStatus'],
+      this.prisma.portTicketSale.count({
         where: {
           reportId: id,
           qeshmondiStatus: PortTicketQeshmondiStatus.INVALID,
         },
-        _count: { _all: true },
+      }),
+      this.prisma.portTicketSale.findMany({
+        where: { reportId: id, weeklyQuotaExcess: true, nationalId: { not: null } },
+        distinct: ['nationalId'],
+        select: { nationalId: true },
       }),
     ]);
-    const statusCounts = emptyStatusCounts();
-    for (const row of grouped) {
-      statusCounts[row.ticketStatus] = row._count._all;
-    }
-    const invalidStatusCounts = emptyStatusCounts();
-    for (const row of invalidGrouped) {
-      invalidStatusCounts[row.ticketStatus] = row._count._all;
-    }
-    const invalidQeshmondiCount = invalidStatusCounts[PortTicketStatus.IN_TRIP];
-    const invalidQeshmondiTotal =
-      invalidQeshmondiCount +
-      statusCounts[PortTicketStatus.OPERATOR_CANCELLED] +
-      statusCounts[PortTicketStatus.EXPIRED] +
-      statusCounts[PortTicketStatus.OTHER];
     return {
       ...serializeReport(item),
-      statusCounts,
       nationalIdPrefix: NATIONAL_ID_PREFIX,
       nationalIdPrefixCount: prefixIds.length,
       validQeshmondiCount,
       invalidQeshmondiCount,
-      invalidQeshmondiTotal,
+      weeklyQuotaExcessCount: excessPeople.length,
     };
   }
 
   async findTickets(reportId: string, query: FindPortTicketSalesQueryDto) {
     await this.assertExists(reportId);
-    await this.backfillTicketStatuses(reportId);
     const where: Prisma.PortTicketSaleWhereInput = {
       reportId,
-      ticketStatus: query.ticketStatus,
       qeshmondiStatus: query.qeshmondiStatus,
+      weeklyQuotaExcess: query.weeklyQuota === 'excess' ? true : undefined,
       OR: query.q
         ? [
             { nationalId: containsInsensitive(query.q) },
+            { passportNumber: containsInsensitive(query.q) },
             { fullName: containsInsensitive(query.q) },
             { firstName: containsInsensitive(query.q) },
             { lastName: containsInsensitive(query.q) },
@@ -425,8 +420,9 @@ export class PortSalesReportsService {
       {
         ticketNumber: (dir) => ({ ticketNumber: dir }),
         nationalId: (dir) => ({ nationalId: dir }),
+        passportNumber: (dir) => ({ passportNumber: dir }),
         fullName: (dir) => ({ fullName: dir }),
-        ticketStatus: (dir) => ({ ticketStatus: dir }),
+        citizenship: (dir) => ({ citizenship: dir }),
         qeshmondiStatus: (dir) => ({ qeshmondiStatus: dir }),
         travelDate: (dir) => ({ travelDate: dir }),
         amount: (dir) => ({ amount: dir }),
@@ -478,35 +474,89 @@ export class PortSalesReportsService {
   }
 
   async exportTickets(reportId: string, query: ExportPortTicketSalesQueryDto) {
-    await this.assertExists(reportId);
-    await this.backfillTicketStatuses(reportId);
+    if (query.group === 'weekly') {
+      return this.exportWeeklyQuota(reportId);
+    }
+    const report = await this.prisma.portSalesReport.findUnique({
+      where: { id: reportId },
+      select: { reportDate: true },
+    });
+    if (!report) {
+      throw new NotFoundException('گزارش فروش بنادر یافت نشد');
+    }
+    const reportIso = toTehranIsoDateOnly(report.reportDate) ?? '';
     const items = await this.prisma.portTicketSale.findMany({
-      where: ticketExportWhere(reportId, query.group),
+      where: {
+        reportId,
+        qeshmondiStatus: PortTicketQeshmondiStatus.INVALID,
+      },
       orderBy: [{ rowNumber: 'asc' }, { id: 'asc' }],
       select: ticketSelect,
     });
-    const sheetName = ticketExportSheetName(query.group);
+    const nationalIds = [
+      ...new Set(
+        items
+          .map((item) => item.nationalId)
+          .filter(
+            (value): value is string =>
+              Boolean(value) && !value.startsWith(NATIONAL_ID_PREFIX),
+          ),
+      ),
+    ];
+    const users = new Map<
+      string,
+      {
+        isQeshmondi: boolean;
+        qeshmondiStartDate: Date | null;
+        qeshmondiEndDate: Date | null;
+      }
+    >();
+    for (const chunk of chunkItems(nationalIds, 500)) {
+      const found = await this.prisma.user.findMany({
+        where: { nationalId: { in: chunk } },
+        select: {
+          nationalId: true,
+          isQeshmondi: true,
+          qeshmondiStartDate: true,
+          qeshmondiEndDate: true,
+        },
+      });
+      for (const user of found) {
+        if (user.nationalId) users.set(user.nationalId, user);
+      }
+    }
+    const sheetName = 'قشموندی نامعتبر';
     return buildStyledExcelExport({
       sheetName,
       fileName: `${sheetName}.xlsx`,
       columns: [
         { header: 'شماره بلیت', key: 'ticketNumber', width: 16 },
         { header: 'کد ملی', key: 'nationalId', width: 16 },
+        { header: 'پاسپورت', key: 'passportNumber', width: 16 },
         { header: 'نام مسافر', key: 'fullName', width: 28 },
-        { header: 'وضعیت', key: 'ticketStatus', width: 18 },
-        { header: 'قشموندی', key: 'qeshmondiStatus', width: 14 },
+        { header: 'شهروندی', key: 'citizenship', width: 16 },
         { header: 'تاریخ حرکت', key: 'travelDate', width: 16 },
+        { header: 'تاریخ انقضای شهروندی', key: 'qeshmondiEndDate', width: 22 },
+        { header: 'علت نامعتبر بودن', key: 'invalidReason', width: 32 },
         { header: 'مبلغ', key: 'amount', width: 14 },
       ],
-      rows: items.map((item) => ({
-        ticketNumber: item.ticketNumber ?? '',
-        nationalId: item.nationalId ?? '',
-        fullName: item.fullName ?? '',
-        ticketStatus: ticketStatusLabel(item.ticketStatus),
-        qeshmondiStatus: qeshmondiStatusLabel(item.qeshmondiStatus),
-        travelDate: toTehranIsoDateOnly(item.travelDate) ?? '',
-        amount: item.amount ?? '',
-      })),
+      rows: items.map((item) => {
+        const user = item.nationalId ? users.get(item.nationalId) : undefined;
+        const travelIso = toTehranIsoDateOnly(item.travelDate);
+        const checkIso = travelIso ?? reportIso;
+        const endIso = user ? toTehranIsoDateOnly(user.qeshmondiEndDate) : null;
+        return {
+          ticketNumber: item.ticketNumber ?? '',
+          nationalId: item.nationalId ?? '',
+          passportNumber: item.passportNumber ?? '',
+          fullName: item.fullName ?? '',
+          citizenship: item.citizenship ?? '',
+          travelDate: formatShamsiDate(travelIso),
+          qeshmondiEndDate: qeshmondiExpiryCell(item.nationalId, endIso),
+          invalidReason: invalidQeshmondiReason(item.nationalId, user, checkIso),
+          amount: item.amount ?? '',
+        };
+      }),
     });
   }
 
@@ -734,6 +784,18 @@ export class PortSalesReportsService {
       });
     }
 
+    const quota = weeklyQuotaExcessInFile(reportIso, tickets);
+    await this.prisma.portTicketSale.updateMany({
+      where: { reportId: id },
+      data: { weeklyQuotaExcess: false },
+    });
+    for (const chunk of chunkItems(quota.excessIds, TICKET_INSERT_CHUNK)) {
+      await this.prisma.portTicketSale.updateMany({
+        where: { id: { in: chunk } },
+        data: { weeklyQuotaExcess: true },
+      });
+    }
+
     return this.findOne(id);
   }
 
@@ -787,25 +849,64 @@ export class PortSalesReportsService {
     };
   }
 
-  private async backfillTicketStatuses(reportId: string) {
-    const others = await this.prisma.portTicketSale.findMany({
-      where: { reportId, ticketStatus: PortTicketStatus.OTHER },
-      select: { id: true, ticketStatusRaw: true },
+  private async exportWeeklyQuota(reportId: string) {
+    const report = await this.prisma.portSalesReport.findUnique({
+      where: { id: reportId },
+      select: { reportDate: true, originalFileName: true },
     });
-    const byStatus = new Map<PortTicketStatus, string[]>();
-    for (const row of others) {
-      const next = mapTicketStatus(row.ticketStatusRaw);
-      if (next === PortTicketStatus.OTHER) continue;
-      const ids = byStatus.get(next) ?? [];
-      ids.push(row.id);
-      byStatus.set(next, ids);
+    if (!report) {
+      throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
-    for (const [ticketStatus, ids] of byStatus) {
-      await this.prisma.portTicketSale.updateMany({
-        where: { id: { in: ids } },
-        data: { ticketStatus },
-      });
-    }
+    const reportIso = toTehranIsoDateOnly(report.reportDate);
+    const [items, counted] = await Promise.all([
+      this.prisma.portTicketSale.findMany({
+        where: { reportId, weeklyQuotaExcess: true },
+        orderBy: [{ nationalId: 'asc' }, { travelDate: 'asc' }, { id: 'asc' }],
+        select: {
+          ticketNumber: true,
+          nationalId: true,
+          fullName: true,
+          travelDate: true,
+        },
+      }),
+      this.prisma.portTicketSale.findMany({
+        where: { reportId, nationalId: { not: null } },
+        select: { id: true, nationalId: true, travelDate: true },
+      }),
+    ]);
+    const quota = weeklyQuotaExcessInFile(reportIso, counted);
+    const reportFile = decodeUploadedFileName(report.originalFileName);
+    const sheetName = 'سهمیه هفتگی مازاد';
+    return buildStyledExcelExport({
+      sheetName,
+      fileName: `${sheetName}.xlsx`,
+      columns: [
+        { header: 'کد ملی', key: 'nationalId', width: 16 },
+        { header: 'نام مسافر', key: 'fullName', width: 28 },
+        { header: 'شماره بلیت', key: 'ticketNumber', width: 16 },
+        { header: 'تاریخ حرکت', key: 'travelDate', width: 16 },
+        { header: 'تعداد سفر در هفته', key: 'weekTrips', width: 18 },
+        { header: 'فایل گزارش', key: 'reportFile', width: 28 },
+      ],
+      rows: items.flatMap((item) => {
+        if (!item.nationalId) return [];
+        const iso = toTehranIsoDateOnly(item.travelDate) ?? reportIso;
+        if (!iso) return [];
+        const week = startOfIranWeekIso(iso);
+        const weekTrips = quota.tripCounts.get(`${week}\n${item.nationalId}`) ?? 0;
+        if (weekTrips <= WEEKLY_TRIP_LIMIT) return [];
+        return [
+          {
+            nationalId: item.nationalId,
+            fullName: item.fullName ?? '',
+            ticketNumber: item.ticketNumber ?? '',
+            travelDate: formatShamsiDate(iso),
+            weekTrips,
+            reportFile,
+          },
+        ];
+      }),
+    });
   }
 
   private async assertExists(id: string) {

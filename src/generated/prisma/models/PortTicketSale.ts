@@ -43,6 +43,7 @@ export type PortTicketSaleMinAggregateOutputType = {
   ticketNumber: string | null
   reservationCode: string | null
   nationalId: string | null
+  passportNumber: string | null
   firstName: string | null
   lastName: string | null
   fullName: string | null
@@ -53,9 +54,9 @@ export type PortTicketSaleMinAggregateOutputType = {
   travelTime: string | null
   origin: string | null
   destination: string | null
-  ticketStatus: $Enums.PortTicketStatus | null
-  ticketStatusRaw: string | null
   qeshmondiStatus: $Enums.PortTicketQeshmondiStatus | null
+  weeklyQuotaExcess: boolean | null
+  citizenship: string | null
   amount: number | null
   seatNumber: string | null
   ticketType: string | null
@@ -70,6 +71,7 @@ export type PortTicketSaleMaxAggregateOutputType = {
   ticketNumber: string | null
   reservationCode: string | null
   nationalId: string | null
+  passportNumber: string | null
   firstName: string | null
   lastName: string | null
   fullName: string | null
@@ -80,9 +82,9 @@ export type PortTicketSaleMaxAggregateOutputType = {
   travelTime: string | null
   origin: string | null
   destination: string | null
-  ticketStatus: $Enums.PortTicketStatus | null
-  ticketStatusRaw: string | null
   qeshmondiStatus: $Enums.PortTicketQeshmondiStatus | null
+  weeklyQuotaExcess: boolean | null
+  citizenship: string | null
   amount: number | null
   seatNumber: string | null
   ticketType: string | null
@@ -97,6 +99,7 @@ export type PortTicketSaleCountAggregateOutputType = {
   ticketNumber: number
   reservationCode: number
   nationalId: number
+  passportNumber: number
   firstName: number
   lastName: number
   fullName: number
@@ -107,9 +110,9 @@ export type PortTicketSaleCountAggregateOutputType = {
   travelTime: number
   origin: number
   destination: number
-  ticketStatus: number
-  ticketStatusRaw: number
   qeshmondiStatus: number
+  weeklyQuotaExcess: number
+  citizenship: number
   amount: number
   seatNumber: number
   ticketType: number
@@ -137,6 +140,7 @@ export type PortTicketSaleMinAggregateInputType = {
   ticketNumber?: true
   reservationCode?: true
   nationalId?: true
+  passportNumber?: true
   firstName?: true
   lastName?: true
   fullName?: true
@@ -147,9 +151,9 @@ export type PortTicketSaleMinAggregateInputType = {
   travelTime?: true
   origin?: true
   destination?: true
-  ticketStatus?: true
-  ticketStatusRaw?: true
   qeshmondiStatus?: true
+  weeklyQuotaExcess?: true
+  citizenship?: true
   amount?: true
   seatNumber?: true
   ticketType?: true
@@ -164,6 +168,7 @@ export type PortTicketSaleMaxAggregateInputType = {
   ticketNumber?: true
   reservationCode?: true
   nationalId?: true
+  passportNumber?: true
   firstName?: true
   lastName?: true
   fullName?: true
@@ -174,9 +179,9 @@ export type PortTicketSaleMaxAggregateInputType = {
   travelTime?: true
   origin?: true
   destination?: true
-  ticketStatus?: true
-  ticketStatusRaw?: true
   qeshmondiStatus?: true
+  weeklyQuotaExcess?: true
+  citizenship?: true
   amount?: true
   seatNumber?: true
   ticketType?: true
@@ -191,6 +196,7 @@ export type PortTicketSaleCountAggregateInputType = {
   ticketNumber?: true
   reservationCode?: true
   nationalId?: true
+  passportNumber?: true
   firstName?: true
   lastName?: true
   fullName?: true
@@ -201,9 +207,9 @@ export type PortTicketSaleCountAggregateInputType = {
   travelTime?: true
   origin?: true
   destination?: true
-  ticketStatus?: true
-  ticketStatusRaw?: true
   qeshmondiStatus?: true
+  weeklyQuotaExcess?: true
+  citizenship?: true
   amount?: true
   seatNumber?: true
   ticketType?: true
@@ -306,6 +312,7 @@ export type PortTicketSaleGroupByOutputType = {
   ticketNumber: string | null
   reservationCode: string | null
   nationalId: string | null
+  passportNumber: string | null
   firstName: string | null
   lastName: string | null
   fullName: string | null
@@ -316,9 +323,9 @@ export type PortTicketSaleGroupByOutputType = {
   travelTime: string | null
   origin: string | null
   destination: string | null
-  ticketStatus: $Enums.PortTicketStatus
-  ticketStatusRaw: string | null
   qeshmondiStatus: $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess: boolean
+  citizenship: string | null
   amount: number | null
   seatNumber: string | null
   ticketType: string | null
@@ -357,6 +364,7 @@ export type PortTicketSaleWhereInput = {
   ticketNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   reservationCode?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   nationalId?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
+  passportNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   firstName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   lastName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   fullName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
@@ -367,9 +375,9 @@ export type PortTicketSaleWhereInput = {
   travelTime?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   origin?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   destination?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFilter<"PortTicketSale"> | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFilter<"PortTicketSale"> | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFilter<"PortTicketSale"> | boolean
+  citizenship?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   amount?: Prisma.IntNullableFilter<"PortTicketSale"> | number | null
   seatNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   ticketType?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
@@ -386,6 +394,7 @@ export type PortTicketSaleOrderByWithRelationInput = {
   ticketNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   reservationCode?: Prisma.SortOrderInput | Prisma.SortOrder
   nationalId?: Prisma.SortOrderInput | Prisma.SortOrder
+  passportNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   firstName?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   fullName?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -396,9 +405,9 @@ export type PortTicketSaleOrderByWithRelationInput = {
   travelTime?: Prisma.SortOrderInput | Prisma.SortOrder
   origin?: Prisma.SortOrderInput | Prisma.SortOrder
   destination?: Prisma.SortOrderInput | Prisma.SortOrder
-  ticketStatus?: Prisma.SortOrder
-  ticketStatusRaw?: Prisma.SortOrderInput | Prisma.SortOrder
   qeshmondiStatus?: Prisma.SortOrder
+  weeklyQuotaExcess?: Prisma.SortOrder
+  citizenship?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
   seatNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   ticketType?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -418,6 +427,7 @@ export type PortTicketSaleWhereUniqueInput = Prisma.AtLeast<{
   ticketNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   reservationCode?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   nationalId?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
+  passportNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   firstName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   lastName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   fullName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
@@ -428,9 +438,9 @@ export type PortTicketSaleWhereUniqueInput = Prisma.AtLeast<{
   travelTime?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   origin?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   destination?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFilter<"PortTicketSale"> | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFilter<"PortTicketSale"> | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFilter<"PortTicketSale"> | boolean
+  citizenship?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   amount?: Prisma.IntNullableFilter<"PortTicketSale"> | number | null
   seatNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   ticketType?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
@@ -447,6 +457,7 @@ export type PortTicketSaleOrderByWithAggregationInput = {
   ticketNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   reservationCode?: Prisma.SortOrderInput | Prisma.SortOrder
   nationalId?: Prisma.SortOrderInput | Prisma.SortOrder
+  passportNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   firstName?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   fullName?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -457,9 +468,9 @@ export type PortTicketSaleOrderByWithAggregationInput = {
   travelTime?: Prisma.SortOrderInput | Prisma.SortOrder
   origin?: Prisma.SortOrderInput | Prisma.SortOrder
   destination?: Prisma.SortOrderInput | Prisma.SortOrder
-  ticketStatus?: Prisma.SortOrder
-  ticketStatusRaw?: Prisma.SortOrderInput | Prisma.SortOrder
   qeshmondiStatus?: Prisma.SortOrder
+  weeklyQuotaExcess?: Prisma.SortOrder
+  citizenship?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
   seatNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   ticketType?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -483,6 +494,7 @@ export type PortTicketSaleScalarWhereWithAggregatesInput = {
   ticketNumber?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   reservationCode?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   nationalId?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
+  passportNumber?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   firstName?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   lastName?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   fullName?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
@@ -493,9 +505,9 @@ export type PortTicketSaleScalarWhereWithAggregatesInput = {
   travelTime?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   origin?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   destination?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusWithAggregatesFilter<"PortTicketSale"> | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusWithAggregatesFilter<"PortTicketSale"> | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolWithAggregatesFilter<"PortTicketSale"> | boolean
+  citizenship?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   amount?: Prisma.IntNullableWithAggregatesFilter<"PortTicketSale"> | number | null
   seatNumber?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
   ticketType?: Prisma.StringNullableWithAggregatesFilter<"PortTicketSale"> | string | null
@@ -510,6 +522,7 @@ export type PortTicketSaleCreateInput = {
   ticketNumber?: string | null
   reservationCode?: string | null
   nationalId?: string | null
+  passportNumber?: string | null
   firstName?: string | null
   lastName?: string | null
   fullName?: string | null
@@ -520,9 +533,9 @@ export type PortTicketSaleCreateInput = {
   travelTime?: string | null
   origin?: string | null
   destination?: string | null
-  ticketStatus?: $Enums.PortTicketStatus
-  ticketStatusRaw?: string | null
   qeshmondiStatus?: $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: boolean
+  citizenship?: string | null
   amount?: number | null
   seatNumber?: string | null
   ticketType?: string | null
@@ -539,6 +552,7 @@ export type PortTicketSaleUncheckedCreateInput = {
   ticketNumber?: string | null
   reservationCode?: string | null
   nationalId?: string | null
+  passportNumber?: string | null
   firstName?: string | null
   lastName?: string | null
   fullName?: string | null
@@ -549,9 +563,9 @@ export type PortTicketSaleUncheckedCreateInput = {
   travelTime?: string | null
   origin?: string | null
   destination?: string | null
-  ticketStatus?: $Enums.PortTicketStatus
-  ticketStatusRaw?: string | null
   qeshmondiStatus?: $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: boolean
+  citizenship?: string | null
   amount?: number | null
   seatNumber?: string | null
   ticketType?: string | null
@@ -566,6 +580,7 @@ export type PortTicketSaleUpdateInput = {
   ticketNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reservationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -576,9 +591,9 @@ export type PortTicketSaleUpdateInput = {
   travelTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   origin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFieldUpdateOperationsInput | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFieldUpdateOperationsInput | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  citizenship?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   seatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -595,6 +610,7 @@ export type PortTicketSaleUncheckedUpdateInput = {
   ticketNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reservationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -605,9 +621,9 @@ export type PortTicketSaleUncheckedUpdateInput = {
   travelTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   origin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFieldUpdateOperationsInput | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFieldUpdateOperationsInput | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  citizenship?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   seatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -623,6 +639,7 @@ export type PortTicketSaleCreateManyInput = {
   ticketNumber?: string | null
   reservationCode?: string | null
   nationalId?: string | null
+  passportNumber?: string | null
   firstName?: string | null
   lastName?: string | null
   fullName?: string | null
@@ -633,9 +650,9 @@ export type PortTicketSaleCreateManyInput = {
   travelTime?: string | null
   origin?: string | null
   destination?: string | null
-  ticketStatus?: $Enums.PortTicketStatus
-  ticketStatusRaw?: string | null
   qeshmondiStatus?: $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: boolean
+  citizenship?: string | null
   amount?: number | null
   seatNumber?: string | null
   ticketType?: string | null
@@ -650,6 +667,7 @@ export type PortTicketSaleUpdateManyMutationInput = {
   ticketNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reservationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -660,9 +678,9 @@ export type PortTicketSaleUpdateManyMutationInput = {
   travelTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   origin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFieldUpdateOperationsInput | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFieldUpdateOperationsInput | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  citizenship?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   seatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -678,6 +696,7 @@ export type PortTicketSaleUncheckedUpdateManyInput = {
   ticketNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reservationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -688,9 +707,9 @@ export type PortTicketSaleUncheckedUpdateManyInput = {
   travelTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   origin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFieldUpdateOperationsInput | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFieldUpdateOperationsInput | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  citizenship?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   seatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -716,6 +735,7 @@ export type PortTicketSaleCountOrderByAggregateInput = {
   ticketNumber?: Prisma.SortOrder
   reservationCode?: Prisma.SortOrder
   nationalId?: Prisma.SortOrder
+  passportNumber?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
@@ -726,9 +746,9 @@ export type PortTicketSaleCountOrderByAggregateInput = {
   travelTime?: Prisma.SortOrder
   origin?: Prisma.SortOrder
   destination?: Prisma.SortOrder
-  ticketStatus?: Prisma.SortOrder
-  ticketStatusRaw?: Prisma.SortOrder
   qeshmondiStatus?: Prisma.SortOrder
+  weeklyQuotaExcess?: Prisma.SortOrder
+  citizenship?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   seatNumber?: Prisma.SortOrder
   ticketType?: Prisma.SortOrder
@@ -749,6 +769,7 @@ export type PortTicketSaleMaxOrderByAggregateInput = {
   ticketNumber?: Prisma.SortOrder
   reservationCode?: Prisma.SortOrder
   nationalId?: Prisma.SortOrder
+  passportNumber?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
@@ -759,9 +780,9 @@ export type PortTicketSaleMaxOrderByAggregateInput = {
   travelTime?: Prisma.SortOrder
   origin?: Prisma.SortOrder
   destination?: Prisma.SortOrder
-  ticketStatus?: Prisma.SortOrder
-  ticketStatusRaw?: Prisma.SortOrder
   qeshmondiStatus?: Prisma.SortOrder
+  weeklyQuotaExcess?: Prisma.SortOrder
+  citizenship?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   seatNumber?: Prisma.SortOrder
   ticketType?: Prisma.SortOrder
@@ -776,6 +797,7 @@ export type PortTicketSaleMinOrderByAggregateInput = {
   ticketNumber?: Prisma.SortOrder
   reservationCode?: Prisma.SortOrder
   nationalId?: Prisma.SortOrder
+  passportNumber?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
@@ -786,9 +808,9 @@ export type PortTicketSaleMinOrderByAggregateInput = {
   travelTime?: Prisma.SortOrder
   origin?: Prisma.SortOrder
   destination?: Prisma.SortOrder
-  ticketStatus?: Prisma.SortOrder
-  ticketStatusRaw?: Prisma.SortOrder
   qeshmondiStatus?: Prisma.SortOrder
+  weeklyQuotaExcess?: Prisma.SortOrder
+  citizenship?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   seatNumber?: Prisma.SortOrder
   ticketType?: Prisma.SortOrder
@@ -843,10 +865,6 @@ export type PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput = {
   deleteMany?: Prisma.PortTicketSaleScalarWhereInput | Prisma.PortTicketSaleScalarWhereInput[]
 }
 
-export type EnumPortTicketStatusFieldUpdateOperationsInput = {
-  set?: $Enums.PortTicketStatus
-}
-
 export type EnumPortTicketQeshmondiStatusFieldUpdateOperationsInput = {
   set?: $Enums.PortTicketQeshmondiStatus
 }
@@ -857,6 +875,7 @@ export type PortTicketSaleCreateWithoutReportInput = {
   ticketNumber?: string | null
   reservationCode?: string | null
   nationalId?: string | null
+  passportNumber?: string | null
   firstName?: string | null
   lastName?: string | null
   fullName?: string | null
@@ -867,9 +886,9 @@ export type PortTicketSaleCreateWithoutReportInput = {
   travelTime?: string | null
   origin?: string | null
   destination?: string | null
-  ticketStatus?: $Enums.PortTicketStatus
-  ticketStatusRaw?: string | null
   qeshmondiStatus?: $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: boolean
+  citizenship?: string | null
   amount?: number | null
   seatNumber?: string | null
   ticketType?: string | null
@@ -884,6 +903,7 @@ export type PortTicketSaleUncheckedCreateWithoutReportInput = {
   ticketNumber?: string | null
   reservationCode?: string | null
   nationalId?: string | null
+  passportNumber?: string | null
   firstName?: string | null
   lastName?: string | null
   fullName?: string | null
@@ -894,9 +914,9 @@ export type PortTicketSaleUncheckedCreateWithoutReportInput = {
   travelTime?: string | null
   origin?: string | null
   destination?: string | null
-  ticketStatus?: $Enums.PortTicketStatus
-  ticketStatusRaw?: string | null
   qeshmondiStatus?: $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: boolean
+  citizenship?: string | null
   amount?: number | null
   seatNumber?: string | null
   ticketType?: string | null
@@ -941,6 +961,7 @@ export type PortTicketSaleScalarWhereInput = {
   ticketNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   reservationCode?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   nationalId?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
+  passportNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   firstName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   lastName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   fullName?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
@@ -951,9 +972,9 @@ export type PortTicketSaleScalarWhereInput = {
   travelTime?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   origin?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   destination?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFilter<"PortTicketSale"> | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFilter<"PortTicketSale"> | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFilter<"PortTicketSale"> | boolean
+  citizenship?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   amount?: Prisma.IntNullableFilter<"PortTicketSale"> | number | null
   seatNumber?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
   ticketType?: Prisma.StringNullableFilter<"PortTicketSale"> | string | null
@@ -968,6 +989,7 @@ export type PortTicketSaleCreateManyReportInput = {
   ticketNumber?: string | null
   reservationCode?: string | null
   nationalId?: string | null
+  passportNumber?: string | null
   firstName?: string | null
   lastName?: string | null
   fullName?: string | null
@@ -978,9 +1000,9 @@ export type PortTicketSaleCreateManyReportInput = {
   travelTime?: string | null
   origin?: string | null
   destination?: string | null
-  ticketStatus?: $Enums.PortTicketStatus
-  ticketStatusRaw?: string | null
   qeshmondiStatus?: $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: boolean
+  citizenship?: string | null
   amount?: number | null
   seatNumber?: string | null
   ticketType?: string | null
@@ -995,6 +1017,7 @@ export type PortTicketSaleUpdateWithoutReportInput = {
   ticketNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reservationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1005,9 +1028,9 @@ export type PortTicketSaleUpdateWithoutReportInput = {
   travelTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   origin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFieldUpdateOperationsInput | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFieldUpdateOperationsInput | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  citizenship?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   seatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1022,6 +1045,7 @@ export type PortTicketSaleUncheckedUpdateWithoutReportInput = {
   ticketNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reservationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1032,9 +1056,9 @@ export type PortTicketSaleUncheckedUpdateWithoutReportInput = {
   travelTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   origin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFieldUpdateOperationsInput | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFieldUpdateOperationsInput | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  citizenship?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   seatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1049,6 +1073,7 @@ export type PortTicketSaleUncheckedUpdateManyWithoutReportInput = {
   ticketNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reservationCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1059,9 +1084,9 @@ export type PortTicketSaleUncheckedUpdateManyWithoutReportInput = {
   travelTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   origin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   destination?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketStatus?: Prisma.EnumPortTicketStatusFieldUpdateOperationsInput | $Enums.PortTicketStatus
-  ticketStatusRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiStatus?: Prisma.EnumPortTicketQeshmondiStatusFieldUpdateOperationsInput | $Enums.PortTicketQeshmondiStatus
+  weeklyQuotaExcess?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  citizenship?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   seatNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1079,6 +1104,7 @@ export type PortTicketSaleSelect<ExtArgs extends runtime.Types.Extensions.Intern
   ticketNumber?: boolean
   reservationCode?: boolean
   nationalId?: boolean
+  passportNumber?: boolean
   firstName?: boolean
   lastName?: boolean
   fullName?: boolean
@@ -1089,9 +1115,9 @@ export type PortTicketSaleSelect<ExtArgs extends runtime.Types.Extensions.Intern
   travelTime?: boolean
   origin?: boolean
   destination?: boolean
-  ticketStatus?: boolean
-  ticketStatusRaw?: boolean
   qeshmondiStatus?: boolean
+  weeklyQuotaExcess?: boolean
+  citizenship?: boolean
   amount?: boolean
   seatNumber?: boolean
   ticketType?: boolean
@@ -1108,6 +1134,7 @@ export type PortTicketSaleSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   ticketNumber?: boolean
   reservationCode?: boolean
   nationalId?: boolean
+  passportNumber?: boolean
   firstName?: boolean
   lastName?: boolean
   fullName?: boolean
@@ -1118,9 +1145,9 @@ export type PortTicketSaleSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   travelTime?: boolean
   origin?: boolean
   destination?: boolean
-  ticketStatus?: boolean
-  ticketStatusRaw?: boolean
   qeshmondiStatus?: boolean
+  weeklyQuotaExcess?: boolean
+  citizenship?: boolean
   amount?: boolean
   seatNumber?: boolean
   ticketType?: boolean
@@ -1137,6 +1164,7 @@ export type PortTicketSaleSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   ticketNumber?: boolean
   reservationCode?: boolean
   nationalId?: boolean
+  passportNumber?: boolean
   firstName?: boolean
   lastName?: boolean
   fullName?: boolean
@@ -1147,9 +1175,9 @@ export type PortTicketSaleSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   travelTime?: boolean
   origin?: boolean
   destination?: boolean
-  ticketStatus?: boolean
-  ticketStatusRaw?: boolean
   qeshmondiStatus?: boolean
+  weeklyQuotaExcess?: boolean
+  citizenship?: boolean
   amount?: boolean
   seatNumber?: boolean
   ticketType?: boolean
@@ -1166,6 +1194,7 @@ export type PortTicketSaleSelectScalar = {
   ticketNumber?: boolean
   reservationCode?: boolean
   nationalId?: boolean
+  passportNumber?: boolean
   firstName?: boolean
   lastName?: boolean
   fullName?: boolean
@@ -1176,9 +1205,9 @@ export type PortTicketSaleSelectScalar = {
   travelTime?: boolean
   origin?: boolean
   destination?: boolean
-  ticketStatus?: boolean
-  ticketStatusRaw?: boolean
   qeshmondiStatus?: boolean
+  weeklyQuotaExcess?: boolean
+  citizenship?: boolean
   amount?: boolean
   seatNumber?: boolean
   ticketType?: boolean
@@ -1187,7 +1216,7 @@ export type PortTicketSaleSelectScalar = {
   createdAt?: boolean
 }
 
-export type PortTicketSaleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportId" | "rowNumber" | "ticketNumber" | "reservationCode" | "nationalId" | "firstName" | "lastName" | "fullName" | "fatherName" | "gender" | "phone" | "travelDate" | "travelTime" | "origin" | "destination" | "ticketStatus" | "ticketStatusRaw" | "qeshmondiStatus" | "amount" | "seatNumber" | "ticketType" | "vesselName" | "extras" | "createdAt", ExtArgs["result"]["portTicketSale"]>
+export type PortTicketSaleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportId" | "rowNumber" | "ticketNumber" | "reservationCode" | "nationalId" | "passportNumber" | "firstName" | "lastName" | "fullName" | "fatherName" | "gender" | "phone" | "travelDate" | "travelTime" | "origin" | "destination" | "qeshmondiStatus" | "weeklyQuotaExcess" | "citizenship" | "amount" | "seatNumber" | "ticketType" | "vesselName" | "extras" | "createdAt", ExtArgs["result"]["portTicketSale"]>
 export type PortTicketSaleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report?: boolean | Prisma.PortSalesReportDefaultArgs<ExtArgs>
 }
@@ -1210,6 +1239,7 @@ export type $PortTicketSalePayload<ExtArgs extends runtime.Types.Extensions.Inte
     ticketNumber: string | null
     reservationCode: string | null
     nationalId: string | null
+    passportNumber: string | null
     firstName: string | null
     lastName: string | null
     fullName: string | null
@@ -1220,9 +1250,9 @@ export type $PortTicketSalePayload<ExtArgs extends runtime.Types.Extensions.Inte
     travelTime: string | null
     origin: string | null
     destination: string | null
-    ticketStatus: $Enums.PortTicketStatus
-    ticketStatusRaw: string | null
     qeshmondiStatus: $Enums.PortTicketQeshmondiStatus
+    weeklyQuotaExcess: boolean
+    citizenship: string | null
     amount: number | null
     seatNumber: string | null
     ticketType: string | null
@@ -1659,6 +1689,7 @@ export interface PortTicketSaleFieldRefs {
   readonly ticketNumber: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly reservationCode: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly nationalId: Prisma.FieldRef<"PortTicketSale", 'String'>
+  readonly passportNumber: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly firstName: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly lastName: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly fullName: Prisma.FieldRef<"PortTicketSale", 'String'>
@@ -1669,9 +1700,9 @@ export interface PortTicketSaleFieldRefs {
   readonly travelTime: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly origin: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly destination: Prisma.FieldRef<"PortTicketSale", 'String'>
-  readonly ticketStatus: Prisma.FieldRef<"PortTicketSale", 'PortTicketStatus'>
-  readonly ticketStatusRaw: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly qeshmondiStatus: Prisma.FieldRef<"PortTicketSale", 'PortTicketQeshmondiStatus'>
+  readonly weeklyQuotaExcess: Prisma.FieldRef<"PortTicketSale", 'Boolean'>
+  readonly citizenship: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly amount: Prisma.FieldRef<"PortTicketSale", 'Int'>
   readonly seatNumber: Prisma.FieldRef<"PortTicketSale", 'String'>
   readonly ticketType: Prisma.FieldRef<"PortTicketSale", 'String'>

@@ -104,7 +104,8 @@ export const ModelName = {
   StakeholderProgressReport: 'StakeholderProgressReport',
   StakeholderCorrespondence: 'StakeholderCorrespondence',
   StakeholderMessage: 'StakeholderMessage',
-  StakeholderAttachment: 'StakeholderAttachment'
+  StakeholderAttachment: 'StakeholderAttachment',
+  TicketTariff: 'TicketTariff'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -919,6 +920,7 @@ export const PortTicketSaleScalarFieldEnum = {
   ticketNumber: 'ticketNumber',
   reservationCode: 'reservationCode',
   nationalId: 'nationalId',
+  passportNumber: 'passportNumber',
   firstName: 'firstName',
   lastName: 'lastName',
   fullName: 'fullName',
@@ -929,9 +931,9 @@ export const PortTicketSaleScalarFieldEnum = {
   travelTime: 'travelTime',
   origin: 'origin',
   destination: 'destination',
-  ticketStatus: 'ticketStatus',
-  ticketStatusRaw: 'ticketStatusRaw',
   qeshmondiStatus: 'qeshmondiStatus',
+  weeklyQuotaExcess: 'weeklyQuotaExcess',
+  citizenship: 'citizenship',
   amount: 'amount',
   seatNumber: 'seatNumber',
   ticketType: 'ticketType',
@@ -1003,6 +1005,22 @@ export const StakeholderAttachmentScalarFieldEnum = {
 } as const
 
 export type StakeholderAttachmentScalarFieldEnum = (typeof StakeholderAttachmentScalarFieldEnum)[keyof typeof StakeholderAttachmentScalarFieldEnum]
+
+
+export const TicketTariffScalarFieldEnum = {
+  id: 'id',
+  year: 'year',
+  individualPrice: 'individualPrice',
+  individualQeshmondiPrice: 'individualQeshmondiPrice',
+  individualSubsidy: 'individualSubsidy',
+  vehiclePrice: 'vehiclePrice',
+  vehicleQeshmondiPrice: 'vehicleQeshmondiPrice',
+  vehicleSubsidy: 'vehicleSubsidy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketTariffScalarFieldEnum = (typeof TicketTariffScalarFieldEnum)[keyof typeof TicketTariffScalarFieldEnum]
 
 
 export const SortOrder = {

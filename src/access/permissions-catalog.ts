@@ -68,6 +68,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
         kind: 'MENU',
         nameKey: 'menus.portSalesReports',
       },
+      {
+        code: 'stakeholders.ticket-tariffs',
+        kind: 'MENU',
+        nameKey: 'menus.ticketTariffs',
+      },
     ],
   },
   {

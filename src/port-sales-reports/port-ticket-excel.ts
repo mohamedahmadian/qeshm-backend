@@ -1,14 +1,18 @@
 import ExcelJS from 'exceljs';
-import { toLatinDigits } from '../common/national-id';
-import { normalizeNationalId } from '../common/national-id';
 import { parseJalaliCompactToIso, parseJalaliSlashToIso } from '../common/jalali-date';
-import { PortTicketStatus } from '../generated/prisma/client';
+import {
+  isValidIranianNationalId,
+  normalizeNationalId,
+  normalizePassportNumber,
+  toLatinDigits,
+} from '../common/national-id';
 
 export type PortTicketExcelRow = {
   rowNumber: number;
   ticketNumber: string | null;
   reservationCode: string | null;
   nationalId: string | null;
+  passportNumber: string | null;
   firstName: string | null;
   lastName: string | null;
   fullName: string | null;
@@ -19,8 +23,7 @@ export type PortTicketExcelRow = {
   travelTime: string | null;
   origin: string | null;
   destination: string | null;
-  ticketStatus: PortTicketStatus;
-  ticketStatusRaw: string | null;
+  citizenship: string | null;
   amount: number | null;
   seatNumber: string | null;
   ticketType: string | null;
@@ -32,6 +35,8 @@ type MappedField =
   | 'ticketNumber'
   | 'reservationCode'
   | 'nationalId'
+  | 'passportNumber'
+  | 'identity'
   | 'firstName'
   | 'lastName'
   | 'fullName'
@@ -42,7 +47,7 @@ type MappedField =
   | 'travelTime'
   | 'origin'
   | 'destination'
-  | 'ticketStatus'
+  | 'citizenship'
   | 'amount'
   | 'seatNumber'
   | 'ticketType'
@@ -86,6 +91,13 @@ const HEADER_ALIASES: Record<string, MappedField> = {
   nationalcode: 'nationalId',
   mellicode: 'nationalId',
   ncode: 'nationalId',
+  پاسپورت: 'passportNumber',
+  شمارهپاسپورت: 'passportNumber',
+  گذرنامه: 'passportNumber',
+  شمارهگذرنامه: 'passportNumber',
+  passport: 'passportNumber',
+  passportno: 'passportNumber',
+  passportnumber: 'passportNumber',
   نام: 'firstName',
   نام‌مسافر: 'firstName',
   ناممسافر: 'firstName',
@@ -99,6 +111,8 @@ const HEADER_ALIASES: Record<string, MappedField> = {
   نامکامل: 'fullName',
   نام‌و‌نام‌خانوادگی: 'fullName',
   نامونامخانوادگی: 'fullName',
+  نامونامخانوادگیمسافر: 'fullName',
+  نامکاملمسافر: 'fullName',
   fullname: 'fullName',
   passenger: 'fullName',
   نام‌پدر: 'fatherName',
@@ -147,19 +161,12 @@ const HEADER_ALIASES: Record<string, MappedField> = {
   مقصد: 'destination',
   to: 'destination',
   destination: 'destination',
-  وضعیت: 'ticketStatus',
-  وضعيت: 'ticketStatus',
-  وضعیت‌بلیت: 'ticketStatus',
-  وضعیتبلیت: 'ticketStatus',
-  وضعیت‌بلیط: 'ticketStatus',
-  وضعیتبلیط: 'ticketStatus',
-  وضعيت‌بليت: 'ticketStatus',
-  شرح‌وضعیت: 'ticketStatus',
-  شرحوضعیت: 'ticketStatus',
-  حالت: 'ticketStatus',
-  status: 'ticketStatus',
-  state: 'ticketStatus',
-  ticketstatus: 'ticketStatus',
+  شهروندی: 'citizenship',
+  شهروندي: 'citizenship',
+  citizenship: 'citizenship',
+  نوعبلیت: 'citizenship',
+  نوعبلیط: 'citizenship',
+  نوعبليط: 'citizenship',
   مبلغ: 'amount',
   مبلغ‌بلیت: 'amount',
   مبلغبلیت: 'amount',
@@ -174,10 +181,6 @@ const HEADER_ALIASES: Record<string, MappedField> = {
   seat: 'seatNumber',
   seatno: 'seatNumber',
   seatnumber: 'seatNumber',
-  نوع‌بلیت: 'ticketType',
-  نوعبلیت: 'ticketType',
-  نوع‌بلیط: 'ticketType',
-  نوعبلیط: 'ticketType',
   tickettype: 'ticketType',
   classtype: 'ticketType',
   شناور: 'vesselName',
@@ -287,35 +290,50 @@ function parseTime(raw: string, cell: ExcelJS.CellValue) {
   return emptyToNull(text);
 }
 
-export function mapTicketStatus(raw: string | null): PortTicketStatus {
-  if (!raw) return PortTicketStatus.OTHER;
-  const normalized = foldPersian(toLatinDigits(raw))
-    .replace(/[\u200e\u200f\u202a-\u202e\u2066-\u2069]/g, '')
-    .replace(/[\s\u00a0\u200c._\-–—]/g, '');
-  if (normalized.includes('ابطال') && normalized.includes('اپراتور')) {
-    return PortTicketStatus.OPERATOR_CANCELLED;
+const IGNORED_HEADERS = new Set([
+  'شمارهسفر',
+  'tripno',
+  'tripnumber',
+  'voyageno',
+  'voyage',
+]);
+
+function splitIdentity(raw: string) {
+  const text = raw.trim();
+  if (!text) return { nationalId: null as string | null, passportNumber: null as string | null };
+  if (isValidIranianNationalId(text)) {
+    return { nationalId: normalizeNationalId(text), passportNumber: null };
   }
-  if (normalized.includes('پایان') && normalized.includes('اعتبار')) {
-    return PortTicketStatus.EXPIRED;
-  }
-  if (
-    normalized.includes('درسفر') ||
-    normalized.includes('intrip') ||
-    normalized.includes('traveling') ||
-    normalized.includes('onboard')
-  ) {
-    return PortTicketStatus.IN_TRIP;
-  }
-  return PortTicketStatus.OTHER;
+  const passport = normalizePassportNumber(text);
+  return { nationalId: null, passportNumber: passport || null };
 }
 
-function resolveHeaderField(label: string): MappedField | undefined {
+function resolveHeaderField(label: string): MappedField | 'ignore' | undefined {
   const folded = foldPersian(label).trim();
   const compact = normalizeHeader(folded);
-  return (
+  if (
+    IGNORED_HEADERS.has(compact) ||
+    compact.includes('شمارهسفر') ||
+    compact.includes('وضعیت') ||
+    compact === 'status' ||
+    compact === 'state' ||
+    compact === 'ticketstatus' ||
+    compact === 'حالت'
+  ) {
+    return 'ignore';
+  }
+  const aliased =
     HEADER_ALIASES[compact] ||
-    HEADER_ALIASES[normalizeHeader(folded.replace(/بليط|بلیت|بليت/g, 'بلیط'))]
-  );
+    HEADER_ALIASES[normalizeHeader(folded.replace(/بليط|بلیت|بليت/g, 'بلیط'))];
+  if (aliased) return aliased;
+  if (
+    (compact.includes('کدملی') || compact.includes('شمارهملی') || compact.includes('nationalid')) &&
+    (compact.includes('پاسپورت') || compact.includes('گذرنامه') || compact.includes('passport'))
+  ) {
+    return 'identity';
+  }
+  if (compact.includes('نام') && compact.includes('خانواد')) return 'fullName';
+  return undefined;
 }
 
 function findHeaderRow(sheet: ExcelJS.Worksheet) {
@@ -327,13 +345,19 @@ function findHeaderRow(sheet: ExcelJS.Worksheet) {
       const label = cellText(cell.value);
       if (!label) return;
       const field = resolveHeaderField(label);
+      if (field === 'ignore') return;
       if (field && !mapped.has(field)) {
         mapped.set(field, col);
-      } else {
+      } else if (!field) {
         extras.set(col, label);
       }
     });
-    if (mapped.has('nationalId') || mapped.has('ticketStatus') || mapped.has('ticketNumber')) {
+    if (
+      mapped.has('nationalId') ||
+      mapped.has('identity') ||
+      mapped.has('passportNumber') ||
+      mapped.has('ticketNumber')
+    ) {
       return { rowNumber, mapped, extras };
     }
   }
@@ -350,7 +374,7 @@ export async function parsePortTicketExcel(buffer: Buffer): Promise<PortTicketEx
 
   const header = findHeaderRow(sheet);
   if (!header) {
-    throw new Error('ستون‌های کد ملی، شماره بلیت یا وضعیت در فایل یافت نشد');
+    throw new Error('ستون‌های کد ملی، پاسپورت یا شماره بلیت در فایل یافت نشد');
   }
 
   const rows: PortTicketExcelRow[] = [];
@@ -365,7 +389,13 @@ export async function parsePortTicketExcel(buffer: Buffer): Promise<PortTicketEx
     };
 
     const nationalRaw = read('nationalId').text;
-    const nationalId = nationalRaw ? normalizeNationalId(nationalRaw) || emptyToNull(toLatinDigits(nationalRaw)) : null;
+    const nationalFromColumn = nationalRaw
+      ? normalizeNationalId(nationalRaw) || emptyToNull(toLatinDigits(nationalRaw))
+      : null;
+    const passportFromColumn = emptyToNull(normalizePassportNumber(read('passportNumber').text));
+    const identity = splitIdentity(read('identity').text);
+    const nationalId = nationalFromColumn || identity.nationalId;
+    const passportNumber = passportFromColumn || identity.passportNumber;
     const firstName = emptyToNull(read('firstName').text);
     const lastName = emptyToNull(read('lastName').text);
     const fullName =
@@ -386,9 +416,6 @@ export async function parsePortTicketExcel(buffer: Buffer): Promise<PortTicketEx
     const ticketNumber =
       emptyToNull(toLatinDigits(read('ticketNumber').text)) ||
       emptyToNull(toLatinDigits(extraByHeader((key) => key.includes('ثبت') || key === 'regno')));
-    const ticketStatusRaw =
-      emptyToNull(read('ticketStatus').text) ||
-      emptyToNull(extraByHeader((key) => key.includes('وضعیت') || key === 'status' || key === 'حالت'));
     const travel = read('travelDate');
     const time = read('travelTime');
     const travelDate =
@@ -401,7 +428,7 @@ export async function parsePortTicketExcel(buffer: Buffer): Promise<PortTicketEx
       parseTime(time.text, time.value) ||
       parseTime(extraByHeader((key) => key === 'زمان' || key === 'ساعت' || key === 'time'), null);
 
-    if (!nationalId && !ticketNumber && !fullName && !ticketStatusRaw) {
+    if (!nationalId && !passportNumber && !ticketNumber && !fullName) {
       return;
     }
 
@@ -410,6 +437,7 @@ export async function parsePortTicketExcel(buffer: Buffer): Promise<PortTicketEx
       ticketNumber,
       reservationCode: emptyToNull(read('reservationCode').text),
       nationalId,
+      passportNumber,
       firstName,
       lastName,
       fullName,
@@ -420,8 +448,7 @@ export async function parsePortTicketExcel(buffer: Buffer): Promise<PortTicketEx
       travelTime,
       origin: emptyToNull(read('origin').text),
       destination: emptyToNull(read('destination').text),
-      ticketStatus: mapTicketStatus(ticketStatusRaw),
-      ticketStatusRaw,
+      citizenship: emptyToNull(read('citizenship').text),
       amount: parseAmount(read('amount').text),
       seatNumber: emptyToNull(read('seatNumber').text),
       ticketType: emptyToNull(read('ticketType').text),

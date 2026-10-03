@@ -3,24 +3,18 @@ import { IsIn, IsOptional } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
-import { PortTicketQeshmondiStatus, PortTicketStatus } from '../../generated/prisma/client';
+import { PortTicketQeshmondiStatus } from '../../generated/prisma/client';
 
 export const portTicketSaleSortFields = [
   'ticketNumber',
   'nationalId',
+  'passportNumber',
   'fullName',
-  'ticketStatus',
+  'citizenship',
   'qeshmondiStatus',
   'travelDate',
   'amount',
   'rowNumber',
-] as const;
-
-export const portTicketStatusFilters = [
-  PortTicketStatus.IN_TRIP,
-  PortTicketStatus.OPERATOR_CANCELLED,
-  PortTicketStatus.EXPIRED,
-  PortTicketStatus.OTHER,
 ] as const;
 
 export const portTicketQeshmondiFilters = [
@@ -42,11 +36,11 @@ export class FindPortTicketSalesQueryDto extends PaginationQueryDto {
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
-  @IsIn([...portTicketStatusFilters])
-  ticketStatus?: (typeof portTicketStatusFilters)[number];
+  @IsIn([...portTicketQeshmondiFilters])
+  qeshmondiStatus?: (typeof portTicketQeshmondiFilters)[number];
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
-  @IsIn([...portTicketQeshmondiFilters])
-  qeshmondiStatus?: (typeof portTicketQeshmondiFilters)[number];
+  @IsIn(['excess'])
+  weeklyQuota?: 'excess';
 }

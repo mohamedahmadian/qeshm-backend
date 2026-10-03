@@ -148,16 +148,6 @@ export const ProjectProgressTranscriptionStatus = {
 export type ProjectProgressTranscriptionStatus = (typeof ProjectProgressTranscriptionStatus)[keyof typeof ProjectProgressTranscriptionStatus]
 
 
-export const PortTicketStatus = {
-  IN_TRIP: 'IN_TRIP',
-  OPERATOR_CANCELLED: 'OPERATOR_CANCELLED',
-  EXPIRED: 'EXPIRED',
-  OTHER: 'OTHER'
-} as const
-
-export type PortTicketStatus = (typeof PortTicketStatus)[keyof typeof PortTicketStatus]
-
-
 export const PortTicketQeshmondiStatus = {
   UNKNOWN: 'UNKNOWN',
   VALID: 'VALID',

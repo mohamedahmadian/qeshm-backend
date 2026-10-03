@@ -2,12 +2,7 @@ import { Transform } from 'class-transformer';
 import { IsIn } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 
-export const portTicketExportGroups = [
-  'invalid',
-  'cancelled',
-  'expired',
-  'total',
-] as const;
+export const portTicketExportGroups = ['invalid', 'weekly'] as const;
 
 export type PortTicketExportGroup = (typeof portTicketExportGroups)[number];
 

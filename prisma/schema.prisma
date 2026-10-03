@@ -102,13 +102,6 @@ enum ProjectProgressTranscriptionStatus {
   FAILED
 }
 
-enum PortTicketStatus {
-  IN_TRIP
-  OPERATOR_CANCELLED
-  EXPIRED
-  OTHER
-}
-
 enum PortTicketQeshmondiStatus {
   UNKNOWN
   VALID
@@ -1282,6 +1275,7 @@ model PortTicketSale {
   ticketNumber    String?
   reservationCode String?
   nationalId      String?
+  passportNumber  String?
   firstName       String?
   lastName        String?
   fullName        String?
@@ -1292,9 +1286,9 @@ model PortTicketSale {
   travelTime      String?
   origin          String?
   destination     String?
-  ticketStatus     PortTicketStatus          @default(OTHER)
-  ticketStatusRaw  String?
-  qeshmondiStatus  PortTicketQeshmondiStatus @default(UNKNOWN)
+  qeshmondiStatus   PortTicketQeshmondiStatus @default(UNKNOWN)
+  weeklyQuotaExcess Boolean                   @default(false)
+  citizenship       String?
   amount          Int?
   seatNumber      String?
   ticketType      String?
@@ -1303,9 +1297,10 @@ model PortTicketSale {
   createdAt       DateTime         @default(now())
 
   @@index([reportId])
-  @@index([reportId, ticketStatus])
   @@index([reportId, qeshmondiStatus])
+  @@index([reportId, weeklyQuotaExcess])
   @@index([nationalId])
+  @@index([passportNumber])
   @@index([ticketNumber])
   @@index([fullName])
   @@index([travelDate])
@@ -1426,4 +1421,22 @@ model StakeholderAttachment {
   @@index([imageId])
   @@index([fileId])
   @@map("stakeholder_attachments")
+}
+
+model TicketTariff {
+  id                       String   @id @default(uuid())
+  year                     Int
+  individualPrice          Int
+  individualQeshmondiPrice Int
+  individualSubsidy        Int
+  vehiclePrice             Int
+  vehicleQeshmondiPrice    Int
+  vehicleSubsidy           Int
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+
+  @@unique([year])
+  @@index([year])
+  @@index([createdAt])
+  @@map("ticket_tariffs")
 }

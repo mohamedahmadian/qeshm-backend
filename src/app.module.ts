@@ -20,6 +20,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
 import { BoardModule } from './board/board.module';
 import { PortSalesReportsModule } from './port-sales-reports/port-sales-reports.module';
 import { StakeholdersModule } from './stakeholders/stakeholders.module';
+import { TicketTariffsModule } from './ticket-tariffs/ticket-tariffs.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
@@ -39,6 +40,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     BoardModule,
     PortSalesReportsModule,
     StakeholdersModule,
+    TicketTariffsModule,
     DashboardModule,
     ImagesModule,
     FilesModule,

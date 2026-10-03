@@ -450,7 +450,8 @@ export const ModelName = {
   StakeholderProgressReport: 'StakeholderProgressReport',
   StakeholderCorrespondence: 'StakeholderCorrespondence',
   StakeholderMessage: 'StakeholderMessage',
-  StakeholderAttachment: 'StakeholderAttachment'
+  StakeholderAttachment: 'StakeholderAttachment',
+  TicketTariff: 'TicketTariff'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -466,7 +467,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4466,6 +4467,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TicketTariff: {
+      payload: Prisma.$TicketTariffPayload<ExtArgs>
+      fields: Prisma.TicketTariffFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TicketTariffFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TicketTariffFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>
+        }
+        findFirst: {
+          args: Prisma.TicketTariffFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TicketTariffFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>
+        }
+        findMany: {
+          args: Prisma.TicketTariffFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>[]
+        }
+        create: {
+          args: Prisma.TicketTariffCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>
+        }
+        createMany: {
+          args: Prisma.TicketTariffCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TicketTariffCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>[]
+        }
+        delete: {
+          args: Prisma.TicketTariffDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>
+        }
+        update: {
+          args: Prisma.TicketTariffUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>
+        }
+        deleteMany: {
+          args: Prisma.TicketTariffDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TicketTariffUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TicketTariffUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>[]
+        }
+        upsert: {
+          args: Prisma.TicketTariffUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TicketTariffPayload>
+        }
+        aggregate: {
+          args: Prisma.TicketTariffAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTicketTariff>
+        }
+        groupBy: {
+          args: Prisma.TicketTariffGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketTariffGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TicketTariffCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TicketTariffCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5301,6 +5376,7 @@ export const PortTicketSaleScalarFieldEnum = {
   ticketNumber: 'ticketNumber',
   reservationCode: 'reservationCode',
   nationalId: 'nationalId',
+  passportNumber: 'passportNumber',
   firstName: 'firstName',
   lastName: 'lastName',
   fullName: 'fullName',
@@ -5311,9 +5387,9 @@ export const PortTicketSaleScalarFieldEnum = {
   travelTime: 'travelTime',
   origin: 'origin',
   destination: 'destination',
-  ticketStatus: 'ticketStatus',
-  ticketStatusRaw: 'ticketStatusRaw',
   qeshmondiStatus: 'qeshmondiStatus',
+  weeklyQuotaExcess: 'weeklyQuotaExcess',
+  citizenship: 'citizenship',
   amount: 'amount',
   seatNumber: 'seatNumber',
   ticketType: 'ticketType',
@@ -5385,6 +5461,22 @@ export const StakeholderAttachmentScalarFieldEnum = {
 } as const
 
 export type StakeholderAttachmentScalarFieldEnum = (typeof StakeholderAttachmentScalarFieldEnum)[keyof typeof StakeholderAttachmentScalarFieldEnum]
+
+
+export const TicketTariffScalarFieldEnum = {
+  id: 'id',
+  year: 'year',
+  individualPrice: 'individualPrice',
+  individualQeshmondiPrice: 'individualQeshmondiPrice',
+  individualSubsidy: 'individualSubsidy',
+  vehiclePrice: 'vehiclePrice',
+  vehicleQeshmondiPrice: 'vehicleQeshmondiPrice',
+  vehicleSubsidy: 'vehicleSubsidy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TicketTariffScalarFieldEnum = (typeof TicketTariffScalarFieldEnum)[keyof typeof TicketTariffScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -5862,20 +5954,6 @@ export type ListEnumBoardMinutesAttachmentKindFieldRefInput<$PrismaModel> = Fiel
 
 
 /**
- * Reference to a field of type 'PortTicketStatus'
- */
-export type EnumPortTicketStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortTicketStatus'>
-    
-
-
-/**
- * Reference to a field of type 'PortTicketStatus[]'
- */
-export type ListEnumPortTicketStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortTicketStatus[]'>
-    
-
-
-/**
  * Reference to a field of type 'PortTicketQeshmondiStatus'
  */
 export type EnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortTicketQeshmondiStatus'>
@@ -6163,6 +6241,7 @@ export type GlobalOmitConfig = {
   stakeholderCorrespondence?: Prisma.StakeholderCorrespondenceOmit
   stakeholderMessage?: Prisma.StakeholderMessageOmit
   stakeholderAttachment?: Prisma.StakeholderAttachmentOmit
+  ticketTariff?: Prisma.TicketTariffOmit
 }
 
 /* Types for Logging */
