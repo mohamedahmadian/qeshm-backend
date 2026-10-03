@@ -27,10 +27,12 @@ export type AggregateRestaurantMenuItem = {
 }
 
 export type RestaurantMenuItemAvgAggregateOutputType = {
+  weekday: number | null
   price: runtime.Decimal | null
 }
 
 export type RestaurantMenuItemSumAggregateOutputType = {
+  weekday: number | null
   price: runtime.Decimal | null
 }
 
@@ -38,7 +40,7 @@ export type RestaurantMenuItemMinAggregateOutputType = {
   id: string | null
   restaurantId: string | null
   foodId: string | null
-  offeredAt: Date | null
+  weekday: number | null
   price: runtime.Decimal | null
   isActive: boolean | null
   createdAt: Date | null
@@ -49,7 +51,7 @@ export type RestaurantMenuItemMaxAggregateOutputType = {
   id: string | null
   restaurantId: string | null
   foodId: string | null
-  offeredAt: Date | null
+  weekday: number | null
   price: runtime.Decimal | null
   isActive: boolean | null
   createdAt: Date | null
@@ -60,7 +62,7 @@ export type RestaurantMenuItemCountAggregateOutputType = {
   id: number
   restaurantId: number
   foodId: number
-  offeredAt: number
+  weekday: number
   price: number
   isActive: number
   createdAt: number
@@ -70,10 +72,12 @@ export type RestaurantMenuItemCountAggregateOutputType = {
 
 
 export type RestaurantMenuItemAvgAggregateInputType = {
+  weekday?: true
   price?: true
 }
 
 export type RestaurantMenuItemSumAggregateInputType = {
+  weekday?: true
   price?: true
 }
 
@@ -81,7 +85,7 @@ export type RestaurantMenuItemMinAggregateInputType = {
   id?: true
   restaurantId?: true
   foodId?: true
-  offeredAt?: true
+  weekday?: true
   price?: true
   isActive?: true
   createdAt?: true
@@ -92,7 +96,7 @@ export type RestaurantMenuItemMaxAggregateInputType = {
   id?: true
   restaurantId?: true
   foodId?: true
-  offeredAt?: true
+  weekday?: true
   price?: true
   isActive?: true
   createdAt?: true
@@ -103,7 +107,7 @@ export type RestaurantMenuItemCountAggregateInputType = {
   id?: true
   restaurantId?: true
   foodId?: true
-  offeredAt?: true
+  weekday?: true
   price?: true
   isActive?: true
   createdAt?: true
@@ -201,7 +205,7 @@ export type RestaurantMenuItemGroupByOutputType = {
   id: string
   restaurantId: string
   foodId: string
-  offeredAt: Date
+  weekday: number
   price: runtime.Decimal
   isActive: boolean
   createdAt: Date
@@ -235,7 +239,7 @@ export type RestaurantMenuItemWhereInput = {
   id?: Prisma.StringFilter<"RestaurantMenuItem"> | string
   restaurantId?: Prisma.StringFilter<"RestaurantMenuItem"> | string
   foodId?: Prisma.StringFilter<"RestaurantMenuItem"> | string
-  offeredAt?: Prisma.DateTimeFilter<"RestaurantMenuItem"> | Date | string
+  weekday?: Prisma.IntFilter<"RestaurantMenuItem"> | number
   price?: Prisma.DecimalFilter<"RestaurantMenuItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFilter<"RestaurantMenuItem"> | boolean
   createdAt?: Prisma.DateTimeFilter<"RestaurantMenuItem"> | Date | string
@@ -248,7 +252,7 @@ export type RestaurantMenuItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   foodId?: Prisma.SortOrder
-  offeredAt?: Prisma.SortOrder
+  weekday?: Prisma.SortOrder
   price?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -259,26 +263,26 @@ export type RestaurantMenuItemOrderByWithRelationInput = {
 
 export type RestaurantMenuItemWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  restaurantId_foodId_offeredAt?: Prisma.RestaurantMenuItemRestaurantIdFoodIdOfferedAtCompoundUniqueInput
+  restaurantId_foodId_weekday?: Prisma.RestaurantMenuItemRestaurantIdFoodIdWeekdayCompoundUniqueInput
   AND?: Prisma.RestaurantMenuItemWhereInput | Prisma.RestaurantMenuItemWhereInput[]
   OR?: Prisma.RestaurantMenuItemWhereInput[]
   NOT?: Prisma.RestaurantMenuItemWhereInput | Prisma.RestaurantMenuItemWhereInput[]
   restaurantId?: Prisma.StringFilter<"RestaurantMenuItem"> | string
   foodId?: Prisma.StringFilter<"RestaurantMenuItem"> | string
-  offeredAt?: Prisma.DateTimeFilter<"RestaurantMenuItem"> | Date | string
+  weekday?: Prisma.IntFilter<"RestaurantMenuItem"> | number
   price?: Prisma.DecimalFilter<"RestaurantMenuItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFilter<"RestaurantMenuItem"> | boolean
   createdAt?: Prisma.DateTimeFilter<"RestaurantMenuItem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RestaurantMenuItem"> | Date | string
   restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
   food?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.FoodWhereInput>
-}, "id" | "restaurantId_foodId_offeredAt">
+}, "id" | "restaurantId_foodId_weekday">
 
 export type RestaurantMenuItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   foodId?: Prisma.SortOrder
-  offeredAt?: Prisma.SortOrder
+  weekday?: Prisma.SortOrder
   price?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -297,7 +301,7 @@ export type RestaurantMenuItemScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"RestaurantMenuItem"> | string
   restaurantId?: Prisma.StringWithAggregatesFilter<"RestaurantMenuItem"> | string
   foodId?: Prisma.StringWithAggregatesFilter<"RestaurantMenuItem"> | string
-  offeredAt?: Prisma.DateTimeWithAggregatesFilter<"RestaurantMenuItem"> | Date | string
+  weekday?: Prisma.IntWithAggregatesFilter<"RestaurantMenuItem"> | number
   price?: Prisma.DecimalWithAggregatesFilter<"RestaurantMenuItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolWithAggregatesFilter<"RestaurantMenuItem"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RestaurantMenuItem"> | Date | string
@@ -306,7 +310,7 @@ export type RestaurantMenuItemScalarWhereWithAggregatesInput = {
 
 export type RestaurantMenuItemCreateInput = {
   id?: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -319,7 +323,7 @@ export type RestaurantMenuItemUncheckedCreateInput = {
   id?: string
   restaurantId: string
   foodId: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -328,7 +332,7 @@ export type RestaurantMenuItemUncheckedCreateInput = {
 
 export type RestaurantMenuItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -341,7 +345,7 @@ export type RestaurantMenuItemUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   foodId?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -352,7 +356,7 @@ export type RestaurantMenuItemCreateManyInput = {
   id?: string
   restaurantId: string
   foodId: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -361,7 +365,7 @@ export type RestaurantMenuItemCreateManyInput = {
 
 export type RestaurantMenuItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -372,7 +376,7 @@ export type RestaurantMenuItemUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   foodId?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -389,17 +393,17 @@ export type RestaurantMenuItemOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type RestaurantMenuItemRestaurantIdFoodIdOfferedAtCompoundUniqueInput = {
+export type RestaurantMenuItemRestaurantIdFoodIdWeekdayCompoundUniqueInput = {
   restaurantId: string
   foodId: string
-  offeredAt: Date | string
+  weekday: number
 }
 
 export type RestaurantMenuItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   foodId?: Prisma.SortOrder
-  offeredAt?: Prisma.SortOrder
+  weekday?: Prisma.SortOrder
   price?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -407,6 +411,7 @@ export type RestaurantMenuItemCountOrderByAggregateInput = {
 }
 
 export type RestaurantMenuItemAvgOrderByAggregateInput = {
+  weekday?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
@@ -414,7 +419,7 @@ export type RestaurantMenuItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   foodId?: Prisma.SortOrder
-  offeredAt?: Prisma.SortOrder
+  weekday?: Prisma.SortOrder
   price?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -425,7 +430,7 @@ export type RestaurantMenuItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   foodId?: Prisma.SortOrder
-  offeredAt?: Prisma.SortOrder
+  weekday?: Prisma.SortOrder
   price?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -433,6 +438,7 @@ export type RestaurantMenuItemMinOrderByAggregateInput = {
 }
 
 export type RestaurantMenuItemSumOrderByAggregateInput = {
+  weekday?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
@@ -522,7 +528,7 @@ export type RestaurantMenuItemUncheckedUpdateManyWithoutRestaurantNestedInput = 
 
 export type RestaurantMenuItemCreateWithoutFoodInput = {
   id?: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -533,7 +539,7 @@ export type RestaurantMenuItemCreateWithoutFoodInput = {
 export type RestaurantMenuItemUncheckedCreateWithoutFoodInput = {
   id?: string
   restaurantId: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -573,7 +579,7 @@ export type RestaurantMenuItemScalarWhereInput = {
   id?: Prisma.StringFilter<"RestaurantMenuItem"> | string
   restaurantId?: Prisma.StringFilter<"RestaurantMenuItem"> | string
   foodId?: Prisma.StringFilter<"RestaurantMenuItem"> | string
-  offeredAt?: Prisma.DateTimeFilter<"RestaurantMenuItem"> | Date | string
+  weekday?: Prisma.IntFilter<"RestaurantMenuItem"> | number
   price?: Prisma.DecimalFilter<"RestaurantMenuItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFilter<"RestaurantMenuItem"> | boolean
   createdAt?: Prisma.DateTimeFilter<"RestaurantMenuItem"> | Date | string
@@ -582,7 +588,7 @@ export type RestaurantMenuItemScalarWhereInput = {
 
 export type RestaurantMenuItemCreateWithoutRestaurantInput = {
   id?: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -593,7 +599,7 @@ export type RestaurantMenuItemCreateWithoutRestaurantInput = {
 export type RestaurantMenuItemUncheckedCreateWithoutRestaurantInput = {
   id?: string
   foodId: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -629,7 +635,7 @@ export type RestaurantMenuItemUpdateManyWithWhereWithoutRestaurantInput = {
 export type RestaurantMenuItemCreateManyFoodInput = {
   id?: string
   restaurantId: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -638,7 +644,7 @@ export type RestaurantMenuItemCreateManyFoodInput = {
 
 export type RestaurantMenuItemUpdateWithoutFoodInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -649,7 +655,7 @@ export type RestaurantMenuItemUpdateWithoutFoodInput = {
 export type RestaurantMenuItemUncheckedUpdateWithoutFoodInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -659,7 +665,7 @@ export type RestaurantMenuItemUncheckedUpdateWithoutFoodInput = {
 export type RestaurantMenuItemUncheckedUpdateManyWithoutFoodInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -669,7 +675,7 @@ export type RestaurantMenuItemUncheckedUpdateManyWithoutFoodInput = {
 export type RestaurantMenuItemCreateManyRestaurantInput = {
   id?: string
   foodId: string
-  offeredAt: Date | string
+  weekday: number
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: boolean
   createdAt?: Date | string
@@ -678,7 +684,7 @@ export type RestaurantMenuItemCreateManyRestaurantInput = {
 
 export type RestaurantMenuItemUpdateWithoutRestaurantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -689,7 +695,7 @@ export type RestaurantMenuItemUpdateWithoutRestaurantInput = {
 export type RestaurantMenuItemUncheckedUpdateWithoutRestaurantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   foodId?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -699,7 +705,7 @@ export type RestaurantMenuItemUncheckedUpdateWithoutRestaurantInput = {
 export type RestaurantMenuItemUncheckedUpdateManyWithoutRestaurantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   foodId?: Prisma.StringFieldUpdateOperationsInput | string
-  offeredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weekday?: Prisma.IntFieldUpdateOperationsInput | number
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -712,7 +718,7 @@ export type RestaurantMenuItemSelect<ExtArgs extends runtime.Types.Extensions.In
   id?: boolean
   restaurantId?: boolean
   foodId?: boolean
-  offeredAt?: boolean
+  weekday?: boolean
   price?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -725,7 +731,7 @@ export type RestaurantMenuItemSelectCreateManyAndReturn<ExtArgs extends runtime.
   id?: boolean
   restaurantId?: boolean
   foodId?: boolean
-  offeredAt?: boolean
+  weekday?: boolean
   price?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -738,7 +744,7 @@ export type RestaurantMenuItemSelectUpdateManyAndReturn<ExtArgs extends runtime.
   id?: boolean
   restaurantId?: boolean
   foodId?: boolean
-  offeredAt?: boolean
+  weekday?: boolean
   price?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -751,14 +757,14 @@ export type RestaurantMenuItemSelectScalar = {
   id?: boolean
   restaurantId?: boolean
   foodId?: boolean
-  offeredAt?: boolean
+  weekday?: boolean
   price?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type RestaurantMenuItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "restaurantId" | "foodId" | "offeredAt" | "price" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["restaurantMenuItem"]>
+export type RestaurantMenuItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "restaurantId" | "foodId" | "weekday" | "price" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["restaurantMenuItem"]>
 export type RestaurantMenuItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   food?: boolean | Prisma.FoodDefaultArgs<ExtArgs>
@@ -782,7 +788,10 @@ export type $RestaurantMenuItemPayload<ExtArgs extends runtime.Types.Extensions.
     id: string
     restaurantId: string
     foodId: string
-    offeredAt: Date
+    /**
+     * 0 = شنبه … 6 = جمعه
+     */
+    weekday: number
     price: runtime.Decimal
     isActive: boolean
     createdAt: Date
@@ -1215,7 +1224,7 @@ export interface RestaurantMenuItemFieldRefs {
   readonly id: Prisma.FieldRef<"RestaurantMenuItem", 'String'>
   readonly restaurantId: Prisma.FieldRef<"RestaurantMenuItem", 'String'>
   readonly foodId: Prisma.FieldRef<"RestaurantMenuItem", 'String'>
-  readonly offeredAt: Prisma.FieldRef<"RestaurantMenuItem", 'DateTime'>
+  readonly weekday: Prisma.FieldRef<"RestaurantMenuItem", 'Int'>
   readonly price: Prisma.FieldRef<"RestaurantMenuItem", 'Decimal'>
   readonly isActive: Prisma.FieldRef<"RestaurantMenuItem", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"RestaurantMenuItem", 'DateTime'>

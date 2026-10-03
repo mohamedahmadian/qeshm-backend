@@ -1,17 +1,6 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-} from '@nestjs/common';
-import { CreateRestaurantMenuItemDto } from './dto/create-restaurant-menu-item.dto';
-import { CancelRestaurantMenuDto } from './dto/cancel-restaurant-menu.dto';
+import { Body, Controller, Get, Param, Put, Query } from '@nestjs/common';
 import { FindRestaurantMenuItemsQueryDto } from './dto/find-restaurant-menu-items-query.dto';
-import { UpdateRestaurantMenuItemDto } from './dto/update-restaurant-menu-item.dto';
+import { ReplaceWeeklyMenuDto } from './dto/replace-weekly-menu.dto';
 import { RestaurantMenuService } from './restaurant-menu.service';
 
 @Controller('restaurants/:restaurantId/menu-items')
@@ -26,44 +15,11 @@ export class RestaurantMenuController {
     return this.menu.findAll(restaurantId, query);
   }
 
-  @Post()
-  create(
+  @Put()
+  replace(
     @Param('restaurantId') restaurantId: string,
-    @Body() dto: CreateRestaurantMenuItemDto,
+    @Body() dto: ReplaceWeeklyMenuDto,
   ) {
-    return this.menu.create(restaurantId, dto);
-  }
-
-  @Post('cancel')
-  cancelRange(
-    @Param('restaurantId') restaurantId: string,
-    @Body() dto: CancelRestaurantMenuDto,
-  ) {
-    return this.menu.cancelRange(restaurantId, dto);
-  }
-
-  @Get(':id')
-  findOne(
-    @Param('restaurantId') restaurantId: string,
-    @Param('id') id: string,
-  ) {
-    return this.menu.findOne(restaurantId, id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('restaurantId') restaurantId: string,
-    @Param('id') id: string,
-    @Body() dto: UpdateRestaurantMenuItemDto,
-  ) {
-    return this.menu.update(restaurantId, id, dto);
-  }
-
-  @Delete(':id')
-  remove(
-    @Param('restaurantId') restaurantId: string,
-    @Param('id') id: string,
-  ) {
-    return this.menu.remove(restaurantId, id);
+    return this.menu.replaceWeekly(restaurantId, dto);
   }
 }

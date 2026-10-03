@@ -4967,7 +4967,7 @@ export const RestaurantMenuItemScalarFieldEnum = {
   id: 'id',
   restaurantId: 'restaurantId',
   foodId: 'foodId',
-  offeredAt: 'offeredAt',
+  weekday: 'weekday',
   price: 'price',
   isActive: 'isActive',
   createdAt: 'createdAt',

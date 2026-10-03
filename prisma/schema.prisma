@@ -659,16 +659,17 @@ model RestaurantMenuItem {
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   foodId       String
   food         Food       @relation(fields: [foodId], references: [id], onDelete: Restrict)
-  offeredAt    DateTime   @db.Date
+  /// 0 = شنبه … 6 = جمعه
+  weekday      Int
   price        Decimal    @db.Decimal(18, 0)
   isActive     Boolean    @default(true)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 
-  @@unique([restaurantId, foodId, offeredAt])
+  @@unique([restaurantId, foodId, weekday])
   @@index([restaurantId])
   @@index([foodId])
-  @@index([offeredAt])
+  @@index([weekday])
   @@index([isActive])
   @@index([createdAt])
   @@map("restaurant_menu_items")

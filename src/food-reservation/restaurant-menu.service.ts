@@ -1,36 +1,20 @@
 import {
   BadRequestException,
-  ConflictException,
   Injectable,
-  NotFoundException,
 } from '@nestjs/common';
-import {
-  eachIsoDateInclusive,
-  eachWorkingIsoDatesInclusive,
-  isIranWeekendIso,
-  parseIsoDate,
-  toIsoDateOnly,
-} from '../common/iso-date';
-import {
-  containsInsensitive,
-  paginatedResult,
-  paginationArgs,
-  wantsPagination,
-} from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
+import { containsInsensitive } from '../common/pagination';
 import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { CancelRestaurantMenuDto } from './dto/cancel-restaurant-menu.dto';
-import { CreateRestaurantMenuItemDto } from './dto/create-restaurant-menu-item.dto';
 import { FindRestaurantMenuItemsQueryDto } from './dto/find-restaurant-menu-items-query.dto';
-import { UpdateRestaurantMenuItemDto } from './dto/update-restaurant-menu-item.dto';
+import { ReplaceWeeklyMenuDto } from './dto/replace-weekly-menu.dto';
 import { RestaurantsService } from './restaurants.service';
 
 const menuItemSelect = {
   id: true,
   restaurantId: true,
   foodId: true,
-  offeredAt: true,
+  weekday: true,
   price: true,
   isActive: true,
   createdAt: true,
@@ -44,23 +28,10 @@ function toMoney(value: Prisma.Decimal) {
   return Number(value);
 }
 
-function offeredAtFilter(from?: string, until?: string) {
-  if (from && until) {
-    const start = from <= until ? from : until;
-    const end = from <= until ? until : from;
-    return { gte: parseIsoDate(start), lte: parseIsoDate(end) };
-  }
-  const day = from || until;
-  return day ? parseIsoDate(day) : undefined;
-}
-
-function withMenuItem<T extends { price: Prisma.Decimal; offeredAt: Date }>(
-  item: T,
-) {
+function withMenuItem<T extends { price: Prisma.Decimal }>(item: T) {
   return {
     ...item,
     price: toMoney(item.price),
-    offeredAt: toIsoDateOnly(item.offeredAt),
   };
 }
 
@@ -76,8 +47,7 @@ export class RestaurantMenuService {
     const where: Prisma.RestaurantMenuItemWhereInput = {
       restaurantId,
       foodId: query.foodId,
-      isActive: query.isActive,
-      offeredAt: offeredAtFilter(query.offeredAt, query.offeredUntil),
+      weekday: query.weekday,
       OR: query.q
         ? [
             { food: { name: containsInsensitive(query.q) } },
@@ -90,191 +60,64 @@ export class RestaurantMenuService {
         query.sortBy,
         query.sortDir,
         {
-          offeredAt: (dir) => ({ offeredAt: dir }),
+          weekday: (dir) => ({ weekday: dir }),
           food: (dir) => ({ food: { name: dir } }),
           price: (dir) => ({ price: dir }),
-          isActive: (dir) => ({ isActive: dir }),
         },
-        [{ offeredAt: 'desc' }, { id: 'asc' }],
+        [{ weekday: 'asc' }, { food: { name: 'asc' } }, { id: 'asc' }],
       );
-    if (!wantsPagination(query)) {
-      const items = await this.prisma.restaurantMenuItem.findMany({
-        where,
-        orderBy,
-        select: menuItemSelect,
-      });
-      return items.map(withMenuItem);
-    }
-    const { page, pageSize, skip, take } = paginationArgs(query);
-    const [items, total] = await Promise.all([
-      this.prisma.restaurantMenuItem.findMany({
-        where,
-        orderBy,
-        skip,
-        take,
-        select: menuItemSelect,
-      }),
-      this.prisma.restaurantMenuItem.count({ where }),
-    ]);
-    return paginatedResult(items.map(withMenuItem), total, page, pageSize);
-  }
-
-  async findOne(restaurantId: string, id: string) {
-    await this.restaurants.findOne(restaurantId);
-    const item = await this.prisma.restaurantMenuItem.findFirst({
-      where: { id, restaurantId },
-      select: menuItemSelect,
-    });
-    if (!item) {
-      throw new NotFoundException('آیتم برنامه غذایی یافت نشد');
-    }
-    return withMenuItem(item);
-  }
-
-  async create(restaurantId: string, dto: CreateRestaurantMenuItemDto) {
-    await this.restaurants.findOne(restaurantId);
-    await this.assertFood(dto.foodId);
-    const start = dto.offeredAt;
-    const end = dto.offeredUntil || dto.offeredAt;
-    if (end < start) {
-      throw new BadRequestException('تاریخ پایان نباید قبل از تاریخ شروع باشد');
-    }
-    const span = eachIsoDateInclusive(start, end);
-    if (span.length > 366) {
-      throw new BadRequestException('بازه زمانی برنامه غذایی بیش از حد طولانی است');
-    }
-    const dates = eachWorkingIsoDatesInclusive(start, end);
-    if (!dates.length) {
-      throw new BadRequestException(
-        'برای این بازه روز کاری وجود ندارد؛ پنجشنبه و جمعه در برنامه غذایی نیستند',
-      );
-    }
-    const existing = await this.prisma.restaurantMenuItem.findMany({
-      where: {
-        restaurantId,
-        foodId: dto.foodId,
-        offeredAt: { in: dates.map((iso) => parseIsoDate(iso)) },
-      },
-      select: { offeredAt: true },
-    });
-    const taken = new Set(
-      existing.map((item) => toIsoDateOnly(item.offeredAt)).filter(Boolean),
-    );
-    const toCreate = dates.filter((iso) => !taken.has(iso));
-    if (!toCreate.length) {
-      throw new ConflictException('این غذا برای این بازه قبلاً ثبت شده است');
-    }
-    await this.prisma.restaurantMenuItem.createMany({
-      data: toCreate.map((offeredAt) => ({
-        restaurantId,
-        foodId: dto.foodId,
-        offeredAt: parseIsoDate(offeredAt),
-        price: new Prisma.Decimal(dto.price),
-        isActive: dto.isActive ?? true,
-      })),
-    });
     const items = await this.prisma.restaurantMenuItem.findMany({
-      where: {
-        restaurantId,
-        foodId: dto.foodId,
-        offeredAt: { in: toCreate.map((iso) => parseIsoDate(iso)) },
-      },
-      orderBy: [{ offeredAt: 'asc' }, { id: 'asc' }],
+      where,
+      orderBy,
       select: menuItemSelect,
     });
     return items.map(withMenuItem);
   }
 
-  async update(
-    restaurantId: string,
-    id: string,
-    dto: UpdateRestaurantMenuItemDto,
-  ) {
-    await this.findOne(restaurantId, id);
-    if (dto.foodId) {
-      await this.assertFood(dto.foodId);
-    }
-    if (dto.offeredAt && isIranWeekendIso(dto.offeredAt)) {
-      throw new BadRequestException('پنجشنبه و جمعه در برنامه غذایی نیستند');
-    }
-    try {
-      const item = await this.prisma.restaurantMenuItem.update({
-        where: { id },
-        data: {
-          foodId: dto.foodId,
-          offeredAt:
-            dto.offeredAt === undefined
-              ? undefined
-              : parseIsoDate(dto.offeredAt),
-          price:
-            dto.price === undefined ? undefined : new Prisma.Decimal(dto.price),
-          isActive: dto.isActive,
-        },
-        select: menuItemSelect,
-      });
-      return withMenuItem(item);
-    } catch (error) {
-      this.rethrowUnique(error);
-    }
-  }
-
-  async remove(restaurantId: string, id: string) {
-    await this.findOne(restaurantId, id);
-    await this.prisma.restaurantMenuItem.delete({ where: { id } });
-    return { ok: true };
-  }
-
-  async cancelRange(restaurantId: string, dto: CancelRestaurantMenuDto) {
+  async replaceWeekly(restaurantId: string, dto: ReplaceWeeklyMenuDto) {
     await this.restaurants.findOne(restaurantId);
-    const start = dto.offeredAt;
-    const end = dto.offeredUntil || dto.offeredAt;
-    if (end < start) {
-      throw new BadRequestException('تاریخ پایان نباید قبل از تاریخ شروع باشد');
+    const seenDays = new Set<number>();
+    const foodIds = new Set<string>();
+    for (const day of dto.days) {
+      if (seenDays.has(day.weekday)) {
+        throw new BadRequestException('روز هفته تکراری است');
+      }
+      seenDays.add(day.weekday);
+      const foods = new Set<string>();
+      for (const item of day.items) {
+        if (foods.has(item.foodId)) {
+          throw new BadRequestException('یک غذا در یک روز بیش از یک بار انتخاب شده است');
+        }
+        foods.add(item.foodId);
+        foodIds.add(item.foodId);
+      }
     }
-    const span = eachIsoDateInclusive(start, end);
-    if (span.length > 366) {
-      throw new BadRequestException('بازه زمانی برنامه غذایی بیش از حد طولانی است');
+    if (seenDays.size !== 7) {
+      throw new BadRequestException('برنامه باید هر هفت روز هفته را داشته باشد');
     }
-    const range = {
-      gte: parseIsoDate(start),
-      lte: parseIsoDate(end),
-    };
-    const [reservations, menuItems] = await this.prisma.$transaction([
-      this.prisma.foodReservation.deleteMany({
-        where: {
+    if (foodIds.size) {
+      const found = await this.prisma.food.count({
+        where: { id: { in: [...foodIds] } },
+      });
+      if (found !== foodIds.size) {
+        throw new BadRequestException('غذا معتبر نیست');
+      }
+    }
+    await this.prisma.$transaction(async (tx) => {
+      await tx.restaurantMenuItem.deleteMany({ where: { restaurantId } });
+      const data = dto.days.flatMap((day) =>
+        day.items.map((item) => ({
           restaurantId,
-          reservedAt: range,
-        },
-      }),
-      this.prisma.restaurantMenuItem.deleteMany({
-        where: {
-          restaurantId,
-          offeredAt: range,
-        },
-      }),
-    ]);
-    return {
-      reservationCount: reservations.count,
-      menuItemCount: menuItems.count,
-    };
-  }
-
-  private async assertFood(id: string) {
-    const food = await this.prisma.food.findUnique({ where: { id } });
-    if (!food) {
-      throw new BadRequestException('غذا معتبر نیست');
-    }
-  }
-
-  private rethrowUnique(error: unknown): never {
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === 'P2002'
-    ) {
-      throw new ConflictException(
-        'این غذا برای این تاریخ قبلاً ثبت شده است',
+          foodId: item.foodId,
+          weekday: day.weekday,
+          price: new Prisma.Decimal(item.price),
+          isActive: true,
+        })),
       );
-    }
-    throw error;
+      if (data.length) {
+        await tx.restaurantMenuItem.createMany({ data });
+      }
+    });
+    return this.findAll(restaurantId, {});
   }
 }

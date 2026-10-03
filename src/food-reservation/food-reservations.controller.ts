@@ -8,8 +8,10 @@ import {
   Patch,
   Post,
   Query,
+  Res,
   UnauthorizedException,
 } from '@nestjs/common';
+import type { Response } from 'express';
 import { hasAnyPermission } from '../access/access.util';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CreateFoodReservationDto } from './dto/create-food-reservation.dto';
@@ -107,6 +109,28 @@ export class FoodReservationsController {
       query.userId = undefined;
     }
     return this.reservations.findAll(query, user.id);
+  }
+
+  @Get('export')
+  async exportAll(
+    @Query() query: FindFoodReservationsQueryDto,
+    @CurrentUser() user: RequestUser | undefined,
+    @Res() res: Response,
+  ) {
+    if (!user?.id) throw new UnauthorizedException();
+    if (!canSeeAllFoodReservations(user)) {
+      query.mine = true;
+      query.userId = undefined;
+    }
+    const file = await this.reservations.exportAll(query, user.id);
+    const ascii = file.fileName.replace(/[^\w.\-]+/g, '_') || 'food-reservations.xlsx';
+    res.setHeader('Content-Type', file.mimeType);
+    res.setHeader('Content-Length', String(file.buffer.length));
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(file.fileName)}`,
+    );
+    res.send(file.buffer);
   }
 
   @Post('confirm-range')

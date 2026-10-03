@@ -6,9 +6,11 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { buildStyledExcelExport } from '../common/excel-export';
 import { gregorianToJalali } from '../common/jalali-date';
 import {
   eachIsoDateInclusive,
+  iranWeekdayIndex,
   parseIsoDate,
   startOfIranWeekIso,
   todayIsoDateTehran,
@@ -73,6 +75,33 @@ function withReservation<
     unitPrice: Number(item.unitPrice),
     totalPrice: Number(item.unitPrice) * item.quantity,
   };
+}
+
+const EXCEL_DIGITS: Partial<Record<string, string>> = {
+  fa: '۰۱۲۳۴۵۶۷۸۹',
+  ur: '۰۱۲۳۴۵۶۷۸۹',
+  ar: '٠١٢٣٤٥٦٧٨٩',
+  hi: '०१२३४५६७८९',
+};
+
+function localizeExcelDigits(value: string) {
+  const alphabet = EXCEL_DIGITS[getRequestLocale()];
+  if (!alphabet) return value;
+  return value.replace(/\d/g, (digit) => alphabet[Number(digit)] ?? digit);
+}
+
+function formatExportDate(iso: string | null) {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return '';
+  const [year, month, day] = iso.split('-').map(Number);
+  if (isLtrLocale(getRequestLocale())) {
+    return localizeExcelDigits(`${year}/${month}/${day}`);
+  }
+  const jalali = gregorianToJalali(year, month, day);
+  return localizeExcelDigits(`${jalali.year}/${jalali.month}/${jalali.day}`);
+}
+
+function reservationStatusLabel(status: FoodReservationStatus) {
+  return status === FoodReservationStatus.CONFIRMED ? 'تأییدشده' : 'تأییدنشده';
 }
 
 type CostGroup = {
@@ -293,14 +322,14 @@ export class FoodReservationsService {
       where: {
         restaurantId: query.restaurantId,
         isActive: true,
-        offeredAt: parseIsoDate(query.offeredAt),
+        weekday: iranWeekdayIndex(query.offeredAt),
       },
       orderBy: [{ food: { name: 'asc' } }, { id: 'asc' }],
       select: {
         id: true,
         restaurantId: true,
         foodId: true,
-        offeredAt: true,
+        weekday: true,
         price: true,
         isActive: true,
         createdAt: true,
@@ -313,7 +342,6 @@ export class FoodReservationsService {
     return items.map((item) => ({
       ...item,
       price: Number(item.price),
-      offeredAt: toIsoDateOnly(item.offeredAt),
     }));
   }
 
@@ -423,6 +451,49 @@ export class FoodReservationsService {
       foodReservations(this.prisma).count({ where }),
     ]);
     return paginatedResult(items.map(withReservation), total, page, pageSize);
+  }
+
+  async exportAll(query: FindFoodReservationsQueryDto, userId?: string) {
+    if (query.mine && !userId) {
+      throw new UnauthorizedException();
+    }
+    const items = await foodReservations(this.prisma).findMany({
+      where: this.buildWhere(query, userId),
+      orderBy: this.sortOrder(query),
+      select: reservationSelect,
+    });
+    const mine = Boolean(query.mine);
+    const sheetName = mine ? 'سفارش‌های من' : 'تاریخچه رزرو';
+    return buildStyledExcelExport({
+      sheetName,
+      fileName: mine ? 'سفارش‌های-من.xlsx' : 'تاریخچه-رزرو-غذا.xlsx',
+      columns: mine
+        ? [
+            { header: 'تاریخ رزرو', key: 'reservedAt', width: 16 },
+            { header: 'رستوران', key: 'restaurant', width: 22 },
+            { header: 'غذا', key: 'food', width: 22 },
+            { header: 'تعداد', key: 'quantity', width: 12 },
+            { header: 'وضعیت', key: 'status', width: 16 },
+          ]
+        : [
+            { header: 'تاریخ رزرو', key: 'reservedAt', width: 16 },
+            { header: 'کارمند', key: 'employee', width: 24 },
+            { header: 'واحد سازمانی', key: 'orgUnit', width: 24 },
+            { header: 'رستوران', key: 'restaurant', width: 22 },
+            { header: 'غذا', key: 'food', width: 22 },
+            { header: 'تعداد', key: 'quantity', width: 12 },
+            { header: 'وضعیت', key: 'status', width: 16 },
+          ],
+      rows: items.map((item) => ({
+        reservedAt: formatExportDate(toIsoDateOnly(item.reservedAt)),
+        employee: item.user.fullName,
+        orgUnit: item.orgUnit.name,
+        restaurant: item.restaurant.name,
+        food: item.food.name,
+        quantity: item.quantity,
+        status: reservationStatusLabel(item.status),
+      })),
+    });
   }
 
   async report(query: FindFoodReservationsQueryDto) {
@@ -831,12 +902,12 @@ export class FoodReservationsService {
       where: {
         restaurantId: dto.restaurantId,
         foodId: dto.foodId,
-        offeredAt: parseIsoDate(dto.reservedAt),
+        weekday: iranWeekdayIndex(dto.reservedAt),
       },
     });
     if (!menuItem) {
       throw new BadRequestException(
-        'این غذا در برنامه غذایی این تاریخ نیست',
+        'این غذا در برنامه غذایی این روز هفته نیست',
       );
     }
     if (!menuItem.isActive) {

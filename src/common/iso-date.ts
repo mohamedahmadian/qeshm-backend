@@ -37,6 +37,11 @@ export function addDaysIso(value: string, days: number) {
   return date.toISOString().slice(0, 10);
 }
 
+/** 0 = شنبه … 6 = جمعه */
+export function iranWeekdayIndex(iso: string) {
+  return (parseIsoDate(iso).getUTCDay() + 1) % 7;
+}
+
 /** شنبهٔ همان هفته در تقویم ایران */
 export function startOfIranWeekIso(iso: string) {
   const date = parseIsoDate(iso);
