@@ -17,6 +17,7 @@ import type { Response } from 'express';
 import { CreatePortSalesReportDto } from './dto/create-port-sales-report.dto';
 import { FindPortSalesReportsQueryDto } from './dto/find-port-sales-reports-query.dto';
 import { ExportPortTicketSalesQueryDto } from './dto/export-port-ticket-sales-query.dto';
+import { FindPortTicketQuotaQueryDto } from './dto/find-port-ticket-quota-query.dto';
 import { FindPortTicketSalesQueryDto } from './dto/find-port-ticket-sales-query.dto';
 import { UpdatePortSalesReportDto } from './dto/update-port-sales-report.dto';
 import { MAX_PORT_SALES_EXCEL_BYTES } from './port-sales.constants';
@@ -73,6 +74,11 @@ export class PortSalesReportsController {
       `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(file.fileName)}`,
     );
     res.send(file.buffer);
+  }
+
+  @Get(':id/tickets/quota')
+  findQuota(@Param('id') id: string, @Query() query: FindPortTicketQuotaQueryDto) {
+    return this.reports.findQuota(id, query);
   }
 
   @Get(':id/tickets')

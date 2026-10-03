@@ -7,9 +7,11 @@ import {
   Patch,
   Post,
   Query,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import type { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { CheckIdentityDto } from './dto/check-identity.dto';
@@ -51,6 +53,23 @@ export class UsersController {
   @Get('qeshmondi-imports/:jobId')
   qeshmondiImportStatus(@Param('jobId') jobId: string) {
     return this.users.qeshmondiImportStatus(jobId);
+  }
+
+  @Get('qeshmondi-imports/:jobId/export')
+  async exportQeshmondiImport(
+    @Param('jobId') jobId: string,
+    @Query('kind') kind: string,
+    @Res() res: Response,
+  ) {
+    const file = await this.users.exportQeshmondiImport(jobId, kind);
+    const ascii = file.fileName.replace(/[^\w.\-]+/g, '_') || 'qeshmondi.xlsx';
+    res.setHeader('Content-Type', file.mimeType);
+    res.setHeader('Content-Length', String(file.buffer.length));
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(file.fileName)}`,
+    );
+    res.send(file.buffer);
   }
 
   @Get(':id')

@@ -26,7 +26,8 @@ import {
   ensureEmployeeRole,
 } from '../access/access.constants';
 import { parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
-import { Prisma, UserStatus } from '../generated/prisma/client';
+import { buildStyledExcelExport } from '../common/excel-export';
+import { Prisma, UserGender, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
 import { joinFullName } from './user-profile.util';
@@ -45,11 +46,12 @@ const QESHMONDI_IMPORT_JOB_TTL_MS = 30 * 60 * 1000;
 type QeshmondiImportJobPhase = 'parsing' | 'saving' | 'done' | 'error';
 type QeshmondiImportStep = 'lookup' | 'writing' | 'roles';
 
+type QeshmondiImportSkip = { rowNumber: number; reason: string };
+
 type QeshmondiImportResult = {
   created: number;
   updated: number;
   skipped: number;
-  skippedRows: { rowNumber: number; reason: string }[];
 };
 
 type QeshmondiImportJob = {
@@ -60,6 +62,8 @@ type QeshmondiImportJob = {
   processed: number;
   total: number;
   result?: QeshmondiImportResult;
+  createdRows?: QeshmondiImportRow[];
+  skippedRows?: QeshmondiImportSkip[];
   error?: string;
   updatedAt: number;
 };
@@ -371,6 +375,59 @@ export class UsersService {
     return { jobId };
   }
 
+  async exportQeshmondiImport(jobId: string, kind: string) {
+    this.pruneQeshmondiJobs();
+    const job = this.qeshmondiImportJobs.get(jobId);
+    if (!job || job.phase !== 'done') {
+      throw new NotFoundException('وضعیت به‌روزرسانی یافت نشد');
+    }
+    if (kind === 'created') {
+      return buildStyledExcelExport({
+        sheetName: 'افراد جدید',
+        fileName: 'افراد-جدید.xlsx',
+        columns: [
+          { header: 'نام', key: 'firstName', width: 18 },
+          { header: 'نام خانوادگی', key: 'lastName', width: 22 },
+          { header: 'نام پدر', key: 'fatherName', width: 18 },
+          { header: 'کد ملی', key: 'nationalId', width: 16 },
+          { header: 'تاریخ تولد', key: 'birthDate', width: 16 },
+          { header: 'جنسیت', key: 'gender', width: 12 },
+          { header: 'شماره گذرنامه', key: 'passportNumber', width: 18 },
+          { header: 'شغل', key: 'occupation', width: 22 },
+          { header: 'مقیم', key: 'isResident', width: 12 },
+          { header: 'تاریخ پایان قشموندی', key: 'qeshmondiEndDate', width: 22 },
+        ],
+        rows: (job.createdRows ?? []).map((row) => ({
+          firstName: row.firstName,
+          lastName: row.lastName,
+          fatherName: row.fatherName ?? '',
+          nationalId: row.nationalId,
+          birthDate: row.birthDate ?? '',
+          gender: qeshmondiGenderLabel(row.gender),
+          passportNumber: row.passportNumber ?? '',
+          occupation: row.occupation ?? '',
+          isResident: row.isResident ? 'بله' : 'خیر',
+          qeshmondiEndDate: row.qeshmondiEndDate ?? '',
+        })),
+      });
+    }
+    if (kind === 'skipped') {
+      return buildStyledExcelExport({
+        sheetName: 'ردیف‌های نادیده',
+        fileName: 'ردیف-های-نادیده.xlsx',
+        columns: [
+          { header: 'ردیف فایل', key: 'sourceRow', width: 14 },
+          { header: 'دلیل', key: 'reason', width: 36 },
+        ],
+        rows: (job.skippedRows ?? []).map((row) => ({
+          sourceRow: row.rowNumber,
+          reason: row.reason,
+        })),
+      });
+    }
+    throw new BadRequestException('نوع خروجی نامعتبر است');
+  }
+
   qeshmondiImportStatus(jobId: string) {
     this.pruneQeshmondiJobs();
     const job = this.qeshmondiImportJobs.get(jobId);
@@ -417,7 +474,6 @@ export class UsersService {
         created: 0,
         updated: 0,
         skipped: parsed.skipped.length,
-        skippedRows: parsed.skipped,
       };
       if (!total) {
         this.patchQeshmondiJob(jobId, {
@@ -426,6 +482,8 @@ export class UsersService {
           processed: 0,
           total: 0,
           result,
+          createdRows: [],
+          skippedRows: parsed.skipped,
         });
         return;
       }
@@ -519,6 +577,8 @@ export class UsersService {
         processed: total,
         total,
         result,
+        createdRows: toCreate,
+        skippedRows: parsed.skipped,
       });
     } catch (error) {
       this.patchQeshmondiJob(jobId, {
@@ -1282,6 +1342,12 @@ function qeshmondiImportErrorText(error: unknown) {
   }
   if (error instanceof Error && error.message.trim()) return error.message;
   return 'به‌روزرسانی اطلاعات انجام نشد';
+}
+
+function qeshmondiGenderLabel(gender: UserGender | null) {
+  if (gender === UserGender.MALE) return 'مرد';
+  if (gender === UserGender.FEMALE) return 'زن';
+  return '';
 }
 
 function chunkList<T>(items: T[], size: number) {
