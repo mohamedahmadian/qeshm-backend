@@ -260,6 +260,8 @@ model User {
   occupation         String?
   isResident         Boolean               @default(false)
   passportNumber     String?
+  qeshmondiGroup         String?
+  individualTicketQuota  Int                   @default(1)
   nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
   foodReservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
@@ -1254,11 +1256,18 @@ model PortSalesReport {
   fileId                String
   file                  StoredFile       @relation(fields: [fileId], references: [id], onDelete: Restrict)
   originalFileName      String
-  recordCount           Int              @default(0)
-  uniqueNationalIdCount Int              @default(0)
-  tickets               PortTicketSale[]
-  createdAt             DateTime         @default(now())
-  updatedAt             DateTime         @updatedAt
+  recordCount            Int              @default(0)
+  uniqueNationalIdCount  Int              @default(0)
+  nationalIdPrefixCount  Int              @default(0)
+  validQeshmondiCount    Int              @default(0)
+  invalidQeshmondiCount  Int              @default(0)
+  weeklyQuotaExcessCount Int              @default(0)
+  quotaSnapshotReady     Boolean          @default(false)
+  tickets                PortTicketSale[]
+  weeklyQuotas           PortTicketWeeklyQuota[]
+  personalQuotas         PortTicketPersonalQuota[]
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
 
   @@index([reportDate])
   @@index([origin])
@@ -1306,6 +1315,36 @@ model PortTicketSale {
   @@index([fullName])
   @@index([travelDate])
   @@map("port_ticket_sales")
+}
+
+model PortTicketWeeklyQuota {
+  id           String          @id @default(uuid())
+  reportId     String
+  report       PortSalesReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  weekStart    DateTime        @db.Date
+  nationalId   String
+  total        Int
+  allowed      Int
+  unauthorized Int
+
+  @@unique([reportId, weekStart, nationalId])
+  @@index([reportId, unauthorized])
+  @@index([reportId, nationalId])
+  @@map("port_ticket_weekly_quotas")
+}
+
+model PortTicketPersonalQuota {
+  id           String          @id @default(uuid())
+  reportId     String
+  report       PortSalesReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  nationalId   String
+  total        Int
+  allowed      Int
+  unauthorized Int
+
+  @@unique([reportId, nationalId])
+  @@index([reportId, unauthorized])
+  @@map("port_ticket_personal_quotas")
 }
 
 enum StakeholderCorrespondenceKind {

@@ -177,6 +177,10 @@ const reportSelect = {
   originalFileName: true,
   recordCount: true,
   uniqueNationalIdCount: true,
+  nationalIdPrefixCount: true,
+  validQeshmondiCount: true,
+  invalidQeshmondiCount: true,
+  weeklyQuotaExcessCount: true,
   createdAt: true,
   updatedAt: true,
   file: { select: fileSelect },
@@ -240,6 +244,14 @@ function serializeReport<
   };
 }
 
+function ticketTravelDateFilter(from?: string, to?: string) {
+  if (!from && !to) return undefined;
+  return {
+    ...(from ? { gte: parseIsoDate(from) } : {}),
+    ...(to ? { lte: parseIsoDate(to) } : {}),
+  };
+}
+
 function serializeTicket<T extends { travelDate: Date | null; createdAt: Date }>(item: T) {
   return {
     ...item,
@@ -298,24 +310,17 @@ function weeklyQuotaExcessInFile(
   return { excessIds };
 }
 
-function aggregateQuota(
+function aggregateWeeklyQuota(
   reportIso: string | null,
   tickets: { nationalId: string | null; travelDate: Date | null }[],
-  scope: QuotaScope,
 ): QuotaRow[] {
-  const buckets = new Map<
-    string,
-    { weekStart: string | null; nationalId: string; total: number }
-  >();
+  const buckets = new Map<string, { weekStart: string; nationalId: string; total: number }>();
   for (const ticket of tickets) {
     if (!ticket.nationalId) continue;
-    let weekStart: string | null = null;
-    if (scope === 'weekly') {
-      const iso = toTehranIsoDateOnly(ticket.travelDate) ?? reportIso;
-      if (!iso) continue;
-      weekStart = startOfIranWeekIso(iso);
-    }
-    const key = scope === 'weekly' ? `${weekStart}\n${ticket.nationalId}` : ticket.nationalId;
+    const iso = toTehranIsoDateOnly(ticket.travelDate) ?? reportIso;
+    if (!iso) continue;
+    const weekStart = startOfIranWeekIso(iso);
+    const key = `${weekStart}\n${ticket.nationalId}`;
     const current = buckets.get(key);
     if (current) {
       current.total += 1;
@@ -329,7 +334,7 @@ function aggregateQuota(
     const unauthorized = bucket.total - allowed;
     rows.push({
       weekStart: bucket.weekStart,
-      weekEnd: bucket.weekStart ? addDaysIso(bucket.weekStart, 6) : null,
+      weekEnd: addDaysIso(bucket.weekStart, 6),
       nationalId: bucket.nationalId,
       total: bucket.total,
       allowed,
@@ -340,65 +345,112 @@ function aggregateQuota(
   return rows;
 }
 
-function filterQuotaRows(rows: QuotaRow[], q?: string) {
-  const violations = rows.filter((row) => row.unauthorized > 0);
-  const needle = toLatinDigits(q?.trim() ?? '').replace(/\D/g, '');
-  if (!needle) return q?.trim() ? [] : violations;
-  return violations.filter((row) => row.nationalId.includes(needle));
+function personalQuotaFromWeekly(weekly: QuotaRow[]): QuotaRow[] {
+  const people = new Map<
+    string,
+    { nationalId: string; total: number; allowed: number; unauthorized: number }
+  >();
+  for (const row of weekly) {
+    const current = people.get(row.nationalId);
+    if (current) {
+      current.total += row.total;
+      current.allowed += row.allowed;
+      current.unauthorized += row.unauthorized;
+    } else {
+      people.set(row.nationalId, {
+        nationalId: row.nationalId,
+        total: row.total,
+        allowed: row.allowed,
+        unauthorized: row.unauthorized,
+      });
+    }
+  }
+  return [...people.values()].map((person) => ({
+    weekStart: null,
+    weekEnd: null,
+    nationalId: person.nationalId,
+    total: person.total,
+    allowed: person.allowed,
+    unauthorized: person.unauthorized,
+    status: person.unauthorized > 0 ? 'violation' : 'allowed',
+  }));
 }
 
-function sortQuotaRows(
-  rows: QuotaRow[],
+const QUOTA_SORT_FIELDS = [
+  'week',
+  'nationalId',
+  'total',
+  'allowed',
+  'unauthorized',
+  'amount',
+  'status',
+] as const;
+
+function quotaSortChoice(
   sortBy: string | undefined,
   sortDir: 'asc' | 'desc' | undefined,
-  scope: QuotaScope,
+  q?: string,
 ) {
   const active =
     Boolean(sortBy) &&
     (sortDir === 'asc' || sortDir === 'desc') &&
-    [
-      'week',
-      'nationalId',
-      'total',
-      'allowed',
-      'unauthorized',
-      'amount',
-      'status',
-    ].includes(sortBy ?? '');
-  const field = active ? sortBy : scope === 'weekly' ? 'week' : 'nationalId';
-  const sign = active && sortDir === 'desc' ? -1 : 1;
-  return [...rows].sort((a, b) => {
-    let result = 0;
-    switch (field) {
-      case 'week':
-        result = (a.weekStart ?? '').localeCompare(b.weekStart ?? '');
-        break;
-      case 'nationalId':
-        result = a.nationalId.localeCompare(b.nationalId);
-        break;
-      case 'total':
-        result = a.total - b.total;
-        break;
-      case 'allowed':
-        result = a.allowed - b.allowed;
-        break;
-      case 'unauthorized':
-      case 'amount':
-        result = a.unauthorized - b.unauthorized;
-        break;
-      case 'status':
-        result = a.status.localeCompare(b.status);
-        break;
-      default:
-        result = 0;
-    }
-    if (result === 0) {
-      result =
-        (a.weekStart ?? '').localeCompare(b.weekStart ?? '') ||
-        a.nationalId.localeCompare(b.nationalId);
-    }
-    return result * sign;
-  });
+    QUOTA_SORT_FIELDS.includes(sortBy as (typeof QUOTA_SORT_FIELDS)[number]);
+  const hasNationalId = Boolean(toLatinDigits(q?.trim() ?? '').replace(/\D/g, ''));
+  const field = active ? (sortBy as (typeof QUOTA_SORT_FIELDS)[number]) : hasNationalId ? 'week' : 'unauthorized';
+  const dir: Prisma.SortOrder = active ? (sortDir === 'desc' ? 'desc' : 'asc') : hasNationalId ? 'asc' : 'desc';
+  return { field, dir };
+}
+
+function weeklyQuotaOrderBy(
+  sortBy: string | undefined,
+  sortDir: 'asc' | 'desc' | undefined,
+  q?: string,
+): Prisma.PortTicketWeeklyQuotaOrderByWithRelationInput[] {
+  const { field, dir } = quotaSortChoice(sortBy, sortDir, q);
+  const byWeek = { weekStart: 'asc' as const };
+  const byNationalId = { nationalId: 'asc' as const };
+  const byId = { id: 'asc' as const };
+  switch (field) {
+    case 'week':
+      return [{ weekStart: dir }, byNationalId, byId];
+    case 'nationalId':
+      return [{ nationalId: dir }, byWeek, byId];
+    case 'total':
+      return [{ total: dir }, byWeek, byNationalId, byId];
+    case 'allowed':
+      return [{ allowed: dir }, byWeek, byNationalId, byId];
+    default:
+      return [{ unauthorized: dir }, byWeek, byNationalId, byId];
+  }
+}
+
+function personalQuotaOrderBy(
+  sortBy: string | undefined,
+  sortDir: 'asc' | 'desc' | undefined,
+  q?: string,
+): Prisma.PortTicketPersonalQuotaOrderByWithRelationInput[] {
+  const { field, dir } = quotaSortChoice(sortBy, sortDir, q);
+  const byNationalId = { nationalId: 'asc' as const };
+  const byId = { id: 'asc' as const };
+  switch (field) {
+    case 'week':
+    case 'nationalId':
+      return [{ nationalId: dir }, byId];
+    case 'total':
+      return [{ total: dir }, byNationalId, byId];
+    case 'allowed':
+      return [{ allowed: dir }, byNationalId, byId];
+    default:
+      return [{ unauthorized: dir }, byNationalId, byId];
+  }
+}
+
+function quotaNationalIdFilter(q?: string) {
+  const raw = q?.trim() ?? '';
+  if (!raw) return { nationalId: undefined as Prisma.StringFilter | undefined };
+  const needle = toLatinDigits(raw).replace(/\D/g, '');
+  if (!needle) return null;
+  return { nationalId: { contains: needle } satisfies Prisma.StringFilter };
 }
 
 function jalaliParts(iso: string) {
@@ -528,45 +580,19 @@ export class PortSalesReportsService {
     if (!item) {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
-    const [prefixIds, validQeshmondiCount, invalidQeshmondiCount, countedTickets] =
-      await Promise.all([
-        this.prisma.portTicketSale.findMany({
-          where: {
-            reportId: id,
-            nationalId: { startsWith: NATIONAL_ID_PREFIX },
-          },
-          distinct: ['nationalId'],
-          select: { nationalId: true },
-        }),
-        this.prisma.portTicketSale.count({
-          where: {
-            reportId: id,
-            qeshmondiStatus: PortTicketQeshmondiStatus.VALID,
-          },
-        }),
-        this.prisma.portTicketSale.count({
-          where: {
-            reportId: id,
-            qeshmondiStatus: PortTicketQeshmondiStatus.INVALID,
-          },
-        }),
-        this.prisma.portTicketSale.findMany({
-          where: { reportId: id, nationalId: { not: null } },
-          select: { nationalId: true, travelDate: true },
-        }),
-      ]);
-    const weeklyQuotaExcessCount = aggregateQuota(
-      toTehranIsoDateOnly(item.reportDate),
-      countedTickets,
-      'weekly',
-    ).reduce((sum, row) => sum + row.unauthorized, 0);
+    const reportIso = toTehranIsoDateOnly(item.reportDate);
+    const tariffYear = reportIso ? jalaliParts(reportIso).year : null;
+    const tariff = tariffYear
+      ? await this.prisma.ticketTariff.findUnique({
+          where: { year: tariffYear },
+          select: { individualSubsidy: true },
+        })
+      : null;
     return {
       ...serializeReport(item),
       nationalIdPrefix: NATIONAL_ID_PREFIX,
-      nationalIdPrefixCount: prefixIds.length,
-      validQeshmondiCount,
-      invalidQeshmondiCount,
-      weeklyQuotaExcessCount,
+      tariffYear,
+      individualSubsidy: tariff?.individualSubsidy ?? null,
     };
   }
 
@@ -576,6 +602,7 @@ export class PortSalesReportsService {
       reportId,
       qeshmondiStatus: query.qeshmondiStatus,
       weeklyQuotaExcess: query.weeklyQuota === 'excess' ? true : undefined,
+      travelDate: ticketTravelDateFilter(query.from, query.to),
       OR: query.q
         ? [
             { nationalId: containsInsensitive(toLatinDigits(query.q)) },
@@ -648,13 +675,62 @@ export class PortSalesReportsService {
   }
 
   async findQuota(reportId: string, query: FindPortTicketQuotaQueryDto) {
-    const rows = filterQuotaRows(await this.loadQuotaRows(reportId, query.scope), query.q);
-    const sorted = sortQuotaRows(rows, query.sortBy, query.sortDir, query.scope);
+    await this.ensureQuotaSnapshot(reportId);
     const { page, pageSize, skip, take } = paginationArgs(query);
-    const unauthorizedTotal = sorted.reduce((sum, row) => sum + row.unauthorized, 0);
+    const nationalId = quotaNationalIdFilter(query.q);
+    if (!nationalId) {
+      return {
+        ...paginatedResult([], 0, page, pageSize),
+        unauthorizedTotal: 0,
+      };
+    }
+    if (query.scope === 'personal') {
+      const where: Prisma.PortTicketPersonalQuotaWhereInput = { reportId, ...nationalId };
+      const [items, total, sum] = await Promise.all([
+        this.prisma.portTicketPersonalQuota.findMany({
+          where,
+          orderBy: personalQuotaOrderBy(query.sortBy, query.sortDir, query.q),
+          skip,
+          take,
+        }),
+        this.prisma.portTicketPersonalQuota.count({ where }),
+        this.prisma.portTicketPersonalQuota.aggregate({
+          where,
+          _sum: { unauthorized: true },
+        }),
+      ]);
+      return {
+        ...paginatedResult(
+          items.map((row) => this.serializeQuotaRow(row)),
+          total,
+          page,
+          pageSize,
+        ),
+        unauthorizedTotal: sum._sum.unauthorized ?? 0,
+      };
+    }
+    const where: Prisma.PortTicketWeeklyQuotaWhereInput = { reportId, ...nationalId };
+    const [items, total, sum] = await Promise.all([
+      this.prisma.portTicketWeeklyQuota.findMany({
+        where,
+        orderBy: weeklyQuotaOrderBy(query.sortBy, query.sortDir, query.q),
+        skip,
+        take,
+      }),
+      this.prisma.portTicketWeeklyQuota.count({ where }),
+      this.prisma.portTicketWeeklyQuota.aggregate({
+        where,
+        _sum: { unauthorized: true },
+      }),
+    ]);
     return {
-      ...paginatedResult(sorted.slice(skip, skip + take), sorted.length, page, pageSize),
-      unauthorizedTotal,
+      ...paginatedResult(
+        items.map((row) => this.serializeQuotaRow(row)),
+        total,
+        page,
+        pageSize,
+      ),
+      unauthorizedTotal: sum._sum.unauthorized ?? 0,
     };
   }
 
@@ -830,6 +906,10 @@ export class PortSalesReportsService {
       const uniqueNationalIds = new Set(
         rows.map((row) => row.nationalId).filter((value): value is string => Boolean(value)),
       );
+      let nationalIdPrefixCount = 0;
+      for (const nationalId of uniqueNationalIds) {
+        if (nationalId.startsWith(NATIONAL_ID_PREFIX)) nationalIdPrefixCount += 1;
+      }
       this.patchJob(jobId, {
         phase: 'saving',
         percent: rows.length ? 20 : 100,
@@ -853,6 +933,7 @@ export class PortSalesReportsService {
               originalFileName,
               recordCount: rows.length,
               uniqueNationalIdCount: uniqueNationalIds.size,
+              nationalIdPrefixCount,
             },
             select: { id: true },
           });
@@ -999,26 +1080,61 @@ export class PortSalesReportsService {
       });
     }
 
+    await this.persistQuotaSnapshot(id, reportIso, tickets, {
+      force: true,
+      validQeshmondiCount: validIds.length,
+      invalidQeshmondiCount: invalidIds.length,
+    });
+
     return this.findOne(id);
   }
 
   async update(id: string, dto: UpdatePortSalesReportDto) {
     const current = await this.prisma.portSalesReport.findUnique({
       where: { id },
-      select: { origin: true, destination: true },
+      select: { origin: true, destination: true, reportDate: true },
     });
     if (!current) {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
     assertDistinctPorts(dto.origin ?? current.origin, dto.destination ?? current.destination);
-    const updated = await this.prisma.portSalesReport.update({
-      where: { id },
-      data: {
-        reportDate: dto.reportDate ? parseIsoDate(dto.reportDate) : undefined,
-        origin: dto.origin,
-        destination: dto.destination,
-      },
-      select: reportSelect,
+    const dateChanged = Boolean(
+      dto.reportDate && toIsoDateOnly(current.reportDate) !== dto.reportDate,
+    );
+    if (!dateChanged) {
+      const updated = await this.prisma.portSalesReport.update({
+        where: { id },
+        data: {
+          origin: dto.origin,
+          destination: dto.destination,
+        },
+        select: reportSelect,
+      });
+      return serializeReport(updated);
+    }
+    const updated = await this.prisma.$transaction(async (tx) => {
+      await tx.portTicketSale.updateMany({
+        where: { reportId: id },
+        data: {
+          qeshmondiStatus: PortTicketQeshmondiStatus.UNKNOWN,
+          weeklyQuotaExcess: false,
+        },
+      });
+      await tx.portTicketWeeklyQuota.deleteMany({ where: { reportId: id } });
+      await tx.portTicketPersonalQuota.deleteMany({ where: { reportId: id } });
+      return tx.portSalesReport.update({
+        where: { id },
+        data: {
+          reportDate: parseIsoDate(dto.reportDate!),
+          origin: dto.origin,
+          destination: dto.destination,
+          validQeshmondiCount: 0,
+          invalidQeshmondiCount: 0,
+          weeklyQuotaExcessCount: 0,
+          quotaSnapshotReady: false,
+        },
+        select: reportSelect,
+      });
     });
     return serializeReport(updated);
   }
@@ -1059,19 +1175,115 @@ export class PortSalesReportsService {
     };
   }
 
-  private async loadQuotaRows(reportId: string, scope: QuotaScope) {
+  private serializeQuotaRow(row: {
+    weekStart?: Date | null;
+    nationalId: string;
+    total: number;
+    allowed: number;
+    unauthorized: number;
+  }): QuotaRow {
+    const weekStart = row.weekStart ? toIsoDateOnly(row.weekStart) : null;
+    return {
+      weekStart,
+      weekEnd: weekStart ? addDaysIso(weekStart, 6) : null,
+      nationalId: row.nationalId,
+      total: row.total,
+      allowed: row.allowed,
+      unauthorized: row.unauthorized,
+      status: 'violation',
+    };
+  }
+
+  /** اگر اسنپ‌شات سهمیه هنوز ساخته نشده، یک‌بار از بلیط‌ها می‌سازد. */
+  private async ensureQuotaSnapshot(reportId: string) {
     const report = await this.prisma.portSalesReport.findUnique({
       where: { id: reportId },
-      select: { reportDate: true },
+      select: { id: true, reportDate: true, quotaSnapshotReady: true },
     });
     if (!report) {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
+    if (report.quotaSnapshotReady) return;
     const tickets = await this.prisma.portTicketSale.findMany({
       where: { reportId, nationalId: { not: null } },
       select: { nationalId: true, travelDate: true },
     });
-    return aggregateQuota(toTehranIsoDateOnly(report.reportDate), tickets, scope);
+    await this.persistQuotaSnapshot(
+      report.id,
+      toTehranIsoDateOnly(report.reportDate),
+      tickets,
+    );
+  }
+
+  private async persistQuotaSnapshot(
+    reportId: string,
+    reportIso: string | null,
+    tickets: { nationalId: string | null; travelDate: Date | null }[],
+    counts?: {
+      force?: boolean;
+      validQeshmondiCount?: number;
+      invalidQeshmondiCount?: number;
+    },
+  ) {
+    const weekly = aggregateWeeklyQuota(reportIso, tickets);
+    const personal = personalQuotaFromWeekly(weekly);
+    const weeklyExcess = weekly.reduce((sum, row) => sum + row.unauthorized, 0);
+    const weeklyRows = weekly.filter((row) => row.unauthorized > 0 && row.weekStart);
+    const personalRows = personal.filter((row) => row.unauthorized > 0);
+    const timeout = Math.min(
+      15 * 60 * 1000,
+      Math.max(
+        120_000,
+        Math.ceil((weeklyRows.length + personalRows.length) / TICKET_INSERT_CHUNK) * 20_000,
+      ),
+    );
+    await this.prisma.$transaction(
+      async (tx) => {
+        await tx.$queryRaw`SELECT id FROM "port_sales_reports" WHERE id = ${reportId} FOR UPDATE`;
+        if (!counts?.force) {
+          const locked = await tx.portSalesReport.findUnique({
+            where: { id: reportId },
+            select: { quotaSnapshotReady: true },
+          });
+          if (locked?.quotaSnapshotReady) return;
+        }
+        await tx.portTicketWeeklyQuota.deleteMany({ where: { reportId } });
+        await tx.portTicketPersonalQuota.deleteMany({ where: { reportId } });
+        for (const chunk of chunkItems(weeklyRows, TICKET_INSERT_CHUNK)) {
+          await tx.portTicketWeeklyQuota.createMany({
+            data: chunk.map((row) => ({
+              reportId,
+              weekStart: parseIsoDate(row.weekStart!),
+              nationalId: row.nationalId,
+              total: row.total,
+              allowed: row.allowed,
+              unauthorized: row.unauthorized,
+            })),
+          });
+        }
+        for (const chunk of chunkItems(personalRows, TICKET_INSERT_CHUNK)) {
+          await tx.portTicketPersonalQuota.createMany({
+            data: chunk.map((row) => ({
+              reportId,
+              nationalId: row.nationalId,
+              total: row.total,
+              allowed: row.allowed,
+              unauthorized: row.unauthorized,
+            })),
+          });
+        }
+        await tx.portSalesReport.update({
+          where: { id: reportId },
+          data: {
+            weeklyQuotaExcessCount: weeklyExcess,
+            quotaSnapshotReady: true,
+            validQeshmondiCount: counts?.validQeshmondiCount,
+            invalidQeshmondiCount: counts?.invalidQeshmondiCount,
+          },
+        });
+      },
+      { maxWait: 20_000, timeout },
+    );
   }
 
   private async exportQuotaSummary(
@@ -1080,12 +1292,23 @@ export class PortSalesReportsService {
     subsidy: number,
     q?: string,
   ) {
-    const rows = sortQuotaRows(
-      filterQuotaRows(await this.loadQuotaRows(reportId, scope), q),
-      undefined,
-      undefined,
-      scope,
-    );
+    await this.ensureQuotaSnapshot(reportId);
+    const nationalId = quotaNationalIdFilter(q);
+    const rows = !nationalId
+      ? []
+      : scope === 'personal'
+        ? (
+            await this.prisma.portTicketPersonalQuota.findMany({
+              where: { reportId, ...nationalId },
+              orderBy: personalQuotaOrderBy(undefined, undefined, q),
+            })
+          ).map((row) => this.serializeQuotaRow(row))
+        : (
+            await this.prisma.portTicketWeeklyQuota.findMany({
+              where: { reportId, ...nationalId },
+              orderBy: weeklyQuotaOrderBy(undefined, undefined, q),
+            })
+          ).map((row) => this.serializeQuotaRow(row));
     const weekly = scope === 'weekly';
     const sheetName = weekly ? 'سهمیه هفتگی مازاد' : 'سهمیه شخصی مازاد';
     const amount = Math.max(0, subsidy);
@@ -1129,6 +1352,7 @@ export class PortSalesReportsService {
       where: {
         reportId,
         qeshmondiStatus: query.qeshmondiStatus,
+        travelDate: ticketTravelDateFilter(query.from, query.to),
         OR: query.q
           ? [
               { nationalId: containsInsensitive(toLatinDigits(query.q)) },
@@ -1141,7 +1365,7 @@ export class PortSalesReportsService {
             ]
           : undefined,
       },
-      orderBy: [{ rowNumber: 'asc' }, { id: 'asc' }],
+      orderBy: [{ travelDate: 'asc' }, { rowNumber: 'asc' }, { id: 'asc' }],
       select: ticketSelect,
     });
     const nationalIds = [
@@ -1163,7 +1387,7 @@ export class PortSalesReportsService {
         }
       }
     }
-    const sheetName = 'کل بلیط‌های فروخته‌شده';
+    const sheetName = 'بلیط‌های فروخته‌شده';
     return buildStyledExcelExport({
       sheetName,
       fileName: `${sheetName}.xlsx`,

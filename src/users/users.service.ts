@@ -115,6 +115,8 @@ const userSelect = {
   occupation: true,
   isResident: true,
   passportNumber: true,
+  qeshmondiGroup: true,
+  individualTicketQuota: true,
   createdAt: true,
   updatedAt: true,
   orgUnit: { select: { id: true, name: true } },
@@ -207,6 +209,7 @@ export class UsersService {
             { email: containsInsensitive(q) },
             { occupation: containsInsensitive(q) },
             { passportNumber: containsInsensitive(q) },
+            { qeshmondiGroup: containsInsensitive(q) },
             { fatherName: containsInsensitive(q) },
             ...(digits
               ? [
@@ -236,6 +239,8 @@ export class UsersService {
         qeshmondiStartDate: (dir) => ({ qeshmondiStartDate: dir }),
         qeshmondiEndDate: (dir) => ({ qeshmondiEndDate: dir }),
         passportNumber: (dir) => ({ passportNumber: dir }),
+        qeshmondiGroup: (dir) => ({ qeshmondiGroup: dir }),
+        individualTicketQuota: (dir) => ({ individualTicketQuota: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -342,6 +347,8 @@ export class UsersService {
         occupation: dto.occupation ?? null,
         isResident: dto.isResident ?? false,
         passportNumber: dto.passportNumber ?? null,
+        qeshmondiGroup: dto.qeshmondiGroup ?? null,
+        individualTicketQuota: dto.individualTicketQuota ?? 1,
         contractorId: await this.resolvePortalContractor(dto.roleIds, dto.contractorId),
       },
       select: userSelect,
@@ -827,6 +834,9 @@ export class UsersService {
       occupation: dto.occupation === undefined ? undefined : dto.occupation,
       isResident: dto.isResident,
       passportNumber: dto.passportNumber === undefined ? undefined : dto.passportNumber,
+      qeshmondiGroup: dto.qeshmondiGroup === undefined ? undefined : dto.qeshmondiGroup,
+      individualTicketQuota:
+        dto.individualTicketQuota === undefined ? undefined : dto.individualTicketQuota,
       contractor:
         dto.roleIds !== undefined || dto.contractorId !== undefined
           ? optionalConnect(

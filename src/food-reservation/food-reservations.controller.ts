@@ -20,6 +20,7 @@ import { FoodReservationRangeActionDto } from './dto/food-reservation-range-acti
 import {
   FoodReservationLastQuantityQueryDto,
   FoodReservationMenuQueryDto,
+  FoodReservationWeekMenuQueryDto,
 } from './dto/food-reservation-menu-query.dto';
 import { MineFoodSummaryQueryDto } from './dto/mine-food-summary-query.dto';
 import { FoodReservationsService } from './food-reservations.service';
@@ -72,6 +73,15 @@ export class FoodReservationsController {
   ) {
     if (!user?.id) throw new UnauthorizedException();
     return this.reservations.menu(user.id, query, Boolean(user.isAdmin));
+  }
+
+  @Get('week-menu')
+  weekMenu(
+    @Query() query: FoodReservationWeekMenuQueryDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user?.id) throw new UnauthorizedException();
+    return this.reservations.weekMenu(user.id, query, Boolean(user.isAdmin));
   }
 
   @Get('report')

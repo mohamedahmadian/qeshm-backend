@@ -33,6 +33,7 @@ import { FoodReservationRangeActionDto } from './dto/food-reservation-range-acti
 import {
   FoodReservationLastQuantityQueryDto,
   FoodReservationMenuQueryDto,
+  FoodReservationWeekMenuQueryDto,
 } from './dto/food-reservation-menu-query.dto';
 import { MineFoodSummaryQueryDto } from './dto/mine-food-summary-query.dto';
 import {
@@ -47,6 +48,20 @@ function foodReservations(prisma: PrismaService) {
     prisma as unknown as { foodReservation: Prisma.FoodReservationDelegate }
   ).foodReservation;
 }
+
+const reservationMenuItemSelect = {
+  id: true,
+  restaurantId: true,
+  foodId: true,
+  weekday: true,
+  price: true,
+  isActive: true,
+  createdAt: true,
+  updatedAt: true,
+  food: {
+    select: { id: true, name: true, description: true, photoId: true },
+  },
+} satisfies Prisma.RestaurantMenuItemSelect;
 
 const reservationSelect = {
   id: true,
@@ -303,21 +318,12 @@ export class FoodReservationsService {
   }
 
   async menu(userId: string, query: FoodReservationMenuQueryDto, isAdmin = false) {
-    const user = await this.requireEmployee(userId);
-    const unitId =
-      isAdmin && query.orgUnitId ? query.orgUnitId : user.orgUnitId;
-    if (!unitId) {
-      throw new BadRequestException('ابتدا واحد سازمانی شما باید مشخص شود');
-    }
-    const linked = await this.prisma.organizationUnitRestaurant.findFirst({
-      where: { unitId, restaurantId: query.restaurantId },
-      select: { unitId: true },
-    });
-    if (!linked) {
-      throw new BadRequestException(
-        'این رستوران برای واحد سازمانی شما تعریف نشده است',
-      );
-    }
+    await this.requireLinkedRestaurant(
+      userId,
+      query.restaurantId,
+      query.orgUnitId,
+      isAdmin,
+    );
     const items = await this.prisma.restaurantMenuItem.findMany({
       where: {
         restaurantId: query.restaurantId,
@@ -325,24 +331,59 @@ export class FoodReservationsService {
         weekday: iranWeekdayIndex(query.offeredAt),
       },
       orderBy: [{ food: { name: 'asc' } }, { id: 'asc' }],
-      select: {
-        id: true,
-        restaurantId: true,
-        foodId: true,
-        weekday: true,
-        price: true,
-        isActive: true,
-        createdAt: true,
-        updatedAt: true,
-        food: {
-          select: { id: true, name: true, description: true, photoId: true },
-        },
-      },
+      select: reservationMenuItemSelect,
     });
     return items.map((item) => ({
       ...item,
       price: Number(item.price),
     }));
+  }
+
+  async weekMenu(
+    userId: string,
+    query: FoodReservationWeekMenuQueryDto,
+    isAdmin = false,
+  ) {
+    await this.requireLinkedRestaurant(
+      userId,
+      query.restaurantId,
+      query.orgUnitId,
+      isAdmin,
+    );
+    const items = await this.prisma.restaurantMenuItem.findMany({
+      where: {
+        restaurantId: query.restaurantId,
+        isActive: true,
+      },
+      orderBy: [{ weekday: 'asc' }, { food: { name: 'asc' } }, { id: 'asc' }],
+      select: reservationMenuItemSelect,
+    });
+    return items.map((item) => ({
+      ...item,
+      price: Number(item.price),
+    }));
+  }
+
+  private async requireLinkedRestaurant(
+    userId: string,
+    restaurantId: string,
+    orgUnitId: string | undefined,
+    isAdmin: boolean,
+  ) {
+    const user = await this.requireEmployee(userId);
+    const unitId = isAdmin && orgUnitId ? orgUnitId : user.orgUnitId;
+    if (!unitId) {
+      throw new BadRequestException('ابتدا واحد سازمانی شما باید مشخص شود');
+    }
+    const linked = await this.prisma.organizationUnitRestaurant.findFirst({
+      where: { unitId, restaurantId },
+      select: { unitId: true },
+    });
+    if (!linked) {
+      throw new BadRequestException(
+        'این رستوران برای واحد سازمانی شما تعریف نشده است',
+      );
+    }
   }
 
   async mineSummary(userId: string, query: MineFoodSummaryQueryDto) {

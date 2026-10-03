@@ -27,6 +27,8 @@ export const userSortFields = [
   'qeshmondiStartDate',
   'qeshmondiEndDate',
   'passportNumber',
+  'qeshmondiGroup',
+  'individualTicketQuota',
 ] as const;
 
 export type UserSortField = (typeof userSortFields)[number];

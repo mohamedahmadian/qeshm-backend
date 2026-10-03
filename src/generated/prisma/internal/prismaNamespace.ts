@@ -447,6 +447,8 @@ export const ModelName = {
   BoardMinutesResolution: 'BoardMinutesResolution',
   PortSalesReport: 'PortSalesReport',
   PortTicketSale: 'PortTicketSale',
+  PortTicketWeeklyQuota: 'PortTicketWeeklyQuota',
+  PortTicketPersonalQuota: 'PortTicketPersonalQuota',
   StakeholderProgressReport: 'StakeholderProgressReport',
   StakeholderCorrespondence: 'StakeholderCorrespondence',
   StakeholderMessage: 'StakeholderMessage',
@@ -467,7 +469,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4171,6 +4173,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PortTicketWeeklyQuota: {
+      payload: Prisma.$PortTicketWeeklyQuotaPayload<ExtArgs>
+      fields: Prisma.PortTicketWeeklyQuotaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PortTicketWeeklyQuotaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PortTicketWeeklyQuotaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>
+        }
+        findFirst: {
+          args: Prisma.PortTicketWeeklyQuotaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PortTicketWeeklyQuotaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>
+        }
+        findMany: {
+          args: Prisma.PortTicketWeeklyQuotaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>[]
+        }
+        create: {
+          args: Prisma.PortTicketWeeklyQuotaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>
+        }
+        createMany: {
+          args: Prisma.PortTicketWeeklyQuotaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PortTicketWeeklyQuotaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>[]
+        }
+        delete: {
+          args: Prisma.PortTicketWeeklyQuotaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>
+        }
+        update: {
+          args: Prisma.PortTicketWeeklyQuotaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>
+        }
+        deleteMany: {
+          args: Prisma.PortTicketWeeklyQuotaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PortTicketWeeklyQuotaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PortTicketWeeklyQuotaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>[]
+        }
+        upsert: {
+          args: Prisma.PortTicketWeeklyQuotaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketWeeklyQuotaPayload>
+        }
+        aggregate: {
+          args: Prisma.PortTicketWeeklyQuotaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePortTicketWeeklyQuota>
+        }
+        groupBy: {
+          args: Prisma.PortTicketWeeklyQuotaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortTicketWeeklyQuotaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PortTicketWeeklyQuotaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortTicketWeeklyQuotaCountAggregateOutputType> | number
+        }
+      }
+    }
+    PortTicketPersonalQuota: {
+      payload: Prisma.$PortTicketPersonalQuotaPayload<ExtArgs>
+      fields: Prisma.PortTicketPersonalQuotaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PortTicketPersonalQuotaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PortTicketPersonalQuotaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>
+        }
+        findFirst: {
+          args: Prisma.PortTicketPersonalQuotaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PortTicketPersonalQuotaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>
+        }
+        findMany: {
+          args: Prisma.PortTicketPersonalQuotaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>[]
+        }
+        create: {
+          args: Prisma.PortTicketPersonalQuotaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>
+        }
+        createMany: {
+          args: Prisma.PortTicketPersonalQuotaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PortTicketPersonalQuotaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>[]
+        }
+        delete: {
+          args: Prisma.PortTicketPersonalQuotaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>
+        }
+        update: {
+          args: Prisma.PortTicketPersonalQuotaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>
+        }
+        deleteMany: {
+          args: Prisma.PortTicketPersonalQuotaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PortTicketPersonalQuotaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PortTicketPersonalQuotaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>[]
+        }
+        upsert: {
+          args: Prisma.PortTicketPersonalQuotaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortTicketPersonalQuotaPayload>
+        }
+        aggregate: {
+          args: Prisma.PortTicketPersonalQuotaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePortTicketPersonalQuota>
+        }
+        groupBy: {
+          args: Prisma.PortTicketPersonalQuotaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortTicketPersonalQuotaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PortTicketPersonalQuotaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortTicketPersonalQuotaCountAggregateOutputType> | number
+        }
+      }
+    }
     StakeholderProgressReport: {
       payload: Prisma.$StakeholderProgressReportPayload<ExtArgs>
       fields: Prisma.StakeholderProgressReportFieldRefs
@@ -4697,6 +4847,8 @@ export const UserScalarFieldEnum = {
   occupation: 'occupation',
   isResident: 'isResident',
   passportNumber: 'passportNumber',
+  qeshmondiGroup: 'qeshmondiGroup',
+  individualTicketQuota: 'individualTicketQuota',
   contractorId: 'contractorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -5362,6 +5514,11 @@ export const PortSalesReportScalarFieldEnum = {
   originalFileName: 'originalFileName',
   recordCount: 'recordCount',
   uniqueNationalIdCount: 'uniqueNationalIdCount',
+  nationalIdPrefixCount: 'nationalIdPrefixCount',
+  validQeshmondiCount: 'validQeshmondiCount',
+  invalidQeshmondiCount: 'invalidQeshmondiCount',
+  weeklyQuotaExcessCount: 'weeklyQuotaExcessCount',
+  quotaSnapshotReady: 'quotaSnapshotReady',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -5399,6 +5556,31 @@ export const PortTicketSaleScalarFieldEnum = {
 } as const
 
 export type PortTicketSaleScalarFieldEnum = (typeof PortTicketSaleScalarFieldEnum)[keyof typeof PortTicketSaleScalarFieldEnum]
+
+
+export const PortTicketWeeklyQuotaScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  weekStart: 'weekStart',
+  nationalId: 'nationalId',
+  total: 'total',
+  allowed: 'allowed',
+  unauthorized: 'unauthorized'
+} as const
+
+export type PortTicketWeeklyQuotaScalarFieldEnum = (typeof PortTicketWeeklyQuotaScalarFieldEnum)[keyof typeof PortTicketWeeklyQuotaScalarFieldEnum]
+
+
+export const PortTicketPersonalQuotaScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  nationalId: 'nationalId',
+  total: 'total',
+  allowed: 'allowed',
+  unauthorized: 'unauthorized'
+} as const
+
+export type PortTicketPersonalQuotaScalarFieldEnum = (typeof PortTicketPersonalQuotaScalarFieldEnum)[keyof typeof PortTicketPersonalQuotaScalarFieldEnum]
 
 
 export const StakeholderProgressReportScalarFieldEnum = {
@@ -6237,6 +6419,8 @@ export type GlobalOmitConfig = {
   boardMinutesResolution?: Prisma.BoardMinutesResolutionOmit
   portSalesReport?: Prisma.PortSalesReportOmit
   portTicketSale?: Prisma.PortTicketSaleOmit
+  portTicketWeeklyQuota?: Prisma.PortTicketWeeklyQuotaOmit
+  portTicketPersonalQuota?: Prisma.PortTicketPersonalQuotaOmit
   stakeholderProgressReport?: Prisma.StakeholderProgressReportOmit
   stakeholderCorrespondence?: Prisma.StakeholderCorrespondenceOmit
   stakeholderMessage?: Prisma.StakeholderMessageOmit

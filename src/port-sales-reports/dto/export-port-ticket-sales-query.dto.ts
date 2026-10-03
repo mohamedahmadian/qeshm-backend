@@ -1,11 +1,13 @@
 import { Transform, Type } from 'class-transformer';
-import { IsIn, IsInt, IsOptional, IsString, Min } from 'class-validator';
+import { IsIn, IsInt, IsOptional, IsString, Matches, Min, ValidateIf } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 import { PortTicketQeshmondiStatus } from '../../generated/prisma/client';
 
 export const portTicketExportGroups = ['all', 'invalid', 'weekly', 'personal'] as const;
 
 export type PortTicketExportGroup = (typeof portTicketExportGroups)[number];
+
+const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
 const qeshmondiFilters = [
   PortTicketQeshmondiStatus.UNKNOWN,
@@ -33,4 +35,16 @@ export class ExportPortTicketSalesQueryDto {
   @IsInt()
   @Min(0)
   subsidy?: number;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @ValidateIf((_, value) => value != null)
+  @Matches(isoDate)
+  from?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @ValidateIf((_, value) => value != null)
+  @Matches(isoDate)
+  to?: string;
 }

@@ -1,14 +1,17 @@
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
   IsEmail,
   IsEnum,
   IsIn,
+  IsInt,
   IsOptional,
   IsString,
   IsUUID,
   Matches,
+  Max,
+  Min,
   MinLength,
   ValidateIf,
 } from 'class-validator';
@@ -235,6 +238,19 @@ export class CreateUserDto {
   @ValidateIf((_, value) => value != null)
   @IsString()
   passportNumber?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  qeshmondiGroup?: string | null;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  @Max(9999)
+  individualTicketQuota?: number;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))

@@ -34,3 +34,12 @@ export class FoodReservationMenuQueryDto {
   @Matches(isoDate, { message: 'تاریخ معتبر نیست' })
   offeredAt: string;
 }
+
+export class FoodReservationWeekMenuQueryDto {
+  @IsOptional()
+  @IsUUID('4')
+  orgUnitId?: string;
+
+  @IsUUID('4')
+  restaurantId: string;
+}

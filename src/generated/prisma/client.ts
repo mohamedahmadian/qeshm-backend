@@ -290,6 +290,16 @@ export type PortSalesReport = Prisma.PortSalesReportModel
  */
 export type PortTicketSale = Prisma.PortTicketSaleModel
 /**
+ * Model PortTicketWeeklyQuota
+ * 
+ */
+export type PortTicketWeeklyQuota = Prisma.PortTicketWeeklyQuotaModel
+/**
+ * Model PortTicketPersonalQuota
+ * 
+ */
+export type PortTicketPersonalQuota = Prisma.PortTicketPersonalQuotaModel
+/**
  * Model StakeholderProgressReport
  * 
  */

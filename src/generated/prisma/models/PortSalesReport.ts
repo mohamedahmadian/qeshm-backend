@@ -29,11 +29,19 @@ export type AggregatePortSalesReport = {
 export type PortSalesReportAvgAggregateOutputType = {
   recordCount: number | null
   uniqueNationalIdCount: number | null
+  nationalIdPrefixCount: number | null
+  validQeshmondiCount: number | null
+  invalidQeshmondiCount: number | null
+  weeklyQuotaExcessCount: number | null
 }
 
 export type PortSalesReportSumAggregateOutputType = {
   recordCount: number | null
   uniqueNationalIdCount: number | null
+  nationalIdPrefixCount: number | null
+  validQeshmondiCount: number | null
+  invalidQeshmondiCount: number | null
+  weeklyQuotaExcessCount: number | null
 }
 
 export type PortSalesReportMinAggregateOutputType = {
@@ -45,6 +53,11 @@ export type PortSalesReportMinAggregateOutputType = {
   originalFileName: string | null
   recordCount: number | null
   uniqueNationalIdCount: number | null
+  nationalIdPrefixCount: number | null
+  validQeshmondiCount: number | null
+  invalidQeshmondiCount: number | null
+  weeklyQuotaExcessCount: number | null
+  quotaSnapshotReady: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +71,11 @@ export type PortSalesReportMaxAggregateOutputType = {
   originalFileName: string | null
   recordCount: number | null
   uniqueNationalIdCount: number | null
+  nationalIdPrefixCount: number | null
+  validQeshmondiCount: number | null
+  invalidQeshmondiCount: number | null
+  weeklyQuotaExcessCount: number | null
+  quotaSnapshotReady: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -71,6 +89,11 @@ export type PortSalesReportCountAggregateOutputType = {
   originalFileName: number
   recordCount: number
   uniqueNationalIdCount: number
+  nationalIdPrefixCount: number
+  validQeshmondiCount: number
+  invalidQeshmondiCount: number
+  weeklyQuotaExcessCount: number
+  quotaSnapshotReady: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -80,11 +103,19 @@ export type PortSalesReportCountAggregateOutputType = {
 export type PortSalesReportAvgAggregateInputType = {
   recordCount?: true
   uniqueNationalIdCount?: true
+  nationalIdPrefixCount?: true
+  validQeshmondiCount?: true
+  invalidQeshmondiCount?: true
+  weeklyQuotaExcessCount?: true
 }
 
 export type PortSalesReportSumAggregateInputType = {
   recordCount?: true
   uniqueNationalIdCount?: true
+  nationalIdPrefixCount?: true
+  validQeshmondiCount?: true
+  invalidQeshmondiCount?: true
+  weeklyQuotaExcessCount?: true
 }
 
 export type PortSalesReportMinAggregateInputType = {
@@ -96,6 +127,11 @@ export type PortSalesReportMinAggregateInputType = {
   originalFileName?: true
   recordCount?: true
   uniqueNationalIdCount?: true
+  nationalIdPrefixCount?: true
+  validQeshmondiCount?: true
+  invalidQeshmondiCount?: true
+  weeklyQuotaExcessCount?: true
+  quotaSnapshotReady?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -109,6 +145,11 @@ export type PortSalesReportMaxAggregateInputType = {
   originalFileName?: true
   recordCount?: true
   uniqueNationalIdCount?: true
+  nationalIdPrefixCount?: true
+  validQeshmondiCount?: true
+  invalidQeshmondiCount?: true
+  weeklyQuotaExcessCount?: true
+  quotaSnapshotReady?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -122,6 +163,11 @@ export type PortSalesReportCountAggregateInputType = {
   originalFileName?: true
   recordCount?: true
   uniqueNationalIdCount?: true
+  nationalIdPrefixCount?: true
+  validQeshmondiCount?: true
+  invalidQeshmondiCount?: true
+  weeklyQuotaExcessCount?: true
+  quotaSnapshotReady?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -222,6 +268,11 @@ export type PortSalesReportGroupByOutputType = {
   originalFileName: string
   recordCount: number
   uniqueNationalIdCount: number
+  nationalIdPrefixCount: number
+  validQeshmondiCount: number
+  invalidQeshmondiCount: number
+  weeklyQuotaExcessCount: number
+  quotaSnapshotReady: boolean
   createdAt: Date
   updatedAt: Date
   _count: PortSalesReportCountAggregateOutputType | null
@@ -258,10 +309,17 @@ export type PortSalesReportWhereInput = {
   originalFileName?: Prisma.StringFilter<"PortSalesReport"> | string
   recordCount?: Prisma.IntFilter<"PortSalesReport"> | number
   uniqueNationalIdCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  nationalIdPrefixCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  validQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   file?: Prisma.XOR<Prisma.StoredFileScalarRelationFilter, Prisma.StoredFileWhereInput>
   tickets?: Prisma.PortTicketSaleListRelationFilter
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaListRelationFilter
+  personalQuotas?: Prisma.PortTicketPersonalQuotaListRelationFilter
 }
 
 export type PortSalesReportOrderByWithRelationInput = {
@@ -273,10 +331,17 @@ export type PortSalesReportOrderByWithRelationInput = {
   originalFileName?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
   uniqueNationalIdCount?: Prisma.SortOrder
+  nationalIdPrefixCount?: Prisma.SortOrder
+  validQeshmondiCount?: Prisma.SortOrder
+  invalidQeshmondiCount?: Prisma.SortOrder
+  weeklyQuotaExcessCount?: Prisma.SortOrder
+  quotaSnapshotReady?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   file?: Prisma.StoredFileOrderByWithRelationInput
   tickets?: Prisma.PortTicketSaleOrderByRelationAggregateInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaOrderByRelationAggregateInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaOrderByRelationAggregateInput
 }
 
 export type PortSalesReportWhereUniqueInput = Prisma.AtLeast<{
@@ -291,10 +356,17 @@ export type PortSalesReportWhereUniqueInput = Prisma.AtLeast<{
   originalFileName?: Prisma.StringFilter<"PortSalesReport"> | string
   recordCount?: Prisma.IntFilter<"PortSalesReport"> | number
   uniqueNationalIdCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  nationalIdPrefixCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  validQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   file?: Prisma.XOR<Prisma.StoredFileScalarRelationFilter, Prisma.StoredFileWhereInput>
   tickets?: Prisma.PortTicketSaleListRelationFilter
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaListRelationFilter
+  personalQuotas?: Prisma.PortTicketPersonalQuotaListRelationFilter
 }, "id">
 
 export type PortSalesReportOrderByWithAggregationInput = {
@@ -306,6 +378,11 @@ export type PortSalesReportOrderByWithAggregationInput = {
   originalFileName?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
   uniqueNationalIdCount?: Prisma.SortOrder
+  nationalIdPrefixCount?: Prisma.SortOrder
+  validQeshmondiCount?: Prisma.SortOrder
+  invalidQeshmondiCount?: Prisma.SortOrder
+  weeklyQuotaExcessCount?: Prisma.SortOrder
+  quotaSnapshotReady?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PortSalesReportCountOrderByAggregateInput
@@ -327,6 +404,11 @@ export type PortSalesReportScalarWhereWithAggregatesInput = {
   originalFileName?: Prisma.StringWithAggregatesFilter<"PortSalesReport"> | string
   recordCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
   uniqueNationalIdCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
+  nationalIdPrefixCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
+  validQeshmondiCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
+  invalidQeshmondiCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
+  weeklyQuotaExcessCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
+  quotaSnapshotReady?: Prisma.BoolWithAggregatesFilter<"PortSalesReport"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PortSalesReport"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PortSalesReport"> | Date | string
 }
@@ -339,10 +421,17 @@ export type PortSalesReportCreateInput = {
   originalFileName: string
   recordCount?: number
   uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
   tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
 }
 
 export type PortSalesReportUncheckedCreateInput = {
@@ -354,9 +443,16 @@ export type PortSalesReportUncheckedCreateInput = {
   originalFileName: string
   recordCount?: number
   uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type PortSalesReportUpdateInput = {
@@ -367,10 +463,17 @@ export type PortSalesReportUpdateInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
   tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
 }
 
 export type PortSalesReportUncheckedUpdateInput = {
@@ -382,9 +485,16 @@ export type PortSalesReportUncheckedUpdateInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type PortSalesReportCreateManyInput = {
@@ -396,6 +506,11 @@ export type PortSalesReportCreateManyInput = {
   originalFileName: string
   recordCount?: number
   uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -408,6 +523,11 @@ export type PortSalesReportUpdateManyMutationInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -421,6 +541,11 @@ export type PortSalesReportUncheckedUpdateManyInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -444,6 +569,11 @@ export type PortSalesReportCountOrderByAggregateInput = {
   originalFileName?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
   uniqueNationalIdCount?: Prisma.SortOrder
+  nationalIdPrefixCount?: Prisma.SortOrder
+  validQeshmondiCount?: Prisma.SortOrder
+  invalidQeshmondiCount?: Prisma.SortOrder
+  weeklyQuotaExcessCount?: Prisma.SortOrder
+  quotaSnapshotReady?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -451,6 +581,10 @@ export type PortSalesReportCountOrderByAggregateInput = {
 export type PortSalesReportAvgOrderByAggregateInput = {
   recordCount?: Prisma.SortOrder
   uniqueNationalIdCount?: Prisma.SortOrder
+  nationalIdPrefixCount?: Prisma.SortOrder
+  validQeshmondiCount?: Prisma.SortOrder
+  invalidQeshmondiCount?: Prisma.SortOrder
+  weeklyQuotaExcessCount?: Prisma.SortOrder
 }
 
 export type PortSalesReportMaxOrderByAggregateInput = {
@@ -462,6 +596,11 @@ export type PortSalesReportMaxOrderByAggregateInput = {
   originalFileName?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
   uniqueNationalIdCount?: Prisma.SortOrder
+  nationalIdPrefixCount?: Prisma.SortOrder
+  validQeshmondiCount?: Prisma.SortOrder
+  invalidQeshmondiCount?: Prisma.SortOrder
+  weeklyQuotaExcessCount?: Prisma.SortOrder
+  quotaSnapshotReady?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -475,6 +614,11 @@ export type PortSalesReportMinOrderByAggregateInput = {
   originalFileName?: Prisma.SortOrder
   recordCount?: Prisma.SortOrder
   uniqueNationalIdCount?: Prisma.SortOrder
+  nationalIdPrefixCount?: Prisma.SortOrder
+  validQeshmondiCount?: Prisma.SortOrder
+  invalidQeshmondiCount?: Prisma.SortOrder
+  weeklyQuotaExcessCount?: Prisma.SortOrder
+  quotaSnapshotReady?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -482,6 +626,10 @@ export type PortSalesReportMinOrderByAggregateInput = {
 export type PortSalesReportSumOrderByAggregateInput = {
   recordCount?: Prisma.SortOrder
   uniqueNationalIdCount?: Prisma.SortOrder
+  nationalIdPrefixCount?: Prisma.SortOrder
+  validQeshmondiCount?: Prisma.SortOrder
+  invalidQeshmondiCount?: Prisma.SortOrder
+  weeklyQuotaExcessCount?: Prisma.SortOrder
 }
 
 export type PortSalesReportScalarRelationFilter = {
@@ -545,6 +693,34 @@ export type PortSalesReportUpdateOneRequiredWithoutTicketsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PortSalesReportUpdateToOneWithWhereWithoutTicketsInput, Prisma.PortSalesReportUpdateWithoutTicketsInput>, Prisma.PortSalesReportUncheckedUpdateWithoutTicketsInput>
 }
 
+export type PortSalesReportCreateNestedOneWithoutWeeklyQuotasInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutWeeklyQuotasInput, Prisma.PortSalesReportUncheckedCreateWithoutWeeklyQuotasInput>
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutWeeklyQuotasInput
+  connect?: Prisma.PortSalesReportWhereUniqueInput
+}
+
+export type PortSalesReportUpdateOneRequiredWithoutWeeklyQuotasNestedInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutWeeklyQuotasInput, Prisma.PortSalesReportUncheckedCreateWithoutWeeklyQuotasInput>
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutWeeklyQuotasInput
+  upsert?: Prisma.PortSalesReportUpsertWithoutWeeklyQuotasInput
+  connect?: Prisma.PortSalesReportWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PortSalesReportUpdateToOneWithWhereWithoutWeeklyQuotasInput, Prisma.PortSalesReportUpdateWithoutWeeklyQuotasInput>, Prisma.PortSalesReportUncheckedUpdateWithoutWeeklyQuotasInput>
+}
+
+export type PortSalesReportCreateNestedOneWithoutPersonalQuotasInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutPersonalQuotasInput, Prisma.PortSalesReportUncheckedCreateWithoutPersonalQuotasInput>
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutPersonalQuotasInput
+  connect?: Prisma.PortSalesReportWhereUniqueInput
+}
+
+export type PortSalesReportUpdateOneRequiredWithoutPersonalQuotasNestedInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutPersonalQuotasInput, Prisma.PortSalesReportUncheckedCreateWithoutPersonalQuotasInput>
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutPersonalQuotasInput
+  upsert?: Prisma.PortSalesReportUpsertWithoutPersonalQuotasInput
+  connect?: Prisma.PortSalesReportWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PortSalesReportUpdateToOneWithWhereWithoutPersonalQuotasInput, Prisma.PortSalesReportUpdateWithoutPersonalQuotasInput>, Prisma.PortSalesReportUncheckedUpdateWithoutPersonalQuotasInput>
+}
+
 export type PortSalesReportCreateWithoutFileInput = {
   id?: string
   reportDate: Date | string
@@ -553,9 +729,16 @@ export type PortSalesReportCreateWithoutFileInput = {
   originalFileName: string
   recordCount?: number
   uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
 }
 
 export type PortSalesReportUncheckedCreateWithoutFileInput = {
@@ -566,9 +749,16 @@ export type PortSalesReportUncheckedCreateWithoutFileInput = {
   originalFileName: string
   recordCount?: number
   uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type PortSalesReportCreateOrConnectWithoutFileInput = {
@@ -609,6 +799,11 @@ export type PortSalesReportScalarWhereInput = {
   originalFileName?: Prisma.StringFilter<"PortSalesReport"> | string
   recordCount?: Prisma.IntFilter<"PortSalesReport"> | number
   uniqueNationalIdCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  nationalIdPrefixCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  validQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
 }
@@ -621,9 +816,16 @@ export type PortSalesReportCreateWithoutTicketsInput = {
   originalFileName: string
   recordCount?: number
   uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
 }
 
 export type PortSalesReportUncheckedCreateWithoutTicketsInput = {
@@ -635,8 +837,15 @@ export type PortSalesReportUncheckedCreateWithoutTicketsInput = {
   originalFileName: string
   recordCount?: number
   uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type PortSalesReportCreateOrConnectWithoutTicketsInput = {
@@ -663,9 +872,16 @@ export type PortSalesReportUpdateWithoutTicketsInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
 }
 
 export type PortSalesReportUncheckedUpdateWithoutTicketsInput = {
@@ -677,8 +893,207 @@ export type PortSalesReportUncheckedUpdateWithoutTicketsInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportCreateWithoutWeeklyQuotasInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
+}
+
+export type PortSalesReportUncheckedCreateWithoutWeeklyQuotasInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  fileId: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedCreateNestedManyWithoutReportInput
+}
+
+export type PortSalesReportCreateOrConnectWithoutWeeklyQuotasInput = {
+  where: Prisma.PortSalesReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.PortSalesReportCreateWithoutWeeklyQuotasInput, Prisma.PortSalesReportUncheckedCreateWithoutWeeklyQuotasInput>
+}
+
+export type PortSalesReportUpsertWithoutWeeklyQuotasInput = {
+  update: Prisma.XOR<Prisma.PortSalesReportUpdateWithoutWeeklyQuotasInput, Prisma.PortSalesReportUncheckedUpdateWithoutWeeklyQuotasInput>
+  create: Prisma.XOR<Prisma.PortSalesReportCreateWithoutWeeklyQuotasInput, Prisma.PortSalesReportUncheckedCreateWithoutWeeklyQuotasInput>
+  where?: Prisma.PortSalesReportWhereInput
+}
+
+export type PortSalesReportUpdateToOneWithWhereWithoutWeeklyQuotasInput = {
+  where?: Prisma.PortSalesReportWhereInput
+  data: Prisma.XOR<Prisma.PortSalesReportUpdateWithoutWeeklyQuotasInput, Prisma.PortSalesReportUncheckedUpdateWithoutWeeklyQuotasInput>
+}
+
+export type PortSalesReportUpdateWithoutWeeklyQuotasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportUncheckedUpdateWithoutWeeklyQuotasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  fileId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportCreateWithoutPersonalQuotasInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
+}
+
+export type PortSalesReportUncheckedCreateWithoutPersonalQuotasInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  fileId: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedCreateNestedManyWithoutReportInput
+}
+
+export type PortSalesReportCreateOrConnectWithoutPersonalQuotasInput = {
+  where: Prisma.PortSalesReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.PortSalesReportCreateWithoutPersonalQuotasInput, Prisma.PortSalesReportUncheckedCreateWithoutPersonalQuotasInput>
+}
+
+export type PortSalesReportUpsertWithoutPersonalQuotasInput = {
+  update: Prisma.XOR<Prisma.PortSalesReportUpdateWithoutPersonalQuotasInput, Prisma.PortSalesReportUncheckedUpdateWithoutPersonalQuotasInput>
+  create: Prisma.XOR<Prisma.PortSalesReportCreateWithoutPersonalQuotasInput, Prisma.PortSalesReportUncheckedCreateWithoutPersonalQuotasInput>
+  where?: Prisma.PortSalesReportWhereInput
+}
+
+export type PortSalesReportUpdateToOneWithWhereWithoutPersonalQuotasInput = {
+  where?: Prisma.PortSalesReportWhereInput
+  data: Prisma.XOR<Prisma.PortSalesReportUpdateWithoutPersonalQuotasInput, Prisma.PortSalesReportUncheckedUpdateWithoutPersonalQuotasInput>
+}
+
+export type PortSalesReportUpdateWithoutPersonalQuotasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportUncheckedUpdateWithoutPersonalQuotasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  fileId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type PortSalesReportCreateManyFileInput = {
@@ -689,6 +1104,11 @@ export type PortSalesReportCreateManyFileInput = {
   originalFileName: string
   recordCount?: number
   uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -701,9 +1121,16 @@ export type PortSalesReportUpdateWithoutFileInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
 }
 
 export type PortSalesReportUncheckedUpdateWithoutFileInput = {
@@ -714,9 +1141,16 @@ export type PortSalesReportUncheckedUpdateWithoutFileInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type PortSalesReportUncheckedUpdateManyWithoutFileInput = {
@@ -727,6 +1161,11 @@ export type PortSalesReportUncheckedUpdateManyWithoutFileInput = {
   originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
   recordCount?: Prisma.IntFieldUpdateOperationsInput | number
   uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -738,10 +1177,14 @@ export type PortSalesReportUncheckedUpdateManyWithoutFileInput = {
 
 export type PortSalesReportCountOutputType = {
   tickets: number
+  weeklyQuotas: number
+  personalQuotas: number
 }
 
 export type PortSalesReportCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tickets?: boolean | PortSalesReportCountOutputTypeCountTicketsArgs
+  weeklyQuotas?: boolean | PortSalesReportCountOutputTypeCountWeeklyQuotasArgs
+  personalQuotas?: boolean | PortSalesReportCountOutputTypeCountPersonalQuotasArgs
 }
 
 /**
@@ -761,6 +1204,20 @@ export type PortSalesReportCountOutputTypeCountTicketsArgs<ExtArgs extends runti
   where?: Prisma.PortTicketSaleWhereInput
 }
 
+/**
+ * PortSalesReportCountOutputType without action
+ */
+export type PortSalesReportCountOutputTypeCountWeeklyQuotasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PortTicketWeeklyQuotaWhereInput
+}
+
+/**
+ * PortSalesReportCountOutputType without action
+ */
+export type PortSalesReportCountOutputTypeCountPersonalQuotasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PortTicketPersonalQuotaWhereInput
+}
+
 
 export type PortSalesReportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -771,10 +1228,17 @@ export type PortSalesReportSelect<ExtArgs extends runtime.Types.Extensions.Inter
   originalFileName?: boolean
   recordCount?: boolean
   uniqueNationalIdCount?: boolean
+  nationalIdPrefixCount?: boolean
+  validQeshmondiCount?: boolean
+  invalidQeshmondiCount?: boolean
+  weeklyQuotaExcessCount?: boolean
+  quotaSnapshotReady?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
   tickets?: boolean | Prisma.PortSalesReport$ticketsArgs<ExtArgs>
+  weeklyQuotas?: boolean | Prisma.PortSalesReport$weeklyQuotasArgs<ExtArgs>
+  personalQuotas?: boolean | Prisma.PortSalesReport$personalQuotasArgs<ExtArgs>
   _count?: boolean | Prisma.PortSalesReportCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["portSalesReport"]>
 
@@ -787,6 +1251,11 @@ export type PortSalesReportSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   originalFileName?: boolean
   recordCount?: boolean
   uniqueNationalIdCount?: boolean
+  nationalIdPrefixCount?: boolean
+  validQeshmondiCount?: boolean
+  invalidQeshmondiCount?: boolean
+  weeklyQuotaExcessCount?: boolean
+  quotaSnapshotReady?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
@@ -801,6 +1270,11 @@ export type PortSalesReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   originalFileName?: boolean
   recordCount?: boolean
   uniqueNationalIdCount?: boolean
+  nationalIdPrefixCount?: boolean
+  validQeshmondiCount?: boolean
+  invalidQeshmondiCount?: boolean
+  weeklyQuotaExcessCount?: boolean
+  quotaSnapshotReady?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
@@ -815,14 +1289,21 @@ export type PortSalesReportSelectScalar = {
   originalFileName?: boolean
   recordCount?: boolean
   uniqueNationalIdCount?: boolean
+  nationalIdPrefixCount?: boolean
+  validQeshmondiCount?: boolean
+  invalidQeshmondiCount?: boolean
+  weeklyQuotaExcessCount?: boolean
+  quotaSnapshotReady?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PortSalesReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportDate" | "origin" | "destination" | "fileId" | "originalFileName" | "recordCount" | "uniqueNationalIdCount" | "createdAt" | "updatedAt", ExtArgs["result"]["portSalesReport"]>
+export type PortSalesReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportDate" | "origin" | "destination" | "fileId" | "originalFileName" | "recordCount" | "uniqueNationalIdCount" | "nationalIdPrefixCount" | "validQeshmondiCount" | "invalidQeshmondiCount" | "weeklyQuotaExcessCount" | "quotaSnapshotReady" | "createdAt" | "updatedAt", ExtArgs["result"]["portSalesReport"]>
 export type PortSalesReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
   tickets?: boolean | Prisma.PortSalesReport$ticketsArgs<ExtArgs>
+  weeklyQuotas?: boolean | Prisma.PortSalesReport$weeklyQuotasArgs<ExtArgs>
+  personalQuotas?: boolean | Prisma.PortSalesReport$personalQuotasArgs<ExtArgs>
   _count?: boolean | Prisma.PortSalesReportCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PortSalesReportIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -837,6 +1318,8 @@ export type $PortSalesReportPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     file: Prisma.$StoredFilePayload<ExtArgs>
     tickets: Prisma.$PortTicketSalePayload<ExtArgs>[]
+    weeklyQuotas: Prisma.$PortTicketWeeklyQuotaPayload<ExtArgs>[]
+    personalQuotas: Prisma.$PortTicketPersonalQuotaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -847,6 +1330,11 @@ export type $PortSalesReportPayload<ExtArgs extends runtime.Types.Extensions.Int
     originalFileName: string
     recordCount: number
     uniqueNationalIdCount: number
+    nationalIdPrefixCount: number
+    validQeshmondiCount: number
+    invalidQeshmondiCount: number
+    weeklyQuotaExcessCount: number
+    quotaSnapshotReady: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["portSalesReport"]>
@@ -1245,6 +1733,8 @@ export interface Prisma__PortSalesReportClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   file<T extends Prisma.StoredFileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFileDefaultArgs<ExtArgs>>): Prisma.Prisma__StoredFileClient<runtime.Types.Result.GetResult<Prisma.$StoredFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tickets<T extends Prisma.PortSalesReport$ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PortSalesReport$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortTicketSalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  weeklyQuotas<T extends Prisma.PortSalesReport$weeklyQuotasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PortSalesReport$weeklyQuotasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortTicketWeeklyQuotaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  personalQuotas<T extends Prisma.PortSalesReport$personalQuotasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PortSalesReport$personalQuotasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortTicketPersonalQuotaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1282,6 +1772,11 @@ export interface PortSalesReportFieldRefs {
   readonly originalFileName: Prisma.FieldRef<"PortSalesReport", 'String'>
   readonly recordCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
   readonly uniqueNationalIdCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly nationalIdPrefixCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly validQeshmondiCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly invalidQeshmondiCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly weeklyQuotaExcessCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly quotaSnapshotReady: Prisma.FieldRef<"PortSalesReport", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"PortSalesReport", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PortSalesReport", 'DateTime'>
 }
@@ -1706,6 +2201,54 @@ export type PortSalesReport$ticketsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.PortTicketSaleScalarFieldEnum | Prisma.PortTicketSaleScalarFieldEnum[]
+}
+
+/**
+ * PortSalesReport.weeklyQuotas
+ */
+export type PortSalesReport$weeklyQuotasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PortTicketWeeklyQuota
+   */
+  select?: Prisma.PortTicketWeeklyQuotaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PortTicketWeeklyQuota
+   */
+  omit?: Prisma.PortTicketWeeklyQuotaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PortTicketWeeklyQuotaInclude<ExtArgs> | null
+  where?: Prisma.PortTicketWeeklyQuotaWhereInput
+  orderBy?: Prisma.PortTicketWeeklyQuotaOrderByWithRelationInput | Prisma.PortTicketWeeklyQuotaOrderByWithRelationInput[]
+  cursor?: Prisma.PortTicketWeeklyQuotaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PortTicketWeeklyQuotaScalarFieldEnum | Prisma.PortTicketWeeklyQuotaScalarFieldEnum[]
+}
+
+/**
+ * PortSalesReport.personalQuotas
+ */
+export type PortSalesReport$personalQuotasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PortTicketPersonalQuota
+   */
+  select?: Prisma.PortTicketPersonalQuotaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PortTicketPersonalQuota
+   */
+  omit?: Prisma.PortTicketPersonalQuotaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PortTicketPersonalQuotaInclude<ExtArgs> | null
+  where?: Prisma.PortTicketPersonalQuotaWhereInput
+  orderBy?: Prisma.PortTicketPersonalQuotaOrderByWithRelationInput | Prisma.PortTicketPersonalQuotaOrderByWithRelationInput[]
+  cursor?: Prisma.PortTicketPersonalQuotaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PortTicketPersonalQuotaScalarFieldEnum | Prisma.PortTicketPersonalQuotaScalarFieldEnum[]
 }
 
 /**

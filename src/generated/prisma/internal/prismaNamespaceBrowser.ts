@@ -101,6 +101,8 @@ export const ModelName = {
   BoardMinutesResolution: 'BoardMinutesResolution',
   PortSalesReport: 'PortSalesReport',
   PortTicketSale: 'PortTicketSale',
+  PortTicketWeeklyQuota: 'PortTicketWeeklyQuota',
+  PortTicketPersonalQuota: 'PortTicketPersonalQuota',
   StakeholderProgressReport: 'StakeholderProgressReport',
   StakeholderCorrespondence: 'StakeholderCorrespondence',
   StakeholderMessage: 'StakeholderMessage',
@@ -241,6 +243,8 @@ export const UserScalarFieldEnum = {
   occupation: 'occupation',
   isResident: 'isResident',
   passportNumber: 'passportNumber',
+  qeshmondiGroup: 'qeshmondiGroup',
+  individualTicketQuota: 'individualTicketQuota',
   contractorId: 'contractorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -906,6 +910,11 @@ export const PortSalesReportScalarFieldEnum = {
   originalFileName: 'originalFileName',
   recordCount: 'recordCount',
   uniqueNationalIdCount: 'uniqueNationalIdCount',
+  nationalIdPrefixCount: 'nationalIdPrefixCount',
+  validQeshmondiCount: 'validQeshmondiCount',
+  invalidQeshmondiCount: 'invalidQeshmondiCount',
+  weeklyQuotaExcessCount: 'weeklyQuotaExcessCount',
+  quotaSnapshotReady: 'quotaSnapshotReady',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -943,6 +952,31 @@ export const PortTicketSaleScalarFieldEnum = {
 } as const
 
 export type PortTicketSaleScalarFieldEnum = (typeof PortTicketSaleScalarFieldEnum)[keyof typeof PortTicketSaleScalarFieldEnum]
+
+
+export const PortTicketWeeklyQuotaScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  weekStart: 'weekStart',
+  nationalId: 'nationalId',
+  total: 'total',
+  allowed: 'allowed',
+  unauthorized: 'unauthorized'
+} as const
+
+export type PortTicketWeeklyQuotaScalarFieldEnum = (typeof PortTicketWeeklyQuotaScalarFieldEnum)[keyof typeof PortTicketWeeklyQuotaScalarFieldEnum]
+
+
+export const PortTicketPersonalQuotaScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  nationalId: 'nationalId',
+  total: 'total',
+  allowed: 'allowed',
+  unauthorized: 'unauthorized'
+} as const
+
+export type PortTicketPersonalQuotaScalarFieldEnum = (typeof PortTicketPersonalQuotaScalarFieldEnum)[keyof typeof PortTicketPersonalQuotaScalarFieldEnum]
 
 
 export const StakeholderProgressReportScalarFieldEnum = {

@@ -29,11 +29,13 @@ export type AggregateUser = {
 export type UserAvgAggregateOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
+  individualTicketQuota: number | null
 }
 
 export type UserSumAggregateOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
+  individualTicketQuota: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -81,6 +83,8 @@ export type UserMinAggregateOutputType = {
   occupation: string | null
   isResident: boolean | null
   passportNumber: string | null
+  qeshmondiGroup: string | null
+  individualTicketQuota: number | null
   contractorId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -131,6 +135,8 @@ export type UserMaxAggregateOutputType = {
   occupation: string | null
   isResident: boolean | null
   passportNumber: string | null
+  qeshmondiGroup: string | null
+  individualTicketQuota: number | null
   contractorId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -182,6 +188,8 @@ export type UserCountAggregateOutputType = {
   occupation: number
   isResident: number
   passportNumber: number
+  qeshmondiGroup: number
+  individualTicketQuota: number
   contractorId: number
   createdAt: number
   updatedAt: number
@@ -192,11 +200,13 @@ export type UserCountAggregateOutputType = {
 export type UserAvgAggregateInputType = {
   latitude?: true
   longitude?: true
+  individualTicketQuota?: true
 }
 
 export type UserSumAggregateInputType = {
   latitude?: true
   longitude?: true
+  individualTicketQuota?: true
 }
 
 export type UserMinAggregateInputType = {
@@ -244,6 +254,8 @@ export type UserMinAggregateInputType = {
   occupation?: true
   isResident?: true
   passportNumber?: true
+  qeshmondiGroup?: true
+  individualTicketQuota?: true
   contractorId?: true
   createdAt?: true
   updatedAt?: true
@@ -294,6 +306,8 @@ export type UserMaxAggregateInputType = {
   occupation?: true
   isResident?: true
   passportNumber?: true
+  qeshmondiGroup?: true
+  individualTicketQuota?: true
   contractorId?: true
   createdAt?: true
   updatedAt?: true
@@ -345,6 +359,8 @@ export type UserCountAggregateInputType = {
   occupation?: true
   isResident?: true
   passportNumber?: true
+  qeshmondiGroup?: true
+  individualTicketQuota?: true
   contractorId?: true
   createdAt?: true
   updatedAt?: true
@@ -483,6 +499,8 @@ export type UserGroupByOutputType = {
   occupation: string | null
   isResident: boolean
   passportNumber: string | null
+  qeshmondiGroup: string | null
+  individualTicketQuota: number
   contractorId: string | null
   createdAt: Date
   updatedAt: Date
@@ -557,6 +575,8 @@ export type UserWhereInput = {
   occupation?: Prisma.StringNullableFilter<"User"> | string | null
   isResident?: Prisma.BoolFilter<"User"> | boolean
   passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  qeshmondiGroup?: Prisma.StringNullableFilter<"User"> | string | null
+  individualTicketQuota?: Prisma.IntFilter<"User"> | number
   contractorId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -639,6 +659,8 @@ export type UserOrderByWithRelationInput = {
   occupation?: Prisma.SortOrderInput | Prisma.SortOrder
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  qeshmondiGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -724,6 +746,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   occupation?: Prisma.StringNullableFilter<"User"> | string | null
   isResident?: Prisma.BoolFilter<"User"> | boolean
   passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  qeshmondiGroup?: Prisma.StringNullableFilter<"User"> | string | null
+  individualTicketQuota?: Prisma.IntFilter<"User"> | number
   contractorId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -806,6 +830,8 @@ export type UserOrderByWithAggregationInput = {
   occupation?: Prisma.SortOrderInput | Prisma.SortOrder
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  qeshmondiGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -865,6 +891,8 @@ export type UserScalarWhereWithAggregatesInput = {
   occupation?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isResident?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   passportNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  qeshmondiGroup?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  individualTicketQuota?: Prisma.IntWithAggregatesFilter<"User"> | number
   contractorId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -905,6 +933,8 @@ export type UserCreateInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -986,6 +1016,8 @@ export type UserUncheckedCreateInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1045,6 +1077,8 @@ export type UserUpdateInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -1126,6 +1160,8 @@ export type UserUncheckedUpdateInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1196,6 +1232,8 @@ export type UserCreateManyInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1236,6 +1274,8 @@ export type UserUpdateManyMutationInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1286,6 +1326,8 @@ export type UserUncheckedUpdateManyInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1355,6 +1397,8 @@ export type UserCountOrderByAggregateInput = {
   occupation?: Prisma.SortOrder
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrder
+  qeshmondiGroup?: Prisma.SortOrder
+  individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1363,6 +1407,7 @@ export type UserCountOrderByAggregateInput = {
 export type UserAvgOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  individualTicketQuota?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -1410,6 +1455,8 @@ export type UserMaxOrderByAggregateInput = {
   occupation?: Prisma.SortOrder
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrder
+  qeshmondiGroup?: Prisma.SortOrder
+  individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1460,6 +1507,8 @@ export type UserMinOrderByAggregateInput = {
   occupation?: Prisma.SortOrder
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrder
+  qeshmondiGroup?: Prisma.SortOrder
+  individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1468,6 +1517,7 @@ export type UserMinOrderByAggregateInput = {
 export type UserSumOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  individualTicketQuota?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -2328,6 +2378,8 @@ export type UserCreateWithoutPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2407,6 +2459,8 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2476,6 +2530,8 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2555,6 +2611,8 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2624,6 +2682,8 @@ export type UserCreateWithoutPassportPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2703,6 +2763,8 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2772,6 +2834,8 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -2851,6 +2915,8 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2950,6 +3016,8 @@ export type UserScalarWhereInput = {
   occupation?: Prisma.StringNullableFilter<"User"> | string | null
   isResident?: Prisma.BoolFilter<"User"> | boolean
   passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  qeshmondiGroup?: Prisma.StringNullableFilter<"User"> | string | null
+  individualTicketQuota?: Prisma.IntFilter<"User"> | number
   contractorId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -3038,6 +3106,8 @@ export type UserCreateWithoutCountryInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
@@ -3117,6 +3187,8 @@ export type UserUncheckedCreateWithoutCountryInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3202,6 +3274,8 @@ export type UserCreateWithoutProvinceInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3281,6 +3355,8 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3350,6 +3426,8 @@ export type UserCreateWithoutLocationProvinceInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3429,6 +3507,8 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3530,6 +3610,8 @@ export type UserCreateWithoutCityInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3609,6 +3691,8 @@ export type UserUncheckedCreateWithoutCityInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3678,6 +3762,8 @@ export type UserCreateWithoutLocationCityInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3757,6 +3843,8 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3858,6 +3946,8 @@ export type UserCreateWithoutLocationHistoriesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -3938,6 +4028,8 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4012,6 +4104,8 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -4092,6 +4186,8 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4150,6 +4246,8 @@ export type UserCreateWithoutContractorInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4230,6 +4328,8 @@ export type UserUncheckedCreateWithoutContractorInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
@@ -4314,6 +4414,8 @@ export type UserCreateWithoutPositionInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4393,6 +4495,8 @@ export type UserUncheckedCreateWithoutPositionInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4478,6 +4582,8 @@ export type UserCreateWithoutNutritionUnitsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4558,6 +4664,8 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4621,6 +4729,8 @@ export type UserCreateWithoutOrgUnitInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -4700,6 +4810,8 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4780,6 +4892,8 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -4860,6 +4974,8 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4934,6 +5050,8 @@ export type UserCreateWithoutFoodReservationsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5014,6 +5132,8 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5088,6 +5208,8 @@ export type UserUpdateWithoutFoodReservationsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -5168,6 +5290,8 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5226,6 +5350,8 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5306,6 +5432,8 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5380,6 +5508,8 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -5460,6 +5590,8 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5518,6 +5650,8 @@ export type UserCreateWithoutUserRolesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5598,6 +5732,8 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5672,6 +5808,8 @@ export type UserUpdateWithoutUserRolesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -5752,6 +5890,8 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5810,6 +5950,8 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -5890,6 +6032,8 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5953,6 +6097,8 @@ export type UserCreateWithoutSingardRepliesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -6033,6 +6179,8 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6107,6 +6255,8 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6187,6 +6337,8 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6256,6 +6408,8 @@ export type UserUpdateWithoutSingardRepliesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6336,6 +6490,8 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6394,6 +6550,8 @@ export type UserCreateWithoutSingardActivitiesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -6474,6 +6632,8 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6548,6 +6708,8 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -6628,6 +6790,8 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6686,6 +6850,8 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -6766,6 +6932,8 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6829,6 +6997,8 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -6909,6 +7079,8 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6972,6 +7144,8 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -7052,6 +7226,8 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7115,6 +7291,8 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -7195,6 +7373,8 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7258,6 +7438,8 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -7338,6 +7520,8 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7401,6 +7585,8 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -7481,6 +7667,8 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7555,6 +7743,8 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -7635,6 +7825,8 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7704,6 +7896,8 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -7784,6 +7978,8 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7853,6 +8049,8 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -7933,6 +8131,8 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8002,6 +8202,8 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8082,6 +8284,8 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8151,6 +8355,8 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8231,6 +8437,8 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8300,6 +8508,8 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8380,6 +8590,8 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8438,6 +8650,8 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -8518,6 +8732,8 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8592,6 +8808,8 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8672,6 +8890,8 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8730,6 +8950,8 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -8810,6 +9032,8 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8884,6 +9108,8 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -8964,6 +9190,8 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9022,6 +9250,8 @@ export type UserCreateWithoutStakeholderReportsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -9102,6 +9332,8 @@ export type UserUncheckedCreateWithoutStakeholderReportsInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9176,6 +9408,8 @@ export type UserUpdateWithoutStakeholderReportsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -9256,6 +9490,8 @@ export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9314,6 +9550,8 @@ export type UserCreateWithoutStakeholderCorrespondencesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -9394,6 +9632,8 @@ export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9468,6 +9708,8 @@ export type UserUpdateWithoutStakeholderCorrespondencesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -9548,6 +9790,8 @@ export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9606,6 +9850,8 @@ export type UserCreateWithoutStakeholderMessagesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   country?: Prisma.CountryCreateNestedOneWithoutUsersInput
@@ -9686,6 +9932,8 @@ export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9760,6 +10008,8 @@ export type UserUpdateWithoutStakeholderMessagesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -9840,6 +10090,8 @@ export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9908,6 +10160,8 @@ export type UserCreateManyPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9958,6 +10212,8 @@ export type UserCreateManyNationalCardPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10008,6 +10264,8 @@ export type UserCreateManyPassportPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10058,6 +10316,8 @@ export type UserCreateManyIdentityBookletPhotoInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10098,6 +10358,8 @@ export type UserUpdateWithoutPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -10177,6 +10439,8 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10246,6 +10510,8 @@ export type UserUncheckedUpdateManyWithoutPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10286,6 +10552,8 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -10365,6 +10633,8 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10434,6 +10704,8 @@ export type UserUncheckedUpdateManyWithoutNationalCardPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10474,6 +10746,8 @@ export type UserUpdateWithoutPassportPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -10553,6 +10827,8 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10622,6 +10898,8 @@ export type UserUncheckedUpdateManyWithoutPassportPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10662,6 +10940,8 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -10741,6 +11021,8 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10810,6 +11092,8 @@ export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10860,6 +11144,8 @@ export type UserCreateManyCountryInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10900,6 +11186,8 @@ export type UserUpdateWithoutCountryInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
@@ -10979,6 +11267,8 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11048,6 +11338,8 @@ export type UserUncheckedUpdateManyWithoutCountryInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11098,6 +11390,8 @@ export type UserCreateManyProvinceInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11148,6 +11442,8 @@ export type UserCreateManyLocationProvinceInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11188,6 +11484,8 @@ export type UserUpdateWithoutProvinceInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -11267,6 +11565,8 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11336,6 +11636,8 @@ export type UserUncheckedUpdateManyWithoutProvinceInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11376,6 +11678,8 @@ export type UserUpdateWithoutLocationProvinceInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -11455,6 +11759,8 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11524,6 +11830,8 @@ export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11574,6 +11882,8 @@ export type UserCreateManyCityInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11624,6 +11934,8 @@ export type UserCreateManyLocationCityInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11664,6 +11976,8 @@ export type UserUpdateWithoutCityInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -11743,6 +12057,8 @@ export type UserUncheckedUpdateWithoutCityInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11812,6 +12128,8 @@ export type UserUncheckedUpdateManyWithoutCityInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11852,6 +12170,8 @@ export type UserUpdateWithoutLocationCityInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -11931,6 +12251,8 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12000,6 +12322,8 @@ export type UserUncheckedUpdateManyWithoutLocationCityInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12051,6 +12375,8 @@ export type UserCreateManyContractorInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -12090,6 +12416,8 @@ export type UserUpdateWithoutContractorInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -12170,6 +12498,8 @@ export type UserUncheckedUpdateWithoutContractorInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
@@ -12239,6 +12569,8 @@ export type UserUncheckedUpdateManyWithoutContractorInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -12288,6 +12620,8 @@ export type UserCreateManyPositionInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -12328,6 +12662,8 @@ export type UserUpdateWithoutPositionInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -12407,6 +12743,8 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12476,6 +12814,8 @@ export type UserUncheckedUpdateManyWithoutPositionInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12526,6 +12866,8 @@ export type UserCreateManyOrgUnitInput = {
   occupation?: string | null
   isResident?: boolean
   passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -12566,6 +12908,8 @@ export type UserUpdateWithoutOrgUnitInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
@@ -12645,6 +12989,8 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12714,6 +13060,8 @@ export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12958,6 +13306,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   occupation?: boolean
   isResident?: boolean
   passportNumber?: boolean
+  qeshmondiGroup?: boolean
+  individualTicketQuota?: boolean
   contractorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -13041,6 +13391,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   occupation?: boolean
   isResident?: boolean
   passportNumber?: boolean
+  qeshmondiGroup?: boolean
+  individualTicketQuota?: boolean
   contractorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -13104,6 +13456,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   occupation?: boolean
   isResident?: boolean
   passportNumber?: boolean
+  qeshmondiGroup?: boolean
+  individualTicketQuota?: boolean
   contractorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -13167,12 +13521,14 @@ export type UserSelectScalar = {
   occupation?: boolean
   isResident?: boolean
   passportNumber?: boolean
+  qeshmondiGroup?: boolean
+  individualTicketQuota?: boolean
   contractorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "fatherName" | "birthDate" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "orgUnitId" | "positionId" | "isQeshmondi" | "qeshmondiStartDate" | "qeshmondiEndDate" | "occupation" | "isResident" | "passportNumber" | "contractorId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "fatherName" | "birthDate" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "orgUnitId" | "positionId" | "isQeshmondi" | "qeshmondiStartDate" | "qeshmondiEndDate" | "occupation" | "isResident" | "passportNumber" | "qeshmondiGroup" | "individualTicketQuota" | "contractorId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
   province?: boolean | Prisma.User$provinceArgs<ExtArgs>
@@ -13317,6 +13673,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     occupation: string | null
     isResident: boolean
     passportNumber: string | null
+    qeshmondiGroup: string | null
+    individualTicketQuota: number
     contractorId: string | null
     createdAt: Date
     updatedAt: Date
@@ -13819,6 +14177,8 @@ export interface UserFieldRefs {
   readonly occupation: Prisma.FieldRef<"User", 'String'>
   readonly isResident: Prisma.FieldRef<"User", 'Boolean'>
   readonly passportNumber: Prisma.FieldRef<"User", 'String'>
+  readonly qeshmondiGroup: Prisma.FieldRef<"User", 'String'>
+  readonly individualTicketQuota: Prisma.FieldRef<"User", 'Int'>
   readonly contractorId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>

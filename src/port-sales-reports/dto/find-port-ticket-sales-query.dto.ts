@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsIn, IsOptional } from 'class-validator';
+import { IsIn, IsOptional, Matches, ValidateIf } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
@@ -16,6 +16,8 @@ export const portTicketSaleSortFields = [
   'amount',
   'rowNumber',
 ] as const;
+
+const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
 export const portTicketQeshmondiFilters = [
   PortTicketQeshmondiStatus.UNKNOWN,
@@ -43,4 +45,16 @@ export class FindPortTicketSalesQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn(['excess'])
   weeklyQuota?: 'excess';
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @ValidateIf((_, value) => value != null)
+  @Matches(isoDate)
+  from?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @ValidateIf((_, value) => value != null)
+  @Matches(isoDate)
+  to?: string;
 }
