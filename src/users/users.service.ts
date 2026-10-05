@@ -27,7 +27,13 @@ import {
 } from '../access/access.constants';
 import { parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
 import { buildStyledExcelExport } from '../common/excel-export';
-import { Prisma, UserGender, UserStatus } from '../generated/prisma/client';
+import {
+  Prisma,
+  QeshmondiSyncSource,
+  QeshmondiSyncStatus,
+  UserGender,
+  UserStatus,
+} from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
 import { joinFullName } from './user-profile.util';
@@ -37,6 +43,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { UpdateUserLocationDto } from './dto/update-user-location.dto';
 import { parseQeshmondiExcel, type QeshmondiImportRow } from './qeshmondi-import';
+import { qeshmondiSqlErrorText, streamQeshmondiSqlPeople, type QeshmondiSqlSettings } from './qeshmondi-sql';
+import { finishQeshmondiSyncLog, openQeshmondiSyncLog } from './qeshmondi-sync-log';
 
 const QESHMONDI_IMPORT_PASSWORD = '11111111';
 const QESHMONDI_LOOKUP_CHUNK = 5000;
@@ -44,7 +52,7 @@ const QESHMONDI_WRITE_CHUNK = 2000;
 const QESHMONDI_IMPORT_JOB_TTL_MS = 30 * 60 * 1000;
 
 type QeshmondiImportJobPhase = 'parsing' | 'saving' | 'done' | 'error';
-type QeshmondiImportStep = 'lookup' | 'writing' | 'roles';
+type QeshmondiImportStep = 'lookup' | 'writing' | 'roles' | 'syncing';
 
 type QeshmondiImportSkip = { rowNumber: number; reason: string };
 
@@ -56,6 +64,7 @@ type QeshmondiImportResult = {
 
 type QeshmondiImportJob = {
   id: string;
+  logId?: string;
   phase: QeshmondiImportJobPhase;
   step?: QeshmondiImportStep;
   percent: number;
@@ -357,7 +366,11 @@ export class UsersService {
     return this.findOne(user.id);
   }
 
-  beginQeshmondiImport(file?: { buffer?: Buffer; originalname?: string }) {
+  async beginQeshmondiImport(
+    file?: { buffer?: Buffer; originalname?: string },
+    actorId?: string,
+  ) {
+    this.assertQeshmondiSyncIdle();
     if (!file?.buffer?.length) {
       throw new BadRequestException('فایل اکسل را انتخاب کنید');
     }
@@ -367,8 +380,13 @@ export class UsersService {
     }
 
     const jobId = randomUUID();
+    const log = await openQeshmondiSyncLog(this.prisma, {
+      source: QeshmondiSyncSource.FILE,
+      actorId,
+    });
     this.putQeshmondiJob({
       id: jobId,
+      logId: log.id,
       phase: 'parsing',
       percent: 5,
       processed: 0,
@@ -380,6 +398,37 @@ export class UsersService {
       void this.runQeshmondiImport(jobId, buffer);
     });
     return { jobId };
+  }
+
+  async beginQeshmondiSqlSync(settings: QeshmondiSqlSettings, actorId?: string) {
+    this.assertQeshmondiSyncIdle();
+    const jobId = randomUUID();
+    const log = await openQeshmondiSyncLog(this.prisma, {
+      source: QeshmondiSyncSource.DATABASE,
+      actorId,
+    });
+    this.putQeshmondiJob({
+      id: jobId,
+      logId: log.id,
+      phase: 'parsing',
+      step: 'syncing',
+      percent: 1,
+      processed: 0,
+      total: 0,
+      updatedAt: Date.now(),
+    });
+    setImmediate(() => {
+      void this.runQeshmondiSqlSync(jobId, settings);
+    });
+    return { jobId };
+  }
+
+  private assertQeshmondiSyncIdle() {
+    for (const job of this.qeshmondiImportJobs.values()) {
+      if (job.phase === 'parsing' || job.phase === 'saving') {
+        throw new BadRequestException('یک به‌روزرسانی در حال اجراست');
+      }
+    }
   }
 
   async exportQeshmondiImport(jobId: string, kind: string) {
@@ -483,15 +532,7 @@ export class UsersService {
         skipped: parsed.skipped.length,
       };
       if (!total) {
-        this.patchQeshmondiJob(jobId, {
-          phase: 'done',
-          percent: 100,
-          processed: 0,
-          total: 0,
-          result,
-          createdRows: [],
-          skippedRows: parsed.skipped,
-        });
+        await this.completeQeshmondiImport(jobId, result, [], parsed.skipped, 0);
         return;
       }
 
@@ -578,20 +619,101 @@ export class UsersService {
 
       result.created = toCreate.length;
       result.updated = toUpdate.length;
-      this.patchQeshmondiJob(jobId, {
-        phase: 'done',
-        percent: 100,
-        processed: total,
-        total,
-        result,
-        createdRows: toCreate,
-        skippedRows: parsed.skipped,
-      });
+      await this.completeQeshmondiImport(jobId, result, toCreate, parsed.skipped, total);
     } catch (error) {
-      this.patchQeshmondiJob(jobId, {
-        phase: 'error',
-        error: qeshmondiImportErrorText(error),
+      await this.failQeshmondiImport(jobId, error);
+    }
+  }
+
+  private async completeQeshmondiImport(
+    jobId: string,
+    result: QeshmondiImportResult,
+    createdRows: QeshmondiImportRow[],
+    skippedRows: QeshmondiImportSkip[],
+    total: number,
+  ) {
+    const logId = this.qeshmondiImportJobs.get(jobId)?.logId;
+    if (logId) {
+      await finishQeshmondiSyncLog(this.prisma, logId, {
+        status: QeshmondiSyncStatus.DONE,
+        createdCount: result.created,
+        updatedCount: result.updated,
+        failedCount: result.skipped,
       });
+    }
+    this.patchQeshmondiJob(jobId, {
+      phase: 'done',
+      percent: 100,
+      processed: total,
+      total,
+      result,
+      createdRows,
+      skippedRows,
+    });
+  }
+
+  private async failQeshmondiImport(
+    jobId: string,
+    error: unknown,
+    counts?: QeshmondiImportResult,
+  ) {
+    const message = qeshmondiImportErrorText(error);
+    const logId = this.qeshmondiImportJobs.get(jobId)?.logId;
+    this.patchQeshmondiJob(jobId, {
+      phase: 'error',
+      error: message,
+    });
+    if (!logId) return;
+    await finishQeshmondiSyncLog(this.prisma, logId, {
+      status: QeshmondiSyncStatus.FAILED,
+      createdCount: counts?.created ?? 0,
+      updatedCount: counts?.updated ?? 0,
+      failedCount: counts?.skipped ?? 0,
+      errorMessage: message,
+    });
+  }
+
+  private async runQeshmondiSqlSync(jobId: string, settings: QeshmondiSqlSettings) {
+    const counts: QeshmondiImportResult = { created: 0, updated: 0, skipped: 0 };
+    let sourceTotal = 0;
+    try {
+      let passwordHash: string | null = null;
+      const citizen = await ensureCitizenRole(this.prisma);
+      await streamQeshmondiSqlPeople(settings, async ({ rows, skipped, read, total }) => {
+        sourceTotal = total;
+        counts.skipped += skipped.length;
+        if (rows.length) {
+          const existing = await this.findExistingNationalIds(rows.map((row) => row.nationalId));
+          const toUpdate: QeshmondiImportRow[] = [];
+          const toCreate: QeshmondiImportRow[] = [];
+          for (const row of rows) {
+            if (existing.has(row.nationalId)) toUpdate.push(row);
+            else toCreate.push(row);
+          }
+          if (toUpdate.length) await this.bulkUpdateQeshmondiSqlUsers(toUpdate);
+          if (toCreate.length) {
+            if (!passwordHash) passwordHash = await bcrypt.hash(QESHMONDI_IMPORT_PASSWORD, 10);
+            await this.bulkCreateQeshmondiUsers(toCreate, passwordHash);
+          }
+          await this.assignCitizenRoleForNationalIds(
+            rows.map((row) => row.nationalId),
+            citizen.id,
+          );
+          counts.created += toCreate.length;
+          counts.updated += toUpdate.length;
+        }
+        const percent = total > 0 ? Math.min(99, Math.round((read / total) * 100)) : 0;
+        this.patchQeshmondiJob(jobId, {
+          phase: 'saving',
+          step: 'syncing',
+          percent,
+          processed: read,
+          total,
+        });
+      });
+      await this.completeQeshmondiImport(jobId, counts, [], [], sourceTotal);
+    } catch (error) {
+      await this.failQeshmondiImport(jobId, new Error(qeshmondiSqlErrorText(error)), counts);
     }
   }
 
@@ -664,6 +786,48 @@ export class UsersService {
         WHERE u."nationalId" = v.national_id
       `;
       onChunk?.(chunk.length);
+    }
+  }
+
+  /** SQL sync only overwrites columns that exist on tblPerson. */
+  private async bulkUpdateQeshmondiSqlUsers(rows: QeshmondiImportRow[]) {
+    for (const chunk of chunkList(rows, QESHMONDI_WRITE_CHUNK)) {
+      const payload = JSON.stringify(
+        chunk.map((row) => ({
+          national_id: row.nationalId,
+          first_name: row.firstName,
+          last_name: row.lastName,
+          full_name: joinFullName(row.firstName, row.lastName),
+          birth_date: row.birthDate,
+          gender: row.gender,
+          end_date: row.qeshmondiEndDate,
+        })),
+      );
+      const updatedAt = new Date();
+      await this.prisma.$executeRaw`
+        UPDATE "users" AS u SET
+          "firstName" = v.first_name,
+          "lastName" = v.last_name,
+          "fullName" = v.full_name,
+          "birthDate" = COALESCE(CAST(NULLIF(v.birth_date, '') AS date), u."birthDate"),
+          "gender" = CASE
+            WHEN v.gender IS NULL OR v.gender = '' THEN u."gender"
+            ELSE CAST(v.gender AS "UserGender")
+          END,
+          "qeshmondiEndDate" = COALESCE(CAST(NULLIF(v.end_date, '') AS date), u."qeshmondiEndDate"),
+          "isQeshmondi" = true,
+          "updatedAt" = ${updatedAt}
+        FROM jsonb_to_recordset(CAST(${payload} AS jsonb)) AS v(
+          national_id text,
+          first_name text,
+          last_name text,
+          full_name text,
+          birth_date text,
+          gender text,
+          end_date text
+        )
+        WHERE u."nationalId" = v.national_id
+      `;
     }
   }
 
@@ -875,11 +1039,21 @@ export class UsersService {
     if (dto.password) {
       data.passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
     }
+    const ticketQuotaBefore =
+      dto.individualTicketQuota !== undefined || dto.nationalId !== undefined
+        ? await this.prisma.user.findUnique({
+            where: { id },
+            select: { nationalId: true, individualTicketQuota: true },
+          })
+        : null;
     const user = await this.prisma.user.update({
       where: { id },
       data,
       select: userSelect,
     });
+    if (ticketQuotaBefore) {
+      await this.invalidatePortTicketQuotas(ticketQuotaBefore, user);
+    }
     if (dto.roleIds !== undefined) {
       await this.syncUserRoles(id, dto.roleIds);
     }
@@ -901,9 +1075,32 @@ export class UsersService {
       qeshmondiEndDate: _qeshmondiEndDate,
       isResident: _isResident,
       contractorId: _contractorId,
+      individualTicketQuota: _individualTicketQuota,
       ...rest
     } = dto;
     return this.update(id, rest);
+  }
+
+  /** با تغییر سهمیهٔ بلیط یا کد ملی، سهمیهٔ هفتگی گزارش‌های فروش شامل این شخص دوباره محاسبه شود. */
+  private async invalidatePortTicketQuotas(
+    before: { nationalId: string | null; individualTicketQuota: number },
+    after: { nationalId: string | null; individualTicketQuota: number },
+  ) {
+    const nationalIdChanged = before.nationalId !== after.nationalId;
+    if (!nationalIdChanged && before.individualTicketQuota === after.individualTicketQuota) {
+      return;
+    }
+    const nationalIds = [
+      ...new Set([before.nationalId, after.nationalId].filter((value): value is string => Boolean(value))),
+    ];
+    if (!nationalIds.length) return;
+    await this.prisma.portSalesReport.updateMany({
+      where: {
+        quotaSnapshotReady: true,
+        tickets: { some: { nationalId: { in: nationalIds } } },
+      },
+      data: { quotaSnapshotReady: false },
+    });
   }
 
   async remove(id: string) {

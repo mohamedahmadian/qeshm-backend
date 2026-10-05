@@ -12,6 +12,8 @@ export const portSalesReportSortFields = [
   'recordCount',
   'uniqueNationalIdCount',
   'originalFileName',
+  'createdBy',
+  'approvalStatus',
 ] as const;
 
 export class FindPortSalesReportsQueryDto extends PaginationQueryDto {

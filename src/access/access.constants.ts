@@ -5,6 +5,7 @@ export const EMPLOYEE_ROLE_CODE = 'EMPLOYEE';
 export const CITIZEN_ROLE_CODE = 'CITIZEN';
 export const BOARD_ADMIN_ROLE_CODE = 'BOARD_ADMIN';
 export const CONTRACTOR_ROLE_CODE = 'CONTRACTOR';
+export const STAKEHOLDERS_ADMIN_ROLE_CODE = 'STAKEHOLDERS_ADMIN';
 
 export const CONTRACTOR_PERMISSION_CODES = [
   'stakeholders.projects',
@@ -40,6 +41,17 @@ export const BOARD_ADMIN_PERMISSION_CODES = [
   'board.permissions',
 ] as const;
 
+export const STAKEHOLDERS_ADMIN_PERMISSION_CODES = [
+  'stakeholders',
+  'stakeholders.projects',
+  'stakeholders.progress',
+  'stakeholders.correspondence',
+  'stakeholders.inbox',
+  'stakeholders.reports',
+  'stakeholders.port-sales-reports',
+  'stakeholders.ticket-tariffs',
+] as const;
+
 export const SYSTEM_ROLES = [
   {
     code: ADMIN_ROLE_CODE,
@@ -65,6 +77,11 @@ export const SYSTEM_ROLES = [
     code: CONTRACTOR_ROLE_CODE,
     name: 'پیمانکار',
     description: 'دسترسی به درگاه یکپارچه ذی‌نفعان و پروژه‌های تخصیص‌یافته',
+  },
+  {
+    code: STAKEHOLDERS_ADMIN_ROLE_CODE,
+    name: 'مدیر ماژول درگاه یکپارچه',
+    description: 'مدیریت درگاه یکپارچه ذی‌نفعان و مشاهدهٔ همهٔ گزارش‌های فروش بنادر',
   },
 ] as const;
 
@@ -107,6 +124,9 @@ export async function ensureSystemRoles(
     });
     if (saved.code === BOARD_ADMIN_ROLE_CODE) {
       await grantRolePermissions(prisma, saved.id, BOARD_ADMIN_PERMISSION_CODES);
+    }
+    if (saved.code === STAKEHOLDERS_ADMIN_ROLE_CODE) {
+      await grantRolePermissions(prisma, saved.id, STAKEHOLDERS_ADMIN_PERMISSION_CODES);
     }
     if (saved.code === EMPLOYEE_ROLE_CODE) {
       await grantRolePermissions(prisma, saved.id, EMPLOYEE_PERMISSION_CODES);

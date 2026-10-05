@@ -47,6 +47,14 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/provinces', permissions: ['base-info.provinces'] },
   { prefix: '/cities', permissions: ['base-info.cities'] },
   {
+    prefix: '/users/qeshmondi-sql-connection',
+    permissions: ['qeshmondi.update'],
+  },
+  { prefix: '/users/qeshmondi-sync-logs', permissions: ['qeshmondi.sync-logs'] },
+  { prefix: '/users/qeshmondi-sync', permissions: ['qeshmondi.update'] },
+  { prefix: '/users/qeshmondi-import', permissions: ['qeshmondi.update'] },
+  { prefix: '/users/qeshmondi-imports', permissions: ['qeshmondi.update'] },
+  {
     prefix: '/users',
     permissions: [
       'management.users',

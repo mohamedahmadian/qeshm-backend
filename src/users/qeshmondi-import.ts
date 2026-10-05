@@ -89,7 +89,7 @@ function parseBooleanCell(raw: string): boolean | null {
   return null;
 }
 
-function parseGender(raw: string): UserGender | null {
+export function parseGender(raw: string): UserGender | null {
   const flag = parseBooleanCell(raw);
   if (flag == null) return null;
   return flag ? UserGender.MALE : UserGender.FEMALE;
@@ -100,14 +100,14 @@ function emptyToNull(value: string) {
   return trimmed.length ? trimmed : null;
 }
 
-function parseExpiryToIso(raw: string) {
+export function parseExpiryToIso(raw: string) {
   const jalali = parseJalaliSlashToIso(raw) || parseJalaliCompactToIso(raw);
   if (jalali) return jalali;
   const iso = toLatinDigits(raw.trim());
   return /^\d{4}-\d{2}-\d{2}$/.test(iso) && Number(iso.slice(0, 4)) > 1600 ? iso : null;
 }
 
-function parseBirthToIso(raw: string) {
+export function parseBirthToIso(raw: string) {
   return parseJalaliCompactToIso(raw) || parseJalaliSlashToIso(raw);
 }
 

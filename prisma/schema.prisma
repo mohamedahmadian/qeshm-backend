@@ -18,6 +18,17 @@ enum UserGender {
   FEMALE
 }
 
+enum QeshmondiSyncSource {
+  FILE
+  DATABASE
+}
+
+enum QeshmondiSyncStatus {
+  RUNNING
+  DONE
+  FAILED
+}
+
 enum Religion {
   ISLAM
   CHRISTIANITY
@@ -106,6 +117,11 @@ enum PortTicketQeshmondiStatus {
   UNKNOWN
   VALID
   INVALID
+}
+
+enum PortSalesReportApprovalStatus {
+  DRAFT
+  APPROVED
 }
 
 model StoredImage {
@@ -282,6 +298,10 @@ model User {
   boardSecretaryReviews   BoardRequest[] @relation("BoardSecretaryReviewer")
   boardMinutesCreated     BoardMinutes[] @relation("BoardMinutesAuthor")
   boardMinutesMemberships BoardMinutesMember[]
+  portSalesReports         PortSalesReport[] @relation("PortSalesReportAuthor")
+  portSalesReportsApproved PortSalesReport[] @relation("PortSalesReportApprover")
+  qeshmondiSyncLogs       QeshmondiSyncLog[] @relation("QeshmondiSyncActor")
+  qeshmondiSqlConnections QeshmondiSqlConnection[] @relation("QeshmondiSqlConnectionEditor")
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
@@ -299,6 +319,42 @@ model User {
   @@index([isQeshmondi])
   @@index([nationalId(ops: raw("gin_trgm_ops"))], type: Gin, map: "users_nationalId_trgm_idx")
   @@map("users")
+}
+
+model QeshmondiSqlConnection {
+  id                     String   @id
+  host                   String
+  port                   Int      @default(1433)
+  databaseName           String
+  username               String
+  passwordCipher         String
+  encrypt                Boolean  @default(true)
+  trustServerCertificate Boolean  @default(true)
+  updatedAt              DateTime @updatedAt
+  updatedById            String?
+  updatedBy              User?    @relation("QeshmondiSqlConnectionEditor", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@map("qeshmondi_sql_connections")
+}
+
+model QeshmondiSyncLog {
+  id            String               @id @default(uuid())
+  source        QeshmondiSyncSource
+  status        QeshmondiSyncStatus
+  startedAt     DateTime             @default(now())
+  finishedAt    DateTime?
+  createdCount  Int                  @default(0)
+  updatedCount  Int                  @default(0)
+  failedCount   Int                  @default(0)
+  errorMessage  String?
+  actorId       String?
+  actor         User?                @relation("QeshmondiSyncActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([startedAt])
+  @@index([source])
+  @@index([status])
+  @@index([actorId])
+  @@map("qeshmondi_sync_logs")
 }
 
 model UserLocationHistory {
@@ -1263,17 +1319,29 @@ model PortSalesReport {
   invalidQeshmondiCount  Int              @default(0)
   weeklyQuotaExcessCount Int              @default(0)
   quotaSnapshotReady     Boolean          @default(false)
+  reportYear             Int
+  reportMonth            Int
+  approvalStatus         PortSalesReportApprovalStatus @default(DRAFT)
+  verifiedAt             DateTime?
+  approvedAt             DateTime?
+  approvedById           String?
+  approvedBy             User?            @relation("PortSalesReportApprover", fields: [approvedById], references: [id], onDelete: SetNull)
+  createdById            String?
+  createdBy              User?            @relation("PortSalesReportAuthor", fields: [createdById], references: [id], onDelete: SetNull)
   tickets                PortTicketSale[]
   weeklyQuotas           PortTicketWeeklyQuota[]
   personalQuotas         PortTicketPersonalQuota[]
   createdAt              DateTime         @default(now())
   updatedAt              DateTime         @updatedAt
 
+  @@unique([createdById, reportYear, reportMonth], map: "port_sales_reports_author_month_key")
   @@index([reportDate])
   @@index([origin])
   @@index([destination])
   @@index([createdAt])
   @@index([fileId])
+  @@index([createdById])
+  @@index([approvalStatus])
   @@map("port_sales_reports")
 }
 

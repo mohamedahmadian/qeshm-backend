@@ -56,6 +56,8 @@ export const ModelName = {
   Province: 'Province',
   City: 'City',
   User: 'User',
+  QeshmondiSqlConnection: 'QeshmondiSqlConnection',
+  QeshmondiSyncLog: 'QeshmondiSyncLog',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
   Project: 'Project',
@@ -251,6 +253,38 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const QeshmondiSqlConnectionScalarFieldEnum = {
+  id: 'id',
+  host: 'host',
+  port: 'port',
+  databaseName: 'databaseName',
+  username: 'username',
+  passwordCipher: 'passwordCipher',
+  encrypt: 'encrypt',
+  trustServerCertificate: 'trustServerCertificate',
+  updatedAt: 'updatedAt',
+  updatedById: 'updatedById'
+} as const
+
+export type QeshmondiSqlConnectionScalarFieldEnum = (typeof QeshmondiSqlConnectionScalarFieldEnum)[keyof typeof QeshmondiSqlConnectionScalarFieldEnum]
+
+
+export const QeshmondiSyncLogScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  createdCount: 'createdCount',
+  updatedCount: 'updatedCount',
+  failedCount: 'failedCount',
+  errorMessage: 'errorMessage',
+  actorId: 'actorId'
+} as const
+
+export type QeshmondiSyncLogScalarFieldEnum = (typeof QeshmondiSyncLogScalarFieldEnum)[keyof typeof QeshmondiSyncLogScalarFieldEnum]
 
 
 export const UserLocationHistoryScalarFieldEnum = {
@@ -915,6 +949,13 @@ export const PortSalesReportScalarFieldEnum = {
   invalidQeshmondiCount: 'invalidQeshmondiCount',
   weeklyQuotaExcessCount: 'weeklyQuotaExcessCount',
   quotaSnapshotReady: 'quotaSnapshotReady',
+  reportYear: 'reportYear',
+  reportMonth: 'reportMonth',
+  approvalStatus: 'approvalStatus',
+  verifiedAt: 'verifiedAt',
+  approvedAt: 'approvedAt',
+  approvedById: 'approvedById',
+  createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

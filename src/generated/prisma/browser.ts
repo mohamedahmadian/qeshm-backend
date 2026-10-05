@@ -43,6 +43,16 @@ export type City = Prisma.CityModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model QeshmondiSqlConnection
+ * 
+ */
+export type QeshmondiSqlConnection = Prisma.QeshmondiSqlConnectionModel
+/**
+ * Model QeshmondiSyncLog
+ * 
+ */
+export type QeshmondiSyncLog = Prisma.QeshmondiSyncLogModel
+/**
  * Model UserLocationHistory
  * 
  */

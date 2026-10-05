@@ -402,6 +402,8 @@ export const ModelName = {
   Province: 'Province',
   City: 'City',
   User: 'User',
+  QeshmondiSqlConnection: 'QeshmondiSqlConnection',
+  QeshmondiSyncLog: 'QeshmondiSyncLog',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
   Project: 'Project',
@@ -469,7 +471,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -840,6 +842,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    QeshmondiSqlConnection: {
+      payload: Prisma.$QeshmondiSqlConnectionPayload<ExtArgs>
+      fields: Prisma.QeshmondiSqlConnectionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.QeshmondiSqlConnectionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.QeshmondiSqlConnectionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>
+        }
+        findFirst: {
+          args: Prisma.QeshmondiSqlConnectionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.QeshmondiSqlConnectionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>
+        }
+        findMany: {
+          args: Prisma.QeshmondiSqlConnectionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>[]
+        }
+        create: {
+          args: Prisma.QeshmondiSqlConnectionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>
+        }
+        createMany: {
+          args: Prisma.QeshmondiSqlConnectionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.QeshmondiSqlConnectionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>[]
+        }
+        delete: {
+          args: Prisma.QeshmondiSqlConnectionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>
+        }
+        update: {
+          args: Prisma.QeshmondiSqlConnectionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>
+        }
+        deleteMany: {
+          args: Prisma.QeshmondiSqlConnectionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.QeshmondiSqlConnectionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.QeshmondiSqlConnectionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>[]
+        }
+        upsert: {
+          args: Prisma.QeshmondiSqlConnectionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSqlConnectionPayload>
+        }
+        aggregate: {
+          args: Prisma.QeshmondiSqlConnectionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateQeshmondiSqlConnection>
+        }
+        groupBy: {
+          args: Prisma.QeshmondiSqlConnectionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QeshmondiSqlConnectionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.QeshmondiSqlConnectionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QeshmondiSqlConnectionCountAggregateOutputType> | number
+        }
+      }
+    }
+    QeshmondiSyncLog: {
+      payload: Prisma.$QeshmondiSyncLogPayload<ExtArgs>
+      fields: Prisma.QeshmondiSyncLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.QeshmondiSyncLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.QeshmondiSyncLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>
+        }
+        findFirst: {
+          args: Prisma.QeshmondiSyncLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.QeshmondiSyncLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>
+        }
+        findMany: {
+          args: Prisma.QeshmondiSyncLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>[]
+        }
+        create: {
+          args: Prisma.QeshmondiSyncLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>
+        }
+        createMany: {
+          args: Prisma.QeshmondiSyncLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.QeshmondiSyncLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>[]
+        }
+        delete: {
+          args: Prisma.QeshmondiSyncLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>
+        }
+        update: {
+          args: Prisma.QeshmondiSyncLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.QeshmondiSyncLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.QeshmondiSyncLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.QeshmondiSyncLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.QeshmondiSyncLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiSyncLogPayload>
+        }
+        aggregate: {
+          args: Prisma.QeshmondiSyncLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateQeshmondiSyncLog>
+        }
+        groupBy: {
+          args: Prisma.QeshmondiSyncLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QeshmondiSyncLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.QeshmondiSyncLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QeshmondiSyncLogCountAggregateOutputType> | number
         }
       }
     }
@@ -4857,6 +5007,38 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const QeshmondiSqlConnectionScalarFieldEnum = {
+  id: 'id',
+  host: 'host',
+  port: 'port',
+  databaseName: 'databaseName',
+  username: 'username',
+  passwordCipher: 'passwordCipher',
+  encrypt: 'encrypt',
+  trustServerCertificate: 'trustServerCertificate',
+  updatedAt: 'updatedAt',
+  updatedById: 'updatedById'
+} as const
+
+export type QeshmondiSqlConnectionScalarFieldEnum = (typeof QeshmondiSqlConnectionScalarFieldEnum)[keyof typeof QeshmondiSqlConnectionScalarFieldEnum]
+
+
+export const QeshmondiSyncLogScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  createdCount: 'createdCount',
+  updatedCount: 'updatedCount',
+  failedCount: 'failedCount',
+  errorMessage: 'errorMessage',
+  actorId: 'actorId'
+} as const
+
+export type QeshmondiSyncLogScalarFieldEnum = (typeof QeshmondiSyncLogScalarFieldEnum)[keyof typeof QeshmondiSyncLogScalarFieldEnum]
+
+
 export const UserLocationHistoryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -5519,6 +5701,13 @@ export const PortSalesReportScalarFieldEnum = {
   invalidQeshmondiCount: 'invalidQeshmondiCount',
   weeklyQuotaExcessCount: 'weeklyQuotaExcessCount',
   quotaSnapshotReady: 'quotaSnapshotReady',
+  reportYear: 'reportYear',
+  reportMonth: 'reportMonth',
+  approvalStatus: 'approvalStatus',
+  verifiedAt: 'verifiedAt',
+  approvedAt: 'approvedAt',
+  approvedById: 'approvedById',
+  createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -5824,6 +6013,34 @@ export type EnumReligionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
  * Reference to a field of type 'Religion[]'
  */
 export type ListEnumReligionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Religion[]'>
+    
+
+
+/**
+ * Reference to a field of type 'QeshmondiSyncSource'
+ */
+export type EnumQeshmondiSyncSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QeshmondiSyncSource'>
+    
+
+
+/**
+ * Reference to a field of type 'QeshmondiSyncSource[]'
+ */
+export type ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QeshmondiSyncSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'QeshmondiSyncStatus'
+ */
+export type EnumQeshmondiSyncStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QeshmondiSyncStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'QeshmondiSyncStatus[]'
+ */
+export type ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QeshmondiSyncStatus[]'>
     
 
 
@@ -6136,6 +6353,20 @@ export type ListEnumBoardMinutesAttachmentKindFieldRefInput<$PrismaModel> = Fiel
 
 
 /**
+ * Reference to a field of type 'PortSalesReportApprovalStatus'
+ */
+export type EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortSalesReportApprovalStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PortSalesReportApprovalStatus[]'
+ */
+export type ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortSalesReportApprovalStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'PortTicketQeshmondiStatus'
  */
 export type EnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortTicketQeshmondiStatus'>
@@ -6374,6 +6605,8 @@ export type GlobalOmitConfig = {
   province?: Prisma.ProvinceOmit
   city?: Prisma.CityOmit
   user?: Prisma.UserOmit
+  qeshmondiSqlConnection?: Prisma.QeshmondiSqlConnectionOmit
+  qeshmondiSyncLog?: Prisma.QeshmondiSyncLogOmit
   userLocationHistory?: Prisma.UserLocationHistoryOmit
   projectGroup?: Prisma.ProjectGroupOmit
   project?: Prisma.ProjectOmit

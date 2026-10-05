@@ -25,6 +25,23 @@ export const UserGender = {
 export type UserGender = (typeof UserGender)[keyof typeof UserGender]
 
 
+export const QeshmondiSyncSource = {
+  FILE: 'FILE',
+  DATABASE: 'DATABASE'
+} as const
+
+export type QeshmondiSyncSource = (typeof QeshmondiSyncSource)[keyof typeof QeshmondiSyncSource]
+
+
+export const QeshmondiSyncStatus = {
+  RUNNING: 'RUNNING',
+  DONE: 'DONE',
+  FAILED: 'FAILED'
+} as const
+
+export type QeshmondiSyncStatus = (typeof QeshmondiSyncStatus)[keyof typeof QeshmondiSyncStatus]
+
+
 export const Religion = {
   ISLAM: 'ISLAM',
   CHRISTIANITY: 'CHRISTIANITY',
@@ -155,6 +172,14 @@ export const PortTicketQeshmondiStatus = {
 } as const
 
 export type PortTicketQeshmondiStatus = (typeof PortTicketQeshmondiStatus)[keyof typeof PortTicketQeshmondiStatus]
+
+
+export const PortSalesReportApprovalStatus = {
+  DRAFT: 'DRAFT',
+  APPROVED: 'APPROVED'
+} as const
+
+export type PortSalesReportApprovalStatus = (typeof PortSalesReportApprovalStatus)[keyof typeof PortSalesReportApprovalStatus]
 
 
 export const SingardFeedbackKind = {

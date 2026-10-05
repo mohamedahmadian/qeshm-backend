@@ -297,6 +297,40 @@ export type EnumReligionNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumReligionNullableFilter<$PrismaModel>
 }
 
+export type EnumQeshmondiSyncSourceFilter<$PrismaModel = never> = {
+  equals?: $Enums.QeshmondiSyncSource | Prisma.EnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.QeshmondiSyncSource[] | Prisma.ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QeshmondiSyncSource[] | Prisma.ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQeshmondiSyncSourceFilter<$PrismaModel> | $Enums.QeshmondiSyncSource
+}
+
+export type EnumQeshmondiSyncStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.QeshmondiSyncStatus | Prisma.EnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.QeshmondiSyncStatus[] | Prisma.ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QeshmondiSyncStatus[] | Prisma.ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQeshmondiSyncStatusFilter<$PrismaModel> | $Enums.QeshmondiSyncStatus
+}
+
+export type EnumQeshmondiSyncSourceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.QeshmondiSyncSource | Prisma.EnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.QeshmondiSyncSource[] | Prisma.ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QeshmondiSyncSource[] | Prisma.ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQeshmondiSyncSourceWithAggregatesFilter<$PrismaModel> | $Enums.QeshmondiSyncSource
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumQeshmondiSyncSourceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumQeshmondiSyncSourceFilter<$PrismaModel>
+}
+
+export type EnumQeshmondiSyncStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.QeshmondiSyncStatus | Prisma.EnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.QeshmondiSyncStatus[] | Prisma.ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QeshmondiSyncStatus[] | Prisma.ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQeshmondiSyncStatusWithAggregatesFilter<$PrismaModel> | $Enums.QeshmondiSyncStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumQeshmondiSyncStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumQeshmondiSyncStatusFilter<$PrismaModel>
+}
+
 export type EnumLocationSourceFilter<$PrismaModel = never> = {
   equals?: $Enums.LocationSource | Prisma.EnumLocationSourceFieldRefInput<$PrismaModel>
   in?: $Enums.LocationSource[] | Prisma.ListEnumLocationSourceFieldRefInput<$PrismaModel>
@@ -779,6 +813,23 @@ export type EnumBoardMinutesAttachmentKindWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumBoardMinutesAttachmentKindFilter<$PrismaModel>
 }
 
+export type EnumPortSalesReportApprovalStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PortSalesReportApprovalStatus | Prisma.EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel> | $Enums.PortSalesReportApprovalStatus
+}
+
+export type EnumPortSalesReportApprovalStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PortSalesReportApprovalStatus | Prisma.EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPortSalesReportApprovalStatusWithAggregatesFilter<$PrismaModel> | $Enums.PortSalesReportApprovalStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel>
+}
+
 export type EnumPortTicketQeshmondiStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.PortTicketQeshmondiStatus | Prisma.EnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel>
   in?: $Enums.PortTicketQeshmondiStatus[] | Prisma.ListEnumPortTicketQeshmondiStatusFieldRefInput<$PrismaModel>
@@ -1158,6 +1209,40 @@ export type NestedEnumReligionNullableWithAggregatesFilter<$PrismaModel = never>
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumReligionNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumReligionNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumQeshmondiSyncSourceFilter<$PrismaModel = never> = {
+  equals?: $Enums.QeshmondiSyncSource | Prisma.EnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.QeshmondiSyncSource[] | Prisma.ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QeshmondiSyncSource[] | Prisma.ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQeshmondiSyncSourceFilter<$PrismaModel> | $Enums.QeshmondiSyncSource
+}
+
+export type NestedEnumQeshmondiSyncStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.QeshmondiSyncStatus | Prisma.EnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.QeshmondiSyncStatus[] | Prisma.ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QeshmondiSyncStatus[] | Prisma.ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQeshmondiSyncStatusFilter<$PrismaModel> | $Enums.QeshmondiSyncStatus
+}
+
+export type NestedEnumQeshmondiSyncSourceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.QeshmondiSyncSource | Prisma.EnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.QeshmondiSyncSource[] | Prisma.ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QeshmondiSyncSource[] | Prisma.ListEnumQeshmondiSyncSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQeshmondiSyncSourceWithAggregatesFilter<$PrismaModel> | $Enums.QeshmondiSyncSource
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumQeshmondiSyncSourceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumQeshmondiSyncSourceFilter<$PrismaModel>
+}
+
+export type NestedEnumQeshmondiSyncStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.QeshmondiSyncStatus | Prisma.EnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.QeshmondiSyncStatus[] | Prisma.ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.QeshmondiSyncStatus[] | Prisma.ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumQeshmondiSyncStatusWithAggregatesFilter<$PrismaModel> | $Enums.QeshmondiSyncStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumQeshmondiSyncStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumQeshmondiSyncStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumLocationSourceFilter<$PrismaModel = never> = {
@@ -1613,6 +1698,23 @@ export type NestedEnumBoardMinutesAttachmentKindWithAggregatesFilter<$PrismaMode
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumBoardMinutesAttachmentKindFilter<$PrismaModel>
   _max?: Prisma.NestedEnumBoardMinutesAttachmentKindFilter<$PrismaModel>
+}
+
+export type NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PortSalesReportApprovalStatus | Prisma.EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel> | $Enums.PortSalesReportApprovalStatus
+}
+
+export type NestedEnumPortSalesReportApprovalStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PortSalesReportApprovalStatus | Prisma.EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPortSalesReportApprovalStatusWithAggregatesFilter<$PrismaModel> | $Enums.PortSalesReportApprovalStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumPortTicketQeshmondiStatusFilter<$PrismaModel = never> = {

@@ -11,6 +11,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import type { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
@@ -46,8 +47,9 @@ export class UsersController {
   importQeshmondi(
     @UploadedFile()
     file: { buffer: Buffer; originalname: string },
+    @CurrentUser() user: { id: string } | undefined,
   ) {
-    return this.users.beginQeshmondiImport(file);
+    return this.users.beginQeshmondiImport(file, user?.id);
   }
 
   @Get('qeshmondi-imports/:jobId')

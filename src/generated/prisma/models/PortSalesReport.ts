@@ -33,6 +33,8 @@ export type PortSalesReportAvgAggregateOutputType = {
   validQeshmondiCount: number | null
   invalidQeshmondiCount: number | null
   weeklyQuotaExcessCount: number | null
+  reportYear: number | null
+  reportMonth: number | null
 }
 
 export type PortSalesReportSumAggregateOutputType = {
@@ -42,6 +44,8 @@ export type PortSalesReportSumAggregateOutputType = {
   validQeshmondiCount: number | null
   invalidQeshmondiCount: number | null
   weeklyQuotaExcessCount: number | null
+  reportYear: number | null
+  reportMonth: number | null
 }
 
 export type PortSalesReportMinAggregateOutputType = {
@@ -58,6 +62,13 @@ export type PortSalesReportMinAggregateOutputType = {
   invalidQeshmondiCount: number | null
   weeklyQuotaExcessCount: number | null
   quotaSnapshotReady: boolean | null
+  reportYear: number | null
+  reportMonth: number | null
+  approvalStatus: $Enums.PortSalesReportApprovalStatus | null
+  verifiedAt: Date | null
+  approvedAt: Date | null
+  approvedById: string | null
+  createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -76,6 +87,13 @@ export type PortSalesReportMaxAggregateOutputType = {
   invalidQeshmondiCount: number | null
   weeklyQuotaExcessCount: number | null
   quotaSnapshotReady: boolean | null
+  reportYear: number | null
+  reportMonth: number | null
+  approvalStatus: $Enums.PortSalesReportApprovalStatus | null
+  verifiedAt: Date | null
+  approvedAt: Date | null
+  approvedById: string | null
+  createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -94,6 +112,13 @@ export type PortSalesReportCountAggregateOutputType = {
   invalidQeshmondiCount: number
   weeklyQuotaExcessCount: number
   quotaSnapshotReady: number
+  reportYear: number
+  reportMonth: number
+  approvalStatus: number
+  verifiedAt: number
+  approvedAt: number
+  approvedById: number
+  createdById: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -107,6 +132,8 @@ export type PortSalesReportAvgAggregateInputType = {
   validQeshmondiCount?: true
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
+  reportYear?: true
+  reportMonth?: true
 }
 
 export type PortSalesReportSumAggregateInputType = {
@@ -116,6 +143,8 @@ export type PortSalesReportSumAggregateInputType = {
   validQeshmondiCount?: true
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
+  reportYear?: true
+  reportMonth?: true
 }
 
 export type PortSalesReportMinAggregateInputType = {
@@ -132,6 +161,13 @@ export type PortSalesReportMinAggregateInputType = {
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
   quotaSnapshotReady?: true
+  reportYear?: true
+  reportMonth?: true
+  approvalStatus?: true
+  verifiedAt?: true
+  approvedAt?: true
+  approvedById?: true
+  createdById?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -150,6 +186,13 @@ export type PortSalesReportMaxAggregateInputType = {
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
   quotaSnapshotReady?: true
+  reportYear?: true
+  reportMonth?: true
+  approvalStatus?: true
+  verifiedAt?: true
+  approvedAt?: true
+  approvedById?: true
+  createdById?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -168,6 +211,13 @@ export type PortSalesReportCountAggregateInputType = {
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
   quotaSnapshotReady?: true
+  reportYear?: true
+  reportMonth?: true
+  approvalStatus?: true
+  verifiedAt?: true
+  approvedAt?: true
+  approvedById?: true
+  createdById?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -273,6 +323,13 @@ export type PortSalesReportGroupByOutputType = {
   invalidQeshmondiCount: number
   weeklyQuotaExcessCount: number
   quotaSnapshotReady: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus: $Enums.PortSalesReportApprovalStatus
+  verifiedAt: Date | null
+  approvedAt: Date | null
+  approvedById: string | null
+  createdById: string | null
   createdAt: Date
   updatedAt: Date
   _count: PortSalesReportCountAggregateOutputType | null
@@ -314,9 +371,18 @@ export type PortSalesReportWhereInput = {
   invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
   weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
   quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
+  reportYear?: Prisma.IntFilter<"PortSalesReport"> | number
+  reportMonth?: Prisma.IntFilter<"PortSalesReport"> | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFilter<"PortSalesReport"> | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.DateTimeNullableFilter<"PortSalesReport"> | Date | string | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"PortSalesReport"> | Date | string | null
+  approvedById?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
+  createdById?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
   createdAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   file?: Prisma.XOR<Prisma.StoredFileScalarRelationFilter, Prisma.StoredFileWhereInput>
+  approvedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   tickets?: Prisma.PortTicketSaleListRelationFilter
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaListRelationFilter
   personalQuotas?: Prisma.PortTicketPersonalQuotaListRelationFilter
@@ -336,9 +402,18 @@ export type PortSalesReportOrderByWithRelationInput = {
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
+  reportYear?: Prisma.SortOrder
+  reportMonth?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   file?: Prisma.StoredFileOrderByWithRelationInput
+  approvedBy?: Prisma.UserOrderByWithRelationInput
+  createdBy?: Prisma.UserOrderByWithRelationInput
   tickets?: Prisma.PortTicketSaleOrderByRelationAggregateInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaOrderByRelationAggregateInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaOrderByRelationAggregateInput
@@ -346,6 +421,7 @@ export type PortSalesReportOrderByWithRelationInput = {
 
 export type PortSalesReportWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  createdById_reportYear_reportMonth?: Prisma.PortSalesReportCreatedByIdReportYearReportMonthCompoundUniqueInput
   AND?: Prisma.PortSalesReportWhereInput | Prisma.PortSalesReportWhereInput[]
   OR?: Prisma.PortSalesReportWhereInput[]
   NOT?: Prisma.PortSalesReportWhereInput | Prisma.PortSalesReportWhereInput[]
@@ -361,13 +437,22 @@ export type PortSalesReportWhereUniqueInput = Prisma.AtLeast<{
   invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
   weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
   quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
+  reportYear?: Prisma.IntFilter<"PortSalesReport"> | number
+  reportMonth?: Prisma.IntFilter<"PortSalesReport"> | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFilter<"PortSalesReport"> | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.DateTimeNullableFilter<"PortSalesReport"> | Date | string | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"PortSalesReport"> | Date | string | null
+  approvedById?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
+  createdById?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
   createdAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
   file?: Prisma.XOR<Prisma.StoredFileScalarRelationFilter, Prisma.StoredFileWhereInput>
+  approvedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   tickets?: Prisma.PortTicketSaleListRelationFilter
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaListRelationFilter
   personalQuotas?: Prisma.PortTicketPersonalQuotaListRelationFilter
-}, "id">
+}, "id" | "createdById_reportYear_reportMonth">
 
 export type PortSalesReportOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -383,6 +468,13 @@ export type PortSalesReportOrderByWithAggregationInput = {
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
+  reportYear?: Prisma.SortOrder
+  reportMonth?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PortSalesReportCountOrderByAggregateInput
@@ -409,6 +501,13 @@ export type PortSalesReportScalarWhereWithAggregatesInput = {
   invalidQeshmondiCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
   weeklyQuotaExcessCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
   quotaSnapshotReady?: Prisma.BoolWithAggregatesFilter<"PortSalesReport"> | boolean
+  reportYear?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
+  reportMonth?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusWithAggregatesFilter<"PortSalesReport"> | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"PortSalesReport"> | Date | string | null
+  approvedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"PortSalesReport"> | Date | string | null
+  approvedById?: Prisma.StringNullableWithAggregatesFilter<"PortSalesReport"> | string | null
+  createdById?: Prisma.StringNullableWithAggregatesFilter<"PortSalesReport"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PortSalesReport"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PortSalesReport"> | Date | string
 }
@@ -426,9 +525,16 @@ export type PortSalesReportCreateInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsApprovedInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsInput
   tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
@@ -448,6 +554,13 @@ export type PortSalesReportUncheckedCreateInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
@@ -468,9 +581,16 @@ export type PortSalesReportUpdateInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutPortSalesReportsApprovedNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutPortSalesReportsNestedInput
   tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
@@ -490,6 +610,13 @@ export type PortSalesReportUncheckedUpdateInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
@@ -511,6 +638,13 @@ export type PortSalesReportCreateManyInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -528,6 +662,11 @@ export type PortSalesReportUpdateManyMutationInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -546,6 +685,13 @@ export type PortSalesReportUncheckedUpdateManyInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -558,6 +704,12 @@ export type PortSalesReportListRelationFilter = {
 
 export type PortSalesReportOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type PortSalesReportCreatedByIdReportYearReportMonthCompoundUniqueInput = {
+  createdById: string
+  reportYear: number
+  reportMonth: number
 }
 
 export type PortSalesReportCountOrderByAggregateInput = {
@@ -574,6 +726,13 @@ export type PortSalesReportCountOrderByAggregateInput = {
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
+  reportYear?: Prisma.SortOrder
+  reportMonth?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  approvedById?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -585,6 +744,8 @@ export type PortSalesReportAvgOrderByAggregateInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  reportYear?: Prisma.SortOrder
+  reportMonth?: Prisma.SortOrder
 }
 
 export type PortSalesReportMaxOrderByAggregateInput = {
@@ -601,6 +762,13 @@ export type PortSalesReportMaxOrderByAggregateInput = {
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
+  reportYear?: Prisma.SortOrder
+  reportMonth?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  approvedById?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -619,6 +787,13 @@ export type PortSalesReportMinOrderByAggregateInput = {
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
+  reportYear?: Prisma.SortOrder
+  reportMonth?: Prisma.SortOrder
+  approvalStatus?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  approvedById?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -630,11 +805,97 @@ export type PortSalesReportSumOrderByAggregateInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  reportYear?: Prisma.SortOrder
+  reportMonth?: Prisma.SortOrder
 }
 
 export type PortSalesReportScalarRelationFilter = {
   is?: Prisma.PortSalesReportWhereInput
   isNot?: Prisma.PortSalesReportWhereInput
+}
+
+export type PortSalesReportCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutCreatedByInput, Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput> | Prisma.PortSalesReportCreateWithoutCreatedByInput[] | Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutCreatedByInput | Prisma.PortSalesReportCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.PortSalesReportCreateManyCreatedByInputEnvelope
+  connect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+}
+
+export type PortSalesReportCreateNestedManyWithoutApprovedByInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutApprovedByInput, Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput> | Prisma.PortSalesReportCreateWithoutApprovedByInput[] | Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput[]
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutApprovedByInput | Prisma.PortSalesReportCreateOrConnectWithoutApprovedByInput[]
+  createMany?: Prisma.PortSalesReportCreateManyApprovedByInputEnvelope
+  connect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+}
+
+export type PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutCreatedByInput, Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput> | Prisma.PortSalesReportCreateWithoutCreatedByInput[] | Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutCreatedByInput | Prisma.PortSalesReportCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.PortSalesReportCreateManyCreatedByInputEnvelope
+  connect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+}
+
+export type PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutApprovedByInput, Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput> | Prisma.PortSalesReportCreateWithoutApprovedByInput[] | Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput[]
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutApprovedByInput | Prisma.PortSalesReportCreateOrConnectWithoutApprovedByInput[]
+  createMany?: Prisma.PortSalesReportCreateManyApprovedByInputEnvelope
+  connect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+}
+
+export type PortSalesReportUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutCreatedByInput, Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput> | Prisma.PortSalesReportCreateWithoutCreatedByInput[] | Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutCreatedByInput | Prisma.PortSalesReportCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.PortSalesReportUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.PortSalesReportUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.PortSalesReportCreateManyCreatedByInputEnvelope
+  set?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  disconnect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  delete?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  connect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  update?: Prisma.PortSalesReportUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.PortSalesReportUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.PortSalesReportUpdateManyWithWhereWithoutCreatedByInput | Prisma.PortSalesReportUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
+}
+
+export type PortSalesReportUpdateManyWithoutApprovedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutApprovedByInput, Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput> | Prisma.PortSalesReportCreateWithoutApprovedByInput[] | Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput[]
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutApprovedByInput | Prisma.PortSalesReportCreateOrConnectWithoutApprovedByInput[]
+  upsert?: Prisma.PortSalesReportUpsertWithWhereUniqueWithoutApprovedByInput | Prisma.PortSalesReportUpsertWithWhereUniqueWithoutApprovedByInput[]
+  createMany?: Prisma.PortSalesReportCreateManyApprovedByInputEnvelope
+  set?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  disconnect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  delete?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  connect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  update?: Prisma.PortSalesReportUpdateWithWhereUniqueWithoutApprovedByInput | Prisma.PortSalesReportUpdateWithWhereUniqueWithoutApprovedByInput[]
+  updateMany?: Prisma.PortSalesReportUpdateManyWithWhereWithoutApprovedByInput | Prisma.PortSalesReportUpdateManyWithWhereWithoutApprovedByInput[]
+  deleteMany?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
+}
+
+export type PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutCreatedByInput, Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput> | Prisma.PortSalesReportCreateWithoutCreatedByInput[] | Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutCreatedByInput | Prisma.PortSalesReportCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.PortSalesReportUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.PortSalesReportUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.PortSalesReportCreateManyCreatedByInputEnvelope
+  set?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  disconnect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  delete?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  connect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  update?: Prisma.PortSalesReportUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.PortSalesReportUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.PortSalesReportUpdateManyWithWhereWithoutCreatedByInput | Prisma.PortSalesReportUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
+}
+
+export type PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutApprovedByInput, Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput> | Prisma.PortSalesReportCreateWithoutApprovedByInput[] | Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput[]
+  connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutApprovedByInput | Prisma.PortSalesReportCreateOrConnectWithoutApprovedByInput[]
+  upsert?: Prisma.PortSalesReportUpsertWithWhereUniqueWithoutApprovedByInput | Prisma.PortSalesReportUpsertWithWhereUniqueWithoutApprovedByInput[]
+  createMany?: Prisma.PortSalesReportCreateManyApprovedByInputEnvelope
+  set?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  disconnect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  delete?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  connect?: Prisma.PortSalesReportWhereUniqueInput | Prisma.PortSalesReportWhereUniqueInput[]
+  update?: Prisma.PortSalesReportUpdateWithWhereUniqueWithoutApprovedByInput | Prisma.PortSalesReportUpdateWithWhereUniqueWithoutApprovedByInput[]
+  updateMany?: Prisma.PortSalesReportUpdateManyWithWhereWithoutApprovedByInput | Prisma.PortSalesReportUpdateManyWithWhereWithoutApprovedByInput[]
+  deleteMany?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
 }
 
 export type PortSalesReportCreateNestedManyWithoutFileInput = {
@@ -679,6 +940,10 @@ export type PortSalesReportUncheckedUpdateManyWithoutFileNestedInput = {
   deleteMany?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
 }
 
+export type EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput = {
+  set?: $Enums.PortSalesReportApprovalStatus
+}
+
 export type PortSalesReportCreateNestedOneWithoutTicketsInput = {
   create?: Prisma.XOR<Prisma.PortSalesReportCreateWithoutTicketsInput, Prisma.PortSalesReportUncheckedCreateWithoutTicketsInput>
   connectOrCreate?: Prisma.PortSalesReportCreateOrConnectWithoutTicketsInput
@@ -721,6 +986,194 @@ export type PortSalesReportUpdateOneRequiredWithoutPersonalQuotasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PortSalesReportUpdateToOneWithWhereWithoutPersonalQuotasInput, Prisma.PortSalesReportUpdateWithoutPersonalQuotasInput>, Prisma.PortSalesReportUncheckedUpdateWithoutPersonalQuotasInput>
 }
 
+export type PortSalesReportCreateWithoutCreatedByInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsApprovedInput
+  tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
+}
+
+export type PortSalesReportUncheckedCreateWithoutCreatedByInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  fileId: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedCreateNestedManyWithoutReportInput
+}
+
+export type PortSalesReportCreateOrConnectWithoutCreatedByInput = {
+  where: Prisma.PortSalesReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.PortSalesReportCreateWithoutCreatedByInput, Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput>
+}
+
+export type PortSalesReportCreateManyCreatedByInputEnvelope = {
+  data: Prisma.PortSalesReportCreateManyCreatedByInput | Prisma.PortSalesReportCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type PortSalesReportCreateWithoutApprovedByInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsInput
+  tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
+}
+
+export type PortSalesReportUncheckedCreateWithoutApprovedByInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  fileId: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  createdById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedCreateNestedManyWithoutReportInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedCreateNestedManyWithoutReportInput
+}
+
+export type PortSalesReportCreateOrConnectWithoutApprovedByInput = {
+  where: Prisma.PortSalesReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.PortSalesReportCreateWithoutApprovedByInput, Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput>
+}
+
+export type PortSalesReportCreateManyApprovedByInputEnvelope = {
+  data: Prisma.PortSalesReportCreateManyApprovedByInput | Prisma.PortSalesReportCreateManyApprovedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type PortSalesReportUpsertWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.PortSalesReportWhereUniqueInput
+  update: Prisma.XOR<Prisma.PortSalesReportUpdateWithoutCreatedByInput, Prisma.PortSalesReportUncheckedUpdateWithoutCreatedByInput>
+  create: Prisma.XOR<Prisma.PortSalesReportCreateWithoutCreatedByInput, Prisma.PortSalesReportUncheckedCreateWithoutCreatedByInput>
+}
+
+export type PortSalesReportUpdateWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.PortSalesReportWhereUniqueInput
+  data: Prisma.XOR<Prisma.PortSalesReportUpdateWithoutCreatedByInput, Prisma.PortSalesReportUncheckedUpdateWithoutCreatedByInput>
+}
+
+export type PortSalesReportUpdateManyWithWhereWithoutCreatedByInput = {
+  where: Prisma.PortSalesReportScalarWhereInput
+  data: Prisma.XOR<Prisma.PortSalesReportUpdateManyMutationInput, Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByInput>
+}
+
+export type PortSalesReportScalarWhereInput = {
+  AND?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
+  OR?: Prisma.PortSalesReportScalarWhereInput[]
+  NOT?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
+  id?: Prisma.StringFilter<"PortSalesReport"> | string
+  reportDate?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
+  origin?: Prisma.StringFilter<"PortSalesReport"> | string
+  destination?: Prisma.StringFilter<"PortSalesReport"> | string
+  fileId?: Prisma.StringFilter<"PortSalesReport"> | string
+  originalFileName?: Prisma.StringFilter<"PortSalesReport"> | string
+  recordCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  uniqueNationalIdCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  nationalIdPrefixCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  validQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
+  reportYear?: Prisma.IntFilter<"PortSalesReport"> | number
+  reportMonth?: Prisma.IntFilter<"PortSalesReport"> | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFilter<"PortSalesReport"> | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.DateTimeNullableFilter<"PortSalesReport"> | Date | string | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"PortSalesReport"> | Date | string | null
+  approvedById?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
+  createdById?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
+}
+
+export type PortSalesReportUpsertWithWhereUniqueWithoutApprovedByInput = {
+  where: Prisma.PortSalesReportWhereUniqueInput
+  update: Prisma.XOR<Prisma.PortSalesReportUpdateWithoutApprovedByInput, Prisma.PortSalesReportUncheckedUpdateWithoutApprovedByInput>
+  create: Prisma.XOR<Prisma.PortSalesReportCreateWithoutApprovedByInput, Prisma.PortSalesReportUncheckedCreateWithoutApprovedByInput>
+}
+
+export type PortSalesReportUpdateWithWhereUniqueWithoutApprovedByInput = {
+  where: Prisma.PortSalesReportWhereUniqueInput
+  data: Prisma.XOR<Prisma.PortSalesReportUpdateWithoutApprovedByInput, Prisma.PortSalesReportUncheckedUpdateWithoutApprovedByInput>
+}
+
+export type PortSalesReportUpdateManyWithWhereWithoutApprovedByInput = {
+  where: Prisma.PortSalesReportScalarWhereInput
+  data: Prisma.XOR<Prisma.PortSalesReportUpdateManyMutationInput, Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByInput>
+}
+
 export type PortSalesReportCreateWithoutFileInput = {
   id?: string
   reportDate: Date | string
@@ -734,8 +1187,15 @@ export type PortSalesReportCreateWithoutFileInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  approvedBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsApprovedInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsInput
   tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
@@ -754,6 +1214,13 @@ export type PortSalesReportUncheckedCreateWithoutFileInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
@@ -787,27 +1254,6 @@ export type PortSalesReportUpdateManyWithWhereWithoutFileInput = {
   data: Prisma.XOR<Prisma.PortSalesReportUpdateManyMutationInput, Prisma.PortSalesReportUncheckedUpdateManyWithoutFileInput>
 }
 
-export type PortSalesReportScalarWhereInput = {
-  AND?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
-  OR?: Prisma.PortSalesReportScalarWhereInput[]
-  NOT?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
-  id?: Prisma.StringFilter<"PortSalesReport"> | string
-  reportDate?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
-  origin?: Prisma.StringFilter<"PortSalesReport"> | string
-  destination?: Prisma.StringFilter<"PortSalesReport"> | string
-  fileId?: Prisma.StringFilter<"PortSalesReport"> | string
-  originalFileName?: Prisma.StringFilter<"PortSalesReport"> | string
-  recordCount?: Prisma.IntFilter<"PortSalesReport"> | number
-  uniqueNationalIdCount?: Prisma.IntFilter<"PortSalesReport"> | number
-  nationalIdPrefixCount?: Prisma.IntFilter<"PortSalesReport"> | number
-  validQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
-  invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
-  weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
-  quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"PortSalesReport"> | Date | string
-}
-
 export type PortSalesReportCreateWithoutTicketsInput = {
   id?: string
   reportDate: Date | string
@@ -821,9 +1267,16 @@ export type PortSalesReportCreateWithoutTicketsInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsApprovedInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
 }
@@ -842,6 +1295,13 @@ export type PortSalesReportUncheckedCreateWithoutTicketsInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedCreateNestedManyWithoutReportInput
@@ -877,9 +1337,16 @@ export type PortSalesReportUpdateWithoutTicketsInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutPortSalesReportsApprovedNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutPortSalesReportsNestedInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
 }
@@ -898,6 +1365,13 @@ export type PortSalesReportUncheckedUpdateWithoutTicketsInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedUpdateManyWithoutReportNestedInput
@@ -917,9 +1391,16 @@ export type PortSalesReportCreateWithoutWeeklyQuotasInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsApprovedInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsInput
   tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaCreateNestedManyWithoutReportInput
 }
@@ -938,6 +1419,13 @@ export type PortSalesReportUncheckedCreateWithoutWeeklyQuotasInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
@@ -973,9 +1461,16 @@ export type PortSalesReportUpdateWithoutWeeklyQuotasInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutPortSalesReportsApprovedNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutPortSalesReportsNestedInput
   tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
 }
@@ -994,6 +1489,13 @@ export type PortSalesReportUncheckedUpdateWithoutWeeklyQuotasInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
@@ -1013,9 +1515,16 @@ export type PortSalesReportCreateWithoutPersonalQuotasInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   file: Prisma.StoredFileCreateNestedOneWithoutPortSalesReportsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsApprovedInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutPortSalesReportsInput
   tickets?: Prisma.PortTicketSaleCreateNestedManyWithoutReportInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaCreateNestedManyWithoutReportInput
 }
@@ -1034,6 +1543,13 @@ export type PortSalesReportUncheckedCreateWithoutPersonalQuotasInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tickets?: Prisma.PortTicketSaleUncheckedCreateNestedManyWithoutReportInput
@@ -1069,9 +1585,16 @@ export type PortSalesReportUpdateWithoutPersonalQuotasInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutPortSalesReportsApprovedNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutPortSalesReportsNestedInput
   tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
 }
@@ -1090,10 +1613,221 @@ export type PortSalesReportUncheckedUpdateWithoutPersonalQuotasInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportCreateManyCreatedByInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  fileId: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PortSalesReportCreateManyApprovedByInput = {
+  id?: string
+  reportDate: Date | string
+  origin: string
+  destination: string
+  fileId: string
+  originalFileName: string
+  recordCount?: number
+  uniqueNationalIdCount?: number
+  nationalIdPrefixCount?: number
+  validQeshmondiCount?: number
+  invalidQeshmondiCount?: number
+  weeklyQuotaExcessCount?: number
+  quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  createdById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PortSalesReportUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutPortSalesReportsApprovedNestedInput
+  tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  fileId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  fileId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PortSalesReportUpdateWithoutApprovedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  file?: Prisma.StoredFileUpdateOneRequiredWithoutPortSalesReportsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutPortSalesReportsNestedInput
+  tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportUncheckedUpdateWithoutApprovedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  fileId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
+  weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUncheckedUpdateManyWithoutReportNestedInput
+  personalQuotas?: Prisma.PortTicketPersonalQuotaUncheckedUpdateManyWithoutReportNestedInput
+}
+
+export type PortSalesReportUncheckedUpdateManyWithoutApprovedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  origin?: Prisma.StringFieldUpdateOperationsInput | string
+  destination?: Prisma.StringFieldUpdateOperationsInput | string
+  fileId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalFileName?: Prisma.StringFieldUpdateOperationsInput | string
+  recordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  uniqueNationalIdCount?: Prisma.IntFieldUpdateOperationsInput | number
+  nationalIdPrefixCount?: Prisma.IntFieldUpdateOperationsInput | number
+  validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PortSalesReportCreateManyFileInput = {
@@ -1109,6 +1843,13 @@ export type PortSalesReportCreateManyFileInput = {
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
   quotaSnapshotReady?: boolean
+  reportYear: number
+  reportMonth: number
+  approvalStatus?: $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  approvedById?: string | null
+  createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1126,8 +1867,15 @@ export type PortSalesReportUpdateWithoutFileInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvedBy?: Prisma.UserUpdateOneWithoutPortSalesReportsApprovedNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutPortSalesReportsNestedInput
   tickets?: Prisma.PortTicketSaleUpdateManyWithoutReportNestedInput
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaUpdateManyWithoutReportNestedInput
   personalQuotas?: Prisma.PortTicketPersonalQuotaUpdateManyWithoutReportNestedInput
@@ -1146,6 +1894,13 @@ export type PortSalesReportUncheckedUpdateWithoutFileInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tickets?: Prisma.PortTicketSaleUncheckedUpdateManyWithoutReportNestedInput
@@ -1166,6 +1921,13 @@ export type PortSalesReportUncheckedUpdateManyWithoutFileInput = {
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reportYear?: Prisma.IntFieldUpdateOperationsInput | number
+  reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  approvalStatus?: Prisma.EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput | $Enums.PortSalesReportApprovalStatus
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1233,9 +1995,18 @@ export type PortSalesReportSelect<ExtArgs extends runtime.Types.Extensions.Inter
   invalidQeshmondiCount?: boolean
   weeklyQuotaExcessCount?: boolean
   quotaSnapshotReady?: boolean
+  reportYear?: boolean
+  reportMonth?: boolean
+  approvalStatus?: boolean
+  verifiedAt?: boolean
+  approvedAt?: boolean
+  approvedById?: boolean
+  createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.PortSalesReport$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.PortSalesReport$createdByArgs<ExtArgs>
   tickets?: boolean | Prisma.PortSalesReport$ticketsArgs<ExtArgs>
   weeklyQuotas?: boolean | Prisma.PortSalesReport$weeklyQuotasArgs<ExtArgs>
   personalQuotas?: boolean | Prisma.PortSalesReport$personalQuotasArgs<ExtArgs>
@@ -1256,9 +2027,18 @@ export type PortSalesReportSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   invalidQeshmondiCount?: boolean
   weeklyQuotaExcessCount?: boolean
   quotaSnapshotReady?: boolean
+  reportYear?: boolean
+  reportMonth?: boolean
+  approvalStatus?: boolean
+  verifiedAt?: boolean
+  approvedAt?: boolean
+  approvedById?: boolean
+  createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.PortSalesReport$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.PortSalesReport$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["portSalesReport"]>
 
 export type PortSalesReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1275,9 +2055,18 @@ export type PortSalesReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   invalidQeshmondiCount?: boolean
   weeklyQuotaExcessCount?: boolean
   quotaSnapshotReady?: boolean
+  reportYear?: boolean
+  reportMonth?: boolean
+  approvalStatus?: boolean
+  verifiedAt?: boolean
+  approvedAt?: boolean
+  approvedById?: boolean
+  createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.PortSalesReport$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.PortSalesReport$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["portSalesReport"]>
 
 export type PortSalesReportSelectScalar = {
@@ -1294,13 +2083,22 @@ export type PortSalesReportSelectScalar = {
   invalidQeshmondiCount?: boolean
   weeklyQuotaExcessCount?: boolean
   quotaSnapshotReady?: boolean
+  reportYear?: boolean
+  reportMonth?: boolean
+  approvalStatus?: boolean
+  verifiedAt?: boolean
+  approvedAt?: boolean
+  approvedById?: boolean
+  createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PortSalesReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportDate" | "origin" | "destination" | "fileId" | "originalFileName" | "recordCount" | "uniqueNationalIdCount" | "nationalIdPrefixCount" | "validQeshmondiCount" | "invalidQeshmondiCount" | "weeklyQuotaExcessCount" | "quotaSnapshotReady" | "createdAt" | "updatedAt", ExtArgs["result"]["portSalesReport"]>
+export type PortSalesReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportDate" | "origin" | "destination" | "fileId" | "originalFileName" | "recordCount" | "uniqueNationalIdCount" | "nationalIdPrefixCount" | "validQeshmondiCount" | "invalidQeshmondiCount" | "weeklyQuotaExcessCount" | "quotaSnapshotReady" | "reportYear" | "reportMonth" | "approvalStatus" | "verifiedAt" | "approvedAt" | "approvedById" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["portSalesReport"]>
 export type PortSalesReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.PortSalesReport$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.PortSalesReport$createdByArgs<ExtArgs>
   tickets?: boolean | Prisma.PortSalesReport$ticketsArgs<ExtArgs>
   weeklyQuotas?: boolean | Prisma.PortSalesReport$weeklyQuotasArgs<ExtArgs>
   personalQuotas?: boolean | Prisma.PortSalesReport$personalQuotasArgs<ExtArgs>
@@ -1308,15 +2106,21 @@ export type PortSalesReportInclude<ExtArgs extends runtime.Types.Extensions.Inte
 }
 export type PortSalesReportIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.PortSalesReport$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.PortSalesReport$createdByArgs<ExtArgs>
 }
 export type PortSalesReportIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.PortSalesReport$approvedByArgs<ExtArgs>
+  createdBy?: boolean | Prisma.PortSalesReport$createdByArgs<ExtArgs>
 }
 
 export type $PortSalesReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PortSalesReport"
   objects: {
     file: Prisma.$StoredFilePayload<ExtArgs>
+    approvedBy: Prisma.$UserPayload<ExtArgs> | null
+    createdBy: Prisma.$UserPayload<ExtArgs> | null
     tickets: Prisma.$PortTicketSalePayload<ExtArgs>[]
     weeklyQuotas: Prisma.$PortTicketWeeklyQuotaPayload<ExtArgs>[]
     personalQuotas: Prisma.$PortTicketPersonalQuotaPayload<ExtArgs>[]
@@ -1335,6 +2139,13 @@ export type $PortSalesReportPayload<ExtArgs extends runtime.Types.Extensions.Int
     invalidQeshmondiCount: number
     weeklyQuotaExcessCount: number
     quotaSnapshotReady: boolean
+    reportYear: number
+    reportMonth: number
+    approvalStatus: $Enums.PortSalesReportApprovalStatus
+    verifiedAt: Date | null
+    approvedAt: Date | null
+    approvedById: string | null
+    createdById: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["portSalesReport"]>
@@ -1732,6 +2543,8 @@ readonly fields: PortSalesReportFieldRefs;
 export interface Prisma__PortSalesReportClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   file<T extends Prisma.StoredFileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFileDefaultArgs<ExtArgs>>): Prisma.Prisma__StoredFileClient<runtime.Types.Result.GetResult<Prisma.$StoredFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  approvedBy<T extends Prisma.PortSalesReport$approvedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PortSalesReport$approvedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.PortSalesReport$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PortSalesReport$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   tickets<T extends Prisma.PortSalesReport$ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PortSalesReport$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortTicketSalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   weeklyQuotas<T extends Prisma.PortSalesReport$weeklyQuotasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PortSalesReport$weeklyQuotasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortTicketWeeklyQuotaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   personalQuotas<T extends Prisma.PortSalesReport$personalQuotasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PortSalesReport$personalQuotasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortTicketPersonalQuotaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1777,6 +2590,13 @@ export interface PortSalesReportFieldRefs {
   readonly invalidQeshmondiCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
   readonly weeklyQuotaExcessCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
   readonly quotaSnapshotReady: Prisma.FieldRef<"PortSalesReport", 'Boolean'>
+  readonly reportYear: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly reportMonth: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly approvalStatus: Prisma.FieldRef<"PortSalesReport", 'PortSalesReportApprovalStatus'>
+  readonly verifiedAt: Prisma.FieldRef<"PortSalesReport", 'DateTime'>
+  readonly approvedAt: Prisma.FieldRef<"PortSalesReport", 'DateTime'>
+  readonly approvedById: Prisma.FieldRef<"PortSalesReport", 'String'>
+  readonly createdById: Prisma.FieldRef<"PortSalesReport", 'String'>
   readonly createdAt: Prisma.FieldRef<"PortSalesReport", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PortSalesReport", 'DateTime'>
 }
@@ -2177,6 +2997,44 @@ export type PortSalesReportDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many PortSalesReports to delete.
    */
   limit?: number
+}
+
+/**
+ * PortSalesReport.approvedBy
+ */
+export type PortSalesReport$approvedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * PortSalesReport.createdBy
+ */
+export type PortSalesReport$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

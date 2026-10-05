@@ -4,6 +4,8 @@ import { SmsModule } from '../sms/sms.module';
 import { AccountController } from './account.controller';
 import { PublicAuthController } from './public-auth.controller';
 import { PublicProfilesController } from './public-profiles.controller';
+import { QeshmondiSyncController } from './qeshmondi-sync.controller';
+import { QeshmondiSyncService } from './qeshmondi-sync.service';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
@@ -13,9 +15,10 @@ import { UsersService } from './users.service';
     AccountController,
     PublicAuthController,
     PublicProfilesController,
+    QeshmondiSyncController,
     UsersController,
   ],
-  providers: [UsersService],
+  providers: [UsersService, QeshmondiSyncService],
   exports: [UsersService],
 })
 export class UsersModule {}

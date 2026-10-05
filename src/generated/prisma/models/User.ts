@@ -611,6 +611,10 @@ export type UserWhereInput = {
   boardSecretaryReviews?: Prisma.BoardRequestListRelationFilter
   boardMinutesCreated?: Prisma.BoardMinutesListRelationFilter
   boardMinutesMemberships?: Prisma.BoardMinutesMemberListRelationFilter
+  portSalesReports?: Prisma.PortSalesReportListRelationFilter
+  portSalesReportsApproved?: Prisma.PortSalesReportListRelationFilter
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogListRelationFilter
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -695,6 +699,10 @@ export type UserOrderByWithRelationInput = {
   boardSecretaryReviews?: Prisma.BoardRequestOrderByRelationAggregateInput
   boardMinutesCreated?: Prisma.BoardMinutesOrderByRelationAggregateInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberOrderByRelationAggregateInput
+  portSalesReports?: Prisma.PortSalesReportOrderByRelationAggregateInput
+  portSalesReportsApproved?: Prisma.PortSalesReportOrderByRelationAggregateInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogOrderByRelationAggregateInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -782,6 +790,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   boardSecretaryReviews?: Prisma.BoardRequestListRelationFilter
   boardMinutesCreated?: Prisma.BoardMinutesListRelationFilter
   boardMinutesMemberships?: Prisma.BoardMinutesMemberListRelationFilter
+  portSalesReports?: Prisma.PortSalesReportListRelationFilter
+  portSalesReportsApproved?: Prisma.PortSalesReportListRelationFilter
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogListRelationFilter
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionListRelationFilter
 }, "id" | "username" | "nationalId" | "phone" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -968,6 +980,10 @@ export type UserCreateInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -1040,6 +1056,10 @@ export type UserUncheckedCreateInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUpdateInput = {
@@ -1112,6 +1132,10 @@ export type UserUpdateInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -1184,6 +1208,10 @@ export type UserUncheckedUpdateInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1520,14 +1548,14 @@ export type UserSumOrderByAggregateInput = {
   individualTicketQuota?: Prisma.SortOrder
 }
 
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
-}
-
 export type UserNullableScalarRelationFilter = {
   is?: Prisma.UserWhereInput | null
   isNot?: Prisma.UserWhereInput | null
+}
+
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type UserCreateNestedManyWithoutPhotoInput = {
@@ -1933,6 +1961,38 @@ export type UserUpdatevehiclePlatesInput = {
   push?: string | string[]
 }
 
+export type UserCreateNestedOneWithoutQeshmondiSqlConnectionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutQeshmondiSqlConnectionsInput, Prisma.UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutQeshmondiSqlConnectionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutQeshmondiSqlConnectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutQeshmondiSqlConnectionsInput, Prisma.UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutQeshmondiSqlConnectionsInput
+  upsert?: Prisma.UserUpsertWithoutQeshmondiSqlConnectionsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutQeshmondiSqlConnectionsInput, Prisma.UserUpdateWithoutQeshmondiSqlConnectionsInput>, Prisma.UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput>
+}
+
+export type UserCreateNestedOneWithoutQeshmondiSyncLogsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutQeshmondiSyncLogsInput, Prisma.UserUncheckedCreateWithoutQeshmondiSyncLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutQeshmondiSyncLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutQeshmondiSyncLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutQeshmondiSyncLogsInput, Prisma.UserUncheckedCreateWithoutQeshmondiSyncLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutQeshmondiSyncLogsInput
+  upsert?: Prisma.UserUpsertWithoutQeshmondiSyncLogsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutQeshmondiSyncLogsInput, Prisma.UserUpdateWithoutQeshmondiSyncLogsInput>, Prisma.UserUncheckedUpdateWithoutQeshmondiSyncLogsInput>
+}
+
 export type UserCreateNestedOneWithoutLocationHistoriesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutLocationHistoriesInput, Prisma.UserUncheckedCreateWithoutLocationHistoriesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutLocationHistoriesInput
@@ -2301,6 +2361,38 @@ export type UserUpdateOneRequiredWithoutBoardMinutesMembershipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardMinutesMembershipsInput, Prisma.UserUpdateWithoutBoardMinutesMembershipsInput>, Prisma.UserUncheckedUpdateWithoutBoardMinutesMembershipsInput>
 }
 
+export type UserCreateNestedOneWithoutPortSalesReportsApprovedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsApprovedInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsApprovedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPortSalesReportsApprovedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutPortSalesReportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPortSalesReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutPortSalesReportsApprovedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsApprovedInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsApprovedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPortSalesReportsApprovedInput
+  upsert?: Prisma.UserUpsertWithoutPortSalesReportsApprovedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPortSalesReportsApprovedInput, Prisma.UserUpdateWithoutPortSalesReportsApprovedInput>, Prisma.UserUncheckedUpdateWithoutPortSalesReportsApprovedInput>
+}
+
+export type UserUpdateOneWithoutPortSalesReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPortSalesReportsInput
+  upsert?: Prisma.UserUpsertWithoutPortSalesReportsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPortSalesReportsInput, Prisma.UserUpdateWithoutPortSalesReportsInput>, Prisma.UserUncheckedUpdateWithoutPortSalesReportsInput>
+}
+
 export type UserCreateNestedOneWithoutStakeholderReportsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutStakeholderReportsInput, Prisma.UserUncheckedCreateWithoutStakeholderReportsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutStakeholderReportsInput
@@ -2412,6 +2504,10 @@ export type UserCreateWithoutPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutPhotoInput = {
@@ -2483,6 +2579,10 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutPhotoInput = {
@@ -2564,6 +2664,10 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
@@ -2635,6 +2739,10 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutNationalCardPhotoInput = {
@@ -2716,6 +2824,10 @@ export type UserCreateWithoutPassportPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutPassportPhotoInput = {
@@ -2787,6 +2899,10 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutPassportPhotoInput = {
@@ -2868,6 +2984,10 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
@@ -2939,6 +3059,10 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutIdentityBookletPhotoInput = {
@@ -3140,6 +3264,10 @@ export type UserCreateWithoutCountryInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutCountryInput = {
@@ -3211,6 +3339,10 @@ export type UserUncheckedCreateWithoutCountryInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutCountryInput = {
@@ -3308,6 +3440,10 @@ export type UserCreateWithoutProvinceInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutProvinceInput = {
@@ -3379,6 +3515,10 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutProvinceInput = {
@@ -3460,6 +3600,10 @@ export type UserCreateWithoutLocationProvinceInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutLocationProvinceInput = {
@@ -3531,6 +3675,10 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutLocationProvinceInput = {
@@ -3644,6 +3792,10 @@ export type UserCreateWithoutCityInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutCityInput = {
@@ -3715,6 +3867,10 @@ export type UserUncheckedCreateWithoutCityInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutCityInput = {
@@ -3796,6 +3952,10 @@ export type UserCreateWithoutLocationCityInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutLocationCityInput = {
@@ -3867,6 +4027,10 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutLocationCityInput = {
@@ -3909,6 +4073,638 @@ export type UserUpdateWithWhereUniqueWithoutLocationCityInput = {
 export type UserUpdateManyWithWhereWithoutLocationCityInput = {
   where: Prisma.UserScalarWhereInput
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutLocationCityInput>
+}
+
+export type UserCreateWithoutQeshmondiSqlConnectionsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutQeshmondiSqlConnectionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutQeshmondiSqlConnectionsInput, Prisma.UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput>
+}
+
+export type UserUpsertWithoutQeshmondiSqlConnectionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutQeshmondiSqlConnectionsInput, Prisma.UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutQeshmondiSqlConnectionsInput, Prisma.UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutQeshmondiSqlConnectionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutQeshmondiSqlConnectionsInput, Prisma.UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput>
+}
+
+export type UserUpdateWithoutQeshmondiSqlConnectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutQeshmondiSyncLogsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutQeshmondiSyncLogsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutQeshmondiSyncLogsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutQeshmondiSyncLogsInput, Prisma.UserUncheckedCreateWithoutQeshmondiSyncLogsInput>
+}
+
+export type UserUpsertWithoutQeshmondiSyncLogsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutQeshmondiSyncLogsInput, Prisma.UserUncheckedUpdateWithoutQeshmondiSyncLogsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutQeshmondiSyncLogsInput, Prisma.UserUncheckedCreateWithoutQeshmondiSyncLogsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutQeshmondiSyncLogsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutQeshmondiSyncLogsInput, Prisma.UserUncheckedUpdateWithoutQeshmondiSyncLogsInput>
+}
+
+export type UserUpdateWithoutQeshmondiSyncLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutQeshmondiSyncLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutLocationHistoriesInput = {
@@ -3980,6 +4776,10 @@ export type UserCreateWithoutLocationHistoriesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutLocationHistoriesInput = {
@@ -4051,6 +4851,10 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutLocationHistoriesInput = {
@@ -4138,6 +4942,10 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
@@ -4209,6 +5017,10 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutContractorInput = {
@@ -4280,6 +5092,10 @@ export type UserCreateWithoutContractorInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutContractorInput = {
@@ -4351,6 +5167,10 @@ export type UserUncheckedCreateWithoutContractorInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutContractorInput = {
@@ -4448,6 +5268,10 @@ export type UserCreateWithoutPositionInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutPositionInput = {
@@ -4519,6 +5343,10 @@ export type UserUncheckedCreateWithoutPositionInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutPositionInput = {
@@ -4616,6 +5444,10 @@ export type UserCreateWithoutNutritionUnitsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutNutritionUnitsInput = {
@@ -4687,6 +5519,10 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutNutritionUnitsInput = {
@@ -4763,6 +5599,10 @@ export type UserCreateWithoutOrgUnitInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutOrgUnitInput = {
@@ -4834,6 +5674,10 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutOrgUnitInput = {
@@ -4926,6 +5770,10 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
@@ -4997,6 +5845,10 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutOrgUnitInput = {
@@ -5084,6 +5936,10 @@ export type UserCreateWithoutFoodReservationsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutFoodReservationsInput = {
@@ -5155,6 +6011,10 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutFoodReservationsInput = {
@@ -5242,6 +6102,10 @@ export type UserUpdateWithoutFoodReservationsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFoodReservationsInput = {
@@ -5313,6 +6177,10 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutVehicleAssignmentsInput = {
@@ -5384,6 +6252,10 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
@@ -5455,6 +6327,10 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutVehicleAssignmentsInput = {
@@ -5542,6 +6418,10 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
@@ -5613,6 +6493,10 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutUserRolesInput = {
@@ -5684,6 +6568,10 @@ export type UserCreateWithoutUserRolesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -5755,6 +6643,10 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -5842,6 +6734,10 @@ export type UserUpdateWithoutUserRolesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -5913,6 +6809,10 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutSingardFeedbacksInput = {
@@ -5984,6 +6884,10 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
@@ -6055,6 +6959,10 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutSingardFeedbacksInput = {
@@ -6131,6 +7039,10 @@ export type UserCreateWithoutSingardRepliesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutSingardRepliesInput = {
@@ -6202,6 +7114,10 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutSingardRepliesInput = {
@@ -6289,6 +7205,10 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
@@ -6360,6 +7280,10 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUpsertWithoutSingardRepliesInput = {
@@ -6442,6 +7366,10 @@ export type UserUpdateWithoutSingardRepliesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSingardRepliesInput = {
@@ -6513,6 +7441,10 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutSingardActivitiesInput = {
@@ -6584,6 +7516,10 @@ export type UserCreateWithoutSingardActivitiesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutSingardActivitiesInput = {
@@ -6655,6 +7591,10 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutSingardActivitiesInput = {
@@ -6742,6 +7682,10 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
@@ -6813,6 +7757,10 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutBoardRequestsCreatedInput = {
@@ -6884,6 +7832,10 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
@@ -6955,6 +7907,10 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardRequestsCreatedInput = {
@@ -7031,6 +7987,10 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
@@ -7102,6 +8062,10 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardManagementReviewsInput = {
@@ -7178,6 +8142,10 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
@@ -7249,6 +8217,10 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardLegalReviewsInput = {
@@ -7325,6 +8297,10 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
@@ -7396,6 +8372,10 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardBudgetReviewsInput = {
@@ -7472,6 +8452,10 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
@@ -7543,6 +8527,10 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardSecretaryReviewsInput = {
@@ -7619,6 +8607,10 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
@@ -7690,6 +8682,10 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardRequestsRejectedInput = {
@@ -7777,6 +8773,10 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
@@ -7848,6 +8848,10 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUpsertWithoutBoardManagementReviewsInput = {
@@ -7930,6 +8934,10 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
@@ -8001,6 +9009,10 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUpsertWithoutBoardLegalReviewsInput = {
@@ -8083,6 +9095,10 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
@@ -8154,6 +9170,10 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUpsertWithoutBoardBudgetReviewsInput = {
@@ -8236,6 +9256,10 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
@@ -8307,6 +9331,10 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUpsertWithoutBoardSecretaryReviewsInput = {
@@ -8389,6 +9417,10 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
@@ -8460,6 +9492,10 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUpsertWithoutBoardRequestsRejectedInput = {
@@ -8542,6 +9578,10 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
@@ -8613,6 +9653,10 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutBoardMinutesCreatedInput = {
@@ -8684,6 +9728,10 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
@@ -8755,6 +9803,10 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardMinutesCreatedInput = {
@@ -8842,6 +9894,10 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
@@ -8913,6 +9969,10 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutBoardMinutesMembershipsInput = {
@@ -8984,6 +10044,10 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
@@ -9055,6 +10119,10 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardMinutesMembershipsInput = {
@@ -9142,6 +10210,10 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
@@ -9213,6 +10285,642 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutPortSalesReportsApprovedInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutPortSalesReportsApprovedInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutPortSalesReportsApprovedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsApprovedInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsApprovedInput>
+}
+
+export type UserCreateWithoutPortSalesReportsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutPortSalesReportsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutPortSalesReportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsInput>
+}
+
+export type UserUpsertWithoutPortSalesReportsApprovedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPortSalesReportsApprovedInput, Prisma.UserUncheckedUpdateWithoutPortSalesReportsApprovedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsApprovedInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsApprovedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPortSalesReportsApprovedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPortSalesReportsApprovedInput, Prisma.UserUncheckedUpdateWithoutPortSalesReportsApprovedInput>
+}
+
+export type UserUpdateWithoutPortSalesReportsApprovedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPortSalesReportsApprovedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutPortSalesReportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPortSalesReportsInput, Prisma.UserUncheckedUpdateWithoutPortSalesReportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPortSalesReportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPortSalesReportsInput, Prisma.UserUncheckedUpdateWithoutPortSalesReportsInput>
+}
+
+export type UserUpdateWithoutPortSalesReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPortSalesReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutStakeholderReportsInput = {
@@ -9284,6 +10992,10 @@ export type UserCreateWithoutStakeholderReportsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutStakeholderReportsInput = {
@@ -9355,6 +11067,10 @@ export type UserUncheckedCreateWithoutStakeholderReportsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutStakeholderReportsInput = {
@@ -9442,6 +11158,10 @@ export type UserUpdateWithoutStakeholderReportsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
@@ -9513,6 +11233,10 @@ export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutStakeholderCorrespondencesInput = {
@@ -9584,6 +11308,10 @@ export type UserCreateWithoutStakeholderCorrespondencesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
@@ -9655,6 +11383,10 @@ export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutStakeholderCorrespondencesInput = {
@@ -9742,6 +11474,10 @@ export type UserUpdateWithoutStakeholderCorrespondencesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
@@ -9813,6 +11549,10 @@ export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutStakeholderMessagesInput = {
@@ -9884,6 +11624,10 @@ export type UserCreateWithoutStakeholderMessagesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
@@ -9955,6 +11699,10 @@ export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutStakeholderMessagesInput = {
@@ -10042,6 +11790,10 @@ export type UserUpdateWithoutStakeholderMessagesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
@@ -10113,6 +11865,10 @@ export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateManyPhotoInput = {
@@ -10392,6 +12148,10 @@ export type UserUpdateWithoutPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhotoInput = {
@@ -10463,6 +12223,10 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutPhotoInput = {
@@ -10586,6 +12350,10 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
@@ -10657,6 +12425,10 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutNationalCardPhotoInput = {
@@ -10780,6 +12552,10 @@ export type UserUpdateWithoutPassportPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPassportPhotoInput = {
@@ -10851,6 +12627,10 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutPassportPhotoInput = {
@@ -10974,6 +12754,10 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
@@ -11045,6 +12829,10 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput = {
@@ -11220,6 +13008,10 @@ export type UserUpdateWithoutCountryInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCountryInput = {
@@ -11291,6 +13083,10 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCountryInput = {
@@ -11518,6 +13314,10 @@ export type UserUpdateWithoutProvinceInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProvinceInput = {
@@ -11589,6 +13389,10 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutProvinceInput = {
@@ -11712,6 +13516,10 @@ export type UserUpdateWithoutLocationProvinceInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLocationProvinceInput = {
@@ -11783,6 +13591,10 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
@@ -12010,6 +13822,10 @@ export type UserUpdateWithoutCityInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCityInput = {
@@ -12081,6 +13897,10 @@ export type UserUncheckedUpdateWithoutCityInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCityInput = {
@@ -12204,6 +14024,10 @@ export type UserUpdateWithoutLocationCityInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLocationCityInput = {
@@ -12275,6 +14099,10 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutLocationCityInput = {
@@ -12450,6 +14278,10 @@ export type UserUpdateWithoutContractorInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContractorInput = {
@@ -12521,6 +14353,10 @@ export type UserUncheckedUpdateWithoutContractorInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutContractorInput = {
@@ -12696,6 +14532,10 @@ export type UserUpdateWithoutPositionInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPositionInput = {
@@ -12767,6 +14607,10 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutPositionInput = {
@@ -12942,6 +14786,10 @@ export type UserUpdateWithoutOrgUnitInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrgUnitInput = {
@@ -13013,6 +14861,10 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
@@ -13092,6 +14944,10 @@ export type UserCountOutputType = {
   boardSecretaryReviews: number
   boardMinutesCreated: number
   boardMinutesMemberships: number
+  portSalesReports: number
+  portSalesReportsApproved: number
+  qeshmondiSyncLogs: number
+  qeshmondiSqlConnections: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -13114,6 +14970,10 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   boardSecretaryReviews?: boolean | UserCountOutputTypeCountBoardSecretaryReviewsArgs
   boardMinutesCreated?: boolean | UserCountOutputTypeCountBoardMinutesCreatedArgs
   boardMinutesMemberships?: boolean | UserCountOutputTypeCountBoardMinutesMembershipsArgs
+  portSalesReports?: boolean | UserCountOutputTypeCountPortSalesReportsArgs
+  portSalesReportsApproved?: boolean | UserCountOutputTypeCountPortSalesReportsApprovedArgs
+  qeshmondiSyncLogs?: boolean | UserCountOutputTypeCountQeshmondiSyncLogsArgs
+  qeshmondiSqlConnections?: boolean | UserCountOutputTypeCountQeshmondiSqlConnectionsArgs
 }
 
 /**
@@ -13259,6 +15119,34 @@ export type UserCountOutputTypeCountBoardMinutesMembershipsArgs<ExtArgs extends 
   where?: Prisma.BoardMinutesMemberWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPortSalesReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PortSalesReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPortSalesReportsApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PortSalesReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountQeshmondiSyncLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QeshmondiSyncLogWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountQeshmondiSqlConnectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QeshmondiSqlConnectionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -13342,6 +15230,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   boardSecretaryReviews?: boolean | Prisma.User$boardSecretaryReviewsArgs<ExtArgs>
   boardMinutesCreated?: boolean | Prisma.User$boardMinutesCreatedArgs<ExtArgs>
   boardMinutesMemberships?: boolean | Prisma.User$boardMinutesMembershipsArgs<ExtArgs>
+  portSalesReports?: boolean | Prisma.User$portSalesReportsArgs<ExtArgs>
+  portSalesReportsApproved?: boolean | Prisma.User$portSalesReportsApprovedArgs<ExtArgs>
+  qeshmondiSyncLogs?: boolean | Prisma.User$qeshmondiSyncLogsArgs<ExtArgs>
+  qeshmondiSqlConnections?: boolean | Prisma.User$qeshmondiSqlConnectionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -13561,6 +15453,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   boardSecretaryReviews?: boolean | Prisma.User$boardSecretaryReviewsArgs<ExtArgs>
   boardMinutesCreated?: boolean | Prisma.User$boardMinutesCreatedArgs<ExtArgs>
   boardMinutesMemberships?: boolean | Prisma.User$boardMinutesMembershipsArgs<ExtArgs>
+  portSalesReports?: boolean | Prisma.User$portSalesReportsArgs<ExtArgs>
+  portSalesReportsApproved?: boolean | Prisma.User$portSalesReportsApprovedArgs<ExtArgs>
+  qeshmondiSyncLogs?: boolean | Prisma.User$qeshmondiSyncLogsArgs<ExtArgs>
+  qeshmondiSqlConnections?: boolean | Prisma.User$qeshmondiSqlConnectionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -13626,6 +15522,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     boardSecretaryReviews: Prisma.$BoardRequestPayload<ExtArgs>[]
     boardMinutesCreated: Prisma.$BoardMinutesPayload<ExtArgs>[]
     boardMinutesMemberships: Prisma.$BoardMinutesMemberPayload<ExtArgs>[]
+    portSalesReports: Prisma.$PortSalesReportPayload<ExtArgs>[]
+    portSalesReportsApproved: Prisma.$PortSalesReportPayload<ExtArgs>[]
+    qeshmondiSyncLogs: Prisma.$QeshmondiSyncLogPayload<ExtArgs>[]
+    qeshmondiSqlConnections: Prisma.$QeshmondiSqlConnectionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -14103,6 +16003,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   boardSecretaryReviews<T extends Prisma.User$boardSecretaryReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardSecretaryReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesCreated<T extends Prisma.User$boardMinutesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardMinutesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesMemberships<T extends Prisma.User$boardMinutesMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardMinutesMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  portSalesReports<T extends Prisma.User$portSalesReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$portSalesReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortSalesReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  portSalesReportsApproved<T extends Prisma.User$portSalesReportsApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$portSalesReportsApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortSalesReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  qeshmondiSyncLogs<T extends Prisma.User$qeshmondiSyncLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$qeshmondiSyncLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QeshmondiSyncLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  qeshmondiSqlConnections<T extends Prisma.User$qeshmondiSqlConnectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$qeshmondiSqlConnectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QeshmondiSqlConnectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15264,6 +17168,102 @@ export type User$boardMinutesMembershipsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.BoardMinutesMemberScalarFieldEnum | Prisma.BoardMinutesMemberScalarFieldEnum[]
+}
+
+/**
+ * User.portSalesReports
+ */
+export type User$portSalesReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PortSalesReport
+   */
+  select?: Prisma.PortSalesReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PortSalesReport
+   */
+  omit?: Prisma.PortSalesReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PortSalesReportInclude<ExtArgs> | null
+  where?: Prisma.PortSalesReportWhereInput
+  orderBy?: Prisma.PortSalesReportOrderByWithRelationInput | Prisma.PortSalesReportOrderByWithRelationInput[]
+  cursor?: Prisma.PortSalesReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PortSalesReportScalarFieldEnum | Prisma.PortSalesReportScalarFieldEnum[]
+}
+
+/**
+ * User.portSalesReportsApproved
+ */
+export type User$portSalesReportsApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PortSalesReport
+   */
+  select?: Prisma.PortSalesReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PortSalesReport
+   */
+  omit?: Prisma.PortSalesReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PortSalesReportInclude<ExtArgs> | null
+  where?: Prisma.PortSalesReportWhereInput
+  orderBy?: Prisma.PortSalesReportOrderByWithRelationInput | Prisma.PortSalesReportOrderByWithRelationInput[]
+  cursor?: Prisma.PortSalesReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PortSalesReportScalarFieldEnum | Prisma.PortSalesReportScalarFieldEnum[]
+}
+
+/**
+ * User.qeshmondiSyncLogs
+ */
+export type User$qeshmondiSyncLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QeshmondiSyncLog
+   */
+  select?: Prisma.QeshmondiSyncLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QeshmondiSyncLog
+   */
+  omit?: Prisma.QeshmondiSyncLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QeshmondiSyncLogInclude<ExtArgs> | null
+  where?: Prisma.QeshmondiSyncLogWhereInput
+  orderBy?: Prisma.QeshmondiSyncLogOrderByWithRelationInput | Prisma.QeshmondiSyncLogOrderByWithRelationInput[]
+  cursor?: Prisma.QeshmondiSyncLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QeshmondiSyncLogScalarFieldEnum | Prisma.QeshmondiSyncLogScalarFieldEnum[]
+}
+
+/**
+ * User.qeshmondiSqlConnections
+ */
+export type User$qeshmondiSqlConnectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QeshmondiSqlConnection
+   */
+  select?: Prisma.QeshmondiSqlConnectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QeshmondiSqlConnection
+   */
+  omit?: Prisma.QeshmondiSqlConnectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QeshmondiSqlConnectionInclude<ExtArgs> | null
+  where?: Prisma.QeshmondiSqlConnectionWhereInput
+  orderBy?: Prisma.QeshmondiSqlConnectionOrderByWithRelationInput | Prisma.QeshmondiSqlConnectionOrderByWithRelationInput[]
+  cursor?: Prisma.QeshmondiSqlConnectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QeshmondiSqlConnectionScalarFieldEnum | Prisma.QeshmondiSqlConnectionScalarFieldEnum[]
 }
 
 /**
