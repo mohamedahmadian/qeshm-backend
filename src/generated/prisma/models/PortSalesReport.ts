@@ -33,6 +33,9 @@ export type PortSalesReportAvgAggregateOutputType = {
   validQeshmondiCount: number | null
   invalidQeshmondiCount: number | null
   weeklyQuotaExcessCount: number | null
+  invalidQeshmondiSubsidy: number | null
+  weeklyQuotaExcessSubsidy: number | null
+  allocatedSubsidy: number | null
   reportYear: number | null
   reportMonth: number | null
 }
@@ -44,6 +47,9 @@ export type PortSalesReportSumAggregateOutputType = {
   validQeshmondiCount: number | null
   invalidQeshmondiCount: number | null
   weeklyQuotaExcessCount: number | null
+  invalidQeshmondiSubsidy: number | null
+  weeklyQuotaExcessSubsidy: number | null
+  allocatedSubsidy: bigint | null
   reportYear: number | null
   reportMonth: number | null
 }
@@ -61,6 +67,10 @@ export type PortSalesReportMinAggregateOutputType = {
   validQeshmondiCount: number | null
   invalidQeshmondiCount: number | null
   weeklyQuotaExcessCount: number | null
+  invalidQeshmondiSubsidy: number | null
+  weeklyQuotaExcessSubsidy: number | null
+  allocatedSubsidy: bigint | null
+  allocatedSubsidyNote: string | null
   quotaSnapshotReady: boolean | null
   reportYear: number | null
   reportMonth: number | null
@@ -86,6 +96,10 @@ export type PortSalesReportMaxAggregateOutputType = {
   validQeshmondiCount: number | null
   invalidQeshmondiCount: number | null
   weeklyQuotaExcessCount: number | null
+  invalidQeshmondiSubsidy: number | null
+  weeklyQuotaExcessSubsidy: number | null
+  allocatedSubsidy: bigint | null
+  allocatedSubsidyNote: string | null
   quotaSnapshotReady: boolean | null
   reportYear: number | null
   reportMonth: number | null
@@ -111,6 +125,10 @@ export type PortSalesReportCountAggregateOutputType = {
   validQeshmondiCount: number
   invalidQeshmondiCount: number
   weeklyQuotaExcessCount: number
+  invalidQeshmondiSubsidy: number
+  weeklyQuotaExcessSubsidy: number
+  allocatedSubsidy: number
+  allocatedSubsidyNote: number
   quotaSnapshotReady: number
   reportYear: number
   reportMonth: number
@@ -132,6 +150,9 @@ export type PortSalesReportAvgAggregateInputType = {
   validQeshmondiCount?: true
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
+  invalidQeshmondiSubsidy?: true
+  weeklyQuotaExcessSubsidy?: true
+  allocatedSubsidy?: true
   reportYear?: true
   reportMonth?: true
 }
@@ -143,6 +164,9 @@ export type PortSalesReportSumAggregateInputType = {
   validQeshmondiCount?: true
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
+  invalidQeshmondiSubsidy?: true
+  weeklyQuotaExcessSubsidy?: true
+  allocatedSubsidy?: true
   reportYear?: true
   reportMonth?: true
 }
@@ -160,6 +184,10 @@ export type PortSalesReportMinAggregateInputType = {
   validQeshmondiCount?: true
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
+  invalidQeshmondiSubsidy?: true
+  weeklyQuotaExcessSubsidy?: true
+  allocatedSubsidy?: true
+  allocatedSubsidyNote?: true
   quotaSnapshotReady?: true
   reportYear?: true
   reportMonth?: true
@@ -185,6 +213,10 @@ export type PortSalesReportMaxAggregateInputType = {
   validQeshmondiCount?: true
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
+  invalidQeshmondiSubsidy?: true
+  weeklyQuotaExcessSubsidy?: true
+  allocatedSubsidy?: true
+  allocatedSubsidyNote?: true
   quotaSnapshotReady?: true
   reportYear?: true
   reportMonth?: true
@@ -210,6 +242,10 @@ export type PortSalesReportCountAggregateInputType = {
   validQeshmondiCount?: true
   invalidQeshmondiCount?: true
   weeklyQuotaExcessCount?: true
+  invalidQeshmondiSubsidy?: true
+  weeklyQuotaExcessSubsidy?: true
+  allocatedSubsidy?: true
+  allocatedSubsidyNote?: true
   quotaSnapshotReady?: true
   reportYear?: true
   reportMonth?: true
@@ -322,6 +358,10 @@ export type PortSalesReportGroupByOutputType = {
   validQeshmondiCount: number
   invalidQeshmondiCount: number
   weeklyQuotaExcessCount: number
+  invalidQeshmondiSubsidy: number | null
+  weeklyQuotaExcessSubsidy: number | null
+  allocatedSubsidy: bigint | null
+  allocatedSubsidyNote: string | null
   quotaSnapshotReady: boolean
   reportYear: number
   reportMonth: number
@@ -370,6 +410,10 @@ export type PortSalesReportWhereInput = {
   validQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
   invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
   weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  invalidQeshmondiSubsidy?: Prisma.IntNullableFilter<"PortSalesReport"> | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.IntNullableFilter<"PortSalesReport"> | number | null
+  allocatedSubsidy?: Prisma.BigIntNullableFilter<"PortSalesReport"> | bigint | number | null
+  allocatedSubsidyNote?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
   quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
   reportYear?: Prisma.IntFilter<"PortSalesReport"> | number
   reportMonth?: Prisma.IntFilter<"PortSalesReport"> | number
@@ -401,6 +445,10 @@ export type PortSalesReportOrderByWithRelationInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  invalidQeshmondiSubsidy?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklyQuotaExcessSubsidy?: Prisma.SortOrderInput | Prisma.SortOrder
+  allocatedSubsidy?: Prisma.SortOrderInput | Prisma.SortOrder
+  allocatedSubsidyNote?: Prisma.SortOrderInput | Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
   reportYear?: Prisma.SortOrder
   reportMonth?: Prisma.SortOrder
@@ -436,6 +484,10 @@ export type PortSalesReportWhereUniqueInput = Prisma.AtLeast<{
   validQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
   invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
   weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  invalidQeshmondiSubsidy?: Prisma.IntNullableFilter<"PortSalesReport"> | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.IntNullableFilter<"PortSalesReport"> | number | null
+  allocatedSubsidy?: Prisma.BigIntNullableFilter<"PortSalesReport"> | bigint | number | null
+  allocatedSubsidyNote?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
   quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
   reportYear?: Prisma.IntFilter<"PortSalesReport"> | number
   reportMonth?: Prisma.IntFilter<"PortSalesReport"> | number
@@ -467,6 +519,10 @@ export type PortSalesReportOrderByWithAggregationInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  invalidQeshmondiSubsidy?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklyQuotaExcessSubsidy?: Prisma.SortOrderInput | Prisma.SortOrder
+  allocatedSubsidy?: Prisma.SortOrderInput | Prisma.SortOrder
+  allocatedSubsidyNote?: Prisma.SortOrderInput | Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
   reportYear?: Prisma.SortOrder
   reportMonth?: Prisma.SortOrder
@@ -500,6 +556,10 @@ export type PortSalesReportScalarWhereWithAggregatesInput = {
   validQeshmondiCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
   invalidQeshmondiCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
   weeklyQuotaExcessCount?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
+  invalidQeshmondiSubsidy?: Prisma.IntNullableWithAggregatesFilter<"PortSalesReport"> | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.IntNullableWithAggregatesFilter<"PortSalesReport"> | number | null
+  allocatedSubsidy?: Prisma.BigIntNullableWithAggregatesFilter<"PortSalesReport"> | bigint | number | null
+  allocatedSubsidyNote?: Prisma.StringNullableWithAggregatesFilter<"PortSalesReport"> | string | null
   quotaSnapshotReady?: Prisma.BoolWithAggregatesFilter<"PortSalesReport"> | boolean
   reportYear?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
   reportMonth?: Prisma.IntWithAggregatesFilter<"PortSalesReport"> | number
@@ -524,6 +584,10 @@ export type PortSalesReportCreateInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -553,6 +617,10 @@ export type PortSalesReportUncheckedCreateInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -580,6 +648,10 @@ export type PortSalesReportUpdateInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -609,6 +681,10 @@ export type PortSalesReportUncheckedUpdateInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -637,6 +713,10 @@ export type PortSalesReportCreateManyInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -661,6 +741,10 @@ export type PortSalesReportUpdateManyMutationInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -684,6 +768,10 @@ export type PortSalesReportUncheckedUpdateManyInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -725,6 +813,10 @@ export type PortSalesReportCountOrderByAggregateInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  invalidQeshmondiSubsidy?: Prisma.SortOrder
+  weeklyQuotaExcessSubsidy?: Prisma.SortOrder
+  allocatedSubsidy?: Prisma.SortOrder
+  allocatedSubsidyNote?: Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
   reportYear?: Prisma.SortOrder
   reportMonth?: Prisma.SortOrder
@@ -744,6 +836,9 @@ export type PortSalesReportAvgOrderByAggregateInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  invalidQeshmondiSubsidy?: Prisma.SortOrder
+  weeklyQuotaExcessSubsidy?: Prisma.SortOrder
+  allocatedSubsidy?: Prisma.SortOrder
   reportYear?: Prisma.SortOrder
   reportMonth?: Prisma.SortOrder
 }
@@ -761,6 +856,10 @@ export type PortSalesReportMaxOrderByAggregateInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  invalidQeshmondiSubsidy?: Prisma.SortOrder
+  weeklyQuotaExcessSubsidy?: Prisma.SortOrder
+  allocatedSubsidy?: Prisma.SortOrder
+  allocatedSubsidyNote?: Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
   reportYear?: Prisma.SortOrder
   reportMonth?: Prisma.SortOrder
@@ -786,6 +885,10 @@ export type PortSalesReportMinOrderByAggregateInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  invalidQeshmondiSubsidy?: Prisma.SortOrder
+  weeklyQuotaExcessSubsidy?: Prisma.SortOrder
+  allocatedSubsidy?: Prisma.SortOrder
+  allocatedSubsidyNote?: Prisma.SortOrder
   quotaSnapshotReady?: Prisma.SortOrder
   reportYear?: Prisma.SortOrder
   reportMonth?: Prisma.SortOrder
@@ -805,6 +908,9 @@ export type PortSalesReportSumOrderByAggregateInput = {
   validQeshmondiCount?: Prisma.SortOrder
   invalidQeshmondiCount?: Prisma.SortOrder
   weeklyQuotaExcessCount?: Prisma.SortOrder
+  invalidQeshmondiSubsidy?: Prisma.SortOrder
+  weeklyQuotaExcessSubsidy?: Prisma.SortOrder
+  allocatedSubsidy?: Prisma.SortOrder
   reportYear?: Prisma.SortOrder
   reportMonth?: Prisma.SortOrder
 }
@@ -940,6 +1046,14 @@ export type PortSalesReportUncheckedUpdateManyWithoutFileNestedInput = {
   deleteMany?: Prisma.PortSalesReportScalarWhereInput | Prisma.PortSalesReportScalarWhereInput[]
 }
 
+export type NullableBigIntFieldUpdateOperationsInput = {
+  set?: bigint | number | null
+  increment?: bigint | number
+  decrement?: bigint | number
+  multiply?: bigint | number
+  divide?: bigint | number
+}
+
 export type EnumPortSalesReportApprovalStatusFieldUpdateOperationsInput = {
   set?: $Enums.PortSalesReportApprovalStatus
 }
@@ -998,6 +1112,10 @@ export type PortSalesReportCreateWithoutCreatedByInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1026,6 +1144,10 @@ export type PortSalesReportUncheckedCreateWithoutCreatedByInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1062,6 +1184,10 @@ export type PortSalesReportCreateWithoutApprovedByInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1090,6 +1216,10 @@ export type PortSalesReportUncheckedCreateWithoutApprovedByInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1146,6 +1276,10 @@ export type PortSalesReportScalarWhereInput = {
   validQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
   invalidQeshmondiCount?: Prisma.IntFilter<"PortSalesReport"> | number
   weeklyQuotaExcessCount?: Prisma.IntFilter<"PortSalesReport"> | number
+  invalidQeshmondiSubsidy?: Prisma.IntNullableFilter<"PortSalesReport"> | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.IntNullableFilter<"PortSalesReport"> | number | null
+  allocatedSubsidy?: Prisma.BigIntNullableFilter<"PortSalesReport"> | bigint | number | null
+  allocatedSubsidyNote?: Prisma.StringNullableFilter<"PortSalesReport"> | string | null
   quotaSnapshotReady?: Prisma.BoolFilter<"PortSalesReport"> | boolean
   reportYear?: Prisma.IntFilter<"PortSalesReport"> | number
   reportMonth?: Prisma.IntFilter<"PortSalesReport"> | number
@@ -1186,6 +1320,10 @@ export type PortSalesReportCreateWithoutFileInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1213,6 +1351,10 @@ export type PortSalesReportUncheckedCreateWithoutFileInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1266,6 +1408,10 @@ export type PortSalesReportCreateWithoutTicketsInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1294,6 +1440,10 @@ export type PortSalesReportUncheckedCreateWithoutTicketsInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1336,6 +1486,10 @@ export type PortSalesReportUpdateWithoutTicketsInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1364,6 +1518,10 @@ export type PortSalesReportUncheckedUpdateWithoutTicketsInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1390,6 +1548,10 @@ export type PortSalesReportCreateWithoutWeeklyQuotasInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1418,6 +1580,10 @@ export type PortSalesReportUncheckedCreateWithoutWeeklyQuotasInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1460,6 +1626,10 @@ export type PortSalesReportUpdateWithoutWeeklyQuotasInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1488,6 +1658,10 @@ export type PortSalesReportUncheckedUpdateWithoutWeeklyQuotasInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1514,6 +1688,10 @@ export type PortSalesReportCreateWithoutPersonalQuotasInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1542,6 +1720,10 @@ export type PortSalesReportUncheckedCreateWithoutPersonalQuotasInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1584,6 +1766,10 @@ export type PortSalesReportUpdateWithoutPersonalQuotasInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1612,6 +1798,10 @@ export type PortSalesReportUncheckedUpdateWithoutPersonalQuotasInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1639,6 +1829,10 @@ export type PortSalesReportCreateManyCreatedByInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1663,6 +1857,10 @@ export type PortSalesReportCreateManyApprovedByInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1686,6 +1884,10 @@ export type PortSalesReportUpdateWithoutCreatedByInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1714,6 +1916,10 @@ export type PortSalesReportUncheckedUpdateWithoutCreatedByInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1741,6 +1947,10 @@ export type PortSalesReportUncheckedUpdateManyWithoutCreatedByInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1764,6 +1974,10 @@ export type PortSalesReportUpdateWithoutApprovedByInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1792,6 +2006,10 @@ export type PortSalesReportUncheckedUpdateWithoutApprovedByInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1819,6 +2037,10 @@ export type PortSalesReportUncheckedUpdateManyWithoutApprovedByInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1842,6 +2064,10 @@ export type PortSalesReportCreateManyFileInput = {
   validQeshmondiCount?: number
   invalidQeshmondiCount?: number
   weeklyQuotaExcessCount?: number
+  invalidQeshmondiSubsidy?: number | null
+  weeklyQuotaExcessSubsidy?: number | null
+  allocatedSubsidy?: bigint | number | null
+  allocatedSubsidyNote?: string | null
   quotaSnapshotReady?: boolean
   reportYear: number
   reportMonth: number
@@ -1866,6 +2092,10 @@ export type PortSalesReportUpdateWithoutFileInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1893,6 +2123,10 @@ export type PortSalesReportUncheckedUpdateWithoutFileInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1920,6 +2154,10 @@ export type PortSalesReportUncheckedUpdateManyWithoutFileInput = {
   validQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   invalidQeshmondiCount?: Prisma.IntFieldUpdateOperationsInput | number
   weeklyQuotaExcessCount?: Prisma.IntFieldUpdateOperationsInput | number
+  invalidQeshmondiSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  weeklyQuotaExcessSubsidy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  allocatedSubsidy?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  allocatedSubsidyNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quotaSnapshotReady?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reportYear?: Prisma.IntFieldUpdateOperationsInput | number
   reportMonth?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1994,6 +2232,10 @@ export type PortSalesReportSelect<ExtArgs extends runtime.Types.Extensions.Inter
   validQeshmondiCount?: boolean
   invalidQeshmondiCount?: boolean
   weeklyQuotaExcessCount?: boolean
+  invalidQeshmondiSubsidy?: boolean
+  weeklyQuotaExcessSubsidy?: boolean
+  allocatedSubsidy?: boolean
+  allocatedSubsidyNote?: boolean
   quotaSnapshotReady?: boolean
   reportYear?: boolean
   reportMonth?: boolean
@@ -2026,6 +2268,10 @@ export type PortSalesReportSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   validQeshmondiCount?: boolean
   invalidQeshmondiCount?: boolean
   weeklyQuotaExcessCount?: boolean
+  invalidQeshmondiSubsidy?: boolean
+  weeklyQuotaExcessSubsidy?: boolean
+  allocatedSubsidy?: boolean
+  allocatedSubsidyNote?: boolean
   quotaSnapshotReady?: boolean
   reportYear?: boolean
   reportMonth?: boolean
@@ -2054,6 +2300,10 @@ export type PortSalesReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   validQeshmondiCount?: boolean
   invalidQeshmondiCount?: boolean
   weeklyQuotaExcessCount?: boolean
+  invalidQeshmondiSubsidy?: boolean
+  weeklyQuotaExcessSubsidy?: boolean
+  allocatedSubsidy?: boolean
+  allocatedSubsidyNote?: boolean
   quotaSnapshotReady?: boolean
   reportYear?: boolean
   reportMonth?: boolean
@@ -2082,6 +2332,10 @@ export type PortSalesReportSelectScalar = {
   validQeshmondiCount?: boolean
   invalidQeshmondiCount?: boolean
   weeklyQuotaExcessCount?: boolean
+  invalidQeshmondiSubsidy?: boolean
+  weeklyQuotaExcessSubsidy?: boolean
+  allocatedSubsidy?: boolean
+  allocatedSubsidyNote?: boolean
   quotaSnapshotReady?: boolean
   reportYear?: boolean
   reportMonth?: boolean
@@ -2094,7 +2348,7 @@ export type PortSalesReportSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PortSalesReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportDate" | "origin" | "destination" | "fileId" | "originalFileName" | "recordCount" | "uniqueNationalIdCount" | "nationalIdPrefixCount" | "validQeshmondiCount" | "invalidQeshmondiCount" | "weeklyQuotaExcessCount" | "quotaSnapshotReady" | "reportYear" | "reportMonth" | "approvalStatus" | "verifiedAt" | "approvedAt" | "approvedById" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["portSalesReport"]>
+export type PortSalesReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportDate" | "origin" | "destination" | "fileId" | "originalFileName" | "recordCount" | "uniqueNationalIdCount" | "nationalIdPrefixCount" | "validQeshmondiCount" | "invalidQeshmondiCount" | "weeklyQuotaExcessCount" | "invalidQeshmondiSubsidy" | "weeklyQuotaExcessSubsidy" | "allocatedSubsidy" | "allocatedSubsidyNote" | "quotaSnapshotReady" | "reportYear" | "reportMonth" | "approvalStatus" | "verifiedAt" | "approvedAt" | "approvedById" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["portSalesReport"]>
 export type PortSalesReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   file?: boolean | Prisma.StoredFileDefaultArgs<ExtArgs>
   approvedBy?: boolean | Prisma.PortSalesReport$approvedByArgs<ExtArgs>
@@ -2138,6 +2392,10 @@ export type $PortSalesReportPayload<ExtArgs extends runtime.Types.Extensions.Int
     validQeshmondiCount: number
     invalidQeshmondiCount: number
     weeklyQuotaExcessCount: number
+    invalidQeshmondiSubsidy: number | null
+    weeklyQuotaExcessSubsidy: number | null
+    allocatedSubsidy: bigint | null
+    allocatedSubsidyNote: string | null
     quotaSnapshotReady: boolean
     reportYear: number
     reportMonth: number
@@ -2589,6 +2847,10 @@ export interface PortSalesReportFieldRefs {
   readonly validQeshmondiCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
   readonly invalidQeshmondiCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
   readonly weeklyQuotaExcessCount: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly invalidQeshmondiSubsidy: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly weeklyQuotaExcessSubsidy: Prisma.FieldRef<"PortSalesReport", 'Int'>
+  readonly allocatedSubsidy: Prisma.FieldRef<"PortSalesReport", 'BigInt'>
+  readonly allocatedSubsidyNote: Prisma.FieldRef<"PortSalesReport", 'String'>
   readonly quotaSnapshotReady: Prisma.FieldRef<"PortSalesReport", 'Boolean'>
   readonly reportYear: Prisma.FieldRef<"PortSalesReport", 'Int'>
   readonly reportMonth: Prisma.FieldRef<"PortSalesReport", 'Int'>

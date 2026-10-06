@@ -17,9 +17,11 @@ import type { Response } from 'express';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CreatePortSalesReportDto } from './dto/create-port-sales-report.dto';
 import { FindPortSalesReportsQueryDto } from './dto/find-port-sales-reports-query.dto';
+import { MySubsidiesQueryDto } from './dto/my-subsidies-query.dto';
 import { ExportPortTicketSalesQueryDto } from './dto/export-port-ticket-sales-query.dto';
 import { FindPortTicketQuotaQueryDto } from './dto/find-port-ticket-quota-query.dto';
 import { FindPortTicketSalesQueryDto } from './dto/find-port-ticket-sales-query.dto';
+import { AllocatePortSalesSubsidyDto } from './dto/allocate-port-sales-subsidy.dto';
 import { UpdatePortSalesReportDto } from './dto/update-port-sales-report.dto';
 import { MAX_PORT_SALES_EXCEL_BYTES } from './port-sales.constants';
 import {
@@ -50,6 +52,19 @@ export class PortSalesReportsController {
     @Query() query: FindPortSalesReportsQueryDto,
   ) {
     return this.reports.findAll(user, query);
+  }
+
+  @Get('mine/subsidy-users')
+  subsidyUsers(@CurrentUser() user: PortSalesActor | undefined) {
+    return this.reports.subsidyUsers(user);
+  }
+
+  @Get('mine/subsidies')
+  mySubsidies(
+    @CurrentUser() user: PortSalesActor | undefined,
+    @Query() query: MySubsidiesQueryDto,
+  ) {
+    return this.reports.mySubsidies(user, query.year, query.userId, query.month);
   }
 
   @Post()
@@ -109,6 +124,15 @@ export class PortSalesReportsController {
   @Post(':id/verify-qeshmondi')
   verifyQeshmondi(@CurrentUser() user: PortSalesActor | undefined, @Param('id') id: string) {
     return this.reports.verifyQeshmondi(user, id);
+  }
+
+  @Patch(':id/allocated-subsidy')
+  allocateSubsidy(
+    @CurrentUser() user: PortSalesActor | undefined,
+    @Param('id') id: string,
+    @Body() dto: AllocatePortSalesSubsidyDto,
+  ) {
+    return this.reports.allocateSubsidy(user, id, dto.amount, dto.note);
   }
 
   @Post(':id/approve')

@@ -18,6 +18,7 @@ import {
   parseIsoDate,
   startOfIranWeekIso,
   toIsoDateOnly,
+  todayIsoDateTehran,
   toTehranIsoDateOnly,
 } from '../common/iso-date';
 import { toLatinDigits } from '../common/national-id';
@@ -230,6 +231,10 @@ const reportSelect = {
   validQeshmondiCount: true,
   invalidQeshmondiCount: true,
   weeklyQuotaExcessCount: true,
+  invalidQeshmondiSubsidy: true,
+  weeklyQuotaExcessSubsidy: true,
+  allocatedSubsidy: true,
+  allocatedSubsidyNote: true,
   quotaSnapshotReady: true,
   reportYear: true,
   reportMonth: true,
@@ -282,10 +287,13 @@ function serializeReport<
     verifiedAt?: Date | null;
     originalFileName?: string;
     file?: { originalName?: string | null } | null;
+    allocatedSubsidy?: bigint | number | null;
   },
 >(item: T) {
   return {
     ...item,
+    allocatedSubsidy:
+      item.allocatedSubsidy == null ? null : Number(item.allocatedSubsidy),
     approvedAt: item.approvedAt instanceof Date ? item.approvedAt.toISOString() : (item.approvedAt ?? null),
     verifiedAt: item.verifiedAt instanceof Date ? item.verifiedAt.toISOString() : (item.verifiedAt ?? null),
     originalFileName:
@@ -527,6 +535,10 @@ function jalaliParts(iso: string) {
   return gregorianToJalali(year, month, day);
 }
 
+function currentJalaliParts() {
+  return jalaliParts(todayIsoDateTehran());
+}
+
 function reportMonthKey(iso: string) {
   const parts = jalaliParts(iso);
   return { reportYear: parts.year, reportMonth: parts.month };
@@ -669,7 +681,7 @@ export class PortSalesReportsService {
         orderBy,
         select: reportSelect,
       });
-      return items.map(serializeReport);
+      return this.withIndividualSubsidy(items.map(serializeReport));
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
@@ -682,7 +694,184 @@ export class PortSalesReportsService {
       }),
       this.prisma.portSalesReport.count({ where }),
     ]);
-    return paginatedResult(items.map(serializeReport), total, page, pageSize);
+    return paginatedResult(
+      await this.withIndividualSubsidy(items.map(serializeReport)),
+      total,
+      page,
+      pageSize,
+    );
+  }
+
+  /** یارانهٔ فردی تعرفهٔ سال گزارش را به هر ردیف فهرست وصل می‌کند. */
+  private async withIndividualSubsidy<T extends { reportYear: number }>(items: T[]) {
+    const years = [...new Set(items.map((item) => item.reportYear))];
+    const tariffs = years.length
+      ? await this.prisma.ticketTariff.findMany({
+          where: { year: { in: years } },
+          select: { year: true, individualSubsidy: true },
+        })
+      : [];
+    const subsidyByYear = new Map(tariffs.map((tariff) => [tariff.year, tariff.individualSubsidy]));
+    return items.map((item) => ({
+      ...item,
+      tariffYear: item.reportYear,
+      individualSubsidy: subsidyByYear.get(item.reportYear) ?? null,
+    }));
+  }
+
+  /** کاربرانی که گزارش بررسی‌شده دارند؛ فقط مدیریت و مدیر ماژول درگاه. */
+  async subsidyUsers(actor: PortSalesActor | undefined) {
+    assertManager(actor);
+    return this.prisma.user.findMany({
+      where: { portSalesReports: { some: { verifiedAt: { not: null } } } },
+      select: { id: true, fullName: true },
+      orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
+    });
+  }
+
+  /**
+   * یارانهٔ گزارش‌های بررسی‌شده به تفکیک ماه جلالی.
+   * کاربر عادی فقط گزارش خودش را می‌بیند. مدیریت و مدیر ماژول درگاه
+   * با `userId` یک کاربر و بدون آن جمع همه کاربران را می‌بینند.
+   * سال و ماه فقط جمع‌ها و نمودار را محدود می‌کنند؛ آخرین یارانه مستقل از این دو است.
+   */
+  async mySubsidies(
+    actor: PortSalesActor | undefined,
+    year?: number,
+    userId?: string,
+    month?: number,
+  ) {
+    const current = requireActor(actor);
+    const manager = canSeeAllPortSalesReports(current);
+    const createdById = manager ? userId : current.id;
+    const reports = await this.prisma.portSalesReport.findMany({
+      where: {
+        verifiedAt: { not: null },
+        ...(createdById ? { createdById } : {}),
+      },
+      select: {
+        reportYear: true,
+        reportMonth: true,
+        validQeshmondiCount: true,
+        invalidQeshmondiCount: true,
+        weeklyQuotaExcessCount: true,
+        invalidQeshmondiSubsidy: true,
+        weeklyQuotaExcessSubsidy: true,
+        allocatedSubsidy: true,
+      },
+      orderBy: [{ reportYear: 'asc' }, { reportMonth: 'asc' }],
+    });
+    const years = [...new Set(reports.map((item) => item.reportYear))].sort((a, b) => b - a);
+    const tariffs = years.length
+      ? await this.prisma.ticketTariff.findMany({
+          where: { year: { in: years } },
+          select: { year: true, individualSubsidy: true },
+        })
+      : [];
+    const rateByYear = new Map(tariffs.map((item) => [item.year, item.individualSubsidy]));
+    const byKey = new Map<
+      string,
+      {
+        year: number;
+        month: number;
+        received: number;
+        allocated: number;
+        count: number;
+        invalidQeshmondi: number;
+        weeklyExcess: number;
+        invalidTotal: number;
+      }
+    >();
+    for (const report of reports) {
+      const rate = rateByYear.get(report.reportYear) ?? 0;
+      const invalidQeshmondi =
+        report.invalidQeshmondiSubsidy ?? report.invalidQeshmondiCount * rate;
+      const weeklyExcess =
+        report.weeklyQuotaExcessSubsidy ?? report.weeklyQuotaExcessCount * rate;
+      const key = `${report.reportYear}-${report.reportMonth}`;
+      const currentMonth = byKey.get(key);
+      const received = report.validQeshmondiCount * rate;
+      const allocated =
+        report.allocatedSubsidy != null ? Number(report.allocatedSubsidy) : received;
+      byKey.set(key, {
+        year: report.reportYear,
+        month: report.reportMonth,
+        received: (currentMonth?.received ?? 0) + received,
+        allocated: (currentMonth?.allocated ?? 0) + allocated,
+        count: (currentMonth?.count ?? 0) + 1,
+        invalidQeshmondi: (currentMonth?.invalidQeshmondi ?? 0) + invalidQeshmondi,
+        weeklyExcess: (currentMonth?.weeklyExcess ?? 0) + weeklyExcess,
+        invalidTotal: (currentMonth?.invalidTotal ?? 0) + invalidQeshmondi + weeklyExcess,
+      });
+    }
+    const ordered = [...byKey.values()].sort((a, b) => a.year - b.year || a.month - b.month);
+    const withChange = (item: (typeof ordered)[number], reported: boolean) => {
+      const previousMonth = item.month === 1 ? 12 : item.month - 1;
+      const previousYear = item.month === 1 ? item.year - 1 : item.year;
+      const previous = byKey.get(`${previousYear}-${previousMonth}`);
+      const previousAllocated = previous?.allocated;
+      const changeAmount =
+        previousAllocated == null ? null : item.allocated - previousAllocated;
+      const changePercent =
+        previousAllocated == null || previousAllocated === 0
+          ? null
+          : Math.round(((item.allocated - previousAllocated) / previousAllocated) * 1000) / 10;
+      return { ...item, reported, changeAmount, changePercent };
+    };
+    const latest = ordered.length ? ordered[ordered.length - 1] : null;
+    const matched = ordered.filter(
+      (item) => (year == null || item.year === year) && (month == null || item.month === month),
+    );
+    const totals = matched.reduce(
+      (sum, item) => ({
+        received: sum.received + item.received,
+        invalidQeshmondi: sum.invalidQeshmondi + item.invalidQeshmondi,
+        weeklyExcess: sum.weeklyExcess + item.weeklyExcess,
+      }),
+      { received: 0, invalidQeshmondi: 0, weeklyExcess: 0 },
+    );
+    const chartSpan =
+      year != null && month == null
+        ? Array.from({ length: 12 }, (_, index) => {
+            const itemMonth = index + 1;
+            return (
+              byKey.get(`${year}-${itemMonth}`) ?? {
+                year,
+                month: itemMonth,
+                received: 0,
+                allocated: 0,
+                count: 0,
+                invalidQeshmondi: 0,
+                weeklyExcess: 0,
+                invalidTotal: 0,
+              }
+            );
+          })
+        : matched;
+    const today = currentJalaliParts();
+    const jalaliYear = today.year;
+    return {
+      years,
+      count: reports.length,
+      latest: latest
+        ? { amount: latest.received, year: latest.year, month: latest.month }
+        : null,
+      totals,
+      currentYear: jalaliYear,
+      currentMonth: today.month,
+      yearMonths: Array.from({ length: today.month }, (_, index) => {
+        const itemMonth = index + 1;
+        const item = byKey.get(`${jalaliYear}-${itemMonth}`);
+        return {
+          month: itemMonth,
+          count: item?.count ?? 0,
+          allocated: item?.allocated ?? 0,
+        };
+      }),
+      months: chartSpan.map((item) =>
+        withChange(item, byKey.has(`${item.year}-${item.month}`)),
+      ),
+    };
   }
 
   async findOne(actor: PortSalesActor | undefined, id: string) {
@@ -1156,9 +1345,6 @@ export class PortSalesReportsService {
     if (!report) {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
-    if (report.approvalStatus === PortSalesReportApprovalStatus.APPROVED) {
-      throw new BadRequestException(APPROVED_LOCK_MESSAGE);
-    }
     await this.enqueueQuotaWork(id, () => this.writeQeshmondiVerification(manager, id));
     return this.findOne(manager, id);
   }
@@ -1203,6 +1389,34 @@ export class PortSalesReportsService {
         approvalStatus: PortSalesReportApprovalStatus.DRAFT,
         approvedAt: null,
         approvedById: null,
+      },
+    });
+    return this.findOne(manager, id);
+  }
+
+  /** مبلغی که مدیریت تخصیص می‌دهد. تا قبل از ثبت، برابر یارانهٔ معتبر می‌ماند. */
+  async allocateSubsidy(
+    actor: PortSalesActor | undefined,
+    id: string,
+    amount: number,
+    note?: string | null,
+  ) {
+    const manager = assertManager(actor);
+    const report = await this.prisma.portSalesReport.findFirst({
+      where: { id, ...reportScope(manager) },
+      select: { id: true, verifiedAt: true },
+    });
+    if (!report) {
+      throw new NotFoundException('گزارش فروش بنادر یافت نشد');
+    }
+    if (!report.verifiedAt) {
+      throw new BadRequestException('ابتدا بررسی صحت قشموندی را انجام دهید');
+    }
+    await this.prisma.portSalesReport.update({
+      where: { id },
+      data: {
+        allocatedSubsidy: BigInt(amount),
+        allocatedSubsidyNote: note ?? null,
       },
     });
     return this.findOne(manager, id);
@@ -1309,9 +1523,7 @@ export class PortSalesReportsService {
     if (!current) {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
-    if (current.approvalStatus === PortSalesReportApprovalStatus.APPROVED) {
-      throw new BadRequestException(APPROVED_LOCK_MESSAGE);
-    }
+    this.assertMutable(actor, current.approvalStatus);
     assertDistinctPorts(dto.origin ?? current.origin, dto.destination ?? current.destination);
     const dateChanged = Boolean(
       dto.reportDate && toIsoDateOnly(current.reportDate) !== dto.reportDate,
@@ -1357,6 +1569,10 @@ export class PortSalesReportsService {
             weeklyQuotaExcessCount: 0,
             quotaSnapshotReady: false,
             verifiedAt: null,
+            invalidQeshmondiSubsidy: null,
+            weeklyQuotaExcessSubsidy: null,
+            allocatedSubsidy: null,
+            allocatedSubsidyNote: null,
           },
           select: reportSelect,
         });
@@ -1374,9 +1590,7 @@ export class PortSalesReportsService {
     if (!item) {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
-    if (item.approvalStatus === PortSalesReportApprovalStatus.APPROVED) {
-      throw new BadRequestException(APPROVED_LOCK_MESSAGE);
-    }
+    this.assertMutable(actor, item.approvalStatus);
     await this.enqueueQuotaWork(item.id, async () => {
       await this.prisma.$transaction(async (tx) => {
         await tx.portSalesReport.delete({ where: { id: item.id } });
@@ -1487,6 +1701,7 @@ export class PortSalesReportsService {
     const weekly = aggregateWeeklyQuota(reportIso, tickets, quotaOf);
     const personal = personalQuotaFromWeekly(weekly);
     const weeklyExcess = weekly.reduce((sum, row) => sum + row.unauthorized, 0);
+    const subsidy = counts?.markVerified ? await this.individualSubsidyForIso(reportIso) : null;
     const weeklyRows = weekly.filter((row) => row.unauthorized > 0 && row.weekStart);
     const personalRows = personal.filter((row) => row.unauthorized > 0);
     const timeout = Math.min(
@@ -1551,6 +1766,16 @@ export class PortSalesReportsService {
             verifiedAt: counts?.markVerified ? new Date() : undefined,
             validQeshmondiCount: counts?.validQeshmondiCount,
             invalidQeshmondiCount: counts?.invalidQeshmondiCount,
+            invalidQeshmondiSubsidy: counts?.markVerified
+              ? subsidy == null
+                ? null
+                : (counts.invalidQeshmondiCount ?? 0) * subsidy
+              : undefined,
+            weeklyQuotaExcessSubsidy: counts?.markVerified
+              ? subsidy == null
+                ? null
+                : weeklyExcess * subsidy
+              : undefined,
           },
         });
       },
@@ -1684,6 +1909,27 @@ export class PortSalesReportsService {
         amount: item.amount ?? '',
       })),
     });
+  }
+
+  /** بعد از تأیید فقط مدیریت و مدیر ماژول می‌توانند ویرایش یا حذف کنند. */
+  private assertMutable(
+    actor: PortSalesActor | undefined,
+    status: PortSalesReportApprovalStatus,
+  ) {
+    if (status !== PortSalesReportApprovalStatus.APPROVED) return;
+    const current = requireActor(actor);
+    if (!canSeeAllPortSalesReports(current)) {
+      throw new BadRequestException(APPROVED_LOCK_MESSAGE);
+    }
+  }
+
+  private async individualSubsidyForIso(reportIso: string | null) {
+    if (!reportIso) return null;
+    const tariff = await this.prisma.ticketTariff.findUnique({
+      where: { year: jalaliParts(reportIso).year },
+      select: { individualSubsidy: true },
+    });
+    return tariff?.individualSubsidy ?? null;
   }
 
   private async assertOwnerMonthFree(

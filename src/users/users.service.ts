@@ -26,6 +26,7 @@ import {
   ensureEmployeeRole,
 } from '../access/access.constants';
 import { parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
+import { localizedGeoName } from '../common/request-locale';
 import { buildStyledExcelExport } from '../common/excel-export';
 import {
   Prisma,
@@ -38,6 +39,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
 import { joinFullName } from './user-profile.util';
 import { CITY_ID_NONE, FindUsersQueryDto } from './dto/find-users-query.dto';
+import { SearchQeshmondiQueryDto } from './dto/search-qeshmondi-query.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
@@ -78,6 +80,30 @@ type QeshmondiImportJob = {
 };
 
 const geoNameSelect = { id: true, nameFa: true, nameEn: true } as const;
+
+const qeshmondiProfileSelect = {
+  id: true,
+  firstName: true,
+  lastName: true,
+  fullName: true,
+  fatherName: true,
+  nationalId: true,
+  gender: true,
+  birthDate: true,
+  phone: true,
+  photoId: true,
+  occupation: true,
+  isResident: true,
+  passportNumber: true,
+  qeshmondiGroup: true,
+  qeshmondiStartDate: true,
+  qeshmondiEndDate: true,
+  individualTicketQuota: true,
+  province: { select: geoNameSelect },
+  city: { select: geoNameSelect },
+} satisfies Prisma.UserSelect;
+
+const QESHMONDI_SEARCH_LIMIT = 50;
 
 const userSelect = {
   id: true,
@@ -273,6 +299,139 @@ export class UsersService {
       this.prisma.user.count({ where }),
     ]);
     return paginatedResult(items.map(mapUser), total, page, pageSize);
+  }
+
+  async searchQeshmondi(query: SearchQeshmondiQueryDto) {
+    const nationalId = query.nationalId?.trim();
+    const firstName = query.firstName?.trim();
+    const lastName = query.lastName?.trim();
+    if (nationalId) {
+      const normalized = normalizeNationalId(nationalId);
+      if (!normalized) {
+        throw new BadRequestException('کد ملی معتبر نیست');
+      }
+      const rows = await this.prisma.user.findMany({
+        where: { isQeshmondi: true, nationalId: normalized },
+        orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
+        take: QESHMONDI_SEARCH_LIMIT + 1,
+        select: qeshmondiProfileSelect,
+      });
+      return {
+        items: rows.slice(0, QESHMONDI_SEARCH_LIMIT).map(mapQeshmondiProfile),
+        hasMore: rows.length > QESHMONDI_SEARCH_LIMIT,
+      };
+    }
+    if (!firstName || !lastName) {
+      throw new BadRequestException(
+        firstName || lastName
+          ? 'نام و نام خانوادگی را با هم وارد کنید'
+          : 'کد ملی یا نام و نام خانوادگی را وارد کنید',
+      );
+    }
+    const rows = await this.prisma.user.findMany({
+      where: {
+        isQeshmondi: true,
+        firstName: containsInsensitive(firstName),
+        lastName: containsInsensitive(lastName),
+      },
+      orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
+      take: QESHMONDI_SEARCH_LIMIT + 1,
+      select: qeshmondiProfileSelect,
+    });
+    return {
+      items: rows.slice(0, QESHMONDI_SEARCH_LIMIT).map(mapQeshmondiProfile),
+      hasMore: rows.length > QESHMONDI_SEARCH_LIMIT,
+    };
+  }
+
+  async qeshmondiBankSummary() {
+    const total = await this.prisma.user.count({ where: { isQeshmondi: true } });
+    return { total };
+  }
+
+  async exportQeshmondiBank(format: string) {
+    const rows = await this.loadQeshmondiBankRows();
+    if (format === 'json') {
+      const body = JSON.stringify(rows, null, 2);
+      return {
+        buffer: Buffer.from(body, 'utf8'),
+        mimeType: 'application/json; charset=utf-8',
+        fileName: 'قشموندان.json',
+      };
+    }
+    if (format === 'xlsx') {
+      return buildStyledExcelExport({
+        sheetName: 'قشموندان',
+        fileName: 'قشموندان.xlsx',
+        columns: [
+          { header: 'نام', key: 'firstName', width: 18 },
+          { header: 'نام خانوادگی', key: 'lastName', width: 22 },
+          { header: 'نام پدر', key: 'fatherName', width: 18 },
+          { header: 'کد ملی', key: 'nationalId', width: 16 },
+          { header: 'تلفن', key: 'phone', width: 16 },
+          { header: 'جنسیت', key: 'gender', width: 12 },
+          { header: 'تاریخ تولد', key: 'birthDate', width: 16 },
+          { header: 'شغل', key: 'occupation', width: 22 },
+          { header: 'مقیم', key: 'isResident', width: 12 },
+          { header: 'شماره گذرنامه', key: 'passportNumber', width: 18 },
+          { header: 'گروه', key: 'qeshmondiGroup', width: 16 },
+          { header: 'سهمیه هفتگی', key: 'individualTicketQuota', width: 14 },
+          { header: 'تاریخ شروع قشموندی', key: 'qeshmondiStartDate', width: 20 },
+          { header: 'تاریخ پایان قشموندی', key: 'qeshmondiEndDate', width: 20 },
+          { header: 'استان', key: 'province', width: 18 },
+          { header: 'شهر', key: 'city', width: 18 },
+        ],
+        rows: rows.map((row) => ({
+          firstName: row.firstName,
+          lastName: row.lastName,
+          fatherName: row.fatherName ?? '',
+          nationalId: row.nationalId ?? '',
+          phone: row.phone ?? '',
+          gender: qeshmondiGenderLabel(row.gender),
+          birthDate: row.birthDate ?? '',
+          occupation: row.occupation ?? '',
+          isResident: row.isResident ? 'بله' : 'خیر',
+          passportNumber: row.passportNumber ?? '',
+          qeshmondiGroup: row.qeshmondiGroup ?? '',
+          individualTicketQuota: row.individualTicketQuota,
+          qeshmondiStartDate: row.qeshmondiStartDate ?? '',
+          qeshmondiEndDate: row.qeshmondiEndDate ?? '',
+          province: row.province ?? '',
+          city: row.city ?? '',
+        })),
+      });
+    }
+    throw new BadRequestException('قالب فایل معتبر نیست');
+  }
+
+  private async loadQeshmondiBankRows() {
+    const rows = await this.prisma.user.findMany({
+      where: { isQeshmondi: true },
+      orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
+      select: qeshmondiProfileSelect,
+    });
+    return rows.map((row) => {
+      const profile = mapQeshmondiProfile(row);
+      return {
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        fullName: profile.fullName,
+        fatherName: profile.fatherName,
+        nationalId: profile.nationalId,
+        phone: profile.phone,
+        gender: profile.gender,
+        birthDate: profile.birthDate,
+        occupation: profile.occupation,
+        isResident: profile.isResident,
+        passportNumber: profile.passportNumber,
+        qeshmondiGroup: profile.qeshmondiGroup,
+        individualTicketQuota: profile.individualTicketQuota,
+        qeshmondiStartDate: profile.qeshmondiStartDate,
+        qeshmondiEndDate: profile.qeshmondiEndDate,
+        province: profile.province ? localizedGeoName(profile.province) : null,
+        city: profile.city ? localizedGeoName(profile.city) : null,
+      };
+    });
   }
 
   async findOne(id: string) {
@@ -1549,6 +1708,21 @@ function qeshmondiImportErrorText(error: unknown) {
   }
   if (error instanceof Error && error.message.trim()) return error.message;
   return 'به‌روزرسانی اطلاعات انجام نشد';
+}
+
+function mapQeshmondiProfile<
+  T extends {
+    birthDate: Date | null;
+    qeshmondiStartDate: Date | null;
+    qeshmondiEndDate: Date | null;
+  },
+>(row: T) {
+  return {
+    ...row,
+    birthDate: toIsoDateOnly(row.birthDate),
+    qeshmondiStartDate: toIsoDateOnly(row.qeshmondiStartDate),
+    qeshmondiEndDate: toIsoDateOnly(row.qeshmondiEndDate),
+  };
 }
 
 function qeshmondiGenderLabel(gender: UserGender | null) {

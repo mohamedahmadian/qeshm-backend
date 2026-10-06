@@ -813,11 +813,38 @@ export type EnumBoardMinutesAttachmentKindWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumBoardMinutesAttachmentKindFilter<$PrismaModel>
 }
 
+export type BigIntNullableFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+}
+
 export type EnumPortSalesReportApprovalStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.PortSalesReportApprovalStatus | Prisma.EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
   in?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel> | $Enums.PortSalesReportApprovalStatus
+}
+
+export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
 }
 
 export type EnumPortSalesReportApprovalStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1700,11 +1727,38 @@ export type NestedEnumBoardMinutesAttachmentKindWithAggregatesFilter<$PrismaMode
   _max?: Prisma.NestedEnumBoardMinutesAttachmentKindFilter<$PrismaModel>
 }
 
+export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+}
+
 export type NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.PortSalesReportApprovalStatus | Prisma.EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
   in?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.PortSalesReportApprovalStatus[] | Prisma.ListEnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumPortSalesReportApprovalStatusFilter<$PrismaModel> | $Enums.PortSalesReportApprovalStatus
+}
+
+export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
+  in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  notIn?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
+  lt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  lte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gt?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  gte?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+  _sum?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBigIntNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumPortSalesReportApprovalStatusWithAggregatesFilter<$PrismaModel = never> = {

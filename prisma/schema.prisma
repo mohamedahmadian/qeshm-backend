@@ -1317,8 +1317,12 @@ model PortSalesReport {
   nationalIdPrefixCount  Int              @default(0)
   validQeshmondiCount    Int              @default(0)
   invalidQeshmondiCount  Int              @default(0)
-  weeklyQuotaExcessCount Int              @default(0)
-  quotaSnapshotReady     Boolean          @default(false)
+  weeklyQuotaExcessCount     Int              @default(0)
+  invalidQeshmondiSubsidy    Int?
+  weeklyQuotaExcessSubsidy   Int?
+  allocatedSubsidy           BigInt?
+  allocatedSubsidyNote       String?
+  quotaSnapshotReady         Boolean          @default(false)
   reportYear             Int
   reportMonth            Int
   approvalStatus         PortSalesReportApprovalStatus @default(DRAFT)

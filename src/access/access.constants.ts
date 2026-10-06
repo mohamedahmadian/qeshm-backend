@@ -12,6 +12,7 @@ export const CONTRACTOR_PERMISSION_CODES = [
   'stakeholders.progress',
   'stakeholders.correspondence',
   'stakeholders.port-sales-reports',
+  'stakeholders.my-subsidies',
 ] as const;
 
 /** ثبت نظر و پیگیری نظرهای خود؛ بقیهٔ منوهای سینگارد فقط از مدیریت نقش‌ها. */
@@ -49,6 +50,7 @@ export const STAKEHOLDERS_ADMIN_PERMISSION_CODES = [
   'stakeholders.inbox',
   'stakeholders.reports',
   'stakeholders.port-sales-reports',
+  'stakeholders.my-subsidies',
   'stakeholders.ticket-tariffs',
 ] as const;
 
@@ -133,6 +135,9 @@ export async function ensureSystemRoles(
     }
     if (saved.code === CITIZEN_ROLE_CODE) {
       await grantRolePermissions(prisma, saved.id, CITIZEN_PERMISSION_CODES);
+    }
+    if (saved.code === CONTRACTOR_ROLE_CODE) {
+      await grantRolePermissions(prisma, saved.id, ['stakeholders.my-subsidies']);
     }
     if (saved.code === CONTRACTOR_ROLE_CODE && !existing) {
       await prisma.rolePermission.createMany({

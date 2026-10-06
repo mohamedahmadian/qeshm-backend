@@ -53,6 +53,8 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/users/qeshmondi-sync-logs', permissions: ['qeshmondi.sync-logs'] },
   { prefix: '/users/qeshmondi-sync', permissions: ['qeshmondi.update'] },
   { prefix: '/users/qeshmondi-import', permissions: ['qeshmondi.update'] },
+  { prefix: '/users/qeshmondi-inquiry', permissions: ['qeshmondi.inquiry'] },
+  { prefix: '/users/qeshmondi-bank', permissions: ['qeshmondi.inquiry'] },
   { prefix: '/users/qeshmondi-imports', permissions: ['qeshmondi.update'] },
   {
     prefix: '/users',
@@ -144,6 +146,10 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/singard/reports', permissions: ['singard.reports'] },
   { prefix: '/singard/categories', permissions: ['singard.categories'] },
   { prefix: '/singard/feedbacks', permissions: ['singard.inbox'] },
+  {
+    prefix: '/port-sales-reports/mine/subsidies',
+    permissions: ['stakeholders.my-subsidies'],
+  },
   { prefix: '/port-sales-reports', permissions: ['stakeholders.port-sales-reports'] },
   { prefix: '/ticket-tariffs', permissions: ['stakeholders.ticket-tariffs'] },
   {

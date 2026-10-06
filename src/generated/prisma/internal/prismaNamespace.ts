@@ -5700,6 +5700,10 @@ export const PortSalesReportScalarFieldEnum = {
   validQeshmondiCount: 'validQeshmondiCount',
   invalidQeshmondiCount: 'invalidQeshmondiCount',
   weeklyQuotaExcessCount: 'weeklyQuotaExcessCount',
+  invalidQeshmondiSubsidy: 'invalidQeshmondiSubsidy',
+  weeklyQuotaExcessSubsidy: 'weeklyQuotaExcessSubsidy',
+  allocatedSubsidy: 'allocatedSubsidy',
+  allocatedSubsidyNote: 'allocatedSubsidyNote',
   quotaSnapshotReady: 'quotaSnapshotReady',
   reportYear: 'reportYear',
   reportMonth: 'reportMonth',
@@ -6349,6 +6353,20 @@ export type EnumBoardMinutesAttachmentKindFieldRefInput<$PrismaModel> = FieldRef
  * Reference to a field of type 'BoardMinutesAttachmentKind[]'
  */
 export type ListEnumBoardMinutesAttachmentKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMinutesAttachmentKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
     
 
 

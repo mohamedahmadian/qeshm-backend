@@ -16,6 +16,7 @@ import type { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { CheckIdentityDto } from './dto/check-identity.dto';
+import { SearchQeshmondiQueryDto } from './dto/search-qeshmondi-query.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { FindUsersQueryDto } from './dto/find-users-query.dto';
@@ -50,6 +51,29 @@ export class UsersController {
     @CurrentUser() user: { id: string } | undefined,
   ) {
     return this.users.beginQeshmondiImport(file, user?.id);
+  }
+
+  @Get('qeshmondi-inquiry')
+  searchQeshmondi(@Query() query: SearchQeshmondiQueryDto) {
+    return this.users.searchQeshmondi(query);
+  }
+
+  @Get('qeshmondi-bank')
+  qeshmondiBank() {
+    return this.users.qeshmondiBankSummary();
+  }
+
+  @Get('qeshmondi-bank/export')
+  async exportQeshmondiBank(@Query('format') format: string, @Res() res: Response) {
+    const file = await this.users.exportQeshmondiBank(format);
+    const ascii = file.fileName.replace(/[^\w.\-]+/g, '_') || 'qeshmondi.xlsx';
+    res.setHeader('Content-Type', file.mimeType);
+    res.setHeader('Content-Length', String(file.buffer.length));
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(file.fileName)}`,
+    );
+    res.send(file.buffer);
   }
 
   @Get('qeshmondi-imports/:jobId')

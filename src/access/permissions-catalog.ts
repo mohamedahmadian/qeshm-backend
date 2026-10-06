@@ -69,6 +69,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
         nameKey: 'menus.portSalesReports',
       },
       {
+        code: 'stakeholders.my-subsidies',
+        kind: 'MENU',
+        nameKey: 'menus.mySubsidies',
+      },
+      {
         code: 'stakeholders.ticket-tariffs',
         kind: 'MENU',
         nameKey: 'menus.ticketTariffs',
@@ -169,6 +174,7 @@ export const PERMISSION_TREE: PermissionNode[] = [
     kind: 'MODULE',
     nameKey: 'modules.qeshmondi',
     children: [
+      { code: 'qeshmondi.inquiry', kind: 'MENU', nameKey: 'menus.qeshmondiInquiry' },
       { code: 'qeshmondi.citizens', kind: 'MENU', nameKey: 'menus.qeshmondiCitizens' },
       { code: 'qeshmondi.update', kind: 'MENU', nameKey: 'menus.qeshmondiUpdate' },
       { code: 'qeshmondi.sync-logs', kind: 'MENU', nameKey: 'menus.qeshmondiSyncLogs' },
