@@ -109,7 +109,8 @@ export const ModelName = {
   StakeholderCorrespondence: 'StakeholderCorrespondence',
   StakeholderMessage: 'StakeholderMessage',
   StakeholderAttachment: 'StakeholderAttachment',
-  TicketTariff: 'TicketTariff'
+  TicketTariff: 'TicketTariff',
+  Port: 'Port'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1100,6 +1101,24 @@ export const TicketTariffScalarFieldEnum = {
 } as const
 
 export type TicketTariffScalarFieldEnum = (typeof TicketTariffScalarFieldEnum)[keyof typeof TicketTariffScalarFieldEnum]
+
+
+export const PortScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  cityId: 'cityId',
+  cooperativeName: 'cooperativeName',
+  address: 'address',
+  kind: 'kind',
+  managerName: 'managerName',
+  phone: 'phone',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PortScalarFieldEnum = (typeof PortScalarFieldEnum)[keyof typeof PortScalarFieldEnum]
 
 
 export const SortOrder = {

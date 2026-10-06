@@ -22,6 +22,8 @@ import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.d
 import { FindUsersQueryDto } from './dto/find-users-query.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdateUserLocationDto } from './dto/update-user-location.dto';
+import { FindCitizenTrafficQueryDto } from '../port-sales-reports/dto/find-citizen-traffic-query.dto';
+import { PortSalesReportsService } from '../port-sales-reports/port-sales-reports.service';
 import { UsersService } from './users.service';
 
 const excelUpload = FileInterceptor('file', {
@@ -31,7 +33,10 @@ const excelUpload = FileInterceptor('file', {
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly users: UsersService) {}
+  constructor(
+    private readonly users: UsersService,
+    private readonly portSales: PortSalesReportsService,
+  ) {}
 
   @Get()
   findAll(@Query() query: FindUsersQueryDto) {
@@ -58,9 +63,19 @@ export class UsersController {
     return this.users.searchQeshmondi(query);
   }
 
+  @Get('qeshmondi-traffic')
+  qeshmondiTraffic(@Query() query: FindCitizenTrafficQueryDto) {
+    return this.portSales.findCitizenTraffic(query);
+  }
+
   @Get('qeshmondi-bank')
   qeshmondiBank() {
     return this.users.qeshmondiBankSummary();
+  }
+
+  @Get('qeshmondi-analytics')
+  qeshmondiAnalytics() {
+    return this.users.qeshmondiAnalytics();
   }
 
   @Get('qeshmondi-bank/export')

@@ -176,6 +176,7 @@ export const PERMISSION_TREE: PermissionNode[] = [
     children: [
       { code: 'qeshmondi.inquiry', kind: 'MENU', nameKey: 'menus.qeshmondiInquiry' },
       { code: 'qeshmondi.citizens', kind: 'MENU', nameKey: 'menus.qeshmondiCitizens' },
+      { code: 'qeshmondi.analytics', kind: 'MENU', nameKey: 'menus.qeshmondiAnalytics' },
       { code: 'qeshmondi.update', kind: 'MENU', nameKey: 'menus.qeshmondiUpdate' },
       { code: 'qeshmondi.sync-logs', kind: 'MENU', nameKey: 'menus.qeshmondiSyncLogs' },
     ],

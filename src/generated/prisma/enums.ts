@@ -302,3 +302,11 @@ export const StakeholderMessageSide = {
 } as const
 
 export type StakeholderMessageSide = (typeof StakeholderMessageSide)[keyof typeof StakeholderMessageSide]
+
+
+export const PortKind = {
+  INDIVIDUAL: 'INDIVIDUAL',
+  VEHICLE: 'VEHICLE'
+} as const
+
+export type PortKind = (typeof PortKind)[keyof typeof PortKind]

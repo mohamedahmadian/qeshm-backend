@@ -8,10 +8,11 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CreateTicketTariffDto } from './dto/create-ticket-tariff.dto';
 import { FindTicketTariffsQueryDto } from './dto/find-ticket-tariffs-query.dto';
 import { UpdateTicketTariffDto } from './dto/update-ticket-tariff.dto';
-import { TicketTariffsService } from './ticket-tariffs.service';
+import { TicketTariffActor, TicketTariffsService } from './ticket-tariffs.service';
 
 @Controller('ticket-tariffs')
 export class TicketTariffsController {
@@ -23,8 +24,8 @@ export class TicketTariffsController {
   }
 
   @Post()
-  create(@Body() dto: CreateTicketTariffDto) {
-    return this.tariffs.create(dto);
+  create(@CurrentUser() user: TicketTariffActor | undefined, @Body() dto: CreateTicketTariffDto) {
+    return this.tariffs.create(user, dto);
   }
 
   @Get(':id')
@@ -33,12 +34,16 @@ export class TicketTariffsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateTicketTariffDto) {
-    return this.tariffs.update(id, dto);
+  update(
+    @CurrentUser() user: TicketTariffActor | undefined,
+    @Param('id') id: string,
+    @Body() dto: UpdateTicketTariffDto,
+  ) {
+    return this.tariffs.update(user, id, dto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tariffs.remove(id);
+  remove(@CurrentUser() user: TicketTariffActor | undefined, @Param('id') id: string) {
+    return this.tariffs.remove(user, id);
   }
 }

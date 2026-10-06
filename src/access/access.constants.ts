@@ -52,6 +52,7 @@ export const STAKEHOLDERS_ADMIN_PERMISSION_CODES = [
   'stakeholders.port-sales-reports',
   'stakeholders.my-subsidies',
   'stakeholders.ticket-tariffs',
+  'stakeholders.ports',
 ] as const;
 
 export const SYSTEM_ROLES = [

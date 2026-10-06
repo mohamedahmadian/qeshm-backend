@@ -25,8 +25,9 @@ import {
   ensureCitizenRole,
   ensureEmployeeRole,
 } from '../access/access.constants';
-import { parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
-import { localizedGeoName } from '../common/request-locale';
+import { gregorianToJalali } from '../common/jalali-date';
+import { parseIsoDate, parseOptionalIsoDate, todayIsoDateTehran, toIsoDateOnly } from '../common/iso-date';
+import { getRequestLocale, isLtrLocale, localizedGeoName } from '../common/request-locale';
 import { buildStyledExcelExport } from '../common/excel-export';
 import {
   Prisma,
@@ -38,7 +39,11 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
 import { joinFullName } from './user-profile.util';
-import { CITY_ID_NONE, FindUsersQueryDto } from './dto/find-users-query.dto';
+import {
+  CITY_ID_NONE,
+  FindUsersQueryDto,
+  type QeshmondiValidityFilter,
+} from './dto/find-users-query.dto';
 import { SearchQeshmondiQueryDto } from './dto/search-qeshmondi-query.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -209,6 +214,73 @@ function randomTempPassword() {
   return `Aa${Math.random().toString(36).slice(2, 8)}1!`;
 }
 
+type QeshmondiGenderCounts = {
+  male: number;
+  female: number;
+  unknown: number;
+};
+
+function foldQeshmondiGender(
+  rows: { gender: UserGender | null; _count: { _all: number } }[],
+): QeshmondiGenderCounts {
+  const counts: QeshmondiGenderCounts = { male: 0, female: 0, unknown: 0 };
+  for (const row of rows) {
+    const count = row._count._all;
+    if (row.gender === UserGender.MALE) counts.male += count;
+    else if (row.gender === UserGender.FEMALE) counts.female += count;
+    else counts.unknown += count;
+  }
+  return counts;
+}
+
+function foldQeshmondiNamedCounts(rows: { name: string | null; count: number }[]) {
+  const totals = new Map<string, number>();
+  for (const row of rows) {
+    const name = row.name?.trim() ?? '';
+    totals.set(name, (totals.get(name) ?? 0) + row.count);
+  }
+  return [...totals.entries()]
+    .map(([name, count]) => ({ name, count }))
+    .sort(
+      (left, right) =>
+        right.count - left.count || left.name.localeCompare(right.name, 'fa'),
+    );
+}
+
+function foldQeshmondiExpiryYears(rows: { qeshmondiEndDate: Date | null }[]) {
+  const gregorian = isLtrLocale(getRequestLocale());
+  const totals = new Map<number, number>();
+  for (const row of rows) {
+    const iso = toIsoDateOnly(row.qeshmondiEndDate);
+    if (!iso) continue;
+    const [year, month, day] = iso.split('-').map(Number);
+    if (!year || !month || !day) continue;
+    const bucket = gregorian ? year : gregorianToJalali(year, month, day).year;
+    totals.set(bucket, (totals.get(bucket) ?? 0) + 1);
+  }
+  return [...totals.entries()]
+    .map(([year, count]) => ({ year, count }))
+    .sort((left, right) => left.year - right.year);
+}
+
+/** معتبر: پایان نگذشته یا خالی. منقضی‌شده: پایان قبل از امروز (تهران). */
+function qeshmondiValidityWhere(
+  validity?: QeshmondiValidityFilter,
+): Prisma.UserWhereInput {
+  if (!validity) return {};
+  const today = parseIsoDate(todayIsoDateTehran());
+  if (validity === 'expired') {
+    return { qeshmondiEndDate: { lt: today } };
+  }
+  return {
+    AND: [
+      {
+        OR: [{ qeshmondiEndDate: null }, { qeshmondiEndDate: { gte: today } }],
+      },
+    ],
+  };
+}
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -230,6 +302,7 @@ export class UsersService {
       ...(query.employeesOnly ? { orgUnitId: query.orgUnitId ?? { not: null } } : {}),
       ...(query.qeshmondiOnly ? { isQeshmondi: true } : {}),
       ...(query.isResident !== undefined ? { isResident: query.isResident } : {}),
+      ...qeshmondiValidityWhere(query.qeshmondiValidity),
       provinceId: query.provinceId,
       cityId:
         query.cityId === CITY_ID_NONE
@@ -302,38 +375,23 @@ export class UsersService {
   }
 
   async searchQeshmondi(query: SearchQeshmondiQueryDto) {
-    const nationalId = query.nationalId?.trim();
-    const firstName = query.firstName?.trim();
-    const lastName = query.lastName?.trim();
-    if (nationalId) {
-      const normalized = normalizeNationalId(nationalId);
+    const q = query.q?.trim();
+    if (!q) {
+      throw new BadRequestException('کد ملی یا نام و نام خانوادگی را وارد کنید');
+    }
+    const compact = toLatinDigits(q).replace(/\s+/g, '');
+    const where: Prisma.UserWhereInput = { isQeshmondi: true };
+    if (/^\d+$/.test(compact)) {
+      const normalized = normalizeNationalId(compact);
       if (!normalized) {
         throw new BadRequestException('کد ملی معتبر نیست');
       }
-      const rows = await this.prisma.user.findMany({
-        where: { isQeshmondi: true, nationalId: normalized },
-        orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
-        take: QESHMONDI_SEARCH_LIMIT + 1,
-        select: qeshmondiProfileSelect,
-      });
-      return {
-        items: rows.slice(0, QESHMONDI_SEARCH_LIMIT).map(mapQeshmondiProfile),
-        hasMore: rows.length > QESHMONDI_SEARCH_LIMIT,
-      };
-    }
-    if (!firstName || !lastName) {
-      throw new BadRequestException(
-        firstName || lastName
-          ? 'نام و نام خانوادگی را با هم وارد کنید'
-          : 'کد ملی یا نام و نام خانوادگی را وارد کنید',
-      );
+      where.nationalId = normalized;
+    } else {
+      where.fullName = containsInsensitive(q.replace(/\s+/g, ' '));
     }
     const rows = await this.prisma.user.findMany({
-      where: {
-        isQeshmondi: true,
-        firstName: containsInsensitive(firstName),
-        lastName: containsInsensitive(lastName),
-      },
+      where,
       orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
       take: QESHMONDI_SEARCH_LIMIT + 1,
       select: qeshmondiProfileSelect,
@@ -345,8 +403,114 @@ export class UsersService {
   }
 
   async qeshmondiBankSummary() {
-    const total = await this.prisma.user.count({ where: { isQeshmondi: true } });
-    return { total };
+    const today = parseIsoDate(todayIsoDateTehran());
+    const qeshmondi = { isQeshmondi: true } as const;
+    const [total, expired, male, female, lastSync, latestUser] = await Promise.all([
+      this.prisma.user.count({ where: qeshmondi }),
+      this.prisma.user.count({
+        where: { ...qeshmondi, qeshmondiEndDate: { lt: today } },
+      }),
+      this.prisma.user.count({ where: { ...qeshmondi, gender: UserGender.MALE } }),
+      this.prisma.user.count({ where: { ...qeshmondi, gender: UserGender.FEMALE } }),
+      this.prisma.qeshmondiSyncLog.findFirst({
+        where: { status: QeshmondiSyncStatus.DONE },
+        orderBy: [{ finishedAt: 'desc' }, { startedAt: 'desc' }],
+        select: { finishedAt: true },
+      }),
+      this.prisma.user.aggregate({
+        where: qeshmondi,
+        _max: { updatedAt: true },
+      }),
+    ]);
+    const stamps = [lastSync?.finishedAt, latestUser._max.updatedAt].filter(
+      (value): value is Date => value != null,
+    );
+    const lastUpdatedAt = stamps.sort((left, right) => right.getTime() - left.getTime())[0] ?? null;
+    return {
+      total,
+      valid: total - expired,
+      expired,
+      male,
+      female,
+      lastUpdatedAt: lastUpdatedAt ? lastUpdatedAt.toISOString() : null,
+    };
+  }
+
+  async qeshmondiAnalytics() {
+    const today = parseIsoDate(todayIsoDateTehran());
+    const base: Prisma.UserWhereInput = { isQeshmondi: true };
+    const expiredWhere: Prisma.UserWhereInput = {
+      ...base,
+      qeshmondiEndDate: { lt: today },
+    };
+    const validWhere: Prisma.UserWhereInput = {
+      ...base,
+      OR: [{ qeshmondiEndDate: null }, { qeshmondiEndDate: { gte: today } }],
+    };
+    const [
+      total,
+      expired,
+      genderTotal,
+      genderValid,
+      genderExpired,
+      occupations,
+      groups,
+      endDates,
+      missingExpiry,
+    ] = await Promise.all([
+      this.prisma.user.count({ where: base }),
+      this.prisma.user.count({ where: expiredWhere }),
+      this.prisma.user.groupBy({
+        by: ['gender'],
+        where: base,
+        _count: { _all: true },
+      }),
+      this.prisma.user.groupBy({
+        by: ['gender'],
+        where: validWhere,
+        _count: { _all: true },
+      }),
+      this.prisma.user.groupBy({
+        by: ['gender'],
+        where: expiredWhere,
+        _count: { _all: true },
+      }),
+      this.prisma.user.groupBy({
+        by: ['occupation'],
+        where: base,
+        _count: { _all: true },
+      }),
+      this.prisma.user.groupBy({
+        by: ['qeshmondiGroup'],
+        where: base,
+        _count: { _all: true },
+      }),
+      this.prisma.user.findMany({
+        where: { isQeshmondi: true, qeshmondiEndDate: { not: null } },
+        select: { qeshmondiEndDate: true },
+      }),
+      this.prisma.user.count({
+        where: { isQeshmondi: true, qeshmondiEndDate: null },
+      }),
+    ]);
+    return {
+      total,
+      valid: total - expired,
+      expired,
+      gender: {
+        total: foldQeshmondiGender(genderTotal),
+        valid: foldQeshmondiGender(genderValid),
+        expired: foldQeshmondiGender(genderExpired),
+      },
+      byOccupation: foldQeshmondiNamedCounts(
+        occupations.map((row) => ({ name: row.occupation, count: row._count._all })),
+      ),
+      byGroup: foldQeshmondiNamedCounts(
+        groups.map((row) => ({ name: row.qeshmondiGroup, count: row._count._all })),
+      ),
+      byExpiryYear: foldQeshmondiExpiryYears(endDates),
+      missingExpiry,
+    };
   }
 
   async exportQeshmondiBank(format: string) {
@@ -1240,7 +1404,7 @@ export class UsersService {
     return this.update(id, rest);
   }
 
-  /** با تغییر سهمیهٔ بلیط یا کد ملی، سهمیهٔ هفتگی گزارش‌های فروش شامل این شخص دوباره محاسبه شود. */
+  /** با تغییر سهمیهٔ بلیط یا کد ملی، اسنپ‌شات سهمیهٔ گزارش‌های شامل این شخص کهنه می‌شود. محاسبهٔ دوباره فقط با دکمهٔ بررسی همان گزارش است. */
   private async invalidatePortTicketQuotas(
     before: { nationalId: string | null; individualTicketQuota: number },
     after: { nationalId: string | null; individualTicketQuota: number },

@@ -334,3 +334,8 @@ export type StakeholderAttachment = Prisma.StakeholderAttachmentModel
  * 
  */
 export type TicketTariff = Prisma.TicketTariffModel
+/**
+ * Model Port
+ * 
+ */
+export type Port = Prisma.PortModel

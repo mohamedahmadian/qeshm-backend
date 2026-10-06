@@ -455,7 +455,8 @@ export const ModelName = {
   StakeholderCorrespondence: 'StakeholderCorrespondence',
   StakeholderMessage: 'StakeholderMessage',
   StakeholderAttachment: 'StakeholderAttachment',
-  TicketTariff: 'TicketTariff'
+  TicketTariff: 'TicketTariff',
+  Port: 'Port'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -471,7 +472,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4841,6 +4842,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Port: {
+      payload: Prisma.$PortPayload<ExtArgs>
+      fields: Prisma.PortFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PortFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PortFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>
+        }
+        findFirst: {
+          args: Prisma.PortFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PortFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>
+        }
+        findMany: {
+          args: Prisma.PortFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>[]
+        }
+        create: {
+          args: Prisma.PortCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>
+        }
+        createMany: {
+          args: Prisma.PortCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PortCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>[]
+        }
+        delete: {
+          args: Prisma.PortDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>
+        }
+        update: {
+          args: Prisma.PortUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>
+        }
+        deleteMany: {
+          args: Prisma.PortDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PortUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PortUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>[]
+        }
+        upsert: {
+          args: Prisma.PortUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortPayload>
+        }
+        aggregate: {
+          args: Prisma.PortAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePort>
+        }
+        groupBy: {
+          args: Prisma.PortGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PortCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5854,6 +5929,24 @@ export const TicketTariffScalarFieldEnum = {
 export type TicketTariffScalarFieldEnum = (typeof TicketTariffScalarFieldEnum)[keyof typeof TicketTariffScalarFieldEnum]
 
 
+export const PortScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  cityId: 'cityId',
+  cooperativeName: 'cooperativeName',
+  address: 'address',
+  kind: 'kind',
+  managerName: 'managerName',
+  phone: 'phone',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PortScalarFieldEnum = (typeof PortScalarFieldEnum)[keyof typeof PortScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6455,6 +6548,20 @@ export type ListEnumStakeholderMessageSideFieldRefInput<$PrismaModel> = FieldRef
 
 
 /**
+ * Reference to a field of type 'PortKind'
+ */
+export type EnumPortKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortKind'>
+    
+
+
+/**
+ * Reference to a field of type 'PortKind[]'
+ */
+export type ListEnumPortKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortKind[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -6677,6 +6784,7 @@ export type GlobalOmitConfig = {
   stakeholderMessage?: Prisma.StakeholderMessageOmit
   stakeholderAttachment?: Prisma.StakeholderAttachmentOmit
   ticketTariff?: Prisma.TicketTariffOmit
+  port?: Prisma.PortOmit
 }
 
 /* Types for Logging */

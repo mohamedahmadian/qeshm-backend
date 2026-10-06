@@ -21,8 +21,6 @@ export type PortTicketExcelRow = {
   phone: string | null;
   travelDate: string | null;
   travelTime: string | null;
-  origin: string | null;
-  destination: string | null;
   citizenship: string | null;
   amount: number | null;
   seatNumber: string | null;
@@ -152,6 +150,7 @@ const HEADER_ALIASES: Record<string, MappedField> = {
   time: 'travelTime',
   traveltime: 'travelTime',
   departuretime: 'travelTime',
+  // ستون مبدأ/مقصد فایل روی بلیت نمی‌نشیند؛ مسیر از خود گزارش نوشته می‌شود.
   مبدأ: 'origin',
   مبدا: 'origin',
   مبداء: 'origin',
@@ -446,8 +445,6 @@ export async function parsePortTicketExcel(buffer: Buffer): Promise<PortTicketEx
       phone: emptyToNull(toLatinDigits(read('phone').text).replace(/\s+/g, '')),
       travelDate,
       travelTime,
-      origin: emptyToNull(read('origin').text),
-      destination: emptyToNull(read('destination').text),
       citizenship: emptyToNull(read('citizenship').text),
       amount: parseAmount(read('amount').text),
       seatNumber: emptyToNull(read('seatNumber').text),

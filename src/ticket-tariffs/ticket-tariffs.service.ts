@@ -1,9 +1,11 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { STAKEHOLDERS_ADMIN_ROLE_CODE } from '../access/access.constants';
 import { toLatinDigits } from '../common/national-id';
 import { paginatedResult, paginationArgs, wantsPagination } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
@@ -25,6 +27,11 @@ const tariffSelect = {
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.TicketTariffSelect;
+
+export type TicketTariffActor = {
+  isAdmin?: boolean;
+  roleCodes?: string[];
+};
 
 type TariffPrices = {
   year: number;
@@ -86,7 +93,8 @@ export class TicketTariffsService {
     return item;
   }
 
-  async create(dto: CreateTicketTariffDto) {
+  async create(actor: TicketTariffActor | undefined, dto: CreateTicketTariffDto) {
+    assertCanEdit(actor);
     const data = toData(dto);
     try {
       return await this.prisma.ticketTariff.create({
@@ -98,7 +106,8 @@ export class TicketTariffsService {
     }
   }
 
-  async update(id: string, dto: UpdateTicketTariffDto) {
+  async update(actor: TicketTariffActor | undefined, id: string, dto: UpdateTicketTariffDto) {
+    assertCanEdit(actor);
     const current = await this.findOne(id);
     const data = toData({
       year: dto.year ?? current.year,
@@ -119,7 +128,8 @@ export class TicketTariffsService {
     }
   }
 
-  async remove(id: string) {
+  async remove(actor: TicketTariffActor | undefined, id: string) {
+    assertCanEdit(actor);
     await this.findOne(id);
     await this.prisma.ticketTariff.delete({ where: { id } });
     return { ok: true };
@@ -131,6 +141,11 @@ export class TicketTariffsService {
     }
     throw error;
   }
+}
+
+function assertCanEdit(actor?: TicketTariffActor) {
+  if (actor?.isAdmin || actor?.roleCodes?.includes(STAKEHOLDERS_ADMIN_ROLE_CODE)) return;
+  throw new ForbiddenException('فقط مدیریت و مدیر ماژول درگاه می‌توانند تعرفه را ویرایش کنند');
 }
 
 function toData(prices: TariffPrices) {

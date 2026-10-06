@@ -4,13 +4,12 @@ import {
   HttpException,
   ForbiddenException,
   Injectable,
-  Logger,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { STAKEHOLDERS_ADMIN_ROLE_CODE } from '../access/access.constants';
 import { buildStyledExcelExport } from '../common/excel-export';
-import { gregorianToJalali } from '../common/jalali-date';
+import { gregorianToJalali, jalaliPartsToIso } from '../common/jalali-date';
 import { getRequestLocale } from '../common/request-locale';
 import { decodeUploadedFileName } from '../common/upload-filename';
 import {
@@ -41,6 +40,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreatePortSalesReportDto } from './dto/create-port-sales-report.dto';
 import { ExportPortTicketSalesQueryDto } from './dto/export-port-ticket-sales-query.dto';
 import { FindPortSalesReportsQueryDto } from './dto/find-port-sales-reports-query.dto';
+import { FindCitizenTrafficQueryDto } from './dto/find-citizen-traffic-query.dto';
 import { FindPortTicketQuotaQueryDto } from './dto/find-port-ticket-quota-query.dto';
 import { FindPortTicketSalesQueryDto } from './dto/find-port-ticket-sales-query.dto';
 import { UpdatePortSalesReportDto } from './dto/update-port-sales-report.dto';
@@ -85,6 +85,14 @@ type QuotaRow = {
   status: QuotaStatus;
 };
 
+type CitizenQuotaItem = QuotaRow & {
+  amount: number;
+  reportId: string;
+  reportDate: string | null;
+  origin: string | null;
+  destination: string | null;
+};
+
 const TICKET_INSERT_CHUNK = 400;
 const IMPORT_JOB_TTL_MS = 30 * 60 * 1000;
 
@@ -109,8 +117,8 @@ const APPROVED_LOCK_MESSAGE = 'گزارش تأییدشده قابل ویرایش
 
 function monthTakenMessage(approved: boolean) {
   return approved
-    ? 'گزارش این ماه تأیید شده است و بارگذاری گزارش دیگری ممکن نیست'
-    : 'برای این ماه قبلاً گزارش ثبت کرده‌اید. تا پیش از تأیید می‌توانید آن را حذف و گزارش جدید بارگذاری کنید';
+    ? 'گزارش این ماه برای همین مبدأ و مقصد تأیید شده است و بارگذاری گزارش دیگری ممکن نیست'
+    : 'برای این ماه و همین مبدأ و مقصد قبلاً گزارش ثبت کرده‌اید. تا پیش از تأیید می‌توانید آن را حذف و گزارش جدید بارگذاری کنید';
 }
 
 function assertManager(actor?: PortSalesActor) {
@@ -177,6 +185,7 @@ function chunkItems<T>(items: T[], size: number): T[][] {
 function toTicketCreateData(
   reportId: string,
   row: PortTicketExcelRow,
+  route: { origin: string; destination: string },
 ): Prisma.PortTicketSaleCreateManyInput {
   return {
     reportId,
@@ -193,8 +202,8 @@ function toTicketCreateData(
     phone: row.phone,
     travelDate: row.travelDate ? parseIsoDate(row.travelDate) : null,
     travelTime: row.travelTime,
-    origin: row.origin,
-    destination: row.destination,
+    origin: route.origin,
+    destination: route.destination,
     citizenship: row.citizenship,
     amount: row.amount,
     seatNumber: row.seatNumber,
@@ -501,6 +510,50 @@ function weeklyQuotaOrderBy(
   }
 }
 
+function compareCitizenQuota(
+  left: CitizenQuotaItem,
+  right: CitizenQuotaItem,
+  sortBy: string,
+  sortDir: 'asc' | 'desc',
+) {
+  const sign = sortDir === 'desc' ? -1 : 1;
+  const text = (a: string, b: string) => a.localeCompare(b) * sign;
+  const num = (a: number, b: number) => (a - b) * sign;
+  let diff = 0;
+  switch (sortBy) {
+    case 'week':
+      diff = text(left.weekStart ?? '', right.weekStart ?? '');
+      break;
+    case 'report':
+      diff = text(left.reportDate ?? '', right.reportDate ?? '');
+      break;
+    case 'nationalId':
+      diff = text(left.nationalId, right.nationalId);
+      break;
+    case 'total':
+      diff = num(left.total, right.total);
+      break;
+    case 'allowed':
+      diff = num(left.allowed, right.allowed);
+      break;
+    case 'amount':
+      diff = num(left.amount, right.amount);
+      break;
+    case 'status':
+      diff = text(left.status, right.status);
+      break;
+    default:
+      diff = num(left.unauthorized, right.unauthorized);
+      break;
+  }
+  if (diff !== 0) return diff;
+  return (
+    (left.reportDate ?? '').localeCompare(right.reportDate ?? '') ||
+    (left.weekStart ?? '').localeCompare(right.weekStart ?? '') ||
+    left.reportId.localeCompare(right.reportId)
+  );
+}
+
 function personalQuotaOrderBy(
   sortBy: string | undefined,
   sortDir: 'asc' | 'desc' | undefined,
@@ -542,6 +595,15 @@ function currentJalaliParts() {
 function reportMonthKey(iso: string) {
   const parts = jalaliParts(iso);
   return { reportYear: parts.year, reportMonth: parts.month };
+}
+
+function firstOfReportMonth(iso: string) {
+  const parts = jalaliParts(iso);
+  const first = jalaliPartsToIso(parts.year, parts.month, 1);
+  if (!first) {
+    throw new BadRequestException('تاریخ گزارش فروش معتبر نیست');
+  }
+  return first;
 }
 
 function formatWeekLabel(startIso: string, endIso: string) {
@@ -608,7 +670,6 @@ function invalidQeshmondiReason(
 
 @Injectable()
 export class PortSalesReportsService {
-  private readonly logger = new Logger(PortSalesReportsService.name);
   private readonly importJobs = new Map<string, ImportJob>();
   /** زنجیرهٔ ساخت سهمیه برای هر گزارش تا دو درخواست همزمان جدول بلیط را دو بار نخوانند. */
   private readonly quotaSnapshotJobs = new Map<string, Promise<void>>();
@@ -628,24 +689,6 @@ export class PortSalesReportsService {
       });
     this.quotaSnapshotJobs.set(reportId, tracked);
     return tracked;
-  }
-
-  /** ساخت سهمیه را بدون منتظر ماندن درخواست شروع می‌کند. */
-  private scheduleQuotaSnapshot(reportId: string) {
-    if (this.quotaSnapshotJobs.has(reportId)) return;
-    void this.enqueueQuotaWork(reportId, () => this.ensureQuotaSnapshot(reportId)).catch(
-      (error: unknown) => {
-        const detail = error instanceof Error ? error.stack : String(error);
-        this.logger.error(`ساخت اسنپ‌شات سهمیه گزارش ${reportId} ناموفق بود`, detail);
-      },
-    );
-  }
-
-  /** اگر سهمیه آماده نیست، منتظر کار در جریان می‌ماند و در غیر این صورت خودش می‌سازد. */
-  private async awaitQuotaSnapshot(reportId: string) {
-    const pending = this.quotaSnapshotJobs.get(reportId);
-    if (pending) await pending;
-    await this.enqueueQuotaWork(reportId, () => this.ensureQuotaSnapshot(reportId));
   }
 
   async findAll(actor: PortSalesActor | undefined, query: FindPortSalesReportsQueryDto) {
@@ -734,6 +777,7 @@ export class PortSalesReportsService {
    * کاربر عادی فقط گزارش خودش را می‌بیند. مدیریت و مدیر ماژول درگاه
    * با `userId` یک کاربر و بدون آن جمع همه کاربران را می‌بینند.
    * سال و ماه فقط جمع‌ها و نمودار را محدود می‌کنند؛ آخرین یارانه مستقل از این دو است.
+   * یارانهٔ بلیط فردی و خودرویی از تعرفهٔ سال انتخاب‌شده است؛ بدون فیلتر سال، سال جاری جلالی.
    */
   async mySubsidies(
     actor: PortSalesActor | undefined,
@@ -830,32 +874,52 @@ export class PortSalesReportsService {
       }),
       { received: 0, invalidQeshmondi: 0, weeklyExcess: 0 },
     );
-    const chartSpan =
-      year != null && month == null
-        ? Array.from({ length: 12 }, (_, index) => {
-            const itemMonth = index + 1;
-            return (
-              byKey.get(`${year}-${itemMonth}`) ?? {
-                year,
-                month: itemMonth,
-                received: 0,
-                allocated: 0,
-                count: 0,
-                invalidQeshmondi: 0,
-                weeklyExcess: 0,
-                invalidTotal: 0,
-              }
-            );
-          })
-        : matched;
     const today = currentJalaliParts();
     const jalaliYear = today.year;
+    const monthsOfYear = (itemYear: number) =>
+      Array.from({ length: 12 }, (_, index) => {
+        const itemMonth = index + 1;
+        return (
+          byKey.get(`${itemYear}-${itemMonth}`) ?? {
+            year: itemYear,
+            month: itemMonth,
+            received: 0,
+            allocated: 0,
+            count: 0,
+            invalidQeshmondi: 0,
+            weeklyExcess: 0,
+            invalidTotal: 0,
+          }
+        );
+      });
+    const chartYears =
+      month != null
+        ? []
+        : year != null
+          ? [year]
+          : years.length
+            ? Array.from(
+                { length: Math.max(...years) - Math.min(...years) + 1 },
+                (_, index) => Math.min(...years) + index,
+              )
+            : [jalaliYear];
+    const chartSpan = month != null ? matched : chartYears.flatMap((itemYear) => monthsOfYear(itemYear));
+    const tariffYear = year ?? jalaliYear;
+    const yearTariff = await this.prisma.ticketTariff.findUnique({
+      where: { year: tariffYear },
+      select: { individualSubsidy: true, vehicleSubsidy: true },
+    });
     return {
       years,
       count: reports.length,
       latest: latest
         ? { amount: latest.received, year: latest.year, month: latest.month }
         : null,
+      ticketSubsidies: {
+        year: tariffYear,
+        individual: yearTariff?.individualSubsidy ?? null,
+        vehicle: yearTariff?.vehicleSubsidy ?? null,
+      },
       totals,
       currentYear: jalaliYear,
       currentMonth: today.month,
@@ -883,7 +947,6 @@ export class PortSalesReportsService {
     if (!item) {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
-    if (!item.quotaSnapshotReady) this.scheduleQuotaSnapshot(id);
     const reportIso = toTehranIsoDateOnly(item.reportDate);
     const tariffYear = reportIso ? jalaliParts(reportIso).year : null;
     const tariff = tariffYear
@@ -906,7 +969,6 @@ export class PortSalesReportsService {
     query: FindPortTicketSalesQueryDto,
   ) {
     await this.assertExists(actor, reportId);
-    if (query.weeklyQuota === 'excess') await this.awaitQuotaSnapshot(reportId);
     const where: Prisma.PortTicketSaleWhereInput = {
       reportId,
       qeshmondiStatus: query.qeshmondiStatus,
@@ -989,7 +1051,6 @@ export class PortSalesReportsService {
     query: FindPortTicketQuotaQueryDto,
   ) {
     await this.assertExists(actor, reportId);
-    await this.awaitQuotaSnapshot(reportId);
     const { page, pageSize, skip, take } = paginationArgs(query);
     const nationalId = quotaNationalIdFilter(query.q);
     if (!nationalId) {
@@ -1045,6 +1106,183 @@ export class PortSalesReportsService {
         pageSize,
       ),
       unauthorizedTotal: sum._sum.unauthorized ?? 0,
+    };
+  }
+
+  async findCitizenTraffic(query: FindCitizenTrafficQueryDto) {
+    const nationalId = query.nationalId;
+    const [tripCount, groupedRoutes] = await Promise.all([
+      this.prisma.portTicketSale.count({ where: { nationalId } }),
+      this.prisma.portTicketSale.groupBy({
+        by: ['origin', 'destination'],
+        where: { nationalId },
+        _count: { _all: true },
+      }),
+    ]);
+    const routes = groupedRoutes
+      .map((row) => ({
+        origin: row.origin,
+        destination: row.destination,
+        count: row._count._all,
+      }))
+      .sort((left, right) => {
+        const byCount = right.count - left.count;
+        if (byCount) return byCount;
+        const byOrigin = (left.origin ?? '').localeCompare(right.origin ?? '', 'fa');
+        if (byOrigin) return byOrigin;
+        return (left.destination ?? '').localeCompare(right.destination ?? '', 'fa');
+      });
+    const scope = query.scope ?? 'all';
+    if (scope === 'weekly' || scope === 'personal') {
+      const page = await this.citizenQuotaPage(nationalId, scope, query);
+      return { ...page, tripCount, routes, nationalIdPrefix: NATIONAL_ID_PREFIX };
+    }
+    const tickets = await this.citizenTicketPage(nationalId, query, tripCount);
+    return { ...tickets, tripCount, routes, nationalIdPrefix: NATIONAL_ID_PREFIX };
+  }
+
+  private async citizenTicketPage(
+    nationalId: string,
+    query: FindCitizenTrafficQueryDto,
+    total: number,
+  ) {
+    const orderBy = resolveSortOrder<Prisma.PortTicketSaleOrderByWithRelationInput>(
+      query.sortBy,
+      query.sortDir,
+      {
+        ticketNumber: (dir) => ({ ticketNumber: dir }),
+        nationalId: (dir) => ({ nationalId: dir }),
+        passportNumber: (dir) => ({ passportNumber: dir }),
+        fullName: (dir) => ({ fullName: dir }),
+        citizenship: (dir) => ({ citizenship: dir }),
+        qeshmondiStatus: (dir) => ({ qeshmondiStatus: dir }),
+        travelDate: (dir) => [{ travelDate: dir }, { travelTime: dir }],
+        origin: (dir) => ({ origin: dir }),
+        destination: (dir) => ({ destination: dir }),
+        amount: (dir) => ({ amount: dir }),
+        rowNumber: (dir) => ({ rowNumber: dir }),
+      },
+      [{ travelDate: 'asc' }, { travelTime: 'asc' }, { id: 'asc' }],
+    );
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    const [items, user] = await Promise.all([
+      this.prisma.portTicketSale.findMany({
+        where: { nationalId },
+        orderBy,
+        skip,
+        take,
+        select: ticketSelect,
+      }),
+      this.prisma.user.findUnique({
+        where: { nationalId },
+        select: { qeshmondiEndDate: true },
+      }),
+    ]);
+    const qeshmondiEndDate = toTehranIsoDateOnly(user?.qeshmondiEndDate);
+    return paginatedResult(
+      items.map((item) => ({
+        ...serializeTicket(item),
+        qeshmondiEndDate,
+      })),
+      total,
+      page,
+      pageSize,
+    );
+  }
+
+  private async citizenQuotaPage(
+    nationalId: string,
+    scope: 'weekly' | 'personal',
+    query: FindCitizenTrafficQueryDto,
+  ) {
+    const reportSelect = {
+      id: true,
+      reportDate: true,
+      reportYear: true,
+      origin: true,
+      destination: true,
+    } as const;
+    const where = { nationalId, report: { quotaSnapshotReady: true } };
+    const weeklyRows =
+      scope === 'weekly'
+        ? await this.prisma.portTicketWeeklyQuota.findMany({
+            where,
+            select: {
+              weekStart: true,
+              nationalId: true,
+              total: true,
+              allowed: true,
+              unauthorized: true,
+              report: { select: reportSelect },
+            },
+          })
+        : [];
+    const personalRows =
+      scope === 'personal'
+        ? await this.prisma.portTicketPersonalQuota.findMany({
+            where,
+            select: {
+              nationalId: true,
+              total: true,
+              allowed: true,
+              unauthorized: true,
+              report: { select: reportSelect },
+            },
+          })
+        : [];
+    const years = [
+      ...new Set([
+        ...weeklyRows.map((row) => row.report.reportYear),
+        ...personalRows.map((row) => row.report.reportYear),
+      ]),
+    ];
+    const tariffs = years.length
+      ? await this.prisma.ticketTariff.findMany({
+          where: { year: { in: years } },
+          select: { year: true, individualSubsidy: true },
+        })
+      : [];
+    const rateByYear = new Map(tariffs.map((tariff) => [tariff.year, tariff.individualSubsidy]));
+    const toRow = (
+      row: (typeof personalRows)[number],
+      weekStart: string | null,
+    ): CitizenQuotaItem => {
+      const rate = rateByYear.get(row.report.reportYear) ?? null;
+      return {
+        weekStart,
+        weekEnd: weekStart ? addDaysIso(weekStart, 6) : null,
+        nationalId: row.nationalId,
+        total: row.total,
+        allowed: row.allowed,
+        unauthorized: row.unauthorized,
+        status: row.unauthorized > 0 ? 'violation' : 'allowed',
+        amount: rate == null ? 0 : row.unauthorized * rate,
+        reportId: row.report.id,
+        reportDate: toTehranIsoDateOnly(row.report.reportDate),
+        origin: row.report.origin,
+        destination: row.report.destination,
+      };
+    };
+    const rows: CitizenQuotaItem[] = [
+      ...weeklyRows.map((row) => toRow(row, toIsoDateOnly(row.weekStart))),
+      ...personalRows.map((row) => toRow(row, null)),
+    ];
+    const sortBy =
+      query.sortBy && query.sortDir
+        ? query.sortBy
+        : scope === 'personal'
+          ? 'unauthorized'
+          : 'week';
+    const sortDir =
+      query.sortBy && query.sortDir ? query.sortDir : scope === 'personal' ? 'desc' : 'asc';
+    rows.sort((left, right) => compareCitizenQuota(left, right, sortBy, sortDir));
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    const unauthorizedTotal = rows.reduce((sum, row) => sum + row.unauthorized, 0);
+    const unauthorizedAmount = rows.reduce((sum, row) => sum + row.amount, 0);
+    return {
+      ...paginatedResult(rows.slice(skip, skip + take), rows.length, page, pageSize),
+      unauthorizedTotal,
+      unauthorizedAmount,
     };
   }
 
@@ -1160,12 +1398,19 @@ export class PortSalesReportsService {
     file?: UploadedExcel,
   ) {
     const { id: userId } = requireActor(actor);
-    assertDistinctPorts(
-      dto.origin?.trim() || DEFAULT_PORT_ORIGIN,
-      dto.destination?.trim() || DEFAULT_PORT_DESTINATION,
+    const origin = normalizePortName(dto.origin || '') || DEFAULT_PORT_ORIGIN;
+    const destination = normalizePortName(dto.destination || '') || DEFAULT_PORT_DESTINATION;
+    assertDistinctPorts(origin, destination);
+    await this.assertKnownPorts(origin, destination);
+    const reportDate = firstOfReportMonth(dto.reportDate);
+    const month = reportMonthKey(reportDate);
+    await this.assertOwnerMonthFree(
+      userId,
+      month.reportYear,
+      month.reportMonth,
+      origin,
+      destination,
     );
-    const month = reportMonthKey(dto.reportDate);
-    await this.assertOwnerMonthFree(userId, month.reportYear, month.reportMonth);
     const stored = this.assertExcel(file);
     const mimeType =
       normalizeDocumentType(stored.mimetype, stored.originalname) ??
@@ -1192,7 +1437,14 @@ export class PortSalesReportsService {
       updatedAt: Date.now(),
     });
     setImmediate(() => {
-      void this.runImport(jobId, userId, dto, stored.buffer, savedFile.id, originalFileName);
+      void this.runImport(
+        jobId,
+        userId,
+        { ...dto, reportDate },
+        stored.buffer,
+        savedFile.id,
+        originalFileName,
+      );
     });
     return { jobId };
   }
@@ -1252,6 +1504,8 @@ export class PortSalesReportsService {
       );
       let processed = 0;
       const month = reportMonthKey(dto.reportDate);
+      const origin = normalizePortName(dto.origin || '') || DEFAULT_PORT_ORIGIN;
+      const destination = normalizePortName(dto.destination || '') || DEFAULT_PORT_DESTINATION;
       const created = await this.prisma.$transaction(
         async (tx) => {
           const clash = await tx.portSalesReport.findFirst({
@@ -1259,6 +1513,8 @@ export class PortSalesReportsService {
               createdById: userId,
               reportYear: month.reportYear,
               reportMonth: month.reportMonth,
+              origin,
+              destination,
             },
             select: { approvalStatus: true },
           });
@@ -1272,8 +1528,8 @@ export class PortSalesReportsService {
               reportDate: parseIsoDate(dto.reportDate),
               reportYear: month.reportYear,
               reportMonth: month.reportMonth,
-              origin: dto.origin?.trim() || DEFAULT_PORT_ORIGIN,
-              destination: dto.destination?.trim() || DEFAULT_PORT_DESTINATION,
+              origin,
+              destination,
               fileId,
               originalFileName,
               recordCount: rows.length,
@@ -1285,7 +1541,9 @@ export class PortSalesReportsService {
           });
           for (const chunk of chunkItems(rows, TICKET_INSERT_CHUNK)) {
             await tx.portTicketSale.createMany({
-              data: chunk.map((row) => toTicketCreateData(report.id, row)),
+              data: chunk.map((row) =>
+                toTicketCreateData(report.id, row, { origin, destination }),
+              ),
             });
             processed += chunk.length;
             const ratio = rows.length ? processed / rows.length : 1;
@@ -1308,7 +1566,6 @@ export class PortSalesReportsService {
         total: rows.length,
         reportId: created,
       });
-      this.scheduleQuotaSnapshot(created);
     } catch (error) {
       await this.prisma.storedFile.delete({ where: { id: fileId } }).catch(() => undefined);
       this.patchJob(jobId, {
@@ -1516,6 +1773,8 @@ export class PortSalesReportsService {
         origin: true,
         destination: true,
         reportDate: true,
+        reportYear: true,
+        reportMonth: true,
         approvalStatus: true,
         createdById: true,
       },
@@ -1524,26 +1783,45 @@ export class PortSalesReportsService {
       throw new NotFoundException('گزارش فروش بنادر یافت نشد');
     }
     this.assertMutable(actor, current.approvalStatus);
-    assertDistinctPorts(dto.origin ?? current.origin, dto.destination ?? current.destination);
-    const dateChanged = Boolean(
-      dto.reportDate && toIsoDateOnly(current.reportDate) !== dto.reportDate,
-    );
-    if (!dateChanged) {
-      const updated = await this.prisma.portSalesReport.update({
-        where: { id },
-        data: {
-          origin: dto.origin,
-          destination: dto.destination,
-        },
-        select: reportSelect,
+    const origin = normalizePortName(dto.origin ?? current.origin);
+    const destination = normalizePortName(dto.destination ?? current.destination);
+    assertDistinctPorts(origin, destination);
+    await this.assertKnownPorts(origin, destination);
+    const nextIso = dto.reportDate ? firstOfReportMonth(dto.reportDate) : undefined;
+    const storedIso = toIsoDateOnly(current.reportDate);
+    const currentFirst = storedIso ? firstOfReportMonth(storedIso) : null;
+    const monthChanged = Boolean(nextIso && nextIso !== currentFirst);
+    const month = monthChanged
+      ? reportMonthKey(nextIso!)
+      : { reportYear: current.reportYear, reportMonth: current.reportMonth };
+    if (current.createdById) {
+      await this.assertOwnerMonthFree(
+        current.createdById,
+        month.reportYear,
+        month.reportMonth,
+        origin,
+        destination,
+        id,
+      );
+    }
+    if (!monthChanged) {
+      const updated = await this.prisma.$transaction(async (tx) => {
+        await tx.portTicketSale.updateMany({
+          where: { reportId: id },
+          data: { origin, destination },
+        });
+        return tx.portSalesReport.update({
+          where: { id },
+          data: {
+            origin,
+            destination,
+          },
+          select: reportSelect,
+        });
       });
       return serializeReport(updated);
     }
-    const nextIso = dto.reportDate!;
-    const month = reportMonthKey(nextIso);
-    if (current.createdById) {
-      await this.assertOwnerMonthFree(current.createdById, month.reportYear, month.reportMonth, id);
-    }
+    const reportDate = nextIso!;
     let serialized: ReturnType<typeof serializeReport> | undefined;
     await this.enqueueQuotaWork(id, async () => {
       const updated = await this.prisma.$transaction(async (tx) => {
@@ -1552,6 +1830,8 @@ export class PortSalesReportsService {
           data: {
             qeshmondiStatus: PortTicketQeshmondiStatus.UNKNOWN,
             weeklyQuotaExcess: false,
+            origin,
+            destination,
           },
         });
         await tx.portTicketWeeklyQuota.deleteMany({ where: { reportId: id } });
@@ -1559,11 +1839,11 @@ export class PortSalesReportsService {
         return tx.portSalesReport.update({
           where: { id },
           data: {
-            reportDate: parseIsoDate(nextIso),
+            reportDate: parseIsoDate(reportDate),
             reportYear: month.reportYear,
             reportMonth: month.reportMonth,
-            origin: dto.origin,
-            destination: dto.destination,
+            origin,
+            destination,
             validQeshmondiCount: 0,
             invalidQeshmondiCount: 0,
             weeklyQuotaExcessCount: 0,
@@ -1636,29 +1916,8 @@ export class PortSalesReportsService {
       total: row.total,
       allowed: row.allowed,
       unauthorized: row.unauthorized,
-      status: 'violation',
+      status: row.unauthorized > 0 ? 'violation' : 'allowed',
     };
-  }
-
-  /** اگر اسنپ‌شات سهمیه هنوز ساخته نشده، یک‌بار از بلیط‌ها می‌سازد. */
-  private async ensureQuotaSnapshot(reportId: string) {
-    const report = await this.prisma.portSalesReport.findUnique({
-      where: { id: reportId },
-      select: { id: true, reportDate: true, quotaSnapshotReady: true },
-    });
-    if (!report) {
-      throw new NotFoundException('گزارش فروش بنادر یافت نشد');
-    }
-    if (report.quotaSnapshotReady) return;
-    const tickets = await this.prisma.portTicketSale.findMany({
-      where: { reportId, nationalId: { not: null } },
-      select: { id: true, nationalId: true, travelDate: true, rowNumber: true },
-    });
-    await this.persistQuotaSnapshot(
-      report.id,
-      toTehranIsoDateOnly(report.reportDate),
-      tickets,
-    );
   }
 
   /** سهمیهٔ هفتگی هر کد ملی از `individualTicketQuota` کاربر؛ نبودِ کاربر = پیش‌فرض. */
@@ -1789,7 +2048,6 @@ export class PortSalesReportsService {
     subsidy: number,
     q?: string,
   ) {
-    await this.awaitQuotaSnapshot(reportId);
     const nationalId = quotaNationalIdFilter(q);
     const rows = !nationalId
       ? []
@@ -1932,10 +2190,29 @@ export class PortSalesReportsService {
     return tariff?.individualSubsidy ?? null;
   }
 
+  private async assertKnownPorts(origin: string, destination: string) {
+    const originName = normalizePortName(origin);
+    const destinationName = normalizePortName(destination);
+    const found = await this.prisma.port.findMany({
+      where: {
+        OR: [originName, destinationName].map((name) => ({
+          name: { equals: name, mode: 'insensitive' },
+        })),
+      },
+      select: { name: true },
+    });
+    const keys = new Set(found.map((item) => normalizePortName(item.name)));
+    if (!keys.has(originName) || !keys.has(destinationName)) {
+      throw new BadRequestException('مبدأ و مقصد باید از بنادر ثبت‌شده انتخاب شوند');
+    }
+  }
+
   private async assertOwnerMonthFree(
     userId: string,
     reportYear: number,
     reportMonth: number,
+    origin: string,
+    destination: string,
     excludeId?: string,
   ) {
     const existing = await this.prisma.portSalesReport.findFirst({
@@ -1943,6 +2220,8 @@ export class PortSalesReportsService {
         createdById: userId,
         reportYear,
         reportMonth,
+        origin: normalizePortName(origin),
+        destination: normalizePortName(destination),
         ...(excludeId ? { NOT: { id: excludeId } } : {}),
       },
       select: { approvalStatus: true },

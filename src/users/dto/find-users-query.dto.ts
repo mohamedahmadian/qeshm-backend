@@ -4,6 +4,7 @@ import {
   IsEnum,
   IsIn,
   IsOptional,
+  IsString,
   IsUUID,
   ValidateIf,
 } from 'class-validator';
@@ -34,6 +35,10 @@ export const userSortFields = [
 export type UserSortField = (typeof userSortFields)[number];
 
 export const CITY_ID_NONE = 'none';
+
+export const qeshmondiValidityFilters = ['valid', 'expired'] as const;
+
+export type QeshmondiValidityFilter = (typeof qeshmondiValidityFilters)[number];
 
 export class FindUsersQueryDto extends PaginationQueryDto {
   @IsOptional()
@@ -81,6 +86,12 @@ export class FindUsersQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => toOptionalBoolean(value))
   @IsBoolean()
   isResident?: boolean;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
+  @IsIn([...qeshmondiValidityFilters])
+  qeshmondiValidity?: QeshmondiValidityFilter;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

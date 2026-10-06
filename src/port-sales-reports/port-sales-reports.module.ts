@@ -5,5 +5,6 @@ import { PortSalesReportsService } from './port-sales-reports.service';
 @Module({
   controllers: [PortSalesReportsController],
   providers: [PortSalesReportsService],
+  exports: [PortSalesReportsService],
 })
 export class PortSalesReportsModule {}

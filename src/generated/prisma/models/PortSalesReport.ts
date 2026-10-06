@@ -469,7 +469,7 @@ export type PortSalesReportOrderByWithRelationInput = {
 
 export type PortSalesReportWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  createdById_reportYear_reportMonth?: Prisma.PortSalesReportCreatedByIdReportYearReportMonthCompoundUniqueInput
+  createdById_reportYear_reportMonth_origin_destination?: Prisma.PortSalesReportCreatedByIdReportYearReportMonthOriginDestinationCompoundUniqueInput
   AND?: Prisma.PortSalesReportWhereInput | Prisma.PortSalesReportWhereInput[]
   OR?: Prisma.PortSalesReportWhereInput[]
   NOT?: Prisma.PortSalesReportWhereInput | Prisma.PortSalesReportWhereInput[]
@@ -504,7 +504,7 @@ export type PortSalesReportWhereUniqueInput = Prisma.AtLeast<{
   tickets?: Prisma.PortTicketSaleListRelationFilter
   weeklyQuotas?: Prisma.PortTicketWeeklyQuotaListRelationFilter
   personalQuotas?: Prisma.PortTicketPersonalQuotaListRelationFilter
-}, "id" | "createdById_reportYear_reportMonth">
+}, "id" | "createdById_reportYear_reportMonth_origin_destination">
 
 export type PortSalesReportOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -794,10 +794,12 @@ export type PortSalesReportOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type PortSalesReportCreatedByIdReportYearReportMonthCompoundUniqueInput = {
+export type PortSalesReportCreatedByIdReportYearReportMonthOriginDestinationCompoundUniqueInput = {
   createdById: string
   reportYear: number
   reportMonth: number
+  origin: string
+  destination: string
 }
 
 export type PortSalesReportCountOrderByAggregateInput = {

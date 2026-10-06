@@ -942,6 +942,23 @@ export type EnumStakeholderMessageSideWithAggregatesFilter<$PrismaModel = never>
   _max?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel>
 }
 
+export type EnumPortKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.PortKind | Prisma.EnumPortKindFieldRefInput<$PrismaModel>
+  in?: $Enums.PortKind[] | Prisma.ListEnumPortKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PortKind[] | Prisma.ListEnumPortKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPortKindFilter<$PrismaModel> | $Enums.PortKind
+}
+
+export type EnumPortKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PortKind | Prisma.EnumPortKindFieldRefInput<$PrismaModel>
+  in?: $Enums.PortKind[] | Prisma.ListEnumPortKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PortKind[] | Prisma.ListEnumPortKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPortKindWithAggregatesFilter<$PrismaModel> | $Enums.PortKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPortKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPortKindFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -1854,6 +1871,23 @@ export type NestedEnumStakeholderMessageSideWithAggregatesFilter<$PrismaModel = 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel>
   _max?: Prisma.NestedEnumStakeholderMessageSideFilter<$PrismaModel>
+}
+
+export type NestedEnumPortKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.PortKind | Prisma.EnumPortKindFieldRefInput<$PrismaModel>
+  in?: $Enums.PortKind[] | Prisma.ListEnumPortKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PortKind[] | Prisma.ListEnumPortKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPortKindFilter<$PrismaModel> | $Enums.PortKind
+}
+
+export type NestedEnumPortKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PortKind | Prisma.EnumPortKindFieldRefInput<$PrismaModel>
+  in?: $Enums.PortKind[] | Prisma.ListEnumPortKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PortKind[] | Prisma.ListEnumPortKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPortKindWithAggregatesFilter<$PrismaModel> | $Enums.PortKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPortKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPortKindFilter<$PrismaModel>
 }
 
 
