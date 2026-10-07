@@ -1319,7 +1319,7 @@ export class UsersService {
           last_name: row.lastName,
           full_name: joinFullName(row.firstName, row.lastName),
           father_name: row.fatherName,
-          birth_date: row.birthDate,
+          birth_date: row.birthDateInvalid ? null : row.birthDate,
           gender: row.gender,
           passport_number: row.passportNumber,
           occupation: row.occupation,
@@ -1374,7 +1374,8 @@ export class UsersService {
           last_name: row.lastName,
           full_name: joinFullName(row.firstName, row.lastName),
           father_name: blank(row.fatherName),
-          birth_date: blank(row.birthDate),
+          birth_date: row.birthDateInvalid ? null : blank(row.birthDate),
+          birth_invalid: Boolean(row.birthDateInvalid),
           gender: row.gender ?? '',
           passport_number: blank(row.passportNumber),
           occupation: blank(row.occupation),
@@ -1392,7 +1393,10 @@ export class UsersService {
           "lastName" = v.last_name,
           "fullName" = v.full_name,
           "fatherName" = COALESCE(NULLIF(v.father_name, ''), u."fatherName"),
-          "birthDate" = COALESCE(CAST(NULLIF(v.birth_date, '') AS date), u."birthDate"),
+          "birthDate" = CASE
+            WHEN v.birth_invalid THEN NULL
+            ELSE COALESCE(CAST(NULLIF(v.birth_date, '') AS date), u."birthDate")
+          END,
           "gender" = CASE
             WHEN v.gender IS NULL OR v.gender = '' THEN u."gender"
             ELSE CAST(v.gender AS "UserGender")
@@ -1453,6 +1457,7 @@ export class UsersService {
           full_name text,
           father_name text,
           birth_date text,
+          birth_invalid boolean,
           gender text,
           passport_number text,
           occupation text,

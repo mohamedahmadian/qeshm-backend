@@ -1,13 +1,14 @@
 import { ConnectionPool, type Request } from 'mssql';
 import { UserGender } from '../generated/prisma/client';
 import {
-  parseBirthToIso,
+  parseBirthCandidate,
   parseExpiryToIso,
   parseGender,
   type QeshmondiCitizenProfile,
   type QeshmondiImportRow,
   type QeshmondiImportSkip,
 } from './qeshmondi-import';
+import { sanitizeBirthIso } from '../common/jalali-date';
 import { normalizeNationalId } from '../common/national-id';
 import {
   QESHMONDI_LOOKUP_TYPE,
@@ -84,12 +85,24 @@ function sqlDateToIso(value: unknown, kind: 'birth' | 'expiry') {
   if (value instanceof Date) {
     if (Number.isNaN(value.getTime())) return null;
     const iso = localIsoDate(value);
-    return Number(iso.slice(0, 4)) > 1600 ? iso : null;
+    if (Number(iso.slice(0, 4)) <= 1600) return null;
+    return kind === 'birth' ? sanitizeBirthIso(iso) : iso;
   }
   const text = String(value).trim();
   if (!text) return null;
   if (kind === 'expiry') return parseExpiryToIso(text);
-  return parseBirthToIso(text) || parseExpiryToIso(text);
+  return sanitizeBirthIso(parseBirthCandidate(text) || parseExpiryToIso(text));
+}
+
+/** خالی یعنی منبع تاریخی نداده. مقدار پر ولی غیرقابل‌قبول باید null ذخیره شود. */
+function sqlBirthDate(value: unknown): { birthDate: string | null; birthDateInvalid: boolean } {
+  if (value == null || value === '') return { birthDate: null, birthDateInvalid: false };
+  if (typeof value === 'string' && !value.trim()) {
+    return { birthDate: null, birthDateInvalid: false };
+  }
+  const birthDate = sqlDateToIso(value, 'birth');
+  if (birthDate) return { birthDate, birthDateInvalid: false };
+  return { birthDate: null, birthDateInvalid: true };
 }
 
 function sqlGender(value: unknown): UserGender | null {
@@ -213,7 +226,7 @@ function mapTblPerson(
       gender: sqlGender(record.IsMale),
       occupation: textOrNull(record.Job),
       qeshmondiEndDate: sqlDateToIso(record.date_exp, 'expiry'),
-      birthDate: sqlDateToIso(record.BirthDate, 'birth'),
+      ...sqlBirthDate(record.BirthDate),
       citizen: citizenFromRecord(record, lookups),
     },
   };

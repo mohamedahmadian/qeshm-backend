@@ -60,6 +60,37 @@ export function gregorianToJalali(gy: number, gm: number, gd: number) {
   return { year: jy, month: 7 + Math.trunc(rest / 30), day: 1 + (rest % 30) };
 }
 
+function tehranGregorianParts(now = new Date()) {
+  const parts = new Intl.DateTimeFormat('en-US-u-nu-latn', {
+    timeZone: 'Asia/Tehran',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  }).formatToParts(now);
+  const num = (type: Intl.DateTimeFormatPartTypes) =>
+    Number(parts.find((part) => part.type === type)?.value);
+  return { year: num('year'), month: num('month'), day: num('day') };
+}
+
+/** سال جلالی امروز به وقت تهران. */
+export function currentJalaliYear(now = new Date()) {
+  const { year, month, day } = tehranGregorianParts(now);
+  return gregorianToJalali(year, month, day).year;
+}
+
+/**
+ * تاریخ تولد با سال جلالی بعد از سال جاری نامعتبر است و نباید ذخیره شود.
+ * مقدار نامعتبر `null` برمی‌گردد.
+ */
+export function sanitizeBirthIso(iso: string | null, now = new Date()): string | null {
+  if (!iso) return null;
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!match) return null;
+  const birth = gregorianToJalali(Number(match[1]), Number(match[2]), Number(match[3]));
+  if (birth.year > currentJalaliYear(now)) return null;
+  return iso;
+}
+
 export function jalaliPartsToIso(year: number, month: number, day: number) {
   if (
     !Number.isInteger(year) ||

@@ -1,7 +1,11 @@
 import ExcelJS from 'exceljs';
 import { toLatinDigits } from '../common/national-id';
 import { normalizeNationalId } from '../common/national-id';
-import { parseJalaliCompactToIso, parseJalaliSlashToIso } from '../common/jalali-date';
+import {
+  parseJalaliCompactToIso,
+  parseJalaliSlashToIso,
+  sanitizeBirthIso,
+} from '../common/jalali-date';
 import { Religion, UserGender } from '../generated/prisma/client';
 
 /** Extra tblPerson columns filled only by the SQL sync, after lookup resolution. */
@@ -58,6 +62,8 @@ export type QeshmondiImportRow = {
   occupation: string | null;
   qeshmondiEndDate: string | null;
   birthDate: string | null;
+  /** منبع تاریخ تولد داشته ولی نامعتبر بوده؛ در به‌روزرسانی باید null شود، نه مقدار قبلی. */
+  birthDateInvalid?: boolean;
   citizen?: QeshmondiCitizenProfile;
 };
 
@@ -150,8 +156,12 @@ export function parseExpiryToIso(raw: string) {
   return /^\d{4}-\d{2}-\d{2}$/.test(iso) && Number(iso.slice(0, 4)) > 1600 ? iso : null;
 }
 
-export function parseBirthToIso(raw: string) {
+export function parseBirthCandidate(raw: string) {
   return parseJalaliCompactToIso(raw) || parseJalaliSlashToIso(raw);
+}
+
+export function parseBirthToIso(raw: string) {
+  return sanitizeBirthIso(parseBirthCandidate(raw));
 }
 
 export async function parseQeshmondiExcel(buffer: Buffer): Promise<{
@@ -203,6 +213,7 @@ export async function parseQeshmondiExcel(buffer: Buffer): Promise<{
     const birthRaw = read('birthDate');
     const residentRaw = read('isResident');
     const maleRaw = read('isMale');
+    const birthDate = birthRaw ? parseBirthToIso(birthRaw) : null;
 
     rows.push({
       rowNumber,
@@ -215,7 +226,8 @@ export async function parseQeshmondiExcel(buffer: Buffer): Promise<{
       gender: parseGender(maleRaw),
       occupation: emptyToNull(read('occupation')),
       qeshmondiEndDate: dateExpRaw ? parseExpiryToIso(dateExpRaw) : null,
-      birthDate: birthRaw ? parseBirthToIso(birthRaw) : null,
+      birthDate,
+      birthDateInvalid: Boolean(birthRaw) && !birthDate,
     });
   });
 
