@@ -1,5 +1,6 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, UseFilters, UseGuards } from '@nestjs/common';
 import { CooperativeAuthGuard } from './cooperative-auth.guard';
+import { CooperativeExceptionFilter } from './cooperative-response';
 import { CooperativeSyncService } from './cooperative-sync.service';
 import {
   CooperativeChangesQueryDto,
@@ -8,6 +9,7 @@ import {
 
 @Controller('cooperative/qeshmondi/sync')
 @UseGuards(CooperativeAuthGuard)
+@UseFilters(CooperativeExceptionFilter)
 export class CooperativeSyncController {
   constructor(private readonly sync: CooperativeSyncService) {}
 

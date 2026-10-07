@@ -14,6 +14,7 @@ import {
   COOPERATIVE_TOKEN_TTL_SECONDS,
 } from './cooperative.constants';
 import { CooperativeLoginDto } from './dto/cooperative-login.dto';
+import { cooperativeOk } from './cooperative-response';
 
 @Injectable()
 export class CooperativeAuthService {
@@ -60,11 +61,11 @@ export class CooperativeAuthService {
       { expiresIn: COOPERATIVE_TOKEN_TTL },
     );
 
-    return {
+    return cooperativeOk({
       tokenType: 'Bearer' as const,
       token,
       expiresIn: COOPERATIVE_TOKEN_TTL_SECONDS,
       port: user.operatedPort,
-    };
+    });
   }
 }

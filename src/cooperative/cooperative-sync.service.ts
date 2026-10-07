@@ -1,11 +1,14 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { toIsoDateOnly } from '../common/iso-date';
+import { toIsoDateOnly, todayIsoDateTehran } from '../common/iso-date';
 import { PrismaService } from '../prisma/prisma.service';
+import { normalizeNationalId } from '../common/national-id';
+import { CooperativeInquiryQueryDto } from './dto/cooperative-inquiry-query.dto';
 import {
   COOPERATIVE_SYNC_PAGE_MAX,
   CooperativeChangesQueryDto,
   CooperativeFullQueryDto,
 } from './dto/cooperative-sync-query.dto';
+import { cooperativeOk } from './cooperative-response';
 
 const personSelect = {
   id: true,
@@ -19,11 +22,26 @@ const personSelect = {
 export class CooperativeSyncService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async inquiry(query: CooperativeInquiryQueryDto) {
+    const nationalId = normalizeNationalId(query.nationalId);
+    const user = await this.prisma.user.findUnique({
+      where: { nationalId },
+      select: { ...personSelect, isQeshmondi: true, individualTicketQuota: true },
+    });
+    if (!user?.isQeshmondi) {
+      return cooperativeOk({ nationalId, isQeshmvand: false });
+    }
+    return cooperativeOk({
+      ...mapPerson(user),
+      individualTicketQuota: user.individualTicketQuota,
+    });
+  }
+
   async status() {
     const row = await this.prisma.qeshmondiFeedEvent.aggregate({
       _max: { seq: true },
     });
-    return { latest: toSeq(row._max.seq) };
+    return cooperativeOk({ latest: toSeq(row._max.seq) });
   }
 
   async full(query: CooperativeFullQueryDto) {
@@ -39,11 +57,11 @@ export class CooperativeSyncService {
     });
     const hasMore = rows.length > limit;
     const items = rows.slice(0, limit).map(mapPerson);
-    return {
+    return cooperativeOk({
       items,
       nextAfterId: hasMore ? items[items.length - 1]?.id ?? null : null,
       hasMore,
-    };
+    });
   }
 
   async changes(query: CooperativeChangesQueryDto) {
@@ -54,7 +72,7 @@ export class CooperativeSyncService {
     if (size > COOPERATIVE_SYNC_PAGE_MAX) {
       throw new BadRequestException('بازهٔ تغییرات حداکثر ۵۰۰ رکورد است');
     }
-    const latest = (await this.status()).latest;
+    const latest = (await this.status()).data?.latest ?? 0;
     const rows = await this.prisma.qeshmondiFeedEvent.findMany({
       where: {
         seq: { gte: BigInt(query.from), lte: BigInt(query.to) },
@@ -69,19 +87,21 @@ export class CooperativeSyncService {
         qeshmondiEndDate: true,
       },
     });
-    return {
+    return cooperativeOk({
       from: query.from,
       to: query.to,
       latest,
       items: rows.map((row) => ({
         seq: toSeq(row.seq),
-        id: row.userId,
-        nationalId: row.nationalId,
-        firstName: row.firstName,
-        lastName: row.lastName,
-        qeshmondiEndDate: toIsoDateOnly(row.qeshmondiEndDate),
+        ...mapPerson({
+          id: row.userId,
+          nationalId: row.nationalId,
+          firstName: row.firstName,
+          lastName: row.lastName,
+          qeshmondiEndDate: row.qeshmondiEndDate,
+        }),
       })),
-    };
+    });
   }
 }
 
@@ -92,12 +112,14 @@ function mapPerson(row: {
   lastName: string;
   qeshmondiEndDate: Date | null;
 }) {
+  const qeshmondiEndDate = toIsoDateOnly(row.qeshmondiEndDate);
   return {
     id: row.id,
     nationalId: row.nationalId,
     firstName: row.firstName,
     lastName: row.lastName,
-    qeshmondiEndDate: toIsoDateOnly(row.qeshmondiEndDate),
+    qeshmondiEndDate,
+    isQeshmvand: qeshmondiEndDate == null || qeshmondiEndDate >= todayIsoDateTehran(),
   };
 }
 
@@ -105,3 +127,4 @@ function toSeq(value: bigint | null | undefined) {
   if (value == null) return 0;
   return Number(value);
 }
+

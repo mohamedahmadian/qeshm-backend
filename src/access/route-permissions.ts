@@ -2,7 +2,7 @@ const PUBLIC_ROUTES: { method?: string; prefix: string }[] = [
   { method: 'POST', prefix: '/auth/login' },
   { method: 'POST', prefix: '/auth/forgot-password' },
   { method: 'POST', prefix: '/cooperative/auth/token' },
-  { prefix: '/cooperative/qeshmondi/sync' },
+  { method: 'GET', prefix: '/cooperative/qeshmondi' },
   { prefix: '/public/profiles' },
   { prefix: '/public/projects' },
   { prefix: '/public/singard' },
