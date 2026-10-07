@@ -25,8 +25,14 @@ import {
   ensureCitizenRole,
   ensureEmployeeRole,
 } from '../access/access.constants';
-import { gregorianToJalali } from '../common/jalali-date';
-import { parseIsoDate, parseOptionalIsoDate, todayIsoDateTehran, toIsoDateOnly } from '../common/iso-date';
+import { gregorianToJalali, jalaliPartsToIso } from '../common/jalali-date';
+import {
+  addDaysIso,
+  parseIsoDate,
+  parseOptionalIsoDate,
+  todayIsoDateTehran,
+  toIsoDateOnly,
+} from '../common/iso-date';
 import { getRequestLocale, isLtrLocale, localizedGeoName } from '../common/request-locale';
 import { buildStyledExcelExport } from '../common/excel-export';
 import {
@@ -53,6 +59,11 @@ import { parseQeshmondiExcel, type QeshmondiCitizenProfile, type QeshmondiImport
 import { qeshmondiSqlErrorText, streamQeshmondiSqlPeople, type QeshmondiSqlSettings } from './qeshmondi-sql';
 import { ensureQeshmondiLookups } from './qeshmondi-lookup';
 import { finishQeshmondiSyncLog, openQeshmondiSyncLog } from './qeshmondi-sync-log';
+import {
+  insertQeshmondiFeedCreates,
+  insertQeshmondiFeedFileUpdates,
+  insertQeshmondiFeedSqlUpdates,
+} from './qeshmondi-feed';
 
 const QESHMONDI_IMPORT_PASSWORD = '11111111';
 const QESHMONDI_LOOKUP_CHUNK = 5000;
@@ -422,6 +433,34 @@ function foldQeshmondiYears(dates: (Date | null)[]) {
     .sort((left, right) => left.year - right.year);
 }
 
+/** بازهٔ یک سال تقویمی زبان فعال: جلالی برای fa/ar/ur و میلادی برای en/hi. */
+function displayCalendarYearRange(year: number): { gte: Date; lt: Date } | null {
+  if (isLtrLocale(getRequestLocale())) {
+    if (year < 1 || year > 9998) return null;
+    const start = `${String(year).padStart(4, '0')}-01-01`;
+    const next = `${String(year + 1).padStart(4, '0')}-01-01`;
+    return { gte: parseIsoDate(start), lt: parseIsoDate(next) };
+  }
+  const start = jalaliPartsToIso(year, 1, 1);
+  const nextStart = jalaliPartsToIso(year + 1, 1, 1);
+  const lastDay = jalaliPartsToIso(year, 12, 30) ?? jalaliPartsToIso(year, 12, 29);
+  const end = nextStart ?? (lastDay ? addDaysIso(lastDay, 1) : null);
+  if (!start || !end) return null;
+  return { gte: parseIsoDate(start), lt: parseIsoDate(end) };
+}
+
+function qeshmondiYearWhere(
+  field: 'birthDate' | 'qeshmondiEndDate',
+  year?: number,
+): Prisma.UserWhereInput {
+  if (year == null) return {};
+  const range = displayCalendarYearRange(year);
+  if (!range) {
+    return { [field]: { gte: parseIsoDate('9999-01-01'), lt: parseIsoDate('9999-01-01') } };
+  }
+  return { [field]: range };
+}
+
 /** معتبر: پایان نگذشته یا خالی. منقضی‌شده: پایان قبل از امروز (تهران). */
 function qeshmondiValidityWhere(
   validity?: QeshmondiValidityFilter,
@@ -452,6 +491,11 @@ export class UsersService {
   async findAll(query: FindUsersQueryDto) {
     const q = query.q?.trim();
     const digits = q ? normalizeSearchDigits(q) : '';
+    const dateFilters = [
+      qeshmondiValidityWhere(query.qeshmondiValidity),
+      qeshmondiYearWhere('birthDate', query.birthYear),
+      qeshmondiYearWhere('qeshmondiEndDate', query.qeshmondiEndYear),
+    ].filter((item) => Object.keys(item).length > 0);
     const where: Prisma.UserWhereInput = {
       status: query.status,
       countryId: query.countryId,
@@ -461,7 +505,7 @@ export class UsersService {
       ...(query.employeesOnly ? { orgUnitId: query.orgUnitId ?? { not: null } } : {}),
       ...(query.qeshmondiOnly ? { isQeshmondi: true } : {}),
       ...(query.isResident !== undefined ? { isResident: query.isResident } : {}),
-      ...qeshmondiValidityWhere(query.qeshmondiValidity),
+      ...(dateFilters.length ? { AND: dateFilters } : {}),
       provinceId: query.provinceId,
       cityId:
         query.cityId === CITY_ID_NONE
@@ -1284,7 +1328,9 @@ export class UsersService {
         })),
       );
       const updatedAt = new Date();
-      await this.prisma.$executeRaw`
+      await this.prisma.$transaction(async (tx) => {
+        await insertQeshmondiFeedFileUpdates(tx, payload);
+        await tx.$executeRaw`
         UPDATE "users" AS u SET
           "firstName" = v.first_name,
           "lastName" = v.last_name,
@@ -1313,6 +1359,7 @@ export class UsersService {
         )
         WHERE u."nationalId" = v.national_id
       `;
+      }, { timeout: 120_000 });
       onChunk?.(chunk.length);
     }
   }
@@ -1337,7 +1384,9 @@ export class UsersService {
         })),
       );
       const updatedAt = new Date();
-      await this.prisma.$executeRaw`
+      await this.prisma.$transaction(async (tx) => {
+        await insertQeshmondiFeedSqlUpdates(tx, payload);
+        await tx.$executeRaw`
         UPDATE "users" AS u SET
           "firstName" = v.first_name,
           "lastName" = v.last_name,
@@ -1449,6 +1498,7 @@ export class UsersService {
         )
         WHERE u."nationalId" = v.national_id
       `;
+      }, { timeout: 120_000 });
     }
     await this.bulkUpdateQeshmondiFingerprints(rows);
   }
@@ -1524,7 +1574,13 @@ export class UsersService {
     });
 
     for (const chunk of chunkList(data, QESHMONDI_WRITE_CHUNK)) {
-      await this.prisma.user.createMany({ data: chunk });
+      await this.prisma.$transaction(async (tx) => {
+        await tx.user.createMany({ data: chunk });
+        await insertQeshmondiFeedCreates(
+          tx,
+          chunk.map((row) => row.nationalId),
+        );
+      }, { timeout: 120_000 });
       onChunk?.(chunk.length);
     }
     await this.bulkUpdateQeshmondiFingerprints(rows);

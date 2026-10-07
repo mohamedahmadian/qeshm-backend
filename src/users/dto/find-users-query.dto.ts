@@ -3,9 +3,12 @@ import {
   IsBoolean,
   IsEnum,
   IsIn,
+  IsInt,
   IsOptional,
   IsString,
   IsUUID,
+  Max,
+  Min,
   ValidateIf,
 } from 'class-validator';
 import { PaginationQueryDto } from '../../common/pagination';
@@ -39,6 +42,17 @@ export const CITY_ID_NONE = 'none';
 export const qeshmondiValidityFilters = ['valid', 'expired'] as const;
 
 export type QeshmondiValidityFilter = (typeof qeshmondiValidityFilters)[number];
+
+function optionalQueryYear(value: unknown) {
+  const raw =
+    typeof value === 'number'
+      ? String(value)
+      : typeof value === 'string'
+        ? value.trim()
+        : '';
+  if (!/^\d{4}$/.test(raw)) return undefined;
+  return Number(raw);
+}
 
 export class FindUsersQueryDto extends PaginationQueryDto {
   @IsOptional()
@@ -92,6 +106,22 @@ export class FindUsersQueryDto extends PaginationQueryDto {
   @IsString()
   @IsIn([...qeshmondiValidityFilters])
   qeshmondiValidity?: QeshmondiValidityFilter;
+
+  /** سال تولد در تقویم زبان درخواست (جلالی برای fa/ar/ur، میلادی برای en/hi). */
+  @IsOptional()
+  @Transform(({ value }) => optionalQueryYear(value))
+  @IsInt()
+  @Min(1000)
+  @Max(9999)
+  birthYear?: number;
+
+  /** سال انقضای کارت شهروندی، همان تقویم زبان درخواست. */
+  @IsOptional()
+  @Transform(({ value }) => optionalQueryYear(value))
+  @IsInt()
+  @Min(1000)
+  @Max(9999)
+  qeshmondiEndYear?: number;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

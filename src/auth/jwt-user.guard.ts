@@ -1,6 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { loadUserAccess } from '../access/access.util';
+import { COOPERATIVE_TOKEN_SCOPE } from '../cooperative/cooperative.constants';
 import { UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -24,7 +25,11 @@ export class JwtUserGuard implements CanActivate {
         sub: string;
         act?: string;
         impersonating?: boolean;
+        scope?: string;
       }>(token);
+      if (payload.scope === COOPERATIVE_TOKEN_SCOPE) {
+        return true;
+      }
       const user = await this.prisma.user.findUnique({
         where: { id: payload.sub },
         select: { id: true, status: true },

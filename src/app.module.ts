@@ -23,6 +23,7 @@ import { StakeholdersModule } from './stakeholders/stakeholders.module';
 import { PortsModule } from './ports/ports.module';
 import { TicketTariffsModule } from './ticket-tariffs/ticket-tariffs.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { CooperativeModule } from './cooperative/cooperative.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     TicketTariffsModule,
     PortsModule,
     DashboardModule,
+    CooperativeModule,
     ImagesModule,
     FilesModule,
     SmsModule,

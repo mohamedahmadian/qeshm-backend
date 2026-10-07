@@ -58,6 +58,7 @@ export const ModelName = {
   User: 'User',
   QeshmondiSqlConnection: 'QeshmondiSqlConnection',
   QeshmondiSyncLog: 'QeshmondiSyncLog',
+  QeshmondiFeedEvent: 'QeshmondiFeedEvent',
   QeshmondiLookup: 'QeshmondiLookup',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
@@ -322,6 +323,19 @@ export const QeshmondiSyncLogScalarFieldEnum = {
 } as const
 
 export type QeshmondiSyncLogScalarFieldEnum = (typeof QeshmondiSyncLogScalarFieldEnum)[keyof typeof QeshmondiSyncLogScalarFieldEnum]
+
+
+export const QeshmondiFeedEventScalarFieldEnum = {
+  seq: 'seq',
+  userId: 'userId',
+  nationalId: 'nationalId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  qeshmondiEndDate: 'qeshmondiEndDate',
+  createdAt: 'createdAt'
+} as const
+
+export type QeshmondiFeedEventScalarFieldEnum = (typeof QeshmondiFeedEventScalarFieldEnum)[keyof typeof QeshmondiFeedEventScalarFieldEnum]
 
 
 export const QeshmondiLookupScalarFieldEnum = {

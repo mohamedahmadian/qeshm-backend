@@ -10,6 +10,7 @@ export const TAAVONI_BELIT_ROLE_CODE = 'TAAVONI_BELIT';
 
 export const TAAVONI_BELIT_PERMISSION_CODES = [
   'stakeholders.port-sales-reports',
+  'qeshmondi.inquiry',
 ] as const;
 
 export const CONTRACTOR_PERMISSION_CODES = [

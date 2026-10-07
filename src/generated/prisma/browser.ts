@@ -53,6 +53,11 @@ export type QeshmondiSqlConnection = Prisma.QeshmondiSqlConnectionModel
  */
 export type QeshmondiSyncLog = Prisma.QeshmondiSyncLogModel
 /**
+ * Model QeshmondiFeedEvent
+ * 
+ */
+export type QeshmondiFeedEvent = Prisma.QeshmondiFeedEventModel
+/**
  * Model QeshmondiLookup
  * 
  */

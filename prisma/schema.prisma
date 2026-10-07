@@ -339,6 +339,7 @@ model User {
   operatedPort             Port?             @relation("PortOperator")
   qeshmondiSyncLogs       QeshmondiSyncLog[] @relation("QeshmondiSyncActor")
   qeshmondiSqlConnections QeshmondiSqlConnection[] @relation("QeshmondiSqlConnectionEditor")
+  qeshmondiFeedEvents     QeshmondiFeedEvent[]
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
@@ -392,6 +393,20 @@ model QeshmondiSyncLog {
   @@index([status])
   @@index([actorId])
   @@map("qeshmondi_sync_logs")
+}
+
+model QeshmondiFeedEvent {
+  seq              BigInt    @id @default(autoincrement())
+  userId           String
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nationalId       String
+  firstName        String
+  lastName         String
+  qeshmondiEndDate DateTime? @db.Date
+  createdAt        DateTime  @default(now())
+
+  @@index([userId])
+  @@map("qeshmondi_feed_events")
 }
 
 model QeshmondiLookup {

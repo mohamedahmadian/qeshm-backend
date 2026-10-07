@@ -404,6 +404,7 @@ export const ModelName = {
   User: 'User',
   QeshmondiSqlConnection: 'QeshmondiSqlConnection',
   QeshmondiSyncLog: 'QeshmondiSyncLog',
+  QeshmondiFeedEvent: 'QeshmondiFeedEvent',
   QeshmondiLookup: 'QeshmondiLookup',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
@@ -473,7 +474,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -992,6 +993,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.QeshmondiSyncLogCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.QeshmondiSyncLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    QeshmondiFeedEvent: {
+      payload: Prisma.$QeshmondiFeedEventPayload<ExtArgs>
+      fields: Prisma.QeshmondiFeedEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.QeshmondiFeedEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.QeshmondiFeedEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>
+        }
+        findFirst: {
+          args: Prisma.QeshmondiFeedEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.QeshmondiFeedEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>
+        }
+        findMany: {
+          args: Prisma.QeshmondiFeedEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>[]
+        }
+        create: {
+          args: Prisma.QeshmondiFeedEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>
+        }
+        createMany: {
+          args: Prisma.QeshmondiFeedEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.QeshmondiFeedEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>[]
+        }
+        delete: {
+          args: Prisma.QeshmondiFeedEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>
+        }
+        update: {
+          args: Prisma.QeshmondiFeedEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.QeshmondiFeedEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.QeshmondiFeedEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.QeshmondiFeedEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.QeshmondiFeedEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiFeedEventPayload>
+        }
+        aggregate: {
+          args: Prisma.QeshmondiFeedEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateQeshmondiFeedEvent>
+        }
+        groupBy: {
+          args: Prisma.QeshmondiFeedEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QeshmondiFeedEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.QeshmondiFeedEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QeshmondiFeedEventCountAggregateOutputType> | number
         }
       }
     }
@@ -5224,6 +5299,19 @@ export const QeshmondiSyncLogScalarFieldEnum = {
 export type QeshmondiSyncLogScalarFieldEnum = (typeof QeshmondiSyncLogScalarFieldEnum)[keyof typeof QeshmondiSyncLogScalarFieldEnum]
 
 
+export const QeshmondiFeedEventScalarFieldEnum = {
+  seq: 'seq',
+  userId: 'userId',
+  nationalId: 'nationalId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  qeshmondiEndDate: 'qeshmondiEndDate',
+  createdAt: 'createdAt'
+} as const
+
+export type QeshmondiFeedEventScalarFieldEnum = (typeof QeshmondiFeedEventScalarFieldEnum)[keyof typeof QeshmondiFeedEventScalarFieldEnum]
+
+
 export const QeshmondiLookupScalarFieldEnum = {
   sourceId: 'sourceId',
   code: 'code',
@@ -6265,6 +6353,20 @@ export type ListEnumQeshmondiSyncStatusFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+/**
  * Reference to a field of type 'LocationSource'
  */
 export type EnumLocationSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LocationSource'>
@@ -6573,20 +6675,6 @@ export type ListEnumBoardMinutesAttachmentKindFieldRefInput<$PrismaModel> = Fiel
 
 
 /**
- * Reference to a field of type 'BigInt'
- */
-export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
-    
-
-
-/**
- * Reference to a field of type 'BigInt[]'
- */
-export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
-    
-
-
-/**
  * Reference to a field of type 'PortSalesReportApprovalStatus'
  */
 export type EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortSalesReportApprovalStatus'>
@@ -6855,6 +6943,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   qeshmondiSqlConnection?: Prisma.QeshmondiSqlConnectionOmit
   qeshmondiSyncLog?: Prisma.QeshmondiSyncLogOmit
+  qeshmondiFeedEvent?: Prisma.QeshmondiFeedEventOmit
   qeshmondiLookup?: Prisma.QeshmondiLookupOmit
   userLocationHistory?: Prisma.UserLocationHistoryOmit
   projectGroup?: Prisma.ProjectGroupOmit
