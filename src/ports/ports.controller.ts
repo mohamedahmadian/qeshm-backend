@@ -19,6 +19,11 @@ export class PortsController {
     return this.ports.create(user, dto);
   }
 
+  @Get('operators')
+  findOperators(@CurrentUser() user: PortActor | undefined) {
+    return this.ports.findOperators(user);
+  }
+
   @Get(':id')
   findOne(@CurrentUser() user: PortActor | undefined, @Param('id') id: string) {
     return this.ports.findOne(user, id);

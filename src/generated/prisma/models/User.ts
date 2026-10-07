@@ -84,6 +84,41 @@ export type UserMinAggregateOutputType = {
   isResident: boolean | null
   passportNumber: string | null
   qeshmondiGroup: string | null
+  latinFirstName: string | null
+  latinLastName: string | null
+  latinFatherName: string | null
+  identityNumber: string | null
+  identitySerial: string | null
+  landlinePhone: string | null
+  fax: string | null
+  postalCode: string | null
+  jobAddress: string | null
+  jobPhone: string | null
+  jobFax: string | null
+  jobPostalCode: string | null
+  isSingle: boolean | null
+  nationality: string | null
+  education: string | null
+  protectorOffice: string | null
+  nationalIdExpiresAt: Date | null
+  passportExpiresAt: Date | null
+  bankFullName: string | null
+  bankFullLatinName: string | null
+  accountNumber: string | null
+  cardNumber: string | null
+  cardSeries: string | null
+  isBank: boolean | null
+  accountOpeningDate: Date | null
+  cardIssuanceDate: Date | null
+  cardDeliverDate: Date | null
+  companyName: string | null
+  companySubject: string | null
+  companyLicenseNumber: string | null
+  companyLicenseDate: Date | null
+  companyPaperNumber: string | null
+  companyPaperDate: Date | null
+  electricitySubscription: string | null
+  fingerprint: runtime.Bytes | null
   individualTicketQuota: number | null
   contractorId: string | null
   createdAt: Date | null
@@ -136,6 +171,41 @@ export type UserMaxAggregateOutputType = {
   isResident: boolean | null
   passportNumber: string | null
   qeshmondiGroup: string | null
+  latinFirstName: string | null
+  latinLastName: string | null
+  latinFatherName: string | null
+  identityNumber: string | null
+  identitySerial: string | null
+  landlinePhone: string | null
+  fax: string | null
+  postalCode: string | null
+  jobAddress: string | null
+  jobPhone: string | null
+  jobFax: string | null
+  jobPostalCode: string | null
+  isSingle: boolean | null
+  nationality: string | null
+  education: string | null
+  protectorOffice: string | null
+  nationalIdExpiresAt: Date | null
+  passportExpiresAt: Date | null
+  bankFullName: string | null
+  bankFullLatinName: string | null
+  accountNumber: string | null
+  cardNumber: string | null
+  cardSeries: string | null
+  isBank: boolean | null
+  accountOpeningDate: Date | null
+  cardIssuanceDate: Date | null
+  cardDeliverDate: Date | null
+  companyName: string | null
+  companySubject: string | null
+  companyLicenseNumber: string | null
+  companyLicenseDate: Date | null
+  companyPaperNumber: string | null
+  companyPaperDate: Date | null
+  electricitySubscription: string | null
+  fingerprint: runtime.Bytes | null
   individualTicketQuota: number | null
   contractorId: string | null
   createdAt: Date | null
@@ -189,6 +259,41 @@ export type UserCountAggregateOutputType = {
   isResident: number
   passportNumber: number
   qeshmondiGroup: number
+  latinFirstName: number
+  latinLastName: number
+  latinFatherName: number
+  identityNumber: number
+  identitySerial: number
+  landlinePhone: number
+  fax: number
+  postalCode: number
+  jobAddress: number
+  jobPhone: number
+  jobFax: number
+  jobPostalCode: number
+  isSingle: number
+  nationality: number
+  education: number
+  protectorOffice: number
+  nationalIdExpiresAt: number
+  passportExpiresAt: number
+  bankFullName: number
+  bankFullLatinName: number
+  accountNumber: number
+  cardNumber: number
+  cardSeries: number
+  isBank: number
+  accountOpeningDate: number
+  cardIssuanceDate: number
+  cardDeliverDate: number
+  companyName: number
+  companySubject: number
+  companyLicenseNumber: number
+  companyLicenseDate: number
+  companyPaperNumber: number
+  companyPaperDate: number
+  electricitySubscription: number
+  fingerprint: number
   individualTicketQuota: number
   contractorId: number
   createdAt: number
@@ -255,6 +360,41 @@ export type UserMinAggregateInputType = {
   isResident?: true
   passportNumber?: true
   qeshmondiGroup?: true
+  latinFirstName?: true
+  latinLastName?: true
+  latinFatherName?: true
+  identityNumber?: true
+  identitySerial?: true
+  landlinePhone?: true
+  fax?: true
+  postalCode?: true
+  jobAddress?: true
+  jobPhone?: true
+  jobFax?: true
+  jobPostalCode?: true
+  isSingle?: true
+  nationality?: true
+  education?: true
+  protectorOffice?: true
+  nationalIdExpiresAt?: true
+  passportExpiresAt?: true
+  bankFullName?: true
+  bankFullLatinName?: true
+  accountNumber?: true
+  cardNumber?: true
+  cardSeries?: true
+  isBank?: true
+  accountOpeningDate?: true
+  cardIssuanceDate?: true
+  cardDeliverDate?: true
+  companyName?: true
+  companySubject?: true
+  companyLicenseNumber?: true
+  companyLicenseDate?: true
+  companyPaperNumber?: true
+  companyPaperDate?: true
+  electricitySubscription?: true
+  fingerprint?: true
   individualTicketQuota?: true
   contractorId?: true
   createdAt?: true
@@ -307,6 +447,41 @@ export type UserMaxAggregateInputType = {
   isResident?: true
   passportNumber?: true
   qeshmondiGroup?: true
+  latinFirstName?: true
+  latinLastName?: true
+  latinFatherName?: true
+  identityNumber?: true
+  identitySerial?: true
+  landlinePhone?: true
+  fax?: true
+  postalCode?: true
+  jobAddress?: true
+  jobPhone?: true
+  jobFax?: true
+  jobPostalCode?: true
+  isSingle?: true
+  nationality?: true
+  education?: true
+  protectorOffice?: true
+  nationalIdExpiresAt?: true
+  passportExpiresAt?: true
+  bankFullName?: true
+  bankFullLatinName?: true
+  accountNumber?: true
+  cardNumber?: true
+  cardSeries?: true
+  isBank?: true
+  accountOpeningDate?: true
+  cardIssuanceDate?: true
+  cardDeliverDate?: true
+  companyName?: true
+  companySubject?: true
+  companyLicenseNumber?: true
+  companyLicenseDate?: true
+  companyPaperNumber?: true
+  companyPaperDate?: true
+  electricitySubscription?: true
+  fingerprint?: true
   individualTicketQuota?: true
   contractorId?: true
   createdAt?: true
@@ -360,6 +535,41 @@ export type UserCountAggregateInputType = {
   isResident?: true
   passportNumber?: true
   qeshmondiGroup?: true
+  latinFirstName?: true
+  latinLastName?: true
+  latinFatherName?: true
+  identityNumber?: true
+  identitySerial?: true
+  landlinePhone?: true
+  fax?: true
+  postalCode?: true
+  jobAddress?: true
+  jobPhone?: true
+  jobFax?: true
+  jobPostalCode?: true
+  isSingle?: true
+  nationality?: true
+  education?: true
+  protectorOffice?: true
+  nationalIdExpiresAt?: true
+  passportExpiresAt?: true
+  bankFullName?: true
+  bankFullLatinName?: true
+  accountNumber?: true
+  cardNumber?: true
+  cardSeries?: true
+  isBank?: true
+  accountOpeningDate?: true
+  cardIssuanceDate?: true
+  cardDeliverDate?: true
+  companyName?: true
+  companySubject?: true
+  companyLicenseNumber?: true
+  companyLicenseDate?: true
+  companyPaperNumber?: true
+  companyPaperDate?: true
+  electricitySubscription?: true
+  fingerprint?: true
   individualTicketQuota?: true
   contractorId?: true
   createdAt?: true
@@ -500,6 +710,41 @@ export type UserGroupByOutputType = {
   isResident: boolean
   passportNumber: string | null
   qeshmondiGroup: string | null
+  latinFirstName: string | null
+  latinLastName: string | null
+  latinFatherName: string | null
+  identityNumber: string | null
+  identitySerial: string | null
+  landlinePhone: string | null
+  fax: string | null
+  postalCode: string | null
+  jobAddress: string | null
+  jobPhone: string | null
+  jobFax: string | null
+  jobPostalCode: string | null
+  isSingle: boolean | null
+  nationality: string | null
+  education: string | null
+  protectorOffice: string | null
+  nationalIdExpiresAt: Date | null
+  passportExpiresAt: Date | null
+  bankFullName: string | null
+  bankFullLatinName: string | null
+  accountNumber: string | null
+  cardNumber: string | null
+  cardSeries: string | null
+  isBank: boolean | null
+  accountOpeningDate: Date | null
+  cardIssuanceDate: Date | null
+  cardDeliverDate: Date | null
+  companyName: string | null
+  companySubject: string | null
+  companyLicenseNumber: string | null
+  companyLicenseDate: Date | null
+  companyPaperNumber: string | null
+  companyPaperDate: Date | null
+  electricitySubscription: string | null
+  fingerprint: runtime.Bytes | null
   individualTicketQuota: number
   contractorId: string | null
   createdAt: Date
@@ -576,6 +821,41 @@ export type UserWhereInput = {
   isResident?: Prisma.BoolFilter<"User"> | boolean
   passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
   qeshmondiGroup?: Prisma.StringNullableFilter<"User"> | string | null
+  latinFirstName?: Prisma.StringNullableFilter<"User"> | string | null
+  latinLastName?: Prisma.StringNullableFilter<"User"> | string | null
+  latinFatherName?: Prisma.StringNullableFilter<"User"> | string | null
+  identityNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  identitySerial?: Prisma.StringNullableFilter<"User"> | string | null
+  landlinePhone?: Prisma.StringNullableFilter<"User"> | string | null
+  fax?: Prisma.StringNullableFilter<"User"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"User"> | string | null
+  jobAddress?: Prisma.StringNullableFilter<"User"> | string | null
+  jobPhone?: Prisma.StringNullableFilter<"User"> | string | null
+  jobFax?: Prisma.StringNullableFilter<"User"> | string | null
+  jobPostalCode?: Prisma.StringNullableFilter<"User"> | string | null
+  isSingle?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  nationality?: Prisma.StringNullableFilter<"User"> | string | null
+  education?: Prisma.StringNullableFilter<"User"> | string | null
+  protectorOffice?: Prisma.StringNullableFilter<"User"> | string | null
+  nationalIdExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  passportExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  bankFullName?: Prisma.StringNullableFilter<"User"> | string | null
+  bankFullLatinName?: Prisma.StringNullableFilter<"User"> | string | null
+  accountNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  cardNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  cardSeries?: Prisma.StringNullableFilter<"User"> | string | null
+  isBank?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  accountOpeningDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  cardIssuanceDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  cardDeliverDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  companyName?: Prisma.StringNullableFilter<"User"> | string | null
+  companySubject?: Prisma.StringNullableFilter<"User"> | string | null
+  companyLicenseNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  companyLicenseDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  companyPaperNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  companyPaperDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  electricitySubscription?: Prisma.StringNullableFilter<"User"> | string | null
+  fingerprint?: Prisma.BytesNullableFilter<"User"> | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFilter<"User"> | number
   contractorId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -613,6 +893,7 @@ export type UserWhereInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberListRelationFilter
   portSalesReports?: Prisma.PortSalesReportListRelationFilter
   portSalesReportsApproved?: Prisma.PortSalesReportListRelationFilter
+  operatedPort?: Prisma.XOR<Prisma.PortNullableScalarRelationFilter, Prisma.PortWhereInput> | null
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogListRelationFilter
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionListRelationFilter
 }
@@ -664,6 +945,41 @@ export type UserOrderByWithRelationInput = {
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   qeshmondiGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  latinFirstName?: Prisma.SortOrderInput | Prisma.SortOrder
+  latinLastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  latinFatherName?: Prisma.SortOrderInput | Prisma.SortOrder
+  identityNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  identitySerial?: Prisma.SortOrderInput | Prisma.SortOrder
+  landlinePhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  fax?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobFax?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobPostalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  isSingle?: Prisma.SortOrderInput | Prisma.SortOrder
+  nationality?: Prisma.SortOrderInput | Prisma.SortOrder
+  education?: Prisma.SortOrderInput | Prisma.SortOrder
+  protectorOffice?: Prisma.SortOrderInput | Prisma.SortOrder
+  nationalIdExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  passportExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankFullName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankFullLatinName?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardSeries?: Prisma.SortOrderInput | Prisma.SortOrder
+  isBank?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountOpeningDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardIssuanceDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardDeliverDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyName?: Prisma.SortOrderInput | Prisma.SortOrder
+  companySubject?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyLicenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyLicenseDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyPaperNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyPaperDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  electricitySubscription?: Prisma.SortOrderInput | Prisma.SortOrder
+  fingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
   individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -701,6 +1017,7 @@ export type UserOrderByWithRelationInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberOrderByRelationAggregateInput
   portSalesReports?: Prisma.PortSalesReportOrderByRelationAggregateInput
   portSalesReportsApproved?: Prisma.PortSalesReportOrderByRelationAggregateInput
+  operatedPort?: Prisma.PortOrderByWithRelationInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogOrderByRelationAggregateInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionOrderByRelationAggregateInput
 }
@@ -755,6 +1072,41 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isResident?: Prisma.BoolFilter<"User"> | boolean
   passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
   qeshmondiGroup?: Prisma.StringNullableFilter<"User"> | string | null
+  latinFirstName?: Prisma.StringNullableFilter<"User"> | string | null
+  latinLastName?: Prisma.StringNullableFilter<"User"> | string | null
+  latinFatherName?: Prisma.StringNullableFilter<"User"> | string | null
+  identityNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  identitySerial?: Prisma.StringNullableFilter<"User"> | string | null
+  landlinePhone?: Prisma.StringNullableFilter<"User"> | string | null
+  fax?: Prisma.StringNullableFilter<"User"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"User"> | string | null
+  jobAddress?: Prisma.StringNullableFilter<"User"> | string | null
+  jobPhone?: Prisma.StringNullableFilter<"User"> | string | null
+  jobFax?: Prisma.StringNullableFilter<"User"> | string | null
+  jobPostalCode?: Prisma.StringNullableFilter<"User"> | string | null
+  isSingle?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  nationality?: Prisma.StringNullableFilter<"User"> | string | null
+  education?: Prisma.StringNullableFilter<"User"> | string | null
+  protectorOffice?: Prisma.StringNullableFilter<"User"> | string | null
+  nationalIdExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  passportExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  bankFullName?: Prisma.StringNullableFilter<"User"> | string | null
+  bankFullLatinName?: Prisma.StringNullableFilter<"User"> | string | null
+  accountNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  cardNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  cardSeries?: Prisma.StringNullableFilter<"User"> | string | null
+  isBank?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  accountOpeningDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  cardIssuanceDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  cardDeliverDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  companyName?: Prisma.StringNullableFilter<"User"> | string | null
+  companySubject?: Prisma.StringNullableFilter<"User"> | string | null
+  companyLicenseNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  companyLicenseDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  companyPaperNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  companyPaperDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  electricitySubscription?: Prisma.StringNullableFilter<"User"> | string | null
+  fingerprint?: Prisma.BytesNullableFilter<"User"> | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFilter<"User"> | number
   contractorId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -792,6 +1144,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   boardMinutesMemberships?: Prisma.BoardMinutesMemberListRelationFilter
   portSalesReports?: Prisma.PortSalesReportListRelationFilter
   portSalesReportsApproved?: Prisma.PortSalesReportListRelationFilter
+  operatedPort?: Prisma.XOR<Prisma.PortNullableScalarRelationFilter, Prisma.PortWhereInput> | null
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogListRelationFilter
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionListRelationFilter
 }, "id" | "username" | "nationalId" | "phone" | "email">
@@ -843,6 +1196,41 @@ export type UserOrderByWithAggregationInput = {
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   qeshmondiGroup?: Prisma.SortOrderInput | Prisma.SortOrder
+  latinFirstName?: Prisma.SortOrderInput | Prisma.SortOrder
+  latinLastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  latinFatherName?: Prisma.SortOrderInput | Prisma.SortOrder
+  identityNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  identitySerial?: Prisma.SortOrderInput | Prisma.SortOrder
+  landlinePhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  fax?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobFax?: Prisma.SortOrderInput | Prisma.SortOrder
+  jobPostalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  isSingle?: Prisma.SortOrderInput | Prisma.SortOrder
+  nationality?: Prisma.SortOrderInput | Prisma.SortOrder
+  education?: Prisma.SortOrderInput | Prisma.SortOrder
+  protectorOffice?: Prisma.SortOrderInput | Prisma.SortOrder
+  nationalIdExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  passportExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankFullName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankFullLatinName?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardSeries?: Prisma.SortOrderInput | Prisma.SortOrder
+  isBank?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountOpeningDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardIssuanceDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardDeliverDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyName?: Prisma.SortOrderInput | Prisma.SortOrder
+  companySubject?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyLicenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyLicenseDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyPaperNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyPaperDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  electricitySubscription?: Prisma.SortOrderInput | Prisma.SortOrder
+  fingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
   individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -904,6 +1292,41 @@ export type UserScalarWhereWithAggregatesInput = {
   isResident?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   passportNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   qeshmondiGroup?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  latinFirstName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  latinLastName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  latinFatherName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  identityNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  identitySerial?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  landlinePhone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  fax?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  postalCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  jobAddress?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  jobPhone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  jobFax?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  jobPostalCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isSingle?: Prisma.BoolNullableWithAggregatesFilter<"User"> | boolean | null
+  nationality?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  education?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  protectorOffice?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  nationalIdExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  passportExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  bankFullName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  bankFullLatinName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  accountNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  cardNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  cardSeries?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  isBank?: Prisma.BoolNullableWithAggregatesFilter<"User"> | boolean | null
+  accountOpeningDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  cardIssuanceDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  cardDeliverDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  companyName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  companySubject?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  companyLicenseNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  companyLicenseDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  companyPaperNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  companyPaperDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  electricitySubscription?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  fingerprint?: Prisma.BytesNullableWithAggregatesFilter<"User"> | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntWithAggregatesFilter<"User"> | number
   contractorId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -946,6 +1369,41 @@ export type UserCreateInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -982,6 +1440,7 @@ export type UserCreateInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -1033,6 +1492,41 @@ export type UserUncheckedCreateInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -1058,6 +1552,7 @@ export type UserUncheckedCreateInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -1098,6 +1593,41 @@ export type UserUpdateInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1134,6 +1664,7 @@ export type UserUpdateInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -1185,6 +1716,41 @@ export type UserUncheckedUpdateInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1210,6 +1776,7 @@ export type UserUncheckedUpdateInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -1261,6 +1828,41 @@ export type UserCreateManyInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -1303,6 +1905,41 @@ export type UserUpdateManyMutationInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1355,6 +1992,41 @@ export type UserUncheckedUpdateManyInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1426,6 +2098,41 @@ export type UserCountOrderByAggregateInput = {
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrder
   qeshmondiGroup?: Prisma.SortOrder
+  latinFirstName?: Prisma.SortOrder
+  latinLastName?: Prisma.SortOrder
+  latinFatherName?: Prisma.SortOrder
+  identityNumber?: Prisma.SortOrder
+  identitySerial?: Prisma.SortOrder
+  landlinePhone?: Prisma.SortOrder
+  fax?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  jobAddress?: Prisma.SortOrder
+  jobPhone?: Prisma.SortOrder
+  jobFax?: Prisma.SortOrder
+  jobPostalCode?: Prisma.SortOrder
+  isSingle?: Prisma.SortOrder
+  nationality?: Prisma.SortOrder
+  education?: Prisma.SortOrder
+  protectorOffice?: Prisma.SortOrder
+  nationalIdExpiresAt?: Prisma.SortOrder
+  passportExpiresAt?: Prisma.SortOrder
+  bankFullName?: Prisma.SortOrder
+  bankFullLatinName?: Prisma.SortOrder
+  accountNumber?: Prisma.SortOrder
+  cardNumber?: Prisma.SortOrder
+  cardSeries?: Prisma.SortOrder
+  isBank?: Prisma.SortOrder
+  accountOpeningDate?: Prisma.SortOrder
+  cardIssuanceDate?: Prisma.SortOrder
+  cardDeliverDate?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  companySubject?: Prisma.SortOrder
+  companyLicenseNumber?: Prisma.SortOrder
+  companyLicenseDate?: Prisma.SortOrder
+  companyPaperNumber?: Prisma.SortOrder
+  companyPaperDate?: Prisma.SortOrder
+  electricitySubscription?: Prisma.SortOrder
+  fingerprint?: Prisma.SortOrder
   individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1484,6 +2191,41 @@ export type UserMaxOrderByAggregateInput = {
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrder
   qeshmondiGroup?: Prisma.SortOrder
+  latinFirstName?: Prisma.SortOrder
+  latinLastName?: Prisma.SortOrder
+  latinFatherName?: Prisma.SortOrder
+  identityNumber?: Prisma.SortOrder
+  identitySerial?: Prisma.SortOrder
+  landlinePhone?: Prisma.SortOrder
+  fax?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  jobAddress?: Prisma.SortOrder
+  jobPhone?: Prisma.SortOrder
+  jobFax?: Prisma.SortOrder
+  jobPostalCode?: Prisma.SortOrder
+  isSingle?: Prisma.SortOrder
+  nationality?: Prisma.SortOrder
+  education?: Prisma.SortOrder
+  protectorOffice?: Prisma.SortOrder
+  nationalIdExpiresAt?: Prisma.SortOrder
+  passportExpiresAt?: Prisma.SortOrder
+  bankFullName?: Prisma.SortOrder
+  bankFullLatinName?: Prisma.SortOrder
+  accountNumber?: Prisma.SortOrder
+  cardNumber?: Prisma.SortOrder
+  cardSeries?: Prisma.SortOrder
+  isBank?: Prisma.SortOrder
+  accountOpeningDate?: Prisma.SortOrder
+  cardIssuanceDate?: Prisma.SortOrder
+  cardDeliverDate?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  companySubject?: Prisma.SortOrder
+  companyLicenseNumber?: Prisma.SortOrder
+  companyLicenseDate?: Prisma.SortOrder
+  companyPaperNumber?: Prisma.SortOrder
+  companyPaperDate?: Prisma.SortOrder
+  electricitySubscription?: Prisma.SortOrder
+  fingerprint?: Prisma.SortOrder
   individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1536,6 +2278,41 @@ export type UserMinOrderByAggregateInput = {
   isResident?: Prisma.SortOrder
   passportNumber?: Prisma.SortOrder
   qeshmondiGroup?: Prisma.SortOrder
+  latinFirstName?: Prisma.SortOrder
+  latinLastName?: Prisma.SortOrder
+  latinFatherName?: Prisma.SortOrder
+  identityNumber?: Prisma.SortOrder
+  identitySerial?: Prisma.SortOrder
+  landlinePhone?: Prisma.SortOrder
+  fax?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  jobAddress?: Prisma.SortOrder
+  jobPhone?: Prisma.SortOrder
+  jobFax?: Prisma.SortOrder
+  jobPostalCode?: Prisma.SortOrder
+  isSingle?: Prisma.SortOrder
+  nationality?: Prisma.SortOrder
+  education?: Prisma.SortOrder
+  protectorOffice?: Prisma.SortOrder
+  nationalIdExpiresAt?: Prisma.SortOrder
+  passportExpiresAt?: Prisma.SortOrder
+  bankFullName?: Prisma.SortOrder
+  bankFullLatinName?: Prisma.SortOrder
+  accountNumber?: Prisma.SortOrder
+  cardNumber?: Prisma.SortOrder
+  cardSeries?: Prisma.SortOrder
+  isBank?: Prisma.SortOrder
+  accountOpeningDate?: Prisma.SortOrder
+  cardIssuanceDate?: Prisma.SortOrder
+  cardDeliverDate?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  companySubject?: Prisma.SortOrder
+  companyLicenseNumber?: Prisma.SortOrder
+  companyLicenseDate?: Prisma.SortOrder
+  companyPaperNumber?: Prisma.SortOrder
+  companyPaperDate?: Prisma.SortOrder
+  electricitySubscription?: Prisma.SortOrder
+  fingerprint?: Prisma.SortOrder
   individualTicketQuota?: Prisma.SortOrder
   contractorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1959,6 +2736,14 @@ export type NullableEnumReligionFieldUpdateOperationsInput = {
 export type UserUpdatevehiclePlatesInput = {
   set?: string[]
   push?: string | string[]
+}
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+}
+
+export type NullableBytesFieldUpdateOperationsInput = {
+  set?: runtime.Bytes | null
 }
 
 export type UserCreateNestedOneWithoutQeshmondiSqlConnectionsInput = {
@@ -2435,6 +3220,22 @@ export type UserUpdateOneRequiredWithoutStakeholderMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStakeholderMessagesInput, Prisma.UserUpdateWithoutStakeholderMessagesInput>, Prisma.UserUncheckedUpdateWithoutStakeholderMessagesInput>
 }
 
+export type UserCreateNestedOneWithoutOperatedPortInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOperatedPortInput, Prisma.UserUncheckedCreateWithoutOperatedPortInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOperatedPortInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutOperatedPortNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOperatedPortInput, Prisma.UserUncheckedCreateWithoutOperatedPortInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOperatedPortInput
+  upsert?: Prisma.UserUpsertWithoutOperatedPortInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOperatedPortInput, Prisma.UserUpdateWithoutOperatedPortInput>, Prisma.UserUncheckedUpdateWithoutOperatedPortInput>
+}
+
 export type UserCreateWithoutPhotoInput = {
   id?: string
   username: string
@@ -2471,6 +3272,41 @@ export type UserCreateWithoutPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2506,6 +3342,7 @@ export type UserCreateWithoutPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -2556,6 +3393,41 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -2581,6 +3453,7 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -2631,6 +3504,41 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2666,6 +3574,7 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -2716,6 +3625,41 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -2741,6 +3685,7 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -2791,6 +3736,41 @@ export type UserCreateWithoutPassportPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2826,6 +3806,7 @@ export type UserCreateWithoutPassportPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -2876,6 +3857,41 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -2901,6 +3917,7 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -2951,6 +3968,41 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2986,6 +4038,7 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -3036,6 +4089,41 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -3061,6 +4149,7 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -3141,6 +4230,41 @@ export type UserScalarWhereInput = {
   isResident?: Prisma.BoolFilter<"User"> | boolean
   passportNumber?: Prisma.StringNullableFilter<"User"> | string | null
   qeshmondiGroup?: Prisma.StringNullableFilter<"User"> | string | null
+  latinFirstName?: Prisma.StringNullableFilter<"User"> | string | null
+  latinLastName?: Prisma.StringNullableFilter<"User"> | string | null
+  latinFatherName?: Prisma.StringNullableFilter<"User"> | string | null
+  identityNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  identitySerial?: Prisma.StringNullableFilter<"User"> | string | null
+  landlinePhone?: Prisma.StringNullableFilter<"User"> | string | null
+  fax?: Prisma.StringNullableFilter<"User"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"User"> | string | null
+  jobAddress?: Prisma.StringNullableFilter<"User"> | string | null
+  jobPhone?: Prisma.StringNullableFilter<"User"> | string | null
+  jobFax?: Prisma.StringNullableFilter<"User"> | string | null
+  jobPostalCode?: Prisma.StringNullableFilter<"User"> | string | null
+  isSingle?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  nationality?: Prisma.StringNullableFilter<"User"> | string | null
+  education?: Prisma.StringNullableFilter<"User"> | string | null
+  protectorOffice?: Prisma.StringNullableFilter<"User"> | string | null
+  nationalIdExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  passportExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  bankFullName?: Prisma.StringNullableFilter<"User"> | string | null
+  bankFullLatinName?: Prisma.StringNullableFilter<"User"> | string | null
+  accountNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  cardNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  cardSeries?: Prisma.StringNullableFilter<"User"> | string | null
+  isBank?: Prisma.BoolNullableFilter<"User"> | boolean | null
+  accountOpeningDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  cardIssuanceDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  cardDeliverDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  companyName?: Prisma.StringNullableFilter<"User"> | string | null
+  companySubject?: Prisma.StringNullableFilter<"User"> | string | null
+  companyLicenseNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  companyLicenseDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  companyPaperNumber?: Prisma.StringNullableFilter<"User"> | string | null
+  companyPaperDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  electricitySubscription?: Prisma.StringNullableFilter<"User"> | string | null
+  fingerprint?: Prisma.BytesNullableFilter<"User"> | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFilter<"User"> | number
   contractorId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -3231,6 +4355,41 @@ export type UserCreateWithoutCountryInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3266,6 +4425,7 @@ export type UserCreateWithoutCountryInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -3316,6 +4476,41 @@ export type UserUncheckedCreateWithoutCountryInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -3341,6 +4536,7 @@ export type UserUncheckedCreateWithoutCountryInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -3407,6 +4603,41 @@ export type UserCreateWithoutProvinceInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3442,6 +4673,7 @@ export type UserCreateWithoutProvinceInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -3492,6 +4724,41 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -3517,6 +4784,7 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -3567,6 +4835,41 @@ export type UserCreateWithoutLocationProvinceInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3602,6 +4905,7 @@ export type UserCreateWithoutLocationProvinceInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -3652,6 +4956,41 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -3677,6 +5016,7 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -3759,6 +5099,41 @@ export type UserCreateWithoutCityInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3794,6 +5169,7 @@ export type UserCreateWithoutCityInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -3844,6 +5220,41 @@ export type UserUncheckedCreateWithoutCityInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -3869,6 +5280,7 @@ export type UserUncheckedCreateWithoutCityInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -3919,6 +5331,41 @@ export type UserCreateWithoutLocationCityInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3954,6 +5401,7 @@ export type UserCreateWithoutLocationCityInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -4004,6 +5452,41 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -4029,6 +5512,7 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -4111,6 +5595,41 @@ export type UserCreateWithoutQeshmondiSqlConnectionsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4147,6 +5666,7 @@ export type UserCreateWithoutQeshmondiSqlConnectionsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
 }
 
@@ -4197,6 +5717,41 @@ export type UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -4222,6 +5777,7 @@ export type UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
 }
 
@@ -4277,6 +5833,41 @@ export type UserUpdateWithoutQeshmondiSqlConnectionsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4313,6 +5904,7 @@ export type UserUpdateWithoutQeshmondiSqlConnectionsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
 }
 
@@ -4363,6 +5955,41 @@ export type UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4388,6 +6015,7 @@ export type UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
@@ -4427,6 +6055,41 @@ export type UserCreateWithoutQeshmondiSyncLogsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4463,6 +6126,7 @@ export type UserCreateWithoutQeshmondiSyncLogsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
 
@@ -4513,6 +6177,41 @@ export type UserUncheckedCreateWithoutQeshmondiSyncLogsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -4538,6 +6237,7 @@ export type UserUncheckedCreateWithoutQeshmondiSyncLogsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
@@ -4593,6 +6293,41 @@ export type UserUpdateWithoutQeshmondiSyncLogsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4629,6 +6364,7 @@ export type UserUpdateWithoutQeshmondiSyncLogsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
 
@@ -4679,6 +6415,41 @@ export type UserUncheckedUpdateWithoutQeshmondiSyncLogsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4704,6 +6475,7 @@ export type UserUncheckedUpdateWithoutQeshmondiSyncLogsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
@@ -4743,6 +6515,41 @@ export type UserCreateWithoutLocationHistoriesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4778,6 +6585,7 @@ export type UserCreateWithoutLocationHistoriesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -4829,6 +6637,41 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -4853,6 +6696,7 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -4909,6 +6753,41 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4944,6 +6823,7 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -4995,6 +6875,41 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5019,6 +6934,7 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -5059,6 +6975,41 @@ export type UserCreateWithoutContractorInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5094,6 +7045,7 @@ export type UserCreateWithoutContractorInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -5145,6 +7097,41 @@ export type UserUncheckedCreateWithoutContractorInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5169,6 +7156,7 @@ export type UserUncheckedCreateWithoutContractorInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -5235,6 +7223,41 @@ export type UserCreateWithoutPositionInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5270,6 +7293,7 @@ export type UserCreateWithoutPositionInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -5320,6 +7344,41 @@ export type UserUncheckedCreateWithoutPositionInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -5345,6 +7404,7 @@ export type UserUncheckedCreateWithoutPositionInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -5411,6 +7471,41 @@ export type UserCreateWithoutNutritionUnitsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5446,6 +7541,7 @@ export type UserCreateWithoutNutritionUnitsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -5497,6 +7593,41 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -5521,6 +7652,7 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -5566,6 +7698,41 @@ export type UserCreateWithoutOrgUnitInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5601,6 +7768,7 @@ export type UserCreateWithoutOrgUnitInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -5651,6 +7819,41 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -5676,6 +7879,7 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -5737,6 +7941,41 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5772,6 +8011,7 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -5823,6 +8063,41 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5847,6 +8122,7 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -5903,6 +8179,41 @@ export type UserCreateWithoutFoodReservationsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5938,6 +8249,7 @@ export type UserCreateWithoutFoodReservationsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -5989,6 +8301,41 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -6013,6 +8360,7 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -6069,6 +8417,41 @@ export type UserUpdateWithoutFoodReservationsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6104,6 +8487,7 @@ export type UserUpdateWithoutFoodReservationsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -6155,6 +8539,41 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6179,6 +8598,7 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -6219,6 +8639,41 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6254,6 +8709,7 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -6305,6 +8761,41 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -6329,6 +8820,7 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -6385,6 +8877,41 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6420,6 +8947,7 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -6471,6 +8999,41 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6495,6 +9058,7 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -6535,6 +9099,41 @@ export type UserCreateWithoutUserRolesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6570,6 +9169,7 @@ export type UserCreateWithoutUserRolesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -6621,6 +9221,41 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -6645,6 +9280,7 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -6701,6 +9337,41 @@ export type UserUpdateWithoutUserRolesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6736,6 +9407,7 @@ export type UserUpdateWithoutUserRolesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -6787,6 +9459,41 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6811,6 +9518,7 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -6851,6 +9559,41 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6886,6 +9629,7 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -6937,6 +9681,41 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -6961,6 +9740,7 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -7006,6 +9786,41 @@ export type UserCreateWithoutSingardRepliesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7041,6 +9856,7 @@ export type UserCreateWithoutSingardRepliesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -7092,6 +9908,41 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -7116,6 +9967,7 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -7172,6 +10024,41 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7207,6 +10094,7 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -7258,6 +10146,41 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7282,6 +10205,7 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -7333,6 +10257,41 @@ export type UserUpdateWithoutSingardRepliesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7368,6 +10327,7 @@ export type UserUpdateWithoutSingardRepliesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -7419,6 +10379,41 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7443,6 +10438,7 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -7483,6 +10479,41 @@ export type UserCreateWithoutSingardActivitiesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7518,6 +10549,7 @@ export type UserCreateWithoutSingardActivitiesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -7569,6 +10601,41 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -7593,6 +10660,7 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -7649,6 +10717,41 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7684,6 +10787,7 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -7735,6 +10839,41 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7759,6 +10898,7 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -7799,6 +10939,41 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7834,6 +11009,7 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -7885,6 +11061,41 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -7909,6 +11120,7 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -7954,6 +11166,41 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7989,6 +11236,7 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -8040,6 +11288,41 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -8064,6 +11347,7 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -8109,6 +11393,41 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8144,6 +11463,7 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -8195,6 +11515,41 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -8219,6 +11574,7 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -8264,6 +11620,41 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8299,6 +11690,7 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -8350,6 +11742,41 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -8374,6 +11801,7 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -8419,6 +11847,41 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8454,6 +11917,7 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -8505,6 +11969,41 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -8529,6 +12028,7 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -8574,6 +12074,41 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8609,6 +12144,7 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -8660,6 +12196,41 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -8684,6 +12255,7 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -8740,6 +12312,41 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8775,6 +12382,7 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -8826,6 +12434,41 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8850,6 +12493,7 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -8901,6 +12545,41 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8936,6 +12615,7 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -8987,6 +12667,41 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9011,6 +12726,7 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9062,6 +12778,41 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9097,6 +12848,7 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9148,6 +12900,41 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9172,6 +12959,7 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9223,6 +13011,41 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9258,6 +13081,7 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9309,6 +13133,41 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9333,6 +13192,7 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9384,6 +13244,41 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9419,6 +13314,7 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9470,6 +13366,41 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9494,6 +13425,7 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9545,6 +13477,41 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9580,6 +13547,7 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9631,6 +13599,41 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9655,6 +13658,7 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9695,6 +13699,41 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9730,6 +13769,7 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -9781,6 +13821,41 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -9805,6 +13880,7 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -9861,6 +13937,41 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9896,6 +14007,7 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -9947,6 +14059,41 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9971,6 +14118,7 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -10011,6 +14159,41 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10046,6 +14229,7 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -10097,6 +14281,41 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -10121,6 +14340,7 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -10177,6 +14397,41 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10212,6 +14467,7 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -10263,6 +14519,41 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10287,6 +14578,7 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -10327,6 +14619,41 @@ export type UserCreateWithoutPortSalesReportsApprovedInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10362,6 +14689,7 @@ export type UserCreateWithoutPortSalesReportsApprovedInput = {
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -10413,6 +14741,41 @@ export type UserUncheckedCreateWithoutPortSalesReportsApprovedInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -10437,6 +14800,7 @@ export type UserUncheckedCreateWithoutPortSalesReportsApprovedInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -10482,6 +14846,41 @@ export type UserCreateWithoutPortSalesReportsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10517,6 +14916,7 @@ export type UserCreateWithoutPortSalesReportsInput = {
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -10568,6 +14968,41 @@ export type UserUncheckedCreateWithoutPortSalesReportsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -10592,6 +15027,7 @@ export type UserUncheckedCreateWithoutPortSalesReportsInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -10648,6 +15084,41 @@ export type UserUpdateWithoutPortSalesReportsApprovedInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10683,6 +15154,7 @@ export type UserUpdateWithoutPortSalesReportsApprovedInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -10734,6 +15206,41 @@ export type UserUncheckedUpdateWithoutPortSalesReportsApprovedInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10758,6 +15265,7 @@ export type UserUncheckedUpdateWithoutPortSalesReportsApprovedInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -10809,6 +15317,41 @@ export type UserUpdateWithoutPortSalesReportsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10844,6 +15387,7 @@ export type UserUpdateWithoutPortSalesReportsInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -10895,6 +15439,41 @@ export type UserUncheckedUpdateWithoutPortSalesReportsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10919,6 +15498,7 @@ export type UserUncheckedUpdateWithoutPortSalesReportsInput = {
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -10959,6 +15539,41 @@ export type UserCreateWithoutStakeholderReportsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10994,6 +15609,7 @@ export type UserCreateWithoutStakeholderReportsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -11045,6 +15661,41 @@ export type UserUncheckedCreateWithoutStakeholderReportsInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -11069,6 +15720,7 @@ export type UserUncheckedCreateWithoutStakeholderReportsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -11125,6 +15777,41 @@ export type UserUpdateWithoutStakeholderReportsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11160,6 +15847,7 @@ export type UserUpdateWithoutStakeholderReportsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -11211,6 +15899,41 @@ export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11235,6 +15958,7 @@ export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -11275,6 +15999,41 @@ export type UserCreateWithoutStakeholderCorrespondencesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11310,6 +16069,7 @@ export type UserCreateWithoutStakeholderCorrespondencesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -11361,6 +16121,41 @@ export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -11385,6 +16180,7 @@ export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -11441,6 +16237,41 @@ export type UserUpdateWithoutStakeholderCorrespondencesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11476,6 +16307,7 @@ export type UserUpdateWithoutStakeholderCorrespondencesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -11527,6 +16359,41 @@ export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11551,6 +16418,7 @@ export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -11591,6 +16459,41 @@ export type UserCreateWithoutStakeholderMessagesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11626,6 +16529,7 @@ export type UserCreateWithoutStakeholderMessagesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
 }
@@ -11677,6 +16581,41 @@ export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -11701,6 +16640,7 @@ export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
@@ -11757,6 +16697,41 @@ export type UserUpdateWithoutStakeholderMessagesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11792,6 +16767,7 @@ export type UserUpdateWithoutStakeholderMessagesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -11843,6 +16819,41 @@ export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11857,6 +16868,467 @@ export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
   singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutOperatedPortInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutOperatedPortInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutOperatedPortInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOperatedPortInput, Prisma.UserUncheckedCreateWithoutOperatedPortInput>
+}
+
+export type UserUpsertWithoutOperatedPortInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOperatedPortInput, Prisma.UserUncheckedUpdateWithoutOperatedPortInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOperatedPortInput, Prisma.UserUncheckedCreateWithoutOperatedPortInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOperatedPortInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOperatedPortInput, Prisma.UserUncheckedUpdateWithoutOperatedPortInput>
+}
+
+export type UserUpdateWithoutOperatedPortInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOperatedPortInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
   boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
   boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
@@ -11917,6 +17389,41 @@ export type UserCreateManyPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -11969,6 +17476,41 @@ export type UserCreateManyNationalCardPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -12021,6 +17563,41 @@ export type UserCreateManyPassportPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -12073,6 +17650,41 @@ export type UserCreateManyIdentityBookletPhotoInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -12115,6 +17727,41 @@ export type UserUpdateWithoutPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12150,6 +17797,7 @@ export type UserUpdateWithoutPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -12200,6 +17848,41 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12225,6 +17908,7 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -12275,6 +17959,41 @@ export type UserUncheckedUpdateManyWithoutPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12317,6 +18036,41 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12352,6 +18106,7 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -12402,6 +18157,41 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12427,6 +18217,7 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -12477,6 +18268,41 @@ export type UserUncheckedUpdateManyWithoutNationalCardPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12519,6 +18345,41 @@ export type UserUpdateWithoutPassportPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12554,6 +18415,7 @@ export type UserUpdateWithoutPassportPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -12604,6 +18466,41 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12629,6 +18526,7 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -12679,6 +18577,41 @@ export type UserUncheckedUpdateManyWithoutPassportPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12721,6 +18654,41 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12756,6 +18724,7 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -12806,6 +18775,41 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12831,6 +18835,7 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -12881,6 +18886,41 @@ export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12933,6 +18973,41 @@ export type UserCreateManyCountryInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -12975,6 +19050,41 @@ export type UserUpdateWithoutCountryInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13010,6 +19120,7 @@ export type UserUpdateWithoutCountryInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -13060,6 +19171,41 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13085,6 +19231,7 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -13135,6 +19282,41 @@ export type UserUncheckedUpdateManyWithoutCountryInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13187,6 +19369,41 @@ export type UserCreateManyProvinceInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -13239,6 +19456,41 @@ export type UserCreateManyLocationProvinceInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -13281,6 +19533,41 @@ export type UserUpdateWithoutProvinceInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13316,6 +19603,7 @@ export type UserUpdateWithoutProvinceInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -13366,6 +19654,41 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13391,6 +19714,7 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -13441,6 +19765,41 @@ export type UserUncheckedUpdateManyWithoutProvinceInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13483,6 +19842,41 @@ export type UserUpdateWithoutLocationProvinceInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13518,6 +19912,7 @@ export type UserUpdateWithoutLocationProvinceInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -13568,6 +19963,41 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13593,6 +20023,7 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -13643,6 +20074,41 @@ export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13695,6 +20161,41 @@ export type UserCreateManyCityInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -13747,6 +20248,41 @@ export type UserCreateManyLocationCityInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -13789,6 +20325,41 @@ export type UserUpdateWithoutCityInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13824,6 +20395,7 @@ export type UserUpdateWithoutCityInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -13874,6 +20446,41 @@ export type UserUncheckedUpdateWithoutCityInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13899,6 +20506,7 @@ export type UserUncheckedUpdateWithoutCityInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -13949,6 +20557,41 @@ export type UserUncheckedUpdateManyWithoutCityInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13991,6 +20634,41 @@ export type UserUpdateWithoutLocationCityInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14026,6 +20704,7 @@ export type UserUpdateWithoutLocationCityInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -14076,6 +20755,41 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14101,6 +20815,7 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -14151,6 +20866,41 @@ export type UserUncheckedUpdateManyWithoutLocationCityInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14204,6 +20954,41 @@ export type UserCreateManyContractorInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -14245,6 +21030,41 @@ export type UserUpdateWithoutContractorInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14280,6 +21100,7 @@ export type UserUpdateWithoutContractorInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -14331,6 +21152,41 @@ export type UserUncheckedUpdateWithoutContractorInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14355,6 +21211,7 @@ export type UserUncheckedUpdateWithoutContractorInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -14406,6 +21263,41 @@ export type UserUncheckedUpdateManyWithoutContractorInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14457,6 +21349,41 @@ export type UserCreateManyPositionInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -14499,6 +21426,41 @@ export type UserUpdateWithoutPositionInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14534,6 +21496,7 @@ export type UserUpdateWithoutPositionInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -14584,6 +21547,41 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14609,6 +21607,7 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -14659,6 +21658,41 @@ export type UserUncheckedUpdateManyWithoutPositionInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14711,6 +21745,41 @@ export type UserCreateManyOrgUnitInput = {
   isResident?: boolean
   passportNumber?: string | null
   qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
   individualTicketQuota?: number
   contractorId?: string | null
   createdAt?: Date | string
@@ -14753,6 +21822,41 @@ export type UserUpdateWithoutOrgUnitInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14788,6 +21892,7 @@ export type UserUpdateWithoutOrgUnitInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
 }
@@ -14838,6 +21943,41 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14863,6 +22003,7 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
   qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
@@ -14913,6 +22054,41 @@ export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
   isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
   passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
   individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
   contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15195,6 +22371,41 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isResident?: boolean
   passportNumber?: boolean
   qeshmondiGroup?: boolean
+  latinFirstName?: boolean
+  latinLastName?: boolean
+  latinFatherName?: boolean
+  identityNumber?: boolean
+  identitySerial?: boolean
+  landlinePhone?: boolean
+  fax?: boolean
+  postalCode?: boolean
+  jobAddress?: boolean
+  jobPhone?: boolean
+  jobFax?: boolean
+  jobPostalCode?: boolean
+  isSingle?: boolean
+  nationality?: boolean
+  education?: boolean
+  protectorOffice?: boolean
+  nationalIdExpiresAt?: boolean
+  passportExpiresAt?: boolean
+  bankFullName?: boolean
+  bankFullLatinName?: boolean
+  accountNumber?: boolean
+  cardNumber?: boolean
+  cardSeries?: boolean
+  isBank?: boolean
+  accountOpeningDate?: boolean
+  cardIssuanceDate?: boolean
+  cardDeliverDate?: boolean
+  companyName?: boolean
+  companySubject?: boolean
+  companyLicenseNumber?: boolean
+  companyLicenseDate?: boolean
+  companyPaperNumber?: boolean
+  companyPaperDate?: boolean
+  electricitySubscription?: boolean
+  fingerprint?: boolean
   individualTicketQuota?: boolean
   contractorId?: boolean
   createdAt?: boolean
@@ -15232,6 +22443,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   boardMinutesMemberships?: boolean | Prisma.User$boardMinutesMembershipsArgs<ExtArgs>
   portSalesReports?: boolean | Prisma.User$portSalesReportsArgs<ExtArgs>
   portSalesReportsApproved?: boolean | Prisma.User$portSalesReportsApprovedArgs<ExtArgs>
+  operatedPort?: boolean | Prisma.User$operatedPortArgs<ExtArgs>
   qeshmondiSyncLogs?: boolean | Prisma.User$qeshmondiSyncLogsArgs<ExtArgs>
   qeshmondiSqlConnections?: boolean | Prisma.User$qeshmondiSqlConnectionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -15284,6 +22496,41 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isResident?: boolean
   passportNumber?: boolean
   qeshmondiGroup?: boolean
+  latinFirstName?: boolean
+  latinLastName?: boolean
+  latinFatherName?: boolean
+  identityNumber?: boolean
+  identitySerial?: boolean
+  landlinePhone?: boolean
+  fax?: boolean
+  postalCode?: boolean
+  jobAddress?: boolean
+  jobPhone?: boolean
+  jobFax?: boolean
+  jobPostalCode?: boolean
+  isSingle?: boolean
+  nationality?: boolean
+  education?: boolean
+  protectorOffice?: boolean
+  nationalIdExpiresAt?: boolean
+  passportExpiresAt?: boolean
+  bankFullName?: boolean
+  bankFullLatinName?: boolean
+  accountNumber?: boolean
+  cardNumber?: boolean
+  cardSeries?: boolean
+  isBank?: boolean
+  accountOpeningDate?: boolean
+  cardIssuanceDate?: boolean
+  cardDeliverDate?: boolean
+  companyName?: boolean
+  companySubject?: boolean
+  companyLicenseNumber?: boolean
+  companyLicenseDate?: boolean
+  companyPaperNumber?: boolean
+  companyPaperDate?: boolean
+  electricitySubscription?: boolean
+  fingerprint?: boolean
   individualTicketQuota?: boolean
   contractorId?: boolean
   createdAt?: boolean
@@ -15349,6 +22596,41 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isResident?: boolean
   passportNumber?: boolean
   qeshmondiGroup?: boolean
+  latinFirstName?: boolean
+  latinLastName?: boolean
+  latinFatherName?: boolean
+  identityNumber?: boolean
+  identitySerial?: boolean
+  landlinePhone?: boolean
+  fax?: boolean
+  postalCode?: boolean
+  jobAddress?: boolean
+  jobPhone?: boolean
+  jobFax?: boolean
+  jobPostalCode?: boolean
+  isSingle?: boolean
+  nationality?: boolean
+  education?: boolean
+  protectorOffice?: boolean
+  nationalIdExpiresAt?: boolean
+  passportExpiresAt?: boolean
+  bankFullName?: boolean
+  bankFullLatinName?: boolean
+  accountNumber?: boolean
+  cardNumber?: boolean
+  cardSeries?: boolean
+  isBank?: boolean
+  accountOpeningDate?: boolean
+  cardIssuanceDate?: boolean
+  cardDeliverDate?: boolean
+  companyName?: boolean
+  companySubject?: boolean
+  companyLicenseNumber?: boolean
+  companyLicenseDate?: boolean
+  companyPaperNumber?: boolean
+  companyPaperDate?: boolean
+  electricitySubscription?: boolean
+  fingerprint?: boolean
   individualTicketQuota?: boolean
   contractorId?: boolean
   createdAt?: boolean
@@ -15414,13 +22696,48 @@ export type UserSelectScalar = {
   isResident?: boolean
   passportNumber?: boolean
   qeshmondiGroup?: boolean
+  latinFirstName?: boolean
+  latinLastName?: boolean
+  latinFatherName?: boolean
+  identityNumber?: boolean
+  identitySerial?: boolean
+  landlinePhone?: boolean
+  fax?: boolean
+  postalCode?: boolean
+  jobAddress?: boolean
+  jobPhone?: boolean
+  jobFax?: boolean
+  jobPostalCode?: boolean
+  isSingle?: boolean
+  nationality?: boolean
+  education?: boolean
+  protectorOffice?: boolean
+  nationalIdExpiresAt?: boolean
+  passportExpiresAt?: boolean
+  bankFullName?: boolean
+  bankFullLatinName?: boolean
+  accountNumber?: boolean
+  cardNumber?: boolean
+  cardSeries?: boolean
+  isBank?: boolean
+  accountOpeningDate?: boolean
+  cardIssuanceDate?: boolean
+  cardDeliverDate?: boolean
+  companyName?: boolean
+  companySubject?: boolean
+  companyLicenseNumber?: boolean
+  companyLicenseDate?: boolean
+  companyPaperNumber?: boolean
+  companyPaperDate?: boolean
+  electricitySubscription?: boolean
+  fingerprint?: boolean
   individualTicketQuota?: boolean
   contractorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "fatherName" | "birthDate" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "orgUnitId" | "positionId" | "isQeshmondi" | "qeshmondiStartDate" | "qeshmondiEndDate" | "occupation" | "isResident" | "passportNumber" | "qeshmondiGroup" | "individualTicketQuota" | "contractorId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "fatherName" | "birthDate" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "orgUnitId" | "positionId" | "isQeshmondi" | "qeshmondiStartDate" | "qeshmondiEndDate" | "occupation" | "isResident" | "passportNumber" | "qeshmondiGroup" | "latinFirstName" | "latinLastName" | "latinFatherName" | "identityNumber" | "identitySerial" | "landlinePhone" | "fax" | "postalCode" | "jobAddress" | "jobPhone" | "jobFax" | "jobPostalCode" | "isSingle" | "nationality" | "education" | "protectorOffice" | "nationalIdExpiresAt" | "passportExpiresAt" | "bankFullName" | "bankFullLatinName" | "accountNumber" | "cardNumber" | "cardSeries" | "isBank" | "accountOpeningDate" | "cardIssuanceDate" | "cardDeliverDate" | "companyName" | "companySubject" | "companyLicenseNumber" | "companyLicenseDate" | "companyPaperNumber" | "companyPaperDate" | "electricitySubscription" | "fingerprint" | "individualTicketQuota" | "contractorId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
   province?: boolean | Prisma.User$provinceArgs<ExtArgs>
@@ -15455,6 +22772,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   boardMinutesMemberships?: boolean | Prisma.User$boardMinutesMembershipsArgs<ExtArgs>
   portSalesReports?: boolean | Prisma.User$portSalesReportsArgs<ExtArgs>
   portSalesReportsApproved?: boolean | Prisma.User$portSalesReportsApprovedArgs<ExtArgs>
+  operatedPort?: boolean | Prisma.User$operatedPortArgs<ExtArgs>
   qeshmondiSyncLogs?: boolean | Prisma.User$qeshmondiSyncLogsArgs<ExtArgs>
   qeshmondiSqlConnections?: boolean | Prisma.User$qeshmondiSqlConnectionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -15524,6 +22842,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     boardMinutesMemberships: Prisma.$BoardMinutesMemberPayload<ExtArgs>[]
     portSalesReports: Prisma.$PortSalesReportPayload<ExtArgs>[]
     portSalesReportsApproved: Prisma.$PortSalesReportPayload<ExtArgs>[]
+    operatedPort: Prisma.$PortPayload<ExtArgs> | null
     qeshmondiSyncLogs: Prisma.$QeshmondiSyncLogPayload<ExtArgs>[]
     qeshmondiSqlConnections: Prisma.$QeshmondiSqlConnectionPayload<ExtArgs>[]
   }
@@ -15574,6 +22893,41 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isResident: boolean
     passportNumber: string | null
     qeshmondiGroup: string | null
+    latinFirstName: string | null
+    latinLastName: string | null
+    latinFatherName: string | null
+    identityNumber: string | null
+    identitySerial: string | null
+    landlinePhone: string | null
+    fax: string | null
+    postalCode: string | null
+    jobAddress: string | null
+    jobPhone: string | null
+    jobFax: string | null
+    jobPostalCode: string | null
+    isSingle: boolean | null
+    nationality: string | null
+    education: string | null
+    protectorOffice: string | null
+    nationalIdExpiresAt: Date | null
+    passportExpiresAt: Date | null
+    bankFullName: string | null
+    bankFullLatinName: string | null
+    accountNumber: string | null
+    cardNumber: string | null
+    cardSeries: string | null
+    isBank: boolean | null
+    accountOpeningDate: Date | null
+    cardIssuanceDate: Date | null
+    cardDeliverDate: Date | null
+    companyName: string | null
+    companySubject: string | null
+    companyLicenseNumber: string | null
+    companyLicenseDate: Date | null
+    companyPaperNumber: string | null
+    companyPaperDate: Date | null
+    electricitySubscription: string | null
+    fingerprint: runtime.Bytes | null
     individualTicketQuota: number
     contractorId: string | null
     createdAt: Date
@@ -16005,6 +23359,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   boardMinutesMemberships<T extends Prisma.User$boardMinutesMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardMinutesMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   portSalesReports<T extends Prisma.User$portSalesReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$portSalesReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortSalesReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   portSalesReportsApproved<T extends Prisma.User$portSalesReportsApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$portSalesReportsApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortSalesReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  operatedPort<T extends Prisma.User$operatedPortArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$operatedPortArgs<ExtArgs>>): Prisma.Prisma__PortClient<runtime.Types.Result.GetResult<Prisma.$PortPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   qeshmondiSyncLogs<T extends Prisma.User$qeshmondiSyncLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$qeshmondiSyncLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QeshmondiSyncLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   qeshmondiSqlConnections<T extends Prisma.User$qeshmondiSqlConnectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$qeshmondiSqlConnectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QeshmondiSqlConnectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -16082,6 +23437,41 @@ export interface UserFieldRefs {
   readonly isResident: Prisma.FieldRef<"User", 'Boolean'>
   readonly passportNumber: Prisma.FieldRef<"User", 'String'>
   readonly qeshmondiGroup: Prisma.FieldRef<"User", 'String'>
+  readonly latinFirstName: Prisma.FieldRef<"User", 'String'>
+  readonly latinLastName: Prisma.FieldRef<"User", 'String'>
+  readonly latinFatherName: Prisma.FieldRef<"User", 'String'>
+  readonly identityNumber: Prisma.FieldRef<"User", 'String'>
+  readonly identitySerial: Prisma.FieldRef<"User", 'String'>
+  readonly landlinePhone: Prisma.FieldRef<"User", 'String'>
+  readonly fax: Prisma.FieldRef<"User", 'String'>
+  readonly postalCode: Prisma.FieldRef<"User", 'String'>
+  readonly jobAddress: Prisma.FieldRef<"User", 'String'>
+  readonly jobPhone: Prisma.FieldRef<"User", 'String'>
+  readonly jobFax: Prisma.FieldRef<"User", 'String'>
+  readonly jobPostalCode: Prisma.FieldRef<"User", 'String'>
+  readonly isSingle: Prisma.FieldRef<"User", 'Boolean'>
+  readonly nationality: Prisma.FieldRef<"User", 'String'>
+  readonly education: Prisma.FieldRef<"User", 'String'>
+  readonly protectorOffice: Prisma.FieldRef<"User", 'String'>
+  readonly nationalIdExpiresAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly passportExpiresAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly bankFullName: Prisma.FieldRef<"User", 'String'>
+  readonly bankFullLatinName: Prisma.FieldRef<"User", 'String'>
+  readonly accountNumber: Prisma.FieldRef<"User", 'String'>
+  readonly cardNumber: Prisma.FieldRef<"User", 'String'>
+  readonly cardSeries: Prisma.FieldRef<"User", 'String'>
+  readonly isBank: Prisma.FieldRef<"User", 'Boolean'>
+  readonly accountOpeningDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly cardIssuanceDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly cardDeliverDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly companyName: Prisma.FieldRef<"User", 'String'>
+  readonly companySubject: Prisma.FieldRef<"User", 'String'>
+  readonly companyLicenseNumber: Prisma.FieldRef<"User", 'String'>
+  readonly companyLicenseDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly companyPaperNumber: Prisma.FieldRef<"User", 'String'>
+  readonly companyPaperDate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly electricitySubscription: Prisma.FieldRef<"User", 'String'>
+  readonly fingerprint: Prisma.FieldRef<"User", 'Bytes'>
   readonly individualTicketQuota: Prisma.FieldRef<"User", 'Int'>
   readonly contractorId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -17216,6 +24606,25 @@ export type User$portSalesReportsApprovedArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.PortSalesReportScalarFieldEnum | Prisma.PortSalesReportScalarFieldEnum[]
+}
+
+/**
+ * User.operatedPort
+ */
+export type User$operatedPortArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Port
+   */
+  select?: Prisma.PortSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Port
+   */
+  omit?: Prisma.PortOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PortInclude<ExtArgs> | null
+  where?: Prisma.PortWhereInput
 }
 
 /**

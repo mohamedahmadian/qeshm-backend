@@ -1,3 +1,4 @@
+import { randomBytes } from 'node:crypto';
 import {
   BadRequestException,
   ConflictException,
@@ -5,7 +6,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { STAKEHOLDERS_ADMIN_ROLE_CODE } from '../access/access.constants';
+import * as bcrypt from 'bcrypt';
+import {
+  STAKEHOLDERS_ADMIN_ROLE_CODE,
+  TAAVONI_BELIT_ROLE_CODE,
+} from '../access/access.constants';
+import { toLatinDigits } from '../common/national-id';
+import { Prisma, UserStatus } from '../generated/prisma/client';
+import { joinFullName } from '../users/user-profile.util';
 import {
   containsInsensitive,
   paginatedResult,
@@ -13,9 +21,8 @@ import {
   wantsPagination,
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
-import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreatePortDto, PortKindValue } from './dto/create-port.dto';
+import { CreatePortDto, CreatePortOperatorDto, PortKindValue } from './dto/create-port.dto';
 import { FindPortsQueryDto } from './dto/find-ports-query.dto';
 import { UpdatePortDto } from './dto/update-port.dto';
 
@@ -24,6 +31,14 @@ const citySelect = {
   nameFa: true,
   nameEn: true,
 } satisfies Prisma.CitySelect;
+
+const operatorSelect = {
+  id: true,
+  firstName: true,
+  lastName: true,
+  fullName: true,
+  phone: true,
+} satisfies Prisma.UserSelect;
 
 const portSelect = {
   id: true,
@@ -41,12 +56,21 @@ const portSelect = {
   updatedAt: true,
 } satisfies Prisma.PortSelect;
 
+const portDetailSelect = {
+  ...portSelect,
+  securityToken: true,
+  operatorUserId: true,
+  operatorUser: { select: operatorSelect },
+} satisfies Prisma.PortSelect;
+
 export type PortActor = {
   isAdmin?: boolean;
   roleCodes?: string[];
 };
 
 type PortRow = Prisma.PortGetPayload<{ select: typeof portSelect }>;
+type PortDetailRow = Prisma.PortGetPayload<{ select: typeof portDetailSelect }>;
+type PortTx = Prisma.TransactionClient;
 
 @Injectable()
 export class PortsService {
@@ -90,11 +114,33 @@ export class PortsService {
     return paginatedResult(items.map(serializePort), total, page, pageSize);
   }
 
+  async findOperators(actor: PortActor | undefined) {
+    assertCanManage(actor);
+    const items = await this.prisma.user.findMany({
+      where: {
+        userRoles: { some: { role: { code: TAAVONI_BELIT_ROLE_CODE } } },
+      },
+      orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
+      select: {
+        ...operatorSelect,
+        operatedPort: { select: { id: true, name: true } },
+      },
+    });
+    return items.map((item) => ({
+      id: item.id,
+      firstName: item.firstName,
+      lastName: item.lastName,
+      fullName: item.fullName,
+      phone: item.phone,
+      port: item.operatedPort,
+    }));
+  }
+
   async findOne(actor: PortActor | undefined, id: string) {
     assertCanManage(actor);
     const item = await this.prisma.port.findUnique({
       where: { id },
-      select: portSelect,
+      select: portDetailSelect,
     });
     if (!item) throw new NotFoundException('بندر یافت نشد');
     return serializePort(item);
@@ -105,9 +151,16 @@ export class PortsService {
     await this.assertCity(dto.cityId);
     assertCoordinates(dto.latitude, dto.longitude);
     try {
-      const item = await this.prisma.port.create({
-        data: toData(dto),
-        select: portSelect,
+      const item = await this.prisma.$transaction(async (tx) => {
+        const operatorUserId = await this.resolveOperatorId(tx, dto);
+        return tx.port.create({
+          data: {
+            ...toData(dto),
+            securityToken: dto.securityToken?.trim() || createPortSecurityToken(),
+            operatorUserId,
+          },
+          select: portDetailSelect,
+        });
       });
       return serializePort(item);
     } catch (error) {
@@ -119,7 +172,7 @@ export class PortsService {
     assertCanManage(actor);
     const current = await this.prisma.port.findUnique({
       where: { id },
-      select: portSelect,
+      select: portDetailSelect,
     });
     if (!current) throw new NotFoundException('بندر یافت نشد');
     const cityId = dto.cityId ?? current.cityId;
@@ -128,20 +181,27 @@ export class PortsService {
     const longitude = dto.longitude !== undefined ? dto.longitude : toNumber(current.longitude);
     assertCoordinates(latitude, longitude);
     try {
-      const item = await this.prisma.port.update({
-        where: { id },
-        data: toData({
-          name: dto.name ?? current.name,
-          cityId,
-          cooperativeName: dto.cooperativeName ?? current.cooperativeName,
-          address: dto.address !== undefined ? dto.address : current.address,
-          kind: (dto.kind ?? current.kind) as PortKindValue,
-          managerName: dto.managerName ?? current.managerName,
-          phone: dto.phone ?? current.phone,
-          latitude,
-          longitude,
-        }),
-        select: portSelect,
+      const item = await this.prisma.$transaction(async (tx) => {
+        const operatorUserId = await this.resolveOperatorId(tx, dto, id, current.operatorUserId);
+        return tx.port.update({
+          where: { id },
+          data: {
+            ...toData({
+              name: dto.name ?? current.name,
+              cityId,
+              cooperativeName: dto.cooperativeName ?? current.cooperativeName,
+              address: dto.address !== undefined ? dto.address : current.address,
+              kind: (dto.kind ?? current.kind) as PortKindValue,
+              managerName: dto.managerName ?? current.managerName,
+              phone: dto.phone ?? current.phone,
+              latitude,
+              longitude,
+            }),
+            securityToken: dto.securityToken?.trim() || current.securityToken,
+            operatorUserId,
+          },
+          select: portDetailSelect,
+        });
       });
       return serializePort(item);
     } catch (error) {
@@ -165,8 +225,81 @@ export class PortsService {
     if (!city) throw new NotFoundException('شهر یافت نشد');
   }
 
+  private async resolveOperatorId(
+    tx: PortTx,
+    dto: { operatorUserId?: string | null; newOperator?: CreatePortOperatorDto },
+    portId?: string,
+    fallback: string | null = null,
+  ) {
+    if (dto.newOperator) {
+      const created = await this.createOperator(tx, dto.newOperator);
+      return created.id;
+    }
+    if (dto.operatorUserId !== undefined) {
+      if (dto.operatorUserId) await this.assertOperator(tx, dto.operatorUserId, portId);
+      return dto.operatorUserId;
+    }
+    return fallback;
+  }
+
+  private async assertOperator(tx: PortTx, userId: string, portId?: string) {
+    const user = await tx.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        userRoles: { select: { role: { select: { code: true } } } },
+        operatedPort: { select: { id: true, name: true } },
+      },
+    });
+    if (!user) throw new NotFoundException('کاربر یافت نشد');
+    const hasRole = user.userRoles.some((item) => item.role.code === TAAVONI_BELIT_ROLE_CODE);
+    if (!hasRole) throw new BadRequestException('این کاربر نقش تعاونی بلیت ندارد');
+    if (user.operatedPort && user.operatedPort.id !== portId) {
+      throw new ConflictException(`این کاربر به بندر ${user.operatedPort.name} اختصاص دارد`);
+    }
+  }
+
+  private async createOperator(tx: PortTx, dto: CreatePortOperatorDto) {
+    const phone = dto.phone;
+    const taken = await tx.user.findFirst({
+      where: { OR: [{ phone }, { username: phone }] },
+      select: { id: true },
+    });
+    if (taken) throw new ConflictException('این تلفن همراه قبلاً ثبت شده است');
+    const role = await tx.role.findUnique({
+      where: { code: TAAVONI_BELIT_ROLE_CODE },
+      select: { id: true },
+    });
+    if (!role) throw new BadRequestException('نقش تعاونی بلیت در سامانه تعریف نشده است');
+    const passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
+    return tx.user.create({
+      data: {
+        username: phone,
+        passwordHash,
+        firstName: dto.firstName.trim(),
+        lastName: dto.lastName.trim(),
+        fullName: joinFullName(dto.firstName, dto.lastName),
+        phone,
+        locale: 'fa',
+        status: UserStatus.ACTIVE,
+        userRoles: { create: { roleId: role.id } },
+      },
+      select: { id: true },
+    });
+  }
+
   private rethrowUnique(error: unknown): never {
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+      const target = JSON.stringify(error.meta?.target ?? '');
+      if (target.includes('securityToken')) {
+        throw new ConflictException('این توکن امنیتی قبلاً ثبت شده است');
+      }
+      if (target.includes('operatorUserId')) {
+        throw new ConflictException('این کاربر به بندر دیگری اختصاص دارد');
+      }
+      if (target.includes('phone') || target.includes('username')) {
+        throw new ConflictException('این تلفن همراه قبلاً ثبت شده است');
+      }
       throw new ConflictException('بندری با این نام قبلاً ثبت شده است');
     }
     throw error;
@@ -205,7 +338,15 @@ function toNumber(value: Prisma.Decimal | number | null | undefined) {
   return Number.isFinite(number) ? number : null;
 }
 
-function serializePort(item: PortRow) {
+function createPortSecurityToken() {
+  return randomBytes(24)
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/g, '');
+}
+
+function serializePort(item: PortRow | PortDetailRow) {
   return {
     ...item,
     latitude: toNumber(item.latitude),

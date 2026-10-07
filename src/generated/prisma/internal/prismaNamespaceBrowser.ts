@@ -58,6 +58,7 @@ export const ModelName = {
   User: 'User',
   QeshmondiSqlConnection: 'QeshmondiSqlConnection',
   QeshmondiSyncLog: 'QeshmondiSyncLog',
+  QeshmondiLookup: 'QeshmondiLookup',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
   Project: 'Project',
@@ -247,6 +248,41 @@ export const UserScalarFieldEnum = {
   isResident: 'isResident',
   passportNumber: 'passportNumber',
   qeshmondiGroup: 'qeshmondiGroup',
+  latinFirstName: 'latinFirstName',
+  latinLastName: 'latinLastName',
+  latinFatherName: 'latinFatherName',
+  identityNumber: 'identityNumber',
+  identitySerial: 'identitySerial',
+  landlinePhone: 'landlinePhone',
+  fax: 'fax',
+  postalCode: 'postalCode',
+  jobAddress: 'jobAddress',
+  jobPhone: 'jobPhone',
+  jobFax: 'jobFax',
+  jobPostalCode: 'jobPostalCode',
+  isSingle: 'isSingle',
+  nationality: 'nationality',
+  education: 'education',
+  protectorOffice: 'protectorOffice',
+  nationalIdExpiresAt: 'nationalIdExpiresAt',
+  passportExpiresAt: 'passportExpiresAt',
+  bankFullName: 'bankFullName',
+  bankFullLatinName: 'bankFullLatinName',
+  accountNumber: 'accountNumber',
+  cardNumber: 'cardNumber',
+  cardSeries: 'cardSeries',
+  isBank: 'isBank',
+  accountOpeningDate: 'accountOpeningDate',
+  cardIssuanceDate: 'cardIssuanceDate',
+  cardDeliverDate: 'cardDeliverDate',
+  companyName: 'companyName',
+  companySubject: 'companySubject',
+  companyLicenseNumber: 'companyLicenseNumber',
+  companyLicenseDate: 'companyLicenseDate',
+  companyPaperNumber: 'companyPaperNumber',
+  companyPaperDate: 'companyPaperDate',
+  electricitySubscription: 'electricitySubscription',
+  fingerprint: 'fingerprint',
   individualTicketQuota: 'individualTicketQuota',
   contractorId: 'contractorId',
   createdAt: 'createdAt',
@@ -286,6 +322,17 @@ export const QeshmondiSyncLogScalarFieldEnum = {
 } as const
 
 export type QeshmondiSyncLogScalarFieldEnum = (typeof QeshmondiSyncLogScalarFieldEnum)[keyof typeof QeshmondiSyncLogScalarFieldEnum]
+
+
+export const QeshmondiLookupScalarFieldEnum = {
+  sourceId: 'sourceId',
+  code: 'code',
+  title: 'title',
+  type: 'type',
+  parentSourceId: 'parentSourceId'
+} as const
+
+export type QeshmondiLookupScalarFieldEnum = (typeof QeshmondiLookupScalarFieldEnum)[keyof typeof QeshmondiLookupScalarFieldEnum]
 
 
 export const UserLocationHistoryScalarFieldEnum = {
@@ -1114,6 +1161,8 @@ export const PortScalarFieldEnum = {
   phone: 'phone',
   latitude: 'latitude',
   longitude: 'longitude',
+  securityToken: 'securityToken',
+  operatorUserId: 'operatorUserId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

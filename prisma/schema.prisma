@@ -278,6 +278,41 @@ model User {
   isResident         Boolean               @default(false)
   passportNumber     String?
   qeshmondiGroup         String?
+  latinFirstName         String?
+  latinLastName          String?
+  latinFatherName        String?
+  identityNumber         String?
+  identitySerial         String?
+  landlinePhone          String?
+  fax                    String?
+  postalCode             String?
+  jobAddress             String?
+  jobPhone               String?
+  jobFax                 String?
+  jobPostalCode          String?
+  isSingle               Boolean?
+  nationality            String?
+  education              String?
+  protectorOffice        String?
+  nationalIdExpiresAt    DateTime?             @db.Date
+  passportExpiresAt      DateTime?             @db.Date
+  bankFullName           String?
+  bankFullLatinName      String?
+  accountNumber          String?
+  cardNumber             String?
+  cardSeries             String?
+  isBank                 Boolean?
+  accountOpeningDate     DateTime?             @db.Date
+  cardIssuanceDate       DateTime?             @db.Date
+  cardDeliverDate        DateTime?             @db.Date
+  companyName            String?
+  companySubject         String?
+  companyLicenseNumber   String?
+  companyLicenseDate     DateTime?             @db.Date
+  companyPaperNumber     String?
+  companyPaperDate       DateTime?             @db.Date
+  electricitySubscription String?
+  fingerprint            Bytes?
   individualTicketQuota  Int                   @default(1)
   nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
   foodReservations   FoodReservation[]
@@ -301,6 +336,7 @@ model User {
   boardMinutesMemberships BoardMinutesMember[]
   portSalesReports         PortSalesReport[] @relation("PortSalesReportAuthor")
   portSalesReportsApproved PortSalesReport[] @relation("PortSalesReportApprover")
+  operatedPort             Port?             @relation("PortOperator")
   qeshmondiSyncLogs       QeshmondiSyncLog[] @relation("QeshmondiSyncActor")
   qeshmondiSqlConnections QeshmondiSqlConnection[] @relation("QeshmondiSqlConnectionEditor")
   createdAt          DateTime              @default(now())
@@ -356,6 +392,17 @@ model QeshmondiSyncLog {
   @@index([status])
   @@index([actorId])
   @@map("qeshmondi_sync_logs")
+}
+
+model QeshmondiLookup {
+  sourceId       Int     @id
+  code           String?
+  title          String?
+  type           Int
+  parentSourceId Int?
+
+  @@index([type])
+  @@map("qeshmondi_lookups")
 }
 
 model UserLocationHistory {
@@ -1571,6 +1618,9 @@ model Port {
   phone           String
   latitude        Decimal? @db.Decimal(10, 7)
   longitude       Decimal? @db.Decimal(10, 7)
+  securityToken   String   @unique
+  operatorUserId  String?  @unique
+  operatorUser    User?    @relation("PortOperator", fields: [operatorUserId], references: [id], onDelete: SetNull)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 

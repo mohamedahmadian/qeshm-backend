@@ -1245,10 +1245,6 @@ export type EnumBoardRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.BoardRequestStatus
 }
 
-export type NullableBoolFieldUpdateOperationsInput = {
-  set?: boolean | null
-}
-
 export type NullableEnumBoardStageFieldUpdateOperationsInput = {
   set?: $Enums.BoardStage | null
 }

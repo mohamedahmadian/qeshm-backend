@@ -49,13 +49,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { UpdateUserLocationDto } from './dto/update-user-location.dto';
-import { parseQeshmondiExcel, type QeshmondiImportRow } from './qeshmondi-import';
+import { parseQeshmondiExcel, type QeshmondiCitizenProfile, type QeshmondiImportRow } from './qeshmondi-import';
 import { qeshmondiSqlErrorText, streamQeshmondiSqlPeople, type QeshmondiSqlSettings } from './qeshmondi-sql';
+import { ensureQeshmondiLookups } from './qeshmondi-lookup';
 import { finishQeshmondiSyncLog, openQeshmondiSyncLog } from './qeshmondi-sync-log';
 
 const QESHMONDI_IMPORT_PASSWORD = '11111111';
 const QESHMONDI_LOOKUP_CHUNK = 5000;
 const QESHMONDI_WRITE_CHUNK = 2000;
+const QESHMONDI_SQL_WRITE_CHUNK = 400;
 const QESHMONDI_IMPORT_JOB_TTL_MS = 30 * 60 * 1000;
 
 type QeshmondiImportJobPhase = 'parsing' | 'saving' | 'done' | 'error';
@@ -156,6 +158,40 @@ const userSelect = {
   isResident: true,
   passportNumber: true,
   qeshmondiGroup: true,
+  latinFirstName: true,
+  latinLastName: true,
+  latinFatherName: true,
+  identityNumber: true,
+  identitySerial: true,
+  landlinePhone: true,
+  fax: true,
+  postalCode: true,
+  jobAddress: true,
+  jobPhone: true,
+  jobFax: true,
+  jobPostalCode: true,
+  isSingle: true,
+  nationality: true,
+  education: true,
+  protectorOffice: true,
+  nationalIdExpiresAt: true,
+  passportExpiresAt: true,
+  bankFullName: true,
+  bankFullLatinName: true,
+  accountNumber: true,
+  cardNumber: true,
+  cardSeries: true,
+  isBank: true,
+  accountOpeningDate: true,
+  cardIssuanceDate: true,
+  cardDeliverDate: true,
+  companyName: true,
+  companySubject: true,
+  companyLicenseNumber: true,
+  companyLicenseDate: true,
+  companyPaperNumber: true,
+  companyPaperDate: true,
+  electricitySubscription: true,
   individualTicketQuota: true,
   createdAt: true,
   updatedAt: true,
@@ -192,10 +228,34 @@ function mapUser<
     qeshmondiStartDate?: Date | null;
     qeshmondiEndDate?: Date | null;
     birthDate?: Date | null;
+    nationalIdExpiresAt?: Date | null;
+    passportExpiresAt?: Date | null;
+    accountOpeningDate?: Date | null;
+    cardIssuanceDate?: Date | null;
+    cardDeliverDate?: Date | null;
+    companyLicenseDate?: Date | null;
+    companyPaperDate?: Date | null;
+    fingerprint?: Uint8Array | null;
     userRoles?: { role: { id: string; code: string; name: string } }[];
   },
 >(user: T) {
-  const { userRoles, qeshmondiStartDate, qeshmondiEndDate, birthDate, ...rest } = user;
+  const {
+    userRoles,
+    qeshmondiStartDate,
+    qeshmondiEndDate,
+    birthDate,
+    nationalIdExpiresAt,
+    passportExpiresAt,
+    accountOpeningDate,
+    cardIssuanceDate,
+    cardDeliverDate,
+    companyLicenseDate,
+    companyPaperDate,
+    fingerprint,
+    ...rest
+  } = user;
+  const hasFingerprint =
+    'fingerprint' in user ? Boolean(fingerprint && fingerprint.byteLength > 0) : undefined;
   return {
     ...rest,
     latitude: toCoord(user.latitude),
@@ -203,10 +263,109 @@ function mapUser<
     qeshmondiStartDate: toIsoDateOnly(qeshmondiStartDate),
     qeshmondiEndDate: toIsoDateOnly(qeshmondiEndDate),
     birthDate: toIsoDateOnly(birthDate),
+    nationalIdExpiresAt: toIsoDateOnly(nationalIdExpiresAt),
+    passportExpiresAt: toIsoDateOnly(passportExpiresAt),
+    accountOpeningDate: toIsoDateOnly(accountOpeningDate),
+    cardIssuanceDate: toIsoDateOnly(cardIssuanceDate),
+    cardDeliverDate: toIsoDateOnly(cardDeliverDate),
+    companyLicenseDate: toIsoDateOnly(companyLicenseDate),
+    companyPaperDate: toIsoDateOnly(companyPaperDate),
+    ...(hasFingerprint === undefined ? {} : { hasFingerprint }),
     roles: userRoles?.map((item) => item.role) ?? [],
     activityStartYear: null,
     issuingOrganizationId: null,
     issuingOrganization: null,
+  };
+}
+
+function blank(value: string | null | undefined) {
+  return value ?? '';
+}
+
+function citizenSqlPayload(row: QeshmondiImportRow) {
+  const citizen: Partial<QeshmondiCitizenProfile> = row.citizen ?? {};
+  return {
+    group_name: blank(citizen.qeshmondiGroup),
+    latin_first_name: blank(citizen.latinFirstName),
+    latin_last_name: blank(citizen.latinLastName),
+    latin_father_name: blank(citizen.latinFatherName),
+    identity_number: blank(citizen.identityNumber),
+    identity_serial: blank(citizen.identitySerial),
+    landline_phone: blank(citizen.landlinePhone),
+    fax: blank(citizen.fax),
+    postal_code: blank(citizen.postalCode),
+    job_address: blank(citizen.jobAddress),
+    job_phone: blank(citizen.jobPhone),
+    job_fax: blank(citizen.jobFax),
+    job_postal_code: blank(citizen.jobPostalCode),
+    is_single: citizen.isSingle ?? null,
+    nationality: blank(citizen.nationality),
+    education: blank(citizen.education),
+    protector_office: blank(citizen.protectorOffice),
+    religion: citizen.religion ?? '',
+    religion_other: citizen.religionOther ?? '',
+    national_id_expires: blank(citizen.nationalIdExpiresAt),
+    passport_expires: blank(citizen.passportExpiresAt),
+    bank_full_name: blank(citizen.bankFullName),
+    bank_full_latin_name: blank(citizen.bankFullLatinName),
+    account_number: blank(citizen.accountNumber),
+    card_number: blank(citizen.cardNumber),
+    card_series: blank(citizen.cardSeries),
+    is_bank: citizen.isBank ?? null,
+    account_opening_date: blank(citizen.accountOpeningDate),
+    card_issuance_date: blank(citizen.cardIssuanceDate),
+    card_deliver_date: blank(citizen.cardDeliverDate),
+    company_name: blank(citizen.companyName),
+    company_subject: blank(citizen.companySubject),
+    company_license_number: blank(citizen.companyLicenseNumber),
+    company_license_date: blank(citizen.companyLicenseDate),
+    company_paper_number: blank(citizen.companyPaperNumber),
+    company_paper_date: blank(citizen.companyPaperDate),
+    electricity_subscription: blank(citizen.electricitySubscription),
+  };
+}
+
+function citizenCreateData(row: QeshmondiImportRow) {
+  const citizen = row.citizen;
+  if (!citizen) return {};
+  return {
+    qeshmondiGroup: citizen.qeshmondiGroup,
+    latinFirstName: citizen.latinFirstName,
+    latinLastName: citizen.latinLastName,
+    latinFatherName: citizen.latinFatherName,
+    identityNumber: citizen.identityNumber,
+    identitySerial: citizen.identitySerial,
+    landlinePhone: citizen.landlinePhone,
+    fax: citizen.fax,
+    postalCode: citizen.postalCode,
+    jobAddress: citizen.jobAddress,
+    jobPhone: citizen.jobPhone,
+    jobFax: citizen.jobFax,
+    jobPostalCode: citizen.jobPostalCode,
+    isSingle: citizen.isSingle,
+    nationality: citizen.nationality,
+    education: citizen.education,
+    protectorOffice: citizen.protectorOffice,
+    religion: citizen.religion,
+    religionOther: citizen.religionOther,
+    nationalIdExpiresAt: parseOptionalIsoDate(citizen.nationalIdExpiresAt) ?? null,
+    passportExpiresAt: parseOptionalIsoDate(citizen.passportExpiresAt) ?? null,
+    bankFullName: citizen.bankFullName,
+    bankFullLatinName: citizen.bankFullLatinName,
+    accountNumber: citizen.accountNumber,
+    cardNumber: citizen.cardNumber,
+    cardSeries: citizen.cardSeries,
+    isBank: citizen.isBank,
+    accountOpeningDate: parseOptionalIsoDate(citizen.accountOpeningDate) ?? null,
+    cardIssuanceDate: parseOptionalIsoDate(citizen.cardIssuanceDate) ?? null,
+    cardDeliverDate: parseOptionalIsoDate(citizen.cardDeliverDate) ?? null,
+    companyName: citizen.companyName,
+    companySubject: citizen.companySubject,
+    companyLicenseNumber: citizen.companyLicenseNumber,
+    companyLicenseDate: parseOptionalIsoDate(citizen.companyLicenseDate) ?? null,
+    companyPaperNumber: citizen.companyPaperNumber,
+    companyPaperDate: parseOptionalIsoDate(citizen.companyPaperDate) ?? null,
+    electricitySubscription: citizen.electricitySubscription,
   };
 }
 
@@ -247,11 +406,11 @@ function foldQeshmondiNamedCounts(rows: { name: string | null; count: number }[]
     );
 }
 
-function foldQeshmondiExpiryYears(rows: { qeshmondiEndDate: Date | null }[]) {
+function foldQeshmondiYears(dates: (Date | null)[]) {
   const gregorian = isLtrLocale(getRequestLocale());
   const totals = new Map<number, number>();
-  for (const row of rows) {
-    const iso = toIsoDateOnly(row.qeshmondiEndDate);
+  for (const date of dates) {
+    const iso = toIsoDateOnly(date);
     if (!iso) continue;
     const [year, month, day] = iso.split('-').map(Number);
     if (!year || !month || !day) continue;
@@ -457,6 +616,8 @@ export class UsersService {
       groups,
       endDates,
       missingExpiry,
+      birthDates,
+      missingBirth,
     ] = await Promise.all([
       this.prisma.user.count({ where: base }),
       this.prisma.user.count({ where: expiredWhere }),
@@ -492,6 +653,13 @@ export class UsersService {
       this.prisma.user.count({
         where: { isQeshmondi: true, qeshmondiEndDate: null },
       }),
+      this.prisma.user.findMany({
+        where: { isQeshmondi: true, birthDate: { not: null } },
+        select: { birthDate: true },
+      }),
+      this.prisma.user.count({
+        where: { isQeshmondi: true, birthDate: null },
+      }),
     ]);
     return {
       total,
@@ -508,8 +676,10 @@ export class UsersService {
       byGroup: foldQeshmondiNamedCounts(
         groups.map((row) => ({ name: row.qeshmondiGroup, count: row._count._all })),
       ),
-      byExpiryYear: foldQeshmondiExpiryYears(endDates),
+      byExpiryYear: foldQeshmondiYears(endDates.map((row) => row.qeshmondiEndDate)),
       missingExpiry,
+      byBirthYear: foldQeshmondiYears(birthDates.map((row) => row.birthDate)),
+      missingBirth,
     };
   }
 
@@ -601,7 +771,7 @@ export class UsersService {
   async findOne(id: string) {
     const user = await this.prisma.user.findUnique({
       where: { id },
-      select: userSelect,
+      select: { ...userSelect, fingerprint: true },
     });
     if (!user) {
       throw new NotFoundException('کاربر یافت نشد');
@@ -680,6 +850,40 @@ export class UsersService {
         isResident: dto.isResident ?? false,
         passportNumber: dto.passportNumber ?? null,
         qeshmondiGroup: dto.qeshmondiGroup ?? null,
+        latinFirstName: dto.latinFirstName ?? null,
+        latinLastName: dto.latinLastName ?? null,
+        latinFatherName: dto.latinFatherName ?? null,
+        identityNumber: dto.identityNumber ?? null,
+        identitySerial: dto.identitySerial ?? null,
+        landlinePhone: dto.landlinePhone ?? null,
+        fax: dto.fax ?? null,
+        postalCode: dto.postalCode ?? null,
+        jobAddress: dto.jobAddress ?? null,
+        jobPhone: dto.jobPhone ?? null,
+        jobFax: dto.jobFax ?? null,
+        jobPostalCode: dto.jobPostalCode ?? null,
+        isSingle: dto.isSingle ?? null,
+        nationality: dto.nationality ?? null,
+        education: dto.education ?? null,
+        protectorOffice: dto.protectorOffice ?? null,
+        nationalIdExpiresAt: parseOptionalIsoDate(dto.nationalIdExpiresAt) ?? null,
+        passportExpiresAt: parseOptionalIsoDate(dto.passportExpiresAt) ?? null,
+        bankFullName: dto.bankFullName ?? null,
+        bankFullLatinName: dto.bankFullLatinName ?? null,
+        accountNumber: dto.accountNumber ?? null,
+        cardNumber: dto.cardNumber ?? null,
+        cardSeries: dto.cardSeries ?? null,
+        isBank: dto.isBank ?? null,
+        accountOpeningDate: parseOptionalIsoDate(dto.accountOpeningDate) ?? null,
+        cardIssuanceDate: parseOptionalIsoDate(dto.cardIssuanceDate) ?? null,
+        cardDeliverDate: parseOptionalIsoDate(dto.cardDeliverDate) ?? null,
+        companyName: dto.companyName ?? null,
+        companySubject: dto.companySubject ?? null,
+        companyLicenseNumber: dto.companyLicenseNumber ?? null,
+        companyLicenseDate: parseOptionalIsoDate(dto.companyLicenseDate) ?? null,
+        companyPaperNumber: dto.companyPaperNumber ?? null,
+        companyPaperDate: parseOptionalIsoDate(dto.companyPaperDate) ?? null,
+        electricitySubscription: dto.electricitySubscription ?? null,
         individualTicketQuota: dto.individualTicketQuota ?? 1,
         contractorId: await this.resolvePortalContractor(dto.roleIds, dto.contractorId),
       },
@@ -1002,7 +1206,8 @@ export class UsersService {
     try {
       let passwordHash: string | null = null;
       const citizen = await ensureCitizenRole(this.prisma);
-      await streamQeshmondiSqlPeople(settings, async ({ rows, skipped, read, total }) => {
+      const lookups = await ensureQeshmondiLookups(this.prisma);
+      await streamQeshmondiSqlPeople(settings, lookups, async ({ rows, skipped, read, total }) => {
         sourceTotal = total;
         counts.skipped += skipped.length;
         if (rows.length) {
@@ -1112,18 +1317,23 @@ export class UsersService {
     }
   }
 
-  /** SQL sync only overwrites columns that exist on tblPerson. */
+  /** SQL sync writes tblPerson columns. An empty source value keeps the current user value. */
   private async bulkUpdateQeshmondiSqlUsers(rows: QeshmondiImportRow[]) {
-    for (const chunk of chunkList(rows, QESHMONDI_WRITE_CHUNK)) {
+    for (const chunk of chunkList(rows, QESHMONDI_SQL_WRITE_CHUNK)) {
       const payload = JSON.stringify(
         chunk.map((row) => ({
           national_id: row.nationalId,
           first_name: row.firstName,
           last_name: row.lastName,
           full_name: joinFullName(row.firstName, row.lastName),
-          birth_date: row.birthDate,
-          gender: row.gender,
-          end_date: row.qeshmondiEndDate,
+          father_name: blank(row.fatherName),
+          birth_date: blank(row.birthDate),
+          gender: row.gender ?? '',
+          passport_number: blank(row.passportNumber),
+          occupation: blank(row.occupation),
+          is_resident: row.isResident,
+          end_date: blank(row.qeshmondiEndDate),
+          ...citizenSqlPayload(row),
         })),
       );
       const updatedAt = new Date();
@@ -1132,12 +1342,59 @@ export class UsersService {
           "firstName" = v.first_name,
           "lastName" = v.last_name,
           "fullName" = v.full_name,
+          "fatherName" = COALESCE(NULLIF(v.father_name, ''), u."fatherName"),
           "birthDate" = COALESCE(CAST(NULLIF(v.birth_date, '') AS date), u."birthDate"),
           "gender" = CASE
             WHEN v.gender IS NULL OR v.gender = '' THEN u."gender"
             ELSE CAST(v.gender AS "UserGender")
           END,
+          "passportNumber" = COALESCE(NULLIF(v.passport_number, ''), u."passportNumber"),
+          "occupation" = COALESCE(NULLIF(v.occupation, ''), u."occupation"),
+          "isResident" = v.is_resident,
           "qeshmondiEndDate" = COALESCE(CAST(NULLIF(v.end_date, '') AS date), u."qeshmondiEndDate"),
+          "qeshmondiGroup" = COALESCE(NULLIF(v.group_name, ''), u."qeshmondiGroup"),
+          "latinFirstName" = COALESCE(NULLIF(v.latin_first_name, ''), u."latinFirstName"),
+          "latinLastName" = COALESCE(NULLIF(v.latin_last_name, ''), u."latinLastName"),
+          "latinFatherName" = COALESCE(NULLIF(v.latin_father_name, ''), u."latinFatherName"),
+          "identityNumber" = COALESCE(NULLIF(v.identity_number, ''), u."identityNumber"),
+          "identitySerial" = COALESCE(NULLIF(v.identity_serial, ''), u."identitySerial"),
+          "landlinePhone" = COALESCE(NULLIF(v.landline_phone, ''), u."landlinePhone"),
+          "fax" = COALESCE(NULLIF(v.fax, ''), u."fax"),
+          "postalCode" = COALESCE(NULLIF(v.postal_code, ''), u."postalCode"),
+          "jobAddress" = COALESCE(NULLIF(v.job_address, ''), u."jobAddress"),
+          "jobPhone" = COALESCE(NULLIF(v.job_phone, ''), u."jobPhone"),
+          "jobFax" = COALESCE(NULLIF(v.job_fax, ''), u."jobFax"),
+          "jobPostalCode" = COALESCE(NULLIF(v.job_postal_code, ''), u."jobPostalCode"),
+          "isSingle" = CASE WHEN v.is_single IS NULL THEN u."isSingle" ELSE v.is_single END,
+          "nationality" = COALESCE(NULLIF(v.nationality, ''), u."nationality"),
+          "education" = COALESCE(NULLIF(v.education, ''), u."education"),
+          "protectorOffice" = COALESCE(NULLIF(v.protector_office, ''), u."protectorOffice"),
+          "religion" = CASE
+            WHEN v.religion IS NULL OR v.religion = '' THEN u."religion"
+            ELSE CAST(v.religion AS "Religion")
+          END,
+          "religionOther" = CASE
+            WHEN v.religion IS NULL OR v.religion = '' THEN u."religionOther"
+            ELSE NULLIF(v.religion_other, '')
+          END,
+          "nationalIdExpiresAt" = COALESCE(CAST(NULLIF(v.national_id_expires, '') AS date), u."nationalIdExpiresAt"),
+          "passportExpiresAt" = COALESCE(CAST(NULLIF(v.passport_expires, '') AS date), u."passportExpiresAt"),
+          "bankFullName" = COALESCE(NULLIF(v.bank_full_name, ''), u."bankFullName"),
+          "bankFullLatinName" = COALESCE(NULLIF(v.bank_full_latin_name, ''), u."bankFullLatinName"),
+          "accountNumber" = COALESCE(NULLIF(v.account_number, ''), u."accountNumber"),
+          "cardNumber" = COALESCE(NULLIF(v.card_number, ''), u."cardNumber"),
+          "cardSeries" = COALESCE(NULLIF(v.card_series, ''), u."cardSeries"),
+          "isBank" = CASE WHEN v.is_bank IS NULL THEN u."isBank" ELSE v.is_bank END,
+          "accountOpeningDate" = COALESCE(CAST(NULLIF(v.account_opening_date, '') AS date), u."accountOpeningDate"),
+          "cardIssuanceDate" = COALESCE(CAST(NULLIF(v.card_issuance_date, '') AS date), u."cardIssuanceDate"),
+          "cardDeliverDate" = COALESCE(CAST(NULLIF(v.card_deliver_date, '') AS date), u."cardDeliverDate"),
+          "companyName" = COALESCE(NULLIF(v.company_name, ''), u."companyName"),
+          "companySubject" = COALESCE(NULLIF(v.company_subject, ''), u."companySubject"),
+          "companyLicenseNumber" = COALESCE(NULLIF(v.company_license_number, ''), u."companyLicenseNumber"),
+          "companyLicenseDate" = COALESCE(CAST(NULLIF(v.company_license_date, '') AS date), u."companyLicenseDate"),
+          "companyPaperNumber" = COALESCE(NULLIF(v.company_paper_number, ''), u."companyPaperNumber"),
+          "companyPaperDate" = COALESCE(CAST(NULLIF(v.company_paper_date, '') AS date), u."companyPaperDate"),
+          "electricitySubscription" = COALESCE(NULLIF(v.electricity_subscription, ''), u."electricitySubscription"),
           "isQeshmondi" = true,
           "updatedAt" = ${updatedAt}
         FROM jsonb_to_recordset(CAST(${payload} AS jsonb)) AS v(
@@ -1145,11 +1402,77 @@ export class UsersService {
           first_name text,
           last_name text,
           full_name text,
+          father_name text,
           birth_date text,
           gender text,
-          end_date text
+          passport_number text,
+          occupation text,
+          is_resident boolean,
+          end_date text,
+          group_name text,
+          latin_first_name text,
+          latin_last_name text,
+          latin_father_name text,
+          identity_number text,
+          identity_serial text,
+          landline_phone text,
+          fax text,
+          postal_code text,
+          job_address text,
+          job_phone text,
+          job_fax text,
+          job_postal_code text,
+          is_single boolean,
+          nationality text,
+          education text,
+          protector_office text,
+          religion text,
+          religion_other text,
+          national_id_expires text,
+          passport_expires text,
+          bank_full_name text,
+          bank_full_latin_name text,
+          account_number text,
+          card_number text,
+          card_series text,
+          is_bank boolean,
+          account_opening_date text,
+          card_issuance_date text,
+          card_deliver_date text,
+          company_name text,
+          company_subject text,
+          company_license_number text,
+          company_license_date text,
+          company_paper_number text,
+          company_paper_date text,
+          electricity_subscription text
         )
         WHERE u."nationalId" = v.national_id
+      `;
+    }
+    await this.bulkUpdateQeshmondiFingerprints(rows);
+  }
+
+  private async bulkUpdateQeshmondiFingerprints(rows: QeshmondiImportRow[]) {
+    const withPrint = rows.filter((row) => row.citizen?.fingerprintBase64);
+    for (const chunk of chunkList(withPrint, 40)) {
+      const payload = JSON.stringify(
+        chunk.map((row) => ({
+          national_id: row.nationalId,
+          fingerprint_b64: row.citizen?.fingerprintBase64 ?? '',
+        })),
+      );
+      const updatedAt = new Date();
+      await this.prisma.$executeRaw`
+        UPDATE "users" AS u SET
+          "fingerprint" = decode(v.fingerprint_b64, 'base64'),
+          "updatedAt" = ${updatedAt}
+        FROM jsonb_to_recordset(CAST(${payload} AS jsonb)) AS v(
+          national_id text,
+          fingerprint_b64 text
+        )
+        WHERE u."nationalId" = v.national_id
+          AND v.fingerprint_b64 <> ''
       `;
     }
   }
@@ -1196,6 +1519,7 @@ export class UsersService {
         isResident: row.isResident,
         qeshmondiEndDate: parseOptionalIsoDate(row.qeshmondiEndDate) ?? null,
         isQeshmondi: true,
+        ...citizenCreateData(row),
       };
     });
 
@@ -1203,6 +1527,7 @@ export class UsersService {
       await this.prisma.user.createMany({ data: chunk });
       onChunk?.(chunk.length);
     }
+    await this.bulkUpdateQeshmondiFingerprints(rows);
   }
 
   private async assignCitizenRoleForNationalIds(
@@ -1322,6 +1647,59 @@ export class UsersService {
       isResident: dto.isResident,
       passportNumber: dto.passportNumber === undefined ? undefined : dto.passportNumber,
       qeshmondiGroup: dto.qeshmondiGroup === undefined ? undefined : dto.qeshmondiGroup,
+      latinFirstName: dto.latinFirstName === undefined ? undefined : dto.latinFirstName,
+      latinLastName: dto.latinLastName === undefined ? undefined : dto.latinLastName,
+      latinFatherName: dto.latinFatherName === undefined ? undefined : dto.latinFatherName,
+      identityNumber: dto.identityNumber === undefined ? undefined : dto.identityNumber,
+      identitySerial: dto.identitySerial === undefined ? undefined : dto.identitySerial,
+      landlinePhone: dto.landlinePhone === undefined ? undefined : dto.landlinePhone,
+      fax: dto.fax === undefined ? undefined : dto.fax,
+      postalCode: dto.postalCode === undefined ? undefined : dto.postalCode,
+      jobAddress: dto.jobAddress === undefined ? undefined : dto.jobAddress,
+      jobPhone: dto.jobPhone === undefined ? undefined : dto.jobPhone,
+      jobFax: dto.jobFax === undefined ? undefined : dto.jobFax,
+      jobPostalCode: dto.jobPostalCode === undefined ? undefined : dto.jobPostalCode,
+      isSingle: dto.isSingle,
+      nationality: dto.nationality === undefined ? undefined : dto.nationality,
+      education: dto.education === undefined ? undefined : dto.education,
+      protectorOffice: dto.protectorOffice === undefined ? undefined : dto.protectorOffice,
+      nationalIdExpiresAt:
+        dto.nationalIdExpiresAt === undefined
+          ? undefined
+          : parseOptionalIsoDate(dto.nationalIdExpiresAt),
+      passportExpiresAt:
+        dto.passportExpiresAt === undefined
+          ? undefined
+          : parseOptionalIsoDate(dto.passportExpiresAt),
+      bankFullName: dto.bankFullName === undefined ? undefined : dto.bankFullName,
+      bankFullLatinName: dto.bankFullLatinName === undefined ? undefined : dto.bankFullLatinName,
+      accountNumber: dto.accountNumber === undefined ? undefined : dto.accountNumber,
+      cardNumber: dto.cardNumber === undefined ? undefined : dto.cardNumber,
+      cardSeries: dto.cardSeries === undefined ? undefined : dto.cardSeries,
+      isBank: dto.isBank,
+      accountOpeningDate:
+        dto.accountOpeningDate === undefined
+          ? undefined
+          : parseOptionalIsoDate(dto.accountOpeningDate),
+      cardIssuanceDate:
+        dto.cardIssuanceDate === undefined
+          ? undefined
+          : parseOptionalIsoDate(dto.cardIssuanceDate),
+      cardDeliverDate:
+        dto.cardDeliverDate === undefined ? undefined : parseOptionalIsoDate(dto.cardDeliverDate),
+      companyName: dto.companyName === undefined ? undefined : dto.companyName,
+      companySubject: dto.companySubject === undefined ? undefined : dto.companySubject,
+      companyLicenseNumber:
+        dto.companyLicenseNumber === undefined ? undefined : dto.companyLicenseNumber,
+      companyLicenseDate:
+        dto.companyLicenseDate === undefined
+          ? undefined
+          : parseOptionalIsoDate(dto.companyLicenseDate),
+      companyPaperNumber: dto.companyPaperNumber === undefined ? undefined : dto.companyPaperNumber,
+      companyPaperDate:
+        dto.companyPaperDate === undefined ? undefined : parseOptionalIsoDate(dto.companyPaperDate),
+      electricitySubscription:
+        dto.electricitySubscription === undefined ? undefined : dto.electricitySubscription,
       individualTicketQuota:
         dto.individualTicketQuota === undefined ? undefined : dto.individualTicketQuota,
       contractor:

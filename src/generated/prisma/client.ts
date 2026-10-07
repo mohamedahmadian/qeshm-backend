@@ -75,6 +75,11 @@ export type QeshmondiSqlConnection = Prisma.QeshmondiSqlConnectionModel
  */
 export type QeshmondiSyncLog = Prisma.QeshmondiSyncLogModel
 /**
+ * Model QeshmondiLookup
+ * 
+ */
+export type QeshmondiLookup = Prisma.QeshmondiLookupModel
+/**
  * Model UserLocationHistory
  * 
  */

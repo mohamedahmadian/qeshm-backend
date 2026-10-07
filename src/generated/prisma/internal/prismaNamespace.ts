@@ -404,6 +404,7 @@ export const ModelName = {
   User: 'User',
   QeshmondiSqlConnection: 'QeshmondiSqlConnection',
   QeshmondiSyncLog: 'QeshmondiSyncLog',
+  QeshmondiLookup: 'QeshmondiLookup',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
   Project: 'Project',
@@ -472,7 +473,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -991,6 +992,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.QeshmondiSyncLogCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.QeshmondiSyncLogCountAggregateOutputType> | number
+        }
+      }
+    }
+    QeshmondiLookup: {
+      payload: Prisma.$QeshmondiLookupPayload<ExtArgs>
+      fields: Prisma.QeshmondiLookupFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.QeshmondiLookupFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.QeshmondiLookupFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>
+        }
+        findFirst: {
+          args: Prisma.QeshmondiLookupFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.QeshmondiLookupFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>
+        }
+        findMany: {
+          args: Prisma.QeshmondiLookupFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>[]
+        }
+        create: {
+          args: Prisma.QeshmondiLookupCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>
+        }
+        createMany: {
+          args: Prisma.QeshmondiLookupCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.QeshmondiLookupCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>[]
+        }
+        delete: {
+          args: Prisma.QeshmondiLookupDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>
+        }
+        update: {
+          args: Prisma.QeshmondiLookupUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>
+        }
+        deleteMany: {
+          args: Prisma.QeshmondiLookupDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.QeshmondiLookupUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.QeshmondiLookupUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>[]
+        }
+        upsert: {
+          args: Prisma.QeshmondiLookupUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$QeshmondiLookupPayload>
+        }
+        aggregate: {
+          args: Prisma.QeshmondiLookupAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateQeshmondiLookup>
+        }
+        groupBy: {
+          args: Prisma.QeshmondiLookupGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QeshmondiLookupGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.QeshmondiLookupCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.QeshmondiLookupCountAggregateOutputType> | number
         }
       }
     }
@@ -5073,6 +5148,41 @@ export const UserScalarFieldEnum = {
   isResident: 'isResident',
   passportNumber: 'passportNumber',
   qeshmondiGroup: 'qeshmondiGroup',
+  latinFirstName: 'latinFirstName',
+  latinLastName: 'latinLastName',
+  latinFatherName: 'latinFatherName',
+  identityNumber: 'identityNumber',
+  identitySerial: 'identitySerial',
+  landlinePhone: 'landlinePhone',
+  fax: 'fax',
+  postalCode: 'postalCode',
+  jobAddress: 'jobAddress',
+  jobPhone: 'jobPhone',
+  jobFax: 'jobFax',
+  jobPostalCode: 'jobPostalCode',
+  isSingle: 'isSingle',
+  nationality: 'nationality',
+  education: 'education',
+  protectorOffice: 'protectorOffice',
+  nationalIdExpiresAt: 'nationalIdExpiresAt',
+  passportExpiresAt: 'passportExpiresAt',
+  bankFullName: 'bankFullName',
+  bankFullLatinName: 'bankFullLatinName',
+  accountNumber: 'accountNumber',
+  cardNumber: 'cardNumber',
+  cardSeries: 'cardSeries',
+  isBank: 'isBank',
+  accountOpeningDate: 'accountOpeningDate',
+  cardIssuanceDate: 'cardIssuanceDate',
+  cardDeliverDate: 'cardDeliverDate',
+  companyName: 'companyName',
+  companySubject: 'companySubject',
+  companyLicenseNumber: 'companyLicenseNumber',
+  companyLicenseDate: 'companyLicenseDate',
+  companyPaperNumber: 'companyPaperNumber',
+  companyPaperDate: 'companyPaperDate',
+  electricitySubscription: 'electricitySubscription',
+  fingerprint: 'fingerprint',
   individualTicketQuota: 'individualTicketQuota',
   contractorId: 'contractorId',
   createdAt: 'createdAt',
@@ -5112,6 +5222,17 @@ export const QeshmondiSyncLogScalarFieldEnum = {
 } as const
 
 export type QeshmondiSyncLogScalarFieldEnum = (typeof QeshmondiSyncLogScalarFieldEnum)[keyof typeof QeshmondiSyncLogScalarFieldEnum]
+
+
+export const QeshmondiLookupScalarFieldEnum = {
+  sourceId: 'sourceId',
+  code: 'code',
+  title: 'title',
+  type: 'type',
+  parentSourceId: 'parentSourceId'
+} as const
+
+export type QeshmondiLookupScalarFieldEnum = (typeof QeshmondiLookupScalarFieldEnum)[keyof typeof QeshmondiLookupScalarFieldEnum]
 
 
 export const UserLocationHistoryScalarFieldEnum = {
@@ -5940,6 +6061,8 @@ export const PortScalarFieldEnum = {
   phone: 'phone',
   latitude: 'latitude',
   longitude: 'longitude',
+  securityToken: 'securityToken',
+  operatorUserId: 'operatorUserId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -6732,6 +6855,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   qeshmondiSqlConnection?: Prisma.QeshmondiSqlConnectionOmit
   qeshmondiSyncLog?: Prisma.QeshmondiSyncLogOmit
+  qeshmondiLookup?: Prisma.QeshmondiLookupOmit
   userLocationHistory?: Prisma.UserLocationHistoryOmit
   projectGroup?: Prisma.ProjectGroupOmit
   project?: Prisma.ProjectOmit

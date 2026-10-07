@@ -2,7 +2,49 @@ import ExcelJS from 'exceljs';
 import { toLatinDigits } from '../common/national-id';
 import { normalizeNationalId } from '../common/national-id';
 import { parseJalaliCompactToIso, parseJalaliSlashToIso } from '../common/jalali-date';
-import { UserGender } from '../generated/prisma/client';
+import { Religion, UserGender } from '../generated/prisma/client';
+
+/** Extra tblPerson columns filled only by the SQL sync, after lookup resolution. */
+export type QeshmondiCitizenProfile = {
+  qeshmondiGroup: string | null;
+  latinFirstName: string | null;
+  latinLastName: string | null;
+  latinFatherName: string | null;
+  identityNumber: string | null;
+  identitySerial: string | null;
+  landlinePhone: string | null;
+  fax: string | null;
+  postalCode: string | null;
+  jobAddress: string | null;
+  jobPhone: string | null;
+  jobFax: string | null;
+  jobPostalCode: string | null;
+  isSingle: boolean | null;
+  nationality: string | null;
+  education: string | null;
+  protectorOffice: string | null;
+  religion: Religion | null;
+  religionOther: string | null;
+  nationalIdExpiresAt: string | null;
+  passportExpiresAt: string | null;
+  bankFullName: string | null;
+  bankFullLatinName: string | null;
+  accountNumber: string | null;
+  cardNumber: string | null;
+  cardSeries: string | null;
+  isBank: boolean | null;
+  accountOpeningDate: string | null;
+  cardIssuanceDate: string | null;
+  cardDeliverDate: string | null;
+  companyName: string | null;
+  companySubject: string | null;
+  companyLicenseNumber: string | null;
+  companyLicenseDate: string | null;
+  companyPaperNumber: string | null;
+  companyPaperDate: string | null;
+  electricitySubscription: string | null;
+  fingerprintBase64: string | null;
+};
 
 export type QeshmondiImportRow = {
   rowNumber: number;
@@ -16,6 +58,7 @@ export type QeshmondiImportRow = {
   occupation: string | null;
   qeshmondiEndDate: string | null;
   birthDate: string | null;
+  citizen?: QeshmondiCitizenProfile;
 };
 
 export type QeshmondiImportSkip = {

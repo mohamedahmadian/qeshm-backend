@@ -4,10 +4,17 @@ import {
   parseBirthToIso,
   parseExpiryToIso,
   parseGender,
+  type QeshmondiCitizenProfile,
   type QeshmondiImportRow,
   type QeshmondiImportSkip,
 } from './qeshmondi-import';
 import { normalizeNationalId } from '../common/national-id';
+import {
+  QESHMONDI_LOOKUP_TYPE,
+  lookupTitle,
+  resolveQeshmondiReligion,
+  type QeshmondiLookupHit,
+} from './qeshmondi-lookup';
 
 export const QESHMONDI_SQL_CONNECTION_ID = 'qeshmondi';
 
@@ -95,15 +102,92 @@ function sqlGender(value: unknown): UserGender | null {
   return parseGender(value == null ? '' : String(value));
 }
 
+function sqlBoolean(value: unknown): boolean | null {
+  if (typeof value === 'boolean') return value;
+  if (typeof value === 'number') {
+    if (value === 1) return true;
+    if (value === 0) return false;
+    return null;
+  }
+  if (value == null || value === '') return null;
+  return parseGender(String(value)) == null
+    ? null
+    : parseGender(String(value)) === UserGender.MALE;
+}
+
 function textCell(value: unknown) {
   if (value == null) return '';
   return String(value).trim();
+}
+
+function textOrNull(value: unknown) {
+  const text = textCell(value);
+  return text.length ? text : null;
+}
+
+function fingerprintBase64(value: unknown) {
+  const bytes = Buffer.isBuffer(value)
+    ? value
+    : value instanceof Uint8Array
+      ? Buffer.from(value)
+      : null;
+  if (!bytes?.length || bytes.length > 1_500_000) return null;
+  return bytes.toString('base64');
+}
+
+function citizenFromRecord(
+  record: Record<string, unknown>,
+  lookups: Map<number, QeshmondiLookupHit>,
+): QeshmondiCitizenProfile {
+  const religionTitle = lookupTitle(lookups, record.ReligionId, QESHMONDI_LOOKUP_TYPE.religion);
+  const religion = resolveQeshmondiReligion(religionTitle);
+  return {
+    qeshmondiGroup: lookupTitle(lookups, record.GroupId, QESHMONDI_LOOKUP_TYPE.group),
+    latinFirstName: textOrNull(record.LatinFirstName),
+    latinLastName: textOrNull(record.LatinLastName),
+    latinFatherName: textOrNull(record.LatinFather),
+    identityNumber: textOrNull(record.IdNum),
+    identitySerial: textOrNull(record.IdSerial),
+    landlinePhone: textOrNull(record.Phone),
+    fax: textOrNull(record.Fax),
+    postalCode: textOrNull(record.PostalCode),
+    jobAddress: textOrNull(record.JobAdr),
+    jobPhone: textOrNull(record.JobPhone),
+    jobFax: textOrNull(record.JobFax),
+    jobPostalCode: textOrNull(record.JobPostalCode),
+    isSingle: sqlBoolean(record.IsSingle),
+    nationality: lookupTitle(lookups, record.NationalityId, QESHMONDI_LOOKUP_TYPE.nationality),
+    education: lookupTitle(lookups, record.EducationId, QESHMONDI_LOOKUP_TYPE.education),
+    protectorOffice: lookupTitle(lookups, record.ProtectorId, QESHMONDI_LOOKUP_TYPE.protector),
+    religion: religion.religion,
+    religionOther: religion.religionOther,
+    nationalIdExpiresAt: sqlDateToIso(record.MelliExpiredDate, 'expiry'),
+    passportExpiresAt: sqlDateToIso(record.PassportExpiredDate, 'expiry'),
+    bankFullName: textOrNull(record.BankFullName),
+    bankFullLatinName: textOrNull(record.BankFullLatinName),
+    accountNumber: textOrNull(record.AccountNum),
+    cardNumber: textOrNull(record.CardNum),
+    cardSeries: textOrNull(record.Serie),
+    isBank: sqlBoolean(record.IsBank),
+    accountOpeningDate: sqlDateToIso(record.AccountOpeningDate, 'expiry'),
+    cardIssuanceDate: sqlDateToIso(record.CardIssuanceDate, 'expiry'),
+    cardDeliverDate: sqlDateToIso(record.CardDeliverDate, 'expiry'),
+    companyName: textOrNull(record.CompName),
+    companySubject: textOrNull(record.CompSubject),
+    companyLicenseNumber: textOrNull(record.CompLicNum),
+    companyLicenseDate: sqlDateToIso(record.CompLicDate, 'expiry'),
+    companyPaperNumber: textOrNull(record.CompPaperNum),
+    companyPaperDate: sqlDateToIso(record.CompPaperDate, 'expiry'),
+    electricitySubscription: textOrNull(record.EshterkBargh),
+    fingerprintBase64: fingerprintBase64(record.FIRData),
+  };
 }
 
 function mapTblPerson(
   record: Record<string, unknown>,
   rowNumber: number,
   seen: Set<string>,
+  lookups: Map<number, QeshmondiLookupHit>,
 ): { row: QeshmondiImportRow } | { skip: QeshmondiImportSkip } | null {
   const firstName = textCell(record.FirstName);
   const lastName = textCell(record.LastName);
@@ -122,14 +206,15 @@ function mapTblPerson(
       rowNumber,
       firstName,
       lastName,
-      fatherName: null,
+      fatherName: textOrNull(record.Father),
       nationalId,
-      passportNumber: null,
-      isResident: false,
+      passportNumber: textOrNull(record.PassportNum),
+      isResident: sqlBoolean(record.IsResident) ?? false,
       gender: sqlGender(record.IsMale),
-      occupation: null,
+      occupation: textOrNull(record.Job),
       qeshmondiEndDate: sqlDateToIso(record.date_exp, 'expiry'),
       birthDate: sqlDateToIso(record.BirthDate, 'birth'),
+      citizen: citizenFromRecord(record, lookups),
     },
   };
 }
@@ -141,6 +226,7 @@ function mapTblPerson(
  */
 export async function streamQeshmondiSqlPeople(
   settings: QeshmondiSqlSettings,
+  lookups: Map<number, QeshmondiLookupHit>,
   onBatch: (batch: QeshmondiSqlBatch) => Promise<void>,
 ) {
   const pool = createPool(settings, 0);
@@ -212,7 +298,7 @@ export async function streamQeshmondiSqlPeople(
       request.on('row', (record: Record<string, unknown>) => {
         if (failed) return;
         read += 1;
-        const mapped = mapTblPerson(record, read, seen);
+        const mapped = mapTblPerson(record, read, seen, lookups);
         if (mapped) {
           if ('skip' in mapped) skipped.push(mapped.skip);
           else rows.push(mapped.row);
@@ -233,9 +319,50 @@ export async function streamQeshmondiSqlPeople(
         SELECT
           [FirstName],
           [LastName],
+          [LatinFirstName],
+          [LatinLastName],
+          [Father],
+          [LatinFather],
+          [NationalityId],
+          [IdNum],
           [MelliCode],
+          [PassportNum],
+          [IsSingle],
+          [IsResident],
           [IsMale],
           [BirthDate],
+          [MelliExpiredDate],
+          [PassportExpiredDate],
+          [EducationId],
+          [JobAdr],
+          [Phone],
+          [JobPhone],
+          [PostalCode],
+          [JobPostalCode],
+          [Fax],
+          [JobFax],
+          [Job],
+          [AccountOpeningDate],
+          [CardIssuanceDate],
+          [BankFullName],
+          [BankFullLatinName],
+          [GroupId],
+          [IdSerial],
+          [CardNum],
+          [AccountNum],
+          [ReligionId],
+          [CardDeliverDate],
+          [ProtectorId],
+          [Serie],
+          [IsBank],
+          [CompName],
+          [CompSubject],
+          [CompLicDate],
+          [CompLicNum],
+          [CompPaperDate],
+          [CompPaperNum],
+          [EshterkBargh],
+          [FIRData],
           [date_exp]
         FROM [dbo].[tblPerson]
       `);

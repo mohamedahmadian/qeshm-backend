@@ -47,6 +47,8 @@ export type PortMinAggregateOutputType = {
   phone: string | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
+  securityToken: string | null
+  operatorUserId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,6 +64,8 @@ export type PortMaxAggregateOutputType = {
   phone: string | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
+  securityToken: string | null
+  operatorUserId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -77,6 +81,8 @@ export type PortCountAggregateOutputType = {
   phone: number
   latitude: number
   longitude: number
+  securityToken: number
+  operatorUserId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -104,6 +110,8 @@ export type PortMinAggregateInputType = {
   phone?: true
   latitude?: true
   longitude?: true
+  securityToken?: true
+  operatorUserId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -119,6 +127,8 @@ export type PortMaxAggregateInputType = {
   phone?: true
   latitude?: true
   longitude?: true
+  securityToken?: true
+  operatorUserId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -134,6 +144,8 @@ export type PortCountAggregateInputType = {
   phone?: true
   latitude?: true
   longitude?: true
+  securityToken?: true
+  operatorUserId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -236,6 +248,8 @@ export type PortGroupByOutputType = {
   phone: string
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
+  securityToken: string
+  operatorUserId: string | null
   createdAt: Date
   updatedAt: Date
   _count: PortCountAggregateOutputType | null
@@ -274,9 +288,12 @@ export type PortWhereInput = {
   phone?: Prisma.StringFilter<"Port"> | string
   latitude?: Prisma.DecimalNullableFilter<"Port"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Port"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFilter<"Port"> | string
+  operatorUserId?: Prisma.StringNullableFilter<"Port"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Port"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Port"> | Date | string
   city?: Prisma.XOR<Prisma.CityScalarRelationFilter, Prisma.CityWhereInput>
+  operatorUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type PortOrderByWithRelationInput = {
@@ -290,14 +307,19 @@ export type PortOrderByWithRelationInput = {
   phone?: Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  securityToken?: Prisma.SortOrder
+  operatorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   city?: Prisma.CityOrderByWithRelationInput
+  operatorUser?: Prisma.UserOrderByWithRelationInput
 }
 
 export type PortWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   name?: string
+  securityToken?: string
+  operatorUserId?: string
   AND?: Prisma.PortWhereInput | Prisma.PortWhereInput[]
   OR?: Prisma.PortWhereInput[]
   NOT?: Prisma.PortWhereInput | Prisma.PortWhereInput[]
@@ -312,7 +334,8 @@ export type PortWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Port"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Port"> | Date | string
   city?: Prisma.XOR<Prisma.CityScalarRelationFilter, Prisma.CityWhereInput>
-}, "id" | "name">
+  operatorUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+}, "id" | "securityToken" | "operatorUserId" | "name">
 
 export type PortOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -325,6 +348,8 @@ export type PortOrderByWithAggregationInput = {
   phone?: Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  securityToken?: Prisma.SortOrder
+  operatorUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PortCountOrderByAggregateInput
@@ -348,6 +373,8 @@ export type PortScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringWithAggregatesFilter<"Port"> | string
   latitude?: Prisma.DecimalNullableWithAggregatesFilter<"Port"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableWithAggregatesFilter<"Port"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringWithAggregatesFilter<"Port"> | string
+  operatorUserId?: Prisma.StringNullableWithAggregatesFilter<"Port"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Port"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Port"> | Date | string
 }
@@ -362,9 +389,11 @@ export type PortCreateInput = {
   phone: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken: string
   createdAt?: Date | string
   updatedAt?: Date | string
   city: Prisma.CityCreateNestedOneWithoutPortsInput
+  operatorUser?: Prisma.UserCreateNestedOneWithoutOperatedPortInput
 }
 
 export type PortUncheckedCreateInput = {
@@ -378,6 +407,8 @@ export type PortUncheckedCreateInput = {
   phone: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken: string
+  operatorUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -392,9 +423,11 @@ export type PortUpdateInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   city?: Prisma.CityUpdateOneRequiredWithoutPortsNestedInput
+  operatorUser?: Prisma.UserUpdateOneWithoutOperatedPortNestedInput
 }
 
 export type PortUncheckedUpdateInput = {
@@ -408,6 +441,8 @@ export type PortUncheckedUpdateInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
+  operatorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -423,6 +458,8 @@ export type PortCreateManyInput = {
   phone: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken: string
+  operatorUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -437,6 +474,7 @@ export type PortUpdateManyMutationInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -452,6 +490,8 @@ export type PortUncheckedUpdateManyInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
+  operatorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -466,6 +506,11 @@ export type PortOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type PortNullableScalarRelationFilter = {
+  is?: Prisma.PortWhereInput | null
+  isNot?: Prisma.PortWhereInput | null
+}
+
 export type PortCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -477,6 +522,8 @@ export type PortCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  securityToken?: Prisma.SortOrder
+  operatorUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -497,6 +544,8 @@ export type PortMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  securityToken?: Prisma.SortOrder
+  operatorUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -512,6 +561,8 @@ export type PortMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  securityToken?: Prisma.SortOrder
+  operatorUserId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -563,6 +614,38 @@ export type PortUncheckedUpdateManyWithoutCityNestedInput = {
   deleteMany?: Prisma.PortScalarWhereInput | Prisma.PortScalarWhereInput[]
 }
 
+export type PortCreateNestedOneWithoutOperatorUserInput = {
+  create?: Prisma.XOR<Prisma.PortCreateWithoutOperatorUserInput, Prisma.PortUncheckedCreateWithoutOperatorUserInput>
+  connectOrCreate?: Prisma.PortCreateOrConnectWithoutOperatorUserInput
+  connect?: Prisma.PortWhereUniqueInput
+}
+
+export type PortUncheckedCreateNestedOneWithoutOperatorUserInput = {
+  create?: Prisma.XOR<Prisma.PortCreateWithoutOperatorUserInput, Prisma.PortUncheckedCreateWithoutOperatorUserInput>
+  connectOrCreate?: Prisma.PortCreateOrConnectWithoutOperatorUserInput
+  connect?: Prisma.PortWhereUniqueInput
+}
+
+export type PortUpdateOneWithoutOperatorUserNestedInput = {
+  create?: Prisma.XOR<Prisma.PortCreateWithoutOperatorUserInput, Prisma.PortUncheckedCreateWithoutOperatorUserInput>
+  connectOrCreate?: Prisma.PortCreateOrConnectWithoutOperatorUserInput
+  upsert?: Prisma.PortUpsertWithoutOperatorUserInput
+  disconnect?: Prisma.PortWhereInput | boolean
+  delete?: Prisma.PortWhereInput | boolean
+  connect?: Prisma.PortWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PortUpdateToOneWithWhereWithoutOperatorUserInput, Prisma.PortUpdateWithoutOperatorUserInput>, Prisma.PortUncheckedUpdateWithoutOperatorUserInput>
+}
+
+export type PortUncheckedUpdateOneWithoutOperatorUserNestedInput = {
+  create?: Prisma.XOR<Prisma.PortCreateWithoutOperatorUserInput, Prisma.PortUncheckedCreateWithoutOperatorUserInput>
+  connectOrCreate?: Prisma.PortCreateOrConnectWithoutOperatorUserInput
+  upsert?: Prisma.PortUpsertWithoutOperatorUserInput
+  disconnect?: Prisma.PortWhereInput | boolean
+  delete?: Prisma.PortWhereInput | boolean
+  connect?: Prisma.PortWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PortUpdateToOneWithWhereWithoutOperatorUserInput, Prisma.PortUpdateWithoutOperatorUserInput>, Prisma.PortUncheckedUpdateWithoutOperatorUserInput>
+}
+
 export type EnumPortKindFieldUpdateOperationsInput = {
   set?: $Enums.PortKind
 }
@@ -577,8 +660,10 @@ export type PortCreateWithoutCityInput = {
   phone: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  operatorUser?: Prisma.UserCreateNestedOneWithoutOperatedPortInput
 }
 
 export type PortUncheckedCreateWithoutCityInput = {
@@ -591,6 +676,8 @@ export type PortUncheckedCreateWithoutCityInput = {
   phone: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken: string
+  operatorUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -635,8 +722,90 @@ export type PortScalarWhereInput = {
   phone?: Prisma.StringFilter<"Port"> | string
   latitude?: Prisma.DecimalNullableFilter<"Port"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Port"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFilter<"Port"> | string
+  operatorUserId?: Prisma.StringNullableFilter<"Port"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Port"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Port"> | Date | string
+}
+
+export type PortCreateWithoutOperatorUserInput = {
+  id?: string
+  name: string
+  cooperativeName: string
+  address?: string | null
+  kind: $Enums.PortKind
+  managerName: string
+  phone: string
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  city: Prisma.CityCreateNestedOneWithoutPortsInput
+}
+
+export type PortUncheckedCreateWithoutOperatorUserInput = {
+  id?: string
+  name: string
+  cityId: string
+  cooperativeName: string
+  address?: string | null
+  kind: $Enums.PortKind
+  managerName: string
+  phone: string
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PortCreateOrConnectWithoutOperatorUserInput = {
+  where: Prisma.PortWhereUniqueInput
+  create: Prisma.XOR<Prisma.PortCreateWithoutOperatorUserInput, Prisma.PortUncheckedCreateWithoutOperatorUserInput>
+}
+
+export type PortUpsertWithoutOperatorUserInput = {
+  update: Prisma.XOR<Prisma.PortUpdateWithoutOperatorUserInput, Prisma.PortUncheckedUpdateWithoutOperatorUserInput>
+  create: Prisma.XOR<Prisma.PortCreateWithoutOperatorUserInput, Prisma.PortUncheckedCreateWithoutOperatorUserInput>
+  where?: Prisma.PortWhereInput
+}
+
+export type PortUpdateToOneWithWhereWithoutOperatorUserInput = {
+  where?: Prisma.PortWhereInput
+  data: Prisma.XOR<Prisma.PortUpdateWithoutOperatorUserInput, Prisma.PortUncheckedUpdateWithoutOperatorUserInput>
+}
+
+export type PortUpdateWithoutOperatorUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  cooperativeName?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kind?: Prisma.EnumPortKindFieldUpdateOperationsInput | $Enums.PortKind
+  managerName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  city?: Prisma.CityUpdateOneRequiredWithoutPortsNestedInput
+}
+
+export type PortUncheckedUpdateWithoutOperatorUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  cityId?: Prisma.StringFieldUpdateOperationsInput | string
+  cooperativeName?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kind?: Prisma.EnumPortKindFieldUpdateOperationsInput | $Enums.PortKind
+  managerName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PortCreateManyCityInput = {
@@ -649,6 +818,8 @@ export type PortCreateManyCityInput = {
   phone: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken: string
+  operatorUserId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -663,8 +834,10 @@ export type PortUpdateWithoutCityInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  operatorUser?: Prisma.UserUpdateOneWithoutOperatedPortNestedInput
 }
 
 export type PortUncheckedUpdateWithoutCityInput = {
@@ -677,6 +850,8 @@ export type PortUncheckedUpdateWithoutCityInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
+  operatorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -691,6 +866,8 @@ export type PortUncheckedUpdateManyWithoutCityInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  securityToken?: Prisma.StringFieldUpdateOperationsInput | string
+  operatorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -708,9 +885,12 @@ export type PortSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   phone?: boolean
   latitude?: boolean
   longitude?: boolean
+  securityToken?: boolean
+  operatorUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  operatorUser?: boolean | Prisma.Port$operatorUserArgs<ExtArgs>
 }, ExtArgs["result"]["port"]>
 
 export type PortSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -724,9 +904,12 @@ export type PortSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phone?: boolean
   latitude?: boolean
   longitude?: boolean
+  securityToken?: boolean
+  operatorUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  operatorUser?: boolean | Prisma.Port$operatorUserArgs<ExtArgs>
 }, ExtArgs["result"]["port"]>
 
 export type PortSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -740,9 +923,12 @@ export type PortSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phone?: boolean
   latitude?: boolean
   longitude?: boolean
+  securityToken?: boolean
+  operatorUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  operatorUser?: boolean | Prisma.Port$operatorUserArgs<ExtArgs>
 }, ExtArgs["result"]["port"]>
 
 export type PortSelectScalar = {
@@ -756,25 +942,31 @@ export type PortSelectScalar = {
   phone?: boolean
   latitude?: boolean
   longitude?: boolean
+  securityToken?: boolean
+  operatorUserId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PortOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "cityId" | "cooperativeName" | "address" | "kind" | "managerName" | "phone" | "latitude" | "longitude" | "createdAt" | "updatedAt", ExtArgs["result"]["port"]>
+export type PortOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "cityId" | "cooperativeName" | "address" | "kind" | "managerName" | "phone" | "latitude" | "longitude" | "securityToken" | "operatorUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["port"]>
 export type PortInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  operatorUser?: boolean | Prisma.Port$operatorUserArgs<ExtArgs>
 }
 export type PortIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  operatorUser?: boolean | Prisma.Port$operatorUserArgs<ExtArgs>
 }
 export type PortIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+  operatorUser?: boolean | Prisma.Port$operatorUserArgs<ExtArgs>
 }
 
 export type $PortPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Port"
   objects: {
     city: Prisma.$CityPayload<ExtArgs>
+    operatorUser: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -787,6 +979,8 @@ export type $PortPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     phone: string
     latitude: runtime.Decimal | null
     longitude: runtime.Decimal | null
+    securityToken: string
+    operatorUserId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["port"]>
@@ -1184,6 +1378,7 @@ readonly fields: PortFieldRefs;
 export interface Prisma__PortClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   city<T extends Prisma.CityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CityDefaultArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  operatorUser<T extends Prisma.Port$operatorUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Port$operatorUserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1223,6 +1418,8 @@ export interface PortFieldRefs {
   readonly phone: Prisma.FieldRef<"Port", 'String'>
   readonly latitude: Prisma.FieldRef<"Port", 'Decimal'>
   readonly longitude: Prisma.FieldRef<"Port", 'Decimal'>
+  readonly securityToken: Prisma.FieldRef<"Port", 'String'>
+  readonly operatorUserId: Prisma.FieldRef<"Port", 'String'>
   readonly createdAt: Prisma.FieldRef<"Port", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Port", 'DateTime'>
 }
@@ -1623,6 +1820,25 @@ export type PortDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Ports to delete.
    */
   limit?: number
+}
+
+/**
+ * Port.operatorUser
+ */
+export type Port$operatorUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

@@ -6,6 +6,11 @@ export const CITIZEN_ROLE_CODE = 'CITIZEN';
 export const BOARD_ADMIN_ROLE_CODE = 'BOARD_ADMIN';
 export const CONTRACTOR_ROLE_CODE = 'CONTRACTOR';
 export const STAKEHOLDERS_ADMIN_ROLE_CODE = 'STAKEHOLDERS_ADMIN';
+export const TAAVONI_BELIT_ROLE_CODE = 'TAAVONI_BELIT';
+
+export const TAAVONI_BELIT_PERMISSION_CODES = [
+  'stakeholders.port-sales-reports',
+] as const;
 
 export const CONTRACTOR_PERMISSION_CODES = [
   'stakeholders.projects',
@@ -86,6 +91,11 @@ export const SYSTEM_ROLES = [
     name: 'مدیر ماژول درگاه یکپارچه',
     description: 'مدیریت درگاه یکپارچه ذی‌نفعان و مشاهدهٔ همهٔ گزارش‌های فروش بنادر',
   },
+  {
+    code: TAAVONI_BELIT_ROLE_CODE,
+    name: 'تعاونی بلیت',
+    description: 'کاربر تعاونی فروش بلیت که به یک بندر اختصاص داده می‌شود',
+  },
 ] as const;
 
 export const RESERVED_ROLE_CODES = new Set<string>(
@@ -139,6 +149,9 @@ export async function ensureSystemRoles(
     }
     if (saved.code === CONTRACTOR_ROLE_CODE) {
       await grantRolePermissions(prisma, saved.id, ['stakeholders.my-subsidies']);
+    }
+    if (saved.code === TAAVONI_BELIT_ROLE_CODE) {
+      await grantRolePermissions(prisma, saved.id, TAAVONI_BELIT_PERMISSION_CODES);
     }
     if (saved.code === CONTRACTOR_ROLE_CODE && !existing) {
       await prisma.rolePermission.createMany({
