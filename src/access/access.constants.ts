@@ -6,6 +6,7 @@ export const CITIZEN_ROLE_CODE = 'CITIZEN';
 export const BOARD_ADMIN_ROLE_CODE = 'BOARD_ADMIN';
 export const CONTRACTOR_ROLE_CODE = 'CONTRACTOR';
 export const STAKEHOLDERS_ADMIN_ROLE_CODE = 'STAKEHOLDERS_ADMIN';
+export const FOOD_ADMIN_ROLE_CODE = 'FOOD_ADMIN';
 export const TAAVONI_BELIT_ROLE_CODE = 'TAAVONI_BELIT';
 
 export const TAAVONI_BELIT_PERMISSION_CODES = [
@@ -46,6 +47,19 @@ export const BOARD_ADMIN_PERMISSION_CODES = [
   'board.requests',
   'board.plans',
   'board.permissions',
+] as const;
+
+/** کل ماژول غذا به‌جز سفارش‌ها و گزارش شخصی کارمند. */
+export const FOOD_ADMIN_PERMISSION_CODES = [
+  'food-reservation.foods',
+  'food-reservation.restaurants',
+  'food-reservation.unit-reps',
+  'food-reservation.reserve',
+  'food-reservation.advanced',
+  'food-reservation.history',
+  'food-reservation.report',
+  'food-reservation.cost-estimate',
+  'food-reservation.unit-report',
 ] as const;
 
 export const STAKEHOLDERS_ADMIN_PERMISSION_CODES = [
@@ -91,6 +105,11 @@ export const SYSTEM_ROLES = [
     code: STAKEHOLDERS_ADMIN_ROLE_CODE,
     name: 'مدیر ماژول درگاه یکپارچه',
     description: 'مدیریت درگاه یکپارچه ذی‌نفعان و مشاهدهٔ همهٔ گزارش‌های فروش بنادر',
+  },
+  {
+    code: FOOD_ADMIN_ROLE_CODE,
+    name: 'مدیر ماژول غذا',
+    description: 'مدیریت رزرواسیون غذا و انتخاب واحد هنگام رزرو؛ بدون سفارش‌ها و گزارش شخصی',
   },
   {
     code: TAAVONI_BELIT_ROLE_CODE,
@@ -141,6 +160,9 @@ export async function ensureSystemRoles(
     }
     if (saved.code === STAKEHOLDERS_ADMIN_ROLE_CODE) {
       await grantRolePermissions(prisma, saved.id, STAKEHOLDERS_ADMIN_PERMISSION_CODES);
+    }
+    if (saved.code === FOOD_ADMIN_ROLE_CODE) {
+      await grantRolePermissions(prisma, saved.id, FOOD_ADMIN_PERMISSION_CODES);
     }
     if (saved.code === EMPLOYEE_ROLE_CODE) {
       await grantRolePermissions(prisma, saved.id, EMPLOYEE_PERMISSION_CODES);

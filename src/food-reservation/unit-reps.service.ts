@@ -151,7 +151,7 @@ export class UnitRepsService {
   }
 
   private mealLimits(limits?: UpdateUnitRepDto) {
-    if (!limits) return { maxMeals: 1 };
+    if (!limits) return {};
     return {
       maxMeals: limits.maxMeals ?? 1,
       guestMealsEnabled: limits.guestMealsEnabled,

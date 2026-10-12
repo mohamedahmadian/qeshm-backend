@@ -12,6 +12,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import type { Response } from 'express';
+import { FOOD_ADMIN_ROLE_CODE } from '../access/access.constants';
 import { hasAnyPermission, hasPermission } from '../access/access.util';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CreateFoodReservationDto } from './dto/create-food-reservation.dto';
@@ -28,6 +29,7 @@ import { FoodReservationsService } from './food-reservations.service';
 type RequestUser = {
   id: string;
   isAdmin?: boolean;
+  roleCodes?: string[];
   permissionCodes?: string[];
 };
 
@@ -48,9 +50,12 @@ function canSeeAllFoodReservations(user: RequestUser) {
   return hasAnyPermission(foodAccess(user), ORG_FOOD_RESERVATION_PERMISSIONS);
 }
 
-/** مدیریت، یا نقشی که کل ماژول غذا را دارد و می‌تواند واحد انتخاب کند. */
+/** مدیریت، مدیر ماژول غذا، یا نقشی که کل ماژول غذا را دارد و می‌تواند واحد انتخاب کند. */
 function canManageFoodReservations(user: RequestUser) {
-  return hasPermission(foodAccess(user), 'food-reservation');
+  return (
+    hasPermission(foodAccess(user), 'food-reservation') ||
+    Boolean(user.roleCodes?.includes(FOOD_ADMIN_ROLE_CODE))
+  );
 }
 
 @Controller('food-reservations')
