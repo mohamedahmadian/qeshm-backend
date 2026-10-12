@@ -71,6 +71,7 @@ const reservationSelect = {
   userId: true,
   orgUnitId: true,
   quantity: true,
+  forGuest: true,
   unitPrice: true,
   status: true,
   createdAt: true,
@@ -127,6 +128,10 @@ type CostGroup = {
   totalPrice: number;
 };
 
+type UnitCostGroup = CostGroup & {
+  guestQuantity: number;
+};
+
 type FoodCostGroup = CostGroup & {
   priceSum: number;
   minUnitPrice: number;
@@ -139,6 +144,33 @@ type PeriodCostGroup = {
   quantity: number;
   totalPrice: number;
 };
+
+type GuestPeriodGroup = PeriodCostGroup & {
+  guestQuantity: number;
+};
+
+function bumpUnitCost(
+  map: Map<string, UnitCostGroup>,
+  id: string,
+  name: string,
+  amount: number,
+  quantity: number,
+  forGuest: boolean,
+) {
+  const current = map.get(id) ?? {
+    id,
+    name,
+    count: 0,
+    quantity: 0,
+    totalPrice: 0,
+    guestQuantity: 0,
+  };
+  current.count += 1;
+  current.quantity += quantity;
+  current.totalPrice += amount;
+  if (forGuest) current.guestQuantity += quantity;
+  map.set(id, current);
+}
 
 function bumpCost(
   map: Map<string, CostGroup>,
@@ -187,6 +219,27 @@ function bumpFood(
   map.set(id, current);
 }
 
+function bumpGuestPeriod(
+  map: Map<string, GuestPeriodGroup>,
+  period: string,
+  amount: number,
+  quantity: number,
+  forGuest: boolean,
+) {
+  const current = map.get(period) ?? {
+    period,
+    count: 0,
+    quantity: 0,
+    totalPrice: 0,
+    guestQuantity: 0,
+  };
+  current.count += 1;
+  current.quantity += quantity;
+  current.totalPrice += amount;
+  if (forGuest) current.guestQuantity += quantity;
+  map.set(period, current);
+}
+
 function bumpPeriod(
   map: Map<string, PeriodCostGroup>,
   period: string,
@@ -231,34 +284,46 @@ function calendarPeriodKeys(iso: string, jalali: boolean) {
 export class FoodReservationsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async context(userId: string, isAdmin = false) {
+  async context(userId: string, canManage = false) {
     const user = await this.requireEmployee(userId);
-    if (isAdmin) {
-      const units = await this.prisma.organizationUnit.findMany({
-        select: {
-          id: true,
-          name: true,
-          parentId: true,
-          maxMeals: true,
-          restaurants: {
-            select: {
-              restaurant: { select: { id: true, name: true, logoId: true } },
+    if (canManage) {
+      const [units, restaurantRows] = await Promise.all([
+        this.prisma.organizationUnit.findMany({
+          select: {
+            id: true,
+            name: true,
+            parentId: true,
+            maxMeals: true,
+            guestMealsEnabled: true,
+            maxGuestMeals: true,
+            restaurants: {
+              select: {
+                restaurant: { select: { id: true, name: true, logoId: true } },
+              },
             },
           },
-        },
-        orderBy: [{ name: 'asc' }, { id: 'asc' }],
-      });
+          orderBy: [{ name: 'asc' }, { id: 'asc' }],
+        }),
+        this.prisma.restaurant.findMany({
+          select: { id: true, name: true, logoId: true },
+        }),
+      ]);
       const paths = buildOrganizationUnitPaths(units);
+      const restaurants = [...restaurantRows].sort(
+        (a, b) => a.name.localeCompare(b.name, 'fa') || a.id.localeCompare(b.id),
+      );
       return {
         orgUnit: user.orgUnit,
         isNutritionRep: this.isNutritionRep(user),
         canManage: true,
-        restaurants: [],
+        restaurants,
         units: units.map((unit) => ({
           id: unit.id,
           name: unit.name,
           pathLabel: paths.get(unit.id) ?? unit.name,
           maxMeals: unit.maxMeals,
+          guestMealsEnabled: unit.guestMealsEnabled,
+          maxGuestMeals: unit.maxGuestMeals,
           restaurants: unit.restaurants
             .map((link) => link.restaurant)
             .sort(
@@ -286,30 +351,33 @@ export class FoodReservationsService {
   async lastQuantity(
     userId: string,
     query: FoodReservationLastQuantityQueryDto,
-    isAdmin = false,
+    canManage = false,
   ) {
     const user = await this.requireEmployee(userId);
-    const unitId = isAdmin && query.orgUnitId ? query.orgUnitId : user.orgUnitId;
+    const unitId = canManage && query.orgUnitId ? query.orgUnitId : user.orgUnitId;
     if (!unitId) return { quantity: null };
+    const forGuest = query.forGuest === true;
     const matched = await this.findLastQuantity(unitId, {
       restaurantId: query.restaurantId,
       foodId: query.foodId,
+      forGuest,
     });
     if (matched != null) return { quantity: matched };
     if (!query.restaurantId && !query.foodId) return { quantity: null };
-    const unitLast = await this.findLastQuantity(unitId, {});
+    const unitLast = await this.findLastQuantity(unitId, { forGuest });
     return { quantity: unitLast };
   }
 
   private async findLastQuantity(
     unitId: string,
-    filter: { restaurantId?: string; foodId?: string },
+    filter: { restaurantId?: string; foodId?: string; forGuest: boolean },
   ) {
     const last = await foodReservations(this.prisma).findFirst({
       where: {
         orgUnitId: unitId,
         restaurantId: filter.restaurantId,
         foodId: filter.foodId,
+        forGuest: filter.forGuest,
       },
       orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
       select: { quantity: true },
@@ -317,12 +385,12 @@ export class FoodReservationsService {
     return last?.quantity ?? null;
   }
 
-  async menu(userId: string, query: FoodReservationMenuQueryDto, isAdmin = false) {
+  async menu(userId: string, query: FoodReservationMenuQueryDto, canManage = false) {
     await this.requireLinkedRestaurant(
       userId,
       query.restaurantId,
       query.orgUnitId,
-      isAdmin,
+      canManage,
     );
     const items = await this.prisma.restaurantMenuItem.findMany({
       where: {
@@ -342,13 +410,13 @@ export class FoodReservationsService {
   async weekMenu(
     userId: string,
     query: FoodReservationWeekMenuQueryDto,
-    isAdmin = false,
+    canManage = false,
   ) {
     await this.requireLinkedRestaurant(
       userId,
       query.restaurantId,
       query.orgUnitId,
-      isAdmin,
+      canManage,
     );
     const items = await this.prisma.restaurantMenuItem.findMany({
       where: {
@@ -367,11 +435,12 @@ export class FoodReservationsService {
   private async requireLinkedRestaurant(
     userId: string,
     restaurantId: string,
-    orgUnitId: string | undefined,
-    isAdmin: boolean,
+    _orgUnitId: string | undefined,
+    canManage: boolean,
   ) {
     const user = await this.requireEmployee(userId);
-    const unitId = isAdmin && orgUnitId ? orgUnitId : user.orgUnitId;
+    if (canManage) return;
+    const unitId = user.orgUnitId;
     if (!unitId) {
       throw new BadRequestException('ابتدا واحد سازمانی شما باید مشخص شود');
     }
@@ -514,15 +583,17 @@ export class FoodReservationsService {
             { header: 'رستوران', key: 'restaurant', width: 22 },
             { header: 'غذا', key: 'food', width: 22 },
             { header: 'تعداد', key: 'quantity', width: 12 },
+            { header: 'برای', key: 'audience', width: 14 },
             { header: 'وضعیت', key: 'status', width: 16 },
           ]
         : [
             { header: 'تاریخ رزرو', key: 'reservedAt', width: 16 },
-            { header: 'کارمند', key: 'employee', width: 24 },
+            { header: 'سفارش‌دهنده', key: 'employee', width: 24 },
             { header: 'واحد سازمانی', key: 'orgUnit', width: 24 },
             { header: 'رستوران', key: 'restaurant', width: 22 },
             { header: 'غذا', key: 'food', width: 22 },
             { header: 'تعداد', key: 'quantity', width: 12 },
+            { header: 'برای', key: 'audience', width: 14 },
             { header: 'وضعیت', key: 'status', width: 16 },
           ],
       rows: items.map((item) => ({
@@ -532,6 +603,7 @@ export class FoodReservationsService {
         restaurant: item.restaurant.name,
         food: item.food.name,
         quantity: item.quantity,
+        audience: item.forGuest ? 'مهمان' : 'واحد',
         status: reservationStatusLabel(item.status),
       })),
     });
@@ -557,6 +629,7 @@ export class FoodReservationsService {
         where,
         select: {
           quantity: true,
+          forGuest: true,
           unitPrice: true,
           status: true,
           foodId: true,
@@ -584,7 +657,14 @@ export class FoodReservationsService {
     >();
     const unitMap = new Map<
       string,
-      { id: string; name: string; count: number; quantity: number; totalPrice: number }
+      {
+        id: string;
+        name: string;
+        count: number;
+        quantity: number;
+        guestQuantity: number;
+        totalPrice: number;
+      }
     >();
 
     for (const row of aggregates) {
@@ -617,10 +697,12 @@ export class FoodReservationsService {
         name: row.orgUnit.name,
         count: 0,
         quantity: 0,
+        guestQuantity: 0,
         totalPrice: 0,
       };
       unit.count += 1;
       unit.quantity += row.quantity;
+      if (row.forGuest) unit.guestQuantity += row.quantity;
       unit.totalPrice += amount;
       unitMap.set(row.orgUnitId, unit);
     }
@@ -793,6 +875,7 @@ export class FoodReservationsService {
       select: {
         reservedAt: true,
         quantity: true,
+        forGuest: true,
         unitPrice: true,
         status: true,
         foodId: true,
@@ -808,6 +891,7 @@ export class FoodReservationsService {
     const summary = {
       reservationCount: 0,
       totalQuantity: 0,
+      guestQuantity: 0,
       totalCost: 0,
       confirmedCount: 0,
       confirmedQuantity: 0,
@@ -823,12 +907,12 @@ export class FoodReservationsService {
       uniqueUnits: 0,
       uniqueRestaurants: 0,
     };
-    const unitMap = new Map<string, CostGroup>();
-    const restaurantMap = new Map<string, CostGroup>();
-    const foodMap = new Map<string, CostGroup>();
-    const weekMap = new Map<string, PeriodCostGroup>();
-    const monthMap = new Map<string, PeriodCostGroup>();
-    const yearMap = new Map<string, PeriodCostGroup>();
+    const unitMap = new Map<string, UnitCostGroup>();
+    const restaurantMap = new Map<string, UnitCostGroup>();
+    const foodMap = new Map<string, UnitCostGroup>();
+    const weekMap = new Map<string, GuestPeriodGroup>();
+    const monthMap = new Map<string, GuestPeriodGroup>();
+    const yearMap = new Map<string, GuestPeriodGroup>();
     const days = new Set<string>();
     const employees = new Set<string>();
 
@@ -840,6 +924,7 @@ export class FoodReservationsService {
 
       summary.reservationCount += 1;
       summary.totalQuantity += row.quantity;
+      if (row.forGuest) summary.guestQuantity += row.quantity;
       summary.totalCost += amount;
       if (row.status === FoodReservationStatus.CONFIRMED) {
         summary.confirmedCount += 1;
@@ -851,20 +936,28 @@ export class FoodReservationsService {
         summary.pendingCost += amount;
       }
 
-      bumpCost(unitMap, row.orgUnitId, row.orgUnit.name, amount, row.quantity);
-      bumpCost(
+      bumpUnitCost(
+        unitMap,
+        row.orgUnitId,
+        row.orgUnit.name,
+        amount,
+        row.quantity,
+        row.forGuest,
+      );
+      bumpUnitCost(
         restaurantMap,
         row.restaurantId,
         row.restaurant.name,
         amount,
         row.quantity,
+        row.forGuest,
       );
-      bumpCost(foodMap, row.foodId, row.food.name, amount, row.quantity);
+      bumpUnitCost(foodMap, row.foodId, row.food.name, amount, row.quantity, row.forGuest);
       if (day) {
         const keys = calendarPeriodKeys(day, jalali);
-        bumpPeriod(weekMap, keys.week, amount, row.quantity);
-        bumpPeriod(monthMap, keys.month, amount, row.quantity);
-        bumpPeriod(yearMap, keys.year, amount, row.quantity);
+        bumpGuestPeriod(weekMap, keys.week, amount, row.quantity, row.forGuest);
+        bumpGuestPeriod(monthMap, keys.month, amount, row.quantity, row.forGuest);
+        bumpGuestPeriod(yearMap, keys.year, amount, row.quantity, row.forGuest);
       }
     }
 
@@ -911,33 +1004,45 @@ export class FoodReservationsService {
     return withReservation(item);
   }
 
-  async create(userId: string, dto: CreateFoodReservationDto, isAdmin = false) {
+  async create(userId: string, dto: CreateFoodReservationDto, canManage = false) {
     const user = await this.requireEmployee(userId);
-    const unitId = isAdmin && dto.orgUnitId ? dto.orgUnitId : user.orgUnitId;
+    const unitId = canManage && dto.orgUnitId ? dto.orgUnitId : user.orgUnitId;
     if (!unitId) {
       throw new BadRequestException('ابتدا واحد سازمانی شما باید مشخص شود');
     }
     const unit = await this.prisma.organizationUnit.findUnique({
       where: { id: unitId },
-      select: { id: true, maxMeals: true, nutritionRepId: true },
+      select: {
+        id: true,
+        maxMeals: true,
+        nutritionRepId: true,
+        guestMealsEnabled: true,
+        maxGuestMeals: true,
+      },
     });
     if (!unit) {
       throw new BadRequestException('واحد سازمانی یافت نشد');
     }
-    if (dto.reservedAt < todayIsoDateTehran()) {
+    if (!canManage && dto.reservedAt < todayIsoDateTehran()) {
       throw new BadRequestException(
         'رزرو فقط برای امروز و روزهای آینده امکان‌پذیر است',
       );
     }
-    const linked = await this.prisma.organizationUnitRestaurant.findFirst({
-      where: { unitId, restaurantId: dto.restaurantId },
-    });
-    if (!linked) {
-      throw new BadRequestException(
-        isAdmin
-          ? 'این رستوران برای واحد انتخاب‌شده تعریف نشده است'
-          : 'این رستوران برای واحد سازمانی شما تعریف نشده است',
-      );
+    if (canManage) {
+      const restaurant = await this.prisma.restaurant.findUnique({
+        where: { id: dto.restaurantId },
+        select: { id: true },
+      });
+      if (!restaurant) {
+        throw new BadRequestException('رستوران یافت نشد');
+      }
+    } else {
+      const linked = await this.prisma.organizationUnitRestaurant.findFirst({
+        where: { unitId, restaurantId: dto.restaurantId },
+      });
+      if (!linked) {
+        throw new BadRequestException('این رستوران برای واحد سازمانی شما تعریف نشده است');
+      }
     }
     const menuItem = await this.prisma.restaurantMenuItem.findFirst({
       where: {
@@ -954,24 +1059,34 @@ export class FoodReservationsService {
     if (!menuItem.isActive) {
       throw new BadRequestException('این غذا در برنامه غذایی رستوران غیرفعال است');
     }
-    const canChooseQuantity = isAdmin || unit.nutritionRepId === user.id;
+    const canChooseQuantity = canManage || unit.nutritionRepId === user.id;
+    const forGuest = dto.forGuest === true;
     const quantity = canChooseQuantity ? (dto.quantity ?? 1) : 1;
     if (!canChooseQuantity && dto.quantity != null && dto.quantity !== 1) {
       throw new BadRequestException('فقط نماینده واحد می‌تواند بیش از یک غذا رزرو کند');
     }
-    const maxMeals = unit.maxMeals;
-    if (maxMeals != null) {
+    if (forGuest && !canChooseQuantity) {
+      throw new BadRequestException('فقط نماینده واحد می‌تواند برای مهمان سفارش ثبت کند');
+    }
+    if (forGuest && !unit.guestMealsEnabled) {
+      throw new BadRequestException('سفارش غذای مهمان برای این واحد فعال نیست');
+    }
+    const cap = forGuest ? unit.maxGuestMeals : unit.maxMeals;
+    if (cap != null) {
       const used = await foodReservations(this.prisma).aggregate({
         where: {
           orgUnitId: unitId,
           reservedAt: parseIsoDate(dto.reservedAt),
+          forGuest,
         },
         _sum: { quantity: true },
       });
       const usedQty = used._sum.quantity ?? 0;
-      if (usedQty + quantity > maxMeals) {
+      if (usedQty + quantity > cap) {
         throw new BadRequestException(
-          'سقف تعداد غذای قابل سفارش این واحد برای این تاریخ تکمیل شده است',
+          forGuest
+            ? 'سقف تعداد غذای مهمان این واحد برای این تاریخ تکمیل شده است'
+            : 'سقف تعداد غذای قابل سفارش این واحد برای این تاریخ تکمیل شده است',
         );
       }
     }
@@ -983,6 +1098,7 @@ export class FoodReservationsService {
         userId,
         orgUnitId: unitId,
         quantity,
+        forGuest,
         unitPrice: menuItem.price,
         status: FoodReservationStatus.PENDING,
       },
@@ -1028,6 +1144,11 @@ export class FoodReservationsService {
         dto.includeConfirmed ? undefined : FoodReservationStatus.PENDING,
       ),
     });
+    return { count: result.count };
+  }
+
+  async deleteAll() {
+    const result = await foodReservations(this.prisma).deleteMany({});
     return { count: result.count };
   }
 
@@ -1116,7 +1237,14 @@ export class FoodReservationsService {
         id: true,
         orgUnitId: true,
         orgUnit: {
-          select: { id: true, name: true, nutritionRepId: true, maxMeals: true },
+          select: {
+            id: true,
+            name: true,
+            nutritionRepId: true,
+            maxMeals: true,
+            guestMealsEnabled: true,
+            maxGuestMeals: true,
+          },
         },
       },
     });

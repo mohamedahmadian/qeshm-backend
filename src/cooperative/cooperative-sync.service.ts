@@ -18,12 +18,17 @@ const personSelect = {
   qeshmondiEndDate: true,
 } as const;
 
+const QESHM_BIRTH_NATIONAL_ID_PREFIX = '345';
+
 @Injectable()
 export class CooperativeSyncService {
   constructor(private readonly prisma: PrismaService) {}
 
   async inquiry(query: CooperativeInquiryQueryDto) {
     const nationalId = normalizeNationalId(query.nationalId);
+    if (nationalId.startsWith(QESHM_BIRTH_NATIONAL_ID_PREFIX)) {
+      return cooperativeOk({ nationalId, isQeshmvand: true });
+    }
     const user = await this.prisma.user.findUnique({
       where: { nationalId },
       select: { ...personSelect, isQeshmondi: true, individualTicketQuota: true },

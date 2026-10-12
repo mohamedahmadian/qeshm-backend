@@ -81,6 +81,10 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   },
   { prefix: '/restaurants', permissions: ['food-reservation.restaurants'] },
   {
+    prefix: '/advanced-food-orders',
+    permissions: ['food-reservation.advanced'],
+  },
+  {
     prefix: '/food-reservations/report',
     permissions: ['food-reservation.report'],
   },
@@ -99,6 +103,15 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   {
     prefix: '/food-reservations/mine/summary',
     permissions: ['food-reservation.my-report'],
+  },
+  {
+    method: 'POST',
+    prefix: '/food-reservations/delete-all',
+    permissions: [
+      'food-reservation.history',
+      'food-reservation.report',
+      'food-reservation.cost-estimate',
+    ],
   },
   {
     method: 'POST',

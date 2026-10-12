@@ -85,6 +85,7 @@ export const ModelName = {
   OrganizationUnit: 'OrganizationUnit',
   OrganizationUnitRestaurant: 'OrganizationUnitRestaurant',
   FoodReservation: 'FoodReservation',
+  AdvancedFoodOrder: 'AdvancedFoodOrder',
   VehicleBrand: 'VehicleBrand',
   Vehicle: 'Vehicle',
   VehicleAssignment: 'VehicleAssignment',
@@ -600,6 +601,8 @@ export const RestaurantScalarFieldEnum = {
   phone: 'phone',
   address: 'address',
   logoId: 'logoId',
+  employeeMealPrice: 'employeeMealPrice',
+  managementMealPrice: 'managementMealPrice',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -693,6 +696,8 @@ export const OrganizationUnitScalarFieldEnum = {
   whatsapp: 'whatsapp',
   nutritionRepId: 'nutritionRepId',
   maxMeals: 'maxMeals',
+  guestMealsEnabled: 'guestMealsEnabled',
+  maxGuestMeals: 'maxGuestMeals',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -719,13 +724,36 @@ export const FoodReservationScalarFieldEnum = {
   userId: 'userId',
   orgUnitId: 'orgUnitId',
   quantity: 'quantity',
+  forGuest: 'forGuest',
   unitPrice: 'unitPrice',
   status: 'status',
+  advancedOrderId: 'advancedOrderId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type FoodReservationScalarFieldEnum = (typeof FoodReservationScalarFieldEnum)[keyof typeof FoodReservationScalarFieldEnum]
+
+
+export const AdvancedFoodOrderScalarFieldEnum = {
+  id: 'id',
+  orgUnitId: 'orgUnitId',
+  restaurantId: 'restaurantId',
+  source: 'source',
+  startsOn: 'startsOn',
+  endsOn: 'endsOn',
+  weekdays: 'weekdays',
+  foodLabel: 'foodLabel',
+  employeeQuantity: 'employeeQuantity',
+  managementQuantity: 'managementQuantity',
+  employeeUnitPrice: 'employeeUnitPrice',
+  managementUnitPrice: 'managementUnitPrice',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdvancedFoodOrderScalarFieldEnum = (typeof AdvancedFoodOrderScalarFieldEnum)[keyof typeof AdvancedFoodOrderScalarFieldEnum]
 
 
 export const VehicleBrandScalarFieldEnum = {

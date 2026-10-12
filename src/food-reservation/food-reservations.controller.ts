@@ -12,7 +12,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import type { Response } from 'express';
-import { hasAnyPermission } from '../access/access.util';
+import { hasAnyPermission, hasPermission } from '../access/access.util';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CreateFoodReservationDto } from './dto/create-food-reservation.dto';
 import { FindFoodReservationsQueryDto } from './dto/find-food-reservations-query.dto';
@@ -37,14 +37,20 @@ const ORG_FOOD_RESERVATION_PERMISSIONS = [
   'food-reservation.cost-estimate',
 ];
 
+function foodAccess(user: RequestUser) {
+  return {
+    isAdmin: Boolean(user.isAdmin),
+    permissionCodes: user.permissionCodes ?? [],
+  };
+}
+
 function canSeeAllFoodReservations(user: RequestUser) {
-  return hasAnyPermission(
-    {
-      isAdmin: Boolean(user.isAdmin),
-      permissionCodes: user.permissionCodes ?? [],
-    },
-    ORG_FOOD_RESERVATION_PERMISSIONS,
-  );
+  return hasAnyPermission(foodAccess(user), ORG_FOOD_RESERVATION_PERMISSIONS);
+}
+
+/** مدیریت، یا نقشی که کل ماژول غذا را دارد و می‌تواند واحد انتخاب کند. */
+function canManageFoodReservations(user: RequestUser) {
+  return hasPermission(foodAccess(user), 'food-reservation');
 }
 
 @Controller('food-reservations')
@@ -54,7 +60,7 @@ export class FoodReservationsController {
   @Get('context')
   context(@CurrentUser() user: RequestUser | undefined) {
     if (!user?.id) throw new UnauthorizedException();
-    return this.reservations.context(user.id, Boolean(user.isAdmin));
+    return this.reservations.context(user.id, canManageFoodReservations(user));
   }
 
   @Get('last-quantity')
@@ -63,7 +69,11 @@ export class FoodReservationsController {
     @CurrentUser() user: RequestUser | undefined,
   ) {
     if (!user?.id) throw new UnauthorizedException();
-    return this.reservations.lastQuantity(user.id, query, Boolean(user.isAdmin));
+    return this.reservations.lastQuantity(
+      user.id,
+      query,
+      canManageFoodReservations(user),
+    );
   }
 
   @Get('menu')
@@ -72,7 +82,7 @@ export class FoodReservationsController {
     @CurrentUser() user: RequestUser | undefined,
   ) {
     if (!user?.id) throw new UnauthorizedException();
-    return this.reservations.menu(user.id, query, Boolean(user.isAdmin));
+    return this.reservations.menu(user.id, query, canManageFoodReservations(user));
   }
 
   @Get('week-menu')
@@ -81,7 +91,11 @@ export class FoodReservationsController {
     @CurrentUser() user: RequestUser | undefined,
   ) {
     if (!user?.id) throw new UnauthorizedException();
-    return this.reservations.weekMenu(user.id, query, Boolean(user.isAdmin));
+    return this.reservations.weekMenu(
+      user.id,
+      query,
+      canManageFoodReservations(user),
+    );
   }
 
   @Get('report')
@@ -155,6 +169,15 @@ export class FoodReservationsController {
     return this.reservations.confirmRange(dto);
   }
 
+  @Post('delete-all')
+  deleteAll(@CurrentUser() user: RequestUser | undefined) {
+    if (!user?.id) throw new UnauthorizedException();
+    if (!canSeeAllFoodReservations(user)) {
+      throw new ForbiddenException('دسترسی مجاز نیست');
+    }
+    return this.reservations.deleteAll();
+  }
+
   @Post('cancel-range')
   cancelRange(
     @Body() dto: FoodReservationRangeActionDto,
@@ -173,7 +196,7 @@ export class FoodReservationsController {
     @Body() dto: CreateFoodReservationDto,
   ) {
     if (!user?.id) throw new UnauthorizedException();
-    return this.reservations.create(user.id, dto, Boolean(user.isAdmin));
+    return this.reservations.create(user.id, dto, canManageFoodReservations(user));
   }
 
   @Get(':id')

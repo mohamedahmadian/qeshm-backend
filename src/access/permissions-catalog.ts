@@ -106,6 +106,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
         nameKey: 'menus.foodReserve',
       },
       {
+        code: 'food-reservation.advanced',
+        kind: 'MENU',
+        nameKey: 'menus.foodAdvancedReserve',
+      },
+      {
         code: 'food-reservation.my-orders',
         kind: 'MENU',
         nameKey: 'menus.foodMyOrders',

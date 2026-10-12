@@ -44,8 +44,10 @@ export type FoodReservationMinAggregateOutputType = {
   userId: string | null
   orgUnitId: string | null
   quantity: number | null
+  forGuest: boolean | null
   unitPrice: runtime.Decimal | null
   status: $Enums.FoodReservationStatus | null
+  advancedOrderId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,8 +60,10 @@ export type FoodReservationMaxAggregateOutputType = {
   userId: string | null
   orgUnitId: string | null
   quantity: number | null
+  forGuest: boolean | null
   unitPrice: runtime.Decimal | null
   status: $Enums.FoodReservationStatus | null
+  advancedOrderId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -72,8 +76,10 @@ export type FoodReservationCountAggregateOutputType = {
   userId: number
   orgUnitId: number
   quantity: number
+  forGuest: number
   unitPrice: number
   status: number
+  advancedOrderId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -98,8 +104,10 @@ export type FoodReservationMinAggregateInputType = {
   userId?: true
   orgUnitId?: true
   quantity?: true
+  forGuest?: true
   unitPrice?: true
   status?: true
+  advancedOrderId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -112,8 +120,10 @@ export type FoodReservationMaxAggregateInputType = {
   userId?: true
   orgUnitId?: true
   quantity?: true
+  forGuest?: true
   unitPrice?: true
   status?: true
+  advancedOrderId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -126,8 +136,10 @@ export type FoodReservationCountAggregateInputType = {
   userId?: true
   orgUnitId?: true
   quantity?: true
+  forGuest?: true
   unitPrice?: true
   status?: true
+  advancedOrderId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -227,8 +239,10 @@ export type FoodReservationGroupByOutputType = {
   userId: string
   orgUnitId: string
   quantity: number
+  forGuest: boolean
   unitPrice: runtime.Decimal
   status: $Enums.FoodReservationStatus
+  advancedOrderId: string | null
   createdAt: Date
   updatedAt: Date
   _count: FoodReservationCountAggregateOutputType | null
@@ -264,14 +278,17 @@ export type FoodReservationWhereInput = {
   userId?: Prisma.StringFilter<"FoodReservation"> | string
   orgUnitId?: Prisma.StringFilter<"FoodReservation"> | string
   quantity?: Prisma.IntFilter<"FoodReservation"> | number
+  forGuest?: Prisma.BoolFilter<"FoodReservation"> | boolean
   unitPrice?: Prisma.DecimalFilter<"FoodReservation"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFilter<"FoodReservation"> | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.StringNullableFilter<"FoodReservation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"FoodReservation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FoodReservation"> | Date | string
   restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
   food?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.FoodWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   orgUnit?: Prisma.XOR<Prisma.OrganizationUnitScalarRelationFilter, Prisma.OrganizationUnitWhereInput>
+  advancedOrder?: Prisma.XOR<Prisma.AdvancedFoodOrderNullableScalarRelationFilter, Prisma.AdvancedFoodOrderWhereInput> | null
 }
 
 export type FoodReservationOrderByWithRelationInput = {
@@ -282,14 +299,17 @@ export type FoodReservationOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  forGuest?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  advancedOrderId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   restaurant?: Prisma.RestaurantOrderByWithRelationInput
   food?: Prisma.FoodOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   orgUnit?: Prisma.OrganizationUnitOrderByWithRelationInput
+  advancedOrder?: Prisma.AdvancedFoodOrderOrderByWithRelationInput
 }
 
 export type FoodReservationWhereUniqueInput = Prisma.AtLeast<{
@@ -303,14 +323,17 @@ export type FoodReservationWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"FoodReservation"> | string
   orgUnitId?: Prisma.StringFilter<"FoodReservation"> | string
   quantity?: Prisma.IntFilter<"FoodReservation"> | number
+  forGuest?: Prisma.BoolFilter<"FoodReservation"> | boolean
   unitPrice?: Prisma.DecimalFilter<"FoodReservation"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFilter<"FoodReservation"> | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.StringNullableFilter<"FoodReservation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"FoodReservation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FoodReservation"> | Date | string
   restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
   food?: Prisma.XOR<Prisma.FoodScalarRelationFilter, Prisma.FoodWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   orgUnit?: Prisma.XOR<Prisma.OrganizationUnitScalarRelationFilter, Prisma.OrganizationUnitWhereInput>
+  advancedOrder?: Prisma.XOR<Prisma.AdvancedFoodOrderNullableScalarRelationFilter, Prisma.AdvancedFoodOrderWhereInput> | null
 }, "id">
 
 export type FoodReservationOrderByWithAggregationInput = {
@@ -321,8 +344,10 @@ export type FoodReservationOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  forGuest?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  advancedOrderId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.FoodReservationCountOrderByAggregateInput
@@ -343,8 +368,10 @@ export type FoodReservationScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"FoodReservation"> | string
   orgUnitId?: Prisma.StringWithAggregatesFilter<"FoodReservation"> | string
   quantity?: Prisma.IntWithAggregatesFilter<"FoodReservation"> | number
+  forGuest?: Prisma.BoolWithAggregatesFilter<"FoodReservation"> | boolean
   unitPrice?: Prisma.DecimalWithAggregatesFilter<"FoodReservation"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusWithAggregatesFilter<"FoodReservation"> | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.StringNullableWithAggregatesFilter<"FoodReservation"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FoodReservation"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FoodReservation"> | Date | string
 }
@@ -353,6 +380,7 @@ export type FoodReservationCreateInput = {
   id?: string
   reservedAt: Date | string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
   createdAt?: Date | string
@@ -361,6 +389,7 @@ export type FoodReservationCreateInput = {
   food: Prisma.FoodCreateNestedOneWithoutReservationsInput
   user: Prisma.UserCreateNestedOneWithoutFoodReservationsInput
   orgUnit: Prisma.OrganizationUnitCreateNestedOneWithoutReservationsInput
+  advancedOrder?: Prisma.AdvancedFoodOrderCreateNestedOneWithoutReservationsInput
 }
 
 export type FoodReservationUncheckedCreateInput = {
@@ -371,8 +400,10 @@ export type FoodReservationUncheckedCreateInput = {
   userId: string
   orgUnitId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -381,6 +412,7 @@ export type FoodReservationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -389,6 +421,7 @@ export type FoodReservationUpdateInput = {
   food?: Prisma.FoodUpdateOneRequiredWithoutReservationsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFoodReservationsNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneRequiredWithoutReservationsNestedInput
+  advancedOrder?: Prisma.AdvancedFoodOrderUpdateOneWithoutReservationsNestedInput
 }
 
 export type FoodReservationUncheckedUpdateInput = {
@@ -399,8 +432,10 @@ export type FoodReservationUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -413,8 +448,10 @@ export type FoodReservationCreateManyInput = {
   userId: string
   orgUnitId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -423,6 +460,7 @@ export type FoodReservationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -437,8 +475,10 @@ export type FoodReservationUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -461,8 +501,10 @@ export type FoodReservationCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  forGuest?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  advancedOrderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -480,8 +522,10 @@ export type FoodReservationMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  forGuest?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  advancedOrderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -494,8 +538,10 @@ export type FoodReservationMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  forGuest?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  advancedOrderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -677,10 +723,53 @@ export type EnumFoodReservationStatusFieldUpdateOperationsInput = {
   set?: $Enums.FoodReservationStatus
 }
 
+export type FoodReservationCreateNestedManyWithoutAdvancedOrderInput = {
+  create?: Prisma.XOR<Prisma.FoodReservationCreateWithoutAdvancedOrderInput, Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput> | Prisma.FoodReservationCreateWithoutAdvancedOrderInput[] | Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput[]
+  connectOrCreate?: Prisma.FoodReservationCreateOrConnectWithoutAdvancedOrderInput | Prisma.FoodReservationCreateOrConnectWithoutAdvancedOrderInput[]
+  createMany?: Prisma.FoodReservationCreateManyAdvancedOrderInputEnvelope
+  connect?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+}
+
+export type FoodReservationUncheckedCreateNestedManyWithoutAdvancedOrderInput = {
+  create?: Prisma.XOR<Prisma.FoodReservationCreateWithoutAdvancedOrderInput, Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput> | Prisma.FoodReservationCreateWithoutAdvancedOrderInput[] | Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput[]
+  connectOrCreate?: Prisma.FoodReservationCreateOrConnectWithoutAdvancedOrderInput | Prisma.FoodReservationCreateOrConnectWithoutAdvancedOrderInput[]
+  createMany?: Prisma.FoodReservationCreateManyAdvancedOrderInputEnvelope
+  connect?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+}
+
+export type FoodReservationUpdateManyWithoutAdvancedOrderNestedInput = {
+  create?: Prisma.XOR<Prisma.FoodReservationCreateWithoutAdvancedOrderInput, Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput> | Prisma.FoodReservationCreateWithoutAdvancedOrderInput[] | Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput[]
+  connectOrCreate?: Prisma.FoodReservationCreateOrConnectWithoutAdvancedOrderInput | Prisma.FoodReservationCreateOrConnectWithoutAdvancedOrderInput[]
+  upsert?: Prisma.FoodReservationUpsertWithWhereUniqueWithoutAdvancedOrderInput | Prisma.FoodReservationUpsertWithWhereUniqueWithoutAdvancedOrderInput[]
+  createMany?: Prisma.FoodReservationCreateManyAdvancedOrderInputEnvelope
+  set?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+  disconnect?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+  delete?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+  connect?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+  update?: Prisma.FoodReservationUpdateWithWhereUniqueWithoutAdvancedOrderInput | Prisma.FoodReservationUpdateWithWhereUniqueWithoutAdvancedOrderInput[]
+  updateMany?: Prisma.FoodReservationUpdateManyWithWhereWithoutAdvancedOrderInput | Prisma.FoodReservationUpdateManyWithWhereWithoutAdvancedOrderInput[]
+  deleteMany?: Prisma.FoodReservationScalarWhereInput | Prisma.FoodReservationScalarWhereInput[]
+}
+
+export type FoodReservationUncheckedUpdateManyWithoutAdvancedOrderNestedInput = {
+  create?: Prisma.XOR<Prisma.FoodReservationCreateWithoutAdvancedOrderInput, Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput> | Prisma.FoodReservationCreateWithoutAdvancedOrderInput[] | Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput[]
+  connectOrCreate?: Prisma.FoodReservationCreateOrConnectWithoutAdvancedOrderInput | Prisma.FoodReservationCreateOrConnectWithoutAdvancedOrderInput[]
+  upsert?: Prisma.FoodReservationUpsertWithWhereUniqueWithoutAdvancedOrderInput | Prisma.FoodReservationUpsertWithWhereUniqueWithoutAdvancedOrderInput[]
+  createMany?: Prisma.FoodReservationCreateManyAdvancedOrderInputEnvelope
+  set?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+  disconnect?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+  delete?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+  connect?: Prisma.FoodReservationWhereUniqueInput | Prisma.FoodReservationWhereUniqueInput[]
+  update?: Prisma.FoodReservationUpdateWithWhereUniqueWithoutAdvancedOrderInput | Prisma.FoodReservationUpdateWithWhereUniqueWithoutAdvancedOrderInput[]
+  updateMany?: Prisma.FoodReservationUpdateManyWithWhereWithoutAdvancedOrderInput | Prisma.FoodReservationUpdateManyWithWhereWithoutAdvancedOrderInput[]
+  deleteMany?: Prisma.FoodReservationScalarWhereInput | Prisma.FoodReservationScalarWhereInput[]
+}
+
 export type FoodReservationCreateWithoutUserInput = {
   id?: string
   reservedAt: Date | string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
   createdAt?: Date | string
@@ -688,6 +777,7 @@ export type FoodReservationCreateWithoutUserInput = {
   restaurant: Prisma.RestaurantCreateNestedOneWithoutReservationsInput
   food: Prisma.FoodCreateNestedOneWithoutReservationsInput
   orgUnit: Prisma.OrganizationUnitCreateNestedOneWithoutReservationsInput
+  advancedOrder?: Prisma.AdvancedFoodOrderCreateNestedOneWithoutReservationsInput
 }
 
 export type FoodReservationUncheckedCreateWithoutUserInput = {
@@ -697,8 +787,10 @@ export type FoodReservationUncheckedCreateWithoutUserInput = {
   foodId: string
   orgUnitId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -740,8 +832,10 @@ export type FoodReservationScalarWhereInput = {
   userId?: Prisma.StringFilter<"FoodReservation"> | string
   orgUnitId?: Prisma.StringFilter<"FoodReservation"> | string
   quantity?: Prisma.IntFilter<"FoodReservation"> | number
+  forGuest?: Prisma.BoolFilter<"FoodReservation"> | boolean
   unitPrice?: Prisma.DecimalFilter<"FoodReservation"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFilter<"FoodReservation"> | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.StringNullableFilter<"FoodReservation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"FoodReservation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FoodReservation"> | Date | string
 }
@@ -750,6 +844,7 @@ export type FoodReservationCreateWithoutFoodInput = {
   id?: string
   reservedAt: Date | string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
   createdAt?: Date | string
@@ -757,6 +852,7 @@ export type FoodReservationCreateWithoutFoodInput = {
   restaurant: Prisma.RestaurantCreateNestedOneWithoutReservationsInput
   user: Prisma.UserCreateNestedOneWithoutFoodReservationsInput
   orgUnit: Prisma.OrganizationUnitCreateNestedOneWithoutReservationsInput
+  advancedOrder?: Prisma.AdvancedFoodOrderCreateNestedOneWithoutReservationsInput
 }
 
 export type FoodReservationUncheckedCreateWithoutFoodInput = {
@@ -766,8 +862,10 @@ export type FoodReservationUncheckedCreateWithoutFoodInput = {
   userId: string
   orgUnitId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -802,6 +900,7 @@ export type FoodReservationCreateWithoutRestaurantInput = {
   id?: string
   reservedAt: Date | string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
   createdAt?: Date | string
@@ -809,6 +908,7 @@ export type FoodReservationCreateWithoutRestaurantInput = {
   food: Prisma.FoodCreateNestedOneWithoutReservationsInput
   user: Prisma.UserCreateNestedOneWithoutFoodReservationsInput
   orgUnit: Prisma.OrganizationUnitCreateNestedOneWithoutReservationsInput
+  advancedOrder?: Prisma.AdvancedFoodOrderCreateNestedOneWithoutReservationsInput
 }
 
 export type FoodReservationUncheckedCreateWithoutRestaurantInput = {
@@ -818,8 +918,10 @@ export type FoodReservationUncheckedCreateWithoutRestaurantInput = {
   userId: string
   orgUnitId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -854,6 +956,7 @@ export type FoodReservationCreateWithoutOrgUnitInput = {
   id?: string
   reservedAt: Date | string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
   createdAt?: Date | string
@@ -861,6 +964,7 @@ export type FoodReservationCreateWithoutOrgUnitInput = {
   restaurant: Prisma.RestaurantCreateNestedOneWithoutReservationsInput
   food: Prisma.FoodCreateNestedOneWithoutReservationsInput
   user: Prisma.UserCreateNestedOneWithoutFoodReservationsInput
+  advancedOrder?: Prisma.AdvancedFoodOrderCreateNestedOneWithoutReservationsInput
 }
 
 export type FoodReservationUncheckedCreateWithoutOrgUnitInput = {
@@ -870,8 +974,10 @@ export type FoodReservationUncheckedCreateWithoutOrgUnitInput = {
   foodId: string
   userId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -902,6 +1008,62 @@ export type FoodReservationUpdateManyWithWhereWithoutOrgUnitInput = {
   data: Prisma.XOR<Prisma.FoodReservationUpdateManyMutationInput, Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitInput>
 }
 
+export type FoodReservationCreateWithoutAdvancedOrderInput = {
+  id?: string
+  reservedAt: Date | string
+  quantity: number
+  forGuest?: boolean
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.FoodReservationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  restaurant: Prisma.RestaurantCreateNestedOneWithoutReservationsInput
+  food: Prisma.FoodCreateNestedOneWithoutReservationsInput
+  user: Prisma.UserCreateNestedOneWithoutFoodReservationsInput
+  orgUnit: Prisma.OrganizationUnitCreateNestedOneWithoutReservationsInput
+}
+
+export type FoodReservationUncheckedCreateWithoutAdvancedOrderInput = {
+  id?: string
+  reservedAt: Date | string
+  restaurantId: string
+  foodId: string
+  userId: string
+  orgUnitId: string
+  quantity: number
+  forGuest?: boolean
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.FoodReservationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type FoodReservationCreateOrConnectWithoutAdvancedOrderInput = {
+  where: Prisma.FoodReservationWhereUniqueInput
+  create: Prisma.XOR<Prisma.FoodReservationCreateWithoutAdvancedOrderInput, Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput>
+}
+
+export type FoodReservationCreateManyAdvancedOrderInputEnvelope = {
+  data: Prisma.FoodReservationCreateManyAdvancedOrderInput | Prisma.FoodReservationCreateManyAdvancedOrderInput[]
+  skipDuplicates?: boolean
+}
+
+export type FoodReservationUpsertWithWhereUniqueWithoutAdvancedOrderInput = {
+  where: Prisma.FoodReservationWhereUniqueInput
+  update: Prisma.XOR<Prisma.FoodReservationUpdateWithoutAdvancedOrderInput, Prisma.FoodReservationUncheckedUpdateWithoutAdvancedOrderInput>
+  create: Prisma.XOR<Prisma.FoodReservationCreateWithoutAdvancedOrderInput, Prisma.FoodReservationUncheckedCreateWithoutAdvancedOrderInput>
+}
+
+export type FoodReservationUpdateWithWhereUniqueWithoutAdvancedOrderInput = {
+  where: Prisma.FoodReservationWhereUniqueInput
+  data: Prisma.XOR<Prisma.FoodReservationUpdateWithoutAdvancedOrderInput, Prisma.FoodReservationUncheckedUpdateWithoutAdvancedOrderInput>
+}
+
+export type FoodReservationUpdateManyWithWhereWithoutAdvancedOrderInput = {
+  where: Prisma.FoodReservationScalarWhereInput
+  data: Prisma.XOR<Prisma.FoodReservationUpdateManyMutationInput, Prisma.FoodReservationUncheckedUpdateManyWithoutAdvancedOrderInput>
+}
+
 export type FoodReservationCreateManyUserInput = {
   id?: string
   reservedAt: Date | string
@@ -909,8 +1071,10 @@ export type FoodReservationCreateManyUserInput = {
   foodId: string
   orgUnitId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -919,6 +1083,7 @@ export type FoodReservationUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -926,6 +1091,7 @@ export type FoodReservationUpdateWithoutUserInput = {
   restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutReservationsNestedInput
   food?: Prisma.FoodUpdateOneRequiredWithoutReservationsNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneRequiredWithoutReservationsNestedInput
+  advancedOrder?: Prisma.AdvancedFoodOrderUpdateOneWithoutReservationsNestedInput
 }
 
 export type FoodReservationUncheckedUpdateWithoutUserInput = {
@@ -935,8 +1101,10 @@ export type FoodReservationUncheckedUpdateWithoutUserInput = {
   foodId?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -948,8 +1116,10 @@ export type FoodReservationUncheckedUpdateManyWithoutUserInput = {
   foodId?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -961,8 +1131,10 @@ export type FoodReservationCreateManyFoodInput = {
   userId: string
   orgUnitId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -971,6 +1143,7 @@ export type FoodReservationUpdateWithoutFoodInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -978,6 +1151,7 @@ export type FoodReservationUpdateWithoutFoodInput = {
   restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutReservationsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFoodReservationsNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneRequiredWithoutReservationsNestedInput
+  advancedOrder?: Prisma.AdvancedFoodOrderUpdateOneWithoutReservationsNestedInput
 }
 
 export type FoodReservationUncheckedUpdateWithoutFoodInput = {
@@ -987,8 +1161,10 @@ export type FoodReservationUncheckedUpdateWithoutFoodInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1000,8 +1176,10 @@ export type FoodReservationUncheckedUpdateManyWithoutFoodInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1013,8 +1191,10 @@ export type FoodReservationCreateManyRestaurantInput = {
   userId: string
   orgUnitId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1023,6 +1203,7 @@ export type FoodReservationUpdateWithoutRestaurantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1030,6 +1211,7 @@ export type FoodReservationUpdateWithoutRestaurantInput = {
   food?: Prisma.FoodUpdateOneRequiredWithoutReservationsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFoodReservationsNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneRequiredWithoutReservationsNestedInput
+  advancedOrder?: Prisma.AdvancedFoodOrderUpdateOneWithoutReservationsNestedInput
 }
 
 export type FoodReservationUncheckedUpdateWithoutRestaurantInput = {
@@ -1039,8 +1221,10 @@ export type FoodReservationUncheckedUpdateWithoutRestaurantInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1052,8 +1236,10 @@ export type FoodReservationUncheckedUpdateManyWithoutRestaurantInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1065,8 +1251,10 @@ export type FoodReservationCreateManyOrgUnitInput = {
   foodId: string
   userId: string
   quantity: number
+  forGuest?: boolean
   unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.FoodReservationStatus
+  advancedOrderId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1075,6 +1263,7 @@ export type FoodReservationUpdateWithoutOrgUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1082,6 +1271,7 @@ export type FoodReservationUpdateWithoutOrgUnitInput = {
   restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutReservationsNestedInput
   food?: Prisma.FoodUpdateOneRequiredWithoutReservationsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFoodReservationsNestedInput
+  advancedOrder?: Prisma.AdvancedFoodOrderUpdateOneWithoutReservationsNestedInput
 }
 
 export type FoodReservationUncheckedUpdateWithoutOrgUnitInput = {
@@ -1091,8 +1281,10 @@ export type FoodReservationUncheckedUpdateWithoutOrgUnitInput = {
   foodId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1104,6 +1296,68 @@ export type FoodReservationUncheckedUpdateManyWithoutOrgUnitInput = {
   foodId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  advancedOrderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type FoodReservationCreateManyAdvancedOrderInput = {
+  id?: string
+  reservedAt: Date | string
+  restaurantId: string
+  foodId: string
+  userId: string
+  orgUnitId: string
+  quantity: number
+  forGuest?: boolean
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.FoodReservationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type FoodReservationUpdateWithoutAdvancedOrderInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutReservationsNestedInput
+  food?: Prisma.FoodUpdateOneRequiredWithoutReservationsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFoodReservationsNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneRequiredWithoutReservationsNestedInput
+}
+
+export type FoodReservationUncheckedUpdateWithoutAdvancedOrderInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
+  foodId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type FoodReservationUncheckedUpdateManyWithoutAdvancedOrderInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reservedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
+  foodId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  forGuest?: Prisma.BoolFieldUpdateOperationsInput | boolean
   unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumFoodReservationStatusFieldUpdateOperationsInput | $Enums.FoodReservationStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1120,14 +1374,17 @@ export type FoodReservationSelect<ExtArgs extends runtime.Types.Extensions.Inter
   userId?: boolean
   orgUnitId?: boolean
   quantity?: boolean
+  forGuest?: boolean
   unitPrice?: boolean
   status?: boolean
+  advancedOrderId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   food?: boolean | Prisma.FoodDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   orgUnit?: boolean | Prisma.OrganizationUnitDefaultArgs<ExtArgs>
+  advancedOrder?: boolean | Prisma.FoodReservation$advancedOrderArgs<ExtArgs>
 }, ExtArgs["result"]["foodReservation"]>
 
 export type FoodReservationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1138,14 +1395,17 @@ export type FoodReservationSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   userId?: boolean
   orgUnitId?: boolean
   quantity?: boolean
+  forGuest?: boolean
   unitPrice?: boolean
   status?: boolean
+  advancedOrderId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   food?: boolean | Prisma.FoodDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   orgUnit?: boolean | Prisma.OrganizationUnitDefaultArgs<ExtArgs>
+  advancedOrder?: boolean | Prisma.FoodReservation$advancedOrderArgs<ExtArgs>
 }, ExtArgs["result"]["foodReservation"]>
 
 export type FoodReservationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1156,14 +1416,17 @@ export type FoodReservationSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   userId?: boolean
   orgUnitId?: boolean
   quantity?: boolean
+  forGuest?: boolean
   unitPrice?: boolean
   status?: boolean
+  advancedOrderId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   food?: boolean | Prisma.FoodDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   orgUnit?: boolean | Prisma.OrganizationUnitDefaultArgs<ExtArgs>
+  advancedOrder?: boolean | Prisma.FoodReservation$advancedOrderArgs<ExtArgs>
 }, ExtArgs["result"]["foodReservation"]>
 
 export type FoodReservationSelectScalar = {
@@ -1174,30 +1437,35 @@ export type FoodReservationSelectScalar = {
   userId?: boolean
   orgUnitId?: boolean
   quantity?: boolean
+  forGuest?: boolean
   unitPrice?: boolean
   status?: boolean
+  advancedOrderId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type FoodReservationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reservedAt" | "restaurantId" | "foodId" | "userId" | "orgUnitId" | "quantity" | "unitPrice" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["foodReservation"]>
+export type FoodReservationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reservedAt" | "restaurantId" | "foodId" | "userId" | "orgUnitId" | "quantity" | "forGuest" | "unitPrice" | "status" | "advancedOrderId" | "createdAt" | "updatedAt", ExtArgs["result"]["foodReservation"]>
 export type FoodReservationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   food?: boolean | Prisma.FoodDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   orgUnit?: boolean | Prisma.OrganizationUnitDefaultArgs<ExtArgs>
+  advancedOrder?: boolean | Prisma.FoodReservation$advancedOrderArgs<ExtArgs>
 }
 export type FoodReservationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   food?: boolean | Prisma.FoodDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   orgUnit?: boolean | Prisma.OrganizationUnitDefaultArgs<ExtArgs>
+  advancedOrder?: boolean | Prisma.FoodReservation$advancedOrderArgs<ExtArgs>
 }
 export type FoodReservationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   food?: boolean | Prisma.FoodDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   orgUnit?: boolean | Prisma.OrganizationUnitDefaultArgs<ExtArgs>
+  advancedOrder?: boolean | Prisma.FoodReservation$advancedOrderArgs<ExtArgs>
 }
 
 export type $FoodReservationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1207,6 +1475,7 @@ export type $FoodReservationPayload<ExtArgs extends runtime.Types.Extensions.Int
     food: Prisma.$FoodPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
     orgUnit: Prisma.$OrganizationUnitPayload<ExtArgs>
+    advancedOrder: Prisma.$AdvancedFoodOrderPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1216,8 +1485,13 @@ export type $FoodReservationPayload<ExtArgs extends runtime.Types.Extensions.Int
     userId: string
     orgUnitId: string
     quantity: number
+    /**
+     * true = تعداد برای مهمانان واحد است، نه سهم خود واحد
+     */
+    forGuest: boolean
     unitPrice: runtime.Decimal
     status: $Enums.FoodReservationStatus
+    advancedOrderId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["foodReservation"]>
@@ -1618,6 +1892,7 @@ export interface Prisma__FoodReservationClient<T, Null = never, ExtArgs extends 
   food<T extends Prisma.FoodDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FoodDefaultArgs<ExtArgs>>): Prisma.Prisma__FoodClient<runtime.Types.Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   orgUnit<T extends Prisma.OrganizationUnitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnitDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationUnitClient<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  advancedOrder<T extends Prisma.FoodReservation$advancedOrderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FoodReservation$advancedOrderArgs<ExtArgs>>): Prisma.Prisma__AdvancedFoodOrderClient<runtime.Types.Result.GetResult<Prisma.$AdvancedFoodOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1654,8 +1929,10 @@ export interface FoodReservationFieldRefs {
   readonly userId: Prisma.FieldRef<"FoodReservation", 'String'>
   readonly orgUnitId: Prisma.FieldRef<"FoodReservation", 'String'>
   readonly quantity: Prisma.FieldRef<"FoodReservation", 'Int'>
+  readonly forGuest: Prisma.FieldRef<"FoodReservation", 'Boolean'>
   readonly unitPrice: Prisma.FieldRef<"FoodReservation", 'Decimal'>
   readonly status: Prisma.FieldRef<"FoodReservation", 'FoodReservationStatus'>
+  readonly advancedOrderId: Prisma.FieldRef<"FoodReservation", 'String'>
   readonly createdAt: Prisma.FieldRef<"FoodReservation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"FoodReservation", 'DateTime'>
 }
@@ -2056,6 +2333,25 @@ export type FoodReservationDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many FoodReservations to delete.
    */
   limit?: number
+}
+
+/**
+ * FoodReservation.advancedOrder
+ */
+export type FoodReservation$advancedOrderArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdvancedFoodOrder
+   */
+  select?: Prisma.AdvancedFoodOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdvancedFoodOrder
+   */
+  omit?: Prisma.AdvancedFoodOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdvancedFoodOrderInclude<ExtArgs> | null
+  where?: Prisma.AdvancedFoodOrderWhereInput
 }
 
 /**

@@ -874,6 +874,7 @@ export type UserWhereInput = {
   position?: Prisma.XOR<Prisma.OrganizationPositionNullableScalarRelationFilter, Prisma.OrganizationPositionWhereInput> | null
   nutritionUnits?: Prisma.OrganizationUnitListRelationFilter
   foodReservations?: Prisma.FoodReservationListRelationFilter
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderListRelationFilter
   vehicleAssignments?: Prisma.VehicleAssignmentListRelationFilter
   userRoles?: Prisma.UserRoleListRelationFilter
   singardFeedbacks?: Prisma.SingardFeedbackListRelationFilter
@@ -999,6 +1000,7 @@ export type UserOrderByWithRelationInput = {
   position?: Prisma.OrganizationPositionOrderByWithRelationInput
   nutritionUnits?: Prisma.OrganizationUnitOrderByRelationAggregateInput
   foodReservations?: Prisma.FoodReservationOrderByRelationAggregateInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderOrderByRelationAggregateInput
   vehicleAssignments?: Prisma.VehicleAssignmentOrderByRelationAggregateInput
   userRoles?: Prisma.UserRoleOrderByRelationAggregateInput
   singardFeedbacks?: Prisma.SingardFeedbackOrderByRelationAggregateInput
@@ -1127,6 +1129,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   position?: Prisma.XOR<Prisma.OrganizationPositionNullableScalarRelationFilter, Prisma.OrganizationPositionWhereInput> | null
   nutritionUnits?: Prisma.OrganizationUnitListRelationFilter
   foodReservations?: Prisma.FoodReservationListRelationFilter
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderListRelationFilter
   vehicleAssignments?: Prisma.VehicleAssignmentListRelationFilter
   userRoles?: Prisma.UserRoleListRelationFilter
   singardFeedbacks?: Prisma.SingardFeedbackListRelationFilter
@@ -1424,6 +1427,7 @@ export type UserCreateInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -1538,6 +1542,7 @@ export type UserUncheckedCreateInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -1650,6 +1655,7 @@ export type UserUpdateInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -1764,6 +1770,7 @@ export type UserUncheckedUpdateInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -2969,6 +2976,20 @@ export type UserUpdateOneRequiredWithoutFoodReservationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFoodReservationsInput, Prisma.UserUpdateWithoutFoodReservationsInput>, Prisma.UserUncheckedUpdateWithoutFoodReservationsInput>
 }
 
+export type UserCreateNestedOneWithoutAdvancedFoodOrdersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAdvancedFoodOrdersInput, Prisma.UserUncheckedCreateWithoutAdvancedFoodOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdvancedFoodOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAdvancedFoodOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAdvancedFoodOrdersInput, Prisma.UserUncheckedCreateWithoutAdvancedFoodOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAdvancedFoodOrdersInput
+  upsert?: Prisma.UserUpsertWithoutAdvancedFoodOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAdvancedFoodOrdersInput, Prisma.UserUpdateWithoutAdvancedFoodOrdersInput>, Prisma.UserUncheckedUpdateWithoutAdvancedFoodOrdersInput>
+}
+
 export type UserCreateNestedOneWithoutVehicleAssignmentsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutVehicleAssignmentsInput, Prisma.UserUncheckedCreateWithoutVehicleAssignmentsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutVehicleAssignmentsInput
@@ -3344,6 +3365,7 @@ export type UserCreateWithoutPhotoInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -3457,6 +3479,7 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -3578,6 +3601,7 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -3691,6 +3715,7 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -3812,6 +3837,7 @@ export type UserCreateWithoutPassportPhotoInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -3925,6 +3951,7 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -4046,6 +4073,7 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -4159,6 +4187,7 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -4435,6 +4464,7 @@ export type UserCreateWithoutCountryInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -4548,6 +4578,7 @@ export type UserUncheckedCreateWithoutCountryInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -4685,6 +4716,7 @@ export type UserCreateWithoutProvinceInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -4798,6 +4830,7 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -4919,6 +4952,7 @@ export type UserCreateWithoutLocationProvinceInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -5032,6 +5066,7 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -5185,6 +5220,7 @@ export type UserCreateWithoutCityInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -5298,6 +5334,7 @@ export type UserUncheckedCreateWithoutCityInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -5419,6 +5456,7 @@ export type UserCreateWithoutLocationCityInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -5532,6 +5570,7 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -5686,6 +5725,7 @@ export type UserCreateWithoutQeshmondiSqlConnectionsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -5799,6 +5839,7 @@ export type UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -5926,6 +5967,7 @@ export type UserUpdateWithoutQeshmondiSqlConnectionsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -6039,6 +6081,7 @@ export type UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -6150,6 +6193,7 @@ export type UserCreateWithoutQeshmondiSyncLogsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -6263,6 +6307,7 @@ export type UserUncheckedCreateWithoutQeshmondiSyncLogsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -6390,6 +6435,7 @@ export type UserUpdateWithoutQeshmondiSyncLogsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -6503,6 +6549,7 @@ export type UserUncheckedUpdateWithoutQeshmondiSyncLogsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -6614,6 +6661,7 @@ export type UserCreateWithoutQeshmondiFeedEventsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -6727,6 +6775,7 @@ export type UserUncheckedCreateWithoutQeshmondiFeedEventsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -6854,6 +6903,7 @@ export type UserUpdateWithoutQeshmondiFeedEventsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -6967,6 +7017,7 @@ export type UserUncheckedUpdateWithoutQeshmondiFeedEventsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -7077,6 +7128,7 @@ export type UserCreateWithoutLocationHistoriesInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -7190,6 +7242,7 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   updatedAt?: Date | string
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -7317,6 +7370,7 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -7430,6 +7484,7 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -7542,6 +7597,7 @@ export type UserCreateWithoutContractorInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -7654,6 +7710,7 @@ export type UserUncheckedCreateWithoutContractorInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -7791,6 +7848,7 @@ export type UserCreateWithoutPositionInput = {
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -7904,6 +7962,7 @@ export type UserUncheckedCreateWithoutPositionInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -8041,6 +8100,7 @@ export type UserCreateWithoutNutritionUnitsInput = {
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -8154,6 +8214,7 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -8270,6 +8331,7 @@ export type UserCreateWithoutOrgUnitInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -8383,6 +8445,7 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -8515,6 +8578,7 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -8628,6 +8692,7 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -8755,6 +8820,7 @@ export type UserCreateWithoutFoodReservationsInput = {
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -8868,6 +8934,7 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   updatedAt?: Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -8995,6 +9062,7 @@ export type UserUpdateWithoutFoodReservationsInput = {
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -9108,6 +9176,475 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAdvancedFoodOrdersInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAdvancedFoodOrdersInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAdvancedFoodOrdersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAdvancedFoodOrdersInput, Prisma.UserUncheckedCreateWithoutAdvancedFoodOrdersInput>
+}
+
+export type UserUpsertWithoutAdvancedFoodOrdersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAdvancedFoodOrdersInput, Prisma.UserUncheckedUpdateWithoutAdvancedFoodOrdersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAdvancedFoodOrdersInput, Prisma.UserUncheckedCreateWithoutAdvancedFoodOrdersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAdvancedFoodOrdersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAdvancedFoodOrdersInput, Prisma.UserUncheckedUpdateWithoutAdvancedFoodOrdersInput>
+}
+
+export type UserUpdateWithoutAdvancedFoodOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -9220,6 +9757,7 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
   singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
@@ -9333,6 +9871,7 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
   singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
@@ -9460,6 +9999,7 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
   singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
@@ -9573,6 +10113,7 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
   singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
@@ -9684,6 +10225,7 @@ export type UserCreateWithoutUserRolesInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
   singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
@@ -9797,6 +10339,7 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
   singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
@@ -9924,6 +10467,7 @@ export type UserUpdateWithoutUserRolesInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
   singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
@@ -10037,6 +10581,7 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
   singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
@@ -10148,6 +10693,7 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
@@ -10261,6 +10807,7 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
@@ -10377,6 +10924,7 @@ export type UserCreateWithoutSingardRepliesInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -10490,6 +11038,7 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -10617,6 +11166,7 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
@@ -10730,6 +11280,7 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
@@ -10852,6 +11403,7 @@ export type UserUpdateWithoutSingardRepliesInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -10965,6 +11517,7 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -11076,6 +11629,7 @@ export type UserCreateWithoutSingardActivitiesInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -11189,6 +11743,7 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -11316,6 +11871,7 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -11429,6 +11985,7 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -11540,6 +12097,7 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -11653,6 +12211,7 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -11769,6 +12328,7 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -11882,6 +12442,7 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -11998,6 +12559,7 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -12111,6 +12673,7 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -12227,6 +12790,7 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -12340,6 +12904,7 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -12456,6 +13021,7 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -12569,6 +13135,7 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -12685,6 +13252,7 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -12798,6 +13366,7 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -12925,6 +13494,7 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -13038,6 +13608,7 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -13160,6 +13731,7 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -13273,6 +13845,7 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -13395,6 +13968,7 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -13508,6 +14082,7 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -13630,6 +14205,7 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -13743,6 +14319,7 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -13865,6 +14442,7 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -13978,6 +14556,7 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -14100,6 +14679,7 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -14213,6 +14793,7 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -14324,6 +14905,7 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -14437,6 +15019,7 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -14564,6 +15147,7 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -14677,6 +15261,7 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -14788,6 +15373,7 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -14901,6 +15487,7 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -15028,6 +15615,7 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -15141,6 +15729,7 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -15252,6 +15841,7 @@ export type UserCreateWithoutPortSalesReportsApprovedInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -15365,6 +15955,7 @@ export type UserUncheckedCreateWithoutPortSalesReportsApprovedInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -15481,6 +16072,7 @@ export type UserCreateWithoutPortSalesReportsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -15594,6 +16186,7 @@ export type UserUncheckedCreateWithoutPortSalesReportsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -15721,6 +16314,7 @@ export type UserUpdateWithoutPortSalesReportsApprovedInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -15834,6 +16428,7 @@ export type UserUncheckedUpdateWithoutPortSalesReportsApprovedInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -15956,6 +16551,7 @@ export type UserUpdateWithoutPortSalesReportsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -16069,6 +16665,7 @@ export type UserUncheckedUpdateWithoutPortSalesReportsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -16180,6 +16777,7 @@ export type UserCreateWithoutStakeholderReportsInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -16293,6 +16891,7 @@ export type UserUncheckedCreateWithoutStakeholderReportsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -16420,6 +17019,7 @@ export type UserUpdateWithoutStakeholderReportsInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -16533,6 +17133,7 @@ export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -16644,6 +17245,7 @@ export type UserCreateWithoutStakeholderCorrespondencesInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -16757,6 +17359,7 @@ export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -16884,6 +17487,7 @@ export type UserUpdateWithoutStakeholderCorrespondencesInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -16997,6 +17601,7 @@ export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -17108,6 +17713,7 @@ export type UserCreateWithoutStakeholderMessagesInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -17221,6 +17827,7 @@ export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -17348,6 +17955,7 @@ export type UserUpdateWithoutStakeholderMessagesInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -17461,6 +18069,7 @@ export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -17572,6 +18181,7 @@ export type UserCreateWithoutOperatedPortInput = {
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
@@ -17685,6 +18295,7 @@ export type UserUncheckedCreateWithoutOperatedPortInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
   foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
   userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
@@ -17812,6 +18423,7 @@ export type UserUpdateWithoutOperatedPortInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -17925,6 +18537,7 @@ export type UserUncheckedUpdateWithoutOperatedPortInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -18383,6 +18996,7 @@ export type UserUpdateWithoutPhotoInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -18496,6 +19110,7 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -18694,6 +19309,7 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -18807,6 +19423,7 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -19005,6 +19622,7 @@ export type UserUpdateWithoutPassportPhotoInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -19118,6 +19736,7 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -19316,6 +19935,7 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -19429,6 +20049,7 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -19714,6 +20335,7 @@ export type UserUpdateWithoutCountryInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -19827,6 +20449,7 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -20199,6 +20822,7 @@ export type UserUpdateWithoutProvinceInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -20312,6 +20936,7 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -20510,6 +21135,7 @@ export type UserUpdateWithoutLocationProvinceInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -20623,6 +21249,7 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -20995,6 +21622,7 @@ export type UserUpdateWithoutCityInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -21108,6 +21736,7 @@ export type UserUncheckedUpdateWithoutCityInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -21306,6 +21935,7 @@ export type UserUpdateWithoutLocationCityInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -21419,6 +22049,7 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -21705,6 +22336,7 @@ export type UserUpdateWithoutContractorInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -21817,6 +22449,7 @@ export type UserUncheckedUpdateWithoutContractorInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -22102,6 +22735,7 @@ export type UserUpdateWithoutPositionInput = {
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -22215,6 +22849,7 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -22500,6 +23135,7 @@ export type UserUpdateWithoutOrgUnitInput = {
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
@@ -22613,6 +23249,7 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
   foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
@@ -22733,6 +23370,7 @@ export type UserCountOutputType = {
   locationHistories: number
   nutritionUnits: number
   foodReservations: number
+  advancedFoodOrders: number
   vehicleAssignments: number
   userRoles: number
   singardFeedbacks: number
@@ -22760,6 +23398,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   locationHistories?: boolean | UserCountOutputTypeCountLocationHistoriesArgs
   nutritionUnits?: boolean | UserCountOutputTypeCountNutritionUnitsArgs
   foodReservations?: boolean | UserCountOutputTypeCountFoodReservationsArgs
+  advancedFoodOrders?: boolean | UserCountOutputTypeCountAdvancedFoodOrdersArgs
   vehicleAssignments?: boolean | UserCountOutputTypeCountVehicleAssignmentsArgs
   userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs
   singardFeedbacks?: boolean | UserCountOutputTypeCountSingardFeedbacksArgs
@@ -22812,6 +23451,13 @@ export type UserCountOutputTypeCountNutritionUnitsArgs<ExtArgs extends runtime.T
  */
 export type UserCountOutputTypeCountFoodReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FoodReservationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAdvancedFoodOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdvancedFoodOrderWhereInput
 }
 
 /**
@@ -23062,6 +23708,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   nutritionUnits?: boolean | Prisma.User$nutritionUnitsArgs<ExtArgs>
   foodReservations?: boolean | Prisma.User$foodReservationsArgs<ExtArgs>
+  advancedFoodOrders?: boolean | Prisma.User$advancedFoodOrdersArgs<ExtArgs>
   vehicleAssignments?: boolean | Prisma.User$vehicleAssignmentsArgs<ExtArgs>
   userRoles?: boolean | Prisma.User$userRolesArgs<ExtArgs>
   singardFeedbacks?: boolean | Prisma.User$singardFeedbacksArgs<ExtArgs>
@@ -23392,6 +24039,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   nutritionUnits?: boolean | Prisma.User$nutritionUnitsArgs<ExtArgs>
   foodReservations?: boolean | Prisma.User$foodReservationsArgs<ExtArgs>
+  advancedFoodOrders?: boolean | Prisma.User$advancedFoodOrdersArgs<ExtArgs>
   vehicleAssignments?: boolean | Prisma.User$vehicleAssignmentsArgs<ExtArgs>
   userRoles?: boolean | Prisma.User$userRolesArgs<ExtArgs>
   singardFeedbacks?: boolean | Prisma.User$singardFeedbacksArgs<ExtArgs>
@@ -23463,6 +24111,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     position: Prisma.$OrganizationPositionPayload<ExtArgs> | null
     nutritionUnits: Prisma.$OrganizationUnitPayload<ExtArgs>[]
     foodReservations: Prisma.$FoodReservationPayload<ExtArgs>[]
+    advancedFoodOrders: Prisma.$AdvancedFoodOrderPayload<ExtArgs>[]
     vehicleAssignments: Prisma.$VehicleAssignmentPayload<ExtArgs>[]
     userRoles: Prisma.$UserRolePayload<ExtArgs>[]
     singardFeedbacks: Prisma.$SingardFeedbackPayload<ExtArgs>[]
@@ -23981,6 +24630,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   position<T extends Prisma.User$positionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$positionArgs<ExtArgs>>): Prisma.Prisma__OrganizationPositionClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPositionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   nutritionUnits<T extends Prisma.User$nutritionUnitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$nutritionUnitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   foodReservations<T extends Prisma.User$foodReservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$foodReservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  advancedFoodOrders<T extends Prisma.User$advancedFoodOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$advancedFoodOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdvancedFoodOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vehicleAssignments<T extends Prisma.User$vehicleAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$vehicleAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VehicleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userRoles<T extends Prisma.User$userRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   singardFeedbacks<T extends Prisma.User$singardFeedbacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$singardFeedbacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SingardFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -24797,6 +25447,30 @@ export type User$foodReservationsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.FoodReservationScalarFieldEnum | Prisma.FoodReservationScalarFieldEnum[]
+}
+
+/**
+ * User.advancedFoodOrders
+ */
+export type User$advancedFoodOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdvancedFoodOrder
+   */
+  select?: Prisma.AdvancedFoodOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdvancedFoodOrder
+   */
+  omit?: Prisma.AdvancedFoodOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdvancedFoodOrderInclude<ExtArgs> | null
+  where?: Prisma.AdvancedFoodOrderWhereInput
+  orderBy?: Prisma.AdvancedFoodOrderOrderByWithRelationInput | Prisma.AdvancedFoodOrderOrderByWithRelationInput[]
+  cursor?: Prisma.AdvancedFoodOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdvancedFoodOrderScalarFieldEnum | Prisma.AdvancedFoodOrderScalarFieldEnum[]
 }
 
 /**

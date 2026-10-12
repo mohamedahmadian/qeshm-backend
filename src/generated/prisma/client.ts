@@ -210,6 +210,11 @@ export type OrganizationUnitRestaurant = Prisma.OrganizationUnitRestaurantModel
  */
 export type FoodReservation = Prisma.FoodReservationModel
 /**
+ * Model AdvancedFoodOrder
+ * سفارش کلی یک بازه؛ ردیف‌های روزانه در food_reservations ذخیره می‌شوند.
+ */
+export type AdvancedFoodOrder = Prisma.AdvancedFoodOrderModel
+/**
  * Model VehicleBrand
  * 
  */

@@ -182,6 +182,14 @@ export const PortSalesReportApprovalStatus = {
 export type PortSalesReportApprovalStatus = (typeof PortSalesReportApprovalStatus)[keyof typeof PortSalesReportApprovalStatus]
 
 
+export const AdvancedFoodOrderSource = {
+  DEFAULT: 'DEFAULT',
+  MENU: 'MENU'
+} as const
+
+export type AdvancedFoodOrderSource = (typeof AdvancedFoodOrderSource)[keyof typeof AdvancedFoodOrderSource]
+
+
 export const SingardFeedbackKind = {
   SUGGESTION: 'SUGGESTION',
   COMPLAINT: 'COMPLAINT',

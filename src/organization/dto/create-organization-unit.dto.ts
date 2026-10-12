@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
 import {
+  IsBoolean,
   IsInt,
   IsLatitude,
   IsLongitude,
@@ -13,7 +14,7 @@ import {
   MinLength,
   ValidateIf,
 } from 'class-validator';
-import { emptyToNull, toOptionalNumber } from '../../common/dto-transform';
+import { emptyToNull, toBoolean, toOptionalNumber } from '../../common/dto-transform';
 import { normalizePhone } from '../../common/phone';
 
 function trimString(value: unknown) {
@@ -125,4 +126,17 @@ export class CreateOrganizationUnitDto {
   @Min(1)
   @Max(9999)
   maxMeals?: number | null;
+
+  @IsOptional()
+  @Transform(({ value }) => (value == null || value === '' ? undefined : toBoolean(value)))
+  @IsBoolean()
+  guestMealsEnabled?: boolean;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalNumber(value))
+  @ValidateIf((_, value) => value != null)
+  @IsInt()
+  @Min(1)
+  @Max(9999)
+  maxGuestMeals?: number | null;
 }

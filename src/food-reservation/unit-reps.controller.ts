@@ -23,7 +23,7 @@ export class UnitRepsController {
 
   @Post()
   create(@Body() dto: CreateUnitRepDto) {
-    return this.unitReps.assign(dto.unitId, dto.nutritionRepId);
+    return this.unitReps.assign(dto.unitId, dto.nutritionRepId, dto);
   }
 
   @Post(':unitId/person')
@@ -33,7 +33,7 @@ export class UnitRepsController {
 
   @Patch(':unitId')
   update(@Param('unitId') unitId: string, @Body() dto: UpdateUnitRepDto) {
-    return this.unitReps.assign(unitId, dto.nutritionRepId);
+    return this.unitReps.assign(unitId, dto.nutritionRepId, dto);
   }
 
   @Delete(':unitId')

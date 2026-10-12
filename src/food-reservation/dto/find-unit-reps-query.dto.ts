@@ -4,7 +4,14 @@ import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 
-export const unitRepSortFields = ['name', 'kind', 'representative'] as const;
+export const unitRepSortFields = [
+  'name',
+  'kind',
+  'representative',
+  'maxMeals',
+  'guestMealsEnabled',
+  'maxGuestMeals',
+] as const;
 
 export class FindUnitRepsQueryDto extends PaginationQueryDto {
   @IsOptional()

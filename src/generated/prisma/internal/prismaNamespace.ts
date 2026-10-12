@@ -431,6 +431,7 @@ export const ModelName = {
   OrganizationUnit: 'OrganizationUnit',
   OrganizationUnitRestaurant: 'OrganizationUnitRestaurant',
   FoodReservation: 'FoodReservation',
+  AdvancedFoodOrder: 'AdvancedFoodOrder',
   VehicleBrand: 'VehicleBrand',
   Vehicle: 'Vehicle',
   VehicleAssignment: 'VehicleAssignment',
@@ -474,7 +475,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "advancedFoodOrder" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2991,6 +2992,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.FoodReservationCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FoodReservationCountAggregateOutputType> | number
+        }
+      }
+    }
+    AdvancedFoodOrder: {
+      payload: Prisma.$AdvancedFoodOrderPayload<ExtArgs>
+      fields: Prisma.AdvancedFoodOrderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdvancedFoodOrderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdvancedFoodOrderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>
+        }
+        findFirst: {
+          args: Prisma.AdvancedFoodOrderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdvancedFoodOrderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>
+        }
+        findMany: {
+          args: Prisma.AdvancedFoodOrderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>[]
+        }
+        create: {
+          args: Prisma.AdvancedFoodOrderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>
+        }
+        createMany: {
+          args: Prisma.AdvancedFoodOrderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdvancedFoodOrderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>[]
+        }
+        delete: {
+          args: Prisma.AdvancedFoodOrderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>
+        }
+        update: {
+          args: Prisma.AdvancedFoodOrderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdvancedFoodOrderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdvancedFoodOrderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdvancedFoodOrderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdvancedFoodOrderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdvancedFoodOrderPayload>
+        }
+        aggregate: {
+          args: Prisma.AdvancedFoodOrderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdvancedFoodOrder>
+        }
+        groupBy: {
+          args: Prisma.AdvancedFoodOrderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdvancedFoodOrderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdvancedFoodOrderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdvancedFoodOrderCountAggregateOutputType> | number
         }
       }
     }
@@ -5574,6 +5649,8 @@ export const RestaurantScalarFieldEnum = {
   phone: 'phone',
   address: 'address',
   logoId: 'logoId',
+  employeeMealPrice: 'employeeMealPrice',
+  managementMealPrice: 'managementMealPrice',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -5667,6 +5744,8 @@ export const OrganizationUnitScalarFieldEnum = {
   whatsapp: 'whatsapp',
   nutritionRepId: 'nutritionRepId',
   maxMeals: 'maxMeals',
+  guestMealsEnabled: 'guestMealsEnabled',
+  maxGuestMeals: 'maxGuestMeals',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -5693,13 +5772,36 @@ export const FoodReservationScalarFieldEnum = {
   userId: 'userId',
   orgUnitId: 'orgUnitId',
   quantity: 'quantity',
+  forGuest: 'forGuest',
   unitPrice: 'unitPrice',
   status: 'status',
+  advancedOrderId: 'advancedOrderId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type FoodReservationScalarFieldEnum = (typeof FoodReservationScalarFieldEnum)[keyof typeof FoodReservationScalarFieldEnum]
+
+
+export const AdvancedFoodOrderScalarFieldEnum = {
+  id: 'id',
+  orgUnitId: 'orgUnitId',
+  restaurantId: 'restaurantId',
+  source: 'source',
+  startsOn: 'startsOn',
+  endsOn: 'endsOn',
+  weekdays: 'weekdays',
+  foodLabel: 'foodLabel',
+  employeeQuantity: 'employeeQuantity',
+  managementQuantity: 'managementQuantity',
+  employeeUnitPrice: 'employeeUnitPrice',
+  managementUnitPrice: 'managementUnitPrice',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdvancedFoodOrderScalarFieldEnum = (typeof AdvancedFoodOrderScalarFieldEnum)[keyof typeof AdvancedFoodOrderScalarFieldEnum]
 
 
 export const VehicleBrandScalarFieldEnum = {
@@ -6493,6 +6595,20 @@ export type ListEnumFoodReservationStatusFieldRefInput<$PrismaModel> = FieldRefI
 
 
 /**
+ * Reference to a field of type 'AdvancedFoodOrderSource'
+ */
+export type EnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdvancedFoodOrderSource'>
+    
+
+
+/**
+ * Reference to a field of type 'AdvancedFoodOrderSource[]'
+ */
+export type ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdvancedFoodOrderSource[]'>
+    
+
+
+/**
  * Reference to a field of type 'VehicleType'
  */
 export type EnumVehicleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VehicleType'>
@@ -6970,6 +7086,7 @@ export type GlobalOmitConfig = {
   organizationUnit?: Prisma.OrganizationUnitOmit
   organizationUnitRestaurant?: Prisma.OrganizationUnitRestaurantOmit
   foodReservation?: Prisma.FoodReservationOmit
+  advancedFoodOrder?: Prisma.AdvancedFoodOrderOmit
   vehicleBrand?: Prisma.VehicleBrandOmit
   vehicle?: Prisma.VehicleOmit
   vehicleAssignment?: Prisma.VehicleAssignmentOmit

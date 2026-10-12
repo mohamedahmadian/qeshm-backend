@@ -1,6 +1,6 @@
 import { Transform, Type } from 'class-transformer';
-import { IsInt, IsOptional, IsString, IsUUID, Matches, Max, Min } from 'class-validator';
-import { toOptionalNumber } from '../../common/dto-transform';
+import { IsBoolean, IsInt, IsOptional, IsString, IsUUID, Matches, Max, Min } from 'class-validator';
+import { toOptionalBoolean, toOptionalNumber } from '../../common/dto-transform';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -31,4 +31,9 @@ export class CreateFoodReservationDto {
   @Min(1)
   @Max(500)
   quantity?: number;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalBoolean(value))
+  @IsBoolean()
+  forGuest?: boolean;
 }

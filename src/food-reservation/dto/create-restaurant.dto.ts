@@ -1,9 +1,11 @@
 import { Transform } from 'class-transformer';
 import {
+  IsInt,
   IsOptional,
   IsString,
   IsUUID,
   MaxLength,
+  Min,
   MinLength,
   ValidateIf,
 } from 'class-validator';
@@ -20,6 +22,15 @@ function normalizePhone(value: unknown) {
   }
   const digits = toLatinDigits(value.trim()).replace(/[^\d+]/g, '');
   return digits.length ? digits : null;
+}
+
+function toMealPrice(value: unknown) {
+  if (typeof value === 'number' && Number.isFinite(value)) return Math.trunc(value);
+  if (typeof value === 'string') {
+    const digits = toLatinDigits(value.trim()).replace(/\D/g, '');
+    return digits.length ? Number(digits) : value;
+  }
+  return value;
 }
 
 export class CreateRestaurantDto {
@@ -48,4 +59,14 @@ export class CreateRestaurantDto {
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
   logoId?: string | null;
+
+  @Transform(({ value }) => toMealPrice(value))
+  @IsInt()
+  @Min(0)
+  employeeMealPrice: number;
+
+  @Transform(({ value }) => toMealPrice(value))
+  @IsInt()
+  @Min(0)
+  managementMealPrice: number;
 }

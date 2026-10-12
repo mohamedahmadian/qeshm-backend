@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UsersModule } from '../users/users.module';
+import { AdvancedFoodOrdersController } from './advanced-food-orders.controller';
+import { AdvancedFoodOrdersService } from './advanced-food-orders.service';
 import { FoodReservationsController } from './food-reservations.controller';
 import { FoodReservationsService } from './food-reservations.service';
 import { FoodsController } from './foods.controller';
@@ -21,6 +23,7 @@ import { UnitRepsService } from './unit-reps.service';
     RestaurantMenuController,
     RestaurantUnitsController,
     FoodReservationsController,
+    AdvancedFoodOrdersController,
     UnitRepsController,
   ],
   providers: [
@@ -29,6 +32,7 @@ import { UnitRepsService } from './unit-reps.service';
     RestaurantMenuService,
     RestaurantUnitsService,
     FoodReservationsService,
+    AdvancedFoodOrdersService,
     UnitRepsService,
   ],
 })

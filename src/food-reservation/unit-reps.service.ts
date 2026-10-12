@@ -13,13 +13,19 @@ import { Prisma } from '../generated/prisma/client';
 import { buildOrganizationUnitPaths } from '../organization/organization-unit-tree';
 import { PrismaService } from '../prisma/prisma.service';
 import { UsersService } from '../users/users.service';
-import { CreateUnitRepPersonDto } from './dto/assign-unit-rep.dto';
+import {
+  CreateUnitRepPersonDto,
+  UpdateUnitRepDto,
+} from './dto/assign-unit-rep.dto';
 import { FindUnitRepsQueryDto } from './dto/find-unit-reps-query.dto';
 
 const unitRepSelect = {
   id: true,
   name: true,
   nutritionRepId: true,
+  maxMeals: true,
+  guestMealsEnabled: true,
+  maxGuestMeals: true,
   kind: { select: { id: true, name: true } },
   nutritionRep: { select: { id: true, fullName: true, phone: true } },
 } satisfies Prisma.OrganizationUnitSelect;
@@ -49,6 +55,9 @@ export class UnitRepsService {
         name: (dir) => ({ name: dir }),
         kind: (dir) => ({ kind: { name: dir } }),
         representative: (dir) => ({ nutritionRep: { fullName: dir } }),
+        maxMeals: (dir) => ({ maxMeals: dir }),
+        guestMealsEnabled: (dir) => ({ guestMealsEnabled: dir }),
+        maxGuestMeals: (dir) => ({ maxGuestMeals: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -84,12 +93,17 @@ export class UnitRepsService {
     return this.withPath(unit, paths);
   }
 
-  async assign(unitId: string, nutritionRepId: string) {
+  async assign(unitId: string, nutritionRepId?: string | null, limits?: UpdateUnitRepDto) {
     await this.findOne(unitId);
-    await this.assertNutritionRep(unitId, nutritionRepId);
+    if (nutritionRepId) {
+      await this.assertNutritionRep(unitId, nutritionRepId);
+    }
     const unit = await this.prisma.organizationUnit.update({
       where: { id: unitId },
-      data: { nutritionRepId },
+      data: {
+        nutritionRepId: nutritionRepId ?? null,
+        ...this.mealLimits(limits),
+      },
       select: unitRepSelect,
     });
     const paths = await this.unitPaths();
@@ -133,6 +147,15 @@ export class UnitRepsService {
     return {
       ...item,
       pathLabel: paths.get(item.id) ?? item.name,
+    };
+  }
+
+  private mealLimits(limits?: UpdateUnitRepDto) {
+    if (!limits) return { maxMeals: 1 };
+    return {
+      maxMeals: limits.maxMeals ?? 1,
+      guestMealsEnabled: limits.guestMealsEnabled,
+      maxGuestMeals: limits.guestMealsEnabled ? limits.maxGuestMeals ?? 1 : null,
     };
   }
 

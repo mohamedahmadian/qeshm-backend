@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
-import { IsOptional, IsString, IsUUID, Matches } from 'class-validator';
+import { IsBoolean, IsOptional, IsString, IsUUID, Matches } from 'class-validator';
+import { toOptionalBoolean } from '../../common/dto-transform';
 
 export class FoodReservationLastQuantityQueryDto {
   @IsOptional()
@@ -13,6 +14,11 @@ export class FoodReservationLastQuantityQueryDto {
   @IsOptional()
   @IsUUID('4')
   foodId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalBoolean(value))
+  @IsBoolean()
+  forGuest?: boolean;
 }
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;

@@ -36,6 +36,8 @@ const unitSelect = {
   whatsapp: true,
   nutritionRepId: true,
   maxMeals: true,
+  guestMealsEnabled: true,
+  maxGuestMeals: true,
   createdAt: true,
   updatedAt: true,
   parent: {
@@ -142,6 +144,7 @@ export class OrganizationUnitsService {
   async create(dto: CreateOrganizationUnitDto) {
     await this.assertValidParent(null, dto.parentId);
     await this.assertKind(dto.kindId);
+    this.assertGuestMeals(dto);
     const unit = await this.prisma.organizationUnit.create({
       data: {
         name: dto.name,
@@ -158,6 +161,8 @@ export class OrganizationUnitsService {
         telegram: dto.telegram,
         whatsapp: dto.whatsapp,
         maxMeals: dto.maxMeals,
+        guestMealsEnabled: dto.guestMealsEnabled ?? false,
+        maxGuestMeals: dto.guestMealsEnabled ? (dto.maxGuestMeals ?? null) : null,
       },
       select: unitSelect,
     });
@@ -175,6 +180,9 @@ export class OrganizationUnitsService {
     }
     if (dto.nutritionRepId !== undefined) {
       await this.assertNutritionRep(id, dto.nutritionRepId);
+    }
+    if (dto.guestMealsEnabled !== undefined) {
+      this.assertGuestMeals(dto);
     }
     const unit = await this.prisma.organizationUnit.update({
       where: { id },
@@ -204,6 +212,12 @@ export class OrganizationUnitsService {
               ? { connect: { id: dto.nutritionRepId } }
               : { disconnect: true },
         maxMeals: dto.maxMeals,
+        ...(dto.guestMealsEnabled === undefined
+          ? {}
+          : {
+              guestMealsEnabled: dto.guestMealsEnabled,
+              maxGuestMeals: dto.guestMealsEnabled ? (dto.maxGuestMeals ?? null) : null,
+            }),
       },
       select: unitSelect,
     });
@@ -297,6 +311,12 @@ export class OrganizationUnitsService {
         select: { parentId: true },
       });
       current = node?.parentId ?? null;
+    }
+  }
+
+  private assertGuestMeals(dto: { guestMealsEnabled?: boolean; maxGuestMeals?: number | null }) {
+    if (dto.guestMealsEnabled && dto.maxGuestMeals == null) {
+      throw new BadRequestException('حداکثر غذای مهمان قابل سفارش را وارد کنید');
     }
   }
 

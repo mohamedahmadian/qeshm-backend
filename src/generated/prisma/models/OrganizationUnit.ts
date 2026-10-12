@@ -30,12 +30,14 @@ export type OrganizationUnitAvgAggregateOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   maxMeals: number | null
+  maxGuestMeals: number | null
 }
 
 export type OrganizationUnitSumAggregateOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   maxMeals: number | null
+  maxGuestMeals: number | null
 }
 
 export type OrganizationUnitMinAggregateOutputType = {
@@ -55,6 +57,8 @@ export type OrganizationUnitMinAggregateOutputType = {
   whatsapp: string | null
   nutritionRepId: string | null
   maxMeals: number | null
+  guestMealsEnabled: boolean | null
+  maxGuestMeals: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -76,6 +80,8 @@ export type OrganizationUnitMaxAggregateOutputType = {
   whatsapp: string | null
   nutritionRepId: string | null
   maxMeals: number | null
+  guestMealsEnabled: boolean | null
+  maxGuestMeals: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -97,6 +103,8 @@ export type OrganizationUnitCountAggregateOutputType = {
   whatsapp: number
   nutritionRepId: number
   maxMeals: number
+  guestMealsEnabled: number
+  maxGuestMeals: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -107,12 +115,14 @@ export type OrganizationUnitAvgAggregateInputType = {
   latitude?: true
   longitude?: true
   maxMeals?: true
+  maxGuestMeals?: true
 }
 
 export type OrganizationUnitSumAggregateInputType = {
   latitude?: true
   longitude?: true
   maxMeals?: true
+  maxGuestMeals?: true
 }
 
 export type OrganizationUnitMinAggregateInputType = {
@@ -132,6 +142,8 @@ export type OrganizationUnitMinAggregateInputType = {
   whatsapp?: true
   nutritionRepId?: true
   maxMeals?: true
+  guestMealsEnabled?: true
+  maxGuestMeals?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -153,6 +165,8 @@ export type OrganizationUnitMaxAggregateInputType = {
   whatsapp?: true
   nutritionRepId?: true
   maxMeals?: true
+  guestMealsEnabled?: true
+  maxGuestMeals?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -174,6 +188,8 @@ export type OrganizationUnitCountAggregateInputType = {
   whatsapp?: true
   nutritionRepId?: true
   maxMeals?: true
+  guestMealsEnabled?: true
+  maxGuestMeals?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -282,6 +298,8 @@ export type OrganizationUnitGroupByOutputType = {
   whatsapp: string | null
   nutritionRepId: string | null
   maxMeals: number | null
+  guestMealsEnabled: boolean
+  maxGuestMeals: number | null
   createdAt: Date
   updatedAt: Date
   _count: OrganizationUnitCountAggregateOutputType | null
@@ -326,6 +344,8 @@ export type OrganizationUnitWhereInput = {
   whatsapp?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   nutritionRepId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   maxMeals?: Prisma.IntNullableFilter<"OrganizationUnit"> | number | null
+  guestMealsEnabled?: Prisma.BoolFilter<"OrganizationUnit"> | boolean
+  maxGuestMeals?: Prisma.IntNullableFilter<"OrganizationUnit"> | number | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
   kind?: Prisma.XOR<Prisma.OrganizationUnitKindScalarRelationFilter, Prisma.OrganizationUnitKindWhereInput>
@@ -335,6 +355,7 @@ export type OrganizationUnitWhereInput = {
   employees?: Prisma.UserListRelationFilter
   restaurants?: Prisma.OrganizationUnitRestaurantListRelationFilter
   reservations?: Prisma.FoodReservationListRelationFilter
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderListRelationFilter
   vehicleAssignments?: Prisma.VehicleAssignmentListRelationFilter
   projectOperators?: Prisma.ProjectOperatorListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
@@ -360,6 +381,8 @@ export type OrganizationUnitOrderByWithRelationInput = {
   whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
   nutritionRepId?: Prisma.SortOrderInput | Prisma.SortOrder
   maxMeals?: Prisma.SortOrderInput | Prisma.SortOrder
+  guestMealsEnabled?: Prisma.SortOrder
+  maxGuestMeals?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   kind?: Prisma.OrganizationUnitKindOrderByWithRelationInput
@@ -369,6 +392,7 @@ export type OrganizationUnitOrderByWithRelationInput = {
   employees?: Prisma.UserOrderByRelationAggregateInput
   restaurants?: Prisma.OrganizationUnitRestaurantOrderByRelationAggregateInput
   reservations?: Prisma.FoodReservationOrderByRelationAggregateInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderOrderByRelationAggregateInput
   vehicleAssignments?: Prisma.VehicleAssignmentOrderByRelationAggregateInput
   projectOperators?: Prisma.ProjectOperatorOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
@@ -397,6 +421,8 @@ export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
   whatsapp?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   nutritionRepId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   maxMeals?: Prisma.IntNullableFilter<"OrganizationUnit"> | number | null
+  guestMealsEnabled?: Prisma.BoolFilter<"OrganizationUnit"> | boolean
+  maxGuestMeals?: Prisma.IntNullableFilter<"OrganizationUnit"> | number | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
   kind?: Prisma.XOR<Prisma.OrganizationUnitKindScalarRelationFilter, Prisma.OrganizationUnitKindWhereInput>
@@ -406,6 +432,7 @@ export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
   employees?: Prisma.UserListRelationFilter
   restaurants?: Prisma.OrganizationUnitRestaurantListRelationFilter
   reservations?: Prisma.FoodReservationListRelationFilter
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderListRelationFilter
   vehicleAssignments?: Prisma.VehicleAssignmentListRelationFilter
   projectOperators?: Prisma.ProjectOperatorListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
@@ -431,6 +458,8 @@ export type OrganizationUnitOrderByWithAggregationInput = {
   whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
   nutritionRepId?: Prisma.SortOrderInput | Prisma.SortOrder
   maxMeals?: Prisma.SortOrderInput | Prisma.SortOrder
+  guestMealsEnabled?: Prisma.SortOrder
+  maxGuestMeals?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrganizationUnitCountOrderByAggregateInput
@@ -460,6 +489,8 @@ export type OrganizationUnitScalarWhereWithAggregatesInput = {
   whatsapp?: Prisma.StringNullableWithAggregatesFilter<"OrganizationUnit"> | string | null
   nutritionRepId?: Prisma.StringNullableWithAggregatesFilter<"OrganizationUnit"> | string | null
   maxMeals?: Prisma.IntNullableWithAggregatesFilter<"OrganizationUnit"> | number | null
+  guestMealsEnabled?: Prisma.BoolWithAggregatesFilter<"OrganizationUnit"> | boolean
+  maxGuestMeals?: Prisma.IntNullableWithAggregatesFilter<"OrganizationUnit"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationUnit"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationUnit"> | Date | string
 }
@@ -478,6 +509,8 @@ export type OrganizationUnitCreateInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -487,6 +520,7 @@ export type OrganizationUnitCreateInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -512,12 +546,15 @@ export type OrganizationUnitUncheckedCreateInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -540,6 +577,8 @@ export type OrganizationUnitUpdateInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -549,6 +588,7 @@ export type OrganizationUnitUpdateInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -574,12 +614,15 @@ export type OrganizationUnitUncheckedUpdateInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -605,6 +648,8 @@ export type OrganizationUnitCreateManyInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -623,6 +668,8 @@ export type OrganizationUnitUpdateManyMutationInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -644,6 +691,8 @@ export type OrganizationUnitUncheckedUpdateManyInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -685,6 +734,8 @@ export type OrganizationUnitCountOrderByAggregateInput = {
   whatsapp?: Prisma.SortOrder
   nutritionRepId?: Prisma.SortOrder
   maxMeals?: Prisma.SortOrder
+  guestMealsEnabled?: Prisma.SortOrder
+  maxGuestMeals?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -693,6 +744,7 @@ export type OrganizationUnitAvgOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   maxMeals?: Prisma.SortOrder
+  maxGuestMeals?: Prisma.SortOrder
 }
 
 export type OrganizationUnitMaxOrderByAggregateInput = {
@@ -712,6 +764,8 @@ export type OrganizationUnitMaxOrderByAggregateInput = {
   whatsapp?: Prisma.SortOrder
   nutritionRepId?: Prisma.SortOrder
   maxMeals?: Prisma.SortOrder
+  guestMealsEnabled?: Prisma.SortOrder
+  maxGuestMeals?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -733,6 +787,8 @@ export type OrganizationUnitMinOrderByAggregateInput = {
   whatsapp?: Prisma.SortOrder
   nutritionRepId?: Prisma.SortOrder
   maxMeals?: Prisma.SortOrder
+  guestMealsEnabled?: Prisma.SortOrder
+  maxGuestMeals?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -741,6 +797,7 @@ export type OrganizationUnitSumOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   maxMeals?: Prisma.SortOrder
+  maxGuestMeals?: Prisma.SortOrder
 }
 
 export type OrganizationUnitCreateNestedOneWithoutEmployeesInput = {
@@ -959,6 +1016,20 @@ export type OrganizationUnitUpdateOneRequiredWithoutReservationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutReservationsInput, Prisma.OrganizationUnitUpdateWithoutReservationsInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutReservationsInput>
 }
 
+export type OrganizationUnitCreateNestedOneWithoutAdvancedFoodOrdersInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutAdvancedFoodOrdersInput, Prisma.OrganizationUnitUncheckedCreateWithoutAdvancedFoodOrdersInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutAdvancedFoodOrdersInput
+  connect?: Prisma.OrganizationUnitWhereUniqueInput
+}
+
+export type OrganizationUnitUpdateOneRequiredWithoutAdvancedFoodOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutAdvancedFoodOrdersInput, Prisma.OrganizationUnitUncheckedCreateWithoutAdvancedFoodOrdersInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutAdvancedFoodOrdersInput
+  upsert?: Prisma.OrganizationUnitUpsertWithoutAdvancedFoodOrdersInput
+  connect?: Prisma.OrganizationUnitWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutAdvancedFoodOrdersInput, Prisma.OrganizationUnitUpdateWithoutAdvancedFoodOrdersInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutAdvancedFoodOrdersInput>
+}
+
 export type OrganizationUnitCreateNestedOneWithoutVehicleAssignmentsInput = {
   create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutVehicleAssignmentsInput, Prisma.OrganizationUnitUncheckedCreateWithoutVehicleAssignmentsInput>
   connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutVehicleAssignmentsInput
@@ -1033,6 +1104,8 @@ export type OrganizationUnitCreateWithoutEmployeesInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -1041,6 +1114,7 @@ export type OrganizationUnitCreateWithoutEmployeesInput = {
   nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -1066,11 +1140,14 @@ export type OrganizationUnitUncheckedCreateWithoutEmployeesInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -1098,6 +1175,8 @@ export type OrganizationUnitCreateWithoutNutritionRepInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -1106,6 +1185,7 @@ export type OrganizationUnitCreateWithoutNutritionRepInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -1130,12 +1210,15 @@ export type OrganizationUnitUncheckedCreateWithoutNutritionRepInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -1179,6 +1262,8 @@ export type OrganizationUnitUpdateWithoutEmployeesInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -1187,6 +1272,7 @@ export type OrganizationUnitUpdateWithoutEmployeesInput = {
   nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -1212,11 +1298,14 @@ export type OrganizationUnitUncheckedUpdateWithoutEmployeesInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -1261,6 +1350,8 @@ export type OrganizationUnitScalarWhereInput = {
   whatsapp?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   nutritionRepId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   maxMeals?: Prisma.IntNullableFilter<"OrganizationUnit"> | number | null
+  guestMealsEnabled?: Prisma.BoolFilter<"OrganizationUnit"> | boolean
+  maxGuestMeals?: Prisma.IntNullableFilter<"OrganizationUnit"> | number | null
   createdAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnit"> | Date | string
 }
@@ -1279,6 +1370,8 @@ export type OrganizationUnitCreateWithoutProjectsInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -1288,6 +1381,7 @@ export type OrganizationUnitCreateWithoutProjectsInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
@@ -1312,12 +1406,15 @@ export type OrganizationUnitUncheckedCreateWithoutProjectsInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
@@ -1355,6 +1452,8 @@ export type OrganizationUnitUpdateWithoutProjectsInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -1364,6 +1463,7 @@ export type OrganizationUnitUpdateWithoutProjectsInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
@@ -1388,12 +1488,15 @@ export type OrganizationUnitUncheckedUpdateWithoutProjectsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
@@ -1415,6 +1518,8 @@ export type OrganizationUnitCreateWithoutProjectOperatorsInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -1424,6 +1529,7 @@ export type OrganizationUnitCreateWithoutProjectOperatorsInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
@@ -1448,12 +1554,15 @@ export type OrganizationUnitUncheckedCreateWithoutProjectOperatorsInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
@@ -1491,6 +1600,8 @@ export type OrganizationUnitUpdateWithoutProjectOperatorsInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -1500,6 +1611,7 @@ export type OrganizationUnitUpdateWithoutProjectOperatorsInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
@@ -1524,12 +1636,15 @@ export type OrganizationUnitUncheckedUpdateWithoutProjectOperatorsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
@@ -1551,6 +1666,8 @@ export type OrganizationUnitCreateWithoutKindInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
@@ -1559,6 +1676,7 @@ export type OrganizationUnitCreateWithoutKindInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -1583,12 +1701,15 @@ export type OrganizationUnitUncheckedCreateWithoutKindInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -1637,6 +1758,8 @@ export type OrganizationUnitCreateWithoutChildrenInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -1645,6 +1768,7 @@ export type OrganizationUnitCreateWithoutChildrenInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -1670,11 +1794,14 @@ export type OrganizationUnitUncheckedCreateWithoutChildrenInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -1702,6 +1829,8 @@ export type OrganizationUnitCreateWithoutParentInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -1710,6 +1839,7 @@ export type OrganizationUnitCreateWithoutParentInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -1734,12 +1864,15 @@ export type OrganizationUnitUncheckedCreateWithoutParentInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -1783,6 +1916,8 @@ export type OrganizationUnitUpdateWithoutChildrenInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -1791,6 +1926,7 @@ export type OrganizationUnitUpdateWithoutChildrenInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -1816,11 +1952,14 @@ export type OrganizationUnitUncheckedUpdateWithoutChildrenInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -1859,6 +1998,8 @@ export type OrganizationUnitCreateWithoutRestaurantsInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -1867,6 +2008,7 @@ export type OrganizationUnitCreateWithoutRestaurantsInput = {
   nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -1892,11 +2034,14 @@ export type OrganizationUnitUncheckedCreateWithoutRestaurantsInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -1935,6 +2080,8 @@ export type OrganizationUnitUpdateWithoutRestaurantsInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -1943,6 +2090,7 @@ export type OrganizationUnitUpdateWithoutRestaurantsInput = {
   nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -1968,11 +2116,14 @@ export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -1995,6 +2146,8 @@ export type OrganizationUnitCreateWithoutReservationsInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -2003,6 +2156,7 @@ export type OrganizationUnitCreateWithoutReservationsInput = {
   nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -2028,11 +2182,14 @@ export type OrganizationUnitUncheckedCreateWithoutReservationsInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -2071,6 +2228,8 @@ export type OrganizationUnitUpdateWithoutReservationsInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -2079,6 +2238,7 @@ export type OrganizationUnitUpdateWithoutReservationsInput = {
   nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -2104,11 +2264,162 @@ export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
+  boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
+  boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+}
+
+export type OrganizationUnitCreateWithoutAdvancedFoodOrdersInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
+  nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
+  employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
+  projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
+  boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
+  boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
+  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+}
+
+export type OrganizationUnitUncheckedCreateWithoutAdvancedFoodOrdersInput = {
+  id?: string
+  name: string
+  kindId: string
+  parentId?: string | null
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  nutritionRepId?: string | null
+  maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
+  employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
+  boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
+  boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+}
+
+export type OrganizationUnitCreateOrConnectWithoutAdvancedFoodOrdersInput = {
+  where: Prisma.OrganizationUnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutAdvancedFoodOrdersInput, Prisma.OrganizationUnitUncheckedCreateWithoutAdvancedFoodOrdersInput>
+}
+
+export type OrganizationUnitUpsertWithoutAdvancedFoodOrdersInput = {
+  update: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutAdvancedFoodOrdersInput, Prisma.OrganizationUnitUncheckedUpdateWithoutAdvancedFoodOrdersInput>
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutAdvancedFoodOrdersInput, Prisma.OrganizationUnitUncheckedCreateWithoutAdvancedFoodOrdersInput>
+  where?: Prisma.OrganizationUnitWhereInput
+}
+
+export type OrganizationUnitUpdateToOneWithWhereWithoutAdvancedFoodOrdersInput = {
+  where?: Prisma.OrganizationUnitWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutAdvancedFoodOrdersInput, Prisma.OrganizationUnitUncheckedUpdateWithoutAdvancedFoodOrdersInput>
+}
+
+export type OrganizationUnitUpdateWithoutAdvancedFoodOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
+  nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
+  employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
+  projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
+  boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
+  boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
+  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+}
+
+export type OrganizationUnitUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
+  employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -2131,6 +2442,8 @@ export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -2140,6 +2453,7 @@ export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
@@ -2164,12 +2478,15 @@ export type OrganizationUnitUncheckedCreateWithoutVehicleAssignmentsInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
@@ -2207,6 +2524,8 @@ export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -2216,6 +2535,7 @@ export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
@@ -2240,12 +2560,15 @@ export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
@@ -2267,6 +2590,8 @@ export type OrganizationUnitCreateWithoutBoardRequestsInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -2276,6 +2601,7 @@ export type OrganizationUnitCreateWithoutBoardRequestsInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -2300,12 +2626,15 @@ export type OrganizationUnitUncheckedCreateWithoutBoardRequestsInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -2343,6 +2672,8 @@ export type OrganizationUnitUpdateWithoutBoardRequestsInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -2352,6 +2683,7 @@ export type OrganizationUnitUpdateWithoutBoardRequestsInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -2376,12 +2708,15 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardRequestsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -2403,6 +2738,8 @@ export type OrganizationUnitCreateWithoutBoardStageUnitsInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -2412,6 +2749,7 @@ export type OrganizationUnitCreateWithoutBoardStageUnitsInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -2436,12 +2774,15 @@ export type OrganizationUnitUncheckedCreateWithoutBoardStageUnitsInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -2479,6 +2820,8 @@ export type OrganizationUnitUpdateWithoutBoardStageUnitsInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -2488,6 +2831,7 @@ export type OrganizationUnitUpdateWithoutBoardStageUnitsInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -2512,12 +2856,15 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardStageUnitsInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -2539,6 +2886,8 @@ export type OrganizationUnitCreateWithoutBoardMinutesResolutionsInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
@@ -2548,6 +2897,7 @@ export type OrganizationUnitCreateWithoutBoardMinutesResolutionsInput = {
   employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
@@ -2572,12 +2922,15 @@ export type OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput =
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
   employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
   reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
@@ -2615,6 +2968,8 @@ export type OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -2624,6 +2979,7 @@ export type OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -2648,12 +3004,15 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput =
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -2677,6 +3036,8 @@ export type OrganizationUnitCreateManyNutritionRepInput = {
   telegram?: string | null
   whatsapp?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2695,6 +3056,8 @@ export type OrganizationUnitUpdateWithoutNutritionRepInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -2703,6 +3066,7 @@ export type OrganizationUnitUpdateWithoutNutritionRepInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -2727,12 +3091,15 @@ export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -2757,6 +3124,8 @@ export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2777,6 +3146,8 @@ export type OrganizationUnitCreateManyKindInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2795,6 +3166,8 @@ export type OrganizationUnitUpdateWithoutKindInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
@@ -2803,6 +3176,7 @@ export type OrganizationUnitUpdateWithoutKindInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -2827,12 +3201,15 @@ export type OrganizationUnitUncheckedUpdateWithoutKindInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -2857,6 +3234,8 @@ export type OrganizationUnitUncheckedUpdateManyWithoutKindInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2877,6 +3256,8 @@ export type OrganizationUnitCreateManyParentInput = {
   whatsapp?: string | null
   nutritionRepId?: string | null
   maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2895,6 +3276,8 @@ export type OrganizationUnitUpdateWithoutParentInput = {
   telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
@@ -2903,6 +3286,7 @@ export type OrganizationUnitUpdateWithoutParentInput = {
   employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
@@ -2927,12 +3311,15 @@ export type OrganizationUnitUncheckedUpdateWithoutParentInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
   employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
   restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
   reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
   vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
@@ -2957,6 +3344,8 @@ export type OrganizationUnitUncheckedUpdateManyWithoutParentInput = {
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2971,6 +3360,7 @@ export type OrganizationUnitCountOutputType = {
   employees: number
   restaurants: number
   reservations: number
+  advancedFoodOrders: number
   vehicleAssignments: number
   projectOperators: number
   projects: number
@@ -2984,6 +3374,7 @@ export type OrganizationUnitCountOutputTypeSelect<ExtArgs extends runtime.Types.
   employees?: boolean | OrganizationUnitCountOutputTypeCountEmployeesArgs
   restaurants?: boolean | OrganizationUnitCountOutputTypeCountRestaurantsArgs
   reservations?: boolean | OrganizationUnitCountOutputTypeCountReservationsArgs
+  advancedFoodOrders?: boolean | OrganizationUnitCountOutputTypeCountAdvancedFoodOrdersArgs
   vehicleAssignments?: boolean | OrganizationUnitCountOutputTypeCountVehicleAssignmentsArgs
   projectOperators?: boolean | OrganizationUnitCountOutputTypeCountProjectOperatorsArgs
   projects?: boolean | OrganizationUnitCountOutputTypeCountProjectsArgs
@@ -3028,6 +3419,13 @@ export type OrganizationUnitCountOutputTypeCountRestaurantsArgs<ExtArgs extends 
  */
 export type OrganizationUnitCountOutputTypeCountReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FoodReservationWhereInput
+}
+
+/**
+ * OrganizationUnitCountOutputType without action
+ */
+export type OrganizationUnitCountOutputTypeCountAdvancedFoodOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdvancedFoodOrderWhereInput
 }
 
 /**
@@ -3090,6 +3488,8 @@ export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.Inte
   whatsapp?: boolean
   nutritionRepId?: boolean
   maxMeals?: boolean
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   kind?: boolean | Prisma.OrganizationUnitKindDefaultArgs<ExtArgs>
@@ -3099,6 +3499,7 @@ export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.Inte
   employees?: boolean | Prisma.OrganizationUnit$employeesArgs<ExtArgs>
   restaurants?: boolean | Prisma.OrganizationUnit$restaurantsArgs<ExtArgs>
   reservations?: boolean | Prisma.OrganizationUnit$reservationsArgs<ExtArgs>
+  advancedFoodOrders?: boolean | Prisma.OrganizationUnit$advancedFoodOrdersArgs<ExtArgs>
   vehicleAssignments?: boolean | Prisma.OrganizationUnit$vehicleAssignmentsArgs<ExtArgs>
   projectOperators?: boolean | Prisma.OrganizationUnit$projectOperatorsArgs<ExtArgs>
   projects?: boolean | Prisma.OrganizationUnit$projectsArgs<ExtArgs>
@@ -3125,6 +3526,8 @@ export type OrganizationUnitSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   whatsapp?: boolean
   nutritionRepId?: boolean
   maxMeals?: boolean
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   kind?: boolean | Prisma.OrganizationUnitKindDefaultArgs<ExtArgs>
@@ -3149,6 +3552,8 @@ export type OrganizationUnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   whatsapp?: boolean
   nutritionRepId?: boolean
   maxMeals?: boolean
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   kind?: boolean | Prisma.OrganizationUnitKindDefaultArgs<ExtArgs>
@@ -3173,11 +3578,13 @@ export type OrganizationUnitSelectScalar = {
   whatsapp?: boolean
   nutritionRepId?: boolean
   maxMeals?: boolean
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrganizationUnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "kindId" | "parentId" | "phone" | "address" | "latitude" | "longitude" | "eitaa" | "bale" | "rubika" | "instagram" | "telegram" | "whatsapp" | "nutritionRepId" | "maxMeals" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationUnit"]>
+export type OrganizationUnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "kindId" | "parentId" | "phone" | "address" | "latitude" | "longitude" | "eitaa" | "bale" | "rubika" | "instagram" | "telegram" | "whatsapp" | "nutritionRepId" | "maxMeals" | "guestMealsEnabled" | "maxGuestMeals" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationUnit"]>
 export type OrganizationUnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   kind?: boolean | Prisma.OrganizationUnitKindDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.OrganizationUnit$parentArgs<ExtArgs>
@@ -3186,6 +3593,7 @@ export type OrganizationUnitInclude<ExtArgs extends runtime.Types.Extensions.Int
   employees?: boolean | Prisma.OrganizationUnit$employeesArgs<ExtArgs>
   restaurants?: boolean | Prisma.OrganizationUnit$restaurantsArgs<ExtArgs>
   reservations?: boolean | Prisma.OrganizationUnit$reservationsArgs<ExtArgs>
+  advancedFoodOrders?: boolean | Prisma.OrganizationUnit$advancedFoodOrdersArgs<ExtArgs>
   vehicleAssignments?: boolean | Prisma.OrganizationUnit$vehicleAssignmentsArgs<ExtArgs>
   projectOperators?: boolean | Prisma.OrganizationUnit$projectOperatorsArgs<ExtArgs>
   projects?: boolean | Prisma.OrganizationUnit$projectsArgs<ExtArgs>
@@ -3215,6 +3623,7 @@ export type $OrganizationUnitPayload<ExtArgs extends runtime.Types.Extensions.In
     employees: Prisma.$UserPayload<ExtArgs>[]
     restaurants: Prisma.$OrganizationUnitRestaurantPayload<ExtArgs>[]
     reservations: Prisma.$FoodReservationPayload<ExtArgs>[]
+    advancedFoodOrders: Prisma.$AdvancedFoodOrderPayload<ExtArgs>[]
     vehicleAssignments: Prisma.$VehicleAssignmentPayload<ExtArgs>[]
     projectOperators: Prisma.$ProjectOperatorPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
@@ -3239,6 +3648,8 @@ export type $OrganizationUnitPayload<ExtArgs extends runtime.Types.Extensions.In
     whatsapp: string | null
     nutritionRepId: string | null
     maxMeals: number | null
+    guestMealsEnabled: boolean
+    maxGuestMeals: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["organizationUnit"]>
@@ -3642,6 +4053,7 @@ export interface Prisma__OrganizationUnitClient<T, Null = never, ExtArgs extends
   employees<T extends Prisma.OrganizationUnit$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restaurants<T extends Prisma.OrganizationUnit$restaurantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$restaurantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitRestaurantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reservations<T extends Prisma.OrganizationUnit$reservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  advancedFoodOrders<T extends Prisma.OrganizationUnit$advancedFoodOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$advancedFoodOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdvancedFoodOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vehicleAssignments<T extends Prisma.OrganizationUnit$vehicleAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$vehicleAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VehicleAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projectOperators<T extends Prisma.OrganizationUnit$projectOperatorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$projectOperatorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectOperatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.OrganizationUnit$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3693,6 +4105,8 @@ export interface OrganizationUnitFieldRefs {
   readonly whatsapp: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly nutritionRepId: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly maxMeals: Prisma.FieldRef<"OrganizationUnit", 'Int'>
+  readonly guestMealsEnabled: Prisma.FieldRef<"OrganizationUnit", 'Boolean'>
+  readonly maxGuestMeals: Prisma.FieldRef<"OrganizationUnit", 'Int'>
   readonly createdAt: Prisma.FieldRef<"OrganizationUnit", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"OrganizationUnit", 'DateTime'>
 }
@@ -4227,6 +4641,30 @@ export type OrganizationUnit$reservationsArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.FoodReservationScalarFieldEnum | Prisma.FoodReservationScalarFieldEnum[]
+}
+
+/**
+ * OrganizationUnit.advancedFoodOrders
+ */
+export type OrganizationUnit$advancedFoodOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdvancedFoodOrder
+   */
+  select?: Prisma.AdvancedFoodOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdvancedFoodOrder
+   */
+  omit?: Prisma.AdvancedFoodOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdvancedFoodOrderInclude<ExtArgs> | null
+  where?: Prisma.AdvancedFoodOrderWhereInput
+  orderBy?: Prisma.AdvancedFoodOrderOrderByWithRelationInput | Prisma.AdvancedFoodOrderOrderByWithRelationInput[]
+  cursor?: Prisma.AdvancedFoodOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdvancedFoodOrderScalarFieldEnum | Prisma.AdvancedFoodOrderScalarFieldEnum[]
 }
 
 /**

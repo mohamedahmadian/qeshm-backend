@@ -619,6 +619,23 @@ export type EnumFoodReservationStatusWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumFoodReservationStatusFilter<$PrismaModel>
 }
 
+export type EnumAdvancedFoodOrderSourceFilter<$PrismaModel = never> = {
+  equals?: $Enums.AdvancedFoodOrderSource | Prisma.EnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.AdvancedFoodOrderSource[] | Prisma.ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AdvancedFoodOrderSource[] | Prisma.ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAdvancedFoodOrderSourceFilter<$PrismaModel> | $Enums.AdvancedFoodOrderSource
+}
+
+export type EnumAdvancedFoodOrderSourceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AdvancedFoodOrderSource | Prisma.EnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.AdvancedFoodOrderSource[] | Prisma.ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AdvancedFoodOrderSource[] | Prisma.ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAdvancedFoodOrderSourceWithAggregatesFilter<$PrismaModel> | $Enums.AdvancedFoodOrderSource
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAdvancedFoodOrderSourceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAdvancedFoodOrderSourceFilter<$PrismaModel>
+}
+
 export type EnumVehicleTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.VehicleType | Prisma.EnumVehicleTypeFieldRefInput<$PrismaModel>
   in?: $Enums.VehicleType[] | Prisma.ListEnumVehicleTypeFieldRefInput<$PrismaModel>
@@ -1592,6 +1609,23 @@ export type NestedEnumFoodReservationStatusWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumFoodReservationStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumFoodReservationStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumAdvancedFoodOrderSourceFilter<$PrismaModel = never> = {
+  equals?: $Enums.AdvancedFoodOrderSource | Prisma.EnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.AdvancedFoodOrderSource[] | Prisma.ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AdvancedFoodOrderSource[] | Prisma.ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAdvancedFoodOrderSourceFilter<$PrismaModel> | $Enums.AdvancedFoodOrderSource
+}
+
+export type NestedEnumAdvancedFoodOrderSourceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AdvancedFoodOrderSource | Prisma.EnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.AdvancedFoodOrderSource[] | Prisma.ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AdvancedFoodOrderSource[] | Prisma.ListEnumAdvancedFoodOrderSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAdvancedFoodOrderSourceWithAggregatesFilter<$PrismaModel> | $Enums.AdvancedFoodOrderSource
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAdvancedFoodOrderSourceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAdvancedFoodOrderSourceFilter<$PrismaModel>
 }
 
 export type NestedEnumVehicleTypeFilter<$PrismaModel = never> = {

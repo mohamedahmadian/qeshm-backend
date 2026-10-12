@@ -316,6 +316,7 @@ model User {
   individualTicketQuota  Int                   @default(1)
   nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
   foodReservations   FoodReservation[]
+  advancedFoodOrders AdvancedFoodOrder[] @relation("AdvancedFoodOrderAuthor")
   vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
   userRoles          UserRole[]
   singardFeedbacks   SingardFeedback[]     @relation("SingardFeedbackAuthor")
@@ -762,9 +763,12 @@ model Restaurant {
   address   String?
   logoId    String?
   logo      StoredImage? @relation("RestaurantLogo", fields: [logoId], references: [id], onDelete: SetNull)
-  menuItems    RestaurantMenuItem[]
-  orgUnits     OrganizationUnitRestaurant[]
-  reservations FoodReservation[]
+  employeeMealPrice   Decimal? @db.Decimal(18, 0)
+  managementMealPrice Decimal? @db.Decimal(18, 0)
+  menuItems          RestaurantMenuItem[]
+  orgUnits           OrganizationUnitRestaurant[]
+  reservations       FoodReservation[]
+  advancedFoodOrders AdvancedFoodOrder[]
   createdAt    DateTime     @default(now())
   updatedAt DateTime     @updatedAt
 
@@ -879,12 +883,15 @@ model OrganizationUnit {
   instagram      String?
   telegram       String?
   whatsapp       String?
-  nutritionRepId String?
-  nutritionRep   User?                @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
-  maxMeals       Int?
+  nutritionRepId    String?
+  nutritionRep      User?                @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
+  maxMeals          Int?
+  guestMealsEnabled Boolean              @default(false)
+  maxGuestMeals     Int?
   employees      User[]               @relation("UnitEmployees")
-  restaurants    OrganizationUnitRestaurant[]
-  reservations   FoodReservation[]
+  restaurants        OrganizationUnitRestaurant[]
+  reservations       FoodReservation[]
+  advancedFoodOrders AdvancedFoodOrder[]
   vehicleAssignments VehicleAssignment[]
   projectOperators ProjectOperator[]
   projects         Project[]          @relation("ProjectOrgUnit")
@@ -930,19 +937,62 @@ model FoodReservation {
   user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   orgUnitId    String
   orgUnit      OrganizationUnit      @relation(fields: [orgUnitId], references: [id], onDelete: Restrict)
-  quantity     Int
-  unitPrice    Decimal               @db.Decimal(18, 0)
-  status       FoodReservationStatus @default(PENDING)
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @updatedAt
+  quantity        Int
+  /// true = تعداد برای مهمانان واحد است، نه سهم خود واحد
+  forGuest        Boolean               @default(false)
+  unitPrice       Decimal               @db.Decimal(18, 0)
+  status          FoodReservationStatus @default(PENDING)
+  advancedOrderId String?
+  advancedOrder   AdvancedFoodOrder?    @relation(fields: [advancedOrderId], references: [id], onDelete: Cascade)
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
 
   @@index([userId, reservedAt])
   @@index([orgUnitId, reservedAt])
   @@index([restaurantId, reservedAt])
   @@index([foodId])
   @@index([status])
+  @@index([advancedOrderId])
   @@index([createdAt])
   @@map("food_reservations")
+}
+
+enum AdvancedFoodOrderSource {
+  DEFAULT
+  MENU
+}
+
+/// سفارش کلی یک بازه؛ ردیف‌های روزانه در food_reservations ذخیره می‌شوند.
+model AdvancedFoodOrder {
+  id                  String                   @id @default(uuid())
+  orgUnitId           String
+  orgUnit             OrganizationUnit         @relation(fields: [orgUnitId], references: [id], onDelete: Restrict)
+  restaurantId        String
+  restaurant          Restaurant               @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  source              AdvancedFoodOrderSource
+  startsOn            DateTime                 @db.Date
+  endsOn              DateTime                 @db.Date
+  /// ۰ شنبه … ۴ چهارشنبه
+  weekdays            Int[]                    @default([])
+  foodLabel           String
+  employeeQuantity    Int
+  managementQuantity  Int
+  employeeUnitPrice   Decimal?                 @db.Decimal(18, 0)
+  managementUnitPrice Decimal?                 @db.Decimal(18, 0)
+  createdById         String
+  createdBy           User                     @relation("AdvancedFoodOrderAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  reservations        FoodReservation[]
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt
+
+  @@index([orgUnitId])
+  @@index([restaurantId])
+  @@index([createdById])
+  @@index([startsOn])
+  @@index([endsOn])
+  @@index([foodLabel])
+  @@index([createdAt])
+  @@map("advanced_food_orders")
 }
 
 model VehicleBrand {
