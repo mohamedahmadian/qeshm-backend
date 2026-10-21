@@ -1,4 +1,4 @@
-import ExcelJS from 'exceljs';
+import { loadExcelJS } from './lazy-modules';
 import { getRequestLocale, isLtrLocale } from './request-locale';
 
 const HEADER_FILL = '2EBDB6';
@@ -23,7 +23,10 @@ export async function buildStyledExcelExport(options: {
   columns: StyledExcelColumn[];
   rows: Record<string, unknown>[];
   fileName?: string;
+  /** اختیاری: جمع ستون‌ها در سطر آخر (کلیدها همان `columns[].key`). */
+  totals?: Record<string, number>;
 }) {
+  const ExcelJS = await loadExcelJS();
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet(options.sheetName.slice(0, 31), {
     views: [{ rightToLeft: !isLtrLocale(getRequestLocale()) }],
@@ -71,7 +74,7 @@ export async function buildStyledExcelExport(options: {
     cell.font = { bold: true, color: { argb: 'FFFFFFFF' }, size: FONT_SIZE };
     cell.alignment = { vertical: 'middle', horizontal: 'center' };
     if (index > 1) {
-      cell.value = null;
+      cell.value = options.totals?.[columns[index - 1].key] ?? null;
     }
   }
 

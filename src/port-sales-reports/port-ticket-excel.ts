@@ -1,4 +1,5 @@
-import ExcelJS from 'exceljs';
+import type ExcelJS from 'exceljs';
+import { loadExcelJS } from '../common/lazy-modules';
 import { parseJalaliCompactToIso, parseJalaliSlashToIso } from '../common/jalali-date';
 import {
   isValidIranianNationalId,
@@ -364,6 +365,7 @@ function findHeaderRow(sheet: ExcelJS.Worksheet) {
 }
 
 export async function parsePortTicketExcel(buffer: Buffer): Promise<PortTicketExcelRow[]> {
+  const ExcelJS = await loadExcelJS();
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.load(buffer as unknown as ArrayBuffer);
   const sheet = workbook.worksheets[0];

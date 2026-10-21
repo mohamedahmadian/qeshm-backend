@@ -8,6 +8,7 @@ import {
   Query,
   UnauthorizedException,
 } from '@nestjs/common';
+import { FOOD_ADMIN_ROLE_CODE } from '../access/access.constants';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { PaginationQueryDto } from '../common/pagination';
 import { AdvancedFoodOrdersService } from './advanced-food-orders.service';
@@ -17,7 +18,19 @@ import {
   FindAdvancedFoodOrdersQueryDto,
 } from './dto/find-advanced-food-orders-query.dto';
 
-type RequestUser = { id: string };
+type RequestUser = {
+  id: string;
+  isAdmin?: boolean;
+  roleCodes?: string[];
+};
+
+/** مدیریت و مدیر ماژول غذا بدون سقف تعداد واحد سفارش می‌دهند. */
+function canOrderWithoutMealCap(user: RequestUser) {
+  return (
+    Boolean(user.isAdmin) ||
+    Boolean(user.roleCodes?.includes(FOOD_ADMIN_ROLE_CODE))
+  );
+}
 
 @Controller('advanced-food-orders')
 export class AdvancedFoodOrdersController {
@@ -53,7 +66,7 @@ export class AdvancedFoodOrdersController {
     @Body() dto: CreateAdvancedFoodOrderDto,
   ) {
     if (!user?.id) throw new UnauthorizedException();
-    return this.orders.create(user.id, dto);
+    return this.orders.create(user.id, dto, canOrderWithoutMealCap(user));
   }
 
   @Get(':id/reservations')

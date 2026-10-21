@@ -36,6 +36,12 @@ export class CreateOrganizationUnitDto {
   @MaxLength(200)
   name: string;
 
+  @Transform(({ value }) => trimString(value))
+  @IsString()
+  @MinLength(1)
+  @MaxLength(40)
+  code: string;
+
   @IsUUID('4')
   kindId: string;
 

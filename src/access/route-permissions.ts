@@ -97,6 +97,10 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
     permissions: ['food-reservation.unit-report'],
   },
   {
+    prefix: '/food-reservations/daily-report',
+    permissions: ['food-reservation.daily-report'],
+  },
+  {
     prefix: '/food-reservations/context',
     permissions: ['food-reservation.reserve'],
   },

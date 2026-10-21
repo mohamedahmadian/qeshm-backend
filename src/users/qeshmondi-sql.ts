@@ -1,4 +1,5 @@
-import { ConnectionPool, type Request } from 'mssql';
+import type { Request } from 'mssql';
+import { loadMssql } from '../common/lazy-modules';
 import { UserGender } from '../generated/prisma/client';
 import {
   parseBirthCandidate,
@@ -38,7 +39,8 @@ export type QeshmondiSqlBatch = {
   total: number;
 };
 
-function createPool(settings: QeshmondiSqlSettings, requestTimeout: number) {
+async function createPool(settings: QeshmondiSqlSettings, requestTimeout: number) {
+  const { ConnectionPool } = await loadMssql();
   return new ConnectionPool({
     server: settings.host,
     port: settings.port,
@@ -57,7 +59,7 @@ function createPool(settings: QeshmondiSqlSettings, requestTimeout: number) {
 }
 
 export async function testQeshmondiSqlConnection(settings: QeshmondiSqlSettings) {
-  const pool = createPool(settings, 15_000);
+  const pool = await createPool(settings, 15_000);
   try {
     await pool.connect();
     await pool.request().query('SELECT 1 AS ok');
@@ -242,7 +244,7 @@ export async function streamQeshmondiSqlPeople(
   lookups: Map<number, QeshmondiLookupHit>,
   onBatch: (batch: QeshmondiSqlBatch) => Promise<void>,
 ) {
-  const pool = createPool(settings, 0);
+  const pool = await createPool(settings, 0);
   await pool.connect();
   try {
     const counted = await pool.request().query<{ total: unknown }>(

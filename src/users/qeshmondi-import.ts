@@ -1,4 +1,5 @@
-import ExcelJS from 'exceljs';
+import type ExcelJS from 'exceljs';
+import { loadExcelJS } from '../common/lazy-modules';
 import { toLatinDigits } from '../common/national-id';
 import { normalizeNationalId } from '../common/national-id';
 import {
@@ -168,6 +169,7 @@ export async function parseQeshmondiExcel(buffer: Buffer): Promise<{
   rows: QeshmondiImportRow[];
   skipped: QeshmondiImportSkip[];
 }> {
+  const ExcelJS = await loadExcelJS();
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.load(buffer as unknown as ArrayBuffer);
   const sheet = workbook.worksheets[0];

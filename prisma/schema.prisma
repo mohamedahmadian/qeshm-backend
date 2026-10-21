@@ -73,6 +73,11 @@ enum FoodReservationStatus {
   CONFIRMED
 }
 
+enum FoodMealType {
+  LUNCH
+  DINNER
+}
+
 enum VehicleType {
   SEDAN
   PICKUP
@@ -125,25 +130,25 @@ enum PortSalesReportApprovalStatus {
 }
 
 model StoredImage {
-  id           String   @id @default(uuid())
-  mimeType     String
-  data         Bytes
-  byteSize     Int
-  width        Int?
-  height       Int?
-  originalName String?
-  photoUsers             User[] @relation("UserPhoto")
-  nationalCardUsers      User[] @relation("UserNationalCard")
-  passportUsers          User[] @relation("UserPassport")
-  identityBookletUsers   User[] @relation("UserIdentityBooklet")
-  foodPhotos             Food[] @relation("FoodPhoto")
-  restaurantLogos        Restaurant[] @relation("RestaurantLogo")
-  progressImages         ProjectProgressImage[]
-  singardAttachments     SingardAttachment[]
-  boardAttachments       BoardAttachment[]
+  id                      String                   @id @default(uuid())
+  mimeType                String
+  data                    Bytes
+  byteSize                Int
+  width                   Int?
+  height                  Int?
+  originalName            String?
+  photoUsers              User[]                   @relation("UserPhoto")
+  nationalCardUsers       User[]                   @relation("UserNationalCard")
+  passportUsers           User[]                   @relation("UserPassport")
+  identityBookletUsers    User[]                   @relation("UserIdentityBooklet")
+  foodPhotos              Food[]                   @relation("FoodPhoto")
+  restaurantLogos         Restaurant[]             @relation("RestaurantLogo")
+  progressImages          ProjectProgressImage[]
+  singardAttachments      SingardAttachment[]
+  boardAttachments        BoardAttachment[]
   boardMinutesAttachments BoardMinutesAttachment[]
-  stakeholderAttachments StakeholderAttachment[]
-  createdAt              DateTime @default(now())
+  stakeholderAttachments  StakeholderAttachment[]
+  createdAt               DateTime                 @default(now())
 
   @@map("stored_images")
 }
@@ -193,26 +198,26 @@ model Province {
 }
 
 model City {
-  id                 String                @id @default(uuid())
-  provinceId         String
-  province           Province              @relation(fields: [provinceId], references: [id], onDelete: Restrict)
-  code               String
-  nameFa             String
-  nameEn             String
-  neshanAddress      String?
-  latitude           Decimal?              @db.Decimal(10, 7)
-  longitude          Decimal?              @db.Decimal(10, 7)
-  isProvinceCapital  Boolean               @default(false)
-  hasRailway         Boolean               @default(false)
-  hasAirport         Boolean               @default(false)
-  isActive           Boolean               @default(true)
-  sortOrder          Int                   @default(0)
-  users              User[]                @relation("UserHomeCity")
-  locatedUsers       User[]                @relation("UserLocationCity")
-  locationHistories  UserLocationHistory[] @relation("UserLocationHistoryCity")
-  ports              Port[]
-  createdAt          DateTime              @default(now())
-  updatedAt          DateTime              @updatedAt
+  id                String                @id @default(uuid())
+  provinceId        String
+  province          Province              @relation(fields: [provinceId], references: [id], onDelete: Restrict)
+  code              String
+  nameFa            String
+  nameEn            String
+  neshanAddress     String?
+  latitude          Decimal?              @db.Decimal(10, 7)
+  longitude         Decimal?              @db.Decimal(10, 7)
+  isProvinceCapital Boolean               @default(false)
+  hasRailway        Boolean               @default(false)
+  hasAirport        Boolean               @default(false)
+  isActive          Boolean               @default(true)
+  sortOrder         Int                   @default(0)
+  users             User[]                @relation("UserHomeCity")
+  locatedUsers      User[]                @relation("UserLocationCity")
+  locationHistories UserLocationHistory[] @relation("UserLocationHistoryCity")
+  ports             Port[]
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
 
   @@unique([provinceId, code])
   @@index([provinceId, isActive, sortOrder])
@@ -220,129 +225,129 @@ model City {
 }
 
 model User {
-  id                 String                @id @default(uuid())
-  username           String                @unique
-  passwordHash       String
-  firstName          String
-  lastName           String
-  fullName           String
-  locale             String                @default("fa")
-  status             UserStatus            @default(ACTIVE)
-  nationalId         String?               @unique
-  phone              String?               @unique
-  email              String?               @unique
-  gender             UserGender?
-  fatherName         String?
-  birthDate          DateTime?             @db.Date
-  address            String?
-  notes              String?
-  religion           Religion?
-  religionOther      String?
-  telegram           String?
-  bale               String?
-  eitaa              String?
-  whatsapp           String?
-  otherSocial        String?
-  vehiclePlates      String[]              @default([])
-  countryId          String?
-  country            Country?              @relation(fields: [countryId], references: [id], onDelete: SetNull)
-  provinceId         String?
-  province           Province?             @relation("UserHomeProvince", fields: [provinceId], references: [id], onDelete: SetNull)
-  cityId             String?
-  city               City?                 @relation("UserHomeCity", fields: [cityId], references: [id], onDelete: SetNull)
-  locationProvinceId String?
-  locationProvince   Province?             @relation("UserLocationProvince", fields: [locationProvinceId], references: [id], onDelete: SetNull)
-  locationCityId     String?
-  locationCity       City?                 @relation("UserLocationCity", fields: [locationCityId], references: [id], onDelete: SetNull)
-  latitude           Decimal?              @db.Decimal(10, 7)
-  longitude          Decimal?              @db.Decimal(10, 7)
-  locationNotes      String?
-  locationUpdatedAt  DateTime?
-  photoId                  String?
-  photo                    StoredImage?          @relation("UserPhoto", fields: [photoId], references: [id], onDelete: SetNull)
-  nationalCardPhotoId      String?
-  nationalCardPhoto        StoredImage?          @relation("UserNationalCard", fields: [nationalCardPhotoId], references: [id], onDelete: SetNull)
-  passportPhotoId          String?
-  passportPhoto            StoredImage?          @relation("UserPassport", fields: [passportPhotoId], references: [id], onDelete: SetNull)
-  identityBookletPhotoId   String?
-  identityBookletPhoto     StoredImage?          @relation("UserIdentityBooklet", fields: [identityBookletPhotoId], references: [id], onDelete: SetNull)
-  locationHistories        UserLocationHistory[]
-  orgUnitId          String?
-  orgUnit            OrganizationUnit?     @relation("UnitEmployees", fields: [orgUnitId], references: [id], onDelete: SetNull)
-  positionId         String?
-  position           OrganizationPosition? @relation(fields: [positionId], references: [id], onDelete: SetNull)
-  isQeshmondi        Boolean               @default(false)
-  qeshmondiStartDate DateTime?             @db.Date
-  qeshmondiEndDate   DateTime?             @db.Date
-  occupation         String?
-  isResident         Boolean               @default(false)
-  passportNumber     String?
-  qeshmondiGroup         String?
-  latinFirstName         String?
-  latinLastName          String?
-  latinFatherName        String?
-  identityNumber         String?
-  identitySerial         String?
-  landlinePhone          String?
-  fax                    String?
-  postalCode             String?
-  jobAddress             String?
-  jobPhone               String?
-  jobFax                 String?
-  jobPostalCode          String?
-  isSingle               Boolean?
-  nationality            String?
-  education              String?
-  protectorOffice        String?
-  nationalIdExpiresAt    DateTime?             @db.Date
-  passportExpiresAt      DateTime?             @db.Date
-  bankFullName           String?
-  bankFullLatinName      String?
-  accountNumber          String?
-  cardNumber             String?
-  cardSeries             String?
-  isBank                 Boolean?
-  accountOpeningDate     DateTime?             @db.Date
-  cardIssuanceDate       DateTime?             @db.Date
-  cardDeliverDate        DateTime?             @db.Date
-  companyName            String?
-  companySubject         String?
-  companyLicenseNumber   String?
-  companyLicenseDate     DateTime?             @db.Date
-  companyPaperNumber     String?
-  companyPaperDate       DateTime?             @db.Date
-  electricitySubscription String?
-  fingerprint            Bytes?
-  individualTicketQuota  Int                   @default(1)
-  nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
-  foodReservations   FoodReservation[]
-  advancedFoodOrders AdvancedFoodOrder[] @relation("AdvancedFoodOrderAuthor")
-  vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
-  userRoles          UserRole[]
-  singardFeedbacks   SingardFeedback[]     @relation("SingardFeedbackAuthor")
-  singardReplies     SingardFeedback[]     @relation("SingardFeedbackReplier")
-  singardActivities  SingardActivity[]
-  contractorId       String?
-  contractor         ProjectContractor? @relation("ContractorPortalUsers", fields: [contractorId], references: [id], onDelete: Restrict)
-  stakeholderReports StakeholderProgressReport[]
+  id                         String                      @id @default(uuid())
+  username                   String                      @unique
+  passwordHash               String
+  firstName                  String
+  lastName                   String
+  fullName                   String
+  locale                     String                      @default("fa")
+  status                     UserStatus                  @default(ACTIVE)
+  nationalId                 String?                     @unique
+  phone                      String?                     @unique
+  email                      String?                     @unique
+  gender                     UserGender?
+  fatherName                 String?
+  birthDate                  DateTime?                   @db.Date
+  address                    String?
+  notes                      String?
+  religion                   Religion?
+  religionOther              String?
+  telegram                   String?
+  bale                       String?
+  eitaa                      String?
+  whatsapp                   String?
+  otherSocial                String?
+  vehiclePlates              String[]                    @default([])
+  countryId                  String?
+  country                    Country?                    @relation(fields: [countryId], references: [id], onDelete: SetNull)
+  provinceId                 String?
+  province                   Province?                   @relation("UserHomeProvince", fields: [provinceId], references: [id], onDelete: SetNull)
+  cityId                     String?
+  city                       City?                       @relation("UserHomeCity", fields: [cityId], references: [id], onDelete: SetNull)
+  locationProvinceId         String?
+  locationProvince           Province?                   @relation("UserLocationProvince", fields: [locationProvinceId], references: [id], onDelete: SetNull)
+  locationCityId             String?
+  locationCity               City?                       @relation("UserLocationCity", fields: [locationCityId], references: [id], onDelete: SetNull)
+  latitude                   Decimal?                    @db.Decimal(10, 7)
+  longitude                  Decimal?                    @db.Decimal(10, 7)
+  locationNotes              String?
+  locationUpdatedAt          DateTime?
+  photoId                    String?
+  photo                      StoredImage?                @relation("UserPhoto", fields: [photoId], references: [id], onDelete: SetNull)
+  nationalCardPhotoId        String?
+  nationalCardPhoto          StoredImage?                @relation("UserNationalCard", fields: [nationalCardPhotoId], references: [id], onDelete: SetNull)
+  passportPhotoId            String?
+  passportPhoto              StoredImage?                @relation("UserPassport", fields: [passportPhotoId], references: [id], onDelete: SetNull)
+  identityBookletPhotoId     String?
+  identityBookletPhoto       StoredImage?                @relation("UserIdentityBooklet", fields: [identityBookletPhotoId], references: [id], onDelete: SetNull)
+  locationHistories          UserLocationHistory[]
+  orgUnitId                  String?
+  orgUnit                    OrganizationUnit?           @relation("UnitEmployees", fields: [orgUnitId], references: [id], onDelete: SetNull)
+  positionId                 String?
+  position                   OrganizationPosition?       @relation(fields: [positionId], references: [id], onDelete: SetNull)
+  isQeshmondi                Boolean                     @default(false)
+  qeshmondiStartDate         DateTime?                   @db.Date
+  qeshmondiEndDate           DateTime?                   @db.Date
+  occupation                 String?
+  isResident                 Boolean                     @default(false)
+  passportNumber             String?
+  qeshmondiGroup             String?
+  latinFirstName             String?
+  latinLastName              String?
+  latinFatherName            String?
+  identityNumber             String?
+  identitySerial             String?
+  landlinePhone              String?
+  fax                        String?
+  postalCode                 String?
+  jobAddress                 String?
+  jobPhone                   String?
+  jobFax                     String?
+  jobPostalCode              String?
+  isSingle                   Boolean?
+  nationality                String?
+  education                  String?
+  protectorOffice            String?
+  nationalIdExpiresAt        DateTime?                   @db.Date
+  passportExpiresAt          DateTime?                   @db.Date
+  bankFullName               String?
+  bankFullLatinName          String?
+  accountNumber              String?
+  cardNumber                 String?
+  cardSeries                 String?
+  isBank                     Boolean?
+  accountOpeningDate         DateTime?                   @db.Date
+  cardIssuanceDate           DateTime?                   @db.Date
+  cardDeliverDate            DateTime?                   @db.Date
+  companyName                String?
+  companySubject             String?
+  companyLicenseNumber       String?
+  companyLicenseDate         DateTime?                   @db.Date
+  companyPaperNumber         String?
+  companyPaperDate           DateTime?                   @db.Date
+  electricitySubscription    String?
+  fingerprint                Bytes?
+  individualTicketQuota      Int                         @default(1)
+  nutritionUnits             OrganizationUnit[]          @relation("UnitNutritionRep")
+  foodReservations           FoodReservation[]
+  advancedFoodOrders         AdvancedFoodOrder[]         @relation("AdvancedFoodOrderAuthor")
+  vehicleAssignments         VehicleAssignment[]         @relation("VehicleAssignmentPerson")
+  userRoles                  UserRole[]
+  singardFeedbacks           SingardFeedback[]           @relation("SingardFeedbackAuthor")
+  singardReplies             SingardFeedback[]           @relation("SingardFeedbackReplier")
+  singardActivities          SingardActivity[]
+  contractorId               String?
+  contractor                 ProjectContractor?          @relation("ContractorPortalUsers", fields: [contractorId], references: [id], onDelete: Restrict)
+  stakeholderReports         StakeholderProgressReport[]
   stakeholderCorrespondences StakeholderCorrespondence[] @relation("StakeholderCorrespondenceAuthor")
-  stakeholderMessages StakeholderMessage[]
-  boardRequestsCreated    BoardRequest[] @relation("BoardRequestAuthor")
-  boardRequestsRejected   BoardRequest[] @relation("BoardRequestRejecter")
-  boardManagementReviews  BoardRequest[] @relation("BoardManagementReviewer")
-  boardLegalReviews       BoardRequest[] @relation("BoardLegalReviewer")
-  boardBudgetReviews      BoardRequest[] @relation("BoardBudgetReviewer")
-  boardSecretaryReviews   BoardRequest[] @relation("BoardSecretaryReviewer")
-  boardMinutesCreated     BoardMinutes[] @relation("BoardMinutesAuthor")
-  boardMinutesMemberships BoardMinutesMember[]
-  portSalesReports         PortSalesReport[] @relation("PortSalesReportAuthor")
-  portSalesReportsApproved PortSalesReport[] @relation("PortSalesReportApprover")
-  operatedPort             Port?             @relation("PortOperator")
-  qeshmondiSyncLogs       QeshmondiSyncLog[] @relation("QeshmondiSyncActor")
-  qeshmondiSqlConnections QeshmondiSqlConnection[] @relation("QeshmondiSqlConnectionEditor")
-  qeshmondiFeedEvents     QeshmondiFeedEvent[]
-  createdAt          DateTime              @default(now())
-  updatedAt          DateTime              @updatedAt
+  stakeholderMessages        StakeholderMessage[]
+  boardRequestsCreated       BoardRequest[]              @relation("BoardRequestAuthor")
+  boardRequestsRejected      BoardRequest[]              @relation("BoardRequestRejecter")
+  boardManagementReviews     BoardRequest[]              @relation("BoardManagementReviewer")
+  boardLegalReviews          BoardRequest[]              @relation("BoardLegalReviewer")
+  boardBudgetReviews         BoardRequest[]              @relation("BoardBudgetReviewer")
+  boardSecretaryReviews      BoardRequest[]              @relation("BoardSecretaryReviewer")
+  boardMinutesCreated        BoardMinutes[]              @relation("BoardMinutesAuthor")
+  boardMinutesMemberships    BoardMinutesMember[]
+  portSalesReports           PortSalesReport[]           @relation("PortSalesReportAuthor")
+  portSalesReportsApproved   PortSalesReport[]           @relation("PortSalesReportApprover")
+  operatedPort               Port?                       @relation("PortOperator")
+  qeshmondiSyncLogs          QeshmondiSyncLog[]          @relation("QeshmondiSyncActor")
+  qeshmondiSqlConnections    QeshmondiSqlConnection[]    @relation("QeshmondiSqlConnectionEditor")
+  qeshmondiFeedEvents        QeshmondiFeedEvent[]
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime                    @updatedAt
 
   @@index([status])
   @@index([fullName])
@@ -377,17 +382,17 @@ model QeshmondiSqlConnection {
 }
 
 model QeshmondiSyncLog {
-  id            String               @id @default(uuid())
-  source        QeshmondiSyncSource
-  status        QeshmondiSyncStatus
-  startedAt     DateTime             @default(now())
-  finishedAt    DateTime?
-  createdCount  Int                  @default(0)
-  updatedCount  Int                  @default(0)
-  failedCount   Int                  @default(0)
-  errorMessage  String?
-  actorId       String?
-  actor         User?                @relation("QeshmondiSyncActor", fields: [actorId], references: [id], onDelete: SetNull)
+  id           String              @id @default(uuid())
+  source       QeshmondiSyncSource
+  status       QeshmondiSyncStatus
+  startedAt    DateTime            @default(now())
+  finishedAt   DateTime?
+  createdCount Int                 @default(0)
+  updatedCount Int                 @default(0)
+  failedCount  Int                 @default(0)
+  errorMessage String?
+  actorId      String?
+  actor        User?               @relation("QeshmondiSyncActor", fields: [actorId], references: [id], onDelete: SetNull)
 
   @@index([startedAt])
   @@index([source])
@@ -456,46 +461,46 @@ model ProjectGroup {
 }
 
 model Project {
-  id                   String             @id @default(uuid())
-  systemName           String
-  code                 String             @unique
-  isActive             Boolean            @default(true)
-  status               ProjectStatus      @default(NOT_STARTED)
-  progressMode         ProjectProgressMode @default(PROJECT_CHECKLIST)
-  progressPercent      Int?
-  startDate            DateTime?          @db.Date
-  endDate              DateTime?          @db.Date
-  latitude             Decimal?           @db.Decimal(10, 7)
-  longitude            Decimal?           @db.Decimal(10, 7)
-  boundary             Json?
-  address              String?
-  companyName          String?
-  systemUrl            String?
-  launchYear           Int?
-  isSupportActive      Boolean            @default(true)
-  replacementProjectId String?
-  replacementProject   Project?           @relation("ProjectReplacement", fields: [replacementProjectId], references: [id], onDelete: SetNull)
-  replacedBy           Project[]          @relation("ProjectReplacement")
-  description          String?
-  color                String?
-  showOnLiveBoard      Boolean            @default(true)
-  showOnHomePage       Boolean            @default(true)
-  importance           ProjectImportance  @default(HIGH)
-  orgUnitId            String?
-  orgUnit              OrganizationUnit?  @relation("ProjectOrgUnit", fields: [orgUnitId], references: [id], onDelete: SetNull)
-  groupId              String?
-  group                ProjectGroup?      @relation(fields: [groupId], references: [id], onDelete: Restrict)
-  operators            ProjectOperator[]
-  contractors          ProjectContractor[]
-  contractorLinks      ProjectContractorProject[]
-  phases               ProjectPhase[]
-  checklistItems       ProjectChecklistItem[]
-  progressEntries      ProjectProgressEntry[]
-  documents            ProjectDocument[]
-  stakeholderReports   StakeholderProgressReport[]
+  id                         String                      @id @default(uuid())
+  systemName                 String
+  code                       String                      @unique
+  isActive                   Boolean                     @default(true)
+  status                     ProjectStatus               @default(NOT_STARTED)
+  progressMode               ProjectProgressMode         @default(PROJECT_CHECKLIST)
+  progressPercent            Int?
+  startDate                  DateTime?                   @db.Date
+  endDate                    DateTime?                   @db.Date
+  latitude                   Decimal?                    @db.Decimal(10, 7)
+  longitude                  Decimal?                    @db.Decimal(10, 7)
+  boundary                   Json?
+  address                    String?
+  companyName                String?
+  systemUrl                  String?
+  launchYear                 Int?
+  isSupportActive            Boolean                     @default(true)
+  replacementProjectId       String?
+  replacementProject         Project?                    @relation("ProjectReplacement", fields: [replacementProjectId], references: [id], onDelete: SetNull)
+  replacedBy                 Project[]                   @relation("ProjectReplacement")
+  description                String?
+  color                      String?
+  showOnLiveBoard            Boolean                     @default(true)
+  showOnHomePage             Boolean                     @default(true)
+  importance                 ProjectImportance           @default(HIGH)
+  orgUnitId                  String?
+  orgUnit                    OrganizationUnit?           @relation("ProjectOrgUnit", fields: [orgUnitId], references: [id], onDelete: SetNull)
+  groupId                    String?
+  group                      ProjectGroup?               @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  operators                  ProjectOperator[]
+  contractors                ProjectContractor[]
+  contractorLinks            ProjectContractorProject[]
+  phases                     ProjectPhase[]
+  checklistItems             ProjectChecklistItem[]
+  progressEntries            ProjectProgressEntry[]
+  documents                  ProjectDocument[]
+  stakeholderReports         StakeholderProgressReport[]
   stakeholderCorrespondences StakeholderCorrespondence[]
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime                    @updatedAt
 
   @@index([systemName])
   @@index([code])
@@ -544,18 +549,18 @@ model ProjectOperator {
 }
 
 model ProjectPhase {
-  id              String         @id @default(uuid())
+  id              String                 @id @default(uuid())
   projectId       String
-  project         Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project         Project                @relation(fields: [projectId], references: [id], onDelete: Cascade)
   name            String
-  startDate       DateTime?      @db.Date
-  endDate         DateTime?      @db.Date
+  startDate       DateTime?              @db.Date
+  endDate         DateTime?              @db.Date
   status          ProjectStatus?
-  progressMode    PhaseProgressMode @default(MANUAL)
+  progressMode    PhaseProgressMode      @default(MANUAL)
   progressPercent Int?
   checklistItems  ProjectChecklistItem[]
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
 
   @@index([projectId, name])
   @@index([projectId, startDate])
@@ -586,40 +591,40 @@ model ProjectChecklistItem {
 }
 
 model StoredFile {
-  id           String                 @id @default(uuid())
-  mimeType     String
-  data         Bytes
-  byteSize     Int
-  originalName String?
-  durationMs   Int?
-  createdAt    DateTime               @default(now())
-  progressEntries ProjectProgressEntry[]
-  singardAttachments SingardAttachment[]
-  boardAttachments   BoardAttachment[]
+  id                      String                   @id @default(uuid())
+  mimeType                String
+  data                    Bytes
+  byteSize                Int
+  originalName            String?
+  durationMs              Int?
+  createdAt               DateTime                 @default(now())
+  progressEntries         ProjectProgressEntry[]
+  singardAttachments      SingardAttachment[]
+  boardAttachments        BoardAttachment[]
   boardMinutesAttachments BoardMinutesAttachment[]
-  portSalesReports   PortSalesReport[]
-  stakeholderAttachments StakeholderAttachment[]
+  portSalesReports        PortSalesReport[]
+  stakeholderAttachments  StakeholderAttachment[]
 
   @@map("stored_files")
 }
 
 model ProjectProgressEntry {
-  id                  String                              @id @default(uuid())
+  id                  String                             @id @default(uuid())
   projectId           String
-  project             Project                             @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  occurredAt          DateTime                            @db.Date
+  project             Project                            @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  occurredAt          DateTime                           @db.Date
   body                String?
   transcript          String?
   summary             String?
   progressPercent     Int?
-  processingMode      ProjectProgressProcessingMode       @default(DEFERRED)
-  transcriptionStatus ProjectProgressTranscriptionStatus  @default(NONE)
+  processingMode      ProjectProgressProcessingMode      @default(DEFERRED)
+  transcriptionStatus ProjectProgressTranscriptionStatus @default(NONE)
   transcriptionError  String?
   audioId             String?
-  audio               StoredFile?                         @relation(fields: [audioId], references: [id], onDelete: SetNull)
+  audio               StoredFile?                        @relation(fields: [audioId], references: [id], onDelete: SetNull)
   images              ProjectProgressImage[]
-  createdAt           DateTime                            @default(now())
-  updatedAt           DateTime                            @updatedAt
+  createdAt           DateTime                           @default(now())
+  updatedAt           DateTime                           @updatedAt
 
   @@index([projectId, occurredAt])
   @@index([projectId, createdAt])
@@ -655,33 +660,33 @@ model ProjectContractorType {
 }
 
 model ProjectContractor {
-  id           String                 @id @default(uuid())
-  projectId    String
-  project      Project                @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  typeId       String?
-  type         ProjectContractorType? @relation(fields: [typeId], references: [id], onDelete: Restrict)
-  name                   String
-  nationalId             String?
-  registrationNumber     String?
-  phone                  String?
-  email                  String?
-  website                String?
-  description            String?
-  ceoName                String?
-  timeEstimate           String?
-  costEstimate           Decimal?               @db.Decimal(18, 0)
-  contractStartDate      DateTime?              @db.Date
-  contractEndDate        DateTime?              @db.Date
-  supportStartDate       DateTime?              @db.Date
-  supportEndDate         DateTime?              @db.Date
-  members      ProjectContractorMember[]
-  payments     ProjectContractorPayment[]
-  projectLinks ProjectContractorProject[]
-  portalUsers  User[]                 @relation("ContractorPortalUsers")
-  stakeholderReports StakeholderProgressReport[]
+  id                         String                      @id @default(uuid())
+  projectId                  String
+  project                    Project                     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  typeId                     String?
+  type                       ProjectContractorType?      @relation(fields: [typeId], references: [id], onDelete: Restrict)
+  name                       String
+  nationalId                 String?
+  registrationNumber         String?
+  phone                      String?
+  email                      String?
+  website                    String?
+  description                String?
+  ceoName                    String?
+  timeEstimate               String?
+  costEstimate               Decimal?                    @db.Decimal(18, 0)
+  contractStartDate          DateTime?                   @db.Date
+  contractEndDate            DateTime?                   @db.Date
+  supportStartDate           DateTime?                   @db.Date
+  supportEndDate             DateTime?                   @db.Date
+  members                    ProjectContractorMember[]
+  payments                   ProjectContractorPayment[]
+  projectLinks               ProjectContractorProject[]
+  portalUsers                User[]                      @relation("ContractorPortalUsers")
+  stakeholderReports         StakeholderProgressReport[]
   stakeholderCorrespondences StakeholderCorrespondence[]
-  createdAt    DateTime               @default(now())
-  updatedAt    DateTime               @updatedAt
+  createdAt                  DateTime                    @default(now())
+  updatedAt                  DateTime                    @updatedAt
 
   @@index([projectId, name])
   @@index([nationalId])
@@ -741,15 +746,15 @@ model ProjectContractorPayment {
 }
 
 model Food {
-  id          String       @id @default(uuid())
-  name        String
-  description String?
-  photoId     String?
-  photo       StoredImage? @relation("FoodPhoto", fields: [photoId], references: [id], onDelete: SetNull)
-  menuItems     RestaurantMenuItem[]
-  reservations  FoodReservation[]
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id           String               @id @default(uuid())
+  name         String
+  description  String?
+  photoId      String?
+  photo        StoredImage?         @relation("FoodPhoto", fields: [photoId], references: [id], onDelete: SetNull)
+  menuItems    RestaurantMenuItem[]
+  reservations FoodReservation[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
 
   @@index([name])
   @@index([createdAt])
@@ -757,20 +762,20 @@ model Food {
 }
 
 model Restaurant {
-  id        String       @id @default(uuid())
-  name      String
-  phone     String?
-  address   String?
-  logoId    String?
-  logo      StoredImage? @relation("RestaurantLogo", fields: [logoId], references: [id], onDelete: SetNull)
-  employeeMealPrice   Decimal? @db.Decimal(18, 0)
-  managementMealPrice Decimal? @db.Decimal(18, 0)
-  menuItems          RestaurantMenuItem[]
-  orgUnits           OrganizationUnitRestaurant[]
-  reservations       FoodReservation[]
-  advancedFoodOrders AdvancedFoodOrder[]
-  createdAt    DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id                  String                       @id @default(uuid())
+  name                String
+  phone               String?
+  address             String?
+  logoId              String?
+  logo                StoredImage?                 @relation("RestaurantLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  employeeMealPrice   Decimal?                     @db.Decimal(18, 0)
+  managementMealPrice Decimal?                     @db.Decimal(18, 0)
+  menuItems           RestaurantMenuItem[]
+  orgUnits            OrganizationUnitRestaurant[]
+  reservations        FoodReservation[]
+  advancedFoodOrders  AdvancedFoodOrder[]
+  createdAt           DateTime                     @default(now())
+  updatedAt           DateTime                     @updatedAt
 
   @@index([name])
   @@index([phone])
@@ -866,42 +871,44 @@ model OrganizationUnitKind {
 }
 
 model OrganizationUnit {
-  id             String               @id @default(uuid())
-  name           String
-  kindId         String
-  kind           OrganizationUnitKind @relation(fields: [kindId], references: [id], onDelete: Restrict)
-  parentId       String?
-  parent         OrganizationUnit?    @relation("UnitTree", fields: [parentId], references: [id], onDelete: Restrict)
-  children       OrganizationUnit[]   @relation("UnitTree")
-  phone          String?
-  address        String?
-  latitude       Decimal?             @db.Decimal(10, 7)
-  longitude      Decimal?             @db.Decimal(10, 7)
-  eitaa          String?
-  bale           String?
-  rubika         String?
-  instagram      String?
-  telegram       String?
-  whatsapp       String?
-  nutritionRepId    String?
-  nutritionRep      User?                @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
-  maxMeals          Int?
-  guestMealsEnabled Boolean              @default(false)
-  maxGuestMeals     Int?
-  employees      User[]               @relation("UnitEmployees")
-  restaurants        OrganizationUnitRestaurant[]
-  reservations       FoodReservation[]
-  advancedFoodOrders AdvancedFoodOrder[]
-  vehicleAssignments VehicleAssignment[]
-  projectOperators ProjectOperator[]
-  projects         Project[]          @relation("ProjectOrgUnit")
-  boardRequests    BoardRequest[]
-  boardStageUnits  BoardStageUnit[]
+  id                      String                       @id @default(uuid())
+  name                    String
+  code                    String                       @unique
+  kindId                  String
+  kind                    OrganizationUnitKind         @relation(fields: [kindId], references: [id], onDelete: Restrict)
+  parentId                String?
+  parent                  OrganizationUnit?            @relation("UnitTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children                OrganizationUnit[]           @relation("UnitTree")
+  phone                   String?
+  address                 String?
+  latitude                Decimal?                     @db.Decimal(10, 7)
+  longitude               Decimal?                     @db.Decimal(10, 7)
+  eitaa                   String?
+  bale                    String?
+  rubika                  String?
+  instagram               String?
+  telegram                String?
+  whatsapp                String?
+  nutritionRepId          String?
+  nutritionRep            User?                        @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
+  maxMeals                Int?
+  guestMealsEnabled       Boolean                      @default(false)
+  maxGuestMeals           Int?
+  employees               User[]                       @relation("UnitEmployees")
+  restaurants             OrganizationUnitRestaurant[]
+  reservations            FoodReservation[]
+  advancedFoodOrders      AdvancedFoodOrder[]
+  vehicleAssignments      VehicleAssignment[]
+  projectOperators        ProjectOperator[]
+  projects                Project[]                    @relation("ProjectOrgUnit")
+  boardRequests           BoardRequest[]
+  boardStageUnits         BoardStageUnit[]
   boardMinutesResolutions BoardMinutesResolution[]
-  createdAt      DateTime             @default(now())
-  updatedAt      DateTime             @updatedAt
+  createdAt               DateTime                     @default(now())
+  updatedAt               DateTime                     @updatedAt
 
   @@index([name])
+  @@index([code])
   @@index([kindId])
   @@index([parentId])
   @@index([phone])
@@ -927,16 +934,17 @@ model OrganizationUnitRestaurant {
 }
 
 model FoodReservation {
-  id           String                @id @default(uuid())
-  reservedAt   DateTime              @db.Date
-  restaurantId String
-  restaurant   Restaurant            @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
-  foodId       String
-  food         Food                  @relation(fields: [foodId], references: [id], onDelete: Restrict)
-  userId       String
-  user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  orgUnitId    String
-  orgUnit      OrganizationUnit      @relation(fields: [orgUnitId], references: [id], onDelete: Restrict)
+  id              String                @id @default(uuid())
+  reservedAt      DateTime              @db.Date
+  mealType        FoodMealType          @default(LUNCH)
+  restaurantId    String
+  restaurant      Restaurant            @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  foodId          String
+  food            Food                  @relation(fields: [foodId], references: [id], onDelete: Restrict)
+  userId          String
+  user            User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orgUnitId       String
+  orgUnit         OrganizationUnit      @relation(fields: [orgUnitId], references: [id], onDelete: Restrict)
   quantity        Int
   /// true = تعداد برای مهمانان واحد است، نه سهم خود واحد
   forGuest        Boolean               @default(false)
@@ -951,6 +959,7 @@ model FoodReservation {
   @@index([orgUnitId, reservedAt])
   @@index([restaurantId, reservedAt])
   @@index([foodId])
+  @@index([mealType])
   @@index([status])
   @@index([advancedOrderId])
   @@index([createdAt])
@@ -964,32 +973,36 @@ enum AdvancedFoodOrderSource {
 
 /// سفارش کلی یک بازه؛ ردیف‌های روزانه در food_reservations ذخیره می‌شوند.
 model AdvancedFoodOrder {
-  id                  String                   @id @default(uuid())
-  orgUnitId           String
-  orgUnit             OrganizationUnit         @relation(fields: [orgUnitId], references: [id], onDelete: Restrict)
-  restaurantId        String
-  restaurant          Restaurant               @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
-  source              AdvancedFoodOrderSource
-  startsOn            DateTime                 @db.Date
-  endsOn              DateTime                 @db.Date
+  id                      String                  @id @default(uuid())
+  orgUnitId               String
+  orgUnit                 OrganizationUnit        @relation(fields: [orgUnitId], references: [id], onDelete: Restrict)
+  restaurantId            String
+  restaurant              Restaurant              @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  source                  AdvancedFoodOrderSource
+  mealType                FoodMealType            @default(LUNCH)
+  startsOn                DateTime                @db.Date
+  endsOn                  DateTime                @db.Date
   /// ۰ شنبه … ۴ چهارشنبه
-  weekdays            Int[]                    @default([])
-  foodLabel           String
-  employeeQuantity    Int
-  managementQuantity  Int
-  employeeUnitPrice   Decimal?                 @db.Decimal(18, 0)
-  managementUnitPrice Decimal?                 @db.Decimal(18, 0)
-  createdById         String
-  createdBy           User                     @relation("AdvancedFoodOrderAuthor", fields: [createdById], references: [id], onDelete: Restrict)
-  reservations        FoodReservation[]
-  createdAt           DateTime                 @default(now())
-  updatedAt           DateTime                 @updatedAt
+  weekdays                Int[]                   @default([])
+  foodLabel               String
+  employeeQuantity        Int
+  managementQuantity      Int
+  employeeGuestQuantity   Int                     @default(0)
+  managementGuestQuantity Int                     @default(0)
+  employeeUnitPrice       Decimal?                @db.Decimal(18, 0)
+  managementUnitPrice     Decimal?                @db.Decimal(18, 0)
+  createdById             String
+  createdBy               User                    @relation("AdvancedFoodOrderAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  reservations            FoodReservation[]
+  createdAt               DateTime                @default(now())
+  updatedAt               DateTime                @updatedAt
 
   @@index([orgUnitId])
   @@index([restaurantId])
   @@index([createdById])
   @@index([startsOn])
   @@index([endsOn])
+  @@index([mealType])
   @@index([foodLabel])
   @@index([createdAt])
   @@map("advanced_food_orders")
@@ -1008,22 +1021,22 @@ model VehicleBrand {
 }
 
 model Vehicle {
-  id            String        @id @default(uuid())
-  assetCode     String        @unique
-  plate         String        @unique
+  id            String              @id @default(uuid())
+  assetCode     String              @unique
+  plate         String              @unique
   type          VehicleType
   brandId       String
-  brand         VehicleBrand  @relation(fields: [brandId], references: [id], onDelete: Restrict)
+  brand         VehicleBrand        @relation(fields: [brandId], references: [id], onDelete: Restrict)
   model         String
   color         String?
   year          Int?
   chassisNumber String?
   engineNumber  String?
-  status        VehicleStatus @default(ACTIVE)
+  status        VehicleStatus       @default(ACTIVE)
   description   String?
   assignments   VehicleAssignment[]
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
 
   @@index([type])
   @@index([status])
@@ -1033,21 +1046,21 @@ model Vehicle {
 }
 
 model VehicleAssignment {
-  id                 String                 @id @default(uuid())
+  id                 String                  @id @default(uuid())
   vehicleId          String
-  vehicle            Vehicle                @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  vehicle            Vehicle                 @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
   organizationUnitId String?
-  organizationUnit   OrganizationUnit?      @relation(fields: [organizationUnitId], references: [id], onDelete: Restrict)
+  organizationUnit   OrganizationUnit?       @relation(fields: [organizationUnitId], references: [id], onDelete: Restrict)
   personId           String?
-  person             User?                  @relation("VehicleAssignmentPerson", fields: [personId], references: [id], onDelete: Restrict)
-  startDate          DateTime                 @db.Date
-  endDate            DateTime?                @db.Date
-  returnedAt         DateTime?                @db.Date
+  person             User?                   @relation("VehicleAssignmentPerson", fields: [personId], references: [id], onDelete: Restrict)
+  startDate          DateTime                @db.Date
+  endDate            DateTime?               @db.Date
+  returnedAt         DateTime?               @db.Date
   type               VehicleAssignmentType
-  status             VehicleAssignmentStatus  @default(LENT)
+  status             VehicleAssignmentStatus @default(LENT)
   description        String?
-  createdAt          DateTime                 @default(now())
-  updatedAt          DateTime                 @updatedAt
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
 
   @@index([vehicleId, startDate])
   @@index([organizationUnitId])
@@ -1077,8 +1090,8 @@ model Role {
 model UserRole {
   userId String
   roleId String
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   @@id([userId, roleId])
   @@index([roleId])
@@ -1088,7 +1101,7 @@ model UserRole {
 model RolePermission {
   roleId String
   code   String
-  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   @@id([roleId, code])
   @@index([code])
@@ -1194,17 +1207,17 @@ model SingardAttachment {
 }
 
 model SingardActivity {
-  id          String             @id @default(uuid())
+  id          String              @id @default(uuid())
   feedbackId  String
-  feedback    SingardFeedback    @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
+  feedback    SingardFeedback     @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
   kind        SingardActivityKind @default(NOTE)
-  occurredAt  DateTime           @db.Date
+  occurredAt  DateTime            @db.Date
   title       String
   body        String?
   createdById String
-  createdBy   User               @relation(fields: [createdById], references: [id], onDelete: Restrict)
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
+  createdBy   User                @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
 
   @@index([feedbackId, occurredAt])
   @@index([createdById])
@@ -1235,47 +1248,47 @@ enum BoardAttachmentKind {
 }
 
 model BoardRequest {
-  id              String             @id @default(uuid())
-  status          BoardRequestStatus @default(PENDING_REVIEW)
-  requestedAt     DateTime           @db.Date
-  unitId          String
-  unit            OrganizationUnit   @relation(fields: [unitId], references: [id], onDelete: Restrict)
-  orgPositionText String
-  subject         String
-  justification   String?
-  topicHistory    String?
-  description     String?
-  createdById     String
-  createdBy       User               @relation("BoardRequestAuthor", fields: [createdById], references: [id], onDelete: Restrict)
-  managementComment String?
-  managementAt      DateTime?        @db.Date
-  managementById    String?
-  managementBy      User?            @relation("BoardManagementReviewer", fields: [managementById], references: [id], onDelete: SetNull)
+  id                       String             @id @default(uuid())
+  status                   BoardRequestStatus @default(PENDING_REVIEW)
+  requestedAt              DateTime           @db.Date
+  unitId                   String
+  unit                     OrganizationUnit   @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  orgPositionText          String
+  subject                  String
+  justification            String?
+  topicHistory             String?
+  description              String?
+  createdById              String
+  createdBy                User               @relation("BoardRequestAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  managementComment        String?
+  managementAt             DateTime?          @db.Date
+  managementById           String?
+  managementBy             User?              @relation("BoardManagementReviewer", fields: [managementById], references: [id], onDelete: SetNull)
   legalOrgMatch            Boolean?
   legalRegulationsMatch    Boolean?
   legalComment             String?
-  legalAt                  DateTime? @db.Date
+  legalAt                  DateTime?          @db.Date
   legalById                String?
-  legalBy                  User?     @relation("BoardLegalReviewer", fields: [legalById], references: [id], onDelete: SetNull)
-  budgetProgramHistory       Boolean?
-  budgetCurrentYearFunding   Boolean?
-  budgetComment              String?
-  budgetAt                   DateTime? @db.Date
-  budgetById                 String?
-  budgetBy                   User?     @relation("BoardBudgetReviewer", fields: [budgetById], references: [id], onDelete: SetNull)
-  secretaryComment String?
-  secretaryAt      DateTime?         @db.Date
-  secretaryById    String?
-  secretaryBy      User?             @relation("BoardSecretaryReviewer", fields: [secretaryById], references: [id], onDelete: SetNull)
-  rejectedStage    BoardStage?
-  rejectedComment  String?
-  rejectedAt       DateTime?         @db.Date
-  rejectedById     String?
-  rejectedBy       User?             @relation("BoardRequestRejecter", fields: [rejectedById], references: [id], onDelete: SetNull)
-  attachments      BoardAttachment[]
-  minutes          BoardMinutes[]
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  legalBy                  User?              @relation("BoardLegalReviewer", fields: [legalById], references: [id], onDelete: SetNull)
+  budgetProgramHistory     Boolean?
+  budgetCurrentYearFunding Boolean?
+  budgetComment            String?
+  budgetAt                 DateTime?          @db.Date
+  budgetById               String?
+  budgetBy                 User?              @relation("BoardBudgetReviewer", fields: [budgetById], references: [id], onDelete: SetNull)
+  secretaryComment         String?
+  secretaryAt              DateTime?          @db.Date
+  secretaryById            String?
+  secretaryBy              User?              @relation("BoardSecretaryReviewer", fields: [secretaryById], references: [id], onDelete: SetNull)
+  rejectedStage            BoardStage?
+  rejectedComment          String?
+  rejectedAt               DateTime?          @db.Date
+  rejectedById             String?
+  rejectedBy               User?              @relation("BoardRequestRejecter", fields: [rejectedById], references: [id], onDelete: SetNull)
+  attachments              BoardAttachment[]
+  minutes                  BoardMinutes[]
+  createdAt                DateTime           @default(now())
+  updatedAt                DateTime           @updatedAt
 
   @@index([status])
   @@index([unitId])
@@ -1287,18 +1300,18 @@ model BoardRequest {
 }
 
 model BoardAttachment {
-  id           String               @id @default(uuid())
+  id           String              @id @default(uuid())
   requestId    String
-  request      BoardRequest         @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  request      BoardRequest        @relation(fields: [requestId], references: [id], onDelete: Cascade)
   stage        BoardStage
   kind         BoardAttachmentKind
   imageId      String?
-  image        StoredImage?         @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  image        StoredImage?        @relation(fields: [imageId], references: [id], onDelete: Restrict)
   fileId       String?
-  file         StoredFile?          @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  file         StoredFile?         @relation(fields: [fileId], references: [id], onDelete: Restrict)
   originalName String?
-  sortOrder    Int                  @default(0)
-  createdAt    DateTime             @default(now())
+  sortOrder    Int                 @default(0)
+  createdAt    DateTime            @default(now())
 
   @@index([requestId, sortOrder])
   @@index([stage])
@@ -1340,19 +1353,19 @@ enum BoardMinutesAttachmentKind {
 }
 
 model BoardMinutes {
-  id          String                     @id @default(uuid())
+  id          String                   @id @default(uuid())
   requestId   String?
-  request     BoardRequest?              @relation(fields: [requestId], references: [id], onDelete: Restrict)
-  heldAt      DateTime                   @db.Date
+  request     BoardRequest?            @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  heldAt      DateTime                 @db.Date
   subject     String
   body        String?
   createdById String
-  createdBy   User                       @relation("BoardMinutesAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  createdBy   User                     @relation("BoardMinutesAuthor", fields: [createdById], references: [id], onDelete: Restrict)
   members     BoardMinutesMember[]
   attachments BoardMinutesAttachment[]
   resolutions BoardMinutesResolution[]
-  createdAt   DateTime                   @default(now())
-  updatedAt   DateTime                   @updatedAt
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
 
   @@index([requestId])
   @@index([heldAt])
@@ -1363,13 +1376,13 @@ model BoardMinutes {
 }
 
 model BoardMinutesMember {
-  id          String                   @id @default(uuid())
-  minutesId   String
-  minutes     BoardMinutes             @relation(fields: [minutesId], references: [id], onDelete: Cascade)
-  userId      String
-  user        User                     @relation(fields: [userId], references: [id], onDelete: Restrict)
-  attendance  BoardMinutesAttendance   @default(PRESENT)
-  createdAt   DateTime                 @default(now())
+  id         String                 @id @default(uuid())
+  minutesId  String
+  minutes    BoardMinutes           @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User                   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  attendance BoardMinutesAttendance @default(PRESENT)
+  createdAt  DateTime               @default(now())
 
   @@unique([minutesId, userId])
   @@index([userId])
@@ -1378,17 +1391,17 @@ model BoardMinutesMember {
 }
 
 model BoardMinutesAttachment {
-  id           String                      @id @default(uuid())
+  id           String                     @id @default(uuid())
   minutesId    String
-  minutes      BoardMinutes                @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  minutes      BoardMinutes               @relation(fields: [minutesId], references: [id], onDelete: Cascade)
   kind         BoardMinutesAttachmentKind
   imageId      String?
-  image        StoredImage?                @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  image        StoredImage?               @relation(fields: [imageId], references: [id], onDelete: Restrict)
   fileId       String?
-  file         StoredFile?                 @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  file         StoredFile?                @relation(fields: [fileId], references: [id], onDelete: Restrict)
   originalName String?
-  sortOrder    Int                         @default(0)
-  createdAt    DateTime                    @default(now())
+  sortOrder    Int                        @default(0)
+  createdAt    DateTime                   @default(now())
 
   @@index([minutesId, sortOrder])
   @@index([imageId])
@@ -1397,17 +1410,17 @@ model BoardMinutesAttachment {
 }
 
 model BoardMinutesResolution {
-  id          String           @id @default(uuid())
+  id          String            @id @default(uuid())
   minutesId   String
-  minutes     BoardMinutes     @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  minutes     BoardMinutes      @relation(fields: [minutesId], references: [id], onDelete: Cascade)
   title       String
   description String?
   unitId      String?
   unit        OrganizationUnit? @relation(fields: [unitId], references: [id], onDelete: SetNull)
-  dueDate     DateTime?        @db.Date
+  dueDate     DateTime?         @db.Date
   notes       String?
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 
   @@index([minutesId])
   @@index([unitId])
@@ -1418,38 +1431,38 @@ model BoardMinutesResolution {
 }
 
 model PortSalesReport {
-  id                    String           @id @default(uuid())
-  reportDate            DateTime         @db.Date
-  origin                String
-  destination           String
-  fileId                String
-  file                  StoredFile       @relation(fields: [fileId], references: [id], onDelete: Restrict)
-  originalFileName      String
-  recordCount            Int              @default(0)
-  uniqueNationalIdCount  Int              @default(0)
-  nationalIdPrefixCount  Int              @default(0)
-  validQeshmondiCount    Int              @default(0)
-  invalidQeshmondiCount  Int              @default(0)
-  weeklyQuotaExcessCount     Int              @default(0)
-  invalidQeshmondiSubsidy    Int?
-  weeklyQuotaExcessSubsidy   Int?
-  allocatedSubsidy           BigInt?
-  allocatedSubsidyNote       String?
-  quotaSnapshotReady         Boolean          @default(false)
-  reportYear             Int
-  reportMonth            Int
-  approvalStatus         PortSalesReportApprovalStatus @default(DRAFT)
-  verifiedAt             DateTime?
-  approvedAt             DateTime?
-  approvedById           String?
-  approvedBy             User?            @relation("PortSalesReportApprover", fields: [approvedById], references: [id], onDelete: SetNull)
-  createdById            String?
-  createdBy              User?            @relation("PortSalesReportAuthor", fields: [createdById], references: [id], onDelete: SetNull)
-  tickets                PortTicketSale[]
-  weeklyQuotas           PortTicketWeeklyQuota[]
-  personalQuotas         PortTicketPersonalQuota[]
-  createdAt              DateTime         @default(now())
-  updatedAt              DateTime         @updatedAt
+  id                       String                        @id @default(uuid())
+  reportDate               DateTime                      @db.Date
+  origin                   String
+  destination              String
+  fileId                   String
+  file                     StoredFile                    @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  originalFileName         String
+  recordCount              Int                           @default(0)
+  uniqueNationalIdCount    Int                           @default(0)
+  nationalIdPrefixCount    Int                           @default(0)
+  validQeshmondiCount      Int                           @default(0)
+  invalidQeshmondiCount    Int                           @default(0)
+  weeklyQuotaExcessCount   Int                           @default(0)
+  invalidQeshmondiSubsidy  Int?
+  weeklyQuotaExcessSubsidy Int?
+  allocatedSubsidy         BigInt?
+  allocatedSubsidyNote     String?
+  quotaSnapshotReady       Boolean                       @default(false)
+  reportYear               Int
+  reportMonth              Int
+  approvalStatus           PortSalesReportApprovalStatus @default(DRAFT)
+  verifiedAt               DateTime?
+  approvedAt               DateTime?
+  approvedById             String?
+  approvedBy               User?                         @relation("PortSalesReportApprover", fields: [approvedById], references: [id], onDelete: SetNull)
+  createdById              String?
+  createdBy                User?                         @relation("PortSalesReportAuthor", fields: [createdById], references: [id], onDelete: SetNull)
+  tickets                  PortTicketSale[]
+  weeklyQuotas             PortTicketWeeklyQuota[]
+  personalQuotas           PortTicketPersonalQuota[]
+  createdAt                DateTime                      @default(now())
+  updatedAt                DateTime                      @updatedAt
 
   @@unique([createdById, reportYear, reportMonth, origin, destination], map: "port_sales_reports_author_route_month_key")
   @@index([reportDate])
@@ -1463,33 +1476,33 @@ model PortSalesReport {
 }
 
 model PortTicketSale {
-  id              String           @id @default(uuid())
-  reportId        String
-  report          PortSalesReport  @relation(fields: [reportId], references: [id], onDelete: Cascade)
-  rowNumber       Int?
-  ticketNumber    String?
-  reservationCode String?
-  nationalId      String?
-  passportNumber  String?
-  firstName       String?
-  lastName        String?
-  fullName        String?
-  fatherName      String?
-  gender          String?
-  phone           String?
-  travelDate      DateTime?        @db.Date
-  travelTime      String?
-  origin          String?
-  destination     String?
+  id                String                    @id @default(uuid())
+  reportId          String
+  report            PortSalesReport           @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  rowNumber         Int?
+  ticketNumber      String?
+  reservationCode   String?
+  nationalId        String?
+  passportNumber    String?
+  firstName         String?
+  lastName          String?
+  fullName          String?
+  fatherName        String?
+  gender            String?
+  phone             String?
+  travelDate        DateTime?                 @db.Date
+  travelTime        String?
+  origin            String?
+  destination       String?
   qeshmondiStatus   PortTicketQeshmondiStatus @default(UNKNOWN)
   weeklyQuotaExcess Boolean                   @default(false)
   citizenship       String?
-  amount          Int?
-  seatNumber      String?
-  ticketType      String?
-  vesselName      String?
-  extras          Json?
-  createdAt       DateTime         @default(now())
+  amount            Int?
+  seatNumber        String?
+  ticketType        String?
+  vesselName        String?
+  extras            Json?
+  createdAt         DateTime                  @default(now())
 
   @@index([reportId])
   @@index([reportId, qeshmondiStatus])
@@ -1613,14 +1626,14 @@ model StakeholderCorrespondence {
 }
 
 model StakeholderMessage {
-  id               String                  @id @default(uuid())
+  id               String                    @id @default(uuid())
   correspondenceId String
   correspondence   StakeholderCorrespondence @relation(fields: [correspondenceId], references: [id], onDelete: Cascade)
   authorId         String
-  author           User                    @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  author           User                      @relation(fields: [authorId], references: [id], onDelete: Restrict)
   side             StakeholderMessageSide
   body             String
-  createdAt        DateTime                @default(now())
+  createdAt        DateTime                  @default(now())
 
   @@index([correspondenceId, createdAt])
   @@index([authorId])

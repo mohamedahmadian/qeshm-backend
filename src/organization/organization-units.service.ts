@@ -21,6 +21,7 @@ import { buildOrganizationUnitPaths } from './organization-unit-tree';
 const unitSelect = {
   id: true,
   name: true,
+  code: true,
   kindId: true,
   kind: { select: { id: true, name: true } },
   parentId: true,
@@ -81,6 +82,7 @@ export class OrganizationUnitsService {
       OR: query.q
         ? [
             { name: containsInsensitive(query.q) },
+            { code: containsInsensitive(query.q) },
             { phone: containsInsensitive(query.q) },
             { address: containsInsensitive(query.q) },
             { nutritionRep: { fullName: containsInsensitive(query.q) } },
@@ -94,6 +96,7 @@ export class OrganizationUnitsService {
       query.sortDir,
       {
         name: (dir) => ({ name: dir }),
+        code: (dir) => ({ code: dir }),
         kind: (dir) => ({ kind: { name: dir } }),
         parent: (dir) => ({ parent: { name: dir } }),
         phone: (dir) => ({ phone: dir }),
@@ -144,10 +147,12 @@ export class OrganizationUnitsService {
   async create(dto: CreateOrganizationUnitDto) {
     await this.assertValidParent(null, dto.parentId);
     await this.assertKind(dto.kindId);
+    await this.assertUniqueCode(dto.code);
     this.assertGuestMeals(dto);
     const unit = await this.prisma.organizationUnit.create({
       data: {
         name: dto.name,
+        code: dto.code,
         kind: { connect: { id: dto.kindId } },
         parent: dto.parentId ? { connect: { id: dto.parentId } } : undefined,
         phone: dto.phone,
@@ -184,10 +189,14 @@ export class OrganizationUnitsService {
     if (dto.guestMealsEnabled !== undefined) {
       this.assertGuestMeals(dto);
     }
+    if (dto.code !== undefined) {
+      await this.assertUniqueCode(dto.code, id);
+    }
     const unit = await this.prisma.organizationUnit.update({
       where: { id },
       data: {
         name: dto.name,
+        code: dto.code,
         kind: dto.kindId ? { connect: { id: dto.kindId } } : undefined,
         parent:
           dto.parentId === undefined
@@ -268,6 +277,19 @@ export class OrganizationUnitsService {
       ...withCoords(item),
       pathLabel: paths.get(item.id) ?? item.name,
     };
+  }
+
+  private async assertUniqueCode(code: string, excludeId?: string) {
+    const existing = await this.prisma.organizationUnit.findFirst({
+      where: {
+        code,
+        ...(excludeId ? { id: { not: excludeId } } : {}),
+      },
+      select: { id: true },
+    });
+    if (existing) {
+      throw new ConflictException('کد واحد تکراری است');
+    }
   }
 
   private async assertKind(kindId: string) {

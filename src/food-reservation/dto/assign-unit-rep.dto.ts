@@ -7,6 +7,7 @@ import {
   IsUUID,
   Matches,
   Max,
+  MaxLength,
   Min,
   MinLength,
   ValidateIf,
@@ -48,10 +49,61 @@ export class CreateUnitRepDto {
 
 export class UpdateUnitRepDto {
   @IsOptional()
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @ValidateIf((_, value) => value != null && value !== '')
+  @IsString()
+  @MinLength(1)
+  @MaxLength(40)
+  code?: string;
+
+  @IsOptional()
   @Transform(({ value }) => (value === '' || value == null ? null : value))
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
   nutritionRepId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalNumber(value))
+  @ValidateIf((_, value) => value != null)
+  @IsInt()
+  @Min(1)
+  @Max(9999)
+  maxMeals?: number | null;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  guestMealsEnabled: boolean;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalNumber(value))
+  @ValidateIf((_, value) => value != null)
+  @IsInt()
+  @Min(1)
+  @Max(9999)
+  maxGuestMeals?: number | null;
+}
+
+export class CreateUnitRepUnitDto {
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @IsString()
+  @MinLength(2)
+  @MaxLength(200)
+  name: string;
+
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @IsString()
+  @MinLength(1)
+  @MaxLength(40)
+  code: string;
+
+  @IsUUID('4')
+  kindId: string;
+
+  @IsOptional()
+  @Transform(({ value }) => (value === '' || value == null ? null : value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  parentId?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => toOptionalNumber(value))

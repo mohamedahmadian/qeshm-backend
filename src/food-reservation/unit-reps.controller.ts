@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestj
 import {
   CreateUnitRepDto,
   CreateUnitRepPersonDto,
+  CreateUnitRepUnitDto,
   UpdateUnitRepDto,
 } from './dto/assign-unit-rep.dto';
 import { FindUnitRepsQueryDto } from './dto/find-unit-reps-query.dto';
@@ -24,6 +25,11 @@ export class UnitRepsController {
   @Post()
   create(@Body() dto: CreateUnitRepDto) {
     return this.unitReps.assign(dto.unitId, dto.nutritionRepId, dto);
+  }
+
+  @Post('units')
+  createUnit(@Body() dto: CreateUnitRepUnitDto) {
+    return this.unitReps.createUnit(dto);
   }
 
   @Post(':unitId/person')

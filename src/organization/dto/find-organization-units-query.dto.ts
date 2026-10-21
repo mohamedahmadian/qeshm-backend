@@ -6,6 +6,7 @@ import { sortDirections } from '../../common/sort-query';
 
 export const organizationUnitSortFields = [
   'name',
+  'code',
   'kind',
   'parent',
   'phone',

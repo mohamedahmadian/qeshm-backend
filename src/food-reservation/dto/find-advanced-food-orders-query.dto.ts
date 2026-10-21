@@ -8,11 +8,13 @@ export const advancedFoodOrderSortFields = [
   'createdAt',
   'orgUnit',
   'restaurant',
+  'mealType',
   'startsOn',
   'endsOn',
-  'food',
   'employeeQuantity',
   'managementQuantity',
+  'employeeGuestQuantity',
+  'managementGuestQuantity',
 ] as const;
 
 export class FindAdvancedFoodOrdersQueryDto extends PaginationQueryDto {

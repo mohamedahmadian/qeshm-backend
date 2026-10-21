@@ -27,6 +27,7 @@ import { resolveSortOrder } from '../common/sort-query';
 import { FoodReservationStatus, Prisma } from '../generated/prisma/client';
 import { buildOrganizationUnitPaths } from '../organization/organization-unit-tree';
 import { PrismaService } from '../prisma/prisma.service';
+import { CreateFoodReservationBatchDto } from './dto/create-food-reservation-batch.dto';
 import { CreateFoodReservationDto } from './dto/create-food-reservation.dto';
 import { FindFoodReservationsQueryDto } from './dto/find-food-reservations-query.dto';
 import { FoodReservationRangeActionDto } from './dto/food-reservation-range-action.dto';
@@ -35,6 +36,8 @@ import {
   FoodReservationMenuQueryDto,
   FoodReservationWeekMenuQueryDto,
 } from './dto/food-reservation-menu-query.dto';
+import { foodMealTypeLabel, resolveFoodMealType } from './food-meal-type';
+import { MANAGEMENT_MEAL_PREFIX, STAFF_MEAL_PREFIX } from './restaurants.service';
 import { MineFoodSummaryQueryDto } from './dto/mine-food-summary-query.dto';
 import {
   bucketStart,
@@ -43,7 +46,9 @@ import {
   mineSummaryGrain,
 } from './mine-summary-range';
 
-function foodReservations(prisma: PrismaService) {
+type Db = PrismaService | Prisma.TransactionClient;
+
+function foodReservations(prisma: Db) {
   return (
     prisma as unknown as { foodReservation: Prisma.FoodReservationDelegate }
   ).foodReservation;
@@ -66,6 +71,7 @@ const reservationMenuItemSelect = {
 const reservationSelect = {
   id: true,
   reservedAt: true,
+  mealType: true,
   restaurantId: true,
   foodId: true,
   userId: true,
@@ -80,16 +86,68 @@ const reservationSelect = {
   food: { select: { id: true, name: true, photoId: true } },
   user: { select: { id: true, fullName: true } },
   orgUnit: { select: { id: true, name: true } },
+  advancedOrder: {
+    select: {
+      employeeQuantity: true,
+      managementQuantity: true,
+      employeeGuestQuantity: true,
+      managementGuestQuantity: true,
+    },
+  },
 } satisfies Prisma.FoodReservationSelect;
 
-function withReservation<
-  T extends { reservedAt: Date; unitPrice: Prisma.Decimal; quantity: number },
->(item: T) {
+type AdvancedOrderQty = {
+  employeeQuantity: number;
+  managementQuantity: number;
+  employeeGuestQuantity: number;
+  managementGuestQuantity: number;
+};
+
+function audienceQuantities(item: {
+  quantity: number;
+  forGuest: boolean;
+  food: { name: string };
+  advancedOrder?: AdvancedOrderQty | null;
+}) {
+  const order = item.advancedOrder;
+  if (order) {
+    if (item.food.name.startsWith(STAFF_MEAL_PREFIX)) {
+      return { unitQuantity: order.employeeQuantity, guestQuantity: order.employeeGuestQuantity };
+    }
+    if (item.food.name.startsWith(MANAGEMENT_MEAL_PREFIX)) {
+      return {
+        unitQuantity: order.managementQuantity,
+        guestQuantity: order.managementGuestQuantity,
+      };
+    }
+    return {
+      unitQuantity: order.employeeQuantity + order.managementQuantity,
+      guestQuantity: order.employeeGuestQuantity + order.managementGuestQuantity,
+    };
+  }
   return {
-    ...item,
+    unitQuantity: item.forGuest ? 0 : item.quantity,
+    guestQuantity: item.forGuest ? item.quantity : 0,
+  };
+}
+
+function withReservation<
+  T extends {
+    reservedAt: Date;
+    unitPrice: Prisma.Decimal;
+    quantity: number;
+    forGuest: boolean;
+    food: { name: string };
+    advancedOrder?: AdvancedOrderQty | null;
+  },
+>(item: T) {
+  const { advancedOrder, ...rest } = item;
+  return {
+    ...rest,
     reservedAt: toIsoDateOnly(item.reservedAt),
     unitPrice: Number(item.unitPrice),
     totalPrice: Number(item.unitPrice) * item.quantity,
+    ...audienceQuantities(item),
   };
 }
 
@@ -106,7 +164,7 @@ function localizeExcelDigits(value: string) {
   return value.replace(/\d/g, (digit) => alphabet[Number(digit)] ?? digit);
 }
 
-function formatExportDate(iso: string | null) {
+export function formatExportDate(iso: string | null) {
   if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return '';
   const [year, month, day] = iso.split('-').map(Number);
   if (isLtrLocale(getRequestLocale())) {
@@ -357,26 +415,34 @@ export class FoodReservationsService {
     const unitId = canManage && query.orgUnitId ? query.orgUnitId : user.orgUnitId;
     if (!unitId) return { quantity: null };
     const forGuest = query.forGuest === true;
+    const mealType = resolveFoodMealType(query.mealType);
     const matched = await this.findLastQuantity(unitId, {
       restaurantId: query.restaurantId,
       foodId: query.foodId,
+      mealType,
       forGuest,
     });
     if (matched != null) return { quantity: matched };
     if (!query.restaurantId && !query.foodId) return { quantity: null };
-    const unitLast = await this.findLastQuantity(unitId, { forGuest });
+    const unitLast = await this.findLastQuantity(unitId, { mealType, forGuest });
     return { quantity: unitLast };
   }
 
   private async findLastQuantity(
     unitId: string,
-    filter: { restaurantId?: string; foodId?: string; forGuest: boolean },
+    filter: {
+      restaurantId?: string;
+      foodId?: string;
+      mealType: ReturnType<typeof resolveFoodMealType>;
+      forGuest: boolean;
+    },
   ) {
     const last = await foodReservations(this.prisma).findFirst({
       where: {
         orgUnitId: unitId,
         restaurantId: filter.restaurantId,
         foodId: filter.foodId,
+        mealType: filter.mealType,
         forGuest: filter.forGuest,
       },
       orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
@@ -580,6 +646,7 @@ export class FoodReservationsService {
       columns: mine
         ? [
             { header: 'تاریخ رزرو', key: 'reservedAt', width: 16 },
+            { header: 'وعده', key: 'mealType', width: 12 },
             { header: 'رستوران', key: 'restaurant', width: 22 },
             { header: 'غذا', key: 'food', width: 22 },
             { header: 'تعداد', key: 'quantity', width: 12 },
@@ -588,6 +655,7 @@ export class FoodReservationsService {
           ]
         : [
             { header: 'تاریخ رزرو', key: 'reservedAt', width: 16 },
+            { header: 'وعده', key: 'mealType', width: 12 },
             { header: 'سفارش‌دهنده', key: 'employee', width: 24 },
             { header: 'واحد سازمانی', key: 'orgUnit', width: 24 },
             { header: 'رستوران', key: 'restaurant', width: 22 },
@@ -598,6 +666,7 @@ export class FoodReservationsService {
           ],
       rows: items.map((item) => ({
         reservedAt: formatExportDate(toIsoDateOnly(item.reservedAt)),
+        mealType: foodMealTypeLabel(item.mealType),
         employee: item.user.fullName,
         orgUnit: item.orgUnit.name,
         restaurant: item.restaurant.name,
@@ -1001,16 +1070,41 @@ export class FoodReservationsService {
     if (mineOnly && item.userId !== userId) {
       throw new ForbiddenException('دسترسی به این رزرو مجاز نیست');
     }
-    return withReservation(item);
+    if (item.advancedOrder) {
+      return withReservation(item);
+    }
+    const siblings = await foodReservations(this.prisma).findMany({
+      where: {
+        reservedAt: item.reservedAt,
+        mealType: item.mealType,
+        restaurantId: item.restaurantId,
+        foodId: item.foodId,
+        orgUnitId: item.orgUnitId,
+        userId: item.userId,
+      },
+      select: { quantity: true, forGuest: true },
+    });
+    let unitQuantity = 0;
+    let guestQuantity = 0;
+    for (const row of siblings) {
+      if (row.forGuest) guestQuantity += row.quantity;
+      else unitQuantity += row.quantity;
+    }
+    return { ...withReservation(item), unitQuantity, guestQuantity };
   }
 
-  async create(userId: string, dto: CreateFoodReservationDto, canManage = false) {
+  async create(
+    userId: string,
+    dto: CreateFoodReservationDto,
+    canManage = false,
+    db: Db = this.prisma,
+  ) {
     const user = await this.requireEmployee(userId);
     const unitId = canManage && dto.orgUnitId ? dto.orgUnitId : user.orgUnitId;
     if (!unitId) {
       throw new BadRequestException('ابتدا واحد سازمانی شما باید مشخص شود');
     }
-    const unit = await this.prisma.organizationUnit.findUnique({
+    const unit = await db.organizationUnit.findUnique({
       where: { id: unitId },
       select: {
         id: true,
@@ -1029,7 +1123,7 @@ export class FoodReservationsService {
       );
     }
     if (canManage) {
-      const restaurant = await this.prisma.restaurant.findUnique({
+      const restaurant = await db.restaurant.findUnique({
         where: { id: dto.restaurantId },
         select: { id: true },
       });
@@ -1037,14 +1131,14 @@ export class FoodReservationsService {
         throw new BadRequestException('رستوران یافت نشد');
       }
     } else {
-      const linked = await this.prisma.organizationUnitRestaurant.findFirst({
+      const linked = await db.organizationUnitRestaurant.findFirst({
         where: { unitId, restaurantId: dto.restaurantId },
       });
       if (!linked) {
         throw new BadRequestException('این رستوران برای واحد سازمانی شما تعریف نشده است');
       }
     }
-    const menuItem = await this.prisma.restaurantMenuItem.findFirst({
+    const menuItem = await db.restaurantMenuItem.findFirst({
       where: {
         restaurantId: dto.restaurantId,
         foodId: dto.foodId,
@@ -1071,12 +1165,14 @@ export class FoodReservationsService {
     if (forGuest && !unit.guestMealsEnabled) {
       throw new BadRequestException('سفارش غذای مهمان برای این واحد فعال نیست');
     }
+    const mealType = resolveFoodMealType(dto.mealType);
     const cap = forGuest ? unit.maxGuestMeals : unit.maxMeals;
     if (cap != null) {
-      const used = await foodReservations(this.prisma).aggregate({
+      const used = await foodReservations(db).aggregate({
         where: {
           orgUnitId: unitId,
           reservedAt: parseIsoDate(dto.reservedAt),
+          mealType,
           forGuest,
         },
         _sum: { quantity: true },
@@ -1090,9 +1186,10 @@ export class FoodReservationsService {
         );
       }
     }
-    const item = await foodReservations(this.prisma).create({
+    const item = await foodReservations(db).create({
       data: {
         reservedAt: parseIsoDate(dto.reservedAt),
+        mealType,
         restaurantId: dto.restaurantId,
         foodId: dto.foodId,
         userId,
@@ -1100,11 +1197,52 @@ export class FoodReservationsService {
         quantity,
         forGuest,
         unitPrice: menuItem.price,
-        status: FoodReservationStatus.PENDING,
+        status: canManage ? FoodReservationStatus.CONFIRMED : FoodReservationStatus.PENDING,
       },
       select: reservationSelect,
     });
     return withReservation(item);
+  }
+
+  /** چند غذا (واحد و مهمان) را در یک تراکنش ثبت می‌کند. */
+  async createBatch(
+    userId: string,
+    dto: CreateFoodReservationBatchDto,
+    canManage = false,
+  ) {
+    const seen = new Set<string>();
+    for (const item of dto.items) {
+      const key = `${item.foodId}|${item.forGuest === true}`;
+      if (seen.has(key)) {
+        throw new BadRequestException('سفارش تکراری برای یک غذا ثبت شده است');
+      }
+      seen.add(key);
+    }
+    return this.prisma.$transaction(
+      async (tx) => {
+        const created = [];
+        for (const item of dto.items) {
+          created.push(
+            await this.create(
+              userId,
+              {
+                reservedAt: dto.reservedAt,
+                orgUnitId: dto.orgUnitId,
+                restaurantId: dto.restaurantId,
+                mealType: dto.mealType,
+                foodId: item.foodId,
+                quantity: item.quantity,
+                forGuest: item.forGuest,
+              },
+              canManage,
+              tx,
+            ),
+          );
+        }
+        return created;
+      },
+      { timeout: 20000 },
+    );
   }
 
   async confirm(id: string) {
@@ -1194,6 +1332,7 @@ export class FoodReservationsService {
       restaurantId: query.restaurantId,
       foodId: query.foodId,
       status: query.status,
+      mealType: query.mealType,
       reservedAt,
       OR: query.q
         ? [
@@ -1212,6 +1351,7 @@ export class FoodReservationsService {
       query.sortDir,
       {
         reservedAt: (dir) => ({ reservedAt: dir }),
+        mealType: (dir) => ({ mealType: dir }),
         restaurant: (dir) => ({ restaurant: { name: dir } }),
         food: (dir) => ({ food: { name: dir } }),
         user: (dir) => ({ user: { fullName: dir } }),

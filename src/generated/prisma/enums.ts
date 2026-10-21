@@ -107,6 +107,14 @@ export const FoodReservationStatus = {
 export type FoodReservationStatus = (typeof FoodReservationStatus)[keyof typeof FoodReservationStatus]
 
 
+export const FoodMealType = {
+  LUNCH: 'LUNCH',
+  DINNER: 'DINNER'
+} as const
+
+export type FoodMealType = (typeof FoodMealType)[keyof typeof FoodMealType]
+
+
 export const VehicleType = {
   SEDAN: 'SEDAN',
   PICKUP: 'PICKUP',

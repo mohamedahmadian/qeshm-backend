@@ -53,6 +53,7 @@ Thumbs.db
 # NestJS
 
 .nest/
+.swc/
 
 # Prisma
 

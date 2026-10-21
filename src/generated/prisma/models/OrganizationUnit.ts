@@ -43,6 +43,7 @@ export type OrganizationUnitSumAggregateOutputType = {
 export type OrganizationUnitMinAggregateOutputType = {
   id: string | null
   name: string | null
+  code: string | null
   kindId: string | null
   parentId: string | null
   phone: string | null
@@ -66,6 +67,7 @@ export type OrganizationUnitMinAggregateOutputType = {
 export type OrganizationUnitMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  code: string | null
   kindId: string | null
   parentId: string | null
   phone: string | null
@@ -89,6 +91,7 @@ export type OrganizationUnitMaxAggregateOutputType = {
 export type OrganizationUnitCountAggregateOutputType = {
   id: number
   name: number
+  code: number
   kindId: number
   parentId: number
   phone: number
@@ -128,6 +131,7 @@ export type OrganizationUnitSumAggregateInputType = {
 export type OrganizationUnitMinAggregateInputType = {
   id?: true
   name?: true
+  code?: true
   kindId?: true
   parentId?: true
   phone?: true
@@ -151,6 +155,7 @@ export type OrganizationUnitMinAggregateInputType = {
 export type OrganizationUnitMaxAggregateInputType = {
   id?: true
   name?: true
+  code?: true
   kindId?: true
   parentId?: true
   phone?: true
@@ -174,6 +179,7 @@ export type OrganizationUnitMaxAggregateInputType = {
 export type OrganizationUnitCountAggregateInputType = {
   id?: true
   name?: true
+  code?: true
   kindId?: true
   parentId?: true
   phone?: true
@@ -284,6 +290,7 @@ export type OrganizationUnitGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type OrganizationUnitGroupByOutputType = {
   id: string
   name: string
+  code: string
   kindId: string
   parentId: string | null
   phone: string | null
@@ -330,6 +337,7 @@ export type OrganizationUnitWhereInput = {
   NOT?: Prisma.OrganizationUnitWhereInput | Prisma.OrganizationUnitWhereInput[]
   id?: Prisma.StringFilter<"OrganizationUnit"> | string
   name?: Prisma.StringFilter<"OrganizationUnit"> | string
+  code?: Prisma.StringFilter<"OrganizationUnit"> | string
   kindId?: Prisma.StringFilter<"OrganizationUnit"> | string
   parentId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   phone?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
@@ -367,6 +375,7 @@ export type OrganizationUnitWhereInput = {
 export type OrganizationUnitOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   kindId?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -403,6 +412,7 @@ export type OrganizationUnitOrderByWithRelationInput = {
 
 export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  code?: string
   AND?: Prisma.OrganizationUnitWhereInput | Prisma.OrganizationUnitWhereInput[]
   OR?: Prisma.OrganizationUnitWhereInput[]
   NOT?: Prisma.OrganizationUnitWhereInput | Prisma.OrganizationUnitWhereInput[]
@@ -439,11 +449,12 @@ export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
   boardRequests?: Prisma.BoardRequestListRelationFilter
   boardStageUnits?: Prisma.BoardStageUnitListRelationFilter
   boardMinutesResolutions?: Prisma.BoardMinutesResolutionListRelationFilter
-}, "id">
+}, "id" | "code">
 
 export type OrganizationUnitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   kindId?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -475,6 +486,7 @@ export type OrganizationUnitScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OrganizationUnitScalarWhereWithAggregatesInput | Prisma.OrganizationUnitScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"OrganizationUnit"> | string
   name?: Prisma.StringWithAggregatesFilter<"OrganizationUnit"> | string
+  code?: Prisma.StringWithAggregatesFilter<"OrganizationUnit"> | string
   kindId?: Prisma.StringWithAggregatesFilter<"OrganizationUnit"> | string
   parentId?: Prisma.StringNullableWithAggregatesFilter<"OrganizationUnit"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"OrganizationUnit"> | string | null
@@ -498,6 +510,7 @@ export type OrganizationUnitScalarWhereWithAggregatesInput = {
 export type OrganizationUnitCreateInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -532,6 +545,7 @@ export type OrganizationUnitCreateInput = {
 export type OrganizationUnitUncheckedCreateInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -566,6 +580,7 @@ export type OrganizationUnitUncheckedCreateInput = {
 export type OrganizationUnitUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -600,6 +615,7 @@ export type OrganizationUnitUpdateInput = {
 export type OrganizationUnitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -634,6 +650,7 @@ export type OrganizationUnitUncheckedUpdateInput = {
 export type OrganizationUnitCreateManyInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -657,6 +674,7 @@ export type OrganizationUnitCreateManyInput = {
 export type OrganizationUnitUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -677,6 +695,7 @@ export type OrganizationUnitUpdateManyMutationInput = {
 export type OrganizationUnitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -720,6 +739,7 @@ export type OrganizationUnitScalarRelationFilter = {
 export type OrganizationUnitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   kindId?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -750,6 +770,7 @@ export type OrganizationUnitAvgOrderByAggregateInput = {
 export type OrganizationUnitMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   kindId?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -773,6 +794,7 @@ export type OrganizationUnitMaxOrderByAggregateInput = {
 export type OrganizationUnitMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   kindId?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -1093,6 +1115,7 @@ export type OrganizationUnitUpdateOneWithoutBoardMinutesResolutionsNestedInput =
 export type OrganizationUnitCreateWithoutEmployeesInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1126,6 +1149,7 @@ export type OrganizationUnitCreateWithoutEmployeesInput = {
 export type OrganizationUnitUncheckedCreateWithoutEmployeesInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -1164,6 +1188,7 @@ export type OrganizationUnitCreateOrConnectWithoutEmployeesInput = {
 export type OrganizationUnitCreateWithoutNutritionRepInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1197,6 +1222,7 @@ export type OrganizationUnitCreateWithoutNutritionRepInput = {
 export type OrganizationUnitUncheckedCreateWithoutNutritionRepInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -1251,6 +1277,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutEmployeesInput = {
 export type OrganizationUnitUpdateWithoutEmployeesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1284,6 +1311,7 @@ export type OrganizationUnitUpdateWithoutEmployeesInput = {
 export type OrganizationUnitUncheckedUpdateWithoutEmployeesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1336,6 +1364,7 @@ export type OrganizationUnitScalarWhereInput = {
   NOT?: Prisma.OrganizationUnitScalarWhereInput | Prisma.OrganizationUnitScalarWhereInput[]
   id?: Prisma.StringFilter<"OrganizationUnit"> | string
   name?: Prisma.StringFilter<"OrganizationUnit"> | string
+  code?: Prisma.StringFilter<"OrganizationUnit"> | string
   kindId?: Prisma.StringFilter<"OrganizationUnit"> | string
   parentId?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
   phone?: Prisma.StringNullableFilter<"OrganizationUnit"> | string | null
@@ -1359,6 +1388,7 @@ export type OrganizationUnitScalarWhereInput = {
 export type OrganizationUnitCreateWithoutProjectsInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1392,6 +1422,7 @@ export type OrganizationUnitCreateWithoutProjectsInput = {
 export type OrganizationUnitUncheckedCreateWithoutProjectsInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -1441,6 +1472,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutProjectsInput = {
 export type OrganizationUnitUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1474,6 +1506,7 @@ export type OrganizationUnitUpdateWithoutProjectsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1507,6 +1540,7 @@ export type OrganizationUnitUncheckedUpdateWithoutProjectsInput = {
 export type OrganizationUnitCreateWithoutProjectOperatorsInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1540,6 +1574,7 @@ export type OrganizationUnitCreateWithoutProjectOperatorsInput = {
 export type OrganizationUnitUncheckedCreateWithoutProjectOperatorsInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -1589,6 +1624,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutProjectOperatorsInput = {
 export type OrganizationUnitUpdateWithoutProjectOperatorsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1622,6 +1658,7 @@ export type OrganizationUnitUpdateWithoutProjectOperatorsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutProjectOperatorsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1655,6 +1692,7 @@ export type OrganizationUnitUncheckedUpdateWithoutProjectOperatorsInput = {
 export type OrganizationUnitCreateWithoutKindInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1688,6 +1726,7 @@ export type OrganizationUnitCreateWithoutKindInput = {
 export type OrganizationUnitUncheckedCreateWithoutKindInput = {
   id?: string
   name: string
+  code: string
   parentId?: string | null
   phone?: string | null
   address?: string | null
@@ -1747,6 +1786,7 @@ export type OrganizationUnitUpdateManyWithWhereWithoutKindInput = {
 export type OrganizationUnitCreateWithoutChildrenInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1780,6 +1820,7 @@ export type OrganizationUnitCreateWithoutChildrenInput = {
 export type OrganizationUnitUncheckedCreateWithoutChildrenInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -1818,6 +1859,7 @@ export type OrganizationUnitCreateOrConnectWithoutChildrenInput = {
 export type OrganizationUnitCreateWithoutParentInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1851,6 +1893,7 @@ export type OrganizationUnitCreateWithoutParentInput = {
 export type OrganizationUnitUncheckedCreateWithoutParentInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   phone?: string | null
   address?: string | null
@@ -1905,6 +1948,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutChildrenInput = {
 export type OrganizationUnitUpdateWithoutChildrenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1938,6 +1982,7 @@ export type OrganizationUnitUpdateWithoutChildrenInput = {
 export type OrganizationUnitUncheckedUpdateWithoutChildrenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1987,6 +2032,7 @@ export type OrganizationUnitUpdateManyWithWhereWithoutParentInput = {
 export type OrganizationUnitCreateWithoutRestaurantsInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2020,6 +2066,7 @@ export type OrganizationUnitCreateWithoutRestaurantsInput = {
 export type OrganizationUnitUncheckedCreateWithoutRestaurantsInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -2069,6 +2116,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutRestaurantsInput = {
 export type OrganizationUnitUpdateWithoutRestaurantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2102,6 +2150,7 @@ export type OrganizationUnitUpdateWithoutRestaurantsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2135,6 +2184,7 @@ export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
 export type OrganizationUnitCreateWithoutReservationsInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2168,6 +2218,7 @@ export type OrganizationUnitCreateWithoutReservationsInput = {
 export type OrganizationUnitUncheckedCreateWithoutReservationsInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -2217,6 +2268,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutReservationsInput = {
 export type OrganizationUnitUpdateWithoutReservationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2250,6 +2302,7 @@ export type OrganizationUnitUpdateWithoutReservationsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2283,6 +2336,7 @@ export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
 export type OrganizationUnitCreateWithoutAdvancedFoodOrdersInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2316,6 +2370,7 @@ export type OrganizationUnitCreateWithoutAdvancedFoodOrdersInput = {
 export type OrganizationUnitUncheckedCreateWithoutAdvancedFoodOrdersInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -2365,6 +2420,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutAdvancedFoodOrdersInput =
 export type OrganizationUnitUpdateWithoutAdvancedFoodOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2398,6 +2454,7 @@ export type OrganizationUnitUpdateWithoutAdvancedFoodOrdersInput = {
 export type OrganizationUnitUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2431,6 +2488,7 @@ export type OrganizationUnitUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
 export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2464,6 +2522,7 @@ export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
 export type OrganizationUnitUncheckedCreateWithoutVehicleAssignmentsInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -2513,6 +2572,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutVehicleAssignmentsInput =
 export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2546,6 +2606,7 @@ export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2579,6 +2640,7 @@ export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
 export type OrganizationUnitCreateWithoutBoardRequestsInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2612,6 +2674,7 @@ export type OrganizationUnitCreateWithoutBoardRequestsInput = {
 export type OrganizationUnitUncheckedCreateWithoutBoardRequestsInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -2661,6 +2724,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutBoardRequestsInput = {
 export type OrganizationUnitUpdateWithoutBoardRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2694,6 +2758,7 @@ export type OrganizationUnitUpdateWithoutBoardRequestsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutBoardRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2727,6 +2792,7 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardRequestsInput = {
 export type OrganizationUnitCreateWithoutBoardStageUnitsInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2760,6 +2826,7 @@ export type OrganizationUnitCreateWithoutBoardStageUnitsInput = {
 export type OrganizationUnitUncheckedCreateWithoutBoardStageUnitsInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -2809,6 +2876,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutBoardStageUnitsInput = {
 export type OrganizationUnitUpdateWithoutBoardStageUnitsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2842,6 +2910,7 @@ export type OrganizationUnitUpdateWithoutBoardStageUnitsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutBoardStageUnitsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2875,6 +2944,7 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardStageUnitsInput = {
 export type OrganizationUnitCreateWithoutBoardMinutesResolutionsInput = {
   id?: string
   name: string
+  code: string
   phone?: string | null
   address?: string | null
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2908,6 +2978,7 @@ export type OrganizationUnitCreateWithoutBoardMinutesResolutionsInput = {
 export type OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -2957,6 +3028,7 @@ export type OrganizationUnitUpdateToOneWithWhereWithoutBoardMinutesResolutionsIn
 export type OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2990,6 +3062,7 @@ export type OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput = {
 export type OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3023,6 +3096,7 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput =
 export type OrganizationUnitCreateManyNutritionRepInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   parentId?: string | null
   phone?: string | null
@@ -3045,6 +3119,7 @@ export type OrganizationUnitCreateManyNutritionRepInput = {
 export type OrganizationUnitUpdateWithoutNutritionRepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3078,6 +3153,7 @@ export type OrganizationUnitUpdateWithoutNutritionRepInput = {
 export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3111,6 +3187,7 @@ export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
 export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3133,6 +3210,7 @@ export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepInput = {
 export type OrganizationUnitCreateManyKindInput = {
   id?: string
   name: string
+  code: string
   parentId?: string | null
   phone?: string | null
   address?: string | null
@@ -3155,6 +3233,7 @@ export type OrganizationUnitCreateManyKindInput = {
 export type OrganizationUnitUpdateWithoutKindInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3188,6 +3267,7 @@ export type OrganizationUnitUpdateWithoutKindInput = {
 export type OrganizationUnitUncheckedUpdateWithoutKindInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3221,6 +3301,7 @@ export type OrganizationUnitUncheckedUpdateWithoutKindInput = {
 export type OrganizationUnitUncheckedUpdateManyWithoutKindInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3243,6 +3324,7 @@ export type OrganizationUnitUncheckedUpdateManyWithoutKindInput = {
 export type OrganizationUnitCreateManyParentInput = {
   id?: string
   name: string
+  code: string
   kindId: string
   phone?: string | null
   address?: string | null
@@ -3265,6 +3347,7 @@ export type OrganizationUnitCreateManyParentInput = {
 export type OrganizationUnitUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3298,6 +3381,7 @@ export type OrganizationUnitUpdateWithoutParentInput = {
 export type OrganizationUnitUncheckedUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3331,6 +3415,7 @@ export type OrganizationUnitUncheckedUpdateWithoutParentInput = {
 export type OrganizationUnitUncheckedUpdateManyWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
   kindId?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3474,6 +3559,7 @@ export type OrganizationUnitCountOutputTypeCountBoardMinutesResolutionsArgs<ExtA
 export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  code?: boolean
   kindId?: boolean
   parentId?: boolean
   phone?: boolean
@@ -3512,6 +3598,7 @@ export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.Inte
 export type OrganizationUnitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  code?: boolean
   kindId?: boolean
   parentId?: boolean
   phone?: boolean
@@ -3538,6 +3625,7 @@ export type OrganizationUnitSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
 export type OrganizationUnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  code?: boolean
   kindId?: boolean
   parentId?: boolean
   phone?: boolean
@@ -3564,6 +3652,7 @@ export type OrganizationUnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
 export type OrganizationUnitSelectScalar = {
   id?: boolean
   name?: boolean
+  code?: boolean
   kindId?: boolean
   parentId?: boolean
   phone?: boolean
@@ -3584,7 +3673,7 @@ export type OrganizationUnitSelectScalar = {
   updatedAt?: boolean
 }
 
-export type OrganizationUnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "kindId" | "parentId" | "phone" | "address" | "latitude" | "longitude" | "eitaa" | "bale" | "rubika" | "instagram" | "telegram" | "whatsapp" | "nutritionRepId" | "maxMeals" | "guestMealsEnabled" | "maxGuestMeals" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationUnit"]>
+export type OrganizationUnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "kindId" | "parentId" | "phone" | "address" | "latitude" | "longitude" | "eitaa" | "bale" | "rubika" | "instagram" | "telegram" | "whatsapp" | "nutritionRepId" | "maxMeals" | "guestMealsEnabled" | "maxGuestMeals" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationUnit"]>
 export type OrganizationUnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   kind?: boolean | Prisma.OrganizationUnitKindDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.OrganizationUnit$parentArgs<ExtArgs>
@@ -3634,6 +3723,7 @@ export type $OrganizationUnitPayload<ExtArgs extends runtime.Types.Extensions.In
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    code: string
     kindId: string
     parentId: string | null
     phone: string | null
@@ -4091,6 +4181,7 @@ export interface Prisma__OrganizationUnitClient<T, Null = never, ExtArgs extends
 export interface OrganizationUnitFieldRefs {
   readonly id: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly name: Prisma.FieldRef<"OrganizationUnit", 'String'>
+  readonly code: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly kindId: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly parentId: Prisma.FieldRef<"OrganizationUnit", 'String'>
   readonly phone: Prisma.FieldRef<"OrganizationUnit", 'String'>

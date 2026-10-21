@@ -5730,6 +5730,7 @@ export type OrganizationUnitKindScalarFieldEnum = (typeof OrganizationUnitKindSc
 export const OrganizationUnitScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  code: 'code',
   kindId: 'kindId',
   parentId: 'parentId',
   phone: 'phone',
@@ -5767,6 +5768,7 @@ export type OrganizationUnitRestaurantScalarFieldEnum = (typeof OrganizationUnit
 export const FoodReservationScalarFieldEnum = {
   id: 'id',
   reservedAt: 'reservedAt',
+  mealType: 'mealType',
   restaurantId: 'restaurantId',
   foodId: 'foodId',
   userId: 'userId',
@@ -5788,12 +5790,15 @@ export const AdvancedFoodOrderScalarFieldEnum = {
   orgUnitId: 'orgUnitId',
   restaurantId: 'restaurantId',
   source: 'source',
+  mealType: 'mealType',
   startsOn: 'startsOn',
   endsOn: 'endsOn',
   weekdays: 'weekdays',
   foodLabel: 'foodLabel',
   employeeQuantity: 'employeeQuantity',
   managementQuantity: 'managementQuantity',
+  employeeGuestQuantity: 'employeeGuestQuantity',
+  managementGuestQuantity: 'managementGuestQuantity',
   employeeUnitPrice: 'employeeUnitPrice',
   managementUnitPrice: 'managementUnitPrice',
   createdById: 'createdById',
@@ -6577,6 +6582,20 @@ export type EnumProjectProgressTranscriptionStatusFieldRefInput<$PrismaModel> = 
  * Reference to a field of type 'ProjectProgressTranscriptionStatus[]'
  */
 export type ListEnumProjectProgressTranscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectProgressTranscriptionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FoodMealType'
+ */
+export type EnumFoodMealTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FoodMealType'>
+    
+
+
+/**
+ * Reference to a field of type 'FoodMealType[]'
+ */
+export type ListEnumFoodMealTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FoodMealType[]'>
     
 
 

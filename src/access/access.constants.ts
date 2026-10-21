@@ -57,9 +57,10 @@ export const FOOD_ADMIN_PERMISSION_CODES = [
   'food-reservation.reserve',
   'food-reservation.advanced',
   'food-reservation.history',
+  'food-reservation.daily-report',
+  'food-reservation.unit-report',
   'food-reservation.report',
   'food-reservation.cost-estimate',
-  'food-reservation.unit-report',
 ] as const;
 
 export const STAKEHOLDERS_ADMIN_PERMISSION_CODES = [

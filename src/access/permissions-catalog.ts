@@ -111,6 +111,26 @@ export const PERMISSION_TREE: PermissionNode[] = [
         nameKey: 'menus.foodAdvancedReserve',
       },
       {
+        code: 'food-reservation.history',
+        kind: 'MENU',
+        nameKey: 'menus.foodReservationHistory',
+      },
+      {
+        code: 'food-reservation.daily-report',
+        kind: 'MENU',
+        nameKey: 'menus.foodDailyReport',
+      },
+      {
+        code: 'food-reservation.unit-report',
+        kind: 'MENU',
+        nameKey: 'menus.foodUnitReport',
+      },
+      {
+        code: 'food-reservation.report',
+        kind: 'MENU',
+        nameKey: 'menus.foodReservationReport',
+      },
+      {
         code: 'food-reservation.my-orders',
         kind: 'MENU',
         nameKey: 'menus.foodMyOrders',
@@ -121,24 +141,9 @@ export const PERMISSION_TREE: PermissionNode[] = [
         nameKey: 'menus.foodMyReport',
       },
       {
-        code: 'food-reservation.history',
-        kind: 'MENU',
-        nameKey: 'menus.foodReservationHistory',
-      },
-      {
-        code: 'food-reservation.report',
-        kind: 'MENU',
-        nameKey: 'menus.foodReservationReport',
-      },
-      {
         code: 'food-reservation.cost-estimate',
         kind: 'MENU',
         nameKey: 'menus.foodCostEstimate',
-      },
-      {
-        code: 'food-reservation.unit-report',
-        kind: 'MENU',
-        nameKey: 'menus.foodUnitReport',
       },
     ],
   },

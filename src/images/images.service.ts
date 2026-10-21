@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { Jimp, JimpMime } from 'jimp';
+import { loadJimp } from '../common/lazy-modules';
 import { PrismaService } from '../prisma/prisma.service';
 
 /** Reject oversized uploads before processing. */
@@ -20,9 +20,12 @@ type ImageUpload = {
   originalname: string;
 };
 
+type JimpNS = typeof import('jimp');
+type JimpImage = Awaited<ReturnType<JimpNS['Jimp']['read']>>;
+
 type EncodedImage = {
   data: Buffer;
-  mimeType: (typeof JimpMime)['jpeg'] | (typeof JimpMime)['png'];
+  mimeType: 'image/jpeg' | 'image/png';
 };
 
 @Injectable()
@@ -40,6 +43,8 @@ export class ImagesService {
       throw new BadRequestException('فقط فایل تصویر مجاز است');
     }
 
+    const jimp = await loadJimp();
+    const { Jimp } = jimp;
     let image;
     try {
       image = await Jimp.read(file.buffer);
@@ -58,6 +63,7 @@ export class ImagesService {
     const encoded = await encodeStoredImage(
       image,
       isPngSource(file) || image.hasAlpha(),
+      jimp,
     );
     if (!encoded) {
       throw new BadRequestException(
@@ -94,7 +100,7 @@ export class ImagesService {
 }
 
 function isPngSource(file: ImageUpload) {
-  if (file.mimetype === JimpMime.png) {
+  if (file.mimetype === 'image/png') {
     return true;
   }
   if (/\.png$/i.test(file.originalname ?? '')) {
@@ -110,32 +116,33 @@ function isPngSource(file: ImageUpload) {
 }
 
 function withStoredFileName(originalName: string | undefined, mimeType: string) {
-  const ext = mimeType === JimpMime.png ? 'png' : 'jpg';
+  const ext = mimeType === 'image/png' ? 'png' : 'jpg';
   const raw = (originalName ?? 'image').trim() || 'image';
   const base = raw.replace(/\.[^.]+$/, '') || 'image';
   return `${base}.${ext}`;
 }
 
 async function encodeStoredImage(
-  image: Awaited<ReturnType<typeof Jimp.read>>,
+  image: JimpImage,
   preferPng: boolean,
+  jimp: JimpNS,
 ): Promise<EncodedImage | null> {
+  const { JimpMime } = jimp;
   if (preferPng) {
     const png = await image.getBuffer(JimpMime.png);
     if (png.length <= MAX_STORED_BYTES) {
       return { data: png, mimeType: JimpMime.png };
     }
   }
-  const jpeg = await encodeJpegUnderLimit(image);
+  const jpeg = await encodeJpegUnderLimit(image, jimp);
   if (!jpeg) {
     return null;
   }
   return { data: jpeg, mimeType: JimpMime.jpeg };
 }
 
-async function encodeJpegUnderLimit(
-  image: Awaited<ReturnType<typeof Jimp.read>>,
-) {
+async function encodeJpegUnderLimit(image: JimpImage, jimp: JimpNS) {
+  const { Jimp, JimpMime } = jimp;
   const source = image.hasAlpha()
     ? new Jimp({
         width: image.width,

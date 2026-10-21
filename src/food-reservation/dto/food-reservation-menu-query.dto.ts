@@ -1,6 +1,7 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsOptional, IsString, IsUUID, Matches } from 'class-validator';
-import { toOptionalBoolean } from '../../common/dto-transform';
+import { IsBoolean, IsIn, IsOptional, IsString, IsUUID, Matches } from 'class-validator';
+import { emptyToUndefined, toOptionalBoolean } from '../../common/dto-transform';
+import { foodMealTypes } from '../food-meal-type';
 
 export class FoodReservationLastQuantityQueryDto {
   @IsOptional()
@@ -14,6 +15,11 @@ export class FoodReservationLastQuantityQueryDto {
   @IsOptional()
   @IsUUID('4')
   foodId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...foodMealTypes])
+  mealType?: (typeof foodMealTypes)[number];
 
   @IsOptional()
   @Transform(({ value }) => toOptionalBoolean(value))

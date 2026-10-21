@@ -13,6 +13,8 @@ import {
   Max,
   Min,
 } from 'class-validator';
+import { emptyToUndefined } from '../../common/dto-transform';
+import { foodMealTypes } from '../food-meal-type';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -60,6 +62,11 @@ export class CreateAdvancedFoodOrderDto {
   @IsIn([...advancedFoodOrderSources])
   source: (typeof advancedFoodOrderSources)[number];
 
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...foodMealTypes])
+  mealType?: (typeof foodMealTypes)[number];
+
   @Type(() => Number)
   @IsInt()
   @Min(0)
@@ -71,6 +78,20 @@ export class CreateAdvancedFoodOrderDto {
   @Min(0)
   @Max(10000)
   managementQuantity: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  @Max(10000)
+  employeeGuestQuantity?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  @Max(10000)
+  managementGuestQuantity?: number;
 
   @IsOptional()
   @Type(() => Number)

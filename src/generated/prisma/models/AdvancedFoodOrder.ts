@@ -30,6 +30,8 @@ export type AdvancedFoodOrderAvgAggregateOutputType = {
   weekdays: number | null
   employeeQuantity: number | null
   managementQuantity: number | null
+  employeeGuestQuantity: number | null
+  managementGuestQuantity: number | null
   employeeUnitPrice: runtime.Decimal | null
   managementUnitPrice: runtime.Decimal | null
 }
@@ -38,6 +40,8 @@ export type AdvancedFoodOrderSumAggregateOutputType = {
   weekdays: number[]
   employeeQuantity: number | null
   managementQuantity: number | null
+  employeeGuestQuantity: number | null
+  managementGuestQuantity: number | null
   employeeUnitPrice: runtime.Decimal | null
   managementUnitPrice: runtime.Decimal | null
 }
@@ -47,11 +51,14 @@ export type AdvancedFoodOrderMinAggregateOutputType = {
   orgUnitId: string | null
   restaurantId: string | null
   source: $Enums.AdvancedFoodOrderSource | null
+  mealType: $Enums.FoodMealType | null
   startsOn: Date | null
   endsOn: Date | null
   foodLabel: string | null
   employeeQuantity: number | null
   managementQuantity: number | null
+  employeeGuestQuantity: number | null
+  managementGuestQuantity: number | null
   employeeUnitPrice: runtime.Decimal | null
   managementUnitPrice: runtime.Decimal | null
   createdById: string | null
@@ -64,11 +71,14 @@ export type AdvancedFoodOrderMaxAggregateOutputType = {
   orgUnitId: string | null
   restaurantId: string | null
   source: $Enums.AdvancedFoodOrderSource | null
+  mealType: $Enums.FoodMealType | null
   startsOn: Date | null
   endsOn: Date | null
   foodLabel: string | null
   employeeQuantity: number | null
   managementQuantity: number | null
+  employeeGuestQuantity: number | null
+  managementGuestQuantity: number | null
   employeeUnitPrice: runtime.Decimal | null
   managementUnitPrice: runtime.Decimal | null
   createdById: string | null
@@ -81,12 +91,15 @@ export type AdvancedFoodOrderCountAggregateOutputType = {
   orgUnitId: number
   restaurantId: number
   source: number
+  mealType: number
   startsOn: number
   endsOn: number
   weekdays: number
   foodLabel: number
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity: number
+  managementGuestQuantity: number
   employeeUnitPrice: number
   managementUnitPrice: number
   createdById: number
@@ -100,6 +113,8 @@ export type AdvancedFoodOrderAvgAggregateInputType = {
   weekdays?: true
   employeeQuantity?: true
   managementQuantity?: true
+  employeeGuestQuantity?: true
+  managementGuestQuantity?: true
   employeeUnitPrice?: true
   managementUnitPrice?: true
 }
@@ -108,6 +123,8 @@ export type AdvancedFoodOrderSumAggregateInputType = {
   weekdays?: true
   employeeQuantity?: true
   managementQuantity?: true
+  employeeGuestQuantity?: true
+  managementGuestQuantity?: true
   employeeUnitPrice?: true
   managementUnitPrice?: true
 }
@@ -117,11 +134,14 @@ export type AdvancedFoodOrderMinAggregateInputType = {
   orgUnitId?: true
   restaurantId?: true
   source?: true
+  mealType?: true
   startsOn?: true
   endsOn?: true
   foodLabel?: true
   employeeQuantity?: true
   managementQuantity?: true
+  employeeGuestQuantity?: true
+  managementGuestQuantity?: true
   employeeUnitPrice?: true
   managementUnitPrice?: true
   createdById?: true
@@ -134,11 +154,14 @@ export type AdvancedFoodOrderMaxAggregateInputType = {
   orgUnitId?: true
   restaurantId?: true
   source?: true
+  mealType?: true
   startsOn?: true
   endsOn?: true
   foodLabel?: true
   employeeQuantity?: true
   managementQuantity?: true
+  employeeGuestQuantity?: true
+  managementGuestQuantity?: true
   employeeUnitPrice?: true
   managementUnitPrice?: true
   createdById?: true
@@ -151,12 +174,15 @@ export type AdvancedFoodOrderCountAggregateInputType = {
   orgUnitId?: true
   restaurantId?: true
   source?: true
+  mealType?: true
   startsOn?: true
   endsOn?: true
   weekdays?: true
   foodLabel?: true
   employeeQuantity?: true
   managementQuantity?: true
+  employeeGuestQuantity?: true
+  managementGuestQuantity?: true
   employeeUnitPrice?: true
   managementUnitPrice?: true
   createdById?: true
@@ -256,12 +282,15 @@ export type AdvancedFoodOrderGroupByOutputType = {
   orgUnitId: string
   restaurantId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType: $Enums.FoodMealType
   startsOn: Date
   endsOn: Date
   weekdays: number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity: number
+  managementGuestQuantity: number
   employeeUnitPrice: runtime.Decimal | null
   managementUnitPrice: runtime.Decimal | null
   createdById: string
@@ -297,12 +326,15 @@ export type AdvancedFoodOrderWhereInput = {
   orgUnitId?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   restaurantId?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFilter<"AdvancedFoodOrder"> | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFilter<"AdvancedFoodOrder"> | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFilter<"AdvancedFoodOrder"> | Date | string
   endsOn?: Prisma.DateTimeFilter<"AdvancedFoodOrder"> | Date | string
   weekdays?: Prisma.IntNullableListFilter<"AdvancedFoodOrder">
   foodLabel?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   employeeQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
   managementQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
+  employeeGuestQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
+  managementGuestQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
   employeeUnitPrice?: Prisma.DecimalNullableFilter<"AdvancedFoodOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.DecimalNullableFilter<"AdvancedFoodOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
@@ -319,12 +351,15 @@ export type AdvancedFoodOrderOrderByWithRelationInput = {
   orgUnitId?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  mealType?: Prisma.SortOrder
   startsOn?: Prisma.SortOrder
   endsOn?: Prisma.SortOrder
   weekdays?: Prisma.SortOrder
   foodLabel?: Prisma.SortOrder
   employeeQuantity?: Prisma.SortOrder
   managementQuantity?: Prisma.SortOrder
+  employeeGuestQuantity?: Prisma.SortOrder
+  managementGuestQuantity?: Prisma.SortOrder
   employeeUnitPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   managementUnitPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -344,12 +379,15 @@ export type AdvancedFoodOrderWhereUniqueInput = Prisma.AtLeast<{
   orgUnitId?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   restaurantId?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFilter<"AdvancedFoodOrder"> | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFilter<"AdvancedFoodOrder"> | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFilter<"AdvancedFoodOrder"> | Date | string
   endsOn?: Prisma.DateTimeFilter<"AdvancedFoodOrder"> | Date | string
   weekdays?: Prisma.IntNullableListFilter<"AdvancedFoodOrder">
   foodLabel?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   employeeQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
   managementQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
+  employeeGuestQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
+  managementGuestQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
   employeeUnitPrice?: Prisma.DecimalNullableFilter<"AdvancedFoodOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.DecimalNullableFilter<"AdvancedFoodOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
@@ -366,12 +404,15 @@ export type AdvancedFoodOrderOrderByWithAggregationInput = {
   orgUnitId?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  mealType?: Prisma.SortOrder
   startsOn?: Prisma.SortOrder
   endsOn?: Prisma.SortOrder
   weekdays?: Prisma.SortOrder
   foodLabel?: Prisma.SortOrder
   employeeQuantity?: Prisma.SortOrder
   managementQuantity?: Prisma.SortOrder
+  employeeGuestQuantity?: Prisma.SortOrder
+  managementGuestQuantity?: Prisma.SortOrder
   employeeUnitPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   managementUnitPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -392,12 +433,15 @@ export type AdvancedFoodOrderScalarWhereWithAggregatesInput = {
   orgUnitId?: Prisma.StringWithAggregatesFilter<"AdvancedFoodOrder"> | string
   restaurantId?: Prisma.StringWithAggregatesFilter<"AdvancedFoodOrder"> | string
   source?: Prisma.EnumAdvancedFoodOrderSourceWithAggregatesFilter<"AdvancedFoodOrder"> | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeWithAggregatesFilter<"AdvancedFoodOrder"> | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeWithAggregatesFilter<"AdvancedFoodOrder"> | Date | string
   endsOn?: Prisma.DateTimeWithAggregatesFilter<"AdvancedFoodOrder"> | Date | string
   weekdays?: Prisma.IntNullableListFilter<"AdvancedFoodOrder">
   foodLabel?: Prisma.StringWithAggregatesFilter<"AdvancedFoodOrder"> | string
   employeeQuantity?: Prisma.IntWithAggregatesFilter<"AdvancedFoodOrder"> | number
   managementQuantity?: Prisma.IntWithAggregatesFilter<"AdvancedFoodOrder"> | number
+  employeeGuestQuantity?: Prisma.IntWithAggregatesFilter<"AdvancedFoodOrder"> | number
+  managementGuestQuantity?: Prisma.IntWithAggregatesFilter<"AdvancedFoodOrder"> | number
   employeeUnitPrice?: Prisma.DecimalNullableWithAggregatesFilter<"AdvancedFoodOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.DecimalNullableWithAggregatesFilter<"AdvancedFoodOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringWithAggregatesFilter<"AdvancedFoodOrder"> | string
@@ -408,12 +452,15 @@ export type AdvancedFoodOrderScalarWhereWithAggregatesInput = {
 export type AdvancedFoodOrderCreateInput = {
   id?: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
@@ -429,12 +476,15 @@ export type AdvancedFoodOrderUncheckedCreateInput = {
   orgUnitId: string
   restaurantId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById: string
@@ -446,12 +496,15 @@ export type AdvancedFoodOrderUncheckedCreateInput = {
 export type AdvancedFoodOrderUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -467,12 +520,15 @@ export type AdvancedFoodOrderUncheckedUpdateInput = {
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -486,12 +542,15 @@ export type AdvancedFoodOrderCreateManyInput = {
   orgUnitId: string
   restaurantId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById: string
@@ -502,12 +561,15 @@ export type AdvancedFoodOrderCreateManyInput = {
 export type AdvancedFoodOrderUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -519,12 +581,15 @@ export type AdvancedFoodOrderUncheckedUpdateManyInput = {
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -560,12 +625,15 @@ export type AdvancedFoodOrderCountOrderByAggregateInput = {
   orgUnitId?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  mealType?: Prisma.SortOrder
   startsOn?: Prisma.SortOrder
   endsOn?: Prisma.SortOrder
   weekdays?: Prisma.SortOrder
   foodLabel?: Prisma.SortOrder
   employeeQuantity?: Prisma.SortOrder
   managementQuantity?: Prisma.SortOrder
+  employeeGuestQuantity?: Prisma.SortOrder
+  managementGuestQuantity?: Prisma.SortOrder
   employeeUnitPrice?: Prisma.SortOrder
   managementUnitPrice?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -577,6 +645,8 @@ export type AdvancedFoodOrderAvgOrderByAggregateInput = {
   weekdays?: Prisma.SortOrder
   employeeQuantity?: Prisma.SortOrder
   managementQuantity?: Prisma.SortOrder
+  employeeGuestQuantity?: Prisma.SortOrder
+  managementGuestQuantity?: Prisma.SortOrder
   employeeUnitPrice?: Prisma.SortOrder
   managementUnitPrice?: Prisma.SortOrder
 }
@@ -586,11 +656,14 @@ export type AdvancedFoodOrderMaxOrderByAggregateInput = {
   orgUnitId?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  mealType?: Prisma.SortOrder
   startsOn?: Prisma.SortOrder
   endsOn?: Prisma.SortOrder
   foodLabel?: Prisma.SortOrder
   employeeQuantity?: Prisma.SortOrder
   managementQuantity?: Prisma.SortOrder
+  employeeGuestQuantity?: Prisma.SortOrder
+  managementGuestQuantity?: Prisma.SortOrder
   employeeUnitPrice?: Prisma.SortOrder
   managementUnitPrice?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -603,11 +676,14 @@ export type AdvancedFoodOrderMinOrderByAggregateInput = {
   orgUnitId?: Prisma.SortOrder
   restaurantId?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  mealType?: Prisma.SortOrder
   startsOn?: Prisma.SortOrder
   endsOn?: Prisma.SortOrder
   foodLabel?: Prisma.SortOrder
   employeeQuantity?: Prisma.SortOrder
   managementQuantity?: Prisma.SortOrder
+  employeeGuestQuantity?: Prisma.SortOrder
+  managementGuestQuantity?: Prisma.SortOrder
   employeeUnitPrice?: Prisma.SortOrder
   managementUnitPrice?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -619,6 +695,8 @@ export type AdvancedFoodOrderSumOrderByAggregateInput = {
   weekdays?: Prisma.SortOrder
   employeeQuantity?: Prisma.SortOrder
   managementQuantity?: Prisma.SortOrder
+  employeeGuestQuantity?: Prisma.SortOrder
+  managementGuestQuantity?: Prisma.SortOrder
   employeeUnitPrice?: Prisma.SortOrder
   managementUnitPrice?: Prisma.SortOrder
 }
@@ -781,12 +859,15 @@ export type AdvancedFoodOrderUpdateweekdaysInput = {
 export type AdvancedFoodOrderCreateWithoutCreatedByInput = {
   id?: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
@@ -801,12 +882,15 @@ export type AdvancedFoodOrderUncheckedCreateWithoutCreatedByInput = {
   orgUnitId: string
   restaurantId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
@@ -848,12 +932,15 @@ export type AdvancedFoodOrderScalarWhereInput = {
   orgUnitId?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   restaurantId?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFilter<"AdvancedFoodOrder"> | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFilter<"AdvancedFoodOrder"> | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFilter<"AdvancedFoodOrder"> | Date | string
   endsOn?: Prisma.DateTimeFilter<"AdvancedFoodOrder"> | Date | string
   weekdays?: Prisma.IntNullableListFilter<"AdvancedFoodOrder">
   foodLabel?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
   employeeQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
   managementQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
+  employeeGuestQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
+  managementGuestQuantity?: Prisma.IntFilter<"AdvancedFoodOrder"> | number
   employeeUnitPrice?: Prisma.DecimalNullableFilter<"AdvancedFoodOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.DecimalNullableFilter<"AdvancedFoodOrder"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFilter<"AdvancedFoodOrder"> | string
@@ -864,12 +951,15 @@ export type AdvancedFoodOrderScalarWhereInput = {
 export type AdvancedFoodOrderCreateWithoutRestaurantInput = {
   id?: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
@@ -883,12 +973,15 @@ export type AdvancedFoodOrderUncheckedCreateWithoutRestaurantInput = {
   id?: string
   orgUnitId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById: string
@@ -926,12 +1019,15 @@ export type AdvancedFoodOrderUpdateManyWithWhereWithoutRestaurantInput = {
 export type AdvancedFoodOrderCreateWithoutOrgUnitInput = {
   id?: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
@@ -945,12 +1041,15 @@ export type AdvancedFoodOrderUncheckedCreateWithoutOrgUnitInput = {
   id?: string
   restaurantId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById: string
@@ -988,12 +1087,15 @@ export type AdvancedFoodOrderUpdateManyWithWhereWithoutOrgUnitInput = {
 export type AdvancedFoodOrderCreateWithoutReservationsInput = {
   id?: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
@@ -1008,12 +1110,15 @@ export type AdvancedFoodOrderUncheckedCreateWithoutReservationsInput = {
   orgUnitId: string
   restaurantId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById: string
@@ -1040,12 +1145,15 @@ export type AdvancedFoodOrderUpdateToOneWithWhereWithoutReservationsInput = {
 export type AdvancedFoodOrderUpdateWithoutReservationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1060,12 +1168,15 @@ export type AdvancedFoodOrderUncheckedUpdateWithoutReservationsInput = {
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1078,12 +1189,15 @@ export type AdvancedFoodOrderCreateManyCreatedByInput = {
   orgUnitId: string
   restaurantId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
@@ -1093,12 +1207,15 @@ export type AdvancedFoodOrderCreateManyCreatedByInput = {
 export type AdvancedFoodOrderUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1113,12 +1230,15 @@ export type AdvancedFoodOrderUncheckedUpdateWithoutCreatedByInput = {
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1131,12 +1251,15 @@ export type AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByInput = {
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1147,12 +1270,15 @@ export type AdvancedFoodOrderCreateManyRestaurantInput = {
   id?: string
   orgUnitId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById: string
@@ -1163,12 +1289,15 @@ export type AdvancedFoodOrderCreateManyRestaurantInput = {
 export type AdvancedFoodOrderUpdateWithoutRestaurantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1182,12 +1311,15 @@ export type AdvancedFoodOrderUncheckedUpdateWithoutRestaurantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1200,12 +1332,15 @@ export type AdvancedFoodOrderUncheckedUpdateManyWithoutRestaurantInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   orgUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1217,12 +1352,15 @@ export type AdvancedFoodOrderCreateManyOrgUnitInput = {
   id?: string
   restaurantId: string
   source: $Enums.AdvancedFoodOrderSource
+  mealType?: $Enums.FoodMealType
   startsOn: Date | string
   endsOn: Date | string
   weekdays?: Prisma.AdvancedFoodOrderCreateweekdaysInput | number[]
   foodLabel: string
   employeeQuantity: number
   managementQuantity: number
+  employeeGuestQuantity?: number
+  managementGuestQuantity?: number
   employeeUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById: string
@@ -1233,12 +1371,15 @@ export type AdvancedFoodOrderCreateManyOrgUnitInput = {
 export type AdvancedFoodOrderUpdateWithoutOrgUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1252,12 +1393,15 @@ export type AdvancedFoodOrderUncheckedUpdateWithoutOrgUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1270,12 +1414,15 @@ export type AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.EnumAdvancedFoodOrderSourceFieldUpdateOperationsInput | $Enums.AdvancedFoodOrderSource
+  mealType?: Prisma.EnumFoodMealTypeFieldUpdateOperationsInput | $Enums.FoodMealType
   startsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsOn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weekdays?: Prisma.AdvancedFoodOrderUpdateweekdaysInput | number[]
   foodLabel?: Prisma.StringFieldUpdateOperationsInput | string
   employeeQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   managementQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  employeeGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
+  managementGuestQuantity?: Prisma.IntFieldUpdateOperationsInput | number
   employeeUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   managementUnitPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1319,12 +1466,15 @@ export type AdvancedFoodOrderSelect<ExtArgs extends runtime.Types.Extensions.Int
   orgUnitId?: boolean
   restaurantId?: boolean
   source?: boolean
+  mealType?: boolean
   startsOn?: boolean
   endsOn?: boolean
   weekdays?: boolean
   foodLabel?: boolean
   employeeQuantity?: boolean
   managementQuantity?: boolean
+  employeeGuestQuantity?: boolean
+  managementGuestQuantity?: boolean
   employeeUnitPrice?: boolean
   managementUnitPrice?: boolean
   createdById?: boolean
@@ -1342,12 +1492,15 @@ export type AdvancedFoodOrderSelectCreateManyAndReturn<ExtArgs extends runtime.T
   orgUnitId?: boolean
   restaurantId?: boolean
   source?: boolean
+  mealType?: boolean
   startsOn?: boolean
   endsOn?: boolean
   weekdays?: boolean
   foodLabel?: boolean
   employeeQuantity?: boolean
   managementQuantity?: boolean
+  employeeGuestQuantity?: boolean
+  managementGuestQuantity?: boolean
   employeeUnitPrice?: boolean
   managementUnitPrice?: boolean
   createdById?: boolean
@@ -1363,12 +1516,15 @@ export type AdvancedFoodOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   orgUnitId?: boolean
   restaurantId?: boolean
   source?: boolean
+  mealType?: boolean
   startsOn?: boolean
   endsOn?: boolean
   weekdays?: boolean
   foodLabel?: boolean
   employeeQuantity?: boolean
   managementQuantity?: boolean
+  employeeGuestQuantity?: boolean
+  managementGuestQuantity?: boolean
   employeeUnitPrice?: boolean
   managementUnitPrice?: boolean
   createdById?: boolean
@@ -1384,12 +1540,15 @@ export type AdvancedFoodOrderSelectScalar = {
   orgUnitId?: boolean
   restaurantId?: boolean
   source?: boolean
+  mealType?: boolean
   startsOn?: boolean
   endsOn?: boolean
   weekdays?: boolean
   foodLabel?: boolean
   employeeQuantity?: boolean
   managementQuantity?: boolean
+  employeeGuestQuantity?: boolean
+  managementGuestQuantity?: boolean
   employeeUnitPrice?: boolean
   managementUnitPrice?: boolean
   createdById?: boolean
@@ -1397,7 +1556,7 @@ export type AdvancedFoodOrderSelectScalar = {
   updatedAt?: boolean
 }
 
-export type AdvancedFoodOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orgUnitId" | "restaurantId" | "source" | "startsOn" | "endsOn" | "weekdays" | "foodLabel" | "employeeQuantity" | "managementQuantity" | "employeeUnitPrice" | "managementUnitPrice" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["advancedFoodOrder"]>
+export type AdvancedFoodOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orgUnitId" | "restaurantId" | "source" | "mealType" | "startsOn" | "endsOn" | "weekdays" | "foodLabel" | "employeeQuantity" | "managementQuantity" | "employeeGuestQuantity" | "managementGuestQuantity" | "employeeUnitPrice" | "managementUnitPrice" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["advancedFoodOrder"]>
 export type AdvancedFoodOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orgUnit?: boolean | Prisma.OrganizationUnitDefaultArgs<ExtArgs>
   restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
@@ -1429,6 +1588,7 @@ export type $AdvancedFoodOrderPayload<ExtArgs extends runtime.Types.Extensions.I
     orgUnitId: string
     restaurantId: string
     source: $Enums.AdvancedFoodOrderSource
+    mealType: $Enums.FoodMealType
     startsOn: Date
     endsOn: Date
     /**
@@ -1438,6 +1598,8 @@ export type $AdvancedFoodOrderPayload<ExtArgs extends runtime.Types.Extensions.I
     foodLabel: string
     employeeQuantity: number
     managementQuantity: number
+    employeeGuestQuantity: number
+    managementGuestQuantity: number
     employeeUnitPrice: runtime.Decimal | null
     managementUnitPrice: runtime.Decimal | null
     createdById: string
@@ -1874,12 +2036,15 @@ export interface AdvancedFoodOrderFieldRefs {
   readonly orgUnitId: Prisma.FieldRef<"AdvancedFoodOrder", 'String'>
   readonly restaurantId: Prisma.FieldRef<"AdvancedFoodOrder", 'String'>
   readonly source: Prisma.FieldRef<"AdvancedFoodOrder", 'AdvancedFoodOrderSource'>
+  readonly mealType: Prisma.FieldRef<"AdvancedFoodOrder", 'FoodMealType'>
   readonly startsOn: Prisma.FieldRef<"AdvancedFoodOrder", 'DateTime'>
   readonly endsOn: Prisma.FieldRef<"AdvancedFoodOrder", 'DateTime'>
   readonly weekdays: Prisma.FieldRef<"AdvancedFoodOrder", 'Int[]'>
   readonly foodLabel: Prisma.FieldRef<"AdvancedFoodOrder", 'String'>
   readonly employeeQuantity: Prisma.FieldRef<"AdvancedFoodOrder", 'Int'>
   readonly managementQuantity: Prisma.FieldRef<"AdvancedFoodOrder", 'Int'>
+  readonly employeeGuestQuantity: Prisma.FieldRef<"AdvancedFoodOrder", 'Int'>
+  readonly managementGuestQuantity: Prisma.FieldRef<"AdvancedFoodOrder", 'Int'>
   readonly employeeUnitPrice: Prisma.FieldRef<"AdvancedFoodOrder", 'Decimal'>
   readonly managementUnitPrice: Prisma.FieldRef<"AdvancedFoodOrder", 'Decimal'>
   readonly createdById: Prisma.FieldRef<"AdvancedFoodOrder", 'String'>

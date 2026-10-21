@@ -1,6 +1,7 @@
 import { existsSync } from 'fs';
 import path from 'path';
-import ExcelJS from 'exceljs';
+import type ExcelJS from 'exceljs';
+import { loadExcelJS } from '../common/lazy-modules';
 import { Religion, type PrismaClient } from '../generated/prisma/client';
 
 /** Type column in داده های پایه.xlsx (CitizenCard base data). */
@@ -61,6 +62,7 @@ export function qeshmondiLookupFilePath() {
 export async function importQeshmondiLookupFile(prisma: LookupDb) {
   const filePath = qeshmondiLookupFilePath();
   if (!filePath) return 0;
+  const ExcelJS = await loadExcelJS();
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(filePath);
   const sheet = workbook.worksheets[0];

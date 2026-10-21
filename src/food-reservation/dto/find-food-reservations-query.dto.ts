@@ -3,9 +3,11 @@ import { IsBoolean, IsIn, IsOptional, IsString, IsUUID, Matches } from 'class-va
 import { emptyToUndefined, toOptionalBoolean } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
+import { foodMealTypes } from '../food-meal-type';
 
 export const foodReservationSortFields = [
   'reservedAt',
+  'mealType',
   'restaurant',
   'food',
   'user',
@@ -43,6 +45,11 @@ export class FindFoodReservationsQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...foodReservationStatuses])
   status?: (typeof foodReservationStatuses)[number];
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...foodMealTypes])
+  mealType?: (typeof foodMealTypes)[number];
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

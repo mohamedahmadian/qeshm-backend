@@ -27,6 +27,7 @@ import { buildOrganizationUnitPaths } from '../organization/organization-unit-tr
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAdvancedFoodOrderDto } from './dto/create-advanced-food-order.dto';
 import { FindAdvancedFoodOrdersQueryDto } from './dto/find-advanced-food-orders-query.dto';
+import { resolveFoodMealType } from './food-meal-type';
 import {
   MANAGEMENT_MEAL_PREFIX,
   RestaurantsService,
@@ -38,12 +39,15 @@ const orderSelect = {
   orgUnitId: true,
   restaurantId: true,
   source: true,
+  mealType: true,
   startsOn: true,
   endsOn: true,
   weekdays: true,
   foodLabel: true,
   employeeQuantity: true,
   managementQuantity: true,
+  employeeGuestQuantity: true,
+  managementGuestQuantity: true,
   employeeUnitPrice: true,
   managementUnitPrice: true,
   createdAt: true,
@@ -56,7 +60,9 @@ const orderSelect = {
 const reservationLineSelect = {
   id: true,
   reservedAt: true,
+  mealType: true,
   quantity: true,
+  forGuest: true,
   unitPrice: true,
   status: true,
   food: { select: { id: true, name: true } },
@@ -74,7 +80,33 @@ type DailyLine = {
   foodName: string;
   quantity: number;
   unitPrice: number;
+  forGuest: boolean;
 };
+
+function employeeMeals(dto: CreateAdvancedFoodOrderDto) {
+  return dto.employeeQuantity + (dto.employeeGuestQuantity ?? 0);
+}
+
+function managementMeals(dto: CreateAdvancedFoodOrderDto) {
+  return dto.managementQuantity + (dto.managementGuestQuantity ?? 0);
+}
+
+function pushMealLines(
+  lines: DailyLine[],
+  iso: string,
+  foodId: string,
+  foodName: string,
+  unitQty: number,
+  guestQty: number,
+  unitPrice: number,
+) {
+  if (unitQty > 0) {
+    lines.push({ iso, foodId, foodName, quantity: unitQty, unitPrice, forGuest: false });
+  }
+  if (guestQty > 0) {
+    lines.push({ iso, foodId, foodName, quantity: guestQty, unitPrice, forGuest: true });
+  }
+}
 
 type MealFood = { id: string; name: string; price: number };
 
@@ -95,7 +127,9 @@ function presentReservation(item: ReservationLineRow) {
   return {
     id: item.id,
     reservedAt: toIsoDateOnly(item.reservedAt),
+    mealType: item.mealType,
     quantity: item.quantity,
+    forGuest: item.forGuest,
     unitPrice: Number(item.unitPrice),
     totalPrice: Number(item.unitPrice) * item.quantity,
     status: item.status,
@@ -194,11 +228,13 @@ export class AdvancedFoodOrdersService {
         createdAt: (dir) => ({ createdAt: dir }),
         orgUnit: (dir) => ({ orgUnit: { name: dir } }),
         restaurant: (dir) => ({ restaurant: { name: dir } }),
+        mealType: (dir) => ({ mealType: dir }),
         startsOn: (dir) => ({ startsOn: dir }),
         endsOn: (dir) => ({ endsOn: dir }),
-        food: (dir) => ({ foodLabel: dir }),
         employeeQuantity: (dir) => ({ employeeQuantity: dir }),
         managementQuantity: (dir) => ({ managementQuantity: dir }),
+        employeeGuestQuantity: (dir) => ({ employeeGuestQuantity: dir }),
+        managementGuestQuantity: (dir) => ({ managementGuestQuantity: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -258,7 +294,7 @@ export class AdvancedFoodOrdersService {
     return paginatedResult(items.map(presentReservation), total, page, pageSize);
   }
 
-  async create(userId: string, dto: CreateAdvancedFoodOrderDto) {
+  async create(userId: string, dto: CreateAdvancedFoodOrderDto, skipMealCap = false) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
       select: { id: true },
@@ -278,7 +314,7 @@ export class AdvancedFoodOrdersService {
     if (!dates.length) {
       throw new BadRequestException('در این بازه هیچ‌کدام از روزهای انتخاب‌شده وجود ندارد');
     }
-    if (dto.employeeQuantity + dto.managementQuantity < 1) {
+    if (employeeMeals(dto) + managementMeals(dto) < 1) {
       throw new BadRequestException(
         'حداقل تعداد غذای کارمندی یا مدیریتی باید بیشتر از صفر باشد',
       );
@@ -305,15 +341,19 @@ export class AdvancedFoodOrdersService {
     if (dto.source === 'DEFAULT') {
       this.assertDefaultPrices(dto);
     }
+    const mealType = resolveFoodMealType(dto.mealType);
 
     const menuLines = dto.source === 'MENU' ? await this.menuLines(restaurant, dates, dto) : null;
-    await this.assertWithinMealCap(
-      unit.id,
-      unit.maxMeals,
-      dto.startsOn,
-      dto.endsOn,
-      menuLines ?? this.defaultQuantityLines(dates, dto),
-    );
+    if (!skipMealCap) {
+      await this.assertWithinMealCap(
+        unit.id,
+        unit.maxMeals,
+        dto.startsOn,
+        dto.endsOn,
+        mealType,
+        menuLines ?? this.defaultQuantityLines(dates, dto),
+      );
+    }
 
     const created = await this.prisma.$transaction(
       async (tx) => {
@@ -327,18 +367,21 @@ export class AdvancedFoodOrdersService {
             orgUnitId: dto.orgUnitId,
             restaurantId: dto.restaurantId,
             source: dto.source,
+            mealType,
             startsOn: parseIsoDate(dto.startsOn),
             endsOn: parseIsoDate(dto.endsOn),
             weekdays: dto.weekdays,
             foodLabel,
             employeeQuantity: dto.employeeQuantity,
             managementQuantity: dto.managementQuantity,
+            employeeGuestQuantity: dto.employeeGuestQuantity ?? 0,
+            managementGuestQuantity: dto.managementGuestQuantity ?? 0,
             employeeUnitPrice:
-              dto.source === 'DEFAULT' && dto.employeeQuantity > 0
+              dto.source === 'DEFAULT' && employeeMeals(dto) > 0
                 ? new Prisma.Decimal(dto.employeeUnitPrice ?? 0)
                 : null,
             managementUnitPrice:
-              dto.source === 'DEFAULT' && dto.managementQuantity > 0
+              dto.source === 'DEFAULT' && managementMeals(dto) > 0
                 ? new Prisma.Decimal(dto.managementUnitPrice ?? 0)
                 : null,
             createdById: userId,
@@ -348,13 +391,15 @@ export class AdvancedFoodOrdersService {
         await tx.foodReservation.createMany({
           data: lines.map((line) => ({
             reservedAt: parseIsoDate(line.iso),
+            mealType,
             restaurantId: dto.restaurantId,
             foodId: line.foodId,
             userId,
             orgUnitId: dto.orgUnitId,
             quantity: line.quantity,
+            forGuest: line.forGuest,
             unitPrice: new Prisma.Decimal(line.unitPrice),
-            status: FoodReservationStatus.PENDING,
+            status: skipMealCap ? FoodReservationStatus.CONFIRMED : FoodReservationStatus.PENDING,
             advancedOrderId: order.id,
           })),
         });
@@ -375,10 +420,10 @@ export class AdvancedFoodOrdersService {
   }
 
   private assertDefaultPrices(dto: CreateAdvancedFoodOrderDto) {
-    if (dto.employeeQuantity > 0 && dto.employeeUnitPrice == null) {
+    if (employeeMeals(dto) > 0 && dto.employeeUnitPrice == null) {
       throw new BadRequestException('قیمت غذای کارمندی را وارد کنید');
     }
-    if (dto.managementQuantity > 0 && dto.managementUnitPrice == null) {
+    if (managementMeals(dto) > 0 && dto.managementUnitPrice == null) {
       throw new BadRequestException('قیمت غذای مدیریتی را وارد کنید');
     }
   }
@@ -387,24 +432,24 @@ export class AdvancedFoodOrdersService {
   private defaultQuantityLines(dates: string[], dto: CreateAdvancedFoodOrderDto): DailyLine[] {
     const lines: DailyLine[] = [];
     for (const iso of dates) {
-      if (dto.employeeQuantity > 0) {
-        lines.push({
-          iso,
-          foodId: '',
-          foodName: '',
-          quantity: dto.employeeQuantity,
-          unitPrice: dto.employeeUnitPrice ?? 0,
-        });
-      }
-      if (dto.managementQuantity > 0) {
-        lines.push({
-          iso,
-          foodId: '',
-          foodName: '',
-          quantity: dto.managementQuantity,
-          unitPrice: dto.managementUnitPrice ?? 0,
-        });
-      }
+      pushMealLines(
+        lines,
+        iso,
+        '',
+        '',
+        dto.employeeQuantity,
+        dto.employeeGuestQuantity ?? 0,
+        dto.employeeUnitPrice ?? 0,
+      );
+      pushMealLines(
+        lines,
+        iso,
+        '',
+        '',
+        dto.managementQuantity,
+        dto.managementGuestQuantity ?? 0,
+        dto.managementUnitPrice ?? 0,
+      );
     }
     return lines;
   }
@@ -425,7 +470,7 @@ export class AdvancedFoodOrdersService {
     let staff: { id: string; name: string } | null = null;
     let management: { id: string; name: string } | null = null;
     const restaurantPrices: Prisma.RestaurantUpdateInput = {};
-    if (dto.employeeQuantity > 0) {
+    if (employeeMeals(dto) > 0) {
       const price = dto.employeeUnitPrice ?? 0;
       const id = await this.restaurants.provisionStandardMeal(tx, restaurant.id, staffName, price);
       staff = { id, name: staffName };
@@ -433,7 +478,7 @@ export class AdvancedFoodOrdersService {
         restaurantPrices.employeeMealPrice = new Prisma.Decimal(price);
       }
     }
-    if (dto.managementQuantity > 0) {
+    if (managementMeals(dto) > 0) {
       const price = dto.managementUnitPrice ?? 0;
       const id = await this.restaurants.provisionStandardMeal(
         tx,
@@ -454,23 +499,27 @@ export class AdvancedFoodOrdersService {
     }
     const lines: DailyLine[] = [];
     for (const iso of dates) {
-      if (dto.employeeQuantity > 0 && staff) {
-        lines.push({
+      if (staff) {
+        pushMealLines(
+          lines,
           iso,
-          foodId: staff.id,
-          foodName: staff.name,
-          quantity: dto.employeeQuantity,
-          unitPrice: dto.employeeUnitPrice ?? 0,
-        });
+          staff.id,
+          staff.name,
+          dto.employeeQuantity,
+          dto.employeeGuestQuantity ?? 0,
+          dto.employeeUnitPrice ?? 0,
+        );
       }
-      if (dto.managementQuantity > 0 && management) {
-        lines.push({
+      if (management) {
+        pushMealLines(
+          lines,
           iso,
-          foodId: management.id,
-          foodName: management.name,
-          quantity: dto.managementQuantity,
-          unitPrice: dto.managementUnitPrice ?? 0,
-        });
+          management.id,
+          management.name,
+          dto.managementQuantity,
+          dto.managementGuestQuantity ?? 0,
+          dto.managementUnitPrice ?? 0,
+        );
       }
     }
     return lines;
@@ -485,7 +534,8 @@ export class AdvancedFoodOrdersService {
     const missing: string[] = [];
     const multiple: string[] = [];
     const lines: DailyLine[] = [];
-    const quantity = dto.employeeQuantity + dto.managementQuantity;
+    const unitQty = dto.employeeQuantity + dto.managementQuantity;
+    const guestQty = (dto.employeeGuestQuantity ?? 0) + (dto.managementGuestQuantity ?? 0);
     for (const iso of dates) {
       const foods = byDay.get(iranWeekdayIndex(iso)) ?? [];
       if (foods.length === 0) {
@@ -497,13 +547,7 @@ export class AdvancedFoodOrdersService {
         continue;
       }
       const food = foods[0];
-      lines.push({
-        iso,
-        foodId: food.id,
-        foodName: food.name,
-        quantity,
-        unitPrice: food.price,
-      });
+      pushMealLines(lines, iso, food.id, food.name, unitQty, guestQty, food.price);
     }
     if (missing.length) {
       throw new BadRequestException(
@@ -549,17 +593,22 @@ export class AdvancedFoodOrdersService {
     maxMeals: number | null,
     startsOn: string,
     endsOn: string,
+    mealType: ReturnType<typeof resolveFoodMealType>,
     lines: DailyLine[],
   ) {
     if (maxMeals == null) return;
     const perDay = new Map<string, number>();
     for (const line of lines) {
+      if (line.forGuest) continue;
       perDay.set(line.iso, (perDay.get(line.iso) ?? 0) + line.quantity);
     }
+    if (!perDay.size) return;
     const existing = await this.prisma.foodReservation.groupBy({
       by: ['reservedAt'],
       where: {
         orgUnitId,
+        mealType,
+        forGuest: false,
         reservedAt: {
           gte: parseIsoDate(startsOn),
           lte: parseIsoDate(endsOn),

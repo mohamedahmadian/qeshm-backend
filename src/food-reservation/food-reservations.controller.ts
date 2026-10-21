@@ -5,6 +5,7 @@ import {
   ForbiddenException,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
   Query,
@@ -15,6 +16,7 @@ import type { Response } from 'express';
 import { FOOD_ADMIN_ROLE_CODE } from '../access/access.constants';
 import { hasAnyPermission, hasPermission } from '../access/access.util';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { CreateFoodReservationBatchDto } from './dto/create-food-reservation-batch.dto';
 import { CreateFoodReservationDto } from './dto/create-food-reservation.dto';
 import { FindFoodReservationsQueryDto } from './dto/find-food-reservations-query.dto';
 import { FoodReservationRangeActionDto } from './dto/food-reservation-range-action.dto';
@@ -24,6 +26,8 @@ import {
   FoodReservationWeekMenuQueryDto,
 } from './dto/food-reservation-menu-query.dto';
 import { MineFoodSummaryQueryDto } from './dto/mine-food-summary-query.dto';
+import { FindDailyFoodReportQueryDto } from './dto/find-daily-food-report-query.dto';
+import { FoodDailyReportService } from './food-daily-report.service';
 import { FoodReservationsService } from './food-reservations.service';
 
 type RequestUser = {
@@ -60,7 +64,10 @@ function canManageFoodReservations(user: RequestUser) {
 
 @Controller('food-reservations')
 export class FoodReservationsController {
-  constructor(private readonly reservations: FoodReservationsService) {}
+  constructor(
+    private readonly reservations: FoodReservationsService,
+    private readonly dailyReport: FoodDailyReportService,
+  ) {}
 
   @Get('context')
   context(@CurrentUser() user: RequestUser | undefined) {
@@ -116,6 +123,27 @@ export class FoodReservationsController {
   @Get('unit-report')
   unitReport(@Query() query: FindFoodReservationsQueryDto) {
     return this.reservations.unitReport(query);
+  }
+
+  @Get('daily-report')
+  getDailyReport(@Query() query: FindDailyFoodReportQueryDto) {
+    return this.dailyReport.report(query);
+  }
+
+  @Get('daily-report/export')
+  async exportDailyReport(
+    @Query() query: FindDailyFoodReportQueryDto,
+    @Res() res: Response,
+  ) {
+    const file = await this.dailyReport.exportReport(query);
+    const ascii = file.fileName.replace(/[^\w.\-]+/g, '_') || 'food-daily-report.xlsx';
+    res.setHeader('Content-Type', file.mimeType);
+    res.setHeader('Content-Length', String(file.buffer.length));
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(file.fileName)}`,
+    );
+    res.send(file.buffer);
   }
 
   @Get('mine/summary')
@@ -195,6 +223,15 @@ export class FoodReservationsController {
     return this.reservations.cancelRange(dto);
   }
 
+  @Post('batch')
+  createBatch(
+    @CurrentUser() user: RequestUser | undefined,
+    @Body() dto: CreateFoodReservationBatchDto,
+  ) {
+    if (!user?.id) throw new UnauthorizedException();
+    return this.reservations.createBatch(user.id, dto, canManageFoodReservations(user));
+  }
+
   @Post()
   create(
     @CurrentUser() user: RequestUser | undefined,
@@ -206,7 +243,7 @@ export class FoodReservationsController {
 
   @Get(':id')
   findOne(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Query('mine') mine: string | undefined,
     @CurrentUser() user: RequestUser | undefined,
   ) {
@@ -218,7 +255,7 @@ export class FoodReservationsController {
 
   @Patch(':id/confirm')
   confirm(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @CurrentUser() user: RequestUser | undefined,
   ) {
     if (!user?.id) throw new UnauthorizedException();
@@ -230,7 +267,7 @@ export class FoodReservationsController {
 
   @Delete(':id')
   remove(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Query('mine') mine: string | undefined,
     @CurrentUser() user: RequestUser | undefined,
   ) {

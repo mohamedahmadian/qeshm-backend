@@ -6,6 +6,7 @@ import { sortDirections } from '../../common/sort-query';
 
 export const unitRepSortFields = [
   'name',
+  'code',
   'kind',
   'representative',
   'maxMeals',
