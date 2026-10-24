@@ -1,3 +1,29 @@
+export function findAncestorOrganizationUnitId<
+  T extends { id: string; parentId: string | null },
+>(units: T[], startId: string, match: (unit: T) => boolean) {
+  const byId = new Map(units.map((unit) => [unit.id, unit]));
+  let current = byId.get(startId);
+  const seen = new Set<string>();
+  while (current) {
+    if (seen.has(current.id)) break;
+    seen.add(current.id);
+    if (match(current)) return current.id;
+    current = current.parentId ? byId.get(current.parentId) : undefined;
+  }
+  return null;
+}
+
+export function findNearestViceUnitId(
+  units: { id: string; parentId: string | null; kindCode?: string | null }[],
+  startId: string,
+) {
+  return findAncestorOrganizationUnitId(
+    units,
+    startId,
+    (unit) => unit.kindCode === 'VICE',
+  );
+}
+
 export function descendantOrganizationUnitIds(
   units: { id: string; parentId: string | null }[],
   rootId: string,

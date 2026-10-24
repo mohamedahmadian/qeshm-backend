@@ -20,12 +20,28 @@ export type BoardRequestModel = runtime.Types.Result.DefaultSelection<Prisma.$Bo
 
 export type AggregateBoardRequest = {
   _count: BoardRequestCountAggregateOutputType | null
+  _avg: BoardRequestAvgAggregateOutputType | null
+  _sum: BoardRequestSumAggregateOutputType | null
   _min: BoardRequestMinAggregateOutputType | null
   _max: BoardRequestMaxAggregateOutputType | null
 }
 
+export type BoardRequestAvgAggregateOutputType = {
+  trackingYear: number | null
+  trackingSeq: number | null
+}
+
+export type BoardRequestSumAggregateOutputType = {
+  trackingYear: number | null
+  trackingSeq: number | null
+}
+
 export type BoardRequestMinAggregateOutputType = {
   id: string | null
+  kind: $Enums.BoardRequestKind | null
+  trackingNo: string | null
+  trackingYear: number | null
+  trackingSeq: number | null
   status: $Enums.BoardRequestStatus | null
   requestedAt: Date | null
   unitId: string | null
@@ -38,19 +54,26 @@ export type BoardRequestMinAggregateOutputType = {
   managementComment: string | null
   managementAt: Date | null
   managementById: string | null
+  legalReferredAt: Date | null
   legalOrgMatch: boolean | null
   legalRegulationsMatch: boolean | null
   legalComment: string | null
   legalAt: Date | null
   legalById: string | null
+  budgetReferredAt: Date | null
   budgetProgramHistory: boolean | null
   budgetCurrentYearFunding: boolean | null
   budgetComment: string | null
   budgetAt: Date | null
   budgetById: string | null
+  secretaryReferredAt: Date | null
   secretaryComment: string | null
   secretaryAt: Date | null
   secretaryById: string | null
+  ceoReferredAt: Date | null
+  ceoComment: string | null
+  ceoAt: Date | null
+  ceoById: string | null
   rejectedStage: $Enums.BoardStage | null
   rejectedComment: string | null
   rejectedAt: Date | null
@@ -61,6 +84,10 @@ export type BoardRequestMinAggregateOutputType = {
 
 export type BoardRequestMaxAggregateOutputType = {
   id: string | null
+  kind: $Enums.BoardRequestKind | null
+  trackingNo: string | null
+  trackingYear: number | null
+  trackingSeq: number | null
   status: $Enums.BoardRequestStatus | null
   requestedAt: Date | null
   unitId: string | null
@@ -73,19 +100,26 @@ export type BoardRequestMaxAggregateOutputType = {
   managementComment: string | null
   managementAt: Date | null
   managementById: string | null
+  legalReferredAt: Date | null
   legalOrgMatch: boolean | null
   legalRegulationsMatch: boolean | null
   legalComment: string | null
   legalAt: Date | null
   legalById: string | null
+  budgetReferredAt: Date | null
   budgetProgramHistory: boolean | null
   budgetCurrentYearFunding: boolean | null
   budgetComment: string | null
   budgetAt: Date | null
   budgetById: string | null
+  secretaryReferredAt: Date | null
   secretaryComment: string | null
   secretaryAt: Date | null
   secretaryById: string | null
+  ceoReferredAt: Date | null
+  ceoComment: string | null
+  ceoAt: Date | null
+  ceoById: string | null
   rejectedStage: $Enums.BoardStage | null
   rejectedComment: string | null
   rejectedAt: Date | null
@@ -96,6 +130,10 @@ export type BoardRequestMaxAggregateOutputType = {
 
 export type BoardRequestCountAggregateOutputType = {
   id: number
+  kind: number
+  trackingNo: number
+  trackingYear: number
+  trackingSeq: number
   status: number
   requestedAt: number
   unitId: number
@@ -108,19 +146,26 @@ export type BoardRequestCountAggregateOutputType = {
   managementComment: number
   managementAt: number
   managementById: number
+  legalReferredAt: number
   legalOrgMatch: number
   legalRegulationsMatch: number
   legalComment: number
   legalAt: number
   legalById: number
+  budgetReferredAt: number
   budgetProgramHistory: number
   budgetCurrentYearFunding: number
   budgetComment: number
   budgetAt: number
   budgetById: number
+  secretaryReferredAt: number
   secretaryComment: number
   secretaryAt: number
   secretaryById: number
+  ceoReferredAt: number
+  ceoComment: number
+  ceoAt: number
+  ceoById: number
   rejectedStage: number
   rejectedComment: number
   rejectedAt: number
@@ -131,8 +176,22 @@ export type BoardRequestCountAggregateOutputType = {
 }
 
 
+export type BoardRequestAvgAggregateInputType = {
+  trackingYear?: true
+  trackingSeq?: true
+}
+
+export type BoardRequestSumAggregateInputType = {
+  trackingYear?: true
+  trackingSeq?: true
+}
+
 export type BoardRequestMinAggregateInputType = {
   id?: true
+  kind?: true
+  trackingNo?: true
+  trackingYear?: true
+  trackingSeq?: true
   status?: true
   requestedAt?: true
   unitId?: true
@@ -145,19 +204,26 @@ export type BoardRequestMinAggregateInputType = {
   managementComment?: true
   managementAt?: true
   managementById?: true
+  legalReferredAt?: true
   legalOrgMatch?: true
   legalRegulationsMatch?: true
   legalComment?: true
   legalAt?: true
   legalById?: true
+  budgetReferredAt?: true
   budgetProgramHistory?: true
   budgetCurrentYearFunding?: true
   budgetComment?: true
   budgetAt?: true
   budgetById?: true
+  secretaryReferredAt?: true
   secretaryComment?: true
   secretaryAt?: true
   secretaryById?: true
+  ceoReferredAt?: true
+  ceoComment?: true
+  ceoAt?: true
+  ceoById?: true
   rejectedStage?: true
   rejectedComment?: true
   rejectedAt?: true
@@ -168,6 +234,10 @@ export type BoardRequestMinAggregateInputType = {
 
 export type BoardRequestMaxAggregateInputType = {
   id?: true
+  kind?: true
+  trackingNo?: true
+  trackingYear?: true
+  trackingSeq?: true
   status?: true
   requestedAt?: true
   unitId?: true
@@ -180,19 +250,26 @@ export type BoardRequestMaxAggregateInputType = {
   managementComment?: true
   managementAt?: true
   managementById?: true
+  legalReferredAt?: true
   legalOrgMatch?: true
   legalRegulationsMatch?: true
   legalComment?: true
   legalAt?: true
   legalById?: true
+  budgetReferredAt?: true
   budgetProgramHistory?: true
   budgetCurrentYearFunding?: true
   budgetComment?: true
   budgetAt?: true
   budgetById?: true
+  secretaryReferredAt?: true
   secretaryComment?: true
   secretaryAt?: true
   secretaryById?: true
+  ceoReferredAt?: true
+  ceoComment?: true
+  ceoAt?: true
+  ceoById?: true
   rejectedStage?: true
   rejectedComment?: true
   rejectedAt?: true
@@ -203,6 +280,10 @@ export type BoardRequestMaxAggregateInputType = {
 
 export type BoardRequestCountAggregateInputType = {
   id?: true
+  kind?: true
+  trackingNo?: true
+  trackingYear?: true
+  trackingSeq?: true
   status?: true
   requestedAt?: true
   unitId?: true
@@ -215,19 +296,26 @@ export type BoardRequestCountAggregateInputType = {
   managementComment?: true
   managementAt?: true
   managementById?: true
+  legalReferredAt?: true
   legalOrgMatch?: true
   legalRegulationsMatch?: true
   legalComment?: true
   legalAt?: true
   legalById?: true
+  budgetReferredAt?: true
   budgetProgramHistory?: true
   budgetCurrentYearFunding?: true
   budgetComment?: true
   budgetAt?: true
   budgetById?: true
+  secretaryReferredAt?: true
   secretaryComment?: true
   secretaryAt?: true
   secretaryById?: true
+  ceoReferredAt?: true
+  ceoComment?: true
+  ceoAt?: true
+  ceoById?: true
   rejectedStage?: true
   rejectedComment?: true
   rejectedAt?: true
@@ -275,6 +363,18 @@ export type BoardRequestAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: BoardRequestAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: BoardRequestSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: BoardRequestMinAggregateInputType
@@ -305,12 +405,18 @@ export type BoardRequestGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: BoardRequestCountAggregateInputType | true
+  _avg?: BoardRequestAvgAggregateInputType
+  _sum?: BoardRequestSumAggregateInputType
   _min?: BoardRequestMinAggregateInputType
   _max?: BoardRequestMaxAggregateInputType
 }
 
 export type BoardRequestGroupByOutputType = {
   id: string
+  kind: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status: $Enums.BoardRequestStatus
   requestedAt: Date
   unitId: string
@@ -323,19 +429,26 @@ export type BoardRequestGroupByOutputType = {
   managementComment: string | null
   managementAt: Date | null
   managementById: string | null
+  legalReferredAt: Date | null
   legalOrgMatch: boolean | null
   legalRegulationsMatch: boolean | null
   legalComment: string | null
   legalAt: Date | null
   legalById: string | null
+  budgetReferredAt: Date | null
   budgetProgramHistory: boolean | null
   budgetCurrentYearFunding: boolean | null
   budgetComment: string | null
   budgetAt: Date | null
   budgetById: string | null
+  secretaryReferredAt: Date | null
   secretaryComment: string | null
   secretaryAt: Date | null
   secretaryById: string | null
+  ceoReferredAt: Date | null
+  ceoComment: string | null
+  ceoAt: Date | null
+  ceoById: string | null
   rejectedStage: $Enums.BoardStage | null
   rejectedComment: string | null
   rejectedAt: Date | null
@@ -343,6 +456,8 @@ export type BoardRequestGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: BoardRequestCountAggregateOutputType | null
+  _avg: BoardRequestAvgAggregateOutputType | null
+  _sum: BoardRequestSumAggregateOutputType | null
   _min: BoardRequestMinAggregateOutputType | null
   _max: BoardRequestMaxAggregateOutputType | null
 }
@@ -367,6 +482,10 @@ export type BoardRequestWhereInput = {
   OR?: Prisma.BoardRequestWhereInput[]
   NOT?: Prisma.BoardRequestWhereInput | Prisma.BoardRequestWhereInput[]
   id?: Prisma.StringFilter<"BoardRequest"> | string
+  kind?: Prisma.EnumBoardRequestKindFilter<"BoardRequest"> | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFilter<"BoardRequest"> | string
+  trackingYear?: Prisma.IntFilter<"BoardRequest"> | number
+  trackingSeq?: Prisma.IntFilter<"BoardRequest"> | number
   status?: Prisma.EnumBoardRequestStatusFilter<"BoardRequest"> | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFilter<"BoardRequest"> | Date | string
   unitId?: Prisma.StringFilter<"BoardRequest"> | string
@@ -379,19 +498,26 @@ export type BoardRequestWhereInput = {
   managementComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   managementAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   managementById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  legalReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   legalOrgMatch?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   legalRegulationsMatch?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   legalComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   legalAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   legalById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  budgetReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   budgetProgramHistory?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   budgetCurrentYearFunding?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   budgetComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   budgetAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   budgetById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  secretaryReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   secretaryComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   secretaryAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   secretaryById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  ceoReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
+  ceoComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  ceoAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
+  ceoById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   rejectedStage?: Prisma.EnumBoardStageNullableFilter<"BoardRequest"> | $Enums.BoardStage | null
   rejectedComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   rejectedAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
@@ -404,6 +530,7 @@ export type BoardRequestWhereInput = {
   legalBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   budgetBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   secretaryBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  ceoBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   rejectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   attachments?: Prisma.BoardAttachmentListRelationFilter
   minutes?: Prisma.BoardMinutesListRelationFilter
@@ -411,6 +538,10 @@ export type BoardRequestWhereInput = {
 
 export type BoardRequestOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  trackingNo?: Prisma.SortOrder
+  trackingYear?: Prisma.SortOrder
+  trackingSeq?: Prisma.SortOrder
   status?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   unitId?: Prisma.SortOrder
@@ -423,19 +554,26 @@ export type BoardRequestOrderByWithRelationInput = {
   managementComment?: Prisma.SortOrderInput | Prisma.SortOrder
   managementAt?: Prisma.SortOrderInput | Prisma.SortOrder
   managementById?: Prisma.SortOrderInput | Prisma.SortOrder
+  legalReferredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   legalOrgMatch?: Prisma.SortOrderInput | Prisma.SortOrder
   legalRegulationsMatch?: Prisma.SortOrderInput | Prisma.SortOrder
   legalComment?: Prisma.SortOrderInput | Prisma.SortOrder
   legalAt?: Prisma.SortOrderInput | Prisma.SortOrder
   legalById?: Prisma.SortOrderInput | Prisma.SortOrder
+  budgetReferredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetProgramHistory?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetCurrentYearFunding?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetComment?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetAt?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetById?: Prisma.SortOrderInput | Prisma.SortOrder
+  secretaryReferredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   secretaryComment?: Prisma.SortOrderInput | Prisma.SortOrder
   secretaryAt?: Prisma.SortOrderInput | Prisma.SortOrder
   secretaryById?: Prisma.SortOrderInput | Prisma.SortOrder
+  ceoReferredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  ceoComment?: Prisma.SortOrderInput | Prisma.SortOrder
+  ceoAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  ceoById?: Prisma.SortOrderInput | Prisma.SortOrder
   rejectedStage?: Prisma.SortOrderInput | Prisma.SortOrder
   rejectedComment?: Prisma.SortOrderInput | Prisma.SortOrder
   rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -448,6 +586,7 @@ export type BoardRequestOrderByWithRelationInput = {
   legalBy?: Prisma.UserOrderByWithRelationInput
   budgetBy?: Prisma.UserOrderByWithRelationInput
   secretaryBy?: Prisma.UserOrderByWithRelationInput
+  ceoBy?: Prisma.UserOrderByWithRelationInput
   rejectedBy?: Prisma.UserOrderByWithRelationInput
   attachments?: Prisma.BoardAttachmentOrderByRelationAggregateInput
   minutes?: Prisma.BoardMinutesOrderByRelationAggregateInput
@@ -455,9 +594,14 @@ export type BoardRequestOrderByWithRelationInput = {
 
 export type BoardRequestWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  trackingNo?: string
+  trackingYear_trackingSeq?: Prisma.BoardRequestTrackingYearTrackingSeqCompoundUniqueInput
   AND?: Prisma.BoardRequestWhereInput | Prisma.BoardRequestWhereInput[]
   OR?: Prisma.BoardRequestWhereInput[]
   NOT?: Prisma.BoardRequestWhereInput | Prisma.BoardRequestWhereInput[]
+  kind?: Prisma.EnumBoardRequestKindFilter<"BoardRequest"> | $Enums.BoardRequestKind
+  trackingYear?: Prisma.IntFilter<"BoardRequest"> | number
+  trackingSeq?: Prisma.IntFilter<"BoardRequest"> | number
   status?: Prisma.EnumBoardRequestStatusFilter<"BoardRequest"> | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFilter<"BoardRequest"> | Date | string
   unitId?: Prisma.StringFilter<"BoardRequest"> | string
@@ -470,19 +614,26 @@ export type BoardRequestWhereUniqueInput = Prisma.AtLeast<{
   managementComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   managementAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   managementById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  legalReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   legalOrgMatch?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   legalRegulationsMatch?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   legalComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   legalAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   legalById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  budgetReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   budgetProgramHistory?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   budgetCurrentYearFunding?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   budgetComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   budgetAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   budgetById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  secretaryReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   secretaryComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   secretaryAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   secretaryById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  ceoReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
+  ceoComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  ceoAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
+  ceoById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   rejectedStage?: Prisma.EnumBoardStageNullableFilter<"BoardRequest"> | $Enums.BoardStage | null
   rejectedComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   rejectedAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
@@ -495,13 +646,18 @@ export type BoardRequestWhereUniqueInput = Prisma.AtLeast<{
   legalBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   budgetBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   secretaryBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  ceoBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   rejectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   attachments?: Prisma.BoardAttachmentListRelationFilter
   minutes?: Prisma.BoardMinutesListRelationFilter
-}, "id">
+}, "id" | "trackingNo" | "trackingYear_trackingSeq">
 
 export type BoardRequestOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  trackingNo?: Prisma.SortOrder
+  trackingYear?: Prisma.SortOrder
+  trackingSeq?: Prisma.SortOrder
   status?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   unitId?: Prisma.SortOrder
@@ -514,19 +670,26 @@ export type BoardRequestOrderByWithAggregationInput = {
   managementComment?: Prisma.SortOrderInput | Prisma.SortOrder
   managementAt?: Prisma.SortOrderInput | Prisma.SortOrder
   managementById?: Prisma.SortOrderInput | Prisma.SortOrder
+  legalReferredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   legalOrgMatch?: Prisma.SortOrderInput | Prisma.SortOrder
   legalRegulationsMatch?: Prisma.SortOrderInput | Prisma.SortOrder
   legalComment?: Prisma.SortOrderInput | Prisma.SortOrder
   legalAt?: Prisma.SortOrderInput | Prisma.SortOrder
   legalById?: Prisma.SortOrderInput | Prisma.SortOrder
+  budgetReferredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetProgramHistory?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetCurrentYearFunding?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetComment?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetAt?: Prisma.SortOrderInput | Prisma.SortOrder
   budgetById?: Prisma.SortOrderInput | Prisma.SortOrder
+  secretaryReferredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   secretaryComment?: Prisma.SortOrderInput | Prisma.SortOrder
   secretaryAt?: Prisma.SortOrderInput | Prisma.SortOrder
   secretaryById?: Prisma.SortOrderInput | Prisma.SortOrder
+  ceoReferredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  ceoComment?: Prisma.SortOrderInput | Prisma.SortOrder
+  ceoAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  ceoById?: Prisma.SortOrderInput | Prisma.SortOrder
   rejectedStage?: Prisma.SortOrderInput | Prisma.SortOrder
   rejectedComment?: Prisma.SortOrderInput | Prisma.SortOrder
   rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -534,8 +697,10 @@ export type BoardRequestOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BoardRequestCountOrderByAggregateInput
+  _avg?: Prisma.BoardRequestAvgOrderByAggregateInput
   _max?: Prisma.BoardRequestMaxOrderByAggregateInput
   _min?: Prisma.BoardRequestMinOrderByAggregateInput
+  _sum?: Prisma.BoardRequestSumOrderByAggregateInput
 }
 
 export type BoardRequestScalarWhereWithAggregatesInput = {
@@ -543,6 +708,10 @@ export type BoardRequestScalarWhereWithAggregatesInput = {
   OR?: Prisma.BoardRequestScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BoardRequestScalarWhereWithAggregatesInput | Prisma.BoardRequestScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"BoardRequest"> | string
+  kind?: Prisma.EnumBoardRequestKindWithAggregatesFilter<"BoardRequest"> | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringWithAggregatesFilter<"BoardRequest"> | string
+  trackingYear?: Prisma.IntWithAggregatesFilter<"BoardRequest"> | number
+  trackingSeq?: Prisma.IntWithAggregatesFilter<"BoardRequest"> | number
   status?: Prisma.EnumBoardRequestStatusWithAggregatesFilter<"BoardRequest"> | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeWithAggregatesFilter<"BoardRequest"> | Date | string
   unitId?: Prisma.StringWithAggregatesFilter<"BoardRequest"> | string
@@ -555,19 +724,26 @@ export type BoardRequestScalarWhereWithAggregatesInput = {
   managementComment?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
   managementAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
   managementById?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
+  legalReferredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
   legalOrgMatch?: Prisma.BoolNullableWithAggregatesFilter<"BoardRequest"> | boolean | null
   legalRegulationsMatch?: Prisma.BoolNullableWithAggregatesFilter<"BoardRequest"> | boolean | null
   legalComment?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
   legalAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
   legalById?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
+  budgetReferredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
   budgetProgramHistory?: Prisma.BoolNullableWithAggregatesFilter<"BoardRequest"> | boolean | null
   budgetCurrentYearFunding?: Prisma.BoolNullableWithAggregatesFilter<"BoardRequest"> | boolean | null
   budgetComment?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
   budgetAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
   budgetById?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
+  secretaryReferredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
   secretaryComment?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
   secretaryAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
   secretaryById?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
+  ceoReferredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
+  ceoComment?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
+  ceoAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
+  ceoById?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
   rejectedStage?: Prisma.EnumBoardStageNullableWithAggregatesFilter<"BoardRequest"> | $Enums.BoardStage | null
   rejectedComment?: Prisma.StringNullableWithAggregatesFilter<"BoardRequest"> | string | null
   rejectedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BoardRequest"> | Date | string | null
@@ -578,6 +754,10 @@ export type BoardRequestScalarWhereWithAggregatesInput = {
 
 export type BoardRequestCreateInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -587,16 +767,22 @@ export type BoardRequestCreateInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -608,6 +794,7 @@ export type BoardRequestCreateInput = {
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
@@ -615,6 +802,10 @@ export type BoardRequestCreateInput = {
 
 export type BoardRequestUncheckedCreateInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -627,19 +818,26 @@ export type BoardRequestUncheckedCreateInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -652,6 +850,10 @@ export type BoardRequestUncheckedCreateInput = {
 
 export type BoardRequestUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -661,16 +863,22 @@ export type BoardRequestUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -682,6 +890,7 @@ export type BoardRequestUpdateInput = {
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
@@ -689,6 +898,10 @@ export type BoardRequestUpdateInput = {
 
 export type BoardRequestUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -701,19 +914,26 @@ export type BoardRequestUncheckedUpdateInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -726,6 +946,10 @@ export type BoardRequestUncheckedUpdateInput = {
 
 export type BoardRequestCreateManyInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -738,19 +962,26 @@ export type BoardRequestCreateManyInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -761,6 +992,10 @@ export type BoardRequestCreateManyInput = {
 
 export type BoardRequestUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -770,16 +1005,22 @@ export type BoardRequestUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -789,6 +1030,10 @@ export type BoardRequestUpdateManyMutationInput = {
 
 export type BoardRequestUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -801,19 +1046,26 @@ export type BoardRequestUncheckedUpdateManyInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -832,8 +1084,17 @@ export type BoardRequestOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type BoardRequestTrackingYearTrackingSeqCompoundUniqueInput = {
+  trackingYear: number
+  trackingSeq: number
+}
+
 export type BoardRequestCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  trackingNo?: Prisma.SortOrder
+  trackingYear?: Prisma.SortOrder
+  trackingSeq?: Prisma.SortOrder
   status?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   unitId?: Prisma.SortOrder
@@ -846,19 +1107,26 @@ export type BoardRequestCountOrderByAggregateInput = {
   managementComment?: Prisma.SortOrder
   managementAt?: Prisma.SortOrder
   managementById?: Prisma.SortOrder
+  legalReferredAt?: Prisma.SortOrder
   legalOrgMatch?: Prisma.SortOrder
   legalRegulationsMatch?: Prisma.SortOrder
   legalComment?: Prisma.SortOrder
   legalAt?: Prisma.SortOrder
   legalById?: Prisma.SortOrder
+  budgetReferredAt?: Prisma.SortOrder
   budgetProgramHistory?: Prisma.SortOrder
   budgetCurrentYearFunding?: Prisma.SortOrder
   budgetComment?: Prisma.SortOrder
   budgetAt?: Prisma.SortOrder
   budgetById?: Prisma.SortOrder
+  secretaryReferredAt?: Prisma.SortOrder
   secretaryComment?: Prisma.SortOrder
   secretaryAt?: Prisma.SortOrder
   secretaryById?: Prisma.SortOrder
+  ceoReferredAt?: Prisma.SortOrder
+  ceoComment?: Prisma.SortOrder
+  ceoAt?: Prisma.SortOrder
+  ceoById?: Prisma.SortOrder
   rejectedStage?: Prisma.SortOrder
   rejectedComment?: Prisma.SortOrder
   rejectedAt?: Prisma.SortOrder
@@ -867,8 +1135,17 @@ export type BoardRequestCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type BoardRequestAvgOrderByAggregateInput = {
+  trackingYear?: Prisma.SortOrder
+  trackingSeq?: Prisma.SortOrder
+}
+
 export type BoardRequestMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  trackingNo?: Prisma.SortOrder
+  trackingYear?: Prisma.SortOrder
+  trackingSeq?: Prisma.SortOrder
   status?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   unitId?: Prisma.SortOrder
@@ -881,19 +1158,26 @@ export type BoardRequestMaxOrderByAggregateInput = {
   managementComment?: Prisma.SortOrder
   managementAt?: Prisma.SortOrder
   managementById?: Prisma.SortOrder
+  legalReferredAt?: Prisma.SortOrder
   legalOrgMatch?: Prisma.SortOrder
   legalRegulationsMatch?: Prisma.SortOrder
   legalComment?: Prisma.SortOrder
   legalAt?: Prisma.SortOrder
   legalById?: Prisma.SortOrder
+  budgetReferredAt?: Prisma.SortOrder
   budgetProgramHistory?: Prisma.SortOrder
   budgetCurrentYearFunding?: Prisma.SortOrder
   budgetComment?: Prisma.SortOrder
   budgetAt?: Prisma.SortOrder
   budgetById?: Prisma.SortOrder
+  secretaryReferredAt?: Prisma.SortOrder
   secretaryComment?: Prisma.SortOrder
   secretaryAt?: Prisma.SortOrder
   secretaryById?: Prisma.SortOrder
+  ceoReferredAt?: Prisma.SortOrder
+  ceoComment?: Prisma.SortOrder
+  ceoAt?: Prisma.SortOrder
+  ceoById?: Prisma.SortOrder
   rejectedStage?: Prisma.SortOrder
   rejectedComment?: Prisma.SortOrder
   rejectedAt?: Prisma.SortOrder
@@ -904,6 +1188,10 @@ export type BoardRequestMaxOrderByAggregateInput = {
 
 export type BoardRequestMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  trackingNo?: Prisma.SortOrder
+  trackingYear?: Prisma.SortOrder
+  trackingSeq?: Prisma.SortOrder
   status?: Prisma.SortOrder
   requestedAt?: Prisma.SortOrder
   unitId?: Prisma.SortOrder
@@ -916,25 +1204,37 @@ export type BoardRequestMinOrderByAggregateInput = {
   managementComment?: Prisma.SortOrder
   managementAt?: Prisma.SortOrder
   managementById?: Prisma.SortOrder
+  legalReferredAt?: Prisma.SortOrder
   legalOrgMatch?: Prisma.SortOrder
   legalRegulationsMatch?: Prisma.SortOrder
   legalComment?: Prisma.SortOrder
   legalAt?: Prisma.SortOrder
   legalById?: Prisma.SortOrder
+  budgetReferredAt?: Prisma.SortOrder
   budgetProgramHistory?: Prisma.SortOrder
   budgetCurrentYearFunding?: Prisma.SortOrder
   budgetComment?: Prisma.SortOrder
   budgetAt?: Prisma.SortOrder
   budgetById?: Prisma.SortOrder
+  secretaryReferredAt?: Prisma.SortOrder
   secretaryComment?: Prisma.SortOrder
   secretaryAt?: Prisma.SortOrder
   secretaryById?: Prisma.SortOrder
+  ceoReferredAt?: Prisma.SortOrder
+  ceoComment?: Prisma.SortOrder
+  ceoAt?: Prisma.SortOrder
+  ceoById?: Prisma.SortOrder
   rejectedStage?: Prisma.SortOrder
   rejectedComment?: Prisma.SortOrder
   rejectedAt?: Prisma.SortOrder
   rejectedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type BoardRequestSumOrderByAggregateInput = {
+  trackingYear?: Prisma.SortOrder
+  trackingSeq?: Prisma.SortOrder
 }
 
 export type BoardRequestScalarRelationFilter = {
@@ -989,6 +1289,13 @@ export type BoardRequestCreateNestedManyWithoutSecretaryByInput = {
   connect?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
 }
 
+export type BoardRequestCreateNestedManyWithoutCeoByInput = {
+  create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutCeoByInput, Prisma.BoardRequestUncheckedCreateWithoutCeoByInput> | Prisma.BoardRequestCreateWithoutCeoByInput[] | Prisma.BoardRequestUncheckedCreateWithoutCeoByInput[]
+  connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutCeoByInput | Prisma.BoardRequestCreateOrConnectWithoutCeoByInput[]
+  createMany?: Prisma.BoardRequestCreateManyCeoByInputEnvelope
+  connect?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+}
+
 export type BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutCreatedByInput, Prisma.BoardRequestUncheckedCreateWithoutCreatedByInput> | Prisma.BoardRequestCreateWithoutCreatedByInput[] | Prisma.BoardRequestUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutCreatedByInput | Prisma.BoardRequestCreateOrConnectWithoutCreatedByInput[]
@@ -1028,6 +1335,13 @@ export type BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput = {
   create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutSecretaryByInput, Prisma.BoardRequestUncheckedCreateWithoutSecretaryByInput> | Prisma.BoardRequestCreateWithoutSecretaryByInput[] | Prisma.BoardRequestUncheckedCreateWithoutSecretaryByInput[]
   connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutSecretaryByInput | Prisma.BoardRequestCreateOrConnectWithoutSecretaryByInput[]
   createMany?: Prisma.BoardRequestCreateManySecretaryByInputEnvelope
+  connect?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+}
+
+export type BoardRequestUncheckedCreateNestedManyWithoutCeoByInput = {
+  create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutCeoByInput, Prisma.BoardRequestUncheckedCreateWithoutCeoByInput> | Prisma.BoardRequestCreateWithoutCeoByInput[] | Prisma.BoardRequestUncheckedCreateWithoutCeoByInput[]
+  connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutCeoByInput | Prisma.BoardRequestCreateOrConnectWithoutCeoByInput[]
+  createMany?: Prisma.BoardRequestCreateManyCeoByInputEnvelope
   connect?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
 }
 
@@ -1115,6 +1429,20 @@ export type BoardRequestUpdateManyWithoutSecretaryByNestedInput = {
   deleteMany?: Prisma.BoardRequestScalarWhereInput | Prisma.BoardRequestScalarWhereInput[]
 }
 
+export type BoardRequestUpdateManyWithoutCeoByNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutCeoByInput, Prisma.BoardRequestUncheckedCreateWithoutCeoByInput> | Prisma.BoardRequestCreateWithoutCeoByInput[] | Prisma.BoardRequestUncheckedCreateWithoutCeoByInput[]
+  connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutCeoByInput | Prisma.BoardRequestCreateOrConnectWithoutCeoByInput[]
+  upsert?: Prisma.BoardRequestUpsertWithWhereUniqueWithoutCeoByInput | Prisma.BoardRequestUpsertWithWhereUniqueWithoutCeoByInput[]
+  createMany?: Prisma.BoardRequestCreateManyCeoByInputEnvelope
+  set?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+  disconnect?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+  delete?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+  connect?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+  update?: Prisma.BoardRequestUpdateWithWhereUniqueWithoutCeoByInput | Prisma.BoardRequestUpdateWithWhereUniqueWithoutCeoByInput[]
+  updateMany?: Prisma.BoardRequestUpdateManyWithWhereWithoutCeoByInput | Prisma.BoardRequestUpdateManyWithWhereWithoutCeoByInput[]
+  deleteMany?: Prisma.BoardRequestScalarWhereInput | Prisma.BoardRequestScalarWhereInput[]
+}
+
 export type BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutCreatedByInput, Prisma.BoardRequestUncheckedCreateWithoutCreatedByInput> | Prisma.BoardRequestCreateWithoutCreatedByInput[] | Prisma.BoardRequestUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutCreatedByInput | Prisma.BoardRequestCreateOrConnectWithoutCreatedByInput[]
@@ -1199,6 +1527,20 @@ export type BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput = {
   deleteMany?: Prisma.BoardRequestScalarWhereInput | Prisma.BoardRequestScalarWhereInput[]
 }
 
+export type BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutCeoByInput, Prisma.BoardRequestUncheckedCreateWithoutCeoByInput> | Prisma.BoardRequestCreateWithoutCeoByInput[] | Prisma.BoardRequestUncheckedCreateWithoutCeoByInput[]
+  connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutCeoByInput | Prisma.BoardRequestCreateOrConnectWithoutCeoByInput[]
+  upsert?: Prisma.BoardRequestUpsertWithWhereUniqueWithoutCeoByInput | Prisma.BoardRequestUpsertWithWhereUniqueWithoutCeoByInput[]
+  createMany?: Prisma.BoardRequestCreateManyCeoByInputEnvelope
+  set?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+  disconnect?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+  delete?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+  connect?: Prisma.BoardRequestWhereUniqueInput | Prisma.BoardRequestWhereUniqueInput[]
+  update?: Prisma.BoardRequestUpdateWithWhereUniqueWithoutCeoByInput | Prisma.BoardRequestUpdateWithWhereUniqueWithoutCeoByInput[]
+  updateMany?: Prisma.BoardRequestUpdateManyWithWhereWithoutCeoByInput | Prisma.BoardRequestUpdateManyWithWhereWithoutCeoByInput[]
+  deleteMany?: Prisma.BoardRequestScalarWhereInput | Prisma.BoardRequestScalarWhereInput[]
+}
+
 export type BoardRequestCreateNestedManyWithoutUnitInput = {
   create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutUnitInput, Prisma.BoardRequestUncheckedCreateWithoutUnitInput> | Prisma.BoardRequestCreateWithoutUnitInput[] | Prisma.BoardRequestUncheckedCreateWithoutUnitInput[]
   connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutUnitInput | Prisma.BoardRequestCreateOrConnectWithoutUnitInput[]
@@ -1241,6 +1583,10 @@ export type BoardRequestUncheckedUpdateManyWithoutUnitNestedInput = {
   deleteMany?: Prisma.BoardRequestScalarWhereInput | Prisma.BoardRequestScalarWhereInput[]
 }
 
+export type EnumBoardRequestKindFieldUpdateOperationsInput = {
+  set?: $Enums.BoardRequestKind
+}
+
 export type EnumBoardRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.BoardRequestStatus
 }
@@ -1281,6 +1627,10 @@ export type BoardRequestUpdateOneWithoutMinutesNestedInput = {
 
 export type BoardRequestCreateWithoutCreatedByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -1290,16 +1640,22 @@ export type BoardRequestCreateWithoutCreatedByInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1310,6 +1666,7 @@ export type BoardRequestCreateWithoutCreatedByInput = {
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
@@ -1317,6 +1674,10 @@ export type BoardRequestCreateWithoutCreatedByInput = {
 
 export type BoardRequestUncheckedCreateWithoutCreatedByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -1328,19 +1689,26 @@ export type BoardRequestUncheckedCreateWithoutCreatedByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1363,6 +1731,10 @@ export type BoardRequestCreateManyCreatedByInputEnvelope = {
 
 export type BoardRequestCreateWithoutRejectedByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -1372,16 +1744,22 @@ export type BoardRequestCreateWithoutRejectedByInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1393,12 +1771,17 @@ export type BoardRequestCreateWithoutRejectedByInput = {
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutRejectedByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -1411,19 +1794,26 @@ export type BoardRequestUncheckedCreateWithoutRejectedByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1445,6 +1835,10 @@ export type BoardRequestCreateManyRejectedByInputEnvelope = {
 
 export type BoardRequestCreateWithoutManagementByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -1454,16 +1848,22 @@ export type BoardRequestCreateWithoutManagementByInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1474,6 +1874,7 @@ export type BoardRequestCreateWithoutManagementByInput = {
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
@@ -1481,6 +1882,10 @@ export type BoardRequestCreateWithoutManagementByInput = {
 
 export type BoardRequestUncheckedCreateWithoutManagementByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -1492,19 +1897,26 @@ export type BoardRequestUncheckedCreateWithoutManagementByInput = {
   createdById: string
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1527,6 +1939,10 @@ export type BoardRequestCreateManyManagementByInputEnvelope = {
 
 export type BoardRequestCreateWithoutLegalByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -1536,16 +1952,22 @@ export type BoardRequestCreateWithoutLegalByInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1556,6 +1978,7 @@ export type BoardRequestCreateWithoutLegalByInput = {
   managementBy?: Prisma.UserCreateNestedOneWithoutBoardManagementReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
@@ -1563,6 +1986,10 @@ export type BoardRequestCreateWithoutLegalByInput = {
 
 export type BoardRequestUncheckedCreateWithoutLegalByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -1575,18 +2002,25 @@ export type BoardRequestUncheckedCreateWithoutLegalByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1609,6 +2043,10 @@ export type BoardRequestCreateManyLegalByInputEnvelope = {
 
 export type BoardRequestCreateWithoutBudgetByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -1618,16 +2056,22 @@ export type BoardRequestCreateWithoutBudgetByInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1638,6 +2082,7 @@ export type BoardRequestCreateWithoutBudgetByInput = {
   managementBy?: Prisma.UserCreateNestedOneWithoutBoardManagementReviewsInput
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
@@ -1645,6 +2090,10 @@ export type BoardRequestCreateWithoutBudgetByInput = {
 
 export type BoardRequestUncheckedCreateWithoutBudgetByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -1657,18 +2106,25 @@ export type BoardRequestUncheckedCreateWithoutBudgetByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1691,6 +2147,10 @@ export type BoardRequestCreateManyBudgetByInputEnvelope = {
 
 export type BoardRequestCreateWithoutSecretaryByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -1700,16 +2160,22 @@ export type BoardRequestCreateWithoutSecretaryByInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1720,6 +2186,7 @@ export type BoardRequestCreateWithoutSecretaryByInput = {
   managementBy?: Prisma.UserCreateNestedOneWithoutBoardManagementReviewsInput
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
@@ -1727,6 +2194,10 @@ export type BoardRequestCreateWithoutSecretaryByInput = {
 
 export type BoardRequestUncheckedCreateWithoutSecretaryByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -1739,18 +2210,25 @@ export type BoardRequestUncheckedCreateWithoutSecretaryByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1768,6 +2246,110 @@ export type BoardRequestCreateOrConnectWithoutSecretaryByInput = {
 
 export type BoardRequestCreateManySecretaryByInputEnvelope = {
   data: Prisma.BoardRequestCreateManySecretaryByInput | Prisma.BoardRequestCreateManySecretaryByInput[]
+  skipDuplicates?: boolean
+}
+
+export type BoardRequestCreateWithoutCeoByInput = {
+  id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
+  status?: $Enums.BoardRequestStatus
+  requestedAt: Date | string
+  orgPositionText: string
+  subject: string
+  justification?: string | null
+  topicHistory?: string | null
+  description?: string | null
+  managementComment?: string | null
+  managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
+  legalOrgMatch?: boolean | null
+  legalRegulationsMatch?: boolean | null
+  legalComment?: string | null
+  legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
+  budgetProgramHistory?: boolean | null
+  budgetCurrentYearFunding?: boolean | null
+  budgetComment?: string | null
+  budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
+  secretaryComment?: string | null
+  secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  rejectedStage?: $Enums.BoardStage | null
+  rejectedComment?: string | null
+  rejectedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  unit: Prisma.OrganizationUnitCreateNestedOneWithoutBoardRequestsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutBoardRequestsCreatedInput
+  managementBy?: Prisma.UserCreateNestedOneWithoutBoardManagementReviewsInput
+  legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
+  budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
+  secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
+  attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
+  minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
+}
+
+export type BoardRequestUncheckedCreateWithoutCeoByInput = {
+  id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
+  status?: $Enums.BoardRequestStatus
+  requestedAt: Date | string
+  unitId: string
+  orgPositionText: string
+  subject: string
+  justification?: string | null
+  topicHistory?: string | null
+  description?: string | null
+  createdById: string
+  managementComment?: string | null
+  managementAt?: Date | string | null
+  managementById?: string | null
+  legalReferredAt?: Date | string | null
+  legalOrgMatch?: boolean | null
+  legalRegulationsMatch?: boolean | null
+  legalComment?: string | null
+  legalAt?: Date | string | null
+  legalById?: string | null
+  budgetReferredAt?: Date | string | null
+  budgetProgramHistory?: boolean | null
+  budgetCurrentYearFunding?: boolean | null
+  budgetComment?: string | null
+  budgetAt?: Date | string | null
+  budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
+  secretaryComment?: string | null
+  secretaryAt?: Date | string | null
+  secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  rejectedStage?: $Enums.BoardStage | null
+  rejectedComment?: string | null
+  rejectedAt?: Date | string | null
+  rejectedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
+  minutes?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutRequestInput
+}
+
+export type BoardRequestCreateOrConnectWithoutCeoByInput = {
+  where: Prisma.BoardRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardRequestCreateWithoutCeoByInput, Prisma.BoardRequestUncheckedCreateWithoutCeoByInput>
+}
+
+export type BoardRequestCreateManyCeoByInputEnvelope = {
+  data: Prisma.BoardRequestCreateManyCeoByInput | Prisma.BoardRequestCreateManyCeoByInput[]
   skipDuplicates?: boolean
 }
 
@@ -1792,6 +2374,10 @@ export type BoardRequestScalarWhereInput = {
   OR?: Prisma.BoardRequestScalarWhereInput[]
   NOT?: Prisma.BoardRequestScalarWhereInput | Prisma.BoardRequestScalarWhereInput[]
   id?: Prisma.StringFilter<"BoardRequest"> | string
+  kind?: Prisma.EnumBoardRequestKindFilter<"BoardRequest"> | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFilter<"BoardRequest"> | string
+  trackingYear?: Prisma.IntFilter<"BoardRequest"> | number
+  trackingSeq?: Prisma.IntFilter<"BoardRequest"> | number
   status?: Prisma.EnumBoardRequestStatusFilter<"BoardRequest"> | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFilter<"BoardRequest"> | Date | string
   unitId?: Prisma.StringFilter<"BoardRequest"> | string
@@ -1804,19 +2390,26 @@ export type BoardRequestScalarWhereInput = {
   managementComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   managementAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   managementById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  legalReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   legalOrgMatch?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   legalRegulationsMatch?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   legalComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   legalAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   legalById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  budgetReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   budgetProgramHistory?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   budgetCurrentYearFunding?: Prisma.BoolNullableFilter<"BoardRequest"> | boolean | null
   budgetComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   budgetAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   budgetById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  secretaryReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   secretaryComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   secretaryAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
   secretaryById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  ceoReferredAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
+  ceoComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
+  ceoAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
+  ceoById?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   rejectedStage?: Prisma.EnumBoardStageNullableFilter<"BoardRequest"> | $Enums.BoardStage | null
   rejectedComment?: Prisma.StringNullableFilter<"BoardRequest"> | string | null
   rejectedAt?: Prisma.DateTimeNullableFilter<"BoardRequest"> | Date | string | null
@@ -1905,8 +2498,28 @@ export type BoardRequestUpdateManyWithWhereWithoutSecretaryByInput = {
   data: Prisma.XOR<Prisma.BoardRequestUpdateManyMutationInput, Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByInput>
 }
 
+export type BoardRequestUpsertWithWhereUniqueWithoutCeoByInput = {
+  where: Prisma.BoardRequestWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoardRequestUpdateWithoutCeoByInput, Prisma.BoardRequestUncheckedUpdateWithoutCeoByInput>
+  create: Prisma.XOR<Prisma.BoardRequestCreateWithoutCeoByInput, Prisma.BoardRequestUncheckedCreateWithoutCeoByInput>
+}
+
+export type BoardRequestUpdateWithWhereUniqueWithoutCeoByInput = {
+  where: Prisma.BoardRequestWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoardRequestUpdateWithoutCeoByInput, Prisma.BoardRequestUncheckedUpdateWithoutCeoByInput>
+}
+
+export type BoardRequestUpdateManyWithWhereWithoutCeoByInput = {
+  where: Prisma.BoardRequestScalarWhereInput
+  data: Prisma.XOR<Prisma.BoardRequestUpdateManyMutationInput, Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByInput>
+}
+
 export type BoardRequestCreateWithoutUnitInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -1916,16 +2529,22 @@ export type BoardRequestCreateWithoutUnitInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -1936,6 +2555,7 @@ export type BoardRequestCreateWithoutUnitInput = {
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
@@ -1943,6 +2563,10 @@ export type BoardRequestCreateWithoutUnitInput = {
 
 export type BoardRequestUncheckedCreateWithoutUnitInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -1954,19 +2578,26 @@ export type BoardRequestUncheckedCreateWithoutUnitInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2005,6 +2636,10 @@ export type BoardRequestUpdateManyWithWhereWithoutUnitInput = {
 
 export type BoardRequestCreateWithoutAttachmentsInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -2014,16 +2649,22 @@ export type BoardRequestCreateWithoutAttachmentsInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2035,12 +2676,17 @@ export type BoardRequestCreateWithoutAttachmentsInput = {
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   minutes?: Prisma.BoardMinutesCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutAttachmentsInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -2053,19 +2699,26 @@ export type BoardRequestUncheckedCreateWithoutAttachmentsInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2093,6 +2746,10 @@ export type BoardRequestUpdateToOneWithWhereWithoutAttachmentsInput = {
 
 export type BoardRequestUpdateWithoutAttachmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2102,16 +2759,22 @@ export type BoardRequestUpdateWithoutAttachmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2123,12 +2786,17 @@ export type BoardRequestUpdateWithoutAttachmentsInput = {
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutAttachmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2141,19 +2809,26 @@ export type BoardRequestUncheckedUpdateWithoutAttachmentsInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2165,6 +2840,10 @@ export type BoardRequestUncheckedUpdateWithoutAttachmentsInput = {
 
 export type BoardRequestCreateWithoutMinutesInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -2174,16 +2853,22 @@ export type BoardRequestCreateWithoutMinutesInput = {
   description?: string | null
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2195,12 +2880,17 @@ export type BoardRequestCreateWithoutMinutesInput = {
   legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
   budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
   secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutMinutesInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -2213,19 +2903,26 @@ export type BoardRequestUncheckedCreateWithoutMinutesInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2253,6 +2950,10 @@ export type BoardRequestUpdateToOneWithWhereWithoutMinutesInput = {
 
 export type BoardRequestUpdateWithoutMinutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2262,16 +2963,22 @@ export type BoardRequestUpdateWithoutMinutesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2283,12 +2990,17 @@ export type BoardRequestUpdateWithoutMinutesInput = {
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutMinutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2301,19 +3013,26 @@ export type BoardRequestUncheckedUpdateWithoutMinutesInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2325,6 +3044,10 @@ export type BoardRequestUncheckedUpdateWithoutMinutesInput = {
 
 export type BoardRequestCreateManyCreatedByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -2336,19 +3059,26 @@ export type BoardRequestCreateManyCreatedByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2359,6 +3089,10 @@ export type BoardRequestCreateManyCreatedByInput = {
 
 export type BoardRequestCreateManyRejectedByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -2371,19 +3105,26 @@ export type BoardRequestCreateManyRejectedByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2393,6 +3134,10 @@ export type BoardRequestCreateManyRejectedByInput = {
 
 export type BoardRequestCreateManyManagementByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -2404,19 +3149,26 @@ export type BoardRequestCreateManyManagementByInput = {
   createdById: string
   managementComment?: string | null
   managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2427,6 +3179,10 @@ export type BoardRequestCreateManyManagementByInput = {
 
 export type BoardRequestCreateManyLegalByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -2439,18 +3195,25 @@ export type BoardRequestCreateManyLegalByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2461,6 +3224,10 @@ export type BoardRequestCreateManyLegalByInput = {
 
 export type BoardRequestCreateManyBudgetByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -2473,18 +3240,25 @@ export type BoardRequestCreateManyBudgetByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2495,6 +3269,10 @@ export type BoardRequestCreateManyBudgetByInput = {
 
 export type BoardRequestCreateManySecretaryByInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   unitId: string
@@ -2507,18 +3285,70 @@ export type BoardRequestCreateManySecretaryByInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
+  rejectedStage?: $Enums.BoardStage | null
+  rejectedComment?: string | null
+  rejectedAt?: Date | string | null
+  rejectedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BoardRequestCreateManyCeoByInput = {
+  id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
+  status?: $Enums.BoardRequestStatus
+  requestedAt: Date | string
+  unitId: string
+  orgPositionText: string
+  subject: string
+  justification?: string | null
+  topicHistory?: string | null
+  description?: string | null
+  createdById: string
+  managementComment?: string | null
+  managementAt?: Date | string | null
+  managementById?: string | null
+  legalReferredAt?: Date | string | null
+  legalOrgMatch?: boolean | null
+  legalRegulationsMatch?: boolean | null
+  legalComment?: string | null
+  legalAt?: Date | string | null
+  legalById?: string | null
+  budgetReferredAt?: Date | string | null
+  budgetProgramHistory?: boolean | null
+  budgetCurrentYearFunding?: boolean | null
+  budgetComment?: string | null
+  budgetAt?: Date | string | null
+  budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
+  secretaryComment?: string | null
+  secretaryAt?: Date | string | null
+  secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -2529,6 +3359,10 @@ export type BoardRequestCreateManySecretaryByInput = {
 
 export type BoardRequestUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2538,16 +3372,22 @@ export type BoardRequestUpdateWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2558,6 +3398,7 @@ export type BoardRequestUpdateWithoutCreatedByInput = {
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
@@ -2565,6 +3406,10 @@ export type BoardRequestUpdateWithoutCreatedByInput = {
 
 export type BoardRequestUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2576,19 +3421,26 @@ export type BoardRequestUncheckedUpdateWithoutCreatedByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2601,6 +3453,10 @@ export type BoardRequestUncheckedUpdateWithoutCreatedByInput = {
 
 export type BoardRequestUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2612,19 +3468,26 @@ export type BoardRequestUncheckedUpdateManyWithoutCreatedByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2635,6 +3498,10 @@ export type BoardRequestUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type BoardRequestUpdateWithoutRejectedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2644,16 +3511,22 @@ export type BoardRequestUpdateWithoutRejectedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2665,12 +3538,17 @@ export type BoardRequestUpdateWithoutRejectedByInput = {
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutRejectedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2683,19 +3561,26 @@ export type BoardRequestUncheckedUpdateWithoutRejectedByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2707,6 +3592,10 @@ export type BoardRequestUncheckedUpdateWithoutRejectedByInput = {
 
 export type BoardRequestUncheckedUpdateManyWithoutRejectedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2719,19 +3608,26 @@ export type BoardRequestUncheckedUpdateManyWithoutRejectedByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2741,6 +3637,10 @@ export type BoardRequestUncheckedUpdateManyWithoutRejectedByInput = {
 
 export type BoardRequestUpdateWithoutManagementByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2750,16 +3650,22 @@ export type BoardRequestUpdateWithoutManagementByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2770,6 +3676,7 @@ export type BoardRequestUpdateWithoutManagementByInput = {
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
@@ -2777,6 +3684,10 @@ export type BoardRequestUpdateWithoutManagementByInput = {
 
 export type BoardRequestUncheckedUpdateWithoutManagementByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2788,19 +3699,26 @@ export type BoardRequestUncheckedUpdateWithoutManagementByInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2813,6 +3731,10 @@ export type BoardRequestUncheckedUpdateWithoutManagementByInput = {
 
 export type BoardRequestUncheckedUpdateManyWithoutManagementByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2824,19 +3746,26 @@ export type BoardRequestUncheckedUpdateManyWithoutManagementByInput = {
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2847,6 +3776,10 @@ export type BoardRequestUncheckedUpdateManyWithoutManagementByInput = {
 
 export type BoardRequestUpdateWithoutLegalByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2856,16 +3789,22 @@ export type BoardRequestUpdateWithoutLegalByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2876,6 +3815,7 @@ export type BoardRequestUpdateWithoutLegalByInput = {
   managementBy?: Prisma.UserUpdateOneWithoutBoardManagementReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
@@ -2883,6 +3823,10 @@ export type BoardRequestUpdateWithoutLegalByInput = {
 
 export type BoardRequestUncheckedUpdateWithoutLegalByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2895,18 +3839,25 @@ export type BoardRequestUncheckedUpdateWithoutLegalByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2919,6 +3870,10 @@ export type BoardRequestUncheckedUpdateWithoutLegalByInput = {
 
 export type BoardRequestUncheckedUpdateManyWithoutLegalByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2931,18 +3886,25 @@ export type BoardRequestUncheckedUpdateManyWithoutLegalByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2953,6 +3915,10 @@ export type BoardRequestUncheckedUpdateManyWithoutLegalByInput = {
 
 export type BoardRequestUpdateWithoutBudgetByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2962,16 +3928,22 @@ export type BoardRequestUpdateWithoutBudgetByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2982,6 +3954,7 @@ export type BoardRequestUpdateWithoutBudgetByInput = {
   managementBy?: Prisma.UserUpdateOneWithoutBoardManagementReviewsNestedInput
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
@@ -2989,6 +3962,10 @@ export type BoardRequestUpdateWithoutBudgetByInput = {
 
 export type BoardRequestUncheckedUpdateWithoutBudgetByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3001,18 +3978,25 @@ export type BoardRequestUncheckedUpdateWithoutBudgetByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3025,6 +4009,10 @@ export type BoardRequestUncheckedUpdateWithoutBudgetByInput = {
 
 export type BoardRequestUncheckedUpdateManyWithoutBudgetByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3037,18 +4025,25 @@ export type BoardRequestUncheckedUpdateManyWithoutBudgetByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3059,6 +4054,10 @@ export type BoardRequestUncheckedUpdateManyWithoutBudgetByInput = {
 
 export type BoardRequestUpdateWithoutSecretaryByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3068,16 +4067,22 @@ export type BoardRequestUpdateWithoutSecretaryByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3088,6 +4093,7 @@ export type BoardRequestUpdateWithoutSecretaryByInput = {
   managementBy?: Prisma.UserUpdateOneWithoutBoardManagementReviewsNestedInput
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
@@ -3095,6 +4101,10 @@ export type BoardRequestUpdateWithoutSecretaryByInput = {
 
 export type BoardRequestUncheckedUpdateWithoutSecretaryByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3107,18 +4117,25 @@ export type BoardRequestUncheckedUpdateWithoutSecretaryByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3131,6 +4148,10 @@ export type BoardRequestUncheckedUpdateWithoutSecretaryByInput = {
 
 export type BoardRequestUncheckedUpdateManyWithoutSecretaryByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   unitId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3143,18 +4164,164 @@ export type BoardRequestUncheckedUpdateManyWithoutSecretaryByInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
+  rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardRequestUpdateWithoutCeoByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  justification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  topicHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
+  rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unit?: Prisma.OrganizationUnitUpdateOneRequiredWithoutBoardRequestsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutBoardRequestsCreatedNestedInput
+  managementBy?: Prisma.UserUpdateOneWithoutBoardManagementReviewsNestedInput
+  legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
+  budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
+  secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
+  attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
+  minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
+}
+
+export type BoardRequestUncheckedUpdateWithoutCeoByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unitId?: Prisma.StringFieldUpdateOperationsInput | string
+  orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  justification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  topicHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
+  rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
+  minutes?: Prisma.BoardMinutesUncheckedUpdateManyWithoutRequestNestedInput
+}
+
+export type BoardRequestUncheckedUpdateManyWithoutCeoByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unitId?: Prisma.StringFieldUpdateOperationsInput | string
+  orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  justification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  topicHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3165,6 +4332,10 @@ export type BoardRequestUncheckedUpdateManyWithoutSecretaryByInput = {
 
 export type BoardRequestCreateManyUnitInput = {
   id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
   status?: $Enums.BoardRequestStatus
   requestedAt: Date | string
   orgPositionText: string
@@ -3176,19 +4347,26 @@ export type BoardRequestCreateManyUnitInput = {
   managementComment?: string | null
   managementAt?: Date | string | null
   managementById?: string | null
+  legalReferredAt?: Date | string | null
   legalOrgMatch?: boolean | null
   legalRegulationsMatch?: boolean | null
   legalComment?: string | null
   legalAt?: Date | string | null
   legalById?: string | null
+  budgetReferredAt?: Date | string | null
   budgetProgramHistory?: boolean | null
   budgetCurrentYearFunding?: boolean | null
   budgetComment?: string | null
   budgetAt?: Date | string | null
   budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
   secretaryComment?: string | null
   secretaryAt?: Date | string | null
   secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
   rejectedStage?: $Enums.BoardStage | null
   rejectedComment?: string | null
   rejectedAt?: Date | string | null
@@ -3199,6 +4377,10 @@ export type BoardRequestCreateManyUnitInput = {
 
 export type BoardRequestUpdateWithoutUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3208,16 +4390,22 @@ export type BoardRequestUpdateWithoutUnitInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3228,6 +4416,7 @@ export type BoardRequestUpdateWithoutUnitInput = {
   legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
   budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
   secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutes?: Prisma.BoardMinutesUpdateManyWithoutRequestNestedInput
@@ -3235,6 +4424,10 @@ export type BoardRequestUpdateWithoutUnitInput = {
 
 export type BoardRequestUncheckedUpdateWithoutUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3246,19 +4439,26 @@ export type BoardRequestUncheckedUpdateWithoutUnitInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3271,6 +4471,10 @@ export type BoardRequestUncheckedUpdateWithoutUnitInput = {
 
 export type BoardRequestUncheckedUpdateManyWithoutUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
   requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3282,19 +4486,26 @@ export type BoardRequestUncheckedUpdateManyWithoutUnitInput = {
   managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
   rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3345,6 +4556,10 @@ export type BoardRequestCountOutputTypeCountMinutesArgs<ExtArgs extends runtime.
 
 export type BoardRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  kind?: boolean
+  trackingNo?: boolean
+  trackingYear?: boolean
+  trackingSeq?: boolean
   status?: boolean
   requestedAt?: boolean
   unitId?: boolean
@@ -3357,19 +4572,26 @@ export type BoardRequestSelect<ExtArgs extends runtime.Types.Extensions.Internal
   managementComment?: boolean
   managementAt?: boolean
   managementById?: boolean
+  legalReferredAt?: boolean
   legalOrgMatch?: boolean
   legalRegulationsMatch?: boolean
   legalComment?: boolean
   legalAt?: boolean
   legalById?: boolean
+  budgetReferredAt?: boolean
   budgetProgramHistory?: boolean
   budgetCurrentYearFunding?: boolean
   budgetComment?: boolean
   budgetAt?: boolean
   budgetById?: boolean
+  secretaryReferredAt?: boolean
   secretaryComment?: boolean
   secretaryAt?: boolean
   secretaryById?: boolean
+  ceoReferredAt?: boolean
+  ceoComment?: boolean
+  ceoAt?: boolean
+  ceoById?: boolean
   rejectedStage?: boolean
   rejectedComment?: boolean
   rejectedAt?: boolean
@@ -3382,6 +4604,7 @@ export type BoardRequestSelect<ExtArgs extends runtime.Types.Extensions.Internal
   legalBy?: boolean | Prisma.BoardRequest$legalByArgs<ExtArgs>
   budgetBy?: boolean | Prisma.BoardRequest$budgetByArgs<ExtArgs>
   secretaryBy?: boolean | Prisma.BoardRequest$secretaryByArgs<ExtArgs>
+  ceoBy?: boolean | Prisma.BoardRequest$ceoByArgs<ExtArgs>
   rejectedBy?: boolean | Prisma.BoardRequest$rejectedByArgs<ExtArgs>
   attachments?: boolean | Prisma.BoardRequest$attachmentsArgs<ExtArgs>
   minutes?: boolean | Prisma.BoardRequest$minutesArgs<ExtArgs>
@@ -3390,6 +4613,10 @@ export type BoardRequestSelect<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type BoardRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  kind?: boolean
+  trackingNo?: boolean
+  trackingYear?: boolean
+  trackingSeq?: boolean
   status?: boolean
   requestedAt?: boolean
   unitId?: boolean
@@ -3402,19 +4629,26 @@ export type BoardRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   managementComment?: boolean
   managementAt?: boolean
   managementById?: boolean
+  legalReferredAt?: boolean
   legalOrgMatch?: boolean
   legalRegulationsMatch?: boolean
   legalComment?: boolean
   legalAt?: boolean
   legalById?: boolean
+  budgetReferredAt?: boolean
   budgetProgramHistory?: boolean
   budgetCurrentYearFunding?: boolean
   budgetComment?: boolean
   budgetAt?: boolean
   budgetById?: boolean
+  secretaryReferredAt?: boolean
   secretaryComment?: boolean
   secretaryAt?: boolean
   secretaryById?: boolean
+  ceoReferredAt?: boolean
+  ceoComment?: boolean
+  ceoAt?: boolean
+  ceoById?: boolean
   rejectedStage?: boolean
   rejectedComment?: boolean
   rejectedAt?: boolean
@@ -3427,11 +4661,16 @@ export type BoardRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   legalBy?: boolean | Prisma.BoardRequest$legalByArgs<ExtArgs>
   budgetBy?: boolean | Prisma.BoardRequest$budgetByArgs<ExtArgs>
   secretaryBy?: boolean | Prisma.BoardRequest$secretaryByArgs<ExtArgs>
+  ceoBy?: boolean | Prisma.BoardRequest$ceoByArgs<ExtArgs>
   rejectedBy?: boolean | Prisma.BoardRequest$rejectedByArgs<ExtArgs>
 }, ExtArgs["result"]["boardRequest"]>
 
 export type BoardRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  kind?: boolean
+  trackingNo?: boolean
+  trackingYear?: boolean
+  trackingSeq?: boolean
   status?: boolean
   requestedAt?: boolean
   unitId?: boolean
@@ -3444,19 +4683,26 @@ export type BoardRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   managementComment?: boolean
   managementAt?: boolean
   managementById?: boolean
+  legalReferredAt?: boolean
   legalOrgMatch?: boolean
   legalRegulationsMatch?: boolean
   legalComment?: boolean
   legalAt?: boolean
   legalById?: boolean
+  budgetReferredAt?: boolean
   budgetProgramHistory?: boolean
   budgetCurrentYearFunding?: boolean
   budgetComment?: boolean
   budgetAt?: boolean
   budgetById?: boolean
+  secretaryReferredAt?: boolean
   secretaryComment?: boolean
   secretaryAt?: boolean
   secretaryById?: boolean
+  ceoReferredAt?: boolean
+  ceoComment?: boolean
+  ceoAt?: boolean
+  ceoById?: boolean
   rejectedStage?: boolean
   rejectedComment?: boolean
   rejectedAt?: boolean
@@ -3469,11 +4715,16 @@ export type BoardRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   legalBy?: boolean | Prisma.BoardRequest$legalByArgs<ExtArgs>
   budgetBy?: boolean | Prisma.BoardRequest$budgetByArgs<ExtArgs>
   secretaryBy?: boolean | Prisma.BoardRequest$secretaryByArgs<ExtArgs>
+  ceoBy?: boolean | Prisma.BoardRequest$ceoByArgs<ExtArgs>
   rejectedBy?: boolean | Prisma.BoardRequest$rejectedByArgs<ExtArgs>
 }, ExtArgs["result"]["boardRequest"]>
 
 export type BoardRequestSelectScalar = {
   id?: boolean
+  kind?: boolean
+  trackingNo?: boolean
+  trackingYear?: boolean
+  trackingSeq?: boolean
   status?: boolean
   requestedAt?: boolean
   unitId?: boolean
@@ -3486,19 +4737,26 @@ export type BoardRequestSelectScalar = {
   managementComment?: boolean
   managementAt?: boolean
   managementById?: boolean
+  legalReferredAt?: boolean
   legalOrgMatch?: boolean
   legalRegulationsMatch?: boolean
   legalComment?: boolean
   legalAt?: boolean
   legalById?: boolean
+  budgetReferredAt?: boolean
   budgetProgramHistory?: boolean
   budgetCurrentYearFunding?: boolean
   budgetComment?: boolean
   budgetAt?: boolean
   budgetById?: boolean
+  secretaryReferredAt?: boolean
   secretaryComment?: boolean
   secretaryAt?: boolean
   secretaryById?: boolean
+  ceoReferredAt?: boolean
+  ceoComment?: boolean
+  ceoAt?: boolean
+  ceoById?: boolean
   rejectedStage?: boolean
   rejectedComment?: boolean
   rejectedAt?: boolean
@@ -3507,7 +4765,7 @@ export type BoardRequestSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BoardRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "requestedAt" | "unitId" | "orgPositionText" | "subject" | "justification" | "topicHistory" | "description" | "createdById" | "managementComment" | "managementAt" | "managementById" | "legalOrgMatch" | "legalRegulationsMatch" | "legalComment" | "legalAt" | "legalById" | "budgetProgramHistory" | "budgetCurrentYearFunding" | "budgetComment" | "budgetAt" | "budgetById" | "secretaryComment" | "secretaryAt" | "secretaryById" | "rejectedStage" | "rejectedComment" | "rejectedAt" | "rejectedById" | "createdAt" | "updatedAt", ExtArgs["result"]["boardRequest"]>
+export type BoardRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kind" | "trackingNo" | "trackingYear" | "trackingSeq" | "status" | "requestedAt" | "unitId" | "orgPositionText" | "subject" | "justification" | "topicHistory" | "description" | "createdById" | "managementComment" | "managementAt" | "managementById" | "legalReferredAt" | "legalOrgMatch" | "legalRegulationsMatch" | "legalComment" | "legalAt" | "legalById" | "budgetReferredAt" | "budgetProgramHistory" | "budgetCurrentYearFunding" | "budgetComment" | "budgetAt" | "budgetById" | "secretaryReferredAt" | "secretaryComment" | "secretaryAt" | "secretaryById" | "ceoReferredAt" | "ceoComment" | "ceoAt" | "ceoById" | "rejectedStage" | "rejectedComment" | "rejectedAt" | "rejectedById" | "createdAt" | "updatedAt", ExtArgs["result"]["boardRequest"]>
 export type BoardRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   unit?: boolean | Prisma.OrganizationUnitDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -3515,6 +4773,7 @@ export type BoardRequestInclude<ExtArgs extends runtime.Types.Extensions.Interna
   legalBy?: boolean | Prisma.BoardRequest$legalByArgs<ExtArgs>
   budgetBy?: boolean | Prisma.BoardRequest$budgetByArgs<ExtArgs>
   secretaryBy?: boolean | Prisma.BoardRequest$secretaryByArgs<ExtArgs>
+  ceoBy?: boolean | Prisma.BoardRequest$ceoByArgs<ExtArgs>
   rejectedBy?: boolean | Prisma.BoardRequest$rejectedByArgs<ExtArgs>
   attachments?: boolean | Prisma.BoardRequest$attachmentsArgs<ExtArgs>
   minutes?: boolean | Prisma.BoardRequest$minutesArgs<ExtArgs>
@@ -3527,6 +4786,7 @@ export type BoardRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types
   legalBy?: boolean | Prisma.BoardRequest$legalByArgs<ExtArgs>
   budgetBy?: boolean | Prisma.BoardRequest$budgetByArgs<ExtArgs>
   secretaryBy?: boolean | Prisma.BoardRequest$secretaryByArgs<ExtArgs>
+  ceoBy?: boolean | Prisma.BoardRequest$ceoByArgs<ExtArgs>
   rejectedBy?: boolean | Prisma.BoardRequest$rejectedByArgs<ExtArgs>
 }
 export type BoardRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3536,6 +4796,7 @@ export type BoardRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
   legalBy?: boolean | Prisma.BoardRequest$legalByArgs<ExtArgs>
   budgetBy?: boolean | Prisma.BoardRequest$budgetByArgs<ExtArgs>
   secretaryBy?: boolean | Prisma.BoardRequest$secretaryByArgs<ExtArgs>
+  ceoBy?: boolean | Prisma.BoardRequest$ceoByArgs<ExtArgs>
   rejectedBy?: boolean | Prisma.BoardRequest$rejectedByArgs<ExtArgs>
 }
 
@@ -3548,12 +4809,17 @@ export type $BoardRequestPayload<ExtArgs extends runtime.Types.Extensions.Intern
     legalBy: Prisma.$UserPayload<ExtArgs> | null
     budgetBy: Prisma.$UserPayload<ExtArgs> | null
     secretaryBy: Prisma.$UserPayload<ExtArgs> | null
+    ceoBy: Prisma.$UserPayload<ExtArgs> | null
     rejectedBy: Prisma.$UserPayload<ExtArgs> | null
     attachments: Prisma.$BoardAttachmentPayload<ExtArgs>[]
     minutes: Prisma.$BoardMinutesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    kind: $Enums.BoardRequestKind
+    trackingNo: string
+    trackingYear: number
+    trackingSeq: number
     status: $Enums.BoardRequestStatus
     requestedAt: Date
     unitId: string
@@ -3566,19 +4832,26 @@ export type $BoardRequestPayload<ExtArgs extends runtime.Types.Extensions.Intern
     managementComment: string | null
     managementAt: Date | null
     managementById: string | null
+    legalReferredAt: Date | null
     legalOrgMatch: boolean | null
     legalRegulationsMatch: boolean | null
     legalComment: string | null
     legalAt: Date | null
     legalById: string | null
+    budgetReferredAt: Date | null
     budgetProgramHistory: boolean | null
     budgetCurrentYearFunding: boolean | null
     budgetComment: string | null
     budgetAt: Date | null
     budgetById: string | null
+    secretaryReferredAt: Date | null
     secretaryComment: string | null
     secretaryAt: Date | null
     secretaryById: string | null
+    ceoReferredAt: Date | null
+    ceoComment: string | null
+    ceoAt: Date | null
+    ceoById: string | null
     rejectedStage: $Enums.BoardStage | null
     rejectedComment: string | null
     rejectedAt: Date | null
@@ -3985,6 +5258,7 @@ export interface Prisma__BoardRequestClient<T, Null = never, ExtArgs extends run
   legalBy<T extends Prisma.BoardRequest$legalByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$legalByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   budgetBy<T extends Prisma.BoardRequest$budgetByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$budgetByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   secretaryBy<T extends Prisma.BoardRequest$secretaryByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$secretaryByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ceoBy<T extends Prisma.BoardRequest$ceoByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$ceoByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   rejectedBy<T extends Prisma.BoardRequest$rejectedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$rejectedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   attachments<T extends Prisma.BoardRequest$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   minutes<T extends Prisma.BoardRequest$minutesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$minutesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4018,6 +5292,10 @@ export interface Prisma__BoardRequestClient<T, Null = never, ExtArgs extends run
  */
 export interface BoardRequestFieldRefs {
   readonly id: Prisma.FieldRef<"BoardRequest", 'String'>
+  readonly kind: Prisma.FieldRef<"BoardRequest", 'BoardRequestKind'>
+  readonly trackingNo: Prisma.FieldRef<"BoardRequest", 'String'>
+  readonly trackingYear: Prisma.FieldRef<"BoardRequest", 'Int'>
+  readonly trackingSeq: Prisma.FieldRef<"BoardRequest", 'Int'>
   readonly status: Prisma.FieldRef<"BoardRequest", 'BoardRequestStatus'>
   readonly requestedAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
   readonly unitId: Prisma.FieldRef<"BoardRequest", 'String'>
@@ -4030,19 +5308,26 @@ export interface BoardRequestFieldRefs {
   readonly managementComment: Prisma.FieldRef<"BoardRequest", 'String'>
   readonly managementAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
   readonly managementById: Prisma.FieldRef<"BoardRequest", 'String'>
+  readonly legalReferredAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
   readonly legalOrgMatch: Prisma.FieldRef<"BoardRequest", 'Boolean'>
   readonly legalRegulationsMatch: Prisma.FieldRef<"BoardRequest", 'Boolean'>
   readonly legalComment: Prisma.FieldRef<"BoardRequest", 'String'>
   readonly legalAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
   readonly legalById: Prisma.FieldRef<"BoardRequest", 'String'>
+  readonly budgetReferredAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
   readonly budgetProgramHistory: Prisma.FieldRef<"BoardRequest", 'Boolean'>
   readonly budgetCurrentYearFunding: Prisma.FieldRef<"BoardRequest", 'Boolean'>
   readonly budgetComment: Prisma.FieldRef<"BoardRequest", 'String'>
   readonly budgetAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
   readonly budgetById: Prisma.FieldRef<"BoardRequest", 'String'>
+  readonly secretaryReferredAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
   readonly secretaryComment: Prisma.FieldRef<"BoardRequest", 'String'>
   readonly secretaryAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
   readonly secretaryById: Prisma.FieldRef<"BoardRequest", 'String'>
+  readonly ceoReferredAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
+  readonly ceoComment: Prisma.FieldRef<"BoardRequest", 'String'>
+  readonly ceoAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
+  readonly ceoById: Prisma.FieldRef<"BoardRequest", 'String'>
   readonly rejectedStage: Prisma.FieldRef<"BoardRequest", 'BoardStage'>
   readonly rejectedComment: Prisma.FieldRef<"BoardRequest", 'String'>
   readonly rejectedAt: Prisma.FieldRef<"BoardRequest", 'DateTime'>
@@ -4510,6 +5795,25 @@ export type BoardRequest$budgetByArgs<ExtArgs extends runtime.Types.Extensions.I
  * BoardRequest.secretaryBy
  */
 export type BoardRequest$secretaryByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * BoardRequest.ceoBy
+ */
+export type BoardRequest$ceoByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the User
    */

@@ -115,6 +115,7 @@ const dossierRequestInclude = {
   legalBy: { select: personSelect },
   budgetBy: { select: personSelect },
   secretaryBy: { select: personSelect },
+  ceoBy: { select: personSelect },
   rejectedBy: { select: personSelect },
   attachments: {
     orderBy: [{ sortOrder: 'asc' as const }, { createdAt: 'asc' as const }],
@@ -658,6 +659,7 @@ export class BoardMinutesService {
       { legalComment: text },
       { budgetComment: text },
       { secretaryComment: text },
+      { ceoComment: text },
       { rejectedComment: text },
     ];
   }
@@ -757,6 +759,7 @@ export class BoardMinutesService {
       makeSnippet(item.legalComment, q) ||
       makeSnippet(item.budgetComment, q) ||
       makeSnippet(item.secretaryComment, q) ||
+      makeSnippet(item.ceoComment, q) ||
       makeSnippet(item.rejectedComment, q) ||
       null;
     return {
@@ -779,9 +782,14 @@ export class BoardMinutesService {
       ...item,
       requestedAt: toIsoDateOnly(item.requestedAt),
       managementAt: toIsoDateOnly(item.managementAt),
+      legalReferredAt: item.legalReferredAt?.toISOString() ?? null,
       legalAt: toIsoDateOnly(item.legalAt),
+      budgetReferredAt: item.budgetReferredAt?.toISOString() ?? null,
       budgetAt: toIsoDateOnly(item.budgetAt),
+      secretaryReferredAt: item.secretaryReferredAt?.toISOString() ?? null,
       secretaryAt: toIsoDateOnly(item.secretaryAt),
+      ceoReferredAt: item.ceoReferredAt?.toISOString() ?? null,
+      ceoAt: toIsoDateOnly(item.ceoAt),
       rejectedAt: toIsoDateOnly(item.rejectedAt),
       createdAt: item.createdAt.toISOString(),
       updatedAt: item.updatedAt.toISOString(),

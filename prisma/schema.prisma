@@ -141,14 +141,16 @@ model StoredImage {
   nationalCardUsers       User[]                   @relation("UserNationalCard")
   passportUsers           User[]                   @relation("UserPassport")
   identityBookletUsers    User[]                   @relation("UserIdentityBooklet")
+  signatureUsers          User[]                   @relation("UserSignature")
   foodPhotos              Food[]                   @relation("FoodPhoto")
   restaurantLogos         Restaurant[]             @relation("RestaurantLogo")
   progressImages          ProjectProgressImage[]
   singardAttachments      SingardAttachment[]
-  boardAttachments        BoardAttachment[]
-  boardMinutesAttachments BoardMinutesAttachment[]
-  stakeholderAttachments  StakeholderAttachment[]
-  createdAt               DateTime                 @default(now())
+  boardAttachments         BoardAttachment[]
+  boardMinutesAttachments  BoardMinutesAttachment[]
+  stakeholderAttachments   StakeholderAttachment[]
+  boardSignatorySignatures BoardSignatory[]         @relation("BoardSignatorySignature")
+  createdAt                DateTime                 @default(now())
 
   @@map("stored_images")
 }
@@ -271,6 +273,8 @@ model User {
   passportPhoto              StoredImage?                @relation("UserPassport", fields: [passportPhotoId], references: [id], onDelete: SetNull)
   identityBookletPhotoId     String?
   identityBookletPhoto       StoredImage?                @relation("UserIdentityBooklet", fields: [identityBookletPhotoId], references: [id], onDelete: SetNull)
+  signaturePhotoId           String?
+  signaturePhoto             StoredImage?                @relation("UserSignature", fields: [signaturePhotoId], references: [id], onDelete: SetNull)
   locationHistories          UserLocationHistory[]
   orgUnitId                  String?
   orgUnit                    OrganizationUnit?           @relation("UnitEmployees", fields: [orgUnitId], references: [id], onDelete: SetNull)
@@ -338,8 +342,10 @@ model User {
   boardLegalReviews          BoardRequest[]              @relation("BoardLegalReviewer")
   boardBudgetReviews         BoardRequest[]              @relation("BoardBudgetReviewer")
   boardSecretaryReviews      BoardRequest[]              @relation("BoardSecretaryReviewer")
+  boardCeoReviews            BoardRequest[]              @relation("BoardCeoReviewer")
   boardMinutesCreated        BoardMinutes[]              @relation("BoardMinutesAuthor")
   boardMinutesMemberships    BoardMinutesMember[]
+  boardSignatory             BoardSignatory?             @relation("BoardSignatoryUser")
   portSalesReports           PortSalesReport[]           @relation("PortSalesReportAuthor")
   portSalesReportsApproved   PortSalesReport[]           @relation("PortSalesReportApprover")
   operatedPort               Port?                       @relation("PortOperator")
@@ -860,12 +866,16 @@ model OrganizationPosition {
 
 model OrganizationUnitKind {
   id        String             @id @default(uuid())
+  code      String?            @unique
   name      String             @unique
+  isSystem  Boolean            @default(false)
   units     OrganizationUnit[]
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
 
   @@index([name])
+  @@index([code])
+  @@index([isSystem])
   @@index([createdAt])
   @@map("organization_unit_kinds")
 }
@@ -1230,6 +1240,7 @@ enum BoardRequestStatus {
   PENDING_LEGAL
   PENDING_BUDGET
   PENDING_SECRETARY
+  PENDING_CEO
   APPROVED
   REJECTED
 }
@@ -1240,6 +1251,12 @@ enum BoardStage {
   LEGAL
   BUDGET
   SECRETARY
+  CEO
+}
+
+enum BoardRequestKind {
+  NORMAL
+  MANAGEMENT
 }
 
 enum BoardAttachmentKind {
@@ -1249,6 +1266,10 @@ enum BoardAttachmentKind {
 
 model BoardRequest {
   id                       String             @id @default(uuid())
+  kind                     BoardRequestKind   @default(NORMAL)
+  trackingNo               String             @unique
+  trackingYear             Int
+  trackingSeq              Int
   status                   BoardRequestStatus @default(PENDING_REVIEW)
   requestedAt              DateTime           @db.Date
   unitId                   String
@@ -1264,22 +1285,30 @@ model BoardRequest {
   managementAt             DateTime?          @db.Date
   managementById           String?
   managementBy             User?              @relation("BoardManagementReviewer", fields: [managementById], references: [id], onDelete: SetNull)
+  legalReferredAt          DateTime?
   legalOrgMatch            Boolean?
   legalRegulationsMatch    Boolean?
   legalComment             String?
   legalAt                  DateTime?          @db.Date
   legalById                String?
   legalBy                  User?              @relation("BoardLegalReviewer", fields: [legalById], references: [id], onDelete: SetNull)
+  budgetReferredAt         DateTime?
   budgetProgramHistory     Boolean?
   budgetCurrentYearFunding Boolean?
   budgetComment            String?
   budgetAt                 DateTime?          @db.Date
   budgetById               String?
   budgetBy                 User?              @relation("BoardBudgetReviewer", fields: [budgetById], references: [id], onDelete: SetNull)
+  secretaryReferredAt      DateTime?
   secretaryComment         String?
   secretaryAt              DateTime?          @db.Date
   secretaryById            String?
   secretaryBy              User?              @relation("BoardSecretaryReviewer", fields: [secretaryById], references: [id], onDelete: SetNull)
+  ceoReferredAt            DateTime?
+  ceoComment               String?
+  ceoAt                    DateTime?          @db.Date
+  ceoById                  String?
+  ceoBy                    User?              @relation("BoardCeoReviewer", fields: [ceoById], references: [id], onDelete: SetNull)
   rejectedStage            BoardStage?
   rejectedComment          String?
   rejectedAt               DateTime?          @db.Date
@@ -1290,13 +1319,34 @@ model BoardRequest {
   createdAt                DateTime           @default(now())
   updatedAt                DateTime           @updatedAt
 
+  @@unique([trackingYear, trackingSeq])
   @@index([status])
+  @@index([kind])
   @@index([unitId])
   @@index([createdById])
   @@index([requestedAt])
   @@index([subject])
   @@index([createdAt])
   @@map("board_requests")
+}
+
+model BoardSignatory {
+  id               String      @id @default(uuid())
+  firstName        String
+  lastName         String
+  title            String
+  signatureImageId String
+  signatureImage   StoredImage @relation("BoardSignatorySignature", fields: [signatureImageId], references: [id], onDelete: Restrict)
+  userId           String?     @unique
+  user             User?       @relation("BoardSignatoryUser", fields: [userId], references: [id], onDelete: SetNull)
+  sortOrder        Int         @default(0)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@index([lastName, firstName])
+  @@index([sortOrder])
+  @@index([createdAt])
+  @@map("board_signatories")
 }
 
 model BoardAttachment {

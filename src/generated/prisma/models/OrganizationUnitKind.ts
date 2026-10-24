@@ -26,21 +26,27 @@ export type AggregateOrganizationUnitKind = {
 
 export type OrganizationUnitKindMinAggregateOutputType = {
   id: string | null
+  code: string | null
   name: string | null
+  isSystem: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type OrganizationUnitKindMaxAggregateOutputType = {
   id: string | null
+  code: string | null
   name: string | null
+  isSystem: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type OrganizationUnitKindCountAggregateOutputType = {
   id: number
+  code: number
   name: number
+  isSystem: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -49,21 +55,27 @@ export type OrganizationUnitKindCountAggregateOutputType = {
 
 export type OrganizationUnitKindMinAggregateInputType = {
   id?: true
+  code?: true
   name?: true
+  isSystem?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type OrganizationUnitKindMaxAggregateInputType = {
   id?: true
+  code?: true
   name?: true
+  isSystem?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type OrganizationUnitKindCountAggregateInputType = {
   id?: true
+  code?: true
   name?: true
+  isSystem?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -143,7 +155,9 @@ export type OrganizationUnitKindGroupByArgs<ExtArgs extends runtime.Types.Extens
 
 export type OrganizationUnitKindGroupByOutputType = {
   id: string
+  code: string | null
   name: string
+  isSystem: boolean
   createdAt: Date
   updatedAt: Date
   _count: OrganizationUnitKindCountAggregateOutputType | null
@@ -171,7 +185,9 @@ export type OrganizationUnitKindWhereInput = {
   OR?: Prisma.OrganizationUnitKindWhereInput[]
   NOT?: Prisma.OrganizationUnitKindWhereInput | Prisma.OrganizationUnitKindWhereInput[]
   id?: Prisma.StringFilter<"OrganizationUnitKind"> | string
+  code?: Prisma.StringNullableFilter<"OrganizationUnitKind"> | string | null
   name?: Prisma.StringFilter<"OrganizationUnitKind"> | string
+  isSystem?: Prisma.BoolFilter<"OrganizationUnitKind"> | boolean
   createdAt?: Prisma.DateTimeFilter<"OrganizationUnitKind"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnitKind"> | Date | string
   units?: Prisma.OrganizationUnitListRelationFilter
@@ -179,7 +195,9 @@ export type OrganizationUnitKindWhereInput = {
 
 export type OrganizationUnitKindOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   units?: Prisma.OrganizationUnitOrderByRelationAggregateInput
@@ -187,18 +205,22 @@ export type OrganizationUnitKindOrderByWithRelationInput = {
 
 export type OrganizationUnitKindWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  code?: string
   name?: string
   AND?: Prisma.OrganizationUnitKindWhereInput | Prisma.OrganizationUnitKindWhereInput[]
   OR?: Prisma.OrganizationUnitKindWhereInput[]
   NOT?: Prisma.OrganizationUnitKindWhereInput | Prisma.OrganizationUnitKindWhereInput[]
+  isSystem?: Prisma.BoolFilter<"OrganizationUnitKind"> | boolean
   createdAt?: Prisma.DateTimeFilter<"OrganizationUnitKind"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OrganizationUnitKind"> | Date | string
   units?: Prisma.OrganizationUnitListRelationFilter
-}, "id" | "name">
+}, "id" | "code" | "name">
 
 export type OrganizationUnitKindOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrganizationUnitKindCountOrderByAggregateInput
@@ -211,14 +233,18 @@ export type OrganizationUnitKindScalarWhereWithAggregatesInput = {
   OR?: Prisma.OrganizationUnitKindScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OrganizationUnitKindScalarWhereWithAggregatesInput | Prisma.OrganizationUnitKindScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"OrganizationUnitKind"> | string
+  code?: Prisma.StringNullableWithAggregatesFilter<"OrganizationUnitKind"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"OrganizationUnitKind"> | string
+  isSystem?: Prisma.BoolWithAggregatesFilter<"OrganizationUnitKind"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationUnitKind"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OrganizationUnitKind"> | Date | string
 }
 
 export type OrganizationUnitKindCreateInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   units?: Prisma.OrganizationUnitCreateNestedManyWithoutKindInput
@@ -226,7 +252,9 @@ export type OrganizationUnitKindCreateInput = {
 
 export type OrganizationUnitKindUncheckedCreateInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   units?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutKindInput
@@ -234,7 +262,9 @@ export type OrganizationUnitKindUncheckedCreateInput = {
 
 export type OrganizationUnitKindUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.OrganizationUnitUpdateManyWithoutKindNestedInput
@@ -242,7 +272,9 @@ export type OrganizationUnitKindUpdateInput = {
 
 export type OrganizationUnitKindUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   units?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutKindNestedInput
@@ -250,42 +282,54 @@ export type OrganizationUnitKindUncheckedUpdateInput = {
 
 export type OrganizationUnitKindCreateManyInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type OrganizationUnitKindUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrganizationUnitKindUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrganizationUnitKindCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OrganizationUnitKindMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type OrganizationUnitKindMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -311,14 +355,18 @@ export type OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput = {
 
 export type OrganizationUnitKindCreateWithoutUnitsInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type OrganizationUnitKindUncheckedCreateWithoutUnitsInput = {
   id?: string
+  code?: string | null
   name: string
+  isSystem?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -341,14 +389,18 @@ export type OrganizationUnitKindUpdateToOneWithWhereWithoutUnitsInput = {
 
 export type OrganizationUnitKindUpdateWithoutUnitsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrganizationUnitKindUncheckedUpdateWithoutUnitsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -386,7 +438,9 @@ export type OrganizationUnitKindCountOutputTypeCountUnitsArgs<ExtArgs extends ru
 
 export type OrganizationUnitKindSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
   name?: boolean
+  isSystem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   units?: boolean | Prisma.OrganizationUnitKind$unitsArgs<ExtArgs>
@@ -395,26 +449,32 @@ export type OrganizationUnitKindSelect<ExtArgs extends runtime.Types.Extensions.
 
 export type OrganizationUnitKindSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
   name?: boolean
+  isSystem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["organizationUnitKind"]>
 
 export type OrganizationUnitKindSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  code?: boolean
   name?: boolean
+  isSystem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["organizationUnitKind"]>
 
 export type OrganizationUnitKindSelectScalar = {
   id?: boolean
+  code?: boolean
   name?: boolean
+  isSystem?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrganizationUnitKindOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationUnitKind"]>
+export type OrganizationUnitKindOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "isSystem" | "createdAt" | "updatedAt", ExtArgs["result"]["organizationUnitKind"]>
 export type OrganizationUnitKindInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   units?: boolean | Prisma.OrganizationUnitKind$unitsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationUnitKindCountOutputTypeDefaultArgs<ExtArgs>
@@ -429,7 +489,9 @@ export type $OrganizationUnitKindPayload<ExtArgs extends runtime.Types.Extension
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    code: string | null
     name: string
+    isSystem: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["organizationUnitKind"]>
@@ -857,7 +919,9 @@ export interface Prisma__OrganizationUnitKindClient<T, Null = never, ExtArgs ext
  */
 export interface OrganizationUnitKindFieldRefs {
   readonly id: Prisma.FieldRef<"OrganizationUnitKind", 'String'>
+  readonly code: Prisma.FieldRef<"OrganizationUnitKind", 'String'>
   readonly name: Prisma.FieldRef<"OrganizationUnitKind", 'String'>
+  readonly isSystem: Prisma.FieldRef<"OrganizationUnitKind", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"OrganizationUnitKind", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"OrganizationUnitKind", 'DateTime'>
 }

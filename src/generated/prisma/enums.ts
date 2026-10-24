@@ -241,6 +241,7 @@ export const BoardRequestStatus = {
   PENDING_LEGAL: 'PENDING_LEGAL',
   PENDING_BUDGET: 'PENDING_BUDGET',
   PENDING_SECRETARY: 'PENDING_SECRETARY',
+  PENDING_CEO: 'PENDING_CEO',
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED'
 } as const
@@ -253,10 +254,19 @@ export const BoardStage = {
   MANAGEMENT: 'MANAGEMENT',
   LEGAL: 'LEGAL',
   BUDGET: 'BUDGET',
-  SECRETARY: 'SECRETARY'
+  SECRETARY: 'SECRETARY',
+  CEO: 'CEO'
 } as const
 
 export type BoardStage = (typeof BoardStage)[keyof typeof BoardStage]
+
+
+export const BoardRequestKind = {
+  NORMAL: 'NORMAL',
+  MANAGEMENT: 'MANAGEMENT'
+} as const
+
+export type BoardRequestKind = (typeof BoardRequestKind)[keyof typeof BoardRequestKind]
 
 
 export const BoardAttachmentKind = {

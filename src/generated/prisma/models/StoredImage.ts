@@ -252,6 +252,7 @@ export type StoredImageWhereInput = {
   nationalCardUsers?: Prisma.UserListRelationFilter
   passportUsers?: Prisma.UserListRelationFilter
   identityBookletUsers?: Prisma.UserListRelationFilter
+  signatureUsers?: Prisma.UserListRelationFilter
   foodPhotos?: Prisma.FoodListRelationFilter
   restaurantLogos?: Prisma.RestaurantListRelationFilter
   progressImages?: Prisma.ProjectProgressImageListRelationFilter
@@ -259,6 +260,7 @@ export type StoredImageWhereInput = {
   boardAttachments?: Prisma.BoardAttachmentListRelationFilter
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
   stakeholderAttachments?: Prisma.StakeholderAttachmentListRelationFilter
+  boardSignatorySignatures?: Prisma.BoardSignatoryListRelationFilter
 }
 
 export type StoredImageOrderByWithRelationInput = {
@@ -274,6 +276,7 @@ export type StoredImageOrderByWithRelationInput = {
   nationalCardUsers?: Prisma.UserOrderByRelationAggregateInput
   passportUsers?: Prisma.UserOrderByRelationAggregateInput
   identityBookletUsers?: Prisma.UserOrderByRelationAggregateInput
+  signatureUsers?: Prisma.UserOrderByRelationAggregateInput
   foodPhotos?: Prisma.FoodOrderByRelationAggregateInput
   restaurantLogos?: Prisma.RestaurantOrderByRelationAggregateInput
   progressImages?: Prisma.ProjectProgressImageOrderByRelationAggregateInput
@@ -281,6 +284,7 @@ export type StoredImageOrderByWithRelationInput = {
   boardAttachments?: Prisma.BoardAttachmentOrderByRelationAggregateInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentOrderByRelationAggregateInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentOrderByRelationAggregateInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryOrderByRelationAggregateInput
 }
 
 export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
@@ -299,6 +303,7 @@ export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
   nationalCardUsers?: Prisma.UserListRelationFilter
   passportUsers?: Prisma.UserListRelationFilter
   identityBookletUsers?: Prisma.UserListRelationFilter
+  signatureUsers?: Prisma.UserListRelationFilter
   foodPhotos?: Prisma.FoodListRelationFilter
   restaurantLogos?: Prisma.RestaurantListRelationFilter
   progressImages?: Prisma.ProjectProgressImageListRelationFilter
@@ -306,6 +311,7 @@ export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
   boardAttachments?: Prisma.BoardAttachmentListRelationFilter
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
   stakeholderAttachments?: Prisma.StakeholderAttachmentListRelationFilter
+  boardSignatorySignatures?: Prisma.BoardSignatoryListRelationFilter
 }, "id">
 
 export type StoredImageOrderByWithAggregationInput = {
@@ -351,6 +357,7 @@ export type StoredImageCreateInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
@@ -358,6 +365,7 @@ export type StoredImageCreateInput = {
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateInput = {
@@ -373,6 +381,7 @@ export type StoredImageUncheckedCreateInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
@@ -380,6 +389,7 @@ export type StoredImageUncheckedCreateInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUpdateInput = {
@@ -395,6 +405,7 @@ export type StoredImageUpdateInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
@@ -402,6 +413,7 @@ export type StoredImageUpdateInput = {
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateInput = {
@@ -417,6 +429,7 @@ export type StoredImageUncheckedUpdateInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
@@ -424,6 +437,7 @@ export type StoredImageUncheckedUpdateInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageCreateManyInput = {
@@ -570,6 +584,12 @@ export type StoredImageCreateNestedOneWithoutIdentityBookletUsersInput = {
   connect?: Prisma.StoredImageWhereUniqueInput
 }
 
+export type StoredImageCreateNestedOneWithoutSignatureUsersInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutSignatureUsersInput, Prisma.StoredImageUncheckedCreateWithoutSignatureUsersInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutSignatureUsersInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+}
+
 export type StoredImageUpdateOneWithoutPhotoUsersNestedInput = {
   create?: Prisma.XOR<Prisma.StoredImageCreateWithoutPhotoUsersInput, Prisma.StoredImageUncheckedCreateWithoutPhotoUsersInput>
   connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutPhotoUsersInput
@@ -608,6 +628,16 @@ export type StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput = {
   delete?: Prisma.StoredImageWhereInput | boolean
   connect?: Prisma.StoredImageWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutIdentityBookletUsersInput, Prisma.StoredImageUpdateWithoutIdentityBookletUsersInput>, Prisma.StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput>
+}
+
+export type StoredImageUpdateOneWithoutSignatureUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutSignatureUsersInput, Prisma.StoredImageUncheckedCreateWithoutSignatureUsersInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutSignatureUsersInput
+  upsert?: Prisma.StoredImageUpsertWithoutSignatureUsersInput
+  disconnect?: Prisma.StoredImageWhereInput | boolean
+  delete?: Prisma.StoredImageWhereInput | boolean
+  connect?: Prisma.StoredImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutSignatureUsersInput, Prisma.StoredImageUpdateWithoutSignatureUsersInput>, Prisma.StoredImageUncheckedUpdateWithoutSignatureUsersInput>
 }
 
 export type StoredImageCreateNestedOneWithoutProgressImagesInput = {
@@ -672,6 +702,20 @@ export type StoredImageUpdateOneWithoutSingardAttachmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutSingardAttachmentsInput, Prisma.StoredImageUpdateWithoutSingardAttachmentsInput>, Prisma.StoredImageUncheckedUpdateWithoutSingardAttachmentsInput>
 }
 
+export type StoredImageCreateNestedOneWithoutBoardSignatorySignaturesInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutBoardSignatorySignaturesInput, Prisma.StoredImageUncheckedCreateWithoutBoardSignatorySignaturesInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutBoardSignatorySignaturesInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+}
+
+export type StoredImageUpdateOneRequiredWithoutBoardSignatorySignaturesNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutBoardSignatorySignaturesInput, Prisma.StoredImageUncheckedCreateWithoutBoardSignatorySignaturesInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutBoardSignatorySignaturesInput
+  upsert?: Prisma.StoredImageUpsertWithoutBoardSignatorySignaturesInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutBoardSignatorySignaturesInput, Prisma.StoredImageUpdateWithoutBoardSignatorySignaturesInput>, Prisma.StoredImageUncheckedUpdateWithoutBoardSignatorySignaturesInput>
+}
+
 export type StoredImageCreateNestedOneWithoutBoardAttachmentsInput = {
   create?: Prisma.XOR<Prisma.StoredImageCreateWithoutBoardAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutBoardAttachmentsInput>
   connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutBoardAttachmentsInput
@@ -732,6 +776,7 @@ export type StoredImageCreateWithoutPhotoUsersInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
@@ -739,6 +784,7 @@ export type StoredImageCreateWithoutPhotoUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
@@ -753,6 +799,7 @@ export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
@@ -760,6 +807,7 @@ export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutPhotoUsersInput = {
@@ -779,6 +827,7 @@ export type StoredImageCreateWithoutNationalCardUsersInput = {
   photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
@@ -786,6 +835,7 @@ export type StoredImageCreateWithoutNationalCardUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutNationalCardUsersInput = {
@@ -800,6 +850,7 @@ export type StoredImageUncheckedCreateWithoutNationalCardUsersInput = {
   photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
@@ -807,6 +858,7 @@ export type StoredImageUncheckedCreateWithoutNationalCardUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutNationalCardUsersInput = {
@@ -826,6 +878,7 @@ export type StoredImageCreateWithoutPassportUsersInput = {
   photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
@@ -833,6 +886,7 @@ export type StoredImageCreateWithoutPassportUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutPassportUsersInput = {
@@ -847,6 +901,7 @@ export type StoredImageUncheckedCreateWithoutPassportUsersInput = {
   photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
@@ -854,6 +909,7 @@ export type StoredImageUncheckedCreateWithoutPassportUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutPassportUsersInput = {
@@ -873,6 +929,7 @@ export type StoredImageCreateWithoutIdentityBookletUsersInput = {
   photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
@@ -880,6 +937,7 @@ export type StoredImageCreateWithoutIdentityBookletUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutIdentityBookletUsersInput = {
@@ -894,6 +952,7 @@ export type StoredImageUncheckedCreateWithoutIdentityBookletUsersInput = {
   photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
@@ -901,11 +960,63 @@ export type StoredImageUncheckedCreateWithoutIdentityBookletUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutIdentityBookletUsersInput = {
   where: Prisma.StoredImageWhereUniqueInput
   create: Prisma.XOR<Prisma.StoredImageCreateWithoutIdentityBookletUsersInput, Prisma.StoredImageUncheckedCreateWithoutIdentityBookletUsersInput>
+}
+
+export type StoredImageCreateWithoutSignatureUsersInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
+}
+
+export type StoredImageUncheckedCreateWithoutSignatureUsersInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
+}
+
+export type StoredImageCreateOrConnectWithoutSignatureUsersInput = {
+  where: Prisma.StoredImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutSignatureUsersInput, Prisma.StoredImageUncheckedCreateWithoutSignatureUsersInput>
 }
 
 export type StoredImageUpsertWithoutPhotoUsersInput = {
@@ -931,6 +1042,7 @@ export type StoredImageUpdateWithoutPhotoUsersInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
@@ -938,6 +1050,7 @@ export type StoredImageUpdateWithoutPhotoUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
@@ -952,6 +1065,7 @@ export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
@@ -959,6 +1073,7 @@ export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUpsertWithoutNationalCardUsersInput = {
@@ -984,6 +1099,7 @@ export type StoredImageUpdateWithoutNationalCardUsersInput = {
   photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
@@ -991,6 +1107,7 @@ export type StoredImageUpdateWithoutNationalCardUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutNationalCardUsersInput = {
@@ -1005,6 +1122,7 @@ export type StoredImageUncheckedUpdateWithoutNationalCardUsersInput = {
   photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
@@ -1012,6 +1130,7 @@ export type StoredImageUncheckedUpdateWithoutNationalCardUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUpsertWithoutPassportUsersInput = {
@@ -1037,6 +1156,7 @@ export type StoredImageUpdateWithoutPassportUsersInput = {
   photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
@@ -1044,6 +1164,7 @@ export type StoredImageUpdateWithoutPassportUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutPassportUsersInput = {
@@ -1058,6 +1179,7 @@ export type StoredImageUncheckedUpdateWithoutPassportUsersInput = {
   photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
@@ -1065,6 +1187,7 @@ export type StoredImageUncheckedUpdateWithoutPassportUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUpsertWithoutIdentityBookletUsersInput = {
@@ -1090,6 +1213,7 @@ export type StoredImageUpdateWithoutIdentityBookletUsersInput = {
   photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
@@ -1097,6 +1221,7 @@ export type StoredImageUpdateWithoutIdentityBookletUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput = {
@@ -1111,6 +1236,7 @@ export type StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput = {
   photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
@@ -1118,6 +1244,64 @@ export type StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput = {
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
+}
+
+export type StoredImageUpsertWithoutSignatureUsersInput = {
+  update: Prisma.XOR<Prisma.StoredImageUpdateWithoutSignatureUsersInput, Prisma.StoredImageUncheckedUpdateWithoutSignatureUsersInput>
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutSignatureUsersInput, Prisma.StoredImageUncheckedCreateWithoutSignatureUsersInput>
+  where?: Prisma.StoredImageWhereInput
+}
+
+export type StoredImageUpdateToOneWithWhereWithoutSignatureUsersInput = {
+  where?: Prisma.StoredImageWhereInput
+  data: Prisma.XOR<Prisma.StoredImageUpdateWithoutSignatureUsersInput, Prisma.StoredImageUncheckedUpdateWithoutSignatureUsersInput>
+}
+
+export type StoredImageUpdateWithoutSignatureUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
+}
+
+export type StoredImageUncheckedUpdateWithoutSignatureUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageCreateWithoutProgressImagesInput = {
@@ -1133,12 +1317,14 @@ export type StoredImageCreateWithoutProgressImagesInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutProgressImagesInput = {
@@ -1154,12 +1340,14 @@ export type StoredImageUncheckedCreateWithoutProgressImagesInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutProgressImagesInput = {
@@ -1191,12 +1379,14 @@ export type StoredImageUpdateWithoutProgressImagesInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutProgressImagesInput = {
@@ -1212,12 +1402,14 @@ export type StoredImageUncheckedUpdateWithoutProgressImagesInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageCreateWithoutFoodPhotosInput = {
@@ -1233,12 +1425,14 @@ export type StoredImageCreateWithoutFoodPhotosInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
@@ -1254,12 +1448,14 @@ export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutFoodPhotosInput = {
@@ -1291,12 +1487,14 @@ export type StoredImageUpdateWithoutFoodPhotosInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
@@ -1312,12 +1510,14 @@ export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageCreateWithoutRestaurantLogosInput = {
@@ -1333,12 +1533,14 @@ export type StoredImageCreateWithoutRestaurantLogosInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
@@ -1354,12 +1556,14 @@ export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutRestaurantLogosInput = {
@@ -1391,12 +1595,14 @@ export type StoredImageUpdateWithoutRestaurantLogosInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
@@ -1412,12 +1618,14 @@ export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageCreateWithoutSingardAttachmentsInput = {
@@ -1433,12 +1641,14 @@ export type StoredImageCreateWithoutSingardAttachmentsInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutSingardAttachmentsInput = {
@@ -1454,12 +1664,14 @@ export type StoredImageUncheckedCreateWithoutSingardAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutSingardAttachmentsInput = {
@@ -1491,12 +1703,14 @@ export type StoredImageUpdateWithoutSingardAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutSingardAttachmentsInput = {
@@ -1512,9 +1726,119 @@ export type StoredImageUncheckedUpdateWithoutSingardAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
+}
+
+export type StoredImageCreateWithoutBoardSignatorySignaturesInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
+  foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+}
+
+export type StoredImageUncheckedCreateWithoutBoardSignatorySignaturesInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
+  foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+}
+
+export type StoredImageCreateOrConnectWithoutBoardSignatorySignaturesInput = {
+  where: Prisma.StoredImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutBoardSignatorySignaturesInput, Prisma.StoredImageUncheckedCreateWithoutBoardSignatorySignaturesInput>
+}
+
+export type StoredImageUpsertWithoutBoardSignatorySignaturesInput = {
+  update: Prisma.XOR<Prisma.StoredImageUpdateWithoutBoardSignatorySignaturesInput, Prisma.StoredImageUncheckedUpdateWithoutBoardSignatorySignaturesInput>
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutBoardSignatorySignaturesInput, Prisma.StoredImageUncheckedCreateWithoutBoardSignatorySignaturesInput>
+  where?: Prisma.StoredImageWhereInput
+}
+
+export type StoredImageUpdateToOneWithWhereWithoutBoardSignatorySignaturesInput = {
+  where?: Prisma.StoredImageWhereInput
+  data: Prisma.XOR<Prisma.StoredImageUpdateWithoutBoardSignatorySignaturesInput, Prisma.StoredImageUncheckedUpdateWithoutBoardSignatorySignaturesInput>
+}
+
+export type StoredImageUpdateWithoutBoardSignatorySignaturesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
+  foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+}
+
+export type StoredImageUncheckedUpdateWithoutBoardSignatorySignaturesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
+  foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
@@ -1533,12 +1857,14 @@ export type StoredImageCreateWithoutBoardAttachmentsInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutBoardAttachmentsInput = {
@@ -1554,12 +1880,14 @@ export type StoredImageUncheckedCreateWithoutBoardAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutBoardAttachmentsInput = {
@@ -1591,12 +1919,14 @@ export type StoredImageUpdateWithoutBoardAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutBoardAttachmentsInput = {
@@ -1612,12 +1942,14 @@ export type StoredImageUncheckedUpdateWithoutBoardAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageCreateWithoutBoardMinutesAttachmentsInput = {
@@ -1633,12 +1965,14 @@ export type StoredImageCreateWithoutBoardMinutesAttachmentsInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
@@ -1654,12 +1988,14 @@ export type StoredImageUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutBoardMinutesAttachmentsInput = {
@@ -1691,12 +2027,14 @@ export type StoredImageUpdateWithoutBoardMinutesAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
@@ -1712,12 +2050,14 @@ export type StoredImageUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageCreateWithoutStakeholderAttachmentsInput = {
@@ -1733,12 +2073,14 @@ export type StoredImageCreateWithoutStakeholderAttachmentsInput = {
   nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutStakeholderAttachmentsInput = {
@@ -1754,12 +2096,14 @@ export type StoredImageUncheckedCreateWithoutStakeholderAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
   passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
   identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  signatureUsers?: Prisma.UserUncheckedCreateNestedManyWithoutSignaturePhotoInput
   foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
   restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedCreateNestedManyWithoutSignatureImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutStakeholderAttachmentsInput = {
@@ -1791,12 +2135,14 @@ export type StoredImageUpdateWithoutStakeholderAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUpdateManyWithoutSignatureImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutStakeholderAttachmentsInput = {
@@ -1812,12 +2158,14 @@ export type StoredImageUncheckedUpdateWithoutStakeholderAttachmentsInput = {
   nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
   passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
   identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  signatureUsers?: Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput
   foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
   restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardSignatorySignatures?: Prisma.BoardSignatoryUncheckedUpdateManyWithoutSignatureImageNestedInput
 }
 
 
@@ -1830,6 +2178,7 @@ export type StoredImageCountOutputType = {
   nationalCardUsers: number
   passportUsers: number
   identityBookletUsers: number
+  signatureUsers: number
   foodPhotos: number
   restaurantLogos: number
   progressImages: number
@@ -1837,6 +2186,7 @@ export type StoredImageCountOutputType = {
   boardAttachments: number
   boardMinutesAttachments: number
   stakeholderAttachments: number
+  boardSignatorySignatures: number
 }
 
 export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1844,6 +2194,7 @@ export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   nationalCardUsers?: boolean | StoredImageCountOutputTypeCountNationalCardUsersArgs
   passportUsers?: boolean | StoredImageCountOutputTypeCountPassportUsersArgs
   identityBookletUsers?: boolean | StoredImageCountOutputTypeCountIdentityBookletUsersArgs
+  signatureUsers?: boolean | StoredImageCountOutputTypeCountSignatureUsersArgs
   foodPhotos?: boolean | StoredImageCountOutputTypeCountFoodPhotosArgs
   restaurantLogos?: boolean | StoredImageCountOutputTypeCountRestaurantLogosArgs
   progressImages?: boolean | StoredImageCountOutputTypeCountProgressImagesArgs
@@ -1851,6 +2202,7 @@ export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   boardAttachments?: boolean | StoredImageCountOutputTypeCountBoardAttachmentsArgs
   boardMinutesAttachments?: boolean | StoredImageCountOutputTypeCountBoardMinutesAttachmentsArgs
   stakeholderAttachments?: boolean | StoredImageCountOutputTypeCountStakeholderAttachmentsArgs
+  boardSignatorySignatures?: boolean | StoredImageCountOutputTypeCountBoardSignatorySignaturesArgs
 }
 
 /**
@@ -1888,6 +2240,13 @@ export type StoredImageCountOutputTypeCountPassportUsersArgs<ExtArgs extends run
  * StoredImageCountOutputType without action
  */
 export type StoredImageCountOutputTypeCountIdentityBookletUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * StoredImageCountOutputType without action
+ */
+export type StoredImageCountOutputTypeCountSignatureUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserWhereInput
 }
 
@@ -1940,6 +2299,13 @@ export type StoredImageCountOutputTypeCountStakeholderAttachmentsArgs<ExtArgs ex
   where?: Prisma.StakeholderAttachmentWhereInput
 }
 
+/**
+ * StoredImageCountOutputType without action
+ */
+export type StoredImageCountOutputTypeCountBoardSignatorySignaturesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardSignatoryWhereInput
+}
+
 
 export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1954,6 +2320,7 @@ export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   nationalCardUsers?: boolean | Prisma.StoredImage$nationalCardUsersArgs<ExtArgs>
   passportUsers?: boolean | Prisma.StoredImage$passportUsersArgs<ExtArgs>
   identityBookletUsers?: boolean | Prisma.StoredImage$identityBookletUsersArgs<ExtArgs>
+  signatureUsers?: boolean | Prisma.StoredImage$signatureUsersArgs<ExtArgs>
   foodPhotos?: boolean | Prisma.StoredImage$foodPhotosArgs<ExtArgs>
   restaurantLogos?: boolean | Prisma.StoredImage$restaurantLogosArgs<ExtArgs>
   progressImages?: boolean | Prisma.StoredImage$progressImagesArgs<ExtArgs>
@@ -1961,6 +2328,7 @@ export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   boardAttachments?: boolean | Prisma.StoredImage$boardAttachmentsArgs<ExtArgs>
   boardMinutesAttachments?: boolean | Prisma.StoredImage$boardMinutesAttachmentsArgs<ExtArgs>
   stakeholderAttachments?: boolean | Prisma.StoredImage$stakeholderAttachmentsArgs<ExtArgs>
+  boardSignatorySignatures?: boolean | Prisma.StoredImage$boardSignatorySignaturesArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["storedImage"]>
 
@@ -2003,6 +2371,7 @@ export type StoredImageInclude<ExtArgs extends runtime.Types.Extensions.Internal
   nationalCardUsers?: boolean | Prisma.StoredImage$nationalCardUsersArgs<ExtArgs>
   passportUsers?: boolean | Prisma.StoredImage$passportUsersArgs<ExtArgs>
   identityBookletUsers?: boolean | Prisma.StoredImage$identityBookletUsersArgs<ExtArgs>
+  signatureUsers?: boolean | Prisma.StoredImage$signatureUsersArgs<ExtArgs>
   foodPhotos?: boolean | Prisma.StoredImage$foodPhotosArgs<ExtArgs>
   restaurantLogos?: boolean | Prisma.StoredImage$restaurantLogosArgs<ExtArgs>
   progressImages?: boolean | Prisma.StoredImage$progressImagesArgs<ExtArgs>
@@ -2010,6 +2379,7 @@ export type StoredImageInclude<ExtArgs extends runtime.Types.Extensions.Internal
   boardAttachments?: boolean | Prisma.StoredImage$boardAttachmentsArgs<ExtArgs>
   boardMinutesAttachments?: boolean | Prisma.StoredImage$boardMinutesAttachmentsArgs<ExtArgs>
   stakeholderAttachments?: boolean | Prisma.StoredImage$stakeholderAttachmentsArgs<ExtArgs>
+  boardSignatorySignatures?: boolean | Prisma.StoredImage$boardSignatorySignaturesArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoredImageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2022,6 +2392,7 @@ export type $StoredImagePayload<ExtArgs extends runtime.Types.Extensions.Interna
     nationalCardUsers: Prisma.$UserPayload<ExtArgs>[]
     passportUsers: Prisma.$UserPayload<ExtArgs>[]
     identityBookletUsers: Prisma.$UserPayload<ExtArgs>[]
+    signatureUsers: Prisma.$UserPayload<ExtArgs>[]
     foodPhotos: Prisma.$FoodPayload<ExtArgs>[]
     restaurantLogos: Prisma.$RestaurantPayload<ExtArgs>[]
     progressImages: Prisma.$ProjectProgressImagePayload<ExtArgs>[]
@@ -2029,6 +2400,7 @@ export type $StoredImagePayload<ExtArgs extends runtime.Types.Extensions.Interna
     boardAttachments: Prisma.$BoardAttachmentPayload<ExtArgs>[]
     boardMinutesAttachments: Prisma.$BoardMinutesAttachmentPayload<ExtArgs>[]
     stakeholderAttachments: Prisma.$StakeholderAttachmentPayload<ExtArgs>[]
+    boardSignatorySignatures: Prisma.$BoardSignatoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2437,6 +2809,7 @@ export interface Prisma__StoredImageClient<T, Null = never, ExtArgs extends runt
   nationalCardUsers<T extends Prisma.StoredImage$nationalCardUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$nationalCardUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   passportUsers<T extends Prisma.StoredImage$passportUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$passportUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   identityBookletUsers<T extends Prisma.StoredImage$identityBookletUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$identityBookletUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  signatureUsers<T extends Prisma.StoredImage$signatureUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$signatureUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   foodPhotos<T extends Prisma.StoredImage$foodPhotosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$foodPhotosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restaurantLogos<T extends Prisma.StoredImage$restaurantLogosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$restaurantLogosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   progressImages<T extends Prisma.StoredImage$progressImagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$progressImagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectProgressImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2444,6 +2817,7 @@ export interface Prisma__StoredImageClient<T, Null = never, ExtArgs extends runt
   boardAttachments<T extends Prisma.StoredImage$boardAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$boardAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesAttachments<T extends Prisma.StoredImage$boardMinutesAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$boardMinutesAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stakeholderAttachments<T extends Prisma.StoredImage$stakeholderAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$stakeholderAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardSignatorySignatures<T extends Prisma.StoredImage$boardSignatorySignaturesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$boardSignatorySignaturesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardSignatoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2970,6 +3344,30 @@ export type StoredImage$identityBookletUsersArgs<ExtArgs extends runtime.Types.E
 }
 
 /**
+ * StoredImage.signatureUsers
+ */
+export type StoredImage$signatureUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
  * StoredImage.foodPhotos
  */
 export type StoredImage$foodPhotosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3135,6 +3533,30 @@ export type StoredImage$stakeholderAttachmentsArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.StakeholderAttachmentScalarFieldEnum | Prisma.StakeholderAttachmentScalarFieldEnum[]
+}
+
+/**
+ * StoredImage.boardSignatorySignatures
+ */
+export type StoredImage$boardSignatorySignaturesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardSignatory
+   */
+  select?: Prisma.BoardSignatorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardSignatory
+   */
+  omit?: Prisma.BoardSignatoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardSignatoryInclude<ExtArgs> | null
+  where?: Prisma.BoardSignatoryWhereInput
+  orderBy?: Prisma.BoardSignatoryOrderByWithRelationInput | Prisma.BoardSignatoryOrderByWithRelationInput[]
+  cursor?: Prisma.BoardSignatoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardSignatoryScalarFieldEnum | Prisma.BoardSignatoryScalarFieldEnum[]
 }
 
 /**

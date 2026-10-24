@@ -240,6 +240,7 @@ export const PERMISSION_TREE: PermissionNode[] = [
       { code: 'board.calendar', kind: 'MENU', nameKey: 'menus.boardCalendar' },
       { code: 'board.requests', kind: 'MENU', nameKey: 'menus.boardRequests' },
       { code: 'board.plans', kind: 'MENU', nameKey: 'menus.boardPlans' },
+      { code: 'board.signatories', kind: 'MENU', nameKey: 'menus.boardSignatories' },
       { code: 'board.permissions', kind: 'MENU', nameKey: 'menus.boardPermissions' },
     ],
   },

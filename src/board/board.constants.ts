@@ -8,28 +8,52 @@ export const BOARD_LEADERSHIP_POSITION_CODES = [
   'SECRETARY',
 ] as const;
 
+export const BOARD_REQUEST_POSITION_CODES = [
+  'DEPUTY',
+  'MANAGER',
+  'HEAD',
+  'SUPERVISOR',
+] as const;
+
 export const BOARD_MANAGER_POSITION_CODE = 'MANAGER';
+export const BOARD_DEPUTY_POSITION_CODE = 'DEPUTY';
+export const BOARD_SECRETARY_POSITION_CODE = 'SECRETARY';
 export const BOARD_EXPERT_POSITION_CODE = 'EXPERT';
+
+export const AUTO_MANAGEMENT_COMMENT =
+  'تأیید خودکار — سمت ثبت‌شده معاون است';
 
 export const boardReviewStages = [
   BoardStage.MANAGEMENT,
   BoardStage.LEGAL,
   BoardStage.BUDGET,
   BoardStage.SECRETARY,
+  BoardStage.CEO,
+] as const;
+
+export const boardPermissionStages = [
+  BoardStage.LEGAL,
+  BoardStage.BUDGET,
+  BoardStage.SECRETARY,
+  BoardStage.CEO,
 ] as const;
 
 export type BoardReviewStage = (typeof boardReviewStages)[number];
+
+export const boardRequestKinds = ['NORMAL', 'MANAGEMENT'] as const;
 
 export const boardRequestStatuses = [
   BoardRequestStatus.PENDING_REVIEW,
   BoardRequestStatus.PENDING_LEGAL,
   BoardRequestStatus.PENDING_BUDGET,
   BoardRequestStatus.PENDING_SECRETARY,
+  BoardRequestStatus.PENDING_CEO,
   BoardRequestStatus.APPROVED,
   BoardRequestStatus.REJECTED,
 ] as const;
 
 export const boardRequestSortFields = [
+  'trackingNo',
   'requestedAt',
   'subject',
   'status',
@@ -71,6 +95,8 @@ export function statusForStage(stage: BoardStage): BoardRequestStatus | null {
       return BoardRequestStatus.PENDING_BUDGET;
     case BoardStage.SECRETARY:
       return BoardRequestStatus.PENDING_SECRETARY;
+    case BoardStage.CEO:
+      return BoardRequestStatus.PENDING_CEO;
     default:
       return null;
   }
@@ -86,12 +112,46 @@ export function stageForStatus(status: BoardRequestStatus): BoardStage | null {
       return BoardStage.BUDGET;
     case BoardRequestStatus.PENDING_SECRETARY:
       return BoardStage.SECRETARY;
+    case BoardRequestStatus.PENDING_CEO:
+      return BoardStage.CEO;
     default:
       return null;
   }
 }
 
-export function nextStatusAfterApprove(status: BoardRequestStatus): BoardRequestStatus | null {
+export function referredAtDataForStatus(
+  status: BoardRequestStatus,
+  at: Date,
+): {
+  legalReferredAt?: Date;
+  budgetReferredAt?: Date;
+  secretaryReferredAt?: Date;
+  ceoReferredAt?: Date;
+} {
+  switch (status) {
+    case BoardRequestStatus.PENDING_LEGAL:
+      return { legalReferredAt: at };
+    case BoardRequestStatus.PENDING_BUDGET:
+      return { budgetReferredAt: at };
+    case BoardRequestStatus.PENDING_SECRETARY:
+      return { secretaryReferredAt: at };
+    case BoardRequestStatus.PENDING_CEO:
+      return { ceoReferredAt: at };
+    default:
+      return {};
+  }
+}
+
+export function nextStatusAfterApprove(
+  status: BoardRequestStatus,
+  kind: (typeof boardRequestKinds)[number] = 'NORMAL',
+): BoardRequestStatus | null {
+  if (kind === 'MANAGEMENT') {
+    if (status === BoardRequestStatus.PENDING_CEO) {
+      return BoardRequestStatus.APPROVED;
+    }
+    return null;
+  }
   switch (status) {
     case BoardRequestStatus.PENDING_REVIEW:
       return BoardRequestStatus.PENDING_LEGAL;
@@ -100,6 +160,8 @@ export function nextStatusAfterApprove(status: BoardRequestStatus): BoardRequest
     case BoardRequestStatus.PENDING_BUDGET:
       return BoardRequestStatus.PENDING_SECRETARY;
     case BoardRequestStatus.PENDING_SECRETARY:
+      return BoardRequestStatus.PENDING_CEO;
+    case BoardRequestStatus.PENDING_CEO:
       return BoardRequestStatus.APPROVED;
     default:
       return null;

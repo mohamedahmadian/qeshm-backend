@@ -42,6 +42,10 @@ import {
   UserGender,
   UserStatus,
 } from '../generated/prisma/client';
+import {
+  BOARD_DEPUTY_POSITION_CODE,
+  ORG_UNIT_KIND_CODES,
+} from '../organization/organization.constants';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
 import { joinFullName } from './user-profile.util';
@@ -160,6 +164,7 @@ const userSelect = {
   nationalCardPhotoId: true,
   passportPhotoId: true,
   identityBookletPhotoId: true,
+  signaturePhotoId: true,
   orgUnitId: true,
   positionId: true,
   isQeshmondi: true,
@@ -850,7 +855,9 @@ export class UsersService {
     await this.assertUnique(dto);
     await this.assertGeo(dto.countryId, dto.provinceId, dto.cityId);
     await this.assertImages(dto);
-    await this.assertOrgAssignment(dto.orgUnitId, dto.positionId);
+    await this.assertOrgAssignment(dto.orgUnitId, dto.positionId, {
+      status: dto.status ?? UserStatus.ACTIVE,
+    });
     this.assertQeshmondiDates(dto.qeshmondiStartDate, dto.qeshmondiEndDate);
     const passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
     const user = await this.prisma.user.create({
@@ -885,6 +892,7 @@ export class UsersService {
         nationalCardPhotoId: dto.nationalCardPhotoId ?? null,
         passportPhotoId: dto.passportPhotoId ?? null,
         identityBookletPhotoId: dto.identityBookletPhotoId ?? null,
+        signaturePhotoId: dto.signaturePhotoId ?? null,
         orgUnitId: dto.orgUnitId ?? null,
         positionId: dto.positionId ?? null,
         isQeshmondi: dto.isQeshmondi ?? false,
@@ -1630,11 +1638,22 @@ export class UsersService {
     await this.findOne(id);
     await this.assertUnique(dto, id);
     await this.assertImages(dto);
-    if (dto.orgUnitId !== undefined || dto.positionId !== undefined) {
-      const current = await this.prisma.user.findUnique({ where: { id } });
+    if (
+      dto.orgUnitId !== undefined ||
+      dto.positionId !== undefined ||
+      dto.status !== undefined
+    ) {
+      const current = await this.prisma.user.findUnique({
+        where: { id },
+        select: { orgUnitId: true, positionId: true, status: true },
+      });
       await this.assertOrgAssignment(
         dto.orgUnitId !== undefined ? dto.orgUnitId : current?.orgUnitId,
         dto.positionId !== undefined ? dto.positionId : current?.positionId,
+        {
+          excludeUserId: id,
+          status: dto.status !== undefined ? dto.status : current?.status,
+        },
       );
     }
     if (dto.countryId !== undefined || dto.provinceId !== undefined || dto.cityId !== undefined) {
@@ -1693,6 +1712,7 @@ export class UsersService {
       nationalCardPhoto: optionalConnect(dto.nationalCardPhotoId),
       passportPhoto: optionalConnect(dto.passportPhotoId),
       identityBookletPhoto: optionalConnect(dto.identityBookletPhotoId),
+      signaturePhoto: optionalConnect(dto.signaturePhotoId),
       orgUnit: optionalConnect(dto.orgUnitId),
       position: optionalConnect(dto.positionId),
       isQeshmondi: dto.isQeshmondi,
@@ -2143,12 +2163,14 @@ export class UsersService {
     nationalCardPhotoId?: string | null;
     passportPhotoId?: string | null;
     identityBookletPhotoId?: string | null;
+    signaturePhotoId?: string | null;
   }) {
     const ids = [
       dto.photoId,
       dto.nationalCardPhotoId,
       dto.passportPhotoId,
       dto.identityBookletPhotoId,
+      dto.signaturePhotoId,
     ].filter((id): id is string => Boolean(id));
     if (!ids.length) return;
     const count = await this.prisma.storedImage.count({
@@ -2162,20 +2184,41 @@ export class UsersService {
   private async assertOrgAssignment(
     orgUnitId?: string | null,
     positionId?: string | null,
+    options?: { excludeUserId?: string; status?: UserStatus | null },
   ) {
-    if (orgUnitId) {
-      const unit = await this.prisma.organizationUnit.findUnique({
-        where: { id: orgUnitId },
-        select: { id: true },
-      });
-      if (!unit) throw new BadRequestException('واحد سازمانی معتبر نیست');
+    const unit = orgUnitId
+      ? await this.prisma.organizationUnit.findUnique({
+          where: { id: orgUnitId },
+          select: { id: true, name: true, kind: { select: { code: true } } },
+        })
+      : null;
+    if (orgUnitId && !unit) throw new BadRequestException('واحد سازمانی معتبر نیست');
+    const position = positionId
+      ? await this.prisma.organizationPosition.findUnique({
+          where: { id: positionId },
+          select: { id: true, code: true },
+        })
+      : null;
+    if (positionId && !position) throw new BadRequestException('سمت معتبر نیست');
+    if (position?.code !== BOARD_DEPUTY_POSITION_CODE) return;
+    if (!unit) {
+      throw new BadRequestException('سمت معاون فقط برای یک معاونت قابل ثبت است');
     }
-    if (positionId) {
-      const position = await this.prisma.organizationPosition.findUnique({
-        where: { id: positionId },
-        select: { id: true },
-      });
-      if (!position) throw new BadRequestException('سمت معتبر نیست');
+    if (unit.kind.code !== ORG_UNIT_KIND_CODES.VICE) {
+      throw new BadRequestException('سمت معاون فقط روی واحد نوع معاونت مجاز است');
+    }
+    if (options?.status && options.status !== UserStatus.ACTIVE) return;
+    const other = await this.prisma.user.findFirst({
+      where: {
+        orgUnitId: unit.id,
+        status: UserStatus.ACTIVE,
+        position: { code: BOARD_DEPUTY_POSITION_CODE },
+        ...(options?.excludeUserId ? { id: { not: options.excludeUserId } } : {}),
+      },
+      select: { fullName: true },
+    });
+    if (other) {
+      throw new ConflictException(`این معاونت از قبل معاون دارد: ${other.fullName}`);
     }
   }
 

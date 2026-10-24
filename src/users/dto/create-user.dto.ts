@@ -184,6 +184,12 @@ export class CreateUserDto {
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
+  signaturePhotoId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
   orgUnitId?: string | null;
 
   @IsOptional()

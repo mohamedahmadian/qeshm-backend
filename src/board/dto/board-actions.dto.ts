@@ -13,7 +13,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { emptyToNull, toOptionalBoolean } from '../../common/dto-transform';
-import { boardRequestStatuses, boardReviewStages } from '../board.constants';
+import { boardPermissionStages, boardRequestStatuses } from '../board.constants';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -88,8 +88,8 @@ export class UpdateBoardRequestStatusDto {
 }
 
 export class BoardStagePermissionDto {
-  @IsIn([...boardReviewStages])
-  stage: (typeof boardReviewStages)[number];
+  @IsIn([...boardPermissionStages])
+  stage: (typeof boardPermissionStages)[number];
 
   @Transform(({ value }) => uniqueIds(value))
   @IsArray()

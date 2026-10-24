@@ -270,6 +270,11 @@ export type SingardActivity = Prisma.SingardActivityModel
  */
 export type BoardRequest = Prisma.BoardRequestModel
 /**
+ * Model BoardSignatory
+ * 
+ */
+export type BoardSignatory = Prisma.BoardSignatoryModel
+/**
  * Model BoardAttachment
  * 
  */

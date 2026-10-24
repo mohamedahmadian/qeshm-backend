@@ -18,7 +18,9 @@ import { UpdateOrganizationUnitKindDto } from './dto/update-organization-unit-ki
 
 const kindSelect = {
   id: true,
+  code: true,
   name: true,
+  isSystem: true,
   createdAt: true,
   updatedAt: true,
   _count: { select: { units: true } },
@@ -30,7 +32,9 @@ export class OrganizationUnitKindsService {
 
   async findAll(query: FindOrganizationUnitKindsQueryDto) {
     const where: Prisma.OrganizationUnitKindWhereInput = {
-      OR: query.q ? [{ name: containsInsensitive(query.q) }] : undefined,
+      OR: query.q
+        ? [{ name: containsInsensitive(query.q) }, { code: containsInsensitive(query.q) }]
+        : undefined,
     };
     const orderBy =
       resolveSortOrder<Prisma.OrganizationUnitKindOrderByWithRelationInput>(
@@ -38,6 +42,7 @@ export class OrganizationUnitKindsService {
         query.sortDir,
         {
           name: (dir) => ({ name: dir }),
+          code: (dir) => ({ code: dir }),
           unitCount: (dir) => ({ units: { _count: dir } }),
         },
         [{ name: 'asc' }, { id: 'asc' }],
@@ -77,7 +82,7 @@ export class OrganizationUnitKindsService {
   async create(dto: CreateOrganizationUnitKindDto) {
     try {
       return await this.prisma.organizationUnitKind.create({
-        data: { name: dto.name },
+        data: { name: dto.name, code: dto.code ?? null },
         select: kindSelect,
       });
     } catch (error) {
@@ -86,11 +91,17 @@ export class OrganizationUnitKindsService {
   }
 
   async update(id: string, dto: UpdateOrganizationUnitKindDto) {
-    await this.findOne(id);
+    const current = await this.findOne(id);
+    if (current.isSystem && dto.code !== undefined && dto.code !== current.code) {
+      throw new ConflictException('کد نوع واحد سیستمی قابل تغییر نیست');
+    }
     try {
       return await this.prisma.organizationUnitKind.update({
         where: { id },
-        data: { name: dto.name },
+        data: {
+          name: dto.name,
+          code: current.isSystem ? undefined : dto.code,
+        },
         select: kindSelect,
       });
     } catch (error) {
@@ -99,7 +110,10 @@ export class OrganizationUnitKindsService {
   }
 
   async remove(id: string) {
-    await this.findOne(id);
+    const current = await this.findOne(id);
+    if (current.isSystem) {
+      throw new ConflictException('نوع واحد سیستمی قابل حذف نیست');
+    }
     const used = await this.prisma.organizationUnit.count({
       where: { kindId: id },
     });

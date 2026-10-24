@@ -97,6 +97,7 @@ export const ModelName = {
   SingardAttachment: 'SingardAttachment',
   SingardActivity: 'SingardActivity',
   BoardRequest: 'BoardRequest',
+  BoardSignatory: 'BoardSignatory',
   BoardAttachment: 'BoardAttachment',
   BoardStageUnit: 'BoardStageUnit',
   BoardStagePosition: 'BoardStagePosition',
@@ -241,6 +242,7 @@ export const UserScalarFieldEnum = {
   nationalCardPhotoId: 'nationalCardPhotoId',
   passportPhotoId: 'passportPhotoId',
   identityBookletPhotoId: 'identityBookletPhotoId',
+  signaturePhotoId: 'signaturePhotoId',
   orgUnitId: 'orgUnitId',
   positionId: 'positionId',
   isQeshmondi: 'isQeshmondi',
@@ -671,7 +673,9 @@ export type OrganizationPositionScalarFieldEnum = (typeof OrganizationPositionSc
 
 export const OrganizationUnitKindScalarFieldEnum = {
   id: 'id',
+  code: 'code',
   name: 'name',
+  isSystem: 'isSystem',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -907,6 +911,10 @@ export type SingardActivityScalarFieldEnum = (typeof SingardActivityScalarFieldE
 
 export const BoardRequestScalarFieldEnum = {
   id: 'id',
+  kind: 'kind',
+  trackingNo: 'trackingNo',
+  trackingYear: 'trackingYear',
+  trackingSeq: 'trackingSeq',
   status: 'status',
   requestedAt: 'requestedAt',
   unitId: 'unitId',
@@ -919,19 +927,26 @@ export const BoardRequestScalarFieldEnum = {
   managementComment: 'managementComment',
   managementAt: 'managementAt',
   managementById: 'managementById',
+  legalReferredAt: 'legalReferredAt',
   legalOrgMatch: 'legalOrgMatch',
   legalRegulationsMatch: 'legalRegulationsMatch',
   legalComment: 'legalComment',
   legalAt: 'legalAt',
   legalById: 'legalById',
+  budgetReferredAt: 'budgetReferredAt',
   budgetProgramHistory: 'budgetProgramHistory',
   budgetCurrentYearFunding: 'budgetCurrentYearFunding',
   budgetComment: 'budgetComment',
   budgetAt: 'budgetAt',
   budgetById: 'budgetById',
+  secretaryReferredAt: 'secretaryReferredAt',
   secretaryComment: 'secretaryComment',
   secretaryAt: 'secretaryAt',
   secretaryById: 'secretaryById',
+  ceoReferredAt: 'ceoReferredAt',
+  ceoComment: 'ceoComment',
+  ceoAt: 'ceoAt',
+  ceoById: 'ceoById',
   rejectedStage: 'rejectedStage',
   rejectedComment: 'rejectedComment',
   rejectedAt: 'rejectedAt',
@@ -941,6 +956,21 @@ export const BoardRequestScalarFieldEnum = {
 } as const
 
 export type BoardRequestScalarFieldEnum = (typeof BoardRequestScalarFieldEnum)[keyof typeof BoardRequestScalarFieldEnum]
+
+
+export const BoardSignatoryScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  title: 'title',
+  signatureImageId: 'signatureImageId',
+  userId: 'userId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardSignatoryScalarFieldEnum = (typeof BoardSignatoryScalarFieldEnum)[keyof typeof BoardSignatoryScalarFieldEnum]
 
 
 export const BoardAttachmentScalarFieldEnum = {

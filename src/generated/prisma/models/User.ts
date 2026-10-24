@@ -75,6 +75,7 @@ export type UserMinAggregateOutputType = {
   nationalCardPhotoId: string | null
   passportPhotoId: string | null
   identityBookletPhotoId: string | null
+  signaturePhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
   isQeshmondi: boolean | null
@@ -162,6 +163,7 @@ export type UserMaxAggregateOutputType = {
   nationalCardPhotoId: string | null
   passportPhotoId: string | null
   identityBookletPhotoId: string | null
+  signaturePhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
   isQeshmondi: boolean | null
@@ -250,6 +252,7 @@ export type UserCountAggregateOutputType = {
   nationalCardPhotoId: number
   passportPhotoId: number
   identityBookletPhotoId: number
+  signaturePhotoId: number
   orgUnitId: number
   positionId: number
   isQeshmondi: number
@@ -351,6 +354,7 @@ export type UserMinAggregateInputType = {
   nationalCardPhotoId?: true
   passportPhotoId?: true
   identityBookletPhotoId?: true
+  signaturePhotoId?: true
   orgUnitId?: true
   positionId?: true
   isQeshmondi?: true
@@ -438,6 +442,7 @@ export type UserMaxAggregateInputType = {
   nationalCardPhotoId?: true
   passportPhotoId?: true
   identityBookletPhotoId?: true
+  signaturePhotoId?: true
   orgUnitId?: true
   positionId?: true
   isQeshmondi?: true
@@ -526,6 +531,7 @@ export type UserCountAggregateInputType = {
   nationalCardPhotoId?: true
   passportPhotoId?: true
   identityBookletPhotoId?: true
+  signaturePhotoId?: true
   orgUnitId?: true
   positionId?: true
   isQeshmondi?: true
@@ -701,6 +707,7 @@ export type UserGroupByOutputType = {
   nationalCardPhotoId: string | null
   passportPhotoId: string | null
   identityBookletPhotoId: string | null
+  signaturePhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
   isQeshmondi: boolean
@@ -812,6 +819,7 @@ export type UserWhereInput = {
   nationalCardPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   passportPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
+  signaturePhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
   isQeshmondi?: Prisma.BoolFilter<"User"> | boolean
@@ -869,6 +877,7 @@ export type UserWhereInput = {
   nationalCardPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   passportPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   identityBookletPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
+  signaturePhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   locationHistories?: Prisma.UserLocationHistoryListRelationFilter
   orgUnit?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
   position?: Prisma.XOR<Prisma.OrganizationPositionNullableScalarRelationFilter, Prisma.OrganizationPositionWhereInput> | null
@@ -890,8 +899,10 @@ export type UserWhereInput = {
   boardLegalReviews?: Prisma.BoardRequestListRelationFilter
   boardBudgetReviews?: Prisma.BoardRequestListRelationFilter
   boardSecretaryReviews?: Prisma.BoardRequestListRelationFilter
+  boardCeoReviews?: Prisma.BoardRequestListRelationFilter
   boardMinutesCreated?: Prisma.BoardMinutesListRelationFilter
   boardMinutesMemberships?: Prisma.BoardMinutesMemberListRelationFilter
+  boardSignatory?: Prisma.XOR<Prisma.BoardSignatoryNullableScalarRelationFilter, Prisma.BoardSignatoryWhereInput> | null
   portSalesReports?: Prisma.PortSalesReportListRelationFilter
   portSalesReportsApproved?: Prisma.PortSalesReportListRelationFilter
   operatedPort?: Prisma.XOR<Prisma.PortNullableScalarRelationFilter, Prisma.PortWhereInput> | null
@@ -938,6 +949,7 @@ export type UserOrderByWithRelationInput = {
   nationalCardPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   passportPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   identityBookletPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
+  signaturePhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   orgUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
   positionId?: Prisma.SortOrderInput | Prisma.SortOrder
   isQeshmondi?: Prisma.SortOrder
@@ -995,6 +1007,7 @@ export type UserOrderByWithRelationInput = {
   nationalCardPhoto?: Prisma.StoredImageOrderByWithRelationInput
   passportPhoto?: Prisma.StoredImageOrderByWithRelationInput
   identityBookletPhoto?: Prisma.StoredImageOrderByWithRelationInput
+  signaturePhoto?: Prisma.StoredImageOrderByWithRelationInput
   locationHistories?: Prisma.UserLocationHistoryOrderByRelationAggregateInput
   orgUnit?: Prisma.OrganizationUnitOrderByWithRelationInput
   position?: Prisma.OrganizationPositionOrderByWithRelationInput
@@ -1016,8 +1029,10 @@ export type UserOrderByWithRelationInput = {
   boardLegalReviews?: Prisma.BoardRequestOrderByRelationAggregateInput
   boardBudgetReviews?: Prisma.BoardRequestOrderByRelationAggregateInput
   boardSecretaryReviews?: Prisma.BoardRequestOrderByRelationAggregateInput
+  boardCeoReviews?: Prisma.BoardRequestOrderByRelationAggregateInput
   boardMinutesCreated?: Prisma.BoardMinutesOrderByRelationAggregateInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberOrderByRelationAggregateInput
+  boardSignatory?: Prisma.BoardSignatoryOrderByWithRelationInput
   portSalesReports?: Prisma.PortSalesReportOrderByRelationAggregateInput
   portSalesReportsApproved?: Prisma.PortSalesReportOrderByRelationAggregateInput
   operatedPort?: Prisma.PortOrderByWithRelationInput
@@ -1067,6 +1082,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   nationalCardPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   passportPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
+  signaturePhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
   isQeshmondi?: Prisma.BoolFilter<"User"> | boolean
@@ -1124,6 +1140,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   nationalCardPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   passportPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   identityBookletPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
+  signaturePhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   locationHistories?: Prisma.UserLocationHistoryListRelationFilter
   orgUnit?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
   position?: Prisma.XOR<Prisma.OrganizationPositionNullableScalarRelationFilter, Prisma.OrganizationPositionWhereInput> | null
@@ -1145,8 +1162,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   boardLegalReviews?: Prisma.BoardRequestListRelationFilter
   boardBudgetReviews?: Prisma.BoardRequestListRelationFilter
   boardSecretaryReviews?: Prisma.BoardRequestListRelationFilter
+  boardCeoReviews?: Prisma.BoardRequestListRelationFilter
   boardMinutesCreated?: Prisma.BoardMinutesListRelationFilter
   boardMinutesMemberships?: Prisma.BoardMinutesMemberListRelationFilter
+  boardSignatory?: Prisma.XOR<Prisma.BoardSignatoryNullableScalarRelationFilter, Prisma.BoardSignatoryWhereInput> | null
   portSalesReports?: Prisma.PortSalesReportListRelationFilter
   portSalesReportsApproved?: Prisma.PortSalesReportListRelationFilter
   operatedPort?: Prisma.XOR<Prisma.PortNullableScalarRelationFilter, Prisma.PortWhereInput> | null
@@ -1193,6 +1212,7 @@ export type UserOrderByWithAggregationInput = {
   nationalCardPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   passportPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   identityBookletPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
+  signaturePhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   orgUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
   positionId?: Prisma.SortOrderInput | Prisma.SortOrder
   isQeshmondi?: Prisma.SortOrder
@@ -1289,6 +1309,7 @@ export type UserScalarWhereWithAggregatesInput = {
   nationalCardPhotoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   passportPhotoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   identityBookletPhotoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  signaturePhotoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   positionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isQeshmondi?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
@@ -1422,6 +1443,7 @@ export type UserCreateInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -1443,8 +1465,10 @@ export type UserCreateInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -1491,6 +1515,7 @@ export type UserUncheckedCreateInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -1557,8 +1582,10 @@ export type UserUncheckedCreateInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -1650,6 +1677,7 @@ export type UserUpdateInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -1671,8 +1699,10 @@ export type UserUpdateInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -1719,6 +1749,7 @@ export type UserUncheckedUpdateInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1785,8 +1816,10 @@ export type UserUncheckedUpdateInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -1833,6 +1866,7 @@ export type UserCreateManyInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -1997,6 +2031,7 @@ export type UserUncheckedUpdateManyInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2103,6 +2138,7 @@ export type UserCountOrderByAggregateInput = {
   nationalCardPhotoId?: Prisma.SortOrder
   passportPhotoId?: Prisma.SortOrder
   identityBookletPhotoId?: Prisma.SortOrder
+  signaturePhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
   isQeshmondi?: Prisma.SortOrder
@@ -2196,6 +2232,7 @@ export type UserMaxOrderByAggregateInput = {
   nationalCardPhotoId?: Prisma.SortOrder
   passportPhotoId?: Prisma.SortOrder
   identityBookletPhotoId?: Prisma.SortOrder
+  signaturePhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
   isQeshmondi?: Prisma.SortOrder
@@ -2283,6 +2320,7 @@ export type UserMinOrderByAggregateInput = {
   nationalCardPhotoId?: Prisma.SortOrder
   passportPhotoId?: Prisma.SortOrder
   identityBookletPhotoId?: Prisma.SortOrder
+  signaturePhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
   isQeshmondi?: Prisma.SortOrder
@@ -2377,6 +2415,13 @@ export type UserCreateNestedManyWithoutIdentityBookletPhotoInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
+export type UserCreateNestedManyWithoutSignaturePhotoInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSignaturePhotoInput, Prisma.UserUncheckedCreateWithoutSignaturePhotoInput> | Prisma.UserCreateWithoutSignaturePhotoInput[] | Prisma.UserUncheckedCreateWithoutSignaturePhotoInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSignaturePhotoInput | Prisma.UserCreateOrConnectWithoutSignaturePhotoInput[]
+  createMany?: Prisma.UserCreateManySignaturePhotoInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
 export type UserUncheckedCreateNestedManyWithoutPhotoInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPhotoInput, Prisma.UserUncheckedCreateWithoutPhotoInput> | Prisma.UserCreateWithoutPhotoInput[] | Prisma.UserUncheckedCreateWithoutPhotoInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhotoInput | Prisma.UserCreateOrConnectWithoutPhotoInput[]
@@ -2402,6 +2447,13 @@ export type UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput> | Prisma.UserCreateWithoutIdentityBookletPhotoInput[] | Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput | Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput[]
   createMany?: Prisma.UserCreateManyIdentityBookletPhotoInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutSignaturePhotoInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSignaturePhotoInput, Prisma.UserUncheckedCreateWithoutSignaturePhotoInput> | Prisma.UserCreateWithoutSignaturePhotoInput[] | Prisma.UserUncheckedCreateWithoutSignaturePhotoInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSignaturePhotoInput | Prisma.UserCreateOrConnectWithoutSignaturePhotoInput[]
+  createMany?: Prisma.UserCreateManySignaturePhotoInputEnvelope
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
@@ -2461,6 +2513,20 @@ export type UserUpdateManyWithoutIdentityBookletPhotoNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserUpdateManyWithoutSignaturePhotoNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSignaturePhotoInput, Prisma.UserUncheckedCreateWithoutSignaturePhotoInput> | Prisma.UserCreateWithoutSignaturePhotoInput[] | Prisma.UserUncheckedCreateWithoutSignaturePhotoInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSignaturePhotoInput | Prisma.UserCreateOrConnectWithoutSignaturePhotoInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSignaturePhotoInput | Prisma.UserUpsertWithWhereUniqueWithoutSignaturePhotoInput[]
+  createMany?: Prisma.UserCreateManySignaturePhotoInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutSignaturePhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutSignaturePhotoInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSignaturePhotoInput | Prisma.UserUpdateManyWithWhereWithoutSignaturePhotoInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
 export type UserUncheckedUpdateManyWithoutPhotoNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPhotoInput, Prisma.UserUncheckedCreateWithoutPhotoInput> | Prisma.UserCreateWithoutPhotoInput[] | Prisma.UserUncheckedCreateWithoutPhotoInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhotoInput | Prisma.UserCreateOrConnectWithoutPhotoInput[]
@@ -2514,6 +2580,20 @@ export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   update?: Prisma.UserUpdateWithWhereUniqueWithoutIdentityBookletPhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutIdentityBookletPhotoInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutIdentityBookletPhotoInput | Prisma.UserUpdateManyWithWhereWithoutIdentityBookletPhotoInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutSignaturePhotoNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSignaturePhotoInput, Prisma.UserUncheckedCreateWithoutSignaturePhotoInput> | Prisma.UserCreateWithoutSignaturePhotoInput[] | Prisma.UserUncheckedCreateWithoutSignaturePhotoInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSignaturePhotoInput | Prisma.UserCreateOrConnectWithoutSignaturePhotoInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSignaturePhotoInput | Prisma.UserUpsertWithWhereUniqueWithoutSignaturePhotoInput[]
+  createMany?: Prisma.UserCreateManySignaturePhotoInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutSignaturePhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutSignaturePhotoInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSignaturePhotoInput | Prisma.UserUpdateManyWithWhereWithoutSignaturePhotoInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
@@ -3096,6 +3176,12 @@ export type UserCreateNestedOneWithoutBoardSecretaryReviewsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
+export type UserCreateNestedOneWithoutBoardCeoReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBoardCeoReviewsInput, Prisma.UserUncheckedCreateWithoutBoardCeoReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardCeoReviewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserCreateNestedOneWithoutBoardRequestsRejectedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBoardRequestsRejectedInput, Prisma.UserUncheckedCreateWithoutBoardRequestsRejectedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardRequestsRejectedInput
@@ -3150,6 +3236,16 @@ export type UserUpdateOneWithoutBoardSecretaryReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardSecretaryReviewsInput, Prisma.UserUpdateWithoutBoardSecretaryReviewsInput>, Prisma.UserUncheckedUpdateWithoutBoardSecretaryReviewsInput>
 }
 
+export type UserUpdateOneWithoutBoardCeoReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBoardCeoReviewsInput, Prisma.UserUncheckedCreateWithoutBoardCeoReviewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardCeoReviewsInput
+  upsert?: Prisma.UserUpsertWithoutBoardCeoReviewsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardCeoReviewsInput, Prisma.UserUpdateWithoutBoardCeoReviewsInput>, Prisma.UserUncheckedUpdateWithoutBoardCeoReviewsInput>
+}
+
 export type UserUpdateOneWithoutBoardRequestsRejectedNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBoardRequestsRejectedInput, Prisma.UserUncheckedCreateWithoutBoardRequestsRejectedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardRequestsRejectedInput
@@ -3158,6 +3254,22 @@ export type UserUpdateOneWithoutBoardRequestsRejectedNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardRequestsRejectedInput, Prisma.UserUpdateWithoutBoardRequestsRejectedInput>, Prisma.UserUncheckedUpdateWithoutBoardRequestsRejectedInput>
+}
+
+export type UserCreateNestedOneWithoutBoardSignatoryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBoardSignatoryInput, Prisma.UserUncheckedCreateWithoutBoardSignatoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardSignatoryInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutBoardSignatoryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBoardSignatoryInput, Prisma.UserUncheckedCreateWithoutBoardSignatoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardSignatoryInput
+  upsert?: Prisma.UserUpsertWithoutBoardSignatoryInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardSignatoryInput, Prisma.UserUpdateWithoutBoardSignatoryInput>, Prisma.UserUncheckedUpdateWithoutBoardSignatoryInput>
 }
 
 export type UserCreateNestedOneWithoutBoardMinutesCreatedInput = {
@@ -3360,6 +3472,7 @@ export type UserCreateWithoutPhotoInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -3381,8 +3494,10 @@ export type UserCreateWithoutPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -3428,6 +3543,7 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -3494,8 +3610,10 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -3596,6 +3714,7 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -3617,8 +3736,10 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -3664,6 +3785,7 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   photoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -3730,8 +3852,10 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -3832,6 +3956,7 @@ export type UserCreateWithoutPassportPhotoInput = {
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -3853,8 +3978,10 @@ export type UserCreateWithoutPassportPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -3900,6 +4027,7 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   photoId?: string | null
   nationalCardPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -3966,8 +4094,10 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -4068,6 +4198,7 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4089,8 +4220,10 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -4136,6 +4269,7 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   photoId?: string | null
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -4202,8 +4336,10 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -4219,6 +4355,248 @@ export type UserCreateOrConnectWithoutIdentityBookletPhotoInput = {
 
 export type UserCreateManyIdentityBookletPhotoInputEnvelope = {
   data: Prisma.UserCreateManyIdentityBookletPhotoInput | Prisma.UserCreateManyIdentityBookletPhotoInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserCreateWithoutSignaturePhotoInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSignaturePhotoInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSignaturePhotoInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSignaturePhotoInput, Prisma.UserUncheckedCreateWithoutSignaturePhotoInput>
+}
+
+export type UserCreateManySignaturePhotoInputEnvelope = {
+  data: Prisma.UserCreateManySignaturePhotoInput | Prisma.UserCreateManySignaturePhotoInput[]
   skipDuplicates?: boolean
 }
 
@@ -4279,6 +4657,7 @@ export type UserScalarWhereInput = {
   nationalCardPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   passportPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
+  signaturePhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
   isQeshmondi?: Prisma.BoolFilter<"User"> | boolean
@@ -4377,6 +4756,22 @@ export type UserUpdateManyWithWhereWithoutIdentityBookletPhotoInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput>
 }
 
+export type UserUpsertWithWhereUniqueWithoutSignaturePhotoInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSignaturePhotoInput, Prisma.UserUncheckedUpdateWithoutSignaturePhotoInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSignaturePhotoInput, Prisma.UserUncheckedCreateWithoutSignaturePhotoInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutSignaturePhotoInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSignaturePhotoInput, Prisma.UserUncheckedUpdateWithoutSignaturePhotoInput>
+}
+
+export type UserUpdateManyWithWhereWithoutSignaturePhotoInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutSignaturePhotoInput>
+}
+
 export type UserCreateWithoutCountryInput = {
   id?: string
   username: string
@@ -4459,6 +4854,7 @@ export type UserCreateWithoutCountryInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4480,8 +4876,10 @@ export type UserCreateWithoutCountryInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -4527,6 +4925,7 @@ export type UserUncheckedCreateWithoutCountryInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -4593,8 +4992,10 @@ export type UserUncheckedCreateWithoutCountryInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -4711,6 +5112,7 @@ export type UserCreateWithoutProvinceInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4732,8 +5134,10 @@ export type UserCreateWithoutProvinceInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -4779,6 +5183,7 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -4845,8 +5250,10 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -4947,6 +5354,7 @@ export type UserCreateWithoutLocationProvinceInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4968,8 +5376,10 @@ export type UserCreateWithoutLocationProvinceInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -5015,6 +5425,7 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -5081,8 +5492,10 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -5215,6 +5628,7 @@ export type UserCreateWithoutCityInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -5236,8 +5650,10 @@ export type UserCreateWithoutCityInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -5283,6 +5699,7 @@ export type UserUncheckedCreateWithoutCityInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -5349,8 +5766,10 @@ export type UserUncheckedCreateWithoutCityInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -5451,6 +5870,7 @@ export type UserCreateWithoutLocationCityInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -5472,8 +5892,10 @@ export type UserCreateWithoutLocationCityInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -5519,6 +5941,7 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -5585,8 +6008,10 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -5720,6 +6145,7 @@ export type UserCreateWithoutQeshmondiSqlConnectionsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -5741,8 +6167,10 @@ export type UserCreateWithoutQeshmondiSqlConnectionsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -5788,6 +6216,7 @@ export type UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -5854,8 +6283,10 @@ export type UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -5962,6 +6393,7 @@ export type UserUpdateWithoutQeshmondiSqlConnectionsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -5983,8 +6415,10 @@ export type UserUpdateWithoutQeshmondiSqlConnectionsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -6030,6 +6464,7 @@ export type UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6096,8 +6531,10 @@ export type UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -6188,6 +6625,7 @@ export type UserCreateWithoutQeshmondiSyncLogsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -6209,8 +6647,10 @@ export type UserCreateWithoutQeshmondiSyncLogsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -6256,6 +6696,7 @@ export type UserUncheckedCreateWithoutQeshmondiSyncLogsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -6322,8 +6763,10 @@ export type UserUncheckedCreateWithoutQeshmondiSyncLogsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -6430,6 +6873,7 @@ export type UserUpdateWithoutQeshmondiSyncLogsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -6451,8 +6895,10 @@ export type UserUpdateWithoutQeshmondiSyncLogsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -6498,6 +6944,7 @@ export type UserUncheckedUpdateWithoutQeshmondiSyncLogsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6564,8 +7011,10 @@ export type UserUncheckedUpdateWithoutQeshmondiSyncLogsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -6656,6 +7105,7 @@ export type UserCreateWithoutQeshmondiFeedEventsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -6677,8 +7127,10 @@ export type UserCreateWithoutQeshmondiFeedEventsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -6724,6 +7176,7 @@ export type UserUncheckedCreateWithoutQeshmondiFeedEventsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -6790,8 +7243,10 @@ export type UserUncheckedCreateWithoutQeshmondiFeedEventsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -6898,6 +7353,7 @@ export type UserUpdateWithoutQeshmondiFeedEventsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -6919,8 +7375,10 @@ export type UserUpdateWithoutQeshmondiFeedEventsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -6966,6 +7424,7 @@ export type UserUncheckedUpdateWithoutQeshmondiFeedEventsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7032,8 +7491,10 @@ export type UserUncheckedUpdateWithoutQeshmondiFeedEventsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -7124,6 +7585,7 @@ export type UserCreateWithoutLocationHistoriesInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
@@ -7144,8 +7606,10 @@ export type UserCreateWithoutLocationHistoriesInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -7192,6 +7656,7 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -7257,8 +7722,10 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -7366,6 +7833,7 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
@@ -7386,8 +7854,10 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -7434,6 +7904,7 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7499,8 +7970,10 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -7592,6 +8065,7 @@ export type UserCreateWithoutContractorInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -7612,8 +8086,10 @@ export type UserCreateWithoutContractorInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -7660,6 +8136,7 @@ export type UserUncheckedCreateWithoutContractorInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -7725,8 +8202,10 @@ export type UserUncheckedCreateWithoutContractorInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -7844,6 +8323,7 @@ export type UserCreateWithoutPositionInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
@@ -7864,8 +8344,10 @@ export type UserCreateWithoutPositionInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -7912,6 +8394,7 @@ export type UserUncheckedCreateWithoutPositionInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   isQeshmondi?: boolean
   qeshmondiStartDate?: Date | string | null
@@ -7977,8 +8460,10 @@ export type UserUncheckedCreateWithoutPositionInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -8096,6 +8581,7 @@ export type UserCreateWithoutNutritionUnitsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -8116,8 +8602,10 @@ export type UserCreateWithoutNutritionUnitsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -8164,6 +8652,7 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -8229,8 +8718,10 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -8327,6 +8818,7 @@ export type UserCreateWithoutOrgUnitInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
@@ -8347,8 +8839,10 @@ export type UserCreateWithoutOrgUnitInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -8395,6 +8889,7 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
   qeshmondiStartDate?: Date | string | null
@@ -8460,8 +8955,10 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -8574,6 +9071,7 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -8594,8 +9092,10 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -8642,6 +9142,7 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8707,8 +9208,10 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -8816,6 +9319,7 @@ export type UserCreateWithoutFoodReservationsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -8836,8 +9340,10 @@ export type UserCreateWithoutFoodReservationsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -8884,6 +9390,7 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -8949,8 +9456,10 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -9058,6 +9567,7 @@ export type UserUpdateWithoutFoodReservationsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -9078,8 +9588,10 @@ export type UserUpdateWithoutFoodReservationsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -9126,6 +9638,7 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9191,8 +9704,10 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -9284,6 +9799,7 @@ export type UserCreateWithoutAdvancedFoodOrdersInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -9304,8 +9820,10 @@ export type UserCreateWithoutAdvancedFoodOrdersInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -9352,6 +9870,7 @@ export type UserUncheckedCreateWithoutAdvancedFoodOrdersInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -9417,8 +9936,10 @@ export type UserUncheckedCreateWithoutAdvancedFoodOrdersInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -9526,6 +10047,7 @@ export type UserUpdateWithoutAdvancedFoodOrdersInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -9546,8 +10068,10 @@ export type UserUpdateWithoutAdvancedFoodOrdersInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -9594,6 +10118,7 @@ export type UserUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9659,8 +10184,10 @@ export type UserUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -9752,6 +10279,7 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -9772,8 +10300,10 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -9820,6 +10350,7 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -9885,8 +10416,10 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -9994,6 +10527,7 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -10014,8 +10548,10 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -10062,6 +10598,7 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10127,8 +10664,10 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -10220,6 +10759,7 @@ export type UserCreateWithoutUserRolesInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -10240,8 +10780,10 @@ export type UserCreateWithoutUserRolesInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -10288,6 +10830,7 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -10353,8 +10896,10 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -10462,6 +11007,7 @@ export type UserUpdateWithoutUserRolesInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -10482,8 +11028,10 @@ export type UserUpdateWithoutUserRolesInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -10530,6 +11078,7 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10595,8 +11144,10 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -10688,6 +11239,7 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -10708,8 +11260,10 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -10756,6 +11310,7 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -10821,8 +11376,10 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -10919,6 +11476,7 @@ export type UserCreateWithoutSingardRepliesInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -10939,8 +11497,10 @@ export type UserCreateWithoutSingardRepliesInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -10987,6 +11547,7 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -11052,8 +11613,10 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -11161,6 +11724,7 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -11181,8 +11745,10 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -11229,6 +11795,7 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11294,8 +11861,10 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -11398,6 +11967,7 @@ export type UserUpdateWithoutSingardRepliesInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -11418,8 +11988,10 @@ export type UserUpdateWithoutSingardRepliesInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -11466,6 +12038,7 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11531,8 +12104,10 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -11624,6 +12199,7 @@ export type UserCreateWithoutSingardActivitiesInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -11644,8 +12220,10 @@ export type UserCreateWithoutSingardActivitiesInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -11692,6 +12270,7 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -11757,8 +12336,10 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -11866,6 +12447,7 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -11886,8 +12468,10 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -11934,6 +12518,7 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11999,8 +12584,10 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -12092,6 +12679,7 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -12112,8 +12700,10 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -12160,6 +12750,7 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -12225,8 +12816,10 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -12323,6 +12916,7 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -12343,8 +12937,10 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -12391,6 +12987,7 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -12456,8 +13053,10 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -12554,6 +13153,7 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -12574,8 +13174,10 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -12622,6 +13224,7 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -12687,8 +13290,10 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -12785,6 +13390,7 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -12805,8 +13411,10 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -12853,6 +13461,7 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -12918,8 +13527,10 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -13016,6 +13627,7 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -13036,8 +13648,10 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -13084,6 +13698,7 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -13149,8 +13764,10 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -13162,6 +13779,243 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
 export type UserCreateOrConnectWithoutBoardSecretaryReviewsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutBoardSecretaryReviewsInput, Prisma.UserUncheckedCreateWithoutBoardSecretaryReviewsInput>
+}
+
+export type UserCreateWithoutBoardCeoReviewsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBoardCeoReviewsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBoardCeoReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBoardCeoReviewsInput, Prisma.UserUncheckedCreateWithoutBoardCeoReviewsInput>
 }
 
 export type UserCreateWithoutBoardRequestsRejectedInput = {
@@ -13247,6 +14101,7 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -13267,8 +14122,10 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -13315,6 +14172,7 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -13380,8 +14238,10 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -13489,6 +14349,7 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -13509,8 +14370,10 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -13557,6 +14420,7 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13622,8 +14486,10 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -13726,6 +14592,7 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -13746,8 +14613,10 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -13794,6 +14663,7 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13859,8 +14729,10 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -13963,6 +14835,7 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -13983,8 +14856,10 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -14031,6 +14906,7 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14096,8 +14972,10 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -14200,6 +15078,7 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -14220,8 +15099,10 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -14268,6 +15149,7 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14333,8 +15215,10 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -14437,6 +15321,7 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -14457,8 +15342,10 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -14505,6 +15392,7 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14570,8 +15458,253 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutBoardCeoReviewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBoardCeoReviewsInput, Prisma.UserUncheckedUpdateWithoutBoardCeoReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBoardCeoReviewsInput, Prisma.UserUncheckedCreateWithoutBoardCeoReviewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBoardCeoReviewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBoardCeoReviewsInput, Prisma.UserUncheckedUpdateWithoutBoardCeoReviewsInput>
+}
+
+export type UserUpdateWithoutBoardCeoReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBoardCeoReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -14674,6 +15807,7 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -14694,8 +15828,10 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -14742,6 +15878,7 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14807,6 +15944,488 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBoardSignatoryInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBoardSignatoryInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBoardSignatoryInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBoardSignatoryInput, Prisma.UserUncheckedCreateWithoutBoardSignatoryInput>
+}
+
+export type UserUpsertWithoutBoardSignatoryInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBoardSignatoryInput, Prisma.UserUncheckedUpdateWithoutBoardSignatoryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBoardSignatoryInput, Prisma.UserUncheckedCreateWithoutBoardSignatoryInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBoardSignatoryInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBoardSignatoryInput, Prisma.UserUncheckedUpdateWithoutBoardSignatoryInput>
+}
+
+export type UserUpdateWithoutBoardSignatoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBoardSignatoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14900,6 +16519,7 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -14921,7 +16541,9 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -14968,6 +16590,7 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -15034,7 +16657,9 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -15142,6 +16767,7 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -15163,7 +16789,9 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -15210,6 +16838,7 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15276,7 +16905,9 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -15368,6 +16999,7 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -15389,7 +17021,9 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -15436,6 +17070,7 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -15502,7 +17137,9 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -15610,6 +17247,7 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -15631,7 +17269,9 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -15678,6 +17318,7 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15744,7 +17385,9 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -15836,6 +17479,7 @@ export type UserCreateWithoutPortSalesReportsApprovedInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -15857,8 +17501,10 @@ export type UserCreateWithoutPortSalesReportsApprovedInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
@@ -15904,6 +17550,7 @@ export type UserUncheckedCreateWithoutPortSalesReportsApprovedInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -15970,8 +17617,10 @@ export type UserUncheckedCreateWithoutPortSalesReportsApprovedInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
@@ -16067,6 +17716,7 @@ export type UserCreateWithoutPortSalesReportsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -16088,8 +17738,10 @@ export type UserCreateWithoutPortSalesReportsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
@@ -16135,6 +17787,7 @@ export type UserUncheckedCreateWithoutPortSalesReportsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -16201,8 +17854,10 @@ export type UserUncheckedCreateWithoutPortSalesReportsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
@@ -16309,6 +17964,7 @@ export type UserUpdateWithoutPortSalesReportsApprovedInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -16330,8 +17986,10 @@ export type UserUpdateWithoutPortSalesReportsApprovedInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
@@ -16377,6 +18035,7 @@ export type UserUncheckedUpdateWithoutPortSalesReportsApprovedInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16443,8 +18102,10 @@ export type UserUncheckedUpdateWithoutPortSalesReportsApprovedInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
@@ -16546,6 +18207,7 @@ export type UserUpdateWithoutPortSalesReportsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -16567,8 +18229,10 @@ export type UserUpdateWithoutPortSalesReportsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
@@ -16614,6 +18278,7 @@ export type UserUncheckedUpdateWithoutPortSalesReportsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16680,8 +18345,10 @@ export type UserUncheckedUpdateWithoutPortSalesReportsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
@@ -16772,6 +18439,7 @@ export type UserCreateWithoutStakeholderReportsInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -16792,8 +18460,10 @@ export type UserCreateWithoutStakeholderReportsInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -16840,6 +18510,7 @@ export type UserUncheckedCreateWithoutStakeholderReportsInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -16905,8 +18576,10 @@ export type UserUncheckedCreateWithoutStakeholderReportsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -17014,6 +18687,7 @@ export type UserUpdateWithoutStakeholderReportsInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -17034,8 +18708,10 @@ export type UserUpdateWithoutStakeholderReportsInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -17082,6 +18758,7 @@ export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17147,8 +18824,10 @@ export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -17240,6 +18919,7 @@ export type UserCreateWithoutStakeholderCorrespondencesInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -17260,8 +18940,10 @@ export type UserCreateWithoutStakeholderCorrespondencesInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -17308,6 +18990,7 @@ export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -17373,8 +19056,10 @@ export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -17482,6 +19167,7 @@ export type UserUpdateWithoutStakeholderCorrespondencesInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -17502,8 +19188,10 @@ export type UserUpdateWithoutStakeholderCorrespondencesInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -17550,6 +19238,7 @@ export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17615,8 +19304,10 @@ export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -17708,6 +19399,7 @@ export type UserCreateWithoutStakeholderMessagesInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -17728,8 +19420,10 @@ export type UserCreateWithoutStakeholderMessagesInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
@@ -17776,6 +19470,7 @@ export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -17841,8 +19536,10 @@ export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
@@ -17950,6 +19647,7 @@ export type UserUpdateWithoutStakeholderMessagesInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -17970,8 +19668,10 @@ export type UserUpdateWithoutStakeholderMessagesInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -18018,6 +19718,7 @@ export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18083,8 +19784,10 @@ export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -18176,6 +19879,7 @@ export type UserCreateWithoutOperatedPortInput = {
   nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
   passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
   identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -18197,8 +19901,10 @@ export type UserCreateWithoutOperatedPortInput = {
   boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
@@ -18244,6 +19950,7 @@ export type UserUncheckedCreateWithoutOperatedPortInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -18310,8 +20017,10 @@ export type UserUncheckedCreateWithoutOperatedPortInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
@@ -18418,6 +20127,7 @@ export type UserUpdateWithoutOperatedPortInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -18439,8 +20149,10 @@ export type UserUpdateWithoutOperatedPortInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
@@ -18486,6 +20198,7 @@ export type UserUncheckedUpdateWithoutOperatedPortInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18552,8 +20265,10 @@ export type UserUncheckedUpdateWithoutOperatedPortInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
@@ -18598,6 +20313,7 @@ export type UserCreateManyPhotoInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -18685,6 +20401,7 @@ export type UserCreateManyNationalCardPhotoInput = {
   photoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -18772,6 +20489,7 @@ export type UserCreateManyPassportPhotoInput = {
   photoId?: string | null
   nationalCardPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -18859,6 +20577,95 @@ export type UserCreateManyIdentityBookletPhotoInput = {
   photoId?: string | null
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
+  signaturePhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserCreateManySignaturePhotoInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -18991,6 +20798,7 @@ export type UserUpdateWithoutPhotoInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -19012,8 +20820,10 @@ export type UserUpdateWithoutPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -19059,6 +20869,7 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19125,8 +20936,10 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -19172,6 +20985,7 @@ export type UserUncheckedUpdateManyWithoutPhotoInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19304,6 +21118,7 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -19325,8 +21140,10 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -19372,6 +21189,7 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19438,8 +21256,10 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -19485,6 +21305,7 @@ export type UserUncheckedUpdateManyWithoutNationalCardPhotoInput = {
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19617,6 +21438,7 @@ export type UserUpdateWithoutPassportPhotoInput = {
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -19638,8 +21460,10 @@ export type UserUpdateWithoutPassportPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -19685,6 +21509,7 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19751,8 +21576,10 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -19798,6 +21625,7 @@ export type UserUncheckedUpdateManyWithoutPassportPhotoInput = {
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19930,6 +21758,7 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -19951,8 +21780,10 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -19998,6 +21829,7 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20064,8 +21896,10 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -20111,6 +21945,327 @@ export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput = {
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutSignaturePhotoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSignaturePhotoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutSignaturePhotoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20198,6 +22353,7 @@ export type UserCreateManyCountryInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -20330,6 +22486,7 @@ export type UserUpdateWithoutCountryInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -20351,8 +22508,10 @@ export type UserUpdateWithoutCountryInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -20398,6 +22557,7 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20464,8 +22624,10 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -20511,6 +22673,7 @@ export type UserUncheckedUpdateManyWithoutCountryInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20598,6 +22761,7 @@ export type UserCreateManyProvinceInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -20685,6 +22849,7 @@ export type UserCreateManyLocationProvinceInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -20817,6 +22982,7 @@ export type UserUpdateWithoutProvinceInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -20838,8 +23004,10 @@ export type UserUpdateWithoutProvinceInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -20885,6 +23053,7 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20951,8 +23120,10 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -20998,6 +23169,7 @@ export type UserUncheckedUpdateManyWithoutProvinceInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21130,6 +23302,7 @@ export type UserUpdateWithoutLocationProvinceInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -21151,8 +23324,10 @@ export type UserUpdateWithoutLocationProvinceInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -21198,6 +23373,7 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21264,8 +23440,10 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -21311,6 +23489,7 @@ export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21398,6 +23577,7 @@ export type UserCreateManyCityInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -21485,6 +23665,7 @@ export type UserCreateManyLocationCityInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -21617,6 +23798,7 @@ export type UserUpdateWithoutCityInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -21638,8 +23820,10 @@ export type UserUpdateWithoutCityInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -21685,6 +23869,7 @@ export type UserUncheckedUpdateWithoutCityInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21751,8 +23936,10 @@ export type UserUncheckedUpdateWithoutCityInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -21798,6 +23985,7 @@ export type UserUncheckedUpdateManyWithoutCityInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21930,6 +24118,7 @@ export type UserUpdateWithoutLocationCityInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -21951,8 +24140,10 @@ export type UserUpdateWithoutLocationCityInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -21998,6 +24189,7 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22064,8 +24256,10 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -22111,6 +24305,7 @@ export type UserUncheckedUpdateManyWithoutLocationCityInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22199,6 +24394,7 @@ export type UserCreateManyContractorInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
@@ -22331,6 +24527,7 @@ export type UserUpdateWithoutContractorInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -22351,8 +24548,10 @@ export type UserUpdateWithoutContractorInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -22399,6 +24598,7 @@ export type UserUncheckedUpdateWithoutContractorInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22464,8 +24664,10 @@ export type UserUncheckedUpdateWithoutContractorInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -22512,6 +24714,7 @@ export type UserUncheckedUpdateManyWithoutContractorInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22599,6 +24802,7 @@ export type UserCreateManyPositionInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   orgUnitId?: string | null
   isQeshmondi?: boolean
   qeshmondiStartDate?: Date | string | null
@@ -22731,6 +24935,7 @@ export type UserUpdateWithoutPositionInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
@@ -22751,8 +24956,10 @@ export type UserUpdateWithoutPositionInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -22799,6 +25006,7 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
   qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22864,8 +25072,10 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -22912,6 +25122,7 @@ export type UserUncheckedUpdateManyWithoutPositionInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
   qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22999,6 +25210,7 @@ export type UserCreateManyOrgUnitInput = {
   nationalCardPhotoId?: string | null
   passportPhotoId?: string | null
   identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
   positionId?: string | null
   isQeshmondi?: boolean
   qeshmondiStartDate?: Date | string | null
@@ -23131,6 +25343,7 @@ export type UserUpdateWithoutOrgUnitInput = {
   nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
   passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
   identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
@@ -23151,8 +25364,10 @@ export type UserUpdateWithoutOrgUnitInput = {
   boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
@@ -23199,6 +25414,7 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
   qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23264,8 +25480,10 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
   boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
   operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
@@ -23312,6 +25530,7 @@ export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
   nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
   qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23385,6 +25604,7 @@ export type UserCountOutputType = {
   boardLegalReviews: number
   boardBudgetReviews: number
   boardSecretaryReviews: number
+  boardCeoReviews: number
   boardMinutesCreated: number
   boardMinutesMemberships: number
   portSalesReports: number
@@ -23413,6 +25633,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   boardLegalReviews?: boolean | UserCountOutputTypeCountBoardLegalReviewsArgs
   boardBudgetReviews?: boolean | UserCountOutputTypeCountBoardBudgetReviewsArgs
   boardSecretaryReviews?: boolean | UserCountOutputTypeCountBoardSecretaryReviewsArgs
+  boardCeoReviews?: boolean | UserCountOutputTypeCountBoardCeoReviewsArgs
   boardMinutesCreated?: boolean | UserCountOutputTypeCountBoardMinutesCreatedArgs
   boardMinutesMemberships?: boolean | UserCountOutputTypeCountBoardMinutesMembershipsArgs
   portSalesReports?: boolean | UserCountOutputTypeCountPortSalesReportsArgs
@@ -23561,6 +25782,13 @@ export type UserCountOutputTypeCountBoardSecretaryReviewsArgs<ExtArgs extends ru
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountBoardCeoReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountBoardMinutesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BoardMinutesWhereInput
 }
@@ -23646,6 +25874,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   nationalCardPhotoId?: boolean
   passportPhotoId?: boolean
   identityBookletPhotoId?: boolean
+  signaturePhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
   isQeshmondi?: boolean
@@ -23703,6 +25932,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
   passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
   identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
+  signaturePhoto?: boolean | Prisma.User$signaturePhotoArgs<ExtArgs>
   locationHistories?: boolean | Prisma.User$locationHistoriesArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
@@ -23724,8 +25954,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   boardLegalReviews?: boolean | Prisma.User$boardLegalReviewsArgs<ExtArgs>
   boardBudgetReviews?: boolean | Prisma.User$boardBudgetReviewsArgs<ExtArgs>
   boardSecretaryReviews?: boolean | Prisma.User$boardSecretaryReviewsArgs<ExtArgs>
+  boardCeoReviews?: boolean | Prisma.User$boardCeoReviewsArgs<ExtArgs>
   boardMinutesCreated?: boolean | Prisma.User$boardMinutesCreatedArgs<ExtArgs>
   boardMinutesMemberships?: boolean | Prisma.User$boardMinutesMembershipsArgs<ExtArgs>
+  boardSignatory?: boolean | Prisma.User$boardSignatoryArgs<ExtArgs>
   portSalesReports?: boolean | Prisma.User$portSalesReportsArgs<ExtArgs>
   portSalesReportsApproved?: boolean | Prisma.User$portSalesReportsApprovedArgs<ExtArgs>
   operatedPort?: boolean | Prisma.User$operatedPortArgs<ExtArgs>
@@ -23773,6 +26005,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nationalCardPhotoId?: boolean
   passportPhotoId?: boolean
   identityBookletPhotoId?: boolean
+  signaturePhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
   isQeshmondi?: boolean
@@ -23830,6 +26063,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
   passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
   identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
+  signaturePhoto?: boolean | Prisma.User$signaturePhotoArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   contractor?: boolean | Prisma.User$contractorArgs<ExtArgs>
@@ -23873,6 +26107,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nationalCardPhotoId?: boolean
   passportPhotoId?: boolean
   identityBookletPhotoId?: boolean
+  signaturePhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
   isQeshmondi?: boolean
@@ -23930,6 +26165,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
   passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
   identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
+  signaturePhoto?: boolean | Prisma.User$signaturePhotoArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   contractor?: boolean | Prisma.User$contractorArgs<ExtArgs>
@@ -23973,6 +26209,7 @@ export type UserSelectScalar = {
   nationalCardPhotoId?: boolean
   passportPhotoId?: boolean
   identityBookletPhotoId?: boolean
+  signaturePhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
   isQeshmondi?: boolean
@@ -24023,7 +26260,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "fatherName" | "birthDate" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "orgUnitId" | "positionId" | "isQeshmondi" | "qeshmondiStartDate" | "qeshmondiEndDate" | "occupation" | "isResident" | "passportNumber" | "qeshmondiGroup" | "latinFirstName" | "latinLastName" | "latinFatherName" | "identityNumber" | "identitySerial" | "landlinePhone" | "fax" | "postalCode" | "jobAddress" | "jobPhone" | "jobFax" | "jobPostalCode" | "isSingle" | "nationality" | "education" | "protectorOffice" | "nationalIdExpiresAt" | "passportExpiresAt" | "bankFullName" | "bankFullLatinName" | "accountNumber" | "cardNumber" | "cardSeries" | "isBank" | "accountOpeningDate" | "cardIssuanceDate" | "cardDeliverDate" | "companyName" | "companySubject" | "companyLicenseNumber" | "companyLicenseDate" | "companyPaperNumber" | "companyPaperDate" | "electricitySubscription" | "fingerprint" | "individualTicketQuota" | "contractorId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "fatherName" | "birthDate" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "signaturePhotoId" | "orgUnitId" | "positionId" | "isQeshmondi" | "qeshmondiStartDate" | "qeshmondiEndDate" | "occupation" | "isResident" | "passportNumber" | "qeshmondiGroup" | "latinFirstName" | "latinLastName" | "latinFatherName" | "identityNumber" | "identitySerial" | "landlinePhone" | "fax" | "postalCode" | "jobAddress" | "jobPhone" | "jobFax" | "jobPostalCode" | "isSingle" | "nationality" | "education" | "protectorOffice" | "nationalIdExpiresAt" | "passportExpiresAt" | "bankFullName" | "bankFullLatinName" | "accountNumber" | "cardNumber" | "cardSeries" | "isBank" | "accountOpeningDate" | "cardIssuanceDate" | "cardDeliverDate" | "companyName" | "companySubject" | "companyLicenseNumber" | "companyLicenseDate" | "companyPaperNumber" | "companyPaperDate" | "electricitySubscription" | "fingerprint" | "individualTicketQuota" | "contractorId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
   province?: boolean | Prisma.User$provinceArgs<ExtArgs>
@@ -24034,6 +26271,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
   passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
   identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
+  signaturePhoto?: boolean | Prisma.User$signaturePhotoArgs<ExtArgs>
   locationHistories?: boolean | Prisma.User$locationHistoriesArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
@@ -24055,8 +26293,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   boardLegalReviews?: boolean | Prisma.User$boardLegalReviewsArgs<ExtArgs>
   boardBudgetReviews?: boolean | Prisma.User$boardBudgetReviewsArgs<ExtArgs>
   boardSecretaryReviews?: boolean | Prisma.User$boardSecretaryReviewsArgs<ExtArgs>
+  boardCeoReviews?: boolean | Prisma.User$boardCeoReviewsArgs<ExtArgs>
   boardMinutesCreated?: boolean | Prisma.User$boardMinutesCreatedArgs<ExtArgs>
   boardMinutesMemberships?: boolean | Prisma.User$boardMinutesMembershipsArgs<ExtArgs>
+  boardSignatory?: boolean | Prisma.User$boardSignatoryArgs<ExtArgs>
   portSalesReports?: boolean | Prisma.User$portSalesReportsArgs<ExtArgs>
   portSalesReportsApproved?: boolean | Prisma.User$portSalesReportsApprovedArgs<ExtArgs>
   operatedPort?: boolean | Prisma.User$operatedPortArgs<ExtArgs>
@@ -24075,6 +26315,7 @@ export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
   passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
   identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
+  signaturePhoto?: boolean | Prisma.User$signaturePhotoArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   contractor?: boolean | Prisma.User$contractorArgs<ExtArgs>
@@ -24089,6 +26330,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
   passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
   identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
+  signaturePhoto?: boolean | Prisma.User$signaturePhotoArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   contractor?: boolean | Prisma.User$contractorArgs<ExtArgs>
@@ -24106,6 +26348,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     nationalCardPhoto: Prisma.$StoredImagePayload<ExtArgs> | null
     passportPhoto: Prisma.$StoredImagePayload<ExtArgs> | null
     identityBookletPhoto: Prisma.$StoredImagePayload<ExtArgs> | null
+    signaturePhoto: Prisma.$StoredImagePayload<ExtArgs> | null
     locationHistories: Prisma.$UserLocationHistoryPayload<ExtArgs>[]
     orgUnit: Prisma.$OrganizationUnitPayload<ExtArgs> | null
     position: Prisma.$OrganizationPositionPayload<ExtArgs> | null
@@ -24127,8 +26370,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     boardLegalReviews: Prisma.$BoardRequestPayload<ExtArgs>[]
     boardBudgetReviews: Prisma.$BoardRequestPayload<ExtArgs>[]
     boardSecretaryReviews: Prisma.$BoardRequestPayload<ExtArgs>[]
+    boardCeoReviews: Prisma.$BoardRequestPayload<ExtArgs>[]
     boardMinutesCreated: Prisma.$BoardMinutesPayload<ExtArgs>[]
     boardMinutesMemberships: Prisma.$BoardMinutesMemberPayload<ExtArgs>[]
+    boardSignatory: Prisma.$BoardSignatoryPayload<ExtArgs> | null
     portSalesReports: Prisma.$PortSalesReportPayload<ExtArgs>[]
     portSalesReportsApproved: Prisma.$PortSalesReportPayload<ExtArgs>[]
     operatedPort: Prisma.$PortPayload<ExtArgs> | null
@@ -24174,6 +26419,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     nationalCardPhotoId: string | null
     passportPhotoId: string | null
     identityBookletPhotoId: string | null
+    signaturePhotoId: string | null
     orgUnitId: string | null
     positionId: string | null
     isQeshmondi: boolean
@@ -24625,6 +26871,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   nationalCardPhoto<T extends Prisma.User$nationalCardPhotoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$nationalCardPhotoArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   passportPhoto<T extends Prisma.User$passportPhotoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passportPhotoArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   identityBookletPhoto<T extends Prisma.User$identityBookletPhotoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$identityBookletPhotoArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  signaturePhoto<T extends Prisma.User$signaturePhotoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$signaturePhotoArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   locationHistories<T extends Prisma.User$locationHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$locationHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLocationHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orgUnit<T extends Prisma.User$orgUnitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orgUnitArgs<ExtArgs>>): Prisma.Prisma__OrganizationUnitClient<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   position<T extends Prisma.User$positionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$positionArgs<ExtArgs>>): Prisma.Prisma__OrganizationPositionClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPositionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -24646,8 +26893,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   boardLegalReviews<T extends Prisma.User$boardLegalReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardLegalReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardBudgetReviews<T extends Prisma.User$boardBudgetReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardBudgetReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardSecretaryReviews<T extends Prisma.User$boardSecretaryReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardSecretaryReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardCeoReviews<T extends Prisma.User$boardCeoReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardCeoReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesCreated<T extends Prisma.User$boardMinutesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardMinutesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesMemberships<T extends Prisma.User$boardMinutesMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardMinutesMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardSignatory<T extends Prisma.User$boardSignatoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardSignatoryArgs<ExtArgs>>): Prisma.Prisma__BoardSignatoryClient<runtime.Types.Result.GetResult<Prisma.$BoardSignatoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   portSalesReports<T extends Prisma.User$portSalesReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$portSalesReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortSalesReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   portSalesReportsApproved<T extends Prisma.User$portSalesReportsApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$portSalesReportsApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortSalesReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   operatedPort<T extends Prisma.User$operatedPortArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$operatedPortArgs<ExtArgs>>): Prisma.Prisma__PortClient<runtime.Types.Result.GetResult<Prisma.$PortPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -24720,6 +26969,7 @@ export interface UserFieldRefs {
   readonly nationalCardPhotoId: Prisma.FieldRef<"User", 'String'>
   readonly passportPhotoId: Prisma.FieldRef<"User", 'String'>
   readonly identityBookletPhotoId: Prisma.FieldRef<"User", 'String'>
+  readonly signaturePhotoId: Prisma.FieldRef<"User", 'String'>
   readonly orgUnitId: Prisma.FieldRef<"User", 'String'>
   readonly positionId: Prisma.FieldRef<"User", 'String'>
   readonly isQeshmondi: Prisma.FieldRef<"User", 'Boolean'>
@@ -25340,6 +27590,25 @@ export type User$identityBookletPhotoArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * User.signaturePhoto
+ */
+export type User$signaturePhotoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StoredImage
+   */
+  select?: Prisma.StoredImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StoredImage
+   */
+  omit?: Prisma.StoredImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StoredImageInclude<ExtArgs> | null
+  where?: Prisma.StoredImageWhereInput
+}
+
+/**
  * User.locationHistories
  */
 export type User$locationHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -25829,6 +28098,30 @@ export type User$boardSecretaryReviewsArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
+ * User.boardCeoReviews
+ */
+export type User$boardCeoReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardRequest
+   */
+  select?: Prisma.BoardRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardRequest
+   */
+  omit?: Prisma.BoardRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardRequestInclude<ExtArgs> | null
+  where?: Prisma.BoardRequestWhereInput
+  orderBy?: Prisma.BoardRequestOrderByWithRelationInput | Prisma.BoardRequestOrderByWithRelationInput[]
+  cursor?: Prisma.BoardRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardRequestScalarFieldEnum | Prisma.BoardRequestScalarFieldEnum[]
+}
+
+/**
  * User.boardMinutesCreated
  */
 export type User$boardMinutesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -25874,6 +28167,25 @@ export type User$boardMinutesMembershipsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.BoardMinutesMemberScalarFieldEnum | Prisma.BoardMinutesMemberScalarFieldEnum[]
+}
+
+/**
+ * User.boardSignatory
+ */
+export type User$boardSignatoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardSignatory
+   */
+  select?: Prisma.BoardSignatorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardSignatory
+   */
+  omit?: Prisma.BoardSignatoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardSignatoryInclude<ExtArgs> | null
+  where?: Prisma.BoardSignatoryWhereInput
 }
 
 /**

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -142,6 +143,15 @@ export class BoardController {
   ) {
     if (!user) throw new UnauthorizedException();
     return this.board.update(id, dto, user.id);
+  }
+
+  @Delete('requests/:id')
+  remove(
+    @Param('id') id: string,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.board.remove(id, user.id);
   }
 
   @Post('requests/:id/review')

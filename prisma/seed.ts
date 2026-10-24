@@ -92,6 +92,15 @@ const SYSTEM_POSITIONS = [
   { code: 'EXPERT', name: 'کارشناس' },
 ] as const;
 
+const SYSTEM_UNIT_KINDS = [
+  { code: 'BOARD', name: 'هیئت مدیره' },
+  { code: 'ADVISORS', name: 'مشاورین' },
+  { code: 'OFFICE', name: 'دفتر' },
+  { code: 'VICE', name: 'معاونت' },
+  { code: 'MANAGEMENT', name: 'مدیریت' },
+  { code: 'DEPARTMENT', name: 'اداره' },
+] as const;
+
 async function seedPositions() {
   for (const item of SYSTEM_POSITIONS) {
     const existing = await prisma.organizationPosition.findFirst({
@@ -110,9 +119,28 @@ async function seedPositions() {
   }
 }
 
+async function seedUnitKinds() {
+  for (const item of SYSTEM_UNIT_KINDS) {
+    const existing = await prisma.organizationUnitKind.findFirst({
+      where: { OR: [{ code: item.code }, { name: item.name }] },
+    });
+    if (existing) {
+      await prisma.organizationUnitKind.update({
+        where: { id: existing.id },
+        data: { code: item.code, name: item.name, isSystem: true },
+      });
+      continue;
+    }
+    await prisma.organizationUnitKind.create({
+      data: { code: item.code, name: item.name, isSystem: true },
+    });
+  }
+}
+
 async function main() {
   await seedGeo();
   await seedPositions();
+  await seedUnitKinds();
   const passwordHash = await bcrypt.hash('Admin1234', 10);
   const adminUser = await prisma.user.upsert({
     where: { username: 'admin' },

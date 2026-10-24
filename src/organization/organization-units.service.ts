@@ -11,19 +11,26 @@ import {
   wantsPagination,
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
-import { Prisma } from '../generated/prisma/client';
+import { Prisma, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateOrganizationUnitDto } from './dto/create-organization-unit.dto';
 import { FindOrganizationUnitsQueryDto } from './dto/find-organization-units-query.dto';
 import { UpdateOrganizationUnitDto } from './dto/update-organization-unit.dto';
-import { buildOrganizationUnitPaths } from './organization-unit-tree';
+import {
+  BOARD_DEPUTY_POSITION_CODE,
+  ORG_UNIT_KINDS_NEEDING_VICE,
+} from './organization.constants';
+import {
+  buildOrganizationUnitPaths,
+  findNearestViceUnitId,
+} from './organization-unit-tree';
 
 const unitSelect = {
   id: true,
   name: true,
   code: true,
   kindId: true,
-  kind: { select: { id: true, name: true } },
+  kind: { select: { id: true, name: true, code: true } },
   parentId: true,
   phone: true,
   address: true,
@@ -42,7 +49,7 @@ const unitSelect = {
   createdAt: true,
   updatedAt: true,
   parent: {
-    select: { id: true, name: true, kind: { select: { id: true, name: true } } },
+    select: { id: true, name: true, kind: { select: { id: true, name: true, code: true } } },
   },
   nutritionRep: {
     select: { id: true, firstName: true, lastName: true, fullName: true },
@@ -104,14 +111,14 @@ export class OrganizationUnitsService {
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
-    const paths = await this.unitPaths();
+    const [paths, deputies] = await Promise.all([this.unitPaths(), this.unitDeputies()]);
     if (!wantsPagination(query)) {
       const items = await this.prisma.organizationUnit.findMany({
         where,
         orderBy,
         select: unitSelect,
       });
-      return items.map((item) => this.withMeta(item, paths));
+      return items.map((item) => this.withMeta(item, paths, deputies));
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
@@ -125,7 +132,7 @@ export class OrganizationUnitsService {
       this.prisma.organizationUnit.count({ where }),
     ]);
     return paginatedResult(
-      items.map((item) => this.withMeta(item, paths)),
+      items.map((item) => this.withMeta(item, paths, deputies)),
       total,
       page,
       pageSize,
@@ -140,13 +147,14 @@ export class OrganizationUnitsService {
     if (!unit) {
       throw new NotFoundException('واحد سازمانی یافت نشد');
     }
-    const paths = await this.unitPaths();
-    return this.withMeta(unit, paths);
+    const [paths, deputies] = await Promise.all([this.unitPaths(), this.unitDeputies()]);
+    return this.withMeta(unit, paths, deputies);
   }
 
   async create(dto: CreateOrganizationUnitDto) {
     await this.assertValidParent(null, dto.parentId);
     await this.assertKind(dto.kindId);
+    await this.assertHierarchy(dto.kindId, dto.parentId ?? null);
     await this.assertUniqueCode(dto.code);
     this.assertGuestMeals(dto);
     const unit = await this.prisma.organizationUnit.create({
@@ -171,8 +179,8 @@ export class OrganizationUnitsService {
       },
       select: unitSelect,
     });
-    const paths = await this.unitPaths();
-    return this.withMeta(unit, paths);
+    const [paths, deputies] = await Promise.all([this.unitPaths(), this.unitDeputies()]);
+    return this.withMeta(unit, paths, deputies);
   }
 
   async update(id: string, dto: UpdateOrganizationUnitDto) {
@@ -182,6 +190,17 @@ export class OrganizationUnitsService {
     }
     if (dto.kindId !== undefined) {
       await this.assertKind(dto.kindId);
+    }
+    if (dto.kindId !== undefined || dto.parentId !== undefined) {
+      const current = await this.prisma.organizationUnit.findUnique({
+        where: { id },
+        select: { kindId: true, parentId: true },
+      });
+      await this.assertHierarchy(
+        dto.kindId !== undefined ? dto.kindId : current?.kindId,
+        dto.parentId !== undefined ? dto.parentId : current?.parentId,
+        id,
+      );
     }
     if (dto.nutritionRepId !== undefined) {
       await this.assertNutritionRep(id, dto.nutritionRepId);
@@ -230,8 +249,8 @@ export class OrganizationUnitsService {
       },
       select: unitSelect,
     });
-    const paths = await this.unitPaths();
-    return this.withMeta(unit, paths);
+    const [paths, deputies] = await Promise.all([this.unitPaths(), this.unitDeputies()]);
+    return this.withMeta(unit, paths, deputies);
   }
 
   async remove(id: string) {
@@ -272,11 +291,32 @@ export class OrganizationUnitsService {
       latitude: Prisma.Decimal | null;
       longitude: Prisma.Decimal | null;
     },
-  >(item: T, paths: Map<string, string>) {
+  >(
+    item: T,
+    paths: Map<string, string>,
+    deputies: Map<string, { id: string; fullName: string }>,
+  ) {
     return {
       ...withCoords(item),
       pathLabel: paths.get(item.id) ?? item.name,
+      deputy: deputies.get(item.id) ?? null,
     };
+  }
+
+  private async unitDeputies() {
+    const rows = await this.prisma.user.findMany({
+      where: {
+        status: UserStatus.ACTIVE,
+        orgUnitId: { not: null },
+        position: { code: BOARD_DEPUTY_POSITION_CODE },
+      },
+      select: { id: true, fullName: true, orgUnitId: true },
+    });
+    return new Map(
+      rows
+        .filter((row) => row.orgUnitId)
+        .map((row) => [row.orgUnitId as string, { id: row.id, fullName: row.fullName }]),
+    );
   }
 
   private async assertUniqueCode(code: string, excludeId?: string) {
@@ -299,6 +339,47 @@ export class OrganizationUnitsService {
     });
     if (!kind) {
       throw new BadRequestException('نوع واحد یافت نشد');
+    }
+  }
+
+  private async assertHierarchy(
+    kindId: string | undefined,
+    parentId: string | null | undefined,
+    unitId?: string,
+  ) {
+    if (!kindId) return;
+    const kind = await this.prisma.organizationUnitKind.findUnique({
+      where: { id: kindId },
+      select: { code: true },
+    });
+    if (!kind?.code || !ORG_UNIT_KINDS_NEEDING_VICE.includes(kind.code)) {
+      return;
+    }
+    if (!parentId) {
+      throw new BadRequestException(
+        'واحد مدیریت یا اداره باید زیرمجموعهٔ یک معاونت باشد',
+      );
+    }
+    const catalog = await this.prisma.organizationUnit.findMany({
+      select: { id: true, parentId: true, kind: { select: { code: true } } },
+    });
+    const units = catalog.map((unit) => ({
+      id: unit.id,
+      parentId: unit.id === unitId ? parentId ?? null : unit.parentId,
+      kindCode: unit.id === unitId ? kind.code : unit.kind.code,
+    }));
+    const startId = unitId ?? '__draft__';
+    if (!unitId) {
+      units.push({
+        id: startId,
+        parentId: parentId ?? null,
+        kindCode: kind.code,
+      });
+    }
+    if (!findNearestViceUnitId(units, startId)) {
+      throw new BadRequestException(
+        'در مسیر بالادست این واحد باید یک معاونت باشد',
+      );
     }
   }
 

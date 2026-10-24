@@ -789,6 +789,13 @@ export type EnumSingardActivityKindWithAggregatesFilter<$PrismaModel = never> = 
   _max?: Prisma.NestedEnumSingardActivityKindFilter<$PrismaModel>
 }
 
+export type EnumBoardRequestKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardRequestKind | Prisma.EnumBoardRequestKindFieldRefInput<$PrismaModel>
+  in?: $Enums.BoardRequestKind[] | Prisma.ListEnumBoardRequestKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoardRequestKind[] | Prisma.ListEnumBoardRequestKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoardRequestKindFilter<$PrismaModel> | $Enums.BoardRequestKind
+}
+
 export type EnumBoardRequestStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.BoardRequestStatus | Prisma.EnumBoardRequestStatusFieldRefInput<$PrismaModel>
   in?: $Enums.BoardRequestStatus[] | Prisma.ListEnumBoardRequestStatusFieldRefInput<$PrismaModel>
@@ -801,6 +808,16 @@ export type EnumBoardStageNullableFilter<$PrismaModel = never> = {
   in?: $Enums.BoardStage[] | Prisma.ListEnumBoardStageFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.BoardStage[] | Prisma.ListEnumBoardStageFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumBoardStageNullableFilter<$PrismaModel> | $Enums.BoardStage | null
+}
+
+export type EnumBoardRequestKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardRequestKind | Prisma.EnumBoardRequestKindFieldRefInput<$PrismaModel>
+  in?: $Enums.BoardRequestKind[] | Prisma.ListEnumBoardRequestKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoardRequestKind[] | Prisma.ListEnumBoardRequestKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoardRequestKindWithAggregatesFilter<$PrismaModel> | $Enums.BoardRequestKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoardRequestKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoardRequestKindFilter<$PrismaModel>
 }
 
 export type EnumBoardRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1798,6 +1815,13 @@ export type NestedEnumSingardActivityKindWithAggregatesFilter<$PrismaModel = nev
   _max?: Prisma.NestedEnumSingardActivityKindFilter<$PrismaModel>
 }
 
+export type NestedEnumBoardRequestKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardRequestKind | Prisma.EnumBoardRequestKindFieldRefInput<$PrismaModel>
+  in?: $Enums.BoardRequestKind[] | Prisma.ListEnumBoardRequestKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoardRequestKind[] | Prisma.ListEnumBoardRequestKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoardRequestKindFilter<$PrismaModel> | $Enums.BoardRequestKind
+}
+
 export type NestedEnumBoardRequestStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.BoardRequestStatus | Prisma.EnumBoardRequestStatusFieldRefInput<$PrismaModel>
   in?: $Enums.BoardRequestStatus[] | Prisma.ListEnumBoardRequestStatusFieldRefInput<$PrismaModel>
@@ -1810,6 +1834,16 @@ export type NestedEnumBoardStageNullableFilter<$PrismaModel = never> = {
   in?: $Enums.BoardStage[] | Prisma.ListEnumBoardStageFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.BoardStage[] | Prisma.ListEnumBoardStageFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumBoardStageNullableFilter<$PrismaModel> | $Enums.BoardStage | null
+}
+
+export type NestedEnumBoardRequestKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardRequestKind | Prisma.EnumBoardRequestKindFieldRefInput<$PrismaModel>
+  in?: $Enums.BoardRequestKind[] | Prisma.ListEnumBoardRequestKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoardRequestKind[] | Prisma.ListEnumBoardRequestKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoardRequestKindWithAggregatesFilter<$PrismaModel> | $Enums.BoardRequestKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoardRequestKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoardRequestKindFilter<$PrismaModel>
 }
 
 export type NestedEnumBoardRequestStatusWithAggregatesFilter<$PrismaModel = never> = {

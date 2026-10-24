@@ -443,6 +443,7 @@ export const ModelName = {
   SingardAttachment: 'SingardAttachment',
   SingardActivity: 'SingardActivity',
   BoardRequest: 'BoardRequest',
+  BoardSignatory: 'BoardSignatory',
   BoardAttachment: 'BoardAttachment',
   BoardStageUnit: 'BoardStageUnit',
   BoardStagePosition: 'BoardStagePosition',
@@ -475,7 +476,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "advancedFoodOrder" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "advancedFoodOrder" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardSignatory" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3883,6 +3884,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BoardSignatory: {
+      payload: Prisma.$BoardSignatoryPayload<ExtArgs>
+      fields: Prisma.BoardSignatoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardSignatoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardSignatoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardSignatoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardSignatoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>
+        }
+        findMany: {
+          args: Prisma.BoardSignatoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>[]
+        }
+        create: {
+          args: Prisma.BoardSignatoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>
+        }
+        createMany: {
+          args: Prisma.BoardSignatoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardSignatoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardSignatoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>
+        }
+        update: {
+          args: Prisma.BoardSignatoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardSignatoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardSignatoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardSignatoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardSignatoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardSignatoryPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardSignatoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardSignatory>
+        }
+        groupBy: {
+          args: Prisma.BoardSignatoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardSignatoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardSignatoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardSignatoryCountAggregateOutputType> | number
+        }
+      }
+    }
     BoardAttachment: {
       payload: Prisma.$BoardAttachmentPayload<ExtArgs>
       fields: Prisma.BoardAttachmentFieldRefs
@@ -5289,6 +5364,7 @@ export const UserScalarFieldEnum = {
   nationalCardPhotoId: 'nationalCardPhotoId',
   passportPhotoId: 'passportPhotoId',
   identityBookletPhotoId: 'identityBookletPhotoId',
+  signaturePhotoId: 'signaturePhotoId',
   orgUnitId: 'orgUnitId',
   positionId: 'positionId',
   isQeshmondi: 'isQeshmondi',
@@ -5719,7 +5795,9 @@ export type OrganizationPositionScalarFieldEnum = (typeof OrganizationPositionSc
 
 export const OrganizationUnitKindScalarFieldEnum = {
   id: 'id',
+  code: 'code',
   name: 'name',
+  isSystem: 'isSystem',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -5955,6 +6033,10 @@ export type SingardActivityScalarFieldEnum = (typeof SingardActivityScalarFieldE
 
 export const BoardRequestScalarFieldEnum = {
   id: 'id',
+  kind: 'kind',
+  trackingNo: 'trackingNo',
+  trackingYear: 'trackingYear',
+  trackingSeq: 'trackingSeq',
   status: 'status',
   requestedAt: 'requestedAt',
   unitId: 'unitId',
@@ -5967,19 +6049,26 @@ export const BoardRequestScalarFieldEnum = {
   managementComment: 'managementComment',
   managementAt: 'managementAt',
   managementById: 'managementById',
+  legalReferredAt: 'legalReferredAt',
   legalOrgMatch: 'legalOrgMatch',
   legalRegulationsMatch: 'legalRegulationsMatch',
   legalComment: 'legalComment',
   legalAt: 'legalAt',
   legalById: 'legalById',
+  budgetReferredAt: 'budgetReferredAt',
   budgetProgramHistory: 'budgetProgramHistory',
   budgetCurrentYearFunding: 'budgetCurrentYearFunding',
   budgetComment: 'budgetComment',
   budgetAt: 'budgetAt',
   budgetById: 'budgetById',
+  secretaryReferredAt: 'secretaryReferredAt',
   secretaryComment: 'secretaryComment',
   secretaryAt: 'secretaryAt',
   secretaryById: 'secretaryById',
+  ceoReferredAt: 'ceoReferredAt',
+  ceoComment: 'ceoComment',
+  ceoAt: 'ceoAt',
+  ceoById: 'ceoById',
   rejectedStage: 'rejectedStage',
   rejectedComment: 'rejectedComment',
   rejectedAt: 'rejectedAt',
@@ -5989,6 +6078,21 @@ export const BoardRequestScalarFieldEnum = {
 } as const
 
 export type BoardRequestScalarFieldEnum = (typeof BoardRequestScalarFieldEnum)[keyof typeof BoardRequestScalarFieldEnum]
+
+
+export const BoardSignatoryScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  title: 'title',
+  signatureImageId: 'signatureImageId',
+  userId: 'userId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardSignatoryScalarFieldEnum = (typeof BoardSignatoryScalarFieldEnum)[keyof typeof BoardSignatoryScalarFieldEnum]
 
 
 export const BoardAttachmentScalarFieldEnum = {
@@ -6740,6 +6844,20 @@ export type ListEnumSingardActivityKindFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
+ * Reference to a field of type 'BoardRequestKind'
+ */
+export type EnumBoardRequestKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardRequestKind'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardRequestKind[]'
+ */
+export type ListEnumBoardRequestKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardRequestKind[]'>
+    
+
+
+/**
  * Reference to a field of type 'BoardRequestStatus'
  */
 export type EnumBoardRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardRequestStatus'>
@@ -7117,6 +7235,7 @@ export type GlobalOmitConfig = {
   singardAttachment?: Prisma.SingardAttachmentOmit
   singardActivity?: Prisma.SingardActivityOmit
   boardRequest?: Prisma.BoardRequestOmit
+  boardSignatory?: Prisma.BoardSignatoryOmit
   boardAttachment?: Prisma.BoardAttachmentOmit
   boardStageUnit?: Prisma.BoardStageUnitOmit
   boardStagePosition?: Prisma.BoardStagePositionOmit

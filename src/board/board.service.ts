@@ -7,6 +7,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { parseIsoDate, toIsoDateOnly } from '../common/iso-date';
+import { gregorianToJalali } from '../common/jalali-date';
+import { toLatinDigits } from '../common/national-id';
 import {
   containsInsensitive,
   paginatedResult,
@@ -16,17 +18,29 @@ import {
 import { resolveSortOrder } from '../common/sort-query';
 import {
   BoardAttachmentKind,
+  BoardRequestKind,
   BoardRequestStatus,
   BoardStage,
   Prisma,
+  UserStatus,
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { BOARD_ADMIN_ROLE_CODE } from '../access/access.constants';
+import { ORG_UNIT_KIND_CODES } from '../organization/organization.constants';
 import {
+  findNearestViceUnitId,
+  organizationUnitSubtreeIds,
+} from '../organization/organization-unit-tree';
+import {
+  AUTO_MANAGEMENT_COMMENT,
+  BOARD_DEPUTY_POSITION_CODE,
   BOARD_LEADERSHIP_POSITION_CODES,
+  BOARD_REQUEST_POSITION_CODES,
+  BOARD_SECRETARY_POSITION_CODE,
   MAX_BOARD_ATTACHMENTS,
-  boardReviewStages,
+  boardPermissionStages,
   nextStatusAfterApprove,
+  referredAtDataForStatus,
   stageForStatus,
 } from './board.constants';
 import {
@@ -56,6 +70,7 @@ const requestInclude = {
   legalBy: { select: personSelect },
   budgetBy: { select: personSelect },
   secretaryBy: { select: personSelect },
+  ceoBy: { select: personSelect },
   rejectedBy: { select: personSelect },
   attachments: {
     orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
@@ -71,11 +86,26 @@ type Actor = {
   id: string;
   isAdmin: boolean;
   isBoardAdmin: boolean;
+  status: UserStatus;
   orgUnitId: string | null;
   positionId: string | null;
   positionCode: string | null;
   positionName: string | null;
 };
+
+function boardRequestSearchOr(q: string): Prisma.BoardRequestWhereInput[] {
+  const latin = toLatinDigits(q).trim();
+  const tracking = latin.replace(/[\s.\\-]+/g, '/');
+  const trackingTerms = [...new Set([q.trim(), latin, tracking].filter(Boolean))];
+  return [
+    ...trackingTerms.map((term) => ({ trackingNo: containsInsensitive(term) })),
+    { subject: containsInsensitive(q) },
+    { orgPositionText: containsInsensitive(q) },
+    { justification: containsInsensitive(q) },
+    { unit: { name: containsInsensitive(q) } },
+    { createdBy: { fullName: containsInsensitive(q) } },
+  ];
+}
 
 @Injectable()
 export class BoardService {
@@ -91,6 +121,7 @@ export class BoardService {
       [BoardStage.LEGAL]: await this.canActOnStage(actor, BoardStage.LEGAL),
       [BoardStage.BUDGET]: await this.canActOnStage(actor, BoardStage.BUDGET),
       [BoardStage.SECRETARY]: await this.canActOnStage(actor, BoardStage.SECRETARY),
+      [BoardStage.CEO]: await this.canActOnStage(actor, BoardStage.CEO),
     };
     return {
       canAccess: true,
@@ -99,6 +130,7 @@ export class BoardService {
       canEditPermissions: actor.isAdmin,
       canChangeStage: actor.isAdmin,
       canManageMinutes: actor.isAdmin || actor.isBoardAdmin,
+      canDeleteRequests: this.canDeleteRequests(actor),
       orgUnitId: actor.orgUnitId,
       positionName: actor.positionName,
       stages,
@@ -123,7 +155,7 @@ export class BoardService {
       }
       seen.add(row.stage);
     }
-    for (const stage of boardReviewStages) {
+    for (const stage of boardPermissionStages) {
       if (!seen.has(stage)) {
         throw new BadRequestException('مجوز همهٔ مراحل بررسی را ارسال کنید');
       }
@@ -148,10 +180,10 @@ export class BoardService {
     }
     await this.prisma.$transaction(async (tx) => {
       await tx.boardStageUnit.deleteMany({
-        where: { stage: { in: [...boardReviewStages] } },
+        where: { stage: { in: [...boardPermissionStages, BoardStage.MANAGEMENT] } },
       });
       await tx.boardStagePosition.deleteMany({
-        where: { stage: { in: [...boardReviewStages] } },
+        where: { stage: { in: [...boardPermissionStages, BoardStage.MANAGEMENT] } },
       });
       for (const row of dto.stages) {
         if (row.unitIds.length) {
@@ -181,17 +213,13 @@ export class BoardService {
   async findPlans(query: FindBoardRequestsQueryDto, userId: string) {
     const actor = await this.requireActor(userId);
     this.assertBoardAccess(actor);
-    const seeAll = await this.canSeeAllRequests(actor);
-    return this.findMany(query, seeAll ? {} : { createdById: actor.id });
+    return this.findMany(query, await this.viewerWhere(actor));
   }
 
   async stats(userId: string) {
     const actor = await this.requireActor(userId);
     this.assertBoardAccess(actor);
-    const seeAll = await this.canSeeAllRequests(actor);
-    const where: Prisma.BoardRequestWhereInput = seeAll
-      ? {}
-      : { createdById: actor.id };
+    const where = await this.viewerWhere(actor);
     const grouped = await this.prisma.boardRequest.groupBy({
       by: ['status'],
       where,
@@ -207,6 +235,7 @@ export class BoardService {
       pendingLegal: counts.PENDING_LEGAL ?? 0,
       pendingBudget: counts.PENDING_BUDGET ?? 0,
       pendingSecretary: counts.PENDING_SECRETARY ?? 0,
+      pendingCeo: counts.PENDING_CEO ?? 0,
       approved: counts.APPROVED ?? 0,
       rejected: counts.REJECTED ?? 0,
     };
@@ -223,7 +252,13 @@ export class BoardService {
       throw new NotFoundException('درخواست یافت نشد');
     }
     await this.assertCanView(actor, item);
-    return this.serialize(item);
+    const stage = stageForStatus(item.status);
+    return {
+      ...this.serialize(item),
+      canReview: stage
+        ? await this.canActOnStage(actor, stage, item.unitId)
+        : false,
+    };
   }
 
   async create(dto: CreateBoardRequestDto, userId: string) {
@@ -231,25 +266,45 @@ export class BoardService {
     this.assertBoardAccess(actor);
     const unitId = this.resolveRequestUnit(actor, dto.unitId);
     await this.assertUnitExists(unitId);
-    const orgPositionText = this.resolveRequestPosition(actor, dto.orgPositionText);
+    const position = await this.resolveRequestPosition(actor, dto.orgPositionText);
     const attachments = await this.buildAttachments(
       BoardStage.REQUEST,
       dto.imageIds,
       dto.fileIds,
     );
-    const created = await this.prisma.boardRequest.create({
-      data: {
-        requestedAt: parseIsoDate(dto.requestedAt),
-        unitId,
-        orgPositionText,
-        subject: dto.subject,
-        justification: dto.justification ?? null,
-        topicHistory: dto.topicHistory ?? null,
-        description: dto.description ?? null,
-        createdById: actor.id,
-        attachments: attachments.length ? { create: attachments } : undefined,
-      },
-      include: requestInclude,
+    const kind = this.resolveRequestKind(actor, dto.kind);
+    const requestedAt = parseIsoDate(dto.requestedAt);
+    const trackingYear = this.jalaliYearFromIso(dto.requestedAt);
+    const autoManage =
+      kind === BoardRequestKind.NORMAL &&
+      position.code === BOARD_DEPUTY_POSITION_CODE;
+    const status =
+      kind === BoardRequestKind.MANAGEMENT
+        ? BoardRequestStatus.PENDING_CEO
+        : autoManage
+          ? BoardRequestStatus.PENDING_LEGAL
+          : BoardRequestStatus.PENDING_REVIEW;
+    const created = await this.createWithTracking({
+      kind,
+      status,
+      requestedAt,
+      trackingYear,
+      unitId,
+      orgPositionText: position.name,
+      subject: dto.subject,
+      justification: dto.justification ?? null,
+      topicHistory: dto.topicHistory ?? null,
+      description: dto.description ?? null,
+      createdById: actor.id,
+      attachments,
+      ...referredAtDataForStatus(status, new Date()),
+      ...(autoManage
+        ? {
+            managementComment: AUTO_MANAGEMENT_COMMENT,
+            managementAt: requestedAt,
+            managementById: actor.id,
+          }
+        : {}),
     });
     return this.serialize(created);
   }
@@ -261,7 +316,12 @@ export class BoardService {
     if (!current) {
       throw new NotFoundException('درخواست یافت نشد');
     }
-    if (current.status !== BoardRequestStatus.PENDING_REVIEW) {
+    const canEdit =
+      current.status === BoardRequestStatus.PENDING_REVIEW ||
+      (current.kind === BoardRequestKind.MANAGEMENT &&
+        current.status === BoardRequestStatus.PENDING_CEO &&
+        !current.ceoAt);
+    if (!canEdit) {
       throw new ConflictException('پس از تأیید اولیه امکان ویرایش وجود ندارد');
     }
     if (current.createdById !== actor.id && !actor.isAdmin) {
@@ -272,7 +332,7 @@ export class BoardService {
     if (unitId) await this.assertUnitExists(unitId);
     const orgPositionText =
       dto.orgPositionText !== undefined
-        ? this.resolveRequestPosition(actor, dto.orgPositionText)
+        ? (await this.resolveRequestPosition(actor, dto.orgPositionText)).name
         : undefined;
     const extra = await this.buildAttachments(
       BoardStage.REQUEST,
@@ -306,6 +366,31 @@ export class BoardService {
     return this.serialize(updated);
   }
 
+  async remove(id: string, userId: string) {
+    const actor = await this.requireActor(userId);
+    this.assertBoardAccess(actor);
+    if (!this.canDeleteRequests(actor)) {
+      throw new ForbiddenException(
+        'فقط مدیریت و مدیر ماژول هیئت مدیره می‌توانند درخواست را حذف کنند',
+      );
+    }
+    const current = await this.prisma.boardRequest.findUnique({
+      where: { id },
+      select: { id: true, createdById: true },
+    });
+    if (!current) {
+      throw new NotFoundException('درخواست یافت نشد');
+    }
+    await this.assertCanView(actor, current);
+    await this.prisma.$transaction(async (tx) => {
+      await tx.boardMinutes.updateMany({
+        where: { requestId: id },
+        data: { requestId: null },
+      });
+      await tx.boardRequest.delete({ where: { id } });
+    });
+  }
+
   async review(id: string, dto: ReviewBoardRequestDto, userId: string) {
     const actor = await this.requireActor(userId);
     this.assertBoardAccess(actor);
@@ -317,7 +402,7 @@ export class BoardService {
     if (!stage) {
       throw new ConflictException('این پرونده در مرحلهٔ بررسی نیست');
     }
-    if (!(await this.canActOnStage(actor, stage))) {
+    if (!(await this.canActOnStage(actor, stage, current.unitId))) {
       throw new ForbiddenException('برای این مرحله مجوز ندارید');
     }
     const extra = await this.buildAttachments(stage, dto.imageIds, dto.fileIds);
@@ -347,7 +432,7 @@ export class BoardService {
       return this.serialize(updated);
     }
     this.assertStageReviewFields(stage, dto);
-    const next = nextStatusAfterApprove(current.status);
+    const next = nextStatusAfterApprove(current.status, current.kind);
     if (!next) {
       throw new ConflictException('امکان تأیید این مرحله وجود ندارد');
     }
@@ -357,6 +442,7 @@ export class BoardService {
         status: next,
         attachments: extra.length ? { create: extra } : undefined,
         ...this.stageReviewFields(stage, actor.id, occurredAt, dto, true),
+        ...referredAtDataForStatus(next, new Date()),
       },
       include: requestInclude,
     });
@@ -368,10 +454,29 @@ export class BoardService {
     if (!actor.isAdmin) {
       throw new ForbiddenException('فقط مدیر سامانه می‌تواند مرحله را عوض کند');
     }
-    await this.findOne(id, userId);
+    const currentSerialized = await this.findOne(id, userId);
+    const referred = referredAtDataForStatus(dto.status, new Date());
     const updated = await this.prisma.boardRequest.update({
       where: { id },
-      data: { status: dto.status },
+      data: {
+        status: dto.status,
+        legalReferredAt:
+          referred.legalReferredAt && !currentSerialized.legalReferredAt
+            ? referred.legalReferredAt
+            : undefined,
+        budgetReferredAt:
+          referred.budgetReferredAt && !currentSerialized.budgetReferredAt
+            ? referred.budgetReferredAt
+            : undefined,
+        secretaryReferredAt:
+          referred.secretaryReferredAt && !currentSerialized.secretaryReferredAt
+            ? referred.secretaryReferredAt
+            : undefined,
+        ceoReferredAt:
+          referred.ceoReferredAt && !currentSerialized.ceoReferredAt
+            ? referred.ceoReferredAt
+            : undefined,
+      },
       include: requestInclude,
     });
     return this.serialize(updated);
@@ -381,24 +486,30 @@ export class BoardService {
     query: FindBoardRequestsQueryDto,
     extraWhere: Prisma.BoardRequestWhereInput,
   ) {
+    const rangeStart =
+      query.from && query.to && query.from > query.to ? query.to : query.from;
+    const rangeEnd =
+      query.from && query.to && query.from > query.to ? query.from : query.to;
     const where: Prisma.BoardRequestWhereInput = {
       ...extraWhere,
       status: query.status,
+      kind: query.kind,
       unitId: query.unitId,
-      OR: query.q
-        ? [
-            { subject: containsInsensitive(query.q) },
-            { orgPositionText: containsInsensitive(query.q) },
-            { justification: containsInsensitive(query.q) },
-            { unit: { name: containsInsensitive(query.q) } },
-            { createdBy: { fullName: containsInsensitive(query.q) } },
-          ]
-        : undefined,
+      ...(rangeStart || rangeEnd
+        ? {
+            requestedAt: {
+              ...(rangeStart ? { gte: parseIsoDate(rangeStart) } : {}),
+              ...(rangeEnd ? { lte: parseIsoDate(rangeEnd) } : {}),
+            },
+          }
+        : {}),
+      OR: query.q ? boardRequestSearchOr(query.q) : undefined,
     };
     const orderBy = resolveSortOrder<Prisma.BoardRequestOrderByWithRelationInput>(
       query.sortBy,
       query.sortDir,
       {
+        trackingNo: (dir) => ({ trackingYear: dir, trackingSeq: dir }),
         requestedAt: (dir) => ({ requestedAt: dir }),
         subject: (dir) => ({ subject: dir }),
         status: (dir) => ({ status: dir }),
@@ -446,7 +557,7 @@ export class BoardService {
         orderBy: { createdAt: 'asc' },
       }),
     ]);
-    return boardReviewStages.map((stage) => ({
+    return boardPermissionStages.map((stage) => ({
       stage,
       units: units.filter((row) => row.stage === stage).map((row) => row.unit),
       positions: positions
@@ -460,6 +571,7 @@ export class BoardService {
       where: { id: userId },
       select: {
         id: true,
+        status: true,
         orgUnitId: true,
         positionId: true,
         position: { select: { id: true, code: true, name: true } },
@@ -473,6 +585,7 @@ export class BoardService {
       id: user.id,
       isAdmin: user.userRoles.some((row) => row.role.code === 'ADMIN'),
       isBoardAdmin: user.userRoles.some((row) => row.role.code === BOARD_ADMIN_ROLE_CODE),
+      status: user.status,
       orgUnitId: user.orgUnitId,
       positionId: user.positionId,
       positionCode: user.position?.code ?? null,
@@ -494,7 +607,25 @@ export class BoardService {
   }
 
   private canPickUnit(actor: Actor) {
+    return (
+      actor.isAdmin ||
+      actor.isBoardAdmin ||
+      actor.positionCode === BOARD_SECRETARY_POSITION_CODE
+    );
+  }
+
+  private canDeleteRequests(actor: Actor) {
     return actor.isAdmin || actor.isBoardAdmin;
+  }
+
+  private resolveRequestKind(actor: Actor, kind?: BoardRequestKind) {
+    if (kind === BoardRequestKind.MANAGEMENT) {
+      if (!this.canPickUnit(actor)) {
+        throw new ForbiddenException('فقط مدیریت می‌تواند درخواست مدیریتی ثبت کند');
+      }
+      return BoardRequestKind.MANAGEMENT;
+    }
+    return BoardRequestKind.NORMAL;
   }
 
   private resolveRequestUnit(actor: Actor, unitId?: string) {
@@ -514,19 +645,36 @@ export class BoardService {
     return actor.orgUnitId;
   }
 
-  private resolveRequestPosition(actor: Actor, text?: string) {
+  private async resolveRequestPosition(actor: Actor, text?: string) {
     if (this.canPickUnit(actor)) {
       const value = text?.trim() ?? '';
       if (value.length < 2) {
         throw new BadRequestException('سمت سازمانی را انتخاب کنید');
       }
-      return value;
+      const position = await this.prisma.organizationPosition.findFirst({
+        where: {
+          name: value,
+          code: { in: [...BOARD_REQUEST_POSITION_CODES] },
+        },
+        select: { name: true, code: true },
+      });
+      if (!position?.code) {
+        throw new BadRequestException(
+          'سمت را از میان مدیر، معاون، رئیس یا سرپرست انتخاب کنید',
+        );
+      }
+      return { name: position.name, code: position.code };
     }
-    const own = actor.positionName?.trim() ?? '';
-    if (own.length < 2) {
-      throw new BadRequestException('سمت سازمانی شما مشخص نیست');
+    const name = actor.positionName?.trim() ?? '';
+    const code = actor.positionCode;
+    if (
+      !code ||
+      !(BOARD_REQUEST_POSITION_CODES as readonly string[]).includes(code) ||
+      name.length < 2
+    ) {
+      throw new BadRequestException('سمت سازمانی شما برای ثبت درخواست معتبر نیست');
     }
-    return own;
+    return { name, code };
   }
 
   private async assertUnitExists(id: string) {
@@ -545,14 +693,73 @@ export class BoardService {
     const count = await this.prisma.boardStageUnit.count({
       where: {
         unitId: actor.orgUnitId,
-        stage: { in: [...boardReviewStages] },
+        stage: { in: [...boardPermissionStages] },
       },
     });
     return count > 0;
   }
 
-  private async canActOnStage(actor: Actor, stage: BoardStage) {
+  private async deputySubtreeUnitIds(actor: Actor) {
+    if (
+      actor.status !== UserStatus.ACTIVE ||
+      actor.positionCode !== BOARD_DEPUTY_POSITION_CODE ||
+      !actor.orgUnitId
+    ) {
+      return [];
+    }
+    const unit = await this.prisma.organizationUnit.findUnique({
+      where: { id: actor.orgUnitId },
+      select: { id: true, kind: { select: { code: true } } },
+    });
+    if (unit?.kind.code !== ORG_UNIT_KIND_CODES.VICE) return [];
+    const catalog = await this.prisma.organizationUnit.findMany({
+      select: { id: true, parentId: true },
+    });
+    return organizationUnitSubtreeIds(catalog, unit.id);
+  }
+
+  private async viewerWhere(actor: Actor): Promise<Prisma.BoardRequestWhereInput> {
+    if (await this.canSeeAllRequests(actor)) return {};
+    const subtree = await this.deputySubtreeUnitIds(actor);
+    if (!subtree.length) return { createdById: actor.id };
+    return {
+      OR: [{ createdById: actor.id }, { unitId: { in: subtree } }],
+    };
+  }
+
+  private async loadUnitTree() {
+    const units = await this.prisma.organizationUnit.findMany({
+      select: { id: true, parentId: true, kind: { select: { code: true } } },
+    });
+    return units.map((unit) => ({
+      id: unit.id,
+      parentId: unit.parentId,
+      kindCode: unit.kind.code,
+    }));
+  }
+
+  private async canActOnStage(
+    actor: Actor,
+    stage: BoardStage,
+    requestUnitId?: string,
+  ) {
     if (actor.isAdmin) return true;
+    if (stage === BoardStage.MANAGEMENT) {
+      if (actor.isBoardAdmin) return true;
+      if (actor.status !== UserStatus.ACTIVE) return false;
+      if (actor.positionCode !== BOARD_DEPUTY_POSITION_CODE || !actor.orgUnitId) {
+        return false;
+      }
+      if (!requestUnitId) {
+        const unit = await this.prisma.organizationUnit.findUnique({
+          where: { id: actor.orgUnitId },
+          select: { kind: { select: { code: true } } },
+        });
+        return unit?.kind.code === ORG_UNIT_KIND_CODES.VICE;
+      }
+      const viceId = findNearestViceUnitId(await this.loadUnitTree(), requestUnitId);
+      return viceId === actor.orgUnitId;
+    }
     if (!actor.orgUnitId || !actor.positionId) return false;
     const [unitOk, positionOk] = await Promise.all([
       this.prisma.boardStageUnit.count({
@@ -567,10 +774,14 @@ export class BoardService {
 
   private async assertCanView(
     actor: Actor,
-    item: { createdById: string },
+    item: { createdById: string; unitId?: string },
   ) {
     if (actor.isAdmin || actor.isBoardAdmin || item.createdById === actor.id) return;
     if (await this.canSeeAllRequests(actor)) return;
+    if (item.unitId) {
+      const subtree = await this.deputySubtreeUnitIds(actor);
+      if (subtree.includes(item.unitId)) return;
+    }
     throw new ForbiddenException('دسترسی به این درخواست ندارید');
   }
 
@@ -671,11 +882,101 @@ export class BoardService {
           : dto.budgetCurrentYearFunding ?? undefined,
       };
     }
+    if (stage === BoardStage.SECRETARY) {
+      return {
+        secretaryComment: comment,
+        secretaryAt: occurredAt,
+        secretaryBy: { connect: { id: userId } },
+      };
+    }
     return {
-      secretaryComment: comment,
-      secretaryAt: occurredAt,
-      secretaryBy: { connect: { id: userId } },
+      ceoComment: comment,
+      ceoAt: occurredAt,
+      ceoBy: { connect: { id: userId } },
     };
+  }
+
+  private jalaliYearFromIso(iso: string) {
+    const [year, month, day] = iso.split('-').map(Number);
+    if (!year || !month || !day) {
+      throw new BadRequestException('تاریخ درخواست معتبر نیست');
+    }
+    return gregorianToJalali(year, month, day).year;
+  }
+
+  private async createWithTracking(data: {
+    kind: BoardRequestKind;
+    status: BoardRequestStatus;
+    requestedAt: Date;
+    trackingYear: number;
+    unitId: string;
+    orgPositionText: string;
+    subject: string;
+    justification: string | null;
+    topicHistory: string | null;
+    description: string | null;
+    createdById: string;
+    attachments: Awaited<ReturnType<BoardService['buildAttachments']>>;
+    managementComment?: string;
+    managementAt?: Date;
+    managementById?: string;
+    legalReferredAt?: Date;
+    budgetReferredAt?: Date;
+    secretaryReferredAt?: Date;
+    ceoReferredAt?: Date;
+  }) {
+    let lastError: unknown;
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      try {
+        return await this.prisma.$transaction(async (tx) => {
+          const last = await tx.boardRequest.findFirst({
+            where: { trackingYear: data.trackingYear },
+            orderBy: { trackingSeq: 'desc' },
+            select: { trackingSeq: true },
+          });
+          const trackingSeq = (last?.trackingSeq ?? 0) + 1;
+          return tx.boardRequest.create({
+            data: {
+              kind: data.kind,
+              status: data.status,
+              requestedAt: data.requestedAt,
+              trackingYear: data.trackingYear,
+              trackingSeq,
+              trackingNo: `${data.trackingYear}/${trackingSeq}`,
+              unitId: data.unitId,
+              orgPositionText: data.orgPositionText,
+              subject: data.subject,
+              justification: data.justification,
+              topicHistory: data.topicHistory,
+              description: data.description,
+              createdById: data.createdById,
+              managementComment: data.managementComment,
+              managementAt: data.managementAt,
+              managementById: data.managementById,
+              legalReferredAt: data.legalReferredAt,
+              budgetReferredAt: data.budgetReferredAt,
+              secretaryReferredAt: data.secretaryReferredAt,
+              ceoReferredAt: data.ceoReferredAt,
+              attachments: data.attachments.length
+                ? { create: data.attachments }
+                : undefined,
+            },
+            include: requestInclude,
+          });
+        });
+      } catch (error) {
+        lastError = error;
+        if (
+          error instanceof Prisma.PrismaClientKnownRequestError &&
+          error.code === 'P2002' &&
+          attempt < 4
+        ) {
+          continue;
+        }
+        throw error;
+      }
+    }
+    throw lastError;
   }
 
   private serialize(
@@ -685,9 +986,14 @@ export class BoardService {
       ...item,
       requestedAt: toIsoDateOnly(item.requestedAt),
       managementAt: toIsoDateOnly(item.managementAt),
+      legalReferredAt: item.legalReferredAt?.toISOString() ?? null,
       legalAt: toIsoDateOnly(item.legalAt),
+      budgetReferredAt: item.budgetReferredAt?.toISOString() ?? null,
       budgetAt: toIsoDateOnly(item.budgetAt),
+      secretaryReferredAt: item.secretaryReferredAt?.toISOString() ?? null,
       secretaryAt: toIsoDateOnly(item.secretaryAt),
+      ceoReferredAt: item.ceoReferredAt?.toISOString() ?? null,
+      ceoAt: toIsoDateOnly(item.ceoAt),
       rejectedAt: toIsoDateOnly(item.rejectedAt),
       createdAt: item.createdAt.toISOString(),
       updatedAt: item.updatedAt.toISOString(),

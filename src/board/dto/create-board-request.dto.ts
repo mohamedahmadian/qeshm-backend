@@ -12,7 +12,7 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { emptyToNull, emptyToUndefined } from '../../common/dto-transform';
-import { MAX_BOARD_ATTACHMENTS } from '../board.constants';
+import { MAX_BOARD_ATTACHMENTS, boardRequestKinds } from '../board.constants';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -21,6 +21,11 @@ function trimString(value: unknown) {
 }
 
 export class CreateBoardRequestDto {
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...boardRequestKinds])
+  kind?: (typeof boardRequestKinds)[number];
+
   @Transform(({ value }) => trimString(value))
   @Matches(isoDate)
   requestedAt: string;
