@@ -17,6 +17,22 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
+    code: 'board',
+    kind: 'MODULE',
+    nameKey: 'modules.board',
+    children: [
+      { code: 'board.search', kind: 'MENU', nameKey: 'menus.boardSmartSearch' },
+      { code: 'board.minutes', kind: 'MENU', nameKey: 'menus.boardMinutes' },
+      { code: 'board.resolutions', kind: 'MENU', nameKey: 'menus.boardResolutions' },
+      { code: 'board.reports', kind: 'MENU', nameKey: 'menus.boardReports' },
+      { code: 'board.calendar', kind: 'MENU', nameKey: 'menus.boardCalendar' },
+      { code: 'board.requests', kind: 'MENU', nameKey: 'menus.boardRequests' },
+      { code: 'board.plans', kind: 'MENU', nameKey: 'menus.boardPlans' },
+      { code: 'board.signatories', kind: 'MENU', nameKey: 'menus.boardSignatories' },
+      { code: 'board.permissions', kind: 'MENU', nameKey: 'menus.boardPermissions' },
+    ],
+  },
+  {
     code: 'singard',
     kind: 'MODULE',
     nameKey: 'modules.singard',
@@ -226,22 +242,6 @@ export const PERMISSION_TREE: PermissionNode[] = [
     children: [
       { code: 'management.users', kind: 'MENU', nameKey: 'menus.users' },
       { code: 'management.roles', kind: 'MENU', nameKey: 'menus.roles' },
-    ],
-  },
-  {
-    code: 'board',
-    kind: 'MODULE',
-    nameKey: 'modules.board',
-    children: [
-      { code: 'board.search', kind: 'MENU', nameKey: 'menus.boardSmartSearch' },
-      { code: 'board.minutes', kind: 'MENU', nameKey: 'menus.boardMinutes' },
-      { code: 'board.resolutions', kind: 'MENU', nameKey: 'menus.boardResolutions' },
-      { code: 'board.reports', kind: 'MENU', nameKey: 'menus.boardReports' },
-      { code: 'board.calendar', kind: 'MENU', nameKey: 'menus.boardCalendar' },
-      { code: 'board.requests', kind: 'MENU', nameKey: 'menus.boardRequests' },
-      { code: 'board.plans', kind: 'MENU', nameKey: 'menus.boardPlans' },
-      { code: 'board.signatories', kind: 'MENU', nameKey: 'menus.boardSignatories' },
-      { code: 'board.permissions', kind: 'MENU', nameKey: 'menus.boardPermissions' },
     ],
   },
 ];

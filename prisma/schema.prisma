@@ -1282,36 +1282,36 @@ model BoardRequest {
   createdById              String
   createdBy                User               @relation("BoardRequestAuthor", fields: [createdById], references: [id], onDelete: Restrict)
   managementComment        String?
-  managementAt             DateTime?          @db.Date
+  managementAt             DateTime?
   managementById           String?
   managementBy             User?              @relation("BoardManagementReviewer", fields: [managementById], references: [id], onDelete: SetNull)
   legalReferredAt          DateTime?
   legalOrgMatch            Boolean?
   legalRegulationsMatch    Boolean?
   legalComment             String?
-  legalAt                  DateTime?          @db.Date
+  legalAt                  DateTime?
   legalById                String?
   legalBy                  User?              @relation("BoardLegalReviewer", fields: [legalById], references: [id], onDelete: SetNull)
   budgetReferredAt         DateTime?
   budgetProgramHistory     Boolean?
   budgetCurrentYearFunding Boolean?
   budgetComment            String?
-  budgetAt                 DateTime?          @db.Date
+  budgetAt                 DateTime?
   budgetById               String?
   budgetBy                 User?              @relation("BoardBudgetReviewer", fields: [budgetById], references: [id], onDelete: SetNull)
   secretaryReferredAt      DateTime?
   secretaryComment         String?
-  secretaryAt              DateTime?          @db.Date
+  secretaryAt              DateTime?
   secretaryById            String?
   secretaryBy              User?              @relation("BoardSecretaryReviewer", fields: [secretaryById], references: [id], onDelete: SetNull)
   ceoReferredAt            DateTime?
   ceoComment               String?
-  ceoAt                    DateTime?          @db.Date
+  ceoAt                    DateTime?
   ceoById                  String?
   ceoBy                    User?              @relation("BoardCeoReviewer", fields: [ceoById], references: [id], onDelete: SetNull)
   rejectedStage            BoardStage?
   rejectedComment          String?
-  rejectedAt               DateTime?          @db.Date
+  rejectedAt               DateTime?
   rejectedById             String?
   rejectedBy               User?              @relation("BoardRequestRejecter", fields: [rejectedById], references: [id], onDelete: SetNull)
   attachments              BoardAttachment[]

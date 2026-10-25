@@ -6,7 +6,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { parseIsoDate, toIsoDateOnly } from '../common/iso-date';
+import { parseIsoDate, parseIsoDateAtNow, toIsoDateOnly } from '../common/iso-date';
 import { gregorianToJalali } from '../common/jalali-date';
 import { toLatinDigits } from '../common/national-id';
 import {
@@ -127,7 +127,7 @@ export class BoardService {
       canAccess: true,
       canPickUnit: this.canPickUnit(actor),
       canSeeAll,
-      canEditPermissions: actor.isAdmin,
+      canEditPermissions: actor.isAdmin || actor.isBoardAdmin,
       canChangeStage: actor.isAdmin,
       canManageMinutes: actor.isAdmin || actor.isBoardAdmin,
       canDeleteRequests: this.canDeleteRequests(actor),
@@ -137,17 +137,29 @@ export class BoardService {
     };
   }
 
-  async getPermissions(userId: string) {
+  async assertCanAccessBoard(userId: string) {
     const actor = await this.requireActor(userId);
     this.assertBoardAccess(actor);
+    return actor;
+  }
+
+  async assertCanManageBoardSettings(userId: string) {
+    const actor = await this.requireActor(userId);
+    if (!actor.isAdmin && !actor.isBoardAdmin) {
+      throw new ForbiddenException(
+        'فقط مدیریت و مدیر ماژول هیئت مدیره به این بخش دسترسی دارند',
+      );
+    }
+    return actor;
+  }
+
+  async getPermissions(userId: string) {
+    await this.assertCanManageBoardSettings(userId);
     return this.loadPermissions();
   }
 
   async updatePermissions(userId: string, dto: UpdateBoardPermissionsDto) {
-    const actor = await this.requireActor(userId);
-    if (!actor.isAdmin) {
-      throw new ForbiddenException('فقط مدیر سامانه می‌تواند مجوزها را ویرایش کند');
-    }
+    await this.assertCanManageBoardSettings(userId);
     const seen = new Set<BoardStage>();
     for (const row of dto.stages) {
       if (seen.has(row.stage)) {
@@ -172,10 +184,15 @@ export class BoardService {
     }
     if (positionIds.length) {
       const count = await this.prisma.organizationPosition.count({
-        where: { id: { in: positionIds } },
+        where: {
+          id: { in: positionIds },
+          code: { in: [...BOARD_LEADERSHIP_POSITION_CODES] },
+        },
       });
       if (count !== positionIds.length) {
-        throw new BadRequestException('یکی از سمت‌های انتخاب‌شده معتبر نیست');
+        throw new BadRequestException(
+          'فقط سمت‌هایی که به ماژول هیئت مدیره دسترسی دارند معتبرند',
+        );
       }
     }
     await this.prisma.$transaction(async (tx) => {
@@ -258,6 +275,7 @@ export class BoardService {
       canReview: stage
         ? await this.canActOnStage(actor, stage, item.unitId)
         : false,
+      stageResponsibles: await this.loadStageResponsibles(item),
     };
   }
 
@@ -301,7 +319,7 @@ export class BoardService {
       ...(autoManage
         ? {
             managementComment: AUTO_MANAGEMENT_COMMENT,
-            managementAt: requestedAt,
+            managementAt: new Date(),
             managementById: actor.id,
           }
         : {}),
@@ -414,7 +432,7 @@ export class BoardService {
         throw new BadRequestException('تعداد پیوست‌ها بیش از حد مجاز است');
       }
     }
-    const occurredAt = parseIsoDate(dto.occurredAt);
+    const occurredAt = parseIsoDateAtNow(dto.occurredAt);
     if (dto.decision === 'REJECT') {
       const updated = await this.prisma.boardRequest.update({
         where: { id },
@@ -546,6 +564,130 @@ export class BoardService {
     );
   }
 
+  private formatStageResponsibleTitle(
+    positions: { name: string }[],
+    units: { name: string }[],
+  ) {
+    const titles = [...new Set(positions.map((row) => row.name).filter(Boolean))];
+    const unitNames = [...new Set(units.map((row) => row.name).filter(Boolean))];
+    if (!titles.length) return null;
+    if (!unitNames.length) return titles.join('، ');
+    return `${titles.join('، ')} — ${unitNames.join('، ')}`;
+  }
+
+  private async loadStageResponsibles(item: {
+    kind: BoardRequestKind;
+    unitId: string;
+    orgPositionText: string;
+    createdBy: { id: string; fullName: string; username: string };
+  }) {
+    const pipeline =
+      item.kind === BoardRequestKind.MANAGEMENT
+        ? [BoardStage.REQUEST, BoardStage.CEO]
+        : [
+            BoardStage.REQUEST,
+            BoardStage.MANAGEMENT,
+            ...boardPermissionStages,
+          ];
+    const needsPermissions = pipeline.some((stage) =>
+      (boardPermissionStages as readonly BoardStage[]).includes(stage),
+    );
+    const needsManagement = pipeline.includes(BoardStage.MANAGEMENT);
+    const [permissions, tree, deputy] = await Promise.all([
+      needsPermissions ? this.loadPermissions() : Promise.resolve([]),
+      needsManagement ? this.loadUnitTree() : Promise.resolve([]),
+      needsManagement
+        ? this.prisma.organizationPosition.findFirst({
+            where: { code: BOARD_DEPUTY_POSITION_CODE },
+            select: { id: true, name: true },
+          })
+        : Promise.resolve(null),
+    ]);
+    const rows: {
+      stage: BoardStage;
+      title: string;
+      people: { id: string; fullName: string; username: string }[];
+    }[] = [];
+
+    if (pipeline.includes(BoardStage.REQUEST) && item.orgPositionText.trim()) {
+      rows.push({
+        stage: BoardStage.REQUEST,
+        title: item.orgPositionText,
+        people: [item.createdBy],
+      });
+    }
+
+    if (needsManagement && deputy) {
+      const viceId = findNearestViceUnitId(tree, item.unitId);
+      const [vice, people] = viceId
+        ? await Promise.all([
+            this.prisma.organizationUnit.findUnique({
+              where: { id: viceId },
+              select: unitSelect,
+            }),
+            this.prisma.user.findMany({
+              where: {
+                status: UserStatus.ACTIVE,
+                positionId: deputy.id,
+                orgUnitId: viceId,
+              },
+              select: personSelect,
+              orderBy: { fullName: 'asc' },
+            }),
+          ])
+        : [null, []];
+      const title = this.formatStageResponsibleTitle(
+        [deputy],
+        vice ? [vice] : [],
+      );
+      if (title) {
+        rows.push({
+          stage: BoardStage.MANAGEMENT,
+          title,
+          people,
+        });
+      }
+    }
+
+    const permissionRows = permissions.filter(
+      (row) => pipeline.includes(row.stage) && row.positions.length > 0,
+    );
+    if (permissionRows.length) {
+      const positionIds = [
+        ...new Set(permissionRows.flatMap((row) => row.positions.map((position) => position.id))),
+      ];
+      const users = await this.prisma.user.findMany({
+        where: {
+          status: UserStatus.ACTIVE,
+          positionId: { in: positionIds },
+        },
+        select: { ...personSelect, positionId: true, orgUnitId: true },
+        orderBy: { fullName: 'asc' },
+      });
+      for (const row of permissionRows) {
+        const title = this.formatStageResponsibleTitle(row.positions, row.units);
+        if (!title) continue;
+        const positionIdSet = new Set(row.positions.map((entry) => entry.id));
+        const unitIdSet = new Set(row.units.map((entry) => entry.id));
+        rows.push({
+          stage: row.stage,
+          title,
+          people: users
+            .filter(
+              (user) =>
+                Boolean(user.positionId) &&
+                positionIdSet.has(user.positionId ?? '') &&
+                (unitIdSet.size === 0 ||
+                  Boolean(user.orgUnitId && unitIdSet.has(user.orgUnitId))),
+            )
+            .map(({ id, fullName, username }) => ({ id, fullName, username })),
+        });
+      }
+    }
+
+    return rows;
+  }
+
   private async loadPermissions() {
     const [units, positions] = await Promise.all([
       this.prisma.boardStageUnit.findMany({
@@ -561,7 +703,13 @@ export class BoardService {
       stage,
       units: units.filter((row) => row.stage === stage).map((row) => row.unit),
       positions: positions
-        .filter((row) => row.stage === stage)
+        .filter(
+          (row) =>
+            row.stage === stage &&
+            (BOARD_LEADERSHIP_POSITION_CODES as readonly string[]).includes(
+              row.position.code ?? '',
+            ),
+        )
         .map((row) => row.position),
     }));
   }
@@ -620,8 +768,10 @@ export class BoardService {
 
   private resolveRequestKind(actor: Actor, kind?: BoardRequestKind) {
     if (kind === BoardRequestKind.MANAGEMENT) {
-      if (!this.canPickUnit(actor)) {
-        throw new ForbiddenException('فقط مدیریت می‌تواند درخواست مدیریتی ثبت کند');
+      if (!actor.isAdmin && !actor.isBoardAdmin) {
+        throw new ForbiddenException(
+          'فقط مدیریت و مدیر ماژول هیئت مدیره می‌توانند درخواست مدیریتی ثبت کنند',
+        );
       }
       return BoardRequestKind.MANAGEMENT;
     }
@@ -985,16 +1135,16 @@ export class BoardService {
     return {
       ...item,
       requestedAt: toIsoDateOnly(item.requestedAt),
-      managementAt: toIsoDateOnly(item.managementAt),
+      managementAt: item.managementAt?.toISOString() ?? null,
       legalReferredAt: item.legalReferredAt?.toISOString() ?? null,
-      legalAt: toIsoDateOnly(item.legalAt),
+      legalAt: item.legalAt?.toISOString() ?? null,
       budgetReferredAt: item.budgetReferredAt?.toISOString() ?? null,
-      budgetAt: toIsoDateOnly(item.budgetAt),
+      budgetAt: item.budgetAt?.toISOString() ?? null,
       secretaryReferredAt: item.secretaryReferredAt?.toISOString() ?? null,
-      secretaryAt: toIsoDateOnly(item.secretaryAt),
+      secretaryAt: item.secretaryAt?.toISOString() ?? null,
       ceoReferredAt: item.ceoReferredAt?.toISOString() ?? null,
-      ceoAt: toIsoDateOnly(item.ceoAt),
-      rejectedAt: toIsoDateOnly(item.rejectedAt),
+      ceoAt: item.ceoAt?.toISOString() ?? null,
+      rejectedAt: item.rejectedAt?.toISOString() ?? null,
       createdAt: item.createdAt.toISOString(),
       updatedAt: item.updatedAt.toISOString(),
       attachments: item.attachments.map((row) => ({

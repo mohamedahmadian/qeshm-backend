@@ -2,6 +2,23 @@ export function parseIsoDate(value: string) {
   return new Date(`${value}T00:00:00.000Z`);
 }
 
+/** تاریخ انتخاب‌شده + ساعت فعلی تهران؛ اگر همان امروز باشد همان لحظهٔ حالا */
+export function parseIsoDateAtNow(value: string) {
+  const now = new Date();
+  if (value === todayIsoDateTehran()) return now;
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Tehran',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  }).formatToParts(now);
+  const hour = parts.find((part) => part.type === 'hour')?.value ?? '00';
+  const minute = parts.find((part) => part.type === 'minute')?.value ?? '00';
+  const second = parts.find((part) => part.type === 'second')?.value ?? '00';
+  return new Date(`${value}T${hour}:${minute}:${second}+03:30`);
+}
+
 export function todayIsoDateTehran() {
   return new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Asia/Tehran',
