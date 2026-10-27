@@ -114,6 +114,7 @@ export const ModelName = {
   BoardMinutesResolution: 'BoardMinutesResolution',
   BoardMinutesResolutionUnit: 'BoardMinutesResolutionUnit',
   BoardResolutionSignatory: 'BoardResolutionSignatory',
+  BoardResolutionProgressReport: 'BoardResolutionProgressReport',
   PortSalesReport: 'PortSalesReport',
   PortTicketSale: 'PortTicketSale',
   PortTicketWeeklyQuota: 'PortTicketWeeklyQuota',
@@ -1211,6 +1212,21 @@ export const BoardResolutionSignatoryScalarFieldEnum = {
 } as const
 
 export type BoardResolutionSignatoryScalarFieldEnum = (typeof BoardResolutionSignatoryScalarFieldEnum)[keyof typeof BoardResolutionSignatoryScalarFieldEnum]
+
+
+export const BoardResolutionProgressReportScalarFieldEnum = {
+  id: 'id',
+  resolutionId: 'resolutionId',
+  reportedAt: 'reportedAt',
+  title: 'title',
+  category: 'category',
+  body: 'body',
+  progressAmount: 'progressAmount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardResolutionProgressReportScalarFieldEnum = (typeof BoardResolutionProgressReportScalarFieldEnum)[keyof typeof BoardResolutionProgressReportScalarFieldEnum]
 
 
 export const PortSalesReportScalarFieldEnum = {

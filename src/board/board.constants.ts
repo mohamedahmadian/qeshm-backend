@@ -67,6 +67,9 @@ export const MAX_BOARD_MINUTES_MEMBERS = 80;
 export const MAX_BOARD_MINUTES_SMS_LENGTH = 700;
 export const MAX_BOARD_RESOLUTION_SIGNATORIES = 40;
 export const MAX_BOARD_RESOLUTION_UNITS = 40;
+export const MAX_BOARD_RESOLUTION_SMS_LENGTH = 700;
+export const MAX_BOARD_RESOLUTION_PROGRESS_REPORTS = 200;
+export const MAX_BOARD_RESOLUTION_PROGRESS_AMOUNT = 100;
 
 export const boardResolutionDueKinds = ['DATE', 'ASAP'] as const;
 export const boardResolutionProposerKinds = ['TEXT', 'UNIT'] as const;

@@ -1679,6 +1679,7 @@ model BoardMinutesResolution {
   proposerUnit    OrganizationUnit?           @relation("BoardResolutionProposer", fields: [proposerUnitId], references: [id], onDelete: SetNull)
   notes           String?
   signatories     BoardResolutionSignatory[]
+  progressReports BoardResolutionProgressReport[]
   createdAt       DateTime                    @default(now())
   updatedAt       DateTime                    @updatedAt
 
@@ -1724,6 +1725,24 @@ model BoardResolutionSignatory {
   @@index([sourceSignatoryId])
   @@index([signatureImageId])
   @@map("board_resolution_signatories")
+}
+
+model BoardResolutionProgressReport {
+  id             String                 @id @default(uuid())
+  resolutionId   String
+  resolution     BoardMinutesResolution @relation(fields: [resolutionId], references: [id], onDelete: Cascade)
+  reportedAt     DateTime               @db.Date
+  title          String
+  category       String?
+  body           String?
+  progressAmount Int                    @default(0)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+
+  @@index([resolutionId, reportedAt])
+  @@index([resolutionId, createdAt])
+  @@index([title])
+  @@map("board_resolution_progress_reports")
 }
 
 model PortSalesReport {

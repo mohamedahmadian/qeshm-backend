@@ -266,6 +266,7 @@ export type BoardMinutesResolutionWhereInput = {
   executors?: Prisma.BoardMinutesResolutionUnitListRelationFilter
   proposerUnit?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
   signatories?: Prisma.BoardResolutionSignatoryListRelationFilter
+  progressReports?: Prisma.BoardResolutionProgressReportListRelationFilter
 }
 
 export type BoardMinutesResolutionOrderByWithRelationInput = {
@@ -288,6 +289,7 @@ export type BoardMinutesResolutionOrderByWithRelationInput = {
   executors?: Prisma.BoardMinutesResolutionUnitOrderByRelationAggregateInput
   proposerUnit?: Prisma.OrganizationUnitOrderByWithRelationInput
   signatories?: Prisma.BoardResolutionSignatoryOrderByRelationAggregateInput
+  progressReports?: Prisma.BoardResolutionProgressReportOrderByRelationAggregateInput
 }
 
 export type BoardMinutesResolutionWhereUniqueInput = Prisma.AtLeast<{
@@ -313,6 +315,7 @@ export type BoardMinutesResolutionWhereUniqueInput = Prisma.AtLeast<{
   executors?: Prisma.BoardMinutesResolutionUnitListRelationFilter
   proposerUnit?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
   signatories?: Prisma.BoardResolutionSignatoryListRelationFilter
+  progressReports?: Prisma.BoardResolutionProgressReportListRelationFilter
 }, "id">
 
 export type BoardMinutesResolutionOrderByWithAggregationInput = {
@@ -375,6 +378,7 @@ export type BoardMinutesResolutionCreateInput = {
   executors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutResolutionInput
   proposerUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutBoardResolutionProposersInput
   signatories?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionUncheckedCreateInput = {
@@ -395,6 +399,7 @@ export type BoardMinutesResolutionUncheckedCreateInput = {
   updatedAt?: Date | string
   executors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutResolutionInput
   signatories?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionUpdateInput = {
@@ -415,6 +420,7 @@ export type BoardMinutesResolutionUpdateInput = {
   executors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutResolutionNestedInput
   proposerUnit?: Prisma.OrganizationUnitUpdateOneWithoutBoardResolutionProposersNestedInput
   signatories?: Prisma.BoardResolutionSignatoryUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionUncheckedUpdateInput = {
@@ -435,6 +441,7 @@ export type BoardMinutesResolutionUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   executors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutResolutionNestedInput
   signatories?: Prisma.BoardResolutionSignatoryUncheckedUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionCreateManyInput = {
@@ -682,6 +689,20 @@ export type BoardMinutesResolutionUpdateOneRequiredWithoutSignatoriesNestedInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BoardMinutesResolutionUpdateToOneWithWhereWithoutSignatoriesInput, Prisma.BoardMinutesResolutionUpdateWithoutSignatoriesInput>, Prisma.BoardMinutesResolutionUncheckedUpdateWithoutSignatoriesInput>
 }
 
+export type BoardMinutesResolutionCreateNestedOneWithoutProgressReportsInput = {
+  create?: Prisma.XOR<Prisma.BoardMinutesResolutionCreateWithoutProgressReportsInput, Prisma.BoardMinutesResolutionUncheckedCreateWithoutProgressReportsInput>
+  connectOrCreate?: Prisma.BoardMinutesResolutionCreateOrConnectWithoutProgressReportsInput
+  connect?: Prisma.BoardMinutesResolutionWhereUniqueInput
+}
+
+export type BoardMinutesResolutionUpdateOneRequiredWithoutProgressReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardMinutesResolutionCreateWithoutProgressReportsInput, Prisma.BoardMinutesResolutionUncheckedCreateWithoutProgressReportsInput>
+  connectOrCreate?: Prisma.BoardMinutesResolutionCreateOrConnectWithoutProgressReportsInput
+  upsert?: Prisma.BoardMinutesResolutionUpsertWithoutProgressReportsInput
+  connect?: Prisma.BoardMinutesResolutionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardMinutesResolutionUpdateToOneWithWhereWithoutProgressReportsInput, Prisma.BoardMinutesResolutionUpdateWithoutProgressReportsInput>, Prisma.BoardMinutesResolutionUncheckedUpdateWithoutProgressReportsInput>
+}
+
 export type BoardMinutesResolutionCreateWithoutProposerUnitInput = {
   id?: string
   title: string
@@ -699,6 +720,7 @@ export type BoardMinutesResolutionCreateWithoutProposerUnitInput = {
   minutes: Prisma.BoardMinutesCreateNestedOneWithoutResolutionsInput
   executors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutResolutionInput
   signatories?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionUncheckedCreateWithoutProposerUnitInput = {
@@ -718,6 +740,7 @@ export type BoardMinutesResolutionUncheckedCreateWithoutProposerUnitInput = {
   updatedAt?: Date | string
   executors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutResolutionInput
   signatories?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionCreateOrConnectWithoutProposerUnitInput = {
@@ -784,6 +807,7 @@ export type BoardMinutesResolutionCreateWithoutMinutesInput = {
   executors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutResolutionInput
   proposerUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutBoardResolutionProposersInput
   signatories?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionUncheckedCreateWithoutMinutesInput = {
@@ -803,6 +827,7 @@ export type BoardMinutesResolutionUncheckedCreateWithoutMinutesInput = {
   updatedAt?: Date | string
   executors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutResolutionInput
   signatories?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionCreateOrConnectWithoutMinutesInput = {
@@ -848,6 +873,7 @@ export type BoardMinutesResolutionCreateWithoutExecutorsInput = {
   minutes: Prisma.BoardMinutesCreateNestedOneWithoutResolutionsInput
   proposerUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutBoardResolutionProposersInput
   signatories?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionUncheckedCreateWithoutExecutorsInput = {
@@ -867,6 +893,7 @@ export type BoardMinutesResolutionUncheckedCreateWithoutExecutorsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   signatories?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionCreateOrConnectWithoutExecutorsInput = {
@@ -902,6 +929,7 @@ export type BoardMinutesResolutionUpdateWithoutExecutorsInput = {
   minutes?: Prisma.BoardMinutesUpdateOneRequiredWithoutResolutionsNestedInput
   proposerUnit?: Prisma.OrganizationUnitUpdateOneWithoutBoardResolutionProposersNestedInput
   signatories?: Prisma.BoardResolutionSignatoryUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionUncheckedUpdateWithoutExecutorsInput = {
@@ -921,6 +949,7 @@ export type BoardMinutesResolutionUncheckedUpdateWithoutExecutorsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   signatories?: Prisma.BoardResolutionSignatoryUncheckedUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionCreateWithoutSignatoriesInput = {
@@ -940,6 +969,7 @@ export type BoardMinutesResolutionCreateWithoutSignatoriesInput = {
   minutes: Prisma.BoardMinutesCreateNestedOneWithoutResolutionsInput
   executors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutResolutionInput
   proposerUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutBoardResolutionProposersInput
+  progressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionUncheckedCreateWithoutSignatoriesInput = {
@@ -959,6 +989,7 @@ export type BoardMinutesResolutionUncheckedCreateWithoutSignatoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   executors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutResolutionInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutResolutionInput
 }
 
 export type BoardMinutesResolutionCreateOrConnectWithoutSignatoriesInput = {
@@ -994,6 +1025,7 @@ export type BoardMinutesResolutionUpdateWithoutSignatoriesInput = {
   minutes?: Prisma.BoardMinutesUpdateOneRequiredWithoutResolutionsNestedInput
   executors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutResolutionNestedInput
   proposerUnit?: Prisma.OrganizationUnitUpdateOneWithoutBoardResolutionProposersNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionUncheckedUpdateWithoutSignatoriesInput = {
@@ -1013,6 +1045,103 @@ export type BoardMinutesResolutionUncheckedUpdateWithoutSignatoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   executors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutResolutionNestedInput
+}
+
+export type BoardMinutesResolutionCreateWithoutProgressReportsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  status?: $Enums.BoardResolutionStatus
+  dueKind?: $Enums.BoardResolutionDueKind
+  dueDate?: Date | string | null
+  hasTopicHistory?: boolean
+  legalBasis?: string | null
+  proposerKind?: $Enums.BoardResolutionProposerKind
+  proposerText?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  minutes: Prisma.BoardMinutesCreateNestedOneWithoutResolutionsInput
+  executors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutResolutionInput
+  proposerUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutBoardResolutionProposersInput
+  signatories?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutResolutionInput
+}
+
+export type BoardMinutesResolutionUncheckedCreateWithoutProgressReportsInput = {
+  id?: string
+  minutesId: string
+  title: string
+  description?: string | null
+  status?: $Enums.BoardResolutionStatus
+  dueKind?: $Enums.BoardResolutionDueKind
+  dueDate?: Date | string | null
+  hasTopicHistory?: boolean
+  legalBasis?: string | null
+  proposerKind?: $Enums.BoardResolutionProposerKind
+  proposerText?: string | null
+  proposerUnitId?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  executors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutResolutionInput
+  signatories?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutResolutionInput
+}
+
+export type BoardMinutesResolutionCreateOrConnectWithoutProgressReportsInput = {
+  where: Prisma.BoardMinutesResolutionWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardMinutesResolutionCreateWithoutProgressReportsInput, Prisma.BoardMinutesResolutionUncheckedCreateWithoutProgressReportsInput>
+}
+
+export type BoardMinutesResolutionUpsertWithoutProgressReportsInput = {
+  update: Prisma.XOR<Prisma.BoardMinutesResolutionUpdateWithoutProgressReportsInput, Prisma.BoardMinutesResolutionUncheckedUpdateWithoutProgressReportsInput>
+  create: Prisma.XOR<Prisma.BoardMinutesResolutionCreateWithoutProgressReportsInput, Prisma.BoardMinutesResolutionUncheckedCreateWithoutProgressReportsInput>
+  where?: Prisma.BoardMinutesResolutionWhereInput
+}
+
+export type BoardMinutesResolutionUpdateToOneWithWhereWithoutProgressReportsInput = {
+  where?: Prisma.BoardMinutesResolutionWhereInput
+  data: Prisma.XOR<Prisma.BoardMinutesResolutionUpdateWithoutProgressReportsInput, Prisma.BoardMinutesResolutionUncheckedUpdateWithoutProgressReportsInput>
+}
+
+export type BoardMinutesResolutionUpdateWithoutProgressReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumBoardResolutionStatusFieldUpdateOperationsInput | $Enums.BoardResolutionStatus
+  dueKind?: Prisma.EnumBoardResolutionDueKindFieldUpdateOperationsInput | $Enums.BoardResolutionDueKind
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasTopicHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proposerKind?: Prisma.EnumBoardResolutionProposerKindFieldUpdateOperationsInput | $Enums.BoardResolutionProposerKind
+  proposerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  minutes?: Prisma.BoardMinutesUpdateOneRequiredWithoutResolutionsNestedInput
+  executors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutResolutionNestedInput
+  proposerUnit?: Prisma.OrganizationUnitUpdateOneWithoutBoardResolutionProposersNestedInput
+  signatories?: Prisma.BoardResolutionSignatoryUpdateManyWithoutResolutionNestedInput
+}
+
+export type BoardMinutesResolutionUncheckedUpdateWithoutProgressReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumBoardResolutionStatusFieldUpdateOperationsInput | $Enums.BoardResolutionStatus
+  dueKind?: Prisma.EnumBoardResolutionDueKindFieldUpdateOperationsInput | $Enums.BoardResolutionDueKind
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasTopicHistory?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  legalBasis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proposerKind?: Prisma.EnumBoardResolutionProposerKindFieldUpdateOperationsInput | $Enums.BoardResolutionProposerKind
+  proposerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  proposerUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  executors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutResolutionNestedInput
+  signatories?: Prisma.BoardResolutionSignatoryUncheckedUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionCreateManyProposerUnitInput = {
@@ -1049,6 +1178,7 @@ export type BoardMinutesResolutionUpdateWithoutProposerUnitInput = {
   minutes?: Prisma.BoardMinutesUpdateOneRequiredWithoutResolutionsNestedInput
   executors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutResolutionNestedInput
   signatories?: Prisma.BoardResolutionSignatoryUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionUncheckedUpdateWithoutProposerUnitInput = {
@@ -1068,6 +1198,7 @@ export type BoardMinutesResolutionUncheckedUpdateWithoutProposerUnitInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   executors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutResolutionNestedInput
   signatories?: Prisma.BoardResolutionSignatoryUncheckedUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitInput = {
@@ -1121,6 +1252,7 @@ export type BoardMinutesResolutionUpdateWithoutMinutesInput = {
   executors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutResolutionNestedInput
   proposerUnit?: Prisma.OrganizationUnitUpdateOneWithoutBoardResolutionProposersNestedInput
   signatories?: Prisma.BoardResolutionSignatoryUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionUncheckedUpdateWithoutMinutesInput = {
@@ -1140,6 +1272,7 @@ export type BoardMinutesResolutionUncheckedUpdateWithoutMinutesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   executors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutResolutionNestedInput
   signatories?: Prisma.BoardResolutionSignatoryUncheckedUpdateManyWithoutResolutionNestedInput
+  progressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutResolutionNestedInput
 }
 
 export type BoardMinutesResolutionUncheckedUpdateManyWithoutMinutesInput = {
@@ -1167,11 +1300,13 @@ export type BoardMinutesResolutionUncheckedUpdateManyWithoutMinutesInput = {
 export type BoardMinutesResolutionCountOutputType = {
   executors: number
   signatories: number
+  progressReports: number
 }
 
 export type BoardMinutesResolutionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   executors?: boolean | BoardMinutesResolutionCountOutputTypeCountExecutorsArgs
   signatories?: boolean | BoardMinutesResolutionCountOutputTypeCountSignatoriesArgs
+  progressReports?: boolean | BoardMinutesResolutionCountOutputTypeCountProgressReportsArgs
 }
 
 /**
@@ -1198,6 +1333,13 @@ export type BoardMinutesResolutionCountOutputTypeCountSignatoriesArgs<ExtArgs ex
   where?: Prisma.BoardResolutionSignatoryWhereInput
 }
 
+/**
+ * BoardMinutesResolutionCountOutputType without action
+ */
+export type BoardMinutesResolutionCountOutputTypeCountProgressReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardResolutionProgressReportWhereInput
+}
+
 
 export type BoardMinutesResolutionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1219,6 +1361,7 @@ export type BoardMinutesResolutionSelect<ExtArgs extends runtime.Types.Extension
   executors?: boolean | Prisma.BoardMinutesResolution$executorsArgs<ExtArgs>
   proposerUnit?: boolean | Prisma.BoardMinutesResolution$proposerUnitArgs<ExtArgs>
   signatories?: boolean | Prisma.BoardMinutesResolution$signatoriesArgs<ExtArgs>
+  progressReports?: boolean | Prisma.BoardMinutesResolution$progressReportsArgs<ExtArgs>
   _count?: boolean | Prisma.BoardMinutesResolutionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boardMinutesResolution"]>
 
@@ -1286,6 +1429,7 @@ export type BoardMinutesResolutionInclude<ExtArgs extends runtime.Types.Extensio
   executors?: boolean | Prisma.BoardMinutesResolution$executorsArgs<ExtArgs>
   proposerUnit?: boolean | Prisma.BoardMinutesResolution$proposerUnitArgs<ExtArgs>
   signatories?: boolean | Prisma.BoardMinutesResolution$signatoriesArgs<ExtArgs>
+  progressReports?: boolean | Prisma.BoardMinutesResolution$progressReportsArgs<ExtArgs>
   _count?: boolean | Prisma.BoardMinutesResolutionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BoardMinutesResolutionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1304,6 +1448,7 @@ export type $BoardMinutesResolutionPayload<ExtArgs extends runtime.Types.Extensi
     executors: Prisma.$BoardMinutesResolutionUnitPayload<ExtArgs>[]
     proposerUnit: Prisma.$OrganizationUnitPayload<ExtArgs> | null
     signatories: Prisma.$BoardResolutionSignatoryPayload<ExtArgs>[]
+    progressReports: Prisma.$BoardResolutionProgressReportPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1719,6 +1864,7 @@ export interface Prisma__BoardMinutesResolutionClient<T, Null = never, ExtArgs e
   executors<T extends Prisma.BoardMinutesResolution$executorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutesResolution$executorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesResolutionUnitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   proposerUnit<T extends Prisma.BoardMinutesResolution$proposerUnitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutesResolution$proposerUnitArgs<ExtArgs>>): Prisma.Prisma__OrganizationUnitClient<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   signatories<T extends Prisma.BoardMinutesResolution$signatoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutesResolution$signatoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardResolutionSignatoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  progressReports<T extends Prisma.BoardMinutesResolution$progressReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutesResolution$progressReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardResolutionProgressReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2228,6 +2374,30 @@ export type BoardMinutesResolution$signatoriesArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.BoardResolutionSignatoryScalarFieldEnum | Prisma.BoardResolutionSignatoryScalarFieldEnum[]
+}
+
+/**
+ * BoardMinutesResolution.progressReports
+ */
+export type BoardMinutesResolution$progressReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardResolutionProgressReport
+   */
+  select?: Prisma.BoardResolutionProgressReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardResolutionProgressReport
+   */
+  omit?: Prisma.BoardResolutionProgressReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardResolutionProgressReportInclude<ExtArgs> | null
+  where?: Prisma.BoardResolutionProgressReportWhereInput
+  orderBy?: Prisma.BoardResolutionProgressReportOrderByWithRelationInput | Prisma.BoardResolutionProgressReportOrderByWithRelationInput[]
+  cursor?: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardResolutionProgressReportScalarFieldEnum | Prisma.BoardResolutionProgressReportScalarFieldEnum[]
 }
 
 /**

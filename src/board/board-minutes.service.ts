@@ -32,11 +32,15 @@ import {
   MAX_BOARD_ATTACHMENTS,
   MAX_BOARD_MINUTES_MEMBERS,
   MAX_BOARD_MINUTES_REQUESTS,
+  MAX_BOARD_RESOLUTION_PROGRESS_REPORTS,
   MAX_BOARD_RESOLUTION_UNITS,
   boardMinutesStatuses,
   boardResolutionStatuses,
 } from './board.constants';
+import { CreateBoardResolutionProgressDto } from './dto/create-board-resolution-progress.dto';
 import { SendBoardMinutesSmsDto } from './dto/send-board-minutes-sms.dto';
+import { SendBoardResolutionSmsDto } from './dto/send-board-resolution-sms.dto';
+import { UpdateBoardResolutionProgressDto } from './dto/update-board-resolution-progress.dto';
 import {
   BoardMinutesMemberDto,
   CreateBoardMinutesDto,
@@ -73,6 +77,7 @@ const memberUserSelect = {
 const unitSelect = {
   id: true,
   name: true,
+  phone: true,
 } satisfies Prisma.OrganizationUnitSelect;
 
 const requestSummarySelect = {
@@ -593,6 +598,72 @@ export class BoardMinutesService {
     };
   }
 
+  async sendResolutionSms(
+    minutesId: string,
+    resolutionId: string,
+    dto: SendBoardResolutionSmsDto,
+    userId: string,
+  ) {
+    await this.requireMinutesActor(userId);
+    const item = await this.loadResolution(minutesId, resolutionId);
+    if (!item.executors.length) {
+      throw new BadRequestException('این مصوبه مجری ندارد');
+    }
+
+    const allowed = new Set(item.executors.map((row) => row.unitId));
+    let selected = item.executors;
+    if (dto.unitIds) {
+      if (dto.unitIds.some((unitId) => !allowed.has(unitId))) {
+        throw new BadRequestException('مجری انتخاب‌شده در این مصوبه نیست');
+      }
+      selected = item.executors.filter((row) => dto.unitIds!.includes(row.unitId));
+      if (!selected.length) {
+        throw new BadRequestException('هیچ مجری انتخاب نشده است');
+      }
+    }
+
+    const overrides = new Map<string, string>();
+    for (const row of dto.phones ?? []) {
+      if (!allowed.has(row.unitId)) {
+        throw new BadRequestException('مجری انتخاب‌شده در این مصوبه نیست');
+      }
+      overrides.set(row.unitId, row.phone);
+    }
+
+    const unique = new Map<string, { name: string; phone: string }>();
+    for (const row of selected) {
+      if (unique.has(row.unitId)) continue;
+      unique.set(row.unitId, {
+        name: row.unit.name,
+        phone: row.unit.phone?.trim() || overrides.get(row.unitId) || '',
+      });
+    }
+    const recipients = [...unique.values()];
+    const withPhone = recipients.filter((row) => row.phone);
+    const withoutPhone = recipients.filter((row) => !row.phone);
+    if (!withPhone.length) {
+      throw new BadRequestException('هیچ‌یک از مجریان شماره همراه ندارند');
+    }
+
+    let providerSkipped = false;
+    let providerMessage: string | undefined;
+    for (const row of withPhone) {
+      const result = await this.sms.send({ phone: row.phone, body: dto.body });
+      if (result.skipped) {
+        providerSkipped = true;
+        providerMessage = result.message;
+      }
+    }
+
+    return {
+      recipientCount: withPhone.length,
+      skippedNoPhoneCount: withoutPhone.length,
+      skippedNames: withoutPhone.map((row) => row.name),
+      providerSkipped,
+      providerMessage,
+    };
+  }
+
   async findAllResolutions(query: FindBoardResolutionsQueryDto, userId: string) {
     await this.requireMinutesActor(userId);
     return this.listResolutions({ OR: this.resolutionSearch(query.q) }, query, wantsPagination(query)
@@ -616,6 +687,79 @@ export class BoardMinutesService {
   async findResolution(minutesId: string, id: string, userId: string) {
     await this.requireMinutesActor(userId);
     return this.serializeResolution(await this.loadResolution(minutesId, id));
+  }
+
+  async findProgressReports(minutesId: string, resolutionId: string, userId: string) {
+    await this.requireMinutesActor(userId);
+    await this.loadResolution(minutesId, resolutionId);
+    const items = await this.prisma.boardResolutionProgressReport.findMany({
+      where: { resolutionId },
+      orderBy: [{ reportedAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
+    });
+    return {
+      items: items.map((row) => this.serializeProgressReport(row)),
+      totalProgress: items.reduce((sum, row) => sum + row.progressAmount, 0),
+    };
+  }
+
+  async createProgressReport(
+    minutesId: string,
+    resolutionId: string,
+    dto: CreateBoardResolutionProgressDto,
+    userId: string,
+  ) {
+    await this.requireMinutesActor(userId);
+    await this.loadResolution(minutesId, resolutionId);
+    const count = await this.prisma.boardResolutionProgressReport.count({
+      where: { resolutionId },
+    });
+    if (count >= MAX_BOARD_RESOLUTION_PROGRESS_REPORTS) {
+      throw new BadRequestException('تعداد گزارش‌های پیشرفت این مصوبه به سقف رسیده است');
+    }
+    const created = await this.prisma.boardResolutionProgressReport.create({
+      data: {
+        resolutionId,
+        reportedAt: parseIsoDate(dto.reportedAt),
+        title: dto.title,
+        category: dto.category ?? null,
+        body: dto.body ?? null,
+        progressAmount: dto.progressAmount,
+      },
+    });
+    return this.serializeProgressReport(created);
+  }
+
+  async updateProgressReport(
+    minutesId: string,
+    resolutionId: string,
+    reportId: string,
+    dto: UpdateBoardResolutionProgressDto,
+    userId: string,
+  ) {
+    await this.requireMinutesActor(userId);
+    await this.loadProgressReport(minutesId, resolutionId, reportId);
+    const updated = await this.prisma.boardResolutionProgressReport.update({
+      where: { id: reportId },
+      data: {
+        reportedAt: dto.reportedAt ? parseIsoDate(dto.reportedAt) : undefined,
+        title: dto.title,
+        category: dto.category === undefined ? undefined : dto.category,
+        body: dto.body === undefined ? undefined : dto.body,
+        progressAmount: dto.progressAmount,
+      },
+    });
+    return this.serializeProgressReport(updated);
+  }
+
+  async removeProgressReport(
+    minutesId: string,
+    resolutionId: string,
+    reportId: string,
+    userId: string,
+  ) {
+    await this.requireMinutesActor(userId);
+    await this.loadProgressReport(minutesId, resolutionId, reportId);
+    await this.prisma.boardResolutionProgressReport.delete({ where: { id: reportId } });
   }
 
   async createResolution(minutesId: string, dto: CreateBoardResolutionDto, userId: string) {
@@ -745,6 +889,39 @@ export class BoardMinutesService {
     });
     if (!item) throw new NotFoundException('مصوبه یافت نشد');
     return item;
+  }
+
+  private async loadProgressReport(minutesId: string, resolutionId: string, reportId: string) {
+    await this.loadResolution(minutesId, resolutionId);
+    const item = await this.prisma.boardResolutionProgressReport.findFirst({
+      where: { id: reportId, resolutionId },
+    });
+    if (!item) throw new NotFoundException('گزارش پیشرفت یافت نشد');
+    return item;
+  }
+
+  private serializeProgressReport(row: {
+    id: string;
+    resolutionId: string;
+    reportedAt: Date;
+    title: string;
+    category: string | null;
+    body: string | null;
+    progressAmount: number;
+    createdAt: Date;
+    updatedAt: Date;
+  }) {
+    return {
+      id: row.id,
+      resolutionId: row.resolutionId,
+      reportedAt: toIsoDateOnly(row.reportedAt),
+      title: row.title,
+      category: row.category,
+      body: row.body,
+      progressAmount: row.progressAmount,
+      createdAt: row.createdAt.toISOString(),
+      updatedAt: row.updatedAt.toISOString(),
+    };
   }
 
   private resolveStatus(status?: string | null) {

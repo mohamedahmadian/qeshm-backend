@@ -333,6 +333,11 @@ export type BoardMinutesResolutionUnit = Prisma.BoardMinutesResolutionUnitModel
  */
 export type BoardResolutionSignatory = Prisma.BoardResolutionSignatoryModel
 /**
+ * Model BoardResolutionProgressReport
+ * 
+ */
+export type BoardResolutionProgressReport = Prisma.BoardResolutionProgressReportModel
+/**
  * Model PortSalesReport
  * 
  */

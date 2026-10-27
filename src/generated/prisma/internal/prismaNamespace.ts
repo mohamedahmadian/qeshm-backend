@@ -460,6 +460,7 @@ export const ModelName = {
   BoardMinutesResolution: 'BoardMinutesResolution',
   BoardMinutesResolutionUnit: 'BoardMinutesResolutionUnit',
   BoardResolutionSignatory: 'BoardResolutionSignatory',
+  BoardResolutionProgressReport: 'BoardResolutionProgressReport',
   PortSalesReport: 'PortSalesReport',
   PortTicketSale: 'PortTicketSale',
   PortTicketWeeklyQuota: 'PortTicketWeeklyQuota',
@@ -485,7 +486,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "advancedFoodOrder" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardKind" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "inspectionKind" | "inspectionCategory" | "inspectionFeedback" | "inspectionAttachment" | "inspectionActivity" | "boardRequest" | "boardSignatory" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesRequest" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "boardMinutesResolutionUnit" | "boardResolutionSignatory" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "advancedFoodOrder" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardKind" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "inspectionKind" | "inspectionCategory" | "inspectionFeedback" | "inspectionAttachment" | "inspectionActivity" | "boardRequest" | "boardSignatory" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesRequest" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "boardMinutesResolutionUnit" | "boardResolutionSignatory" | "boardResolutionProgressReport" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5151,6 +5152,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BoardResolutionProgressReport: {
+      payload: Prisma.$BoardResolutionProgressReportPayload<ExtArgs>
+      fields: Prisma.BoardResolutionProgressReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardResolutionProgressReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardResolutionProgressReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardResolutionProgressReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardResolutionProgressReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>
+        }
+        findMany: {
+          args: Prisma.BoardResolutionProgressReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>[]
+        }
+        create: {
+          args: Prisma.BoardResolutionProgressReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>
+        }
+        createMany: {
+          args: Prisma.BoardResolutionProgressReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardResolutionProgressReportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardResolutionProgressReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>
+        }
+        update: {
+          args: Prisma.BoardResolutionProgressReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardResolutionProgressReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardResolutionProgressReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardResolutionProgressReportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardResolutionProgressReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionProgressReportPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardResolutionProgressReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardResolutionProgressReport>
+        }
+        groupBy: {
+          args: Prisma.BoardResolutionProgressReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardResolutionProgressReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardResolutionProgressReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardResolutionProgressReportCountAggregateOutputType> | number
+        }
+      }
+    }
     PortSalesReport: {
       payload: Prisma.$PortSalesReportPayload<ExtArgs>
       fields: Prisma.PortSalesReportFieldRefs
@@ -7001,6 +7076,21 @@ export const BoardResolutionSignatoryScalarFieldEnum = {
 export type BoardResolutionSignatoryScalarFieldEnum = (typeof BoardResolutionSignatoryScalarFieldEnum)[keyof typeof BoardResolutionSignatoryScalarFieldEnum]
 
 
+export const BoardResolutionProgressReportScalarFieldEnum = {
+  id: 'id',
+  resolutionId: 'resolutionId',
+  reportedAt: 'reportedAt',
+  title: 'title',
+  category: 'category',
+  body: 'body',
+  progressAmount: 'progressAmount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardResolutionProgressReportScalarFieldEnum = (typeof BoardResolutionProgressReportScalarFieldEnum)[keyof typeof BoardResolutionProgressReportScalarFieldEnum]
+
+
 export const PortSalesReportScalarFieldEnum = {
   id: 'id',
   reportDate: 'reportDate',
@@ -8169,6 +8259,7 @@ export type GlobalOmitConfig = {
   boardMinutesResolution?: Prisma.BoardMinutesResolutionOmit
   boardMinutesResolutionUnit?: Prisma.BoardMinutesResolutionUnitOmit
   boardResolutionSignatory?: Prisma.BoardResolutionSignatoryOmit
+  boardResolutionProgressReport?: Prisma.BoardResolutionProgressReportOmit
   portSalesReport?: Prisma.PortSalesReportOmit
   portTicketSale?: Prisma.PortTicketSaleOmit
   portTicketWeeklyQuota?: Prisma.PortTicketWeeklyQuotaOmit
