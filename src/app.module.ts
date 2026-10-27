@@ -16,6 +16,7 @@ import { RolesModule } from './roles/roles.module';
 import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
 import { SingardModule } from './singard/singard.module';
+import { InspectionModule } from './inspection/inspection.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { BoardModule } from './board/board.module';
 import { PortSalesReportsModule } from './port-sales-reports/port-sales-reports.module';
@@ -39,6 +40,7 @@ import { CooperativeModule } from './cooperative/cooperative.module';
     OrganizationModule,
     VehiclesModule,
     SingardModule,
+    InspectionModule,
     BoardModule,
     PortSalesReportsModule,
     StakeholdersModule,

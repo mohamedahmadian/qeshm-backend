@@ -15,6 +15,7 @@ import { CreateBoardMinutesDto } from './dto/create-board-minutes.dto';
 import { CreateBoardResolutionDto } from './dto/create-board-resolution.dto';
 import { FindBoardMinutesQueryDto } from './dto/find-board-minutes-query.dto';
 import { FindBoardResolutionsQueryDto } from './dto/find-board-resolutions-query.dto';
+import { SendBoardMinutesSmsDto } from './dto/send-board-minutes-sms.dto';
 import { UpdateBoardMinutesDto } from './dto/update-board-minutes.dto';
 import { UpdateBoardResolutionDto } from './dto/update-board-resolution.dto';
 
@@ -103,6 +104,16 @@ export class BoardMinutesController {
   ) {
     if (!user) throw new UnauthorizedException();
     return this.minutes.removeResolution(id, resolutionId, user.id);
+  }
+
+  @Post(':id/sms')
+  sendSms(
+    @Param('id') id: string,
+    @Body() dto: SendBoardMinutesSmsDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.minutes.sendSms(id, dto, user.id);
   }
 
   @Get(':id')

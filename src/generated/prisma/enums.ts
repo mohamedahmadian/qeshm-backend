@@ -198,16 +198,6 @@ export const AdvancedFoodOrderSource = {
 export type AdvancedFoodOrderSource = (typeof AdvancedFoodOrderSource)[keyof typeof AdvancedFoodOrderSource]
 
 
-export const SingardFeedbackKind = {
-  SUGGESTION: 'SUGGESTION',
-  COMPLAINT: 'COMPLAINT',
-  CRITICISM: 'CRITICISM',
-  REPORT: 'REPORT'
-} as const
-
-export type SingardFeedbackKind = (typeof SingardFeedbackKind)[keyof typeof SingardFeedbackKind]
-
-
 export const SingardFeedbackStatus = {
   NEW: 'NEW',
   IN_PROGRESS: 'IN_PROGRESS',
@@ -234,6 +224,34 @@ export const SingardActivityKind = {
 } as const
 
 export type SingardActivityKind = (typeof SingardActivityKind)[keyof typeof SingardActivityKind]
+
+
+export const InspectionFeedbackStatus = {
+  NEW: 'NEW',
+  IN_PROGRESS: 'IN_PROGRESS',
+  ANSWERED: 'ANSWERED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type InspectionFeedbackStatus = (typeof InspectionFeedbackStatus)[keyof typeof InspectionFeedbackStatus]
+
+
+export const InspectionAttachmentKind = {
+  IMAGE: 'IMAGE',
+  AUDIO: 'AUDIO',
+  VIDEO: 'VIDEO'
+} as const
+
+export type InspectionAttachmentKind = (typeof InspectionAttachmentKind)[keyof typeof InspectionAttachmentKind]
+
+
+export const InspectionActivityKind = {
+  NOTE: 'NOTE',
+  CONTACT: 'CONTACT',
+  REPLY: 'REPLY'
+} as const
+
+export type InspectionActivityKind = (typeof InspectionActivityKind)[keyof typeof InspectionActivityKind]
 
 
 export const BoardRequestStatus = {
@@ -291,6 +309,39 @@ export const BoardMinutesAttachmentKind = {
 } as const
 
 export type BoardMinutesAttachmentKind = (typeof BoardMinutesAttachmentKind)[keyof typeof BoardMinutesAttachmentKind]
+
+
+export const BoardResolutionDueKind = {
+  DATE: 'DATE',
+  ASAP: 'ASAP'
+} as const
+
+export type BoardResolutionDueKind = (typeof BoardResolutionDueKind)[keyof typeof BoardResolutionDueKind]
+
+
+export const BoardResolutionStatus = {
+  NOT_NOTIFIED: 'NOT_NOTIFIED',
+  NOTIFIED: 'NOTIFIED'
+} as const
+
+export type BoardResolutionStatus = (typeof BoardResolutionStatus)[keyof typeof BoardResolutionStatus]
+
+
+export const BoardResolutionProposerKind = {
+  TEXT: 'TEXT',
+  UNIT: 'UNIT'
+} as const
+
+export type BoardResolutionProposerKind = (typeof BoardResolutionProposerKind)[keyof typeof BoardResolutionProposerKind]
+
+
+export const BoardMinutesStatus = {
+  NOT_HELD: 'NOT_HELD',
+  HELD: 'HELD',
+  NOTIFIED: 'NOTIFIED'
+} as const
+
+export type BoardMinutesStatus = (typeof BoardMinutesStatus)[keyof typeof BoardMinutesStatus]
 
 
 export const StakeholderCorrespondenceKind = {

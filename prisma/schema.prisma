@@ -146,11 +146,13 @@ model StoredImage {
   restaurantLogos         Restaurant[]             @relation("RestaurantLogo")
   progressImages          ProjectProgressImage[]
   singardAttachments      SingardAttachment[]
+  inspectionAttachments    InspectionAttachment[]
   boardAttachments         BoardAttachment[]
   boardMinutesAttachments  BoardMinutesAttachment[]
   stakeholderAttachments   StakeholderAttachment[]
-  boardSignatorySignatures BoardSignatory[]         @relation("BoardSignatorySignature")
-  createdAt                DateTime                 @default(now())
+  boardSignatorySignatures   BoardSignatory[]            @relation("BoardSignatorySignature")
+  boardResolutionSignatures  BoardResolutionSignatory[]  @relation("BoardResolutionSignatorySignature")
+  createdAt                  DateTime                    @default(now())
 
   @@map("stored_images")
 }
@@ -331,6 +333,9 @@ model User {
   singardFeedbacks           SingardFeedback[]           @relation("SingardFeedbackAuthor")
   singardReplies             SingardFeedback[]           @relation("SingardFeedbackReplier")
   singardActivities          SingardActivity[]
+  inspectionFeedbacks        InspectionFeedback[]        @relation("InspectionFeedbackAuthor")
+  inspectionReplies          InspectionFeedback[]        @relation("InspectionFeedbackReplier")
+  inspectionActivities       InspectionActivity[]
   contractorId               String?
   contractor                 ProjectContractor?          @relation("ContractorPortalUsers", fields: [contractorId], references: [id], onDelete: Restrict)
   stakeholderReports         StakeholderProgressReport[]
@@ -606,6 +611,7 @@ model StoredFile {
   createdAt               DateTime                 @default(now())
   progressEntries         ProjectProgressEntry[]
   singardAttachments      SingardAttachment[]
+  inspectionAttachments   InspectionAttachment[]
   boardAttachments        BoardAttachment[]
   boardMinutesAttachments BoardMinutesAttachment[]
   portSalesReports        PortSalesReport[]
@@ -911,10 +917,11 @@ model OrganizationUnit {
   vehicleAssignments      VehicleAssignment[]
   projectOperators        ProjectOperator[]
   projects                Project[]                    @relation("ProjectOrgUnit")
-  boardRequests           BoardRequest[]
-  boardStageUnits         BoardStageUnit[]
-  boardMinutesResolutions BoardMinutesResolution[]
-  createdAt               DateTime                     @default(now())
+  boardRequests            BoardRequest[]
+  boardStageUnits          BoardStageUnit[]
+  boardResolutionExecutors BoardMinutesResolutionUnit[]
+  boardResolutionProposers BoardMinutesResolution[] @relation("BoardResolutionProposer")
+  createdAt                DateTime                     @default(now())
   updatedAt               DateTime                     @updatedAt
 
   @@index([name])
@@ -1118,13 +1125,6 @@ model RolePermission {
   @@map("role_permissions")
 }
 
-enum SingardFeedbackKind {
-  SUGGESTION
-  COMPLAINT
-  CRITICISM
-  REPORT
-}
-
 enum SingardFeedbackStatus {
   NEW
   IN_PROGRESS
@@ -1142,6 +1142,24 @@ enum SingardActivityKind {
   NOTE
   CONTACT
   REPLY
+}
+
+model SingardKind {
+  id          String            @id @default(uuid())
+  title       String
+  description String?
+  icon        String
+  sortOrder   Int               @default(0)
+  isActive    Boolean           @default(true)
+  feedbacks   SingardFeedback[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([sortOrder])
+  @@index([isActive])
+  @@index([title])
+  @@index([createdAt])
+  @@map("singard_kinds")
 }
 
 model SingardCategory {
@@ -1167,7 +1185,8 @@ model SingardCategory {
 model SingardFeedback {
   id           String                @id @default(uuid())
   trackingCode String                @unique
-  kind         SingardFeedbackKind
+  kindId       String
+  kind         SingardKind           @relation(fields: [kindId], references: [id], onDelete: Restrict)
   status       SingardFeedbackStatus @default(NEW)
   categoryId   String
   category     SingardCategory       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
@@ -1190,7 +1209,7 @@ model SingardFeedback {
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 
-  @@index([kind, status])
+  @@index([kindId, status])
   @@index([categoryId])
   @@index([userId])
   @@index([phone])
@@ -1233,6 +1252,135 @@ model SingardActivity {
   @@index([createdById])
   @@index([createdAt])
   @@map("singard_activities")
+}
+
+enum InspectionFeedbackStatus {
+  NEW
+  IN_PROGRESS
+  ANSWERED
+  CLOSED
+}
+
+enum InspectionAttachmentKind {
+  IMAGE
+  AUDIO
+  VIDEO
+}
+
+enum InspectionActivityKind {
+  NOTE
+  CONTACT
+  REPLY
+}
+
+model InspectionKind {
+  id          String                @id @default(uuid())
+  title       String
+  description String?
+  icon        String
+  sortOrder   Int                   @default(0)
+  isActive    Boolean               @default(true)
+  feedbacks   InspectionFeedback[]
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+
+  @@index([sortOrder])
+  @@index([isActive])
+  @@index([title])
+  @@index([createdAt])
+  @@map("inspection_kinds")
+}
+
+model InspectionCategory {
+  id          String                @id @default(uuid())
+  parentId    String?
+  parent      InspectionCategory?   @relation("InspectionCategoryTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children    InspectionCategory[]  @relation("InspectionCategoryTree")
+  name        String
+  description String?
+  sortOrder   Int                   @default(0)
+  isActive    Boolean               @default(true)
+  feedbacks   InspectionFeedback[]
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+
+  @@index([parentId, sortOrder])
+  @@index([isActive])
+  @@index([name])
+  @@index([createdAt])
+  @@map("inspection_categories")
+}
+
+model InspectionFeedback {
+  id           String                    @id @default(uuid())
+  trackingCode String                    @unique
+  kindId       String
+  kind         InspectionKind            @relation(fields: [kindId], references: [id], onDelete: Restrict)
+  status       InspectionFeedbackStatus  @default(NEW)
+  categoryId   String
+  category     InspectionCategory        @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  userId       String?
+  user         User?                     @relation("InspectionFeedbackAuthor", fields: [userId], references: [id], onDelete: SetNull)
+  isAnonymous  Boolean                   @default(true)
+  firstName    String?
+  lastName     String?
+  phone        String?
+  body         String?
+  address      String?
+  latitude     Decimal?                  @db.Decimal(10, 7)
+  longitude    Decimal?                  @db.Decimal(10, 7)
+  replyBody    String?
+  repliedAt    DateTime?
+  repliedById  String?
+  repliedBy    User?                     @relation("InspectionFeedbackReplier", fields: [repliedById], references: [id], onDelete: SetNull)
+  attachments  InspectionAttachment[]
+  activities   InspectionActivity[]
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+
+  @@index([kindId, status])
+  @@index([categoryId])
+  @@index([userId])
+  @@index([phone])
+  @@index([createdAt])
+  @@map("inspection_feedbacks")
+}
+
+model InspectionAttachment {
+  id         String                    @id @default(uuid())
+  feedbackId String
+  feedback   InspectionFeedback        @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
+  kind       InspectionAttachmentKind
+  imageId    String?
+  image      StoredImage?              @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  fileId     String?
+  file       StoredFile?               @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  sortOrder  Int                       @default(0)
+  createdAt  DateTime                  @default(now())
+
+  @@index([feedbackId, sortOrder])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("inspection_attachments")
+}
+
+model InspectionActivity {
+  id          String                  @id @default(uuid())
+  feedbackId  String
+  feedback    InspectionFeedback      @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
+  kind        InspectionActivityKind  @default(NOTE)
+  occurredAt  DateTime                @db.Date
+  title       String
+  body        String?
+  createdById String
+  createdBy   User                    @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+
+  @@index([feedbackId, occurredAt])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("inspection_activities")
 }
 
 enum BoardRequestStatus {
@@ -1315,7 +1463,7 @@ model BoardRequest {
   rejectedById             String?
   rejectedBy               User?              @relation("BoardRequestRejecter", fields: [rejectedById], references: [id], onDelete: SetNull)
   attachments              BoardAttachment[]
-  minutes                  BoardMinutes[]
+  minutesRequests          BoardMinutesRequest[]
   createdAt                DateTime           @default(now())
   updatedAt                DateTime           @updatedAt
 
@@ -1340,6 +1488,7 @@ model BoardSignatory {
   userId           String?     @unique
   user             User?       @relation("BoardSignatoryUser", fields: [userId], references: [id], onDelete: SetNull)
   sortOrder        Int         @default(0)
+  resolutionCopies BoardResolutionSignatory[]
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
 
@@ -1402,10 +1551,33 @@ enum BoardMinutesAttachmentKind {
   AUDIO
 }
 
+enum BoardResolutionDueKind {
+  DATE
+  ASAP
+}
+
+enum BoardResolutionStatus {
+  NOT_NOTIFIED
+  NOTIFIED
+}
+
+enum BoardResolutionProposerKind {
+  TEXT
+  UNIT
+}
+
+enum BoardMinutesStatus {
+  NOT_HELD
+  HELD
+  NOTIFIED
+}
+
 model BoardMinutes {
   id          String                   @id @default(uuid())
-  requestId   String?
-  request     BoardRequest?            @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  minutesNo   String                   @unique
+  minutesYear Int
+  minutesSeq  Int
+  status      BoardMinutesStatus       @default(NOT_HELD)
   heldAt      DateTime                 @db.Date
   subject     String
   body        String?
@@ -1414,15 +1586,30 @@ model BoardMinutes {
   members     BoardMinutesMember[]
   attachments BoardMinutesAttachment[]
   resolutions BoardMinutesResolution[]
+  requests    BoardMinutesRequest[]
   createdAt   DateTime                 @default(now())
   updatedAt   DateTime                 @updatedAt
 
-  @@index([requestId])
+  @@unique([minutesYear, minutesSeq])
+  @@index([status])
+  @@index([minutesNo])
   @@index([heldAt])
   @@index([subject])
   @@index([createdById])
   @@index([createdAt])
   @@map("board_minutes")
+}
+
+model BoardMinutesRequest {
+  minutesId String
+  minutes   BoardMinutes @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  requestId String
+  request   BoardRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  createdAt DateTime     @default(now())
+
+  @@id([minutesId, requestId])
+  @@index([requestId])
+  @@map("board_minutes_requests")
 }
 
 model BoardMinutesMember {
@@ -1460,24 +1647,68 @@ model BoardMinutesAttachment {
 }
 
 model BoardMinutesResolution {
-  id          String            @id @default(uuid())
-  minutesId   String
-  minutes     BoardMinutes      @relation(fields: [minutesId], references: [id], onDelete: Cascade)
-  title       String
-  description String?
-  unitId      String?
-  unit        OrganizationUnit? @relation(fields: [unitId], references: [id], onDelete: SetNull)
-  dueDate     DateTime?         @db.Date
-  notes       String?
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  id              String                      @id @default(uuid())
+  minutesId       String
+  minutes         BoardMinutes                @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  title           String
+  description     String?
+  status          BoardResolutionStatus       @default(NOT_NOTIFIED)
+  executors       BoardMinutesResolutionUnit[]
+  dueKind         BoardResolutionDueKind      @default(DATE)
+  dueDate         DateTime?                   @db.Date
+  hasTopicHistory Boolean                     @default(false)
+  legalBasis      String?
+  proposerKind    BoardResolutionProposerKind @default(TEXT)
+  proposerText    String?
+  proposerUnitId  String?
+  proposerUnit    OrganizationUnit?           @relation("BoardResolutionProposer", fields: [proposerUnitId], references: [id], onDelete: SetNull)
+  notes           String?
+  signatories     BoardResolutionSignatory[]
+  createdAt       DateTime                    @default(now())
+  updatedAt       DateTime                    @updatedAt
 
   @@index([minutesId])
-  @@index([unitId])
+  @@index([status])
+  @@index([dueKind])
   @@index([dueDate])
+  @@index([proposerUnitId])
   @@index([title])
   @@index([createdAt])
   @@map("board_minutes_resolutions")
+}
+
+model BoardMinutesResolutionUnit {
+  resolutionId String
+  resolution   BoardMinutesResolution @relation(fields: [resolutionId], references: [id], onDelete: Cascade)
+  unitId       String
+  unit         OrganizationUnit       @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  createdAt    DateTime               @default(now())
+
+  @@id([resolutionId, unitId])
+  @@index([unitId])
+  @@map("board_resolution_units")
+}
+
+model BoardResolutionSignatory {
+  id               String                 @id @default(uuid())
+  resolutionId     String
+  resolution       BoardMinutesResolution @relation(fields: [resolutionId], references: [id], onDelete: Cascade)
+  sourceSignatoryId String?
+  sourceSignatory  BoardSignatory?        @relation(fields: [sourceSignatoryId], references: [id], onDelete: SetNull)
+  firstName        String
+  lastName         String
+  title            String
+  signatureImageId String
+  signatureImage   StoredImage            @relation("BoardResolutionSignatorySignature", fields: [signatureImageId], references: [id], onDelete: Restrict)
+  signedAt         DateTime?              @db.Date
+  sortOrder        Int                    @default(0)
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  @@index([resolutionId, sortOrder])
+  @@index([sourceSignatoryId])
+  @@index([signatureImageId])
+  @@map("board_resolution_signatories")
 }
 
 model PortSalesReport {

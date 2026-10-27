@@ -369,7 +369,8 @@ export type OrganizationUnitWhereInput = {
   projects?: Prisma.ProjectListRelationFilter
   boardRequests?: Prisma.BoardRequestListRelationFilter
   boardStageUnits?: Prisma.BoardStageUnitListRelationFilter
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionListRelationFilter
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitListRelationFilter
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionListRelationFilter
 }
 
 export type OrganizationUnitOrderByWithRelationInput = {
@@ -407,7 +408,8 @@ export type OrganizationUnitOrderByWithRelationInput = {
   projects?: Prisma.ProjectOrderByRelationAggregateInput
   boardRequests?: Prisma.BoardRequestOrderByRelationAggregateInput
   boardStageUnits?: Prisma.BoardStageUnitOrderByRelationAggregateInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionOrderByRelationAggregateInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitOrderByRelationAggregateInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionOrderByRelationAggregateInput
 }
 
 export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
@@ -448,7 +450,8 @@ export type OrganizationUnitWhereUniqueInput = Prisma.AtLeast<{
   projects?: Prisma.ProjectListRelationFilter
   boardRequests?: Prisma.BoardRequestListRelationFilter
   boardStageUnits?: Prisma.BoardStageUnitListRelationFilter
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionListRelationFilter
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitListRelationFilter
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionListRelationFilter
 }, "id" | "code">
 
 export type OrganizationUnitOrderByWithAggregationInput = {
@@ -539,7 +542,8 @@ export type OrganizationUnitCreateInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateInput = {
@@ -574,7 +578,8 @@ export type OrganizationUnitUncheckedCreateInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUpdateInput = {
@@ -609,7 +614,8 @@ export type OrganizationUnitUpdateInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateInput = {
@@ -644,7 +650,8 @@ export type OrganizationUnitUncheckedUpdateInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateManyInput = {
@@ -1096,20 +1103,34 @@ export type OrganizationUnitUpdateOneRequiredWithoutBoardStageUnitsNestedInput =
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutBoardStageUnitsInput, Prisma.OrganizationUnitUpdateWithoutBoardStageUnitsInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardStageUnitsInput>
 }
 
-export type OrganizationUnitCreateNestedOneWithoutBoardMinutesResolutionsInput = {
-  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput>
-  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutBoardMinutesResolutionsInput
+export type OrganizationUnitCreateNestedOneWithoutBoardResolutionProposersInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardResolutionProposersInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardResolutionProposersInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutBoardResolutionProposersInput
   connect?: Prisma.OrganizationUnitWhereUniqueInput
 }
 
-export type OrganizationUnitUpdateOneWithoutBoardMinutesResolutionsNestedInput = {
-  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput>
-  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutBoardMinutesResolutionsInput
-  upsert?: Prisma.OrganizationUnitUpsertWithoutBoardMinutesResolutionsInput
+export type OrganizationUnitUpdateOneWithoutBoardResolutionProposersNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardResolutionProposersInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardResolutionProposersInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutBoardResolutionProposersInput
+  upsert?: Prisma.OrganizationUnitUpsertWithoutBoardResolutionProposersInput
   disconnect?: Prisma.OrganizationUnitWhereInput | boolean
   delete?: Prisma.OrganizationUnitWhereInput | boolean
   connect?: Prisma.OrganizationUnitWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutBoardResolutionProposersInput, Prisma.OrganizationUnitUpdateWithoutBoardResolutionProposersInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardResolutionProposersInput>
+}
+
+export type OrganizationUnitCreateNestedOneWithoutBoardResolutionExecutorsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardResolutionExecutorsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardResolutionExecutorsInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutBoardResolutionExecutorsInput
+  connect?: Prisma.OrganizationUnitWhereUniqueInput
+}
+
+export type OrganizationUnitUpdateOneRequiredWithoutBoardResolutionExecutorsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardResolutionExecutorsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardResolutionExecutorsInput>
+  connectOrCreate?: Prisma.OrganizationUnitCreateOrConnectWithoutBoardResolutionExecutorsInput
+  upsert?: Prisma.OrganizationUnitUpsertWithoutBoardResolutionExecutorsInput
+  connect?: Prisma.OrganizationUnitWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUnitUpdateToOneWithWhereWithoutBoardResolutionExecutorsInput, Prisma.OrganizationUnitUpdateWithoutBoardResolutionExecutorsInput>, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardResolutionExecutorsInput>
 }
 
 export type OrganizationUnitCreateWithoutEmployeesInput = {
@@ -1143,7 +1164,8 @@ export type OrganizationUnitCreateWithoutEmployeesInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutEmployeesInput = {
@@ -1177,7 +1199,8 @@ export type OrganizationUnitUncheckedCreateWithoutEmployeesInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutEmployeesInput = {
@@ -1216,7 +1239,8 @@ export type OrganizationUnitCreateWithoutNutritionRepInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutNutritionRepInput = {
@@ -1250,7 +1274,8 @@ export type OrganizationUnitUncheckedCreateWithoutNutritionRepInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutNutritionRepInput = {
@@ -1305,7 +1330,8 @@ export type OrganizationUnitUpdateWithoutEmployeesInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutEmployeesInput = {
@@ -1339,7 +1365,8 @@ export type OrganizationUnitUncheckedUpdateWithoutEmployeesInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUpsertWithWhereUniqueWithoutNutritionRepInput = {
@@ -1416,7 +1443,8 @@ export type OrganizationUnitCreateWithoutProjectsInput = {
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutProjectsInput = {
@@ -1450,7 +1478,8 @@ export type OrganizationUnitUncheckedCreateWithoutProjectsInput = {
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutProjectsInput = {
@@ -1500,7 +1529,8 @@ export type OrganizationUnitUpdateWithoutProjectsInput = {
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutProjectsInput = {
@@ -1534,7 +1564,8 @@ export type OrganizationUnitUncheckedUpdateWithoutProjectsInput = {
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateWithoutProjectOperatorsInput = {
@@ -1568,7 +1599,8 @@ export type OrganizationUnitCreateWithoutProjectOperatorsInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutProjectOperatorsInput = {
@@ -1602,7 +1634,8 @@ export type OrganizationUnitUncheckedCreateWithoutProjectOperatorsInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutProjectOperatorsInput = {
@@ -1652,7 +1685,8 @@ export type OrganizationUnitUpdateWithoutProjectOperatorsInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutProjectOperatorsInput = {
@@ -1686,7 +1720,8 @@ export type OrganizationUnitUncheckedUpdateWithoutProjectOperatorsInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateWithoutKindInput = {
@@ -1720,7 +1755,8 @@ export type OrganizationUnitCreateWithoutKindInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutKindInput = {
@@ -1754,7 +1790,8 @@ export type OrganizationUnitUncheckedCreateWithoutKindInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutKindInput = {
@@ -1814,7 +1851,8 @@ export type OrganizationUnitCreateWithoutChildrenInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutChildrenInput = {
@@ -1848,7 +1886,8 @@ export type OrganizationUnitUncheckedCreateWithoutChildrenInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutChildrenInput = {
@@ -1887,7 +1926,8 @@ export type OrganizationUnitCreateWithoutParentInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutParentInput = {
@@ -1921,7 +1961,8 @@ export type OrganizationUnitUncheckedCreateWithoutParentInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutParentInput = {
@@ -1976,7 +2017,8 @@ export type OrganizationUnitUpdateWithoutChildrenInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutChildrenInput = {
@@ -2010,7 +2052,8 @@ export type OrganizationUnitUncheckedUpdateWithoutChildrenInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUpsertWithWhereUniqueWithoutParentInput = {
@@ -2060,7 +2103,8 @@ export type OrganizationUnitCreateWithoutRestaurantsInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutRestaurantsInput = {
@@ -2094,7 +2138,8 @@ export type OrganizationUnitUncheckedCreateWithoutRestaurantsInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutRestaurantsInput = {
@@ -2144,7 +2189,8 @@ export type OrganizationUnitUpdateWithoutRestaurantsInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
@@ -2178,7 +2224,8 @@ export type OrganizationUnitUncheckedUpdateWithoutRestaurantsInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateWithoutReservationsInput = {
@@ -2212,7 +2259,8 @@ export type OrganizationUnitCreateWithoutReservationsInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutReservationsInput = {
@@ -2246,7 +2294,8 @@ export type OrganizationUnitUncheckedCreateWithoutReservationsInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutReservationsInput = {
@@ -2296,7 +2345,8 @@ export type OrganizationUnitUpdateWithoutReservationsInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
@@ -2330,7 +2380,8 @@ export type OrganizationUnitUncheckedUpdateWithoutReservationsInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateWithoutAdvancedFoodOrdersInput = {
@@ -2364,7 +2415,8 @@ export type OrganizationUnitCreateWithoutAdvancedFoodOrdersInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutAdvancedFoodOrdersInput = {
@@ -2398,7 +2450,8 @@ export type OrganizationUnitUncheckedCreateWithoutAdvancedFoodOrdersInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutAdvancedFoodOrdersInput = {
@@ -2448,7 +2501,8 @@ export type OrganizationUnitUpdateWithoutAdvancedFoodOrdersInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
@@ -2482,7 +2536,8 @@ export type OrganizationUnitUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
@@ -2516,7 +2571,8 @@ export type OrganizationUnitCreateWithoutVehicleAssignmentsInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutVehicleAssignmentsInput = {
@@ -2550,7 +2606,8 @@ export type OrganizationUnitUncheckedCreateWithoutVehicleAssignmentsInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutVehicleAssignmentsInput = {
@@ -2600,7 +2657,8 @@ export type OrganizationUnitUpdateWithoutVehicleAssignmentsInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
@@ -2634,7 +2692,8 @@ export type OrganizationUnitUncheckedUpdateWithoutVehicleAssignmentsInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateWithoutBoardRequestsInput = {
@@ -2668,7 +2727,8 @@ export type OrganizationUnitCreateWithoutBoardRequestsInput = {
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutBoardRequestsInput = {
@@ -2702,7 +2762,8 @@ export type OrganizationUnitUncheckedCreateWithoutBoardRequestsInput = {
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutBoardRequestsInput = {
@@ -2752,7 +2813,8 @@ export type OrganizationUnitUpdateWithoutBoardRequestsInput = {
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutBoardRequestsInput = {
@@ -2786,7 +2848,8 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardRequestsInput = {
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateWithoutBoardStageUnitsInput = {
@@ -2820,7 +2883,8 @@ export type OrganizationUnitCreateWithoutBoardStageUnitsInput = {
   projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitUncheckedCreateWithoutBoardStageUnitsInput = {
@@ -2854,7 +2918,8 @@ export type OrganizationUnitUncheckedCreateWithoutBoardStageUnitsInput = {
   projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
 }
 
 export type OrganizationUnitCreateOrConnectWithoutBoardStageUnitsInput = {
@@ -2904,7 +2969,8 @@ export type OrganizationUnitUpdateWithoutBoardStageUnitsInput = {
   projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutBoardStageUnitsInput = {
@@ -2938,10 +3004,11 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardStageUnitsInput = {
   projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
-export type OrganizationUnitCreateWithoutBoardMinutesResolutionsInput = {
+export type OrganizationUnitCreateWithoutBoardResolutionProposersInput = {
   id?: string
   name: string
   code: string
@@ -2973,9 +3040,10 @@ export type OrganizationUnitCreateWithoutBoardMinutesResolutionsInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitCreateNestedManyWithoutUnitInput
 }
 
-export type OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput = {
+export type OrganizationUnitUncheckedCreateWithoutBoardResolutionProposersInput = {
   id?: string
   name: string
   code: string
@@ -3007,25 +3075,26 @@ export type OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput =
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
   boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedCreateNestedManyWithoutUnitInput
 }
 
-export type OrganizationUnitCreateOrConnectWithoutBoardMinutesResolutionsInput = {
+export type OrganizationUnitCreateOrConnectWithoutBoardResolutionProposersInput = {
   where: Prisma.OrganizationUnitWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput>
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardResolutionProposersInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardResolutionProposersInput>
 }
 
-export type OrganizationUnitUpsertWithoutBoardMinutesResolutionsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput>
-  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardMinutesResolutionsInput>
+export type OrganizationUnitUpsertWithoutBoardResolutionProposersInput = {
+  update: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutBoardResolutionProposersInput, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardResolutionProposersInput>
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardResolutionProposersInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardResolutionProposersInput>
   where?: Prisma.OrganizationUnitWhereInput
 }
 
-export type OrganizationUnitUpdateToOneWithWhereWithoutBoardMinutesResolutionsInput = {
+export type OrganizationUnitUpdateToOneWithWhereWithoutBoardResolutionProposersInput = {
   where?: Prisma.OrganizationUnitWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput>
+  data: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutBoardResolutionProposersInput, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardResolutionProposersInput>
 }
 
-export type OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput = {
+export type OrganizationUnitUpdateWithoutBoardResolutionProposersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3057,9 +3126,10 @@ export type OrganizationUnitUpdateWithoutBoardMinutesResolutionsInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
 }
 
-export type OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput = {
+export type OrganizationUnitUncheckedUpdateWithoutBoardResolutionProposersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3091,6 +3161,163 @@ export type OrganizationUnitUncheckedUpdateWithoutBoardMinutesResolutionsInput =
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+}
+
+export type OrganizationUnitCreateWithoutBoardResolutionExecutorsInput = {
+  id?: string
+  name: string
+  code: string
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  kind: Prisma.OrganizationUnitKindCreateNestedOneWithoutUnitsInput
+  parent?: Prisma.OrganizationUnitCreateNestedOneWithoutChildrenInput
+  children?: Prisma.OrganizationUnitCreateNestedManyWithoutParentInput
+  nutritionRep?: Prisma.UserCreateNestedOneWithoutNutritionUnitsInput
+  employees?: Prisma.UserCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutOrganizationUnitInput
+  projectOperators?: Prisma.ProjectOperatorCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutOrgUnitInput
+  boardRequests?: Prisma.BoardRequestCreateNestedManyWithoutUnitInput
+  boardStageUnits?: Prisma.BoardStageUnitCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutProposerUnitInput
+}
+
+export type OrganizationUnitUncheckedCreateWithoutBoardResolutionExecutorsInput = {
+  id?: string
+  name: string
+  code: string
+  kindId: string
+  parentId?: string | null
+  phone?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: string | null
+  bale?: string | null
+  rubika?: string | null
+  instagram?: string | null
+  telegram?: string | null
+  whatsapp?: string | null
+  nutritionRepId?: string | null
+  maxMeals?: number | null
+  guestMealsEnabled?: boolean
+  maxGuestMeals?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  children?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutParentInput
+  employees?: Prisma.UserUncheckedCreateNestedManyWithoutOrgUnitInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedCreateNestedManyWithoutUnitInput
+  reservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutOrgUnitInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutOrgUnitInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projectOperators?: Prisma.ProjectOperatorUncheckedCreateNestedManyWithoutOrganizationUnitInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutOrgUnitInput
+  boardRequests?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutUnitInput
+  boardStageUnits?: Prisma.BoardStageUnitUncheckedCreateNestedManyWithoutUnitInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutProposerUnitInput
+}
+
+export type OrganizationUnitCreateOrConnectWithoutBoardResolutionExecutorsInput = {
+  where: Prisma.OrganizationUnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardResolutionExecutorsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardResolutionExecutorsInput>
+}
+
+export type OrganizationUnitUpsertWithoutBoardResolutionExecutorsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutBoardResolutionExecutorsInput, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardResolutionExecutorsInput>
+  create: Prisma.XOR<Prisma.OrganizationUnitCreateWithoutBoardResolutionExecutorsInput, Prisma.OrganizationUnitUncheckedCreateWithoutBoardResolutionExecutorsInput>
+  where?: Prisma.OrganizationUnitWhereInput
+}
+
+export type OrganizationUnitUpdateToOneWithWhereWithoutBoardResolutionExecutorsInput = {
+  where?: Prisma.OrganizationUnitWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUnitUpdateWithoutBoardResolutionExecutorsInput, Prisma.OrganizationUnitUncheckedUpdateWithoutBoardResolutionExecutorsInput>
+}
+
+export type OrganizationUnitUpdateWithoutBoardResolutionExecutorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.OrganizationUnitKindUpdateOneRequiredWithoutUnitsNestedInput
+  parent?: Prisma.OrganizationUnitUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.OrganizationUnitUpdateManyWithoutParentNestedInput
+  nutritionRep?: Prisma.UserUpdateOneWithoutNutritionUnitsNestedInput
+  employees?: Prisma.UserUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutOrganizationUnitNestedInput
+  projectOperators?: Prisma.ProjectOperatorUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
+  boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
+  boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
+}
+
+export type OrganizationUnitUncheckedUpdateWithoutBoardResolutionExecutorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rubika?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nutritionRepId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  guestMealsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxGuestMeals?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutParentNestedInput
+  employees?: Prisma.UserUncheckedUpdateManyWithoutOrgUnitNestedInput
+  restaurants?: Prisma.OrganizationUnitRestaurantUncheckedUpdateManyWithoutUnitNestedInput
+  reservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutOrgUnitNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutOrgUnitNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projectOperators?: Prisma.ProjectOperatorUncheckedUpdateManyWithoutOrganizationUnitNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
+  boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
+  boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitCreateManyNutritionRepInput = {
@@ -3147,7 +3374,8 @@ export type OrganizationUnitUpdateWithoutNutritionRepInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
@@ -3181,7 +3409,8 @@ export type OrganizationUnitUncheckedUpdateWithoutNutritionRepInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateManyWithoutNutritionRepInput = {
@@ -3261,7 +3490,8 @@ export type OrganizationUnitUpdateWithoutKindInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutKindInput = {
@@ -3295,7 +3525,8 @@ export type OrganizationUnitUncheckedUpdateWithoutKindInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateManyWithoutKindInput = {
@@ -3375,7 +3606,8 @@ export type OrganizationUnitUpdateWithoutParentInput = {
   projects?: Prisma.ProjectUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateWithoutParentInput = {
@@ -3409,7 +3641,8 @@ export type OrganizationUnitUncheckedUpdateWithoutParentInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutOrgUnitNestedInput
   boardRequests?: Prisma.BoardRequestUncheckedUpdateManyWithoutUnitNestedInput
   boardStageUnits?: Prisma.BoardStageUnitUncheckedUpdateManyWithoutUnitNestedInput
-  boardMinutesResolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionExecutors?: Prisma.BoardMinutesResolutionUnitUncheckedUpdateManyWithoutUnitNestedInput
+  boardResolutionProposers?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutProposerUnitNestedInput
 }
 
 export type OrganizationUnitUncheckedUpdateManyWithoutParentInput = {
@@ -3451,7 +3684,8 @@ export type OrganizationUnitCountOutputType = {
   projects: number
   boardRequests: number
   boardStageUnits: number
-  boardMinutesResolutions: number
+  boardResolutionExecutors: number
+  boardResolutionProposers: number
 }
 
 export type OrganizationUnitCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3465,7 +3699,8 @@ export type OrganizationUnitCountOutputTypeSelect<ExtArgs extends runtime.Types.
   projects?: boolean | OrganizationUnitCountOutputTypeCountProjectsArgs
   boardRequests?: boolean | OrganizationUnitCountOutputTypeCountBoardRequestsArgs
   boardStageUnits?: boolean | OrganizationUnitCountOutputTypeCountBoardStageUnitsArgs
-  boardMinutesResolutions?: boolean | OrganizationUnitCountOutputTypeCountBoardMinutesResolutionsArgs
+  boardResolutionExecutors?: boolean | OrganizationUnitCountOutputTypeCountBoardResolutionExecutorsArgs
+  boardResolutionProposers?: boolean | OrganizationUnitCountOutputTypeCountBoardResolutionProposersArgs
 }
 
 /**
@@ -3551,7 +3786,14 @@ export type OrganizationUnitCountOutputTypeCountBoardStageUnitsArgs<ExtArgs exte
 /**
  * OrganizationUnitCountOutputType without action
  */
-export type OrganizationUnitCountOutputTypeCountBoardMinutesResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type OrganizationUnitCountOutputTypeCountBoardResolutionExecutorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardMinutesResolutionUnitWhereInput
+}
+
+/**
+ * OrganizationUnitCountOutputType without action
+ */
+export type OrganizationUnitCountOutputTypeCountBoardResolutionProposersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BoardMinutesResolutionWhereInput
 }
 
@@ -3591,7 +3833,8 @@ export type OrganizationUnitSelect<ExtArgs extends runtime.Types.Extensions.Inte
   projects?: boolean | Prisma.OrganizationUnit$projectsArgs<ExtArgs>
   boardRequests?: boolean | Prisma.OrganizationUnit$boardRequestsArgs<ExtArgs>
   boardStageUnits?: boolean | Prisma.OrganizationUnit$boardStageUnitsArgs<ExtArgs>
-  boardMinutesResolutions?: boolean | Prisma.OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs>
+  boardResolutionExecutors?: boolean | Prisma.OrganizationUnit$boardResolutionExecutorsArgs<ExtArgs>
+  boardResolutionProposers?: boolean | Prisma.OrganizationUnit$boardResolutionProposersArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationUnitCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organizationUnit"]>
 
@@ -3688,7 +3931,8 @@ export type OrganizationUnitInclude<ExtArgs extends runtime.Types.Extensions.Int
   projects?: boolean | Prisma.OrganizationUnit$projectsArgs<ExtArgs>
   boardRequests?: boolean | Prisma.OrganizationUnit$boardRequestsArgs<ExtArgs>
   boardStageUnits?: boolean | Prisma.OrganizationUnit$boardStageUnitsArgs<ExtArgs>
-  boardMinutesResolutions?: boolean | Prisma.OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs>
+  boardResolutionExecutors?: boolean | Prisma.OrganizationUnit$boardResolutionExecutorsArgs<ExtArgs>
+  boardResolutionProposers?: boolean | Prisma.OrganizationUnit$boardResolutionProposersArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationUnitCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationUnitIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3718,7 +3962,8 @@ export type $OrganizationUnitPayload<ExtArgs extends runtime.Types.Extensions.In
     projects: Prisma.$ProjectPayload<ExtArgs>[]
     boardRequests: Prisma.$BoardRequestPayload<ExtArgs>[]
     boardStageUnits: Prisma.$BoardStageUnitPayload<ExtArgs>[]
-    boardMinutesResolutions: Prisma.$BoardMinutesResolutionPayload<ExtArgs>[]
+    boardResolutionExecutors: Prisma.$BoardMinutesResolutionUnitPayload<ExtArgs>[]
+    boardResolutionProposers: Prisma.$BoardMinutesResolutionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4149,7 +4394,8 @@ export interface Prisma__OrganizationUnitClient<T, Null = never, ExtArgs extends
   projects<T extends Prisma.OrganizationUnit$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardRequests<T extends Prisma.OrganizationUnit$boardRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$boardRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardStageUnits<T extends Prisma.OrganizationUnit$boardStageUnitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$boardStageUnitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardStageUnitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  boardMinutesResolutions<T extends Prisma.OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardResolutionExecutors<T extends Prisma.OrganizationUnit$boardResolutionExecutorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$boardResolutionExecutorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesResolutionUnitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardResolutionProposers<T extends Prisma.OrganizationUnit$boardResolutionProposersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationUnit$boardResolutionProposersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4879,9 +5125,33 @@ export type OrganizationUnit$boardStageUnitsArgs<ExtArgs extends runtime.Types.E
 }
 
 /**
- * OrganizationUnit.boardMinutesResolutions
+ * OrganizationUnit.boardResolutionExecutors
  */
-export type OrganizationUnit$boardMinutesResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type OrganizationUnit$boardResolutionExecutorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardMinutesResolutionUnit
+   */
+  select?: Prisma.BoardMinutesResolutionUnitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardMinutesResolutionUnit
+   */
+  omit?: Prisma.BoardMinutesResolutionUnitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardMinutesResolutionUnitInclude<ExtArgs> | null
+  where?: Prisma.BoardMinutesResolutionUnitWhereInput
+  orderBy?: Prisma.BoardMinutesResolutionUnitOrderByWithRelationInput | Prisma.BoardMinutesResolutionUnitOrderByWithRelationInput[]
+  cursor?: Prisma.BoardMinutesResolutionUnitWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardMinutesResolutionUnitScalarFieldEnum | Prisma.BoardMinutesResolutionUnitScalarFieldEnum[]
+}
+
+/**
+ * OrganizationUnit.boardResolutionProposers
+ */
+export type OrganizationUnit$boardResolutionProposersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the BoardMinutesResolution
    */

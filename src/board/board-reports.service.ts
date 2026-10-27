@@ -86,16 +86,18 @@ export class BoardReportsService {
       select: {
         id: true,
         heldAt: true,
-        requestId: true,
-        request: { select: { unit: { select: { id: true, name: true } } } },
+        requests: {
+          select: { request: { select: { unit: { select: { id: true, name: true } } } } },
+        },
         members: { select: { attendance: true } },
         attachments: { select: { kind: true } },
         resolutions: {
           select: {
             id: true,
-            unitId: true,
             dueDate: true,
-            unit: { select: { id: true, name: true } },
+            executors: {
+              select: { unit: { select: { id: true, name: true } } },
+            },
           },
         },
       },
@@ -133,7 +135,7 @@ export class BoardReportsService {
 
     for (const item of minutes) {
       const heldAt = toIsoDateOnly(item.heldAt) ?? today;
-      if (item.requestId) byKind.linked += 1;
+      if (item.requests.length) byKind.linked += 1;
       else byKind.regular += 1;
 
       const weekday = iranWeekdayKey(heldAt);
@@ -154,8 +156,8 @@ export class BoardReportsService {
         else audioAttachments += 1;
       }
 
-      if (item.request?.unit) {
-        const unit = item.request.unit;
+      for (const link of item.requests) {
+        const unit = link.request.unit;
         const bucket = byRequestUnit.get(unit.id) ?? {
           id: unit.id,
           name: unit.name,
@@ -166,7 +168,9 @@ export class BoardReportsService {
       }
 
       const resolutions = query.unitId
-        ? item.resolutions.filter((row) => row.unitId === query.unitId)
+        ? item.resolutions.filter((row) =>
+            row.executors.some((link) => link.unit.id === query.unitId),
+          )
         : item.resolutions;
       if (resolutions.length > 0) meetingsWithResolutions += 1;
       monthBucket.resolutions += resolutions.length;
@@ -187,18 +191,19 @@ export class BoardReportsService {
         } else {
           withoutDueDate += 1;
         }
-        if (!resolution.unitId) withoutUnit += 1;
+        if (!resolution.executors.length) withoutUnit += 1;
 
-        const unitKey = resolution.unitId ?? '';
-        const bucket =
-          byUnit.get(unitKey) ?? emptyUnit(resolution.unitId, resolution.unit?.name ?? '');
-        bucket.count += 1;
-        if (status === 'overdue') bucket.overdue += 1;
-        else if (status === 'today' || status === 'soon') bucket.soon += 1;
-        else if (status === 'upcoming') bucket.upcoming += 1;
-        else if (status === 'later') bucket.later += 1;
-        else bucket.noDue += 1;
-        byUnit.set(unitKey, bucket);
+        for (const link of resolution.executors) {
+          const unitKey = link.unit.id;
+          const bucket = byUnit.get(unitKey) ?? emptyUnit(link.unit.id, link.unit.name);
+          bucket.count += 1;
+          if (status === 'overdue') bucket.overdue += 1;
+          else if (status === 'today' || status === 'soon') bucket.soon += 1;
+          else if (status === 'upcoming') bucket.upcoming += 1;
+          else if (status === 'later') bucket.later += 1;
+          else bucket.noDue += 1;
+          byUnit.set(unitKey, bucket);
+        }
       }
     }
 
@@ -284,15 +289,16 @@ export class BoardReportsService {
     return {
       ...(heldAt ? { heldAt } : {}),
       ...(query.kind === 'regular'
-        ? { requestId: null }
+        ? { requests: { none: {} } }
         : query.kind === 'linked'
-          ? { requestId: { not: null } }
+          ? { requests: { some: {} } }
           : {}),
       OR: query.q
         ? [
+            { minutesNo: containsInsensitive(query.q) },
             { subject: containsInsensitive(query.q) },
             { body: containsInsensitive(query.q) },
-            { request: { subject: containsInsensitive(query.q) } },
+            { requests: { some: { request: { subject: containsInsensitive(query.q) } } } },
             { createdBy: { fullName: containsInsensitive(query.q) } },
             { resolutions: { some: { title: containsInsensitive(query.q) } } },
             { resolutions: { some: { description: containsInsensitive(query.q) } } },

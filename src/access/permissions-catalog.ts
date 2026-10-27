@@ -40,8 +40,22 @@ export const PERMISSION_TREE: PermissionNode[] = [
       { code: 'singard.submit', kind: 'MENU', nameKey: 'menus.singardSubmit' },
       { code: 'singard.mine', kind: 'MENU', nameKey: 'menus.singardMine' },
       { code: 'singard.inbox', kind: 'MENU', nameKey: 'menus.singardInbox' },
+      { code: 'singard.kinds', kind: 'MENU', nameKey: 'menus.singardKinds' },
       { code: 'singard.categories', kind: 'MENU', nameKey: 'menus.singardCategories' },
       { code: 'singard.reports', kind: 'MENU', nameKey: 'menus.singardReports' },
+    ],
+  },
+  {
+    code: 'inspection',
+    kind: 'MODULE',
+    nameKey: 'modules.inspection',
+    children: [
+      { code: 'inspection.submit', kind: 'MENU', nameKey: 'menus.inspectionSubmit' },
+      { code: 'inspection.mine', kind: 'MENU', nameKey: 'menus.inspectionMine' },
+      { code: 'inspection.inbox', kind: 'MENU', nameKey: 'menus.inspectionInbox' },
+      { code: 'inspection.kinds', kind: 'MENU', nameKey: 'menus.inspectionKinds' },
+      { code: 'inspection.categories', kind: 'MENU', nameKey: 'menus.inspectionCategories' },
+      { code: 'inspection.reports', kind: 'MENU', nameKey: 'menus.inspectionReports' },
     ],
   },
   {

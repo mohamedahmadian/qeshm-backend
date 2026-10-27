@@ -14,6 +14,7 @@ import { ImagesService } from '../images/images.service';
 import { SingardCategoriesService } from './categories.service';
 import { CreateSingardFeedbackDto } from './dto/create-feedback.dto';
 import { SingardFeedbacksService } from './feedbacks.service';
+import { SingardKindsService } from './kinds.service';
 import { SINGARD_MAX_VIDEO_BYTES } from './singard.constants';
 
 type RequestUser = { id: string };
@@ -29,10 +30,16 @@ type UploadFile = {
 export class PublicSingardController {
   constructor(
     private readonly categories: SingardCategoriesService,
+    private readonly kinds: SingardKindsService,
     private readonly feedbacks: SingardFeedbacksService,
     private readonly images: ImagesService,
     private readonly files: FilesService,
   ) {}
+
+  @Get('kinds')
+  kindsList() {
+    return this.kinds.findActive();
+  }
 
   @Get('categories')
   tree() {

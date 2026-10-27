@@ -6,6 +6,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { parseIsoDate, parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
+import { gregorianToJalali } from '../common/jalali-date';
 import {
   containsInsensitive,
   paginatedResult,
@@ -16,20 +17,33 @@ import { resolveSortOrder } from '../common/sort-query';
 import {
   BoardMinutesAttachmentKind,
   BoardMinutesAttendance,
+  BoardMinutesStatus,
   BoardRequestStatus,
+  BoardResolutionDueKind,
+  BoardResolutionProposerKind,
+  BoardResolutionStatus,
   Prisma,
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { SmsService } from '../sms/sms.service';
 import { BOARD_ADMIN_ROLE_CODE } from '../access/access.constants';
 import {
   MAX_BOARD_ATTACHMENTS,
   MAX_BOARD_MINUTES_MEMBERS,
+  MAX_BOARD_MINUTES_REQUESTS,
+  MAX_BOARD_RESOLUTION_UNITS,
+  boardMinutesStatuses,
+  boardResolutionStatuses,
 } from './board.constants';
+import { SendBoardMinutesSmsDto } from './dto/send-board-minutes-sms.dto';
 import {
   BoardMinutesMemberDto,
   CreateBoardMinutesDto,
 } from './dto/create-board-minutes.dto';
-import { CreateBoardResolutionDto } from './dto/create-board-resolution.dto';
+import {
+  BoardResolutionSignatoryDto,
+  CreateBoardResolutionDto,
+} from './dto/create-board-resolution.dto';
 import { FindBoardMinutesQueryDto } from './dto/find-board-minutes-query.dto';
 import { FindBoardResolutionsQueryDto } from './dto/find-board-resolutions-query.dto';
 import { UpdateBoardMinutesDto } from './dto/update-board-minutes.dto';
@@ -41,17 +55,32 @@ const personSelect = {
   username: true,
 } satisfies Prisma.UserSelect;
 
+const memberUserSelect = {
+  ...personSelect,
+  phone: true,
+} satisfies Prisma.UserSelect;
+
 const unitSelect = {
   id: true,
   name: true,
 } satisfies Prisma.OrganizationUnitSelect;
 
+const requestSummarySelect = {
+  id: true,
+  subject: true,
+  status: true,
+  trackingNo: true,
+} satisfies Prisma.BoardRequestSelect;
+
 const minutesInclude = {
-  request: { select: { id: true, subject: true, status: true } },
+  requests: {
+    orderBy: { createdAt: 'asc' as const },
+    include: { request: { select: requestSummarySelect } },
+  },
   createdBy: { select: personSelect },
   members: {
     orderBy: { createdAt: 'asc' as const },
-    include: { user: { select: personSelect } },
+    include: { user: { select: memberUserSelect } },
   },
   attachments: {
     orderBy: [{ sortOrder: 'asc' as const }, { createdAt: 'asc' as const }],
@@ -62,33 +91,60 @@ const minutesInclude = {
       },
     },
   },
-  _count: { select: { members: true, resolutions: true, attachments: true } },
+  _count: { select: { members: true, resolutions: true, attachments: true, requests: true } },
 } satisfies Prisma.BoardMinutesInclude;
 
 const resolutionInclude = {
-  unit: { select: unitSelect },
+  executors: {
+    orderBy: { createdAt: 'asc' as const },
+    include: { unit: { select: unitSelect } },
+  },
+  proposerUnit: { select: unitSelect },
+  signatories: {
+    orderBy: [{ sortOrder: 'asc' as const }, { createdAt: 'asc' as const }, { id: 'asc' as const }],
+    select: {
+      id: true,
+      sourceSignatoryId: true,
+      firstName: true,
+      lastName: true,
+      title: true,
+      signatureImageId: true,
+      signedAt: true,
+      sortOrder: true,
+    },
+  },
   minutes: {
     select: {
       id: true,
       subject: true,
       heldAt: true,
-      requestId: true,
-      request: { select: { id: true, subject: true, status: true } },
+      minutesNo: true,
+      status: true,
+      requests: {
+        orderBy: { createdAt: 'asc' as const },
+        include: { request: { select: requestSummarySelect } },
+      },
     },
   },
 } satisfies Prisma.BoardMinutesResolutionInclude;
 
 const searchInclude = {
-  request: {
-    select: {
-      id: true,
-      subject: true,
-      status: true,
-      justification: true,
-      topicHistory: true,
-      description: true,
-      orgPositionText: true,
-      unit: { select: unitSelect },
+  requests: {
+    orderBy: { createdAt: 'asc' as const },
+    include: {
+      request: {
+        select: {
+          id: true,
+          subject: true,
+          status: true,
+          trackingNo: true,
+          justification: true,
+          topicHistory: true,
+          description: true,
+          orgPositionText: true,
+          unit: { select: unitSelect },
+        },
+      },
     },
   },
   createdBy: { select: personSelect },
@@ -97,7 +153,11 @@ const searchInclude = {
   },
   resolutions: {
     orderBy: [{ createdAt: 'asc' as const }, { id: 'asc' as const }],
-    include: { unit: { select: unitSelect } },
+    include: {
+      executors: {
+        include: { unit: { select: unitSelect } },
+      },
+    },
   },
   _count: { select: { resolutions: true } },
 } satisfies Prisma.BoardMinutesInclude;
@@ -105,7 +165,7 @@ const searchInclude = {
 const searchRequestInclude = {
   unit: { select: unitSelect },
   createdBy: { select: personSelect },
-  _count: { select: { minutes: true } },
+  _count: { select: { minutesRequests: true } },
 } satisfies Prisma.BoardRequestInclude;
 
 const dossierRequestInclude = {
@@ -148,13 +208,16 @@ type Actor = {
 
 @Injectable()
 export class BoardMinutesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly sms: SmsService,
+  ) {}
 
   async stats(userId: string) {
     await this.requireMinutesActor(userId);
     const [total, linked, resolutionCount] = await Promise.all([
       this.prisma.boardMinutes.count(),
-      this.prisma.boardMinutes.count({ where: { requestId: { not: null } } }),
+      this.prisma.boardMinutes.count({ where: { requests: { some: {} } } }),
       this.prisma.boardMinutesResolution.count(),
     ]);
     return {
@@ -169,12 +232,13 @@ export class BoardMinutesService {
     await this.requireMinutesActor(userId);
     const items = await this.prisma.boardRequest.findMany({
       where: { status: BoardRequestStatus.APPROVED },
-      select: { id: true, subject: true, requestedAt: true },
+      select: { id: true, subject: true, requestedAt: true, trackingNo: true },
       orderBy: [{ requestedAt: 'desc' }, { id: 'asc' }],
     });
     return items.map((item) => ({
       id: item.id,
       subject: item.subject,
+      trackingNo: item.trackingNo,
       requestedAt: toIsoDateOnly(item.requestedAt),
     }));
   }
@@ -194,18 +258,21 @@ export class BoardMinutesService {
             },
           }
         : {}),
+      ...(query.status ? { status: query.status } : {}),
       ...(query.requestId
-        ? { requestId: query.requestId }
+        ? { requests: { some: { requestId: query.requestId } } }
         : query.kind === 'regular'
-          ? { requestId: null }
+          ? { requests: { none: {} } }
           : query.kind === 'linked'
-            ? { requestId: { not: null } }
+            ? { requests: { some: {} } }
             : {}),
       OR: query.q
         ? [
+            { minutesNo: containsInsensitive(query.q) },
             { subject: containsInsensitive(query.q) },
             { body: containsInsensitive(query.q) },
-            { request: { subject: containsInsensitive(query.q) } },
+            { requests: { some: { request: { subject: containsInsensitive(query.q) } } } },
+            { requests: { some: { request: { trackingNo: containsInsensitive(query.q) } } } },
             { createdBy: { fullName: containsInsensitive(query.q) } },
             { resolutions: { some: { title: containsInsensitive(query.q) } } },
             { resolutions: { some: { description: containsInsensitive(query.q) } } },
@@ -216,9 +283,11 @@ export class BoardMinutesService {
       query.sortBy,
       query.sortDir,
       {
+        minutesNo: (dir) => ({ minutesYear: dir, minutesSeq: dir }),
         heldAt: (dir) => ({ heldAt: dir }),
         subject: (dir) => ({ subject: dir }),
-        request: (dir) => ({ request: { subject: dir } }),
+        status: (dir) => ({ status: dir }),
+        request: (dir) => ({ requests: { _count: dir } }),
         memberCount: (dir) => ({ members: { _count: dir } }),
         resolutionCount: (dir) => ({ resolutions: { _count: dir } }),
         createdAt: (dir) => ({ createdAt: dir }),
@@ -341,62 +410,62 @@ export class BoardMinutesService {
   async findDossier(id: string, userId: string) {
     await this.requireMinutesActor(userId);
     const minutes = await this.loadMinutes(id);
-    const [request, resolutions] = await Promise.all([
-      minutes.requestId
-        ? this.prisma.boardRequest.findUnique({
-            where: { id: minutes.requestId },
+    const linkedIds = minutes.requests.map((row) => row.request.id);
+    const [requestRows, resolutions] = await Promise.all([
+      linkedIds.length
+        ? this.prisma.boardRequest.findMany({
+            where: { id: { in: linkedIds } },
             include: dossierRequestInclude,
           })
-        : Promise.resolve(null),
+        : Promise.resolve([]),
       this.prisma.boardMinutesResolution.findMany({
         where: { minutesId: id },
         orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
-        include: { unit: { select: unitSelect } },
+        include: resolutionInclude,
       }),
     ]);
+    const requestsById = new Map(requestRows.map((row) => [row.id, row]));
+    const requests = linkedIds
+      .map((requestId) => requestsById.get(requestId))
+      .filter((item): item is NonNullable<typeof item> => Boolean(item))
+      .map((item) => this.serializeDossierRequest(item));
     return {
       minutes: this.serializeMinutes(minutes),
-      request: request ? this.serializeDossierRequest(request) : null,
-      resolutions: resolutions.map((item) => ({
-        id: item.id,
-        minutesId: item.minutesId,
-        title: item.title,
-        description: item.description,
-        unitId: item.unitId,
-        unit: item.unit,
-        dueDate: toIsoDateOnly(item.dueDate),
-        notes: item.notes,
-        createdAt: item.createdAt.toISOString(),
-        updatedAt: item.updatedAt.toISOString(),
-      })),
+      request: requests[0] ?? null,
+      requests,
+      resolutions: resolutions.map((item) => this.serializeResolution(item)),
     };
   }
 
   async create(dto: CreateBoardMinutesDto, userId: string) {
     const actor = await this.requireMinutesActor(userId);
-    const requestId = await this.resolveRequestId(dto.requestId);
+    const requestIds = await this.resolveRequestIds(dto.requestIds);
     const members = await this.normalizeMembers(dto.members);
     const attachments = await this.buildAttachments(dto.imageIds, dto.audioIds);
-    const created = await this.prisma.boardMinutes.create({
-      data: {
-        heldAt: parseIsoDate(dto.heldAt),
-        subject: dto.subject,
-        body: dto.body ?? null,
-        requestId,
-        createdById: actor.id,
-        members: members.length ? { create: members } : undefined,
-        attachments: attachments.length ? { create: attachments } : undefined,
-      },
-      include: minutesInclude,
+    const heldAt = parseIsoDate(dto.heldAt);
+    const created = await this.createWithNumber({
+      heldAt,
+      subject: dto.subject,
+      body: dto.body ?? null,
+      status: this.resolveStatus(dto.status),
+      createdById: actor.id,
+      requestIds,
+      members,
+      attachments,
     });
     return this.serializeMinutes(created);
   }
 
   async update(id: string, dto: UpdateBoardMinutesDto, userId: string) {
     await this.requireMinutesActor(userId);
-    await this.loadMinutes(id);
-    const requestId =
-      dto.requestId !== undefined ? await this.resolveRequestId(dto.requestId) : undefined;
+    const current = await this.loadMinutes(id);
+    const requestIds =
+      dto.requestIds !== undefined
+        ? await this.resolveRequestIds(
+            dto.requestIds,
+            current.requests.map((row) => row.request.id),
+          )
+        : undefined;
     const members =
       dto.members !== undefined ? await this.normalizeMembers(dto.members) : undefined;
     const attachments =
@@ -410,15 +479,32 @@ export class BoardMinutesService {
       if (attachments) {
         await tx.boardMinutesAttachment.deleteMany({ where: { minutesId: id } });
       }
+      if (requestIds) {
+        await tx.boardMinutesRequest.deleteMany({ where: { minutesId: id } });
+      }
+      const addedRequestIds = requestIds
+        ? requestIds.filter(
+            (requestId) => !current.requests.some((row) => row.request.id === requestId),
+          )
+        : [];
+      const addedResolutions = await this.resolutionsFromRequestIds(tx, addedRequestIds);
+      for (const row of addedResolutions) {
+        await tx.boardMinutesResolution.create({
+          data: { minutesId: id, ...this.resolutionCreateData(row) },
+        });
+      }
       return tx.boardMinutes.update({
         where: { id },
         data: {
           heldAt: dto.heldAt !== undefined ? parseIsoDate(dto.heldAt) : undefined,
           subject: dto.subject,
           body: dto.body === undefined ? undefined : dto.body,
-          requestId,
+          status: dto.status !== undefined ? this.resolveStatus(dto.status) : undefined,
           members: members?.length ? { create: members } : undefined,
           attachments: attachments?.length ? { create: attachments } : undefined,
+          requests: requestIds?.length
+            ? { create: requestIds.map((requestId) => ({ requestId })) }
+            : undefined,
         },
         include: minutesInclude,
       });
@@ -430,6 +516,60 @@ export class BoardMinutesService {
     await this.requireMinutesActor(userId);
     await this.loadMinutes(id);
     await this.prisma.boardMinutes.delete({ where: { id } });
+  }
+
+  async sendSms(id: string, dto: SendBoardMinutesSmsDto, userId: string) {
+    await this.requireMinutesActor(userId);
+    const item = await this.prisma.boardMinutes.findUnique({
+      where: { id },
+      include: {
+        members: {
+          orderBy: { createdAt: 'asc' },
+          include: { user: { select: memberUserSelect } },
+        },
+      },
+    });
+    if (!item) throw new NotFoundException('صورت‌جلسه یافت نشد');
+    if (!item.members.length) {
+      throw new BadRequestException('این صورت‌جلسه عضوی ندارد');
+    }
+
+    const unique = new Map<
+      string,
+      { userId: string; fullName: string; phone: string }
+    >();
+    for (const row of item.members) {
+      if (unique.has(row.userId)) continue;
+      unique.set(row.userId, {
+        userId: row.userId,
+        fullName: row.user.fullName,
+        phone: row.user.phone?.trim() ?? '',
+      });
+    }
+    const recipients = [...unique.values()];
+    const withPhone = recipients.filter((row) => row.phone);
+    const withoutPhone = recipients.filter((row) => !row.phone);
+    if (!withPhone.length) {
+      throw new BadRequestException('هیچ‌یک از اعضا شماره همراه ندارند');
+    }
+
+    let providerSkipped = false;
+    let providerMessage: string | undefined;
+    for (const row of withPhone) {
+      const result = await this.sms.send({ phone: row.phone, body: dto.body });
+      if (result.skipped) {
+        providerSkipped = true;
+        providerMessage = result.message;
+      }
+    }
+
+    return {
+      recipientCount: withPhone.length,
+      skippedNoPhoneCount: withoutPhone.length,
+      skippedNames: withoutPhone.map((row) => row.fullName),
+      providerSkipped,
+      providerMessage,
+    };
   }
 
   async findAllResolutions(query: FindBoardResolutionsQueryDto, userId: string) {
@@ -460,15 +600,29 @@ export class BoardMinutesService {
   async createResolution(minutesId: string, dto: CreateBoardResolutionDto, userId: string) {
     await this.requireMinutesActor(userId);
     await this.loadMinutes(minutesId);
-    if (dto.unitId) await this.assertUnitExists(dto.unitId);
+    const due = this.resolveResolutionDue(dto);
+    const proposer = this.resolveResolutionProposer(dto);
+    const unitIds = await this.normalizeResolutionUnitIds(dto.unitIds);
+    if (proposer.proposerUnitId) await this.assertUnitExists(proposer.proposerUnitId);
+    const signatories = await this.normalizeResolutionSignatories(dto.signatories);
     const created = await this.prisma.boardMinutesResolution.create({
       data: {
         minutesId,
         title: dto.title,
         description: dto.description ?? null,
-        unitId: dto.unitId ?? null,
-        dueDate: parseOptionalIsoDate(dto.dueDate) ?? null,
+        status: this.resolveResolutionStatus(dto.status),
+        executors: unitIds.length
+          ? { create: unitIds.map((unitId) => ({ unitId })) }
+          : undefined,
+        dueKind: due.dueKind,
+        dueDate: due.dueDate,
+        hasTopicHistory: dto.hasTopicHistory ?? false,
+        legalBasis: dto.legalBasis ?? null,
+        proposerKind: proposer.proposerKind,
+        proposerText: proposer.proposerText,
+        proposerUnitId: proposer.proposerUnitId,
         notes: dto.notes ?? null,
+        signatories: signatories?.length ? { create: signatories } : undefined,
       },
       include: resolutionInclude,
     });
@@ -482,19 +636,41 @@ export class BoardMinutesService {
     userId: string,
   ) {
     await this.requireMinutesActor(userId);
-    await this.loadResolution(minutesId, id);
-    if (dto.unitId) await this.assertUnitExists(dto.unitId);
-    const updated = await this.prisma.boardMinutesResolution.update({
-      where: { id },
-      data: {
-        title: dto.title,
-        description: dto.description === undefined ? undefined : dto.description,
-        unitId: dto.unitId,
-        dueDate:
-          dto.dueDate === undefined ? undefined : parseOptionalIsoDate(dto.dueDate) ?? null,
-        notes: dto.notes === undefined ? undefined : dto.notes,
-      },
-      include: resolutionInclude,
+    const current = await this.loadResolution(minutesId, id);
+    const due = this.resolveResolutionDue(dto, current);
+    const proposer = this.resolveResolutionProposer(dto, current);
+    const unitIds =
+      dto.unitIds !== undefined ? await this.normalizeResolutionUnitIds(dto.unitIds) : undefined;
+    if (proposer.proposerUnitId) await this.assertUnitExists(proposer.proposerUnitId);
+    const signatories = await this.normalizeResolutionSignatories(dto.signatories);
+    const updated = await this.prisma.$transaction(async (tx) => {
+      if (signatories) {
+        await tx.boardResolutionSignatory.deleteMany({ where: { resolutionId: id } });
+      }
+      if (unitIds) {
+        await tx.boardMinutesResolutionUnit.deleteMany({ where: { resolutionId: id } });
+      }
+      return tx.boardMinutesResolution.update({
+        where: { id },
+        data: {
+          title: dto.title,
+          description: dto.description === undefined ? undefined : dto.description,
+          status: dto.status !== undefined ? this.resolveResolutionStatus(dto.status) : undefined,
+          executors: unitIds?.length
+            ? { create: unitIds.map((unitId) => ({ unitId })) }
+            : undefined,
+          dueKind: due.dueKind,
+          dueDate: due.dueDate,
+          hasTopicHistory: dto.hasTopicHistory,
+          legalBasis: dto.legalBasis === undefined ? undefined : dto.legalBasis,
+          proposerKind: proposer.proposerKind,
+          proposerText: proposer.proposerText,
+          proposerUnitId: proposer.proposerUnitId,
+          notes: dto.notes === undefined ? undefined : dto.notes,
+          signatories: signatories?.length ? { create: signatories } : undefined,
+        },
+        include: resolutionInclude,
+      });
     });
     return this.serializeResolution(updated);
   }
@@ -547,19 +723,195 @@ export class BoardMinutesService {
     return item;
   }
 
-  private async resolveRequestId(requestId?: string | null) {
-    if (!requestId) return null;
-    const request = await this.prisma.boardRequest.findUnique({
-      where: { id: requestId },
+  private resolveStatus(status?: string | null) {
+    if (status && boardMinutesStatuses.includes(status as (typeof boardMinutesStatuses)[number])) {
+      return status as BoardMinutesStatus;
+    }
+    return BoardMinutesStatus.NOT_HELD;
+  }
+
+  private resolveResolutionStatus(status?: string | null) {
+    if (
+      status &&
+      boardResolutionStatuses.includes(status as (typeof boardResolutionStatuses)[number])
+    ) {
+      return status as BoardResolutionStatus;
+    }
+    return BoardResolutionStatus.NOT_NOTIFIED;
+  }
+
+  private jalaliYearFromIso(iso: string) {
+    const [year, month, day] = iso.split('-').map(Number);
+    if (!year || !month || !day) {
+      throw new BadRequestException('تاریخ جلسه معتبر نیست');
+    }
+    return gregorianToJalali(year, month, day).year;
+  }
+
+  private async createWithNumber(data: {
+    heldAt: Date;
+    subject: string;
+    body: string | null;
+    status: BoardMinutesStatus;
+    createdById: string;
+    requestIds: string[];
+    members: { userId: string; attendance: BoardMinutesAttendance }[];
+    attachments: {
+      kind: BoardMinutesAttachmentKind;
+      imageId?: string;
+      fileId?: string;
+      sortOrder: number;
+    }[];
+  }) {
+    const heldIso = toIsoDateOnly(data.heldAt);
+    if (!heldIso) throw new BadRequestException('تاریخ جلسه معتبر نیست');
+    const minutesYear = this.jalaliYearFromIso(heldIso);
+    let lastError: unknown;
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      try {
+        return await this.prisma.$transaction(async (tx) => {
+          const last = await tx.boardMinutes.findFirst({
+            where: { minutesYear },
+            orderBy: { minutesSeq: 'desc' },
+            select: { minutesSeq: true },
+          });
+          const minutesSeq = (last?.minutesSeq ?? 0) + 1;
+          const resolutions = await this.resolutionsFromRequestIds(tx, data.requestIds);
+          return tx.boardMinutes.create({
+            data: {
+              minutesYear,
+              minutesSeq,
+              minutesNo: `${minutesYear}/${minutesSeq}`,
+              heldAt: data.heldAt,
+              subject: data.subject,
+              body: data.body,
+              status: data.status,
+              createdById: data.createdById,
+              members: data.members.length ? { create: data.members } : undefined,
+              attachments: data.attachments.length ? { create: data.attachments } : undefined,
+              requests: data.requestIds.length
+                ? { create: data.requestIds.map((requestId) => ({ requestId })) }
+                : undefined,
+              resolutions: resolutions.length
+                ? { create: resolutions.map((row) => this.resolutionCreateData(row)) }
+                : undefined,
+            },
+            include: minutesInclude,
+          });
+        });
+      } catch (error) {
+        lastError = error;
+        if (
+          error instanceof Prisma.PrismaClientKnownRequestError &&
+          error.code === 'P2002' &&
+          attempt < 4
+        ) {
+          continue;
+        }
+        throw error;
+      }
+    }
+    throw lastError;
+  }
+
+  private async resolutionsFromRequestIds(
+    tx: Prisma.TransactionClient,
+    requestIds: string[],
+  ) {
+    if (!requestIds.length) return [];
+    const rows = await tx.boardRequest.findMany({
+      where: { id: { in: requestIds } },
+      select: {
+        id: true,
+        subject: true,
+        description: true,
+        justification: true,
+        unitId: true,
+      },
+    });
+    const byId = new Map(rows.map((row) => [row.id, row]));
+    return requestIds
+      .map((id) => byId.get(id))
+      .filter((row): row is NonNullable<typeof row> => Boolean(row))
+      .map((row) => this.resolutionDataFromRequest(row));
+  }
+
+  private resolutionDataFromRequest(request: {
+    subject: string;
+    description: string | null;
+    justification: string | null;
+    unitId: string;
+  }) {
+    const title = request.subject.trim().slice(0, 240) || 'مصوبه';
+    const description = (
+      request.description?.trim() ||
+      request.justification?.trim() ||
+      request.subject.trim()
+    ).slice(0, 8000);
+    return {
+      title,
+      description,
+      unitIds: request.unitId ? [request.unitId] : [],
+      dueKind: BoardResolutionDueKind.ASAP,
+      dueDate: null as Date | null,
+    };
+  }
+
+  private resolutionCreateData(row: {
+    title: string;
+    description: string;
+    unitIds: string[];
+    dueKind: BoardResolutionDueKind;
+    dueDate: Date | null;
+  }) {
+    return {
+      title: row.title,
+      description: row.description,
+      dueKind: row.dueKind,
+      dueDate: row.dueDate,
+      executors: row.unitIds.length
+        ? { create: row.unitIds.map((unitId) => ({ unitId })) }
+        : undefined,
+    };
+  }
+
+  private async normalizeResolutionUnitIds(unitIds?: string[]) {
+    const unique = [...new Set(unitIds ?? [])];
+    if (unique.length > MAX_BOARD_RESOLUTION_UNITS) {
+      throw new BadRequestException('تعداد مجریان بیش از حد مجاز است');
+    }
+    if (!unique.length) return [];
+    const count = await this.prisma.organizationUnit.count({
+      where: { id: { in: unique } },
+    });
+    if (count !== unique.length) {
+      throw new BadRequestException('یکی از واحدهای مجری معتبر نیست');
+    }
+    return unique;
+  }
+
+  private async resolveRequestIds(requestIds?: string[], existingIds: string[] = []) {
+    const unique = [...new Set(requestIds ?? [])];
+    if (unique.length > MAX_BOARD_MINUTES_REQUESTS) {
+      throw new BadRequestException('تعداد درخواست‌های صورت‌جلسه بیش از حد مجاز است');
+    }
+    if (!unique.length) return [];
+    const requests = await this.prisma.boardRequest.findMany({
+      where: { id: { in: unique } },
       select: { id: true, status: true },
     });
-    if (!request) {
+    if (requests.length !== unique.length) {
       throw new BadRequestException('درخواست طرح موضوع یافت نشد');
     }
-    if (request.status !== BoardRequestStatus.APPROVED) {
-      throw new BadRequestException('فقط پس از تأیید نهایی می‌توان صورت‌جلسه ثبت کرد');
+    const existing = new Set(existingIds);
+    if (
+      requests.some(
+        (item) => item.status !== BoardRequestStatus.APPROVED && !existing.has(item.id),
+      )
+    ) {
+      throw new BadRequestException('فقط پس از تأیید نهایی می‌توان درخواست را به صورت‌جلسه افزود');
     }
-    return request.id;
+    return unique;
   }
 
   private async normalizeMembers(members?: BoardMinutesMemberDto[]) {
@@ -641,7 +993,10 @@ export class BoardMinutesService {
       { title: text },
       { description: text },
       { notes: text },
+      { legalBasis: text },
+      { proposerText: text },
       { unit: { name: text } },
+      { proposerUnit: { name: text } },
     ];
   }
 
@@ -654,6 +1009,7 @@ export class BoardMinutesService {
       { topicHistory: text },
       { description: text },
       { unit: { name: text } },
+      { trackingNo: text },
       { createdBy: { fullName: text } },
       { managementComment: text },
       { legalComment: text },
@@ -669,14 +1025,16 @@ export class BoardMinutesService {
     return [
       { subject: text },
       { body: text },
+      { minutesNo: text },
       { createdBy: { fullName: text } },
       { members: { some: { user: { fullName: text } } } },
-      { request: { subject: text } },
-      { request: { justification: text } },
-      { request: { topicHistory: text } },
-      { request: { description: text } },
-      { request: { orgPositionText: text } },
-      { request: { unit: { name: text } } },
+      { requests: { some: { request: { subject: text } } } },
+      { requests: { some: { request: { trackingNo: text } } } },
+      { requests: { some: { request: { justification: text } } } },
+      { requests: { some: { request: { topicHistory: text } } } },
+      { requests: { some: { request: { description: text } } } },
+      { requests: { some: { request: { orgPositionText: text } } } },
+      { requests: { some: { request: { unit: { name: text } } } } },
       { resolutions: { some: { title: text } } },
       { resolutions: { some: { description: text } } },
       { resolutions: { some: { notes: text } } },
@@ -693,46 +1051,58 @@ export class BoardMinutesService {
         includesInsensitive(row.title, q) ||
         includesInsensitive(row.description, q) ||
         includesInsensitive(row.notes, q) ||
-        includesInsensitive(row.unit?.name, q),
+        row.executors.some((link) => includesInsensitive(link.unit.name, q)),
+    );
+    const linkedRequests = item.requests.map((row) => row.request);
+    const matchedRequest = linkedRequests.find(
+      (request) =>
+        includesInsensitive(request.subject, q) ||
+        includesInsensitive(request.trackingNo, q) ||
+        includesInsensitive(request.justification, q) ||
+        includesInsensitive(request.topicHistory, q) ||
+        includesInsensitive(request.description, q) ||
+        includesInsensitive(request.orgPositionText, q) ||
+        includesInsensitive(request.unit.name, q),
     );
     const matchIn = [
       ...(includesInsensitive(item.subject, q) ||
       includesInsensitive(item.body, q) ||
+      includesInsensitive(item.minutesNo, q) ||
       includesInsensitive(item.createdBy.fullName, q) ||
       item.members.some((row) => includesInsensitive(row.user.fullName, q))
         ? (['minutes'] as const)
         : []),
-      ...(item.request &&
-      (includesInsensitive(item.request.subject, q) ||
-        includesInsensitive(item.request.justification, q) ||
-        includesInsensitive(item.request.topicHistory, q) ||
-        includesInsensitive(item.request.description, q) ||
-        includesInsensitive(item.request.orgPositionText, q) ||
-        includesInsensitive(item.request.unit.name, q))
-        ? (['request'] as const)
-        : []),
+      ...(matchedRequest ? (['request'] as const) : []),
       ...(matchedResolutions.length ? (['resolution'] as const) : []),
     ];
     const snippet =
       makeSnippet(item.subject, q) ||
       makeSnippet(item.body, q) ||
-      makeSnippet(item.request?.subject, q) ||
-      makeSnippet(item.request?.justification, q) ||
-      makeSnippet(item.request?.topicHistory, q) ||
-      makeSnippet(item.request?.description, q) ||
+      makeSnippet(item.minutesNo, q) ||
+      makeSnippet(matchedRequest?.subject, q) ||
+      makeSnippet(matchedRequest?.justification, q) ||
+      makeSnippet(matchedRequest?.topicHistory, q) ||
+      makeSnippet(matchedRequest?.description, q) ||
       makeSnippet(matchedResolutions[0]?.title, q) ||
       makeSnippet(matchedResolutions[0]?.description, q) ||
       makeSnippet(matchedResolutions[0]?.notes, q) ||
       null;
+    const requests = linkedRequests.map((request) => ({
+      id: request.id,
+      subject: request.subject,
+      status: request.status,
+      trackingNo: request.trackingNo,
+    }));
     return {
       kind: 'minutes' as const,
       id: item.id,
+      minutesNo: item.minutesNo,
+      status: item.status,
       subject: item.subject,
       heldAt: toIsoDateOnly(item.heldAt),
       body: item.body,
-      request: item.request
-        ? { id: item.request.id, subject: item.request.subject, status: item.request.status }
-        : null,
+      request: requests[0] ?? null,
+      requests,
       resolutionCount: item._count.resolutions,
       matchIn,
       snippet,
@@ -771,7 +1141,7 @@ export class BoardMinutesService {
       unit: item.unit,
       snippet,
       matchIn: ['request'] as const,
-      minutesCount: item._count.minutes,
+      minutesCount: item._count.minutesRequests,
     };
   }
 
@@ -811,10 +1181,17 @@ export class BoardMinutesService {
   private serializeMinutes(
     item: Prisma.BoardMinutesGetPayload<{ include: typeof minutesInclude }>,
   ) {
+    const requests = item.requests.map((row) => row.request);
     return {
       id: item.id,
-      requestId: item.requestId,
-      request: item.request,
+      minutesNo: item.minutesNo,
+      minutesYear: item.minutesYear,
+      minutesSeq: item.minutesSeq,
+      status: item.status,
+      requestId: requests[0]?.id ?? null,
+      request: requests[0] ?? null,
+      requestIds: requests.map((row) => row.id),
+      requests,
       heldAt: toIsoDateOnly(item.heldAt),
       subject: item.subject,
       body: item.body,
@@ -849,10 +1226,17 @@ export class BoardMinutesService {
       { title: containsInsensitive(q) },
       { description: containsInsensitive(q) },
       { notes: containsInsensitive(q) },
-      { unit: { name: containsInsensitive(q) } },
+      { legalBasis: containsInsensitive(q) },
+      { proposerText: containsInsensitive(q) },
+      { executors: { some: { unit: { name: containsInsensitive(q) } } } },
+      { proposerUnit: { name: containsInsensitive(q) } },
+      { signatories: { some: { firstName: containsInsensitive(q) } } },
+      { signatories: { some: { lastName: containsInsensitive(q) } } },
+      { signatories: { some: { title: containsInsensitive(q) } } },
       { minutes: { subject: containsInsensitive(q) } },
       { minutes: { body: containsInsensitive(q) } },
-      { minutes: { request: { subject: containsInsensitive(q) } } },
+      { minutes: { minutesNo: containsInsensitive(q) } },
+      { minutes: { requests: { some: { request: { subject: containsInsensitive(q) } } } } },
     ];
   }
 
@@ -868,10 +1252,11 @@ export class BoardMinutesService {
       query.sortDir,
       {
         title: (dir) => ({ title: dir }),
-        unit: (dir) => ({ unit: { name: dir } }),
+        unit: (dir) => ({ executors: { _count: dir } }),
+        status: (dir) => ({ status: dir }),
         dueDate: (dir) => ({ dueDate: dir }),
         minutes: (dir) => ({ minutes: { subject: dir } }),
-        request: (dir) => ({ minutes: { request: { subject: dir } } }),
+        request: (dir) => ({ minutes: { requests: { _count: dir } } }),
         createdAt: (dir) => ({ createdAt: dir }),
       },
       fallback,
@@ -883,10 +1268,14 @@ export class BoardMinutesService {
     query: FindBoardResolutionsQueryDto,
     fallback?: Prisma.BoardMinutesResolutionOrderByWithRelationInput[],
   ) {
+    const filtered: Prisma.BoardMinutesResolutionWhereInput = {
+      ...where,
+      ...(query.status ? { status: query.status } : {}),
+    };
     const orderBy = this.resolutionOrderBy(query, fallback);
     if (!wantsPagination(query)) {
       const items = await this.prisma.boardMinutesResolution.findMany({
-        where,
+        where: filtered,
         orderBy,
         include: resolutionInclude,
       });
@@ -895,13 +1284,13 @@ export class BoardMinutesService {
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
       this.prisma.boardMinutesResolution.findMany({
-        where,
+        where: filtered,
         orderBy,
         skip,
         take,
         include: resolutionInclude,
       }),
-      this.prisma.boardMinutesResolution.count({ where }),
+      this.prisma.boardMinutesResolution.count({ where: filtered }),
     ]);
     return paginatedResult(
       items.map((item) => this.serializeResolution(item)),
@@ -919,19 +1308,141 @@ export class BoardMinutesService {
       minutesId: item.minutesId,
       title: item.title,
       description: item.description,
-      unitId: item.unitId,
-      unit: item.unit,
+      status: item.status,
+      unitId: item.executors[0]?.unit.id ?? null,
+      unit: item.executors[0]?.unit ?? null,
+      unitIds: item.executors.map((row) => row.unit.id),
+      units: item.executors.map((row) => row.unit),
+      dueKind: item.dueKind,
       dueDate: toIsoDateOnly(item.dueDate),
+      hasTopicHistory: item.hasTopicHistory,
+      legalBasis: item.legalBasis,
+      proposerKind: item.proposerKind,
+      proposerText: item.proposerText,
+      proposerUnitId: item.proposerUnitId,
+      proposerUnit: item.proposerUnit,
       notes: item.notes,
+      signatories: item.signatories.map((row) => ({
+        id: row.id,
+        sourceSignatoryId: row.sourceSignatoryId,
+        firstName: row.firstName,
+        lastName: row.lastName,
+        title: row.title,
+        signatureImageId: row.signatureImageId,
+        signedAt: toIsoDateOnly(row.signedAt),
+        sortOrder: row.sortOrder,
+      })),
       createdAt: item.createdAt.toISOString(),
       updatedAt: item.updatedAt.toISOString(),
       minutes: {
         id: item.minutes.id,
         subject: item.minutes.subject,
         heldAt: toIsoDateOnly(item.minutes.heldAt),
-        requestId: item.minutes.requestId,
-        request: item.minutes.request,
+        minutesNo: item.minutes.minutesNo,
+        status: item.minutes.status,
+        requestId: item.minutes.requests[0]?.request.id ?? null,
+        request: item.minutes.requests[0]?.request ?? null,
+        requests: item.minutes.requests.map((row) => row.request),
       },
     };
+  }
+
+  private resolveResolutionDue(
+    dto: { dueKind?: BoardResolutionDueKind; dueDate?: string | null },
+    current?: { dueKind: BoardResolutionDueKind; dueDate: Date | null },
+  ) {
+    const dueKind = dto.dueKind ?? current?.dueKind ?? BoardResolutionDueKind.DATE;
+    if (dueKind === BoardResolutionDueKind.ASAP) {
+      return { dueKind, dueDate: null as Date | null };
+    }
+    const dueDate =
+      dto.dueDate !== undefined
+        ? parseOptionalIsoDate(dto.dueDate) ?? null
+        : (current?.dueDate ?? null);
+    if (!dueDate) {
+      throw new BadRequestException('مهلت اجرا را وارد کنید');
+    }
+    return { dueKind, dueDate };
+  }
+
+  private resolveResolutionProposer(
+    dto: {
+      proposerKind?: BoardResolutionProposerKind;
+      proposerText?: string | null;
+      proposerUnitId?: string | null;
+    },
+    current?: {
+      proposerKind: BoardResolutionProposerKind;
+      proposerText: string | null;
+      proposerUnitId: string | null;
+    },
+  ) {
+    const proposerKind =
+      dto.proposerKind ?? current?.proposerKind ?? BoardResolutionProposerKind.TEXT;
+    if (proposerKind === BoardResolutionProposerKind.UNIT) {
+      const proposerUnitId =
+        dto.proposerUnitId !== undefined ? dto.proposerUnitId : current?.proposerUnitId;
+      if (!proposerUnitId) {
+        throw new BadRequestException('واحد پیشنهاددهنده را انتخاب کنید');
+      }
+      return { proposerKind, proposerText: null as string | null, proposerUnitId };
+    }
+    const proposerText =
+      dto.proposerText !== undefined
+        ? dto.proposerText?.trim() || null
+        : (current?.proposerText ?? null);
+    if (!proposerText) {
+      throw new BadRequestException('پیشنهاددهنده را وارد کنید');
+    }
+    return { proposerKind, proposerText, proposerUnitId: null as string | null };
+  }
+
+  private async normalizeResolutionSignatories(
+    rows?: BoardResolutionSignatoryDto[],
+  ): Promise<Prisma.BoardResolutionSignatoryCreateWithoutResolutionInput[] | undefined> {
+    if (rows === undefined) return undefined;
+    const imageIds = [...new Set(rows.map((row) => row.signatureImageId))];
+    if (imageIds.length) {
+      const count = await this.prisma.storedImage.count({ where: { id: { in: imageIds } } });
+      if (count !== imageIds.length) {
+        throw new BadRequestException('تصویر امضا معتبر نیست');
+      }
+    }
+    const sourceIds = [
+      ...new Set(
+        rows
+          .map((row) => row.sourceSignatoryId)
+          .filter((id): id is string => Boolean(id)),
+      ),
+    ];
+    const existingSources = sourceIds.length
+      ? await this.prisma.boardSignatory.findMany({
+          where: { id: { in: sourceIds } },
+          select: { id: true },
+        })
+      : [];
+    const sourceSet = new Set(existingSources.map((row) => row.id));
+    const seen = new Set<string>();
+    return rows.map((row, index) => {
+      const sourceId =
+        row.sourceSignatoryId && sourceSet.has(row.sourceSignatoryId)
+          ? row.sourceSignatoryId
+          : null;
+      if (sourceId) {
+        if (seen.has(sourceId)) {
+          throw new BadRequestException('یک دارنده حق امضا بیش از یک بار انتخاب شده است');
+        }
+        seen.add(sourceId);
+      }
+      return {
+        sourceSignatoryId: sourceId,
+        firstName: row.firstName,
+        lastName: row.lastName,
+        title: row.title,
+        signatureImageId: row.signatureImageId,
+        signedAt: parseOptionalIsoDate(row.signedAt) ?? null,
+        sortOrder: index,
+      };
+    });
   }
 }

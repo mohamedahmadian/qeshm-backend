@@ -1,0 +1,105 @@
+import { Transform } from 'class-transformer';
+import {
+  ArrayMaxSize,
+  IsArray,
+  IsBoolean,
+  IsLatitude,
+  IsLongitude,
+  IsOptional,
+  IsString,
+  IsUUID,
+  MaxLength,
+  MinLength,
+  ValidateIf,
+} from 'class-validator';
+import { emptyToNull, toBoolean, toOptionalNumber } from '../../common/dto-transform';
+import {
+  INSPECTION_MAX_AUDIO,
+  INSPECTION_MAX_IMAGES,
+  INSPECTION_MAX_VIDEO,
+} from '../inspection.constants';
+
+function trimString(value: unknown) {
+  return typeof value === 'string' ? value.trim() : value;
+}
+
+export class CreateInspectionFeedbackDto {
+  @IsUUID('4')
+  kindId: string;
+
+  @IsUUID('4')
+  categoryId: string;
+
+  @IsOptional()
+  @Transform(({ value }) => toBoolean(value, false))
+  @IsBoolean()
+  introduce?: boolean;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MinLength(2)
+  @MaxLength(80)
+  firstName?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MinLength(2)
+  @MaxLength(80)
+  lastName?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MinLength(8)
+  @MaxLength(20)
+  phone?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  body?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(2000)
+  address?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalNumber(value))
+  @ValidateIf((_, value) => value != null)
+  @IsLatitude()
+  latitude?: number | null;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalNumber(value))
+  @ValidateIf((_, value) => value != null)
+  @IsLongitude()
+  longitude?: number | null;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(INSPECTION_MAX_IMAGES)
+  @IsUUID('4', { each: true })
+  imageIds?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(INSPECTION_MAX_AUDIO)
+  @IsUUID('4', { each: true })
+  audioIds?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(INSPECTION_MAX_VIDEO)
+  @IsUUID('4', { each: true })
+  videoIds?: string[];
+}

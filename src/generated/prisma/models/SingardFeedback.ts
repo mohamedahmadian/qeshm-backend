@@ -39,7 +39,7 @@ export type SingardFeedbackSumAggregateOutputType = {
 export type SingardFeedbackMinAggregateOutputType = {
   id: string | null
   trackingCode: string | null
-  kind: $Enums.SingardFeedbackKind | null
+  kindId: string | null
   status: $Enums.SingardFeedbackStatus | null
   categoryId: string | null
   userId: string | null
@@ -61,7 +61,7 @@ export type SingardFeedbackMinAggregateOutputType = {
 export type SingardFeedbackMaxAggregateOutputType = {
   id: string | null
   trackingCode: string | null
-  kind: $Enums.SingardFeedbackKind | null
+  kindId: string | null
   status: $Enums.SingardFeedbackStatus | null
   categoryId: string | null
   userId: string | null
@@ -83,7 +83,7 @@ export type SingardFeedbackMaxAggregateOutputType = {
 export type SingardFeedbackCountAggregateOutputType = {
   id: number
   trackingCode: number
-  kind: number
+  kindId: number
   status: number
   categoryId: number
   userId: number
@@ -117,7 +117,7 @@ export type SingardFeedbackSumAggregateInputType = {
 export type SingardFeedbackMinAggregateInputType = {
   id?: true
   trackingCode?: true
-  kind?: true
+  kindId?: true
   status?: true
   categoryId?: true
   userId?: true
@@ -139,7 +139,7 @@ export type SingardFeedbackMinAggregateInputType = {
 export type SingardFeedbackMaxAggregateInputType = {
   id?: true
   trackingCode?: true
-  kind?: true
+  kindId?: true
   status?: true
   categoryId?: true
   userId?: true
@@ -161,7 +161,7 @@ export type SingardFeedbackMaxAggregateInputType = {
 export type SingardFeedbackCountAggregateInputType = {
   id?: true
   trackingCode?: true
-  kind?: true
+  kindId?: true
   status?: true
   categoryId?: true
   userId?: true
@@ -270,7 +270,7 @@ export type SingardFeedbackGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 export type SingardFeedbackGroupByOutputType = {
   id: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status: $Enums.SingardFeedbackStatus
   categoryId: string
   userId: string | null
@@ -315,7 +315,7 @@ export type SingardFeedbackWhereInput = {
   NOT?: Prisma.SingardFeedbackWhereInput | Prisma.SingardFeedbackWhereInput[]
   id?: Prisma.StringFilter<"SingardFeedback"> | string
   trackingCode?: Prisma.StringFilter<"SingardFeedback"> | string
-  kind?: Prisma.EnumSingardFeedbackKindFilter<"SingardFeedback"> | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFilter<"SingardFeedback"> | string
   status?: Prisma.EnumSingardFeedbackStatusFilter<"SingardFeedback"> | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFilter<"SingardFeedback"> | string
   userId?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
@@ -332,6 +332,7 @@ export type SingardFeedbackWhereInput = {
   repliedById?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SingardFeedback"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SingardFeedback"> | Date | string
+  kind?: Prisma.XOR<Prisma.SingardKindScalarRelationFilter, Prisma.SingardKindWhereInput>
   category?: Prisma.XOR<Prisma.SingardCategoryScalarRelationFilter, Prisma.SingardCategoryWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   repliedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -342,7 +343,7 @@ export type SingardFeedbackWhereInput = {
 export type SingardFeedbackOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
-  kind?: Prisma.SortOrder
+  kindId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -359,6 +360,7 @@ export type SingardFeedbackOrderByWithRelationInput = {
   repliedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  kind?: Prisma.SingardKindOrderByWithRelationInput
   category?: Prisma.SingardCategoryOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   repliedBy?: Prisma.UserOrderByWithRelationInput
@@ -372,7 +374,7 @@ export type SingardFeedbackWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SingardFeedbackWhereInput | Prisma.SingardFeedbackWhereInput[]
   OR?: Prisma.SingardFeedbackWhereInput[]
   NOT?: Prisma.SingardFeedbackWhereInput | Prisma.SingardFeedbackWhereInput[]
-  kind?: Prisma.EnumSingardFeedbackKindFilter<"SingardFeedback"> | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFilter<"SingardFeedback"> | string
   status?: Prisma.EnumSingardFeedbackStatusFilter<"SingardFeedback"> | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFilter<"SingardFeedback"> | string
   userId?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
@@ -389,6 +391,7 @@ export type SingardFeedbackWhereUniqueInput = Prisma.AtLeast<{
   repliedById?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SingardFeedback"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SingardFeedback"> | Date | string
+  kind?: Prisma.XOR<Prisma.SingardKindScalarRelationFilter, Prisma.SingardKindWhereInput>
   category?: Prisma.XOR<Prisma.SingardCategoryScalarRelationFilter, Prisma.SingardCategoryWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   repliedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -399,7 +402,7 @@ export type SingardFeedbackWhereUniqueInput = Prisma.AtLeast<{
 export type SingardFeedbackOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
-  kind?: Prisma.SortOrder
+  kindId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -429,7 +432,7 @@ export type SingardFeedbackScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SingardFeedbackScalarWhereWithAggregatesInput | Prisma.SingardFeedbackScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SingardFeedback"> | string
   trackingCode?: Prisma.StringWithAggregatesFilter<"SingardFeedback"> | string
-  kind?: Prisma.EnumSingardFeedbackKindWithAggregatesFilter<"SingardFeedback"> | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringWithAggregatesFilter<"SingardFeedback"> | string
   status?: Prisma.EnumSingardFeedbackStatusWithAggregatesFilter<"SingardFeedback"> | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringWithAggregatesFilter<"SingardFeedback"> | string
   userId?: Prisma.StringNullableWithAggregatesFilter<"SingardFeedback"> | string | null
@@ -451,7 +454,6 @@ export type SingardFeedbackScalarWhereWithAggregatesInput = {
 export type SingardFeedbackCreateInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
   status?: $Enums.SingardFeedbackStatus
   isAnonymous?: boolean
   firstName?: string | null
@@ -465,6 +467,7 @@ export type SingardFeedbackCreateInput = {
   repliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  kind: Prisma.SingardKindCreateNestedOneWithoutFeedbacksInput
   category: Prisma.SingardCategoryCreateNestedOneWithoutFeedbacksInput
   user?: Prisma.UserCreateNestedOneWithoutSingardFeedbacksInput
   repliedBy?: Prisma.UserCreateNestedOneWithoutSingardRepliesInput
@@ -475,7 +478,7 @@ export type SingardFeedbackCreateInput = {
 export type SingardFeedbackUncheckedCreateInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   categoryId: string
   userId?: string | null
@@ -499,7 +502,6 @@ export type SingardFeedbackUncheckedCreateInput = {
 export type SingardFeedbackUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -513,6 +515,7 @@ export type SingardFeedbackUpdateInput = {
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.SingardKindUpdateOneRequiredWithoutFeedbacksNestedInput
   category?: Prisma.SingardCategoryUpdateOneRequiredWithoutFeedbacksNestedInput
   user?: Prisma.UserUpdateOneWithoutSingardFeedbacksNestedInput
   repliedBy?: Prisma.UserUpdateOneWithoutSingardRepliesNestedInput
@@ -523,7 +526,7 @@ export type SingardFeedbackUpdateInput = {
 export type SingardFeedbackUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -547,7 +550,7 @@ export type SingardFeedbackUncheckedUpdateInput = {
 export type SingardFeedbackCreateManyInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   categoryId: string
   userId?: string | null
@@ -569,7 +572,6 @@ export type SingardFeedbackCreateManyInput = {
 export type SingardFeedbackUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -588,7 +590,7 @@ export type SingardFeedbackUpdateManyMutationInput = {
 export type SingardFeedbackUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -620,7 +622,7 @@ export type SingardFeedbackOrderByRelationAggregateInput = {
 export type SingardFeedbackCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
-  kind?: Prisma.SortOrder
+  kindId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -647,7 +649,7 @@ export type SingardFeedbackAvgOrderByAggregateInput = {
 export type SingardFeedbackMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
-  kind?: Prisma.SortOrder
+  kindId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -669,7 +671,7 @@ export type SingardFeedbackMaxOrderByAggregateInput = {
 export type SingardFeedbackMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
-  kind?: Prisma.SortOrder
+  kindId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -782,6 +784,48 @@ export type SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput = {
   deleteMany?: Prisma.SingardFeedbackScalarWhereInput | Prisma.SingardFeedbackScalarWhereInput[]
 }
 
+export type SingardFeedbackCreateNestedManyWithoutKindInput = {
+  create?: Prisma.XOR<Prisma.SingardFeedbackCreateWithoutKindInput, Prisma.SingardFeedbackUncheckedCreateWithoutKindInput> | Prisma.SingardFeedbackCreateWithoutKindInput[] | Prisma.SingardFeedbackUncheckedCreateWithoutKindInput[]
+  connectOrCreate?: Prisma.SingardFeedbackCreateOrConnectWithoutKindInput | Prisma.SingardFeedbackCreateOrConnectWithoutKindInput[]
+  createMany?: Prisma.SingardFeedbackCreateManyKindInputEnvelope
+  connect?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+}
+
+export type SingardFeedbackUncheckedCreateNestedManyWithoutKindInput = {
+  create?: Prisma.XOR<Prisma.SingardFeedbackCreateWithoutKindInput, Prisma.SingardFeedbackUncheckedCreateWithoutKindInput> | Prisma.SingardFeedbackCreateWithoutKindInput[] | Prisma.SingardFeedbackUncheckedCreateWithoutKindInput[]
+  connectOrCreate?: Prisma.SingardFeedbackCreateOrConnectWithoutKindInput | Prisma.SingardFeedbackCreateOrConnectWithoutKindInput[]
+  createMany?: Prisma.SingardFeedbackCreateManyKindInputEnvelope
+  connect?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+}
+
+export type SingardFeedbackUpdateManyWithoutKindNestedInput = {
+  create?: Prisma.XOR<Prisma.SingardFeedbackCreateWithoutKindInput, Prisma.SingardFeedbackUncheckedCreateWithoutKindInput> | Prisma.SingardFeedbackCreateWithoutKindInput[] | Prisma.SingardFeedbackUncheckedCreateWithoutKindInput[]
+  connectOrCreate?: Prisma.SingardFeedbackCreateOrConnectWithoutKindInput | Prisma.SingardFeedbackCreateOrConnectWithoutKindInput[]
+  upsert?: Prisma.SingardFeedbackUpsertWithWhereUniqueWithoutKindInput | Prisma.SingardFeedbackUpsertWithWhereUniqueWithoutKindInput[]
+  createMany?: Prisma.SingardFeedbackCreateManyKindInputEnvelope
+  set?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+  disconnect?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+  delete?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+  connect?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+  update?: Prisma.SingardFeedbackUpdateWithWhereUniqueWithoutKindInput | Prisma.SingardFeedbackUpdateWithWhereUniqueWithoutKindInput[]
+  updateMany?: Prisma.SingardFeedbackUpdateManyWithWhereWithoutKindInput | Prisma.SingardFeedbackUpdateManyWithWhereWithoutKindInput[]
+  deleteMany?: Prisma.SingardFeedbackScalarWhereInput | Prisma.SingardFeedbackScalarWhereInput[]
+}
+
+export type SingardFeedbackUncheckedUpdateManyWithoutKindNestedInput = {
+  create?: Prisma.XOR<Prisma.SingardFeedbackCreateWithoutKindInput, Prisma.SingardFeedbackUncheckedCreateWithoutKindInput> | Prisma.SingardFeedbackCreateWithoutKindInput[] | Prisma.SingardFeedbackUncheckedCreateWithoutKindInput[]
+  connectOrCreate?: Prisma.SingardFeedbackCreateOrConnectWithoutKindInput | Prisma.SingardFeedbackCreateOrConnectWithoutKindInput[]
+  upsert?: Prisma.SingardFeedbackUpsertWithWhereUniqueWithoutKindInput | Prisma.SingardFeedbackUpsertWithWhereUniqueWithoutKindInput[]
+  createMany?: Prisma.SingardFeedbackCreateManyKindInputEnvelope
+  set?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+  disconnect?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+  delete?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+  connect?: Prisma.SingardFeedbackWhereUniqueInput | Prisma.SingardFeedbackWhereUniqueInput[]
+  update?: Prisma.SingardFeedbackUpdateWithWhereUniqueWithoutKindInput | Prisma.SingardFeedbackUpdateWithWhereUniqueWithoutKindInput[]
+  updateMany?: Prisma.SingardFeedbackUpdateManyWithWhereWithoutKindInput | Prisma.SingardFeedbackUpdateManyWithWhereWithoutKindInput[]
+  deleteMany?: Prisma.SingardFeedbackScalarWhereInput | Prisma.SingardFeedbackScalarWhereInput[]
+}
+
 export type SingardFeedbackCreateNestedManyWithoutCategoryInput = {
   create?: Prisma.XOR<Prisma.SingardFeedbackCreateWithoutCategoryInput, Prisma.SingardFeedbackUncheckedCreateWithoutCategoryInput> | Prisma.SingardFeedbackCreateWithoutCategoryInput[] | Prisma.SingardFeedbackUncheckedCreateWithoutCategoryInput[]
   connectOrCreate?: Prisma.SingardFeedbackCreateOrConnectWithoutCategoryInput | Prisma.SingardFeedbackCreateOrConnectWithoutCategoryInput[]
@@ -824,10 +868,6 @@ export type SingardFeedbackUncheckedUpdateManyWithoutCategoryNestedInput = {
   deleteMany?: Prisma.SingardFeedbackScalarWhereInput | Prisma.SingardFeedbackScalarWhereInput[]
 }
 
-export type EnumSingardFeedbackKindFieldUpdateOperationsInput = {
-  set?: $Enums.SingardFeedbackKind
-}
-
 export type EnumSingardFeedbackStatusFieldUpdateOperationsInput = {
   set?: $Enums.SingardFeedbackStatus
 }
@@ -863,7 +903,6 @@ export type SingardFeedbackUpdateOneRequiredWithoutActivitiesNestedInput = {
 export type SingardFeedbackCreateWithoutUserInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
   status?: $Enums.SingardFeedbackStatus
   isAnonymous?: boolean
   firstName?: string | null
@@ -877,6 +916,7 @@ export type SingardFeedbackCreateWithoutUserInput = {
   repliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  kind: Prisma.SingardKindCreateNestedOneWithoutFeedbacksInput
   category: Prisma.SingardCategoryCreateNestedOneWithoutFeedbacksInput
   repliedBy?: Prisma.UserCreateNestedOneWithoutSingardRepliesInput
   attachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFeedbackInput
@@ -886,7 +926,7 @@ export type SingardFeedbackCreateWithoutUserInput = {
 export type SingardFeedbackUncheckedCreateWithoutUserInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   categoryId: string
   isAnonymous?: boolean
@@ -919,7 +959,6 @@ export type SingardFeedbackCreateManyUserInputEnvelope = {
 export type SingardFeedbackCreateWithoutRepliedByInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
   status?: $Enums.SingardFeedbackStatus
   isAnonymous?: boolean
   firstName?: string | null
@@ -933,6 +972,7 @@ export type SingardFeedbackCreateWithoutRepliedByInput = {
   repliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  kind: Prisma.SingardKindCreateNestedOneWithoutFeedbacksInput
   category: Prisma.SingardCategoryCreateNestedOneWithoutFeedbacksInput
   user?: Prisma.UserCreateNestedOneWithoutSingardFeedbacksInput
   attachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFeedbackInput
@@ -942,7 +982,7 @@ export type SingardFeedbackCreateWithoutRepliedByInput = {
 export type SingardFeedbackUncheckedCreateWithoutRepliedByInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   categoryId: string
   userId?: string | null
@@ -994,7 +1034,7 @@ export type SingardFeedbackScalarWhereInput = {
   NOT?: Prisma.SingardFeedbackScalarWhereInput | Prisma.SingardFeedbackScalarWhereInput[]
   id?: Prisma.StringFilter<"SingardFeedback"> | string
   trackingCode?: Prisma.StringFilter<"SingardFeedback"> | string
-  kind?: Prisma.EnumSingardFeedbackKindFilter<"SingardFeedback"> | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFilter<"SingardFeedback"> | string
   status?: Prisma.EnumSingardFeedbackStatusFilter<"SingardFeedback"> | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFilter<"SingardFeedback"> | string
   userId?: Prisma.StringNullableFilter<"SingardFeedback"> | string | null
@@ -1029,10 +1069,9 @@ export type SingardFeedbackUpdateManyWithWhereWithoutRepliedByInput = {
   data: Prisma.XOR<Prisma.SingardFeedbackUpdateManyMutationInput, Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByInput>
 }
 
-export type SingardFeedbackCreateWithoutCategoryInput = {
+export type SingardFeedbackCreateWithoutKindInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
   status?: $Enums.SingardFeedbackStatus
   isAnonymous?: boolean
   firstName?: string | null
@@ -1046,6 +1085,79 @@ export type SingardFeedbackCreateWithoutCategoryInput = {
   repliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  category: Prisma.SingardCategoryCreateNestedOneWithoutFeedbacksInput
+  user?: Prisma.UserCreateNestedOneWithoutSingardFeedbacksInput
+  repliedBy?: Prisma.UserCreateNestedOneWithoutSingardRepliesInput
+  attachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFeedbackInput
+  activities?: Prisma.SingardActivityCreateNestedManyWithoutFeedbackInput
+}
+
+export type SingardFeedbackUncheckedCreateWithoutKindInput = {
+  id?: string
+  trackingCode: string
+  status?: $Enums.SingardFeedbackStatus
+  categoryId: string
+  userId?: string | null
+  isAnonymous?: boolean
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  replyBody?: string | null
+  repliedAt?: Date | string | null
+  repliedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFeedbackInput
+  activities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutFeedbackInput
+}
+
+export type SingardFeedbackCreateOrConnectWithoutKindInput = {
+  where: Prisma.SingardFeedbackWhereUniqueInput
+  create: Prisma.XOR<Prisma.SingardFeedbackCreateWithoutKindInput, Prisma.SingardFeedbackUncheckedCreateWithoutKindInput>
+}
+
+export type SingardFeedbackCreateManyKindInputEnvelope = {
+  data: Prisma.SingardFeedbackCreateManyKindInput | Prisma.SingardFeedbackCreateManyKindInput[]
+  skipDuplicates?: boolean
+}
+
+export type SingardFeedbackUpsertWithWhereUniqueWithoutKindInput = {
+  where: Prisma.SingardFeedbackWhereUniqueInput
+  update: Prisma.XOR<Prisma.SingardFeedbackUpdateWithoutKindInput, Prisma.SingardFeedbackUncheckedUpdateWithoutKindInput>
+  create: Prisma.XOR<Prisma.SingardFeedbackCreateWithoutKindInput, Prisma.SingardFeedbackUncheckedCreateWithoutKindInput>
+}
+
+export type SingardFeedbackUpdateWithWhereUniqueWithoutKindInput = {
+  where: Prisma.SingardFeedbackWhereUniqueInput
+  data: Prisma.XOR<Prisma.SingardFeedbackUpdateWithoutKindInput, Prisma.SingardFeedbackUncheckedUpdateWithoutKindInput>
+}
+
+export type SingardFeedbackUpdateManyWithWhereWithoutKindInput = {
+  where: Prisma.SingardFeedbackScalarWhereInput
+  data: Prisma.XOR<Prisma.SingardFeedbackUpdateManyMutationInput, Prisma.SingardFeedbackUncheckedUpdateManyWithoutKindInput>
+}
+
+export type SingardFeedbackCreateWithoutCategoryInput = {
+  id?: string
+  trackingCode: string
+  status?: $Enums.SingardFeedbackStatus
+  isAnonymous?: boolean
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  replyBody?: string | null
+  repliedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  kind: Prisma.SingardKindCreateNestedOneWithoutFeedbacksInput
   user?: Prisma.UserCreateNestedOneWithoutSingardFeedbacksInput
   repliedBy?: Prisma.UserCreateNestedOneWithoutSingardRepliesInput
   attachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFeedbackInput
@@ -1055,7 +1167,7 @@ export type SingardFeedbackCreateWithoutCategoryInput = {
 export type SingardFeedbackUncheckedCreateWithoutCategoryInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   userId?: string | null
   isAnonymous?: boolean
@@ -1104,7 +1216,6 @@ export type SingardFeedbackUpdateManyWithWhereWithoutCategoryInput = {
 export type SingardFeedbackCreateWithoutAttachmentsInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
   status?: $Enums.SingardFeedbackStatus
   isAnonymous?: boolean
   firstName?: string | null
@@ -1118,6 +1229,7 @@ export type SingardFeedbackCreateWithoutAttachmentsInput = {
   repliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  kind: Prisma.SingardKindCreateNestedOneWithoutFeedbacksInput
   category: Prisma.SingardCategoryCreateNestedOneWithoutFeedbacksInput
   user?: Prisma.UserCreateNestedOneWithoutSingardFeedbacksInput
   repliedBy?: Prisma.UserCreateNestedOneWithoutSingardRepliesInput
@@ -1127,7 +1239,7 @@ export type SingardFeedbackCreateWithoutAttachmentsInput = {
 export type SingardFeedbackUncheckedCreateWithoutAttachmentsInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   categoryId: string
   userId?: string | null
@@ -1166,7 +1278,6 @@ export type SingardFeedbackUpdateToOneWithWhereWithoutAttachmentsInput = {
 export type SingardFeedbackUpdateWithoutAttachmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1180,6 +1291,7 @@ export type SingardFeedbackUpdateWithoutAttachmentsInput = {
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.SingardKindUpdateOneRequiredWithoutFeedbacksNestedInput
   category?: Prisma.SingardCategoryUpdateOneRequiredWithoutFeedbacksNestedInput
   user?: Prisma.UserUpdateOneWithoutSingardFeedbacksNestedInput
   repliedBy?: Prisma.UserUpdateOneWithoutSingardRepliesNestedInput
@@ -1189,7 +1301,7 @@ export type SingardFeedbackUpdateWithoutAttachmentsInput = {
 export type SingardFeedbackUncheckedUpdateWithoutAttachmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1212,7 +1324,6 @@ export type SingardFeedbackUncheckedUpdateWithoutAttachmentsInput = {
 export type SingardFeedbackCreateWithoutActivitiesInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
   status?: $Enums.SingardFeedbackStatus
   isAnonymous?: boolean
   firstName?: string | null
@@ -1226,6 +1337,7 @@ export type SingardFeedbackCreateWithoutActivitiesInput = {
   repliedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  kind: Prisma.SingardKindCreateNestedOneWithoutFeedbacksInput
   category: Prisma.SingardCategoryCreateNestedOneWithoutFeedbacksInput
   user?: Prisma.UserCreateNestedOneWithoutSingardFeedbacksInput
   repliedBy?: Prisma.UserCreateNestedOneWithoutSingardRepliesInput
@@ -1235,7 +1347,7 @@ export type SingardFeedbackCreateWithoutActivitiesInput = {
 export type SingardFeedbackUncheckedCreateWithoutActivitiesInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   categoryId: string
   userId?: string | null
@@ -1274,7 +1386,6 @@ export type SingardFeedbackUpdateToOneWithWhereWithoutActivitiesInput = {
 export type SingardFeedbackUpdateWithoutActivitiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1288,6 +1399,7 @@ export type SingardFeedbackUpdateWithoutActivitiesInput = {
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.SingardKindUpdateOneRequiredWithoutFeedbacksNestedInput
   category?: Prisma.SingardCategoryUpdateOneRequiredWithoutFeedbacksNestedInput
   user?: Prisma.UserUpdateOneWithoutSingardFeedbacksNestedInput
   repliedBy?: Prisma.UserUpdateOneWithoutSingardRepliesNestedInput
@@ -1297,7 +1409,7 @@ export type SingardFeedbackUpdateWithoutActivitiesInput = {
 export type SingardFeedbackUncheckedUpdateWithoutActivitiesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1320,7 +1432,7 @@ export type SingardFeedbackUncheckedUpdateWithoutActivitiesInput = {
 export type SingardFeedbackCreateManyUserInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   categoryId: string
   isAnonymous?: boolean
@@ -1341,7 +1453,7 @@ export type SingardFeedbackCreateManyUserInput = {
 export type SingardFeedbackCreateManyRepliedByInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   categoryId: string
   userId?: string | null
@@ -1362,7 +1474,6 @@ export type SingardFeedbackCreateManyRepliedByInput = {
 export type SingardFeedbackUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1376,6 +1487,7 @@ export type SingardFeedbackUpdateWithoutUserInput = {
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.SingardKindUpdateOneRequiredWithoutFeedbacksNestedInput
   category?: Prisma.SingardCategoryUpdateOneRequiredWithoutFeedbacksNestedInput
   repliedBy?: Prisma.UserUpdateOneWithoutSingardRepliesNestedInput
   attachments?: Prisma.SingardAttachmentUpdateManyWithoutFeedbackNestedInput
@@ -1385,7 +1497,7 @@ export type SingardFeedbackUpdateWithoutUserInput = {
 export type SingardFeedbackUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1408,7 +1520,7 @@ export type SingardFeedbackUncheckedUpdateWithoutUserInput = {
 export type SingardFeedbackUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1429,7 +1541,6 @@ export type SingardFeedbackUncheckedUpdateManyWithoutUserInput = {
 export type SingardFeedbackUpdateWithoutRepliedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1443,6 +1554,7 @@ export type SingardFeedbackUpdateWithoutRepliedByInput = {
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.SingardKindUpdateOneRequiredWithoutFeedbacksNestedInput
   category?: Prisma.SingardCategoryUpdateOneRequiredWithoutFeedbacksNestedInput
   user?: Prisma.UserUpdateOneWithoutSingardFeedbacksNestedInput
   attachments?: Prisma.SingardAttachmentUpdateManyWithoutFeedbackNestedInput
@@ -1452,7 +1564,7 @@ export type SingardFeedbackUpdateWithoutRepliedByInput = {
 export type SingardFeedbackUncheckedUpdateWithoutRepliedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1475,7 +1587,7 @@ export type SingardFeedbackUncheckedUpdateWithoutRepliedByInput = {
 export type SingardFeedbackUncheckedUpdateManyWithoutRepliedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1493,10 +1605,98 @@ export type SingardFeedbackUncheckedUpdateManyWithoutRepliedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type SingardFeedbackCreateManyKindInput = {
+  id?: string
+  trackingCode: string
+  status?: $Enums.SingardFeedbackStatus
+  categoryId: string
+  userId?: string | null
+  isAnonymous?: boolean
+  firstName?: string | null
+  lastName?: string | null
+  phone?: string | null
+  body?: string | null
+  address?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  replyBody?: string | null
+  repliedAt?: Date | string | null
+  repliedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type SingardFeedbackUpdateWithoutKindInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
+  isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  category?: Prisma.SingardCategoryUpdateOneRequiredWithoutFeedbacksNestedInput
+  user?: Prisma.UserUpdateOneWithoutSingardFeedbacksNestedInput
+  repliedBy?: Prisma.UserUpdateOneWithoutSingardRepliesNestedInput
+  attachments?: Prisma.SingardAttachmentUpdateManyWithoutFeedbackNestedInput
+  activities?: Prisma.SingardActivityUpdateManyWithoutFeedbackNestedInput
+}
+
+export type SingardFeedbackUncheckedUpdateWithoutKindInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
+  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFeedbackNestedInput
+  activities?: Prisma.SingardActivityUncheckedUpdateManyWithoutFeedbackNestedInput
+}
+
+export type SingardFeedbackUncheckedUpdateManyWithoutKindInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
+  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  replyBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  repliedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type SingardFeedbackCreateManyCategoryInput = {
   id?: string
   trackingCode: string
-  kind: $Enums.SingardFeedbackKind
+  kindId: string
   status?: $Enums.SingardFeedbackStatus
   userId?: string | null
   isAnonymous?: boolean
@@ -1517,7 +1717,6 @@ export type SingardFeedbackCreateManyCategoryInput = {
 export type SingardFeedbackUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1531,6 +1730,7 @@ export type SingardFeedbackUpdateWithoutCategoryInput = {
   repliedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  kind?: Prisma.SingardKindUpdateOneRequiredWithoutFeedbacksNestedInput
   user?: Prisma.UserUpdateOneWithoutSingardFeedbacksNestedInput
   repliedBy?: Prisma.UserUpdateOneWithoutSingardRepliesNestedInput
   attachments?: Prisma.SingardAttachmentUpdateManyWithoutFeedbackNestedInput
@@ -1540,7 +1740,7 @@ export type SingardFeedbackUpdateWithoutCategoryInput = {
 export type SingardFeedbackUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1563,7 +1763,7 @@ export type SingardFeedbackUncheckedUpdateWithoutCategoryInput = {
 export type SingardFeedbackUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   trackingCode?: Prisma.StringFieldUpdateOperationsInput | string
-  kind?: Prisma.EnumSingardFeedbackKindFieldUpdateOperationsInput | $Enums.SingardFeedbackKind
+  kindId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSingardFeedbackStatusFieldUpdateOperationsInput | $Enums.SingardFeedbackStatus
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAnonymous?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1624,7 +1824,7 @@ export type SingardFeedbackCountOutputTypeCountActivitiesArgs<ExtArgs extends ru
 export type SingardFeedbackSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   trackingCode?: boolean
-  kind?: boolean
+  kindId?: boolean
   status?: boolean
   categoryId?: boolean
   userId?: boolean
@@ -1641,6 +1841,7 @@ export type SingardFeedbackSelect<ExtArgs extends runtime.Types.Extensions.Inter
   repliedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  kind?: boolean | Prisma.SingardKindDefaultArgs<ExtArgs>
   category?: boolean | Prisma.SingardCategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.SingardFeedback$userArgs<ExtArgs>
   repliedBy?: boolean | Prisma.SingardFeedback$repliedByArgs<ExtArgs>
@@ -1652,7 +1853,7 @@ export type SingardFeedbackSelect<ExtArgs extends runtime.Types.Extensions.Inter
 export type SingardFeedbackSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   trackingCode?: boolean
-  kind?: boolean
+  kindId?: boolean
   status?: boolean
   categoryId?: boolean
   userId?: boolean
@@ -1669,6 +1870,7 @@ export type SingardFeedbackSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   repliedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  kind?: boolean | Prisma.SingardKindDefaultArgs<ExtArgs>
   category?: boolean | Prisma.SingardCategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.SingardFeedback$userArgs<ExtArgs>
   repliedBy?: boolean | Prisma.SingardFeedback$repliedByArgs<ExtArgs>
@@ -1677,7 +1879,7 @@ export type SingardFeedbackSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
 export type SingardFeedbackSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   trackingCode?: boolean
-  kind?: boolean
+  kindId?: boolean
   status?: boolean
   categoryId?: boolean
   userId?: boolean
@@ -1694,6 +1896,7 @@ export type SingardFeedbackSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   repliedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  kind?: boolean | Prisma.SingardKindDefaultArgs<ExtArgs>
   category?: boolean | Prisma.SingardCategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.SingardFeedback$userArgs<ExtArgs>
   repliedBy?: boolean | Prisma.SingardFeedback$repliedByArgs<ExtArgs>
@@ -1702,7 +1905,7 @@ export type SingardFeedbackSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
 export type SingardFeedbackSelectScalar = {
   id?: boolean
   trackingCode?: boolean
-  kind?: boolean
+  kindId?: boolean
   status?: boolean
   categoryId?: boolean
   userId?: boolean
@@ -1721,8 +1924,9 @@ export type SingardFeedbackSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SingardFeedbackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackingCode" | "kind" | "status" | "categoryId" | "userId" | "isAnonymous" | "firstName" | "lastName" | "phone" | "body" | "address" | "latitude" | "longitude" | "replyBody" | "repliedAt" | "repliedById" | "createdAt" | "updatedAt", ExtArgs["result"]["singardFeedback"]>
+export type SingardFeedbackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackingCode" | "kindId" | "status" | "categoryId" | "userId" | "isAnonymous" | "firstName" | "lastName" | "phone" | "body" | "address" | "latitude" | "longitude" | "replyBody" | "repliedAt" | "repliedById" | "createdAt" | "updatedAt", ExtArgs["result"]["singardFeedback"]>
 export type SingardFeedbackInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  kind?: boolean | Prisma.SingardKindDefaultArgs<ExtArgs>
   category?: boolean | Prisma.SingardCategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.SingardFeedback$userArgs<ExtArgs>
   repliedBy?: boolean | Prisma.SingardFeedback$repliedByArgs<ExtArgs>
@@ -1731,11 +1935,13 @@ export type SingardFeedbackInclude<ExtArgs extends runtime.Types.Extensions.Inte
   _count?: boolean | Prisma.SingardFeedbackCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SingardFeedbackIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  kind?: boolean | Prisma.SingardKindDefaultArgs<ExtArgs>
   category?: boolean | Prisma.SingardCategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.SingardFeedback$userArgs<ExtArgs>
   repliedBy?: boolean | Prisma.SingardFeedback$repliedByArgs<ExtArgs>
 }
 export type SingardFeedbackIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  kind?: boolean | Prisma.SingardKindDefaultArgs<ExtArgs>
   category?: boolean | Prisma.SingardCategoryDefaultArgs<ExtArgs>
   user?: boolean | Prisma.SingardFeedback$userArgs<ExtArgs>
   repliedBy?: boolean | Prisma.SingardFeedback$repliedByArgs<ExtArgs>
@@ -1744,6 +1950,7 @@ export type SingardFeedbackIncludeUpdateManyAndReturn<ExtArgs extends runtime.Ty
 export type $SingardFeedbackPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SingardFeedback"
   objects: {
+    kind: Prisma.$SingardKindPayload<ExtArgs>
     category: Prisma.$SingardCategoryPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
     repliedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -1753,7 +1960,7 @@ export type $SingardFeedbackPayload<ExtArgs extends runtime.Types.Extensions.Int
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     trackingCode: string
-    kind: $Enums.SingardFeedbackKind
+    kindId: string
     status: $Enums.SingardFeedbackStatus
     categoryId: string
     userId: string | null
@@ -2164,6 +2371,7 @@ readonly fields: SingardFeedbackFieldRefs;
  */
 export interface Prisma__SingardFeedbackClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  kind<T extends Prisma.SingardKindDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SingardKindDefaultArgs<ExtArgs>>): Prisma.Prisma__SingardKindClient<runtime.Types.Result.GetResult<Prisma.$SingardKindPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.SingardCategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SingardCategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__SingardCategoryClient<runtime.Types.Result.GetResult<Prisma.$SingardCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.SingardFeedback$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SingardFeedback$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   repliedBy<T extends Prisma.SingardFeedback$repliedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SingardFeedback$repliedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2200,7 +2408,7 @@ export interface Prisma__SingardFeedbackClient<T, Null = never, ExtArgs extends 
 export interface SingardFeedbackFieldRefs {
   readonly id: Prisma.FieldRef<"SingardFeedback", 'String'>
   readonly trackingCode: Prisma.FieldRef<"SingardFeedback", 'String'>
-  readonly kind: Prisma.FieldRef<"SingardFeedback", 'SingardFeedbackKind'>
+  readonly kindId: Prisma.FieldRef<"SingardFeedback", 'String'>
   readonly status: Prisma.FieldRef<"SingardFeedback", 'SingardFeedbackStatus'>
   readonly categoryId: Prisma.FieldRef<"SingardFeedback", 'String'>
   readonly userId: Prisma.FieldRef<"SingardFeedback", 'String'>

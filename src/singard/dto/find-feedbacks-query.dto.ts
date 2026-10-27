@@ -3,7 +3,7 @@ import { IsIn, IsOptional, IsUUID, Matches, ValidateIf } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
-import { singardFeedbackKinds, singardFeedbackStatuses } from '../singard.constants';
+import { singardFeedbackStatuses } from '../singard.constants';
 
 export const singardFeedbackSortFields = [
   'trackingCode',
@@ -30,8 +30,9 @@ export class FindSingardFeedbacksQueryDto extends PaginationQueryDto {
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
-  @IsIn([...singardFeedbackKinds])
-  kind?: (typeof singardFeedbackKinds)[number];
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  kindId?: string;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

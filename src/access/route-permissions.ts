@@ -6,6 +6,7 @@ const PUBLIC_ROUTES: { method?: string; prefix: string }[] = [
   { prefix: '/public/profiles' },
   { prefix: '/public/projects' },
   { prefix: '/public/singard' },
+  { prefix: '/public/inspection' },
   { method: 'GET', prefix: '/images' },
   { method: 'GET', prefix: '/files' },
 ];
@@ -35,6 +36,8 @@ const LOOKUP_COLLECTIONS = new Set([
   '/projects/lookups',
   '/projects/groups',
   '/singard/categories',
+  '/inspection/categories',
+  '/inspection/kinds',
 ]);
 
 type RoutePermission = {
@@ -165,8 +168,15 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { method: 'POST', prefix: '/singard/mine', permissions: ['singard.submit'] },
   { prefix: '/singard/mine', permissions: ['singard.mine'] },
   { prefix: '/singard/reports', permissions: ['singard.reports'] },
+  { prefix: '/singard/kinds', permissions: ['singard.kinds'] },
   { prefix: '/singard/categories', permissions: ['singard.categories'] },
   { prefix: '/singard/feedbacks', permissions: ['singard.inbox'] },
+  { method: 'POST', prefix: '/inspection/mine', permissions: ['inspection.submit'] },
+  { prefix: '/inspection/mine', permissions: ['inspection.mine'] },
+  { prefix: '/inspection/reports', permissions: ['inspection.reports'] },
+  { prefix: '/inspection/kinds', permissions: ['inspection.kinds'] },
+  { prefix: '/inspection/categories', permissions: ['inspection.categories'] },
+  { prefix: '/inspection/feedbacks', permissions: ['inspection.inbox'] },
   {
     prefix: '/port-sales-reports/mine/subsidies',
     permissions: ['stakeholders.my-subsidies'],
@@ -211,6 +221,11 @@ export type AccessDecision =
 export function isSingardApiPath(rawPath: string) {
   const path = normalizeApiPath(rawPath);
   return path === '/singard' || path.startsWith('/singard/');
+}
+
+export function isInspectionApiPath(rawPath: string) {
+  const path = normalizeApiPath(rawPath);
+  return path === '/inspection' || path.startsWith('/inspection/');
 }
 
 function normalizeApiPath(rawPath: string) {

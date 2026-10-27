@@ -92,19 +92,28 @@ export const ModelName = {
   Role: 'Role',
   UserRole: 'UserRole',
   RolePermission: 'RolePermission',
+  SingardKind: 'SingardKind',
   SingardCategory: 'SingardCategory',
   SingardFeedback: 'SingardFeedback',
   SingardAttachment: 'SingardAttachment',
   SingardActivity: 'SingardActivity',
+  InspectionKind: 'InspectionKind',
+  InspectionCategory: 'InspectionCategory',
+  InspectionFeedback: 'InspectionFeedback',
+  InspectionAttachment: 'InspectionAttachment',
+  InspectionActivity: 'InspectionActivity',
   BoardRequest: 'BoardRequest',
   BoardSignatory: 'BoardSignatory',
   BoardAttachment: 'BoardAttachment',
   BoardStageUnit: 'BoardStageUnit',
   BoardStagePosition: 'BoardStagePosition',
   BoardMinutes: 'BoardMinutes',
+  BoardMinutesRequest: 'BoardMinutesRequest',
   BoardMinutesMember: 'BoardMinutesMember',
   BoardMinutesAttachment: 'BoardMinutesAttachment',
   BoardMinutesResolution: 'BoardMinutesResolution',
+  BoardMinutesResolutionUnit: 'BoardMinutesResolutionUnit',
+  BoardResolutionSignatory: 'BoardResolutionSignatory',
   PortSalesReport: 'PortSalesReport',
   PortTicketSale: 'PortTicketSale',
   PortTicketWeeklyQuota: 'PortTicketWeeklyQuota',
@@ -842,6 +851,20 @@ export const RolePermissionScalarFieldEnum = {
 export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
 
 
+export const SingardKindScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  icon: 'icon',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SingardKindScalarFieldEnum = (typeof SingardKindScalarFieldEnum)[keyof typeof SingardKindScalarFieldEnum]
+
+
 export const SingardCategoryScalarFieldEnum = {
   id: 'id',
   parentId: 'parentId',
@@ -859,7 +882,7 @@ export type SingardCategoryScalarFieldEnum = (typeof SingardCategoryScalarFieldE
 export const SingardFeedbackScalarFieldEnum = {
   id: 'id',
   trackingCode: 'trackingCode',
-  kind: 'kind',
+  kindId: 'kindId',
   status: 'status',
   categoryId: 'categoryId',
   userId: 'userId',
@@ -907,6 +930,87 @@ export const SingardActivityScalarFieldEnum = {
 } as const
 
 export type SingardActivityScalarFieldEnum = (typeof SingardActivityScalarFieldEnum)[keyof typeof SingardActivityScalarFieldEnum]
+
+
+export const InspectionKindScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  icon: 'icon',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InspectionKindScalarFieldEnum = (typeof InspectionKindScalarFieldEnum)[keyof typeof InspectionKindScalarFieldEnum]
+
+
+export const InspectionCategoryScalarFieldEnum = {
+  id: 'id',
+  parentId: 'parentId',
+  name: 'name',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InspectionCategoryScalarFieldEnum = (typeof InspectionCategoryScalarFieldEnum)[keyof typeof InspectionCategoryScalarFieldEnum]
+
+
+export const InspectionFeedbackScalarFieldEnum = {
+  id: 'id',
+  trackingCode: 'trackingCode',
+  kindId: 'kindId',
+  status: 'status',
+  categoryId: 'categoryId',
+  userId: 'userId',
+  isAnonymous: 'isAnonymous',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  body: 'body',
+  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  replyBody: 'replyBody',
+  repliedAt: 'repliedAt',
+  repliedById: 'repliedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InspectionFeedbackScalarFieldEnum = (typeof InspectionFeedbackScalarFieldEnum)[keyof typeof InspectionFeedbackScalarFieldEnum]
+
+
+export const InspectionAttachmentScalarFieldEnum = {
+  id: 'id',
+  feedbackId: 'feedbackId',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type InspectionAttachmentScalarFieldEnum = (typeof InspectionAttachmentScalarFieldEnum)[keyof typeof InspectionAttachmentScalarFieldEnum]
+
+
+export const InspectionActivityScalarFieldEnum = {
+  id: 'id',
+  feedbackId: 'feedbackId',
+  kind: 'kind',
+  occurredAt: 'occurredAt',
+  title: 'title',
+  body: 'body',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InspectionActivityScalarFieldEnum = (typeof InspectionActivityScalarFieldEnum)[keyof typeof InspectionActivityScalarFieldEnum]
 
 
 export const BoardRequestScalarFieldEnum = {
@@ -1008,7 +1112,10 @@ export type BoardStagePositionScalarFieldEnum = (typeof BoardStagePositionScalar
 
 export const BoardMinutesScalarFieldEnum = {
   id: 'id',
-  requestId: 'requestId',
+  minutesNo: 'minutesNo',
+  minutesYear: 'minutesYear',
+  minutesSeq: 'minutesSeq',
+  status: 'status',
   heldAt: 'heldAt',
   subject: 'subject',
   body: 'body',
@@ -1018,6 +1125,15 @@ export const BoardMinutesScalarFieldEnum = {
 } as const
 
 export type BoardMinutesScalarFieldEnum = (typeof BoardMinutesScalarFieldEnum)[keyof typeof BoardMinutesScalarFieldEnum]
+
+
+export const BoardMinutesRequestScalarFieldEnum = {
+  minutesId: 'minutesId',
+  requestId: 'requestId',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardMinutesRequestScalarFieldEnum = (typeof BoardMinutesRequestScalarFieldEnum)[keyof typeof BoardMinutesRequestScalarFieldEnum]
 
 
 export const BoardMinutesMemberScalarFieldEnum = {
@@ -1050,14 +1166,46 @@ export const BoardMinutesResolutionScalarFieldEnum = {
   minutesId: 'minutesId',
   title: 'title',
   description: 'description',
-  unitId: 'unitId',
+  status: 'status',
+  dueKind: 'dueKind',
   dueDate: 'dueDate',
+  hasTopicHistory: 'hasTopicHistory',
+  legalBasis: 'legalBasis',
+  proposerKind: 'proposerKind',
+  proposerText: 'proposerText',
+  proposerUnitId: 'proposerUnitId',
   notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type BoardMinutesResolutionScalarFieldEnum = (typeof BoardMinutesResolutionScalarFieldEnum)[keyof typeof BoardMinutesResolutionScalarFieldEnum]
+
+
+export const BoardMinutesResolutionUnitScalarFieldEnum = {
+  resolutionId: 'resolutionId',
+  unitId: 'unitId',
+  createdAt: 'createdAt'
+} as const
+
+export type BoardMinutesResolutionUnitScalarFieldEnum = (typeof BoardMinutesResolutionUnitScalarFieldEnum)[keyof typeof BoardMinutesResolutionUnitScalarFieldEnum]
+
+
+export const BoardResolutionSignatoryScalarFieldEnum = {
+  id: 'id',
+  resolutionId: 'resolutionId',
+  sourceSignatoryId: 'sourceSignatoryId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  title: 'title',
+  signatureImageId: 'signatureImageId',
+  signedAt: 'signedAt',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardResolutionSignatoryScalarFieldEnum = (typeof BoardResolutionSignatoryScalarFieldEnum)[keyof typeof BoardResolutionSignatoryScalarFieldEnum]
 
 
 export const PortSalesReportScalarFieldEnum = {

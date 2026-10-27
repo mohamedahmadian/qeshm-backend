@@ -20,13 +20,28 @@ export type BoardMinutesModel = runtime.Types.Result.DefaultSelection<Prisma.$Bo
 
 export type AggregateBoardMinutes = {
   _count: BoardMinutesCountAggregateOutputType | null
+  _avg: BoardMinutesAvgAggregateOutputType | null
+  _sum: BoardMinutesSumAggregateOutputType | null
   _min: BoardMinutesMinAggregateOutputType | null
   _max: BoardMinutesMaxAggregateOutputType | null
 }
 
+export type BoardMinutesAvgAggregateOutputType = {
+  minutesYear: number | null
+  minutesSeq: number | null
+}
+
+export type BoardMinutesSumAggregateOutputType = {
+  minutesYear: number | null
+  minutesSeq: number | null
+}
+
 export type BoardMinutesMinAggregateOutputType = {
   id: string | null
-  requestId: string | null
+  minutesNo: string | null
+  minutesYear: number | null
+  minutesSeq: number | null
+  status: $Enums.BoardMinutesStatus | null
   heldAt: Date | null
   subject: string | null
   body: string | null
@@ -37,7 +52,10 @@ export type BoardMinutesMinAggregateOutputType = {
 
 export type BoardMinutesMaxAggregateOutputType = {
   id: string | null
-  requestId: string | null
+  minutesNo: string | null
+  minutesYear: number | null
+  minutesSeq: number | null
+  status: $Enums.BoardMinutesStatus | null
   heldAt: Date | null
   subject: string | null
   body: string | null
@@ -48,7 +66,10 @@ export type BoardMinutesMaxAggregateOutputType = {
 
 export type BoardMinutesCountAggregateOutputType = {
   id: number
-  requestId: number
+  minutesNo: number
+  minutesYear: number
+  minutesSeq: number
+  status: number
   heldAt: number
   subject: number
   body: number
@@ -59,9 +80,22 @@ export type BoardMinutesCountAggregateOutputType = {
 }
 
 
+export type BoardMinutesAvgAggregateInputType = {
+  minutesYear?: true
+  minutesSeq?: true
+}
+
+export type BoardMinutesSumAggregateInputType = {
+  minutesYear?: true
+  minutesSeq?: true
+}
+
 export type BoardMinutesMinAggregateInputType = {
   id?: true
-  requestId?: true
+  minutesNo?: true
+  minutesYear?: true
+  minutesSeq?: true
+  status?: true
   heldAt?: true
   subject?: true
   body?: true
@@ -72,7 +106,10 @@ export type BoardMinutesMinAggregateInputType = {
 
 export type BoardMinutesMaxAggregateInputType = {
   id?: true
-  requestId?: true
+  minutesNo?: true
+  minutesYear?: true
+  minutesSeq?: true
+  status?: true
   heldAt?: true
   subject?: true
   body?: true
@@ -83,7 +120,10 @@ export type BoardMinutesMaxAggregateInputType = {
 
 export type BoardMinutesCountAggregateInputType = {
   id?: true
-  requestId?: true
+  minutesNo?: true
+  minutesYear?: true
+  minutesSeq?: true
+  status?: true
   heldAt?: true
   subject?: true
   body?: true
@@ -131,6 +171,18 @@ export type BoardMinutesAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: BoardMinutesAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: BoardMinutesSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: BoardMinutesMinAggregateInputType
@@ -161,13 +213,18 @@ export type BoardMinutesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: BoardMinutesCountAggregateInputType | true
+  _avg?: BoardMinutesAvgAggregateInputType
+  _sum?: BoardMinutesSumAggregateInputType
   _min?: BoardMinutesMinAggregateInputType
   _max?: BoardMinutesMaxAggregateInputType
 }
 
 export type BoardMinutesGroupByOutputType = {
   id: string
-  requestId: string | null
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status: $Enums.BoardMinutesStatus
   heldAt: Date
   subject: string
   body: string | null
@@ -175,6 +232,8 @@ export type BoardMinutesGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: BoardMinutesCountAggregateOutputType | null
+  _avg: BoardMinutesAvgAggregateOutputType | null
+  _sum: BoardMinutesSumAggregateOutputType | null
   _min: BoardMinutesMinAggregateOutputType | null
   _max: BoardMinutesMaxAggregateOutputType | null
 }
@@ -199,58 +258,71 @@ export type BoardMinutesWhereInput = {
   OR?: Prisma.BoardMinutesWhereInput[]
   NOT?: Prisma.BoardMinutesWhereInput | Prisma.BoardMinutesWhereInput[]
   id?: Prisma.StringFilter<"BoardMinutes"> | string
-  requestId?: Prisma.StringNullableFilter<"BoardMinutes"> | string | null
+  minutesNo?: Prisma.StringFilter<"BoardMinutes"> | string
+  minutesYear?: Prisma.IntFilter<"BoardMinutes"> | number
+  minutesSeq?: Prisma.IntFilter<"BoardMinutes"> | number
+  status?: Prisma.EnumBoardMinutesStatusFilter<"BoardMinutes"> | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFilter<"BoardMinutes"> | Date | string
   subject?: Prisma.StringFilter<"BoardMinutes"> | string
   body?: Prisma.StringNullableFilter<"BoardMinutes"> | string | null
   createdById?: Prisma.StringFilter<"BoardMinutes"> | string
   createdAt?: Prisma.DateTimeFilter<"BoardMinutes"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BoardMinutes"> | Date | string
-  request?: Prisma.XOR<Prisma.BoardRequestNullableScalarRelationFilter, Prisma.BoardRequestWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   members?: Prisma.BoardMinutesMemberListRelationFilter
   attachments?: Prisma.BoardMinutesAttachmentListRelationFilter
   resolutions?: Prisma.BoardMinutesResolutionListRelationFilter
+  requests?: Prisma.BoardMinutesRequestListRelationFilter
 }
 
 export type BoardMinutesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  requestId?: Prisma.SortOrderInput | Prisma.SortOrder
+  minutesNo?: Prisma.SortOrder
+  minutesYear?: Prisma.SortOrder
+  minutesSeq?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   heldAt?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  request?: Prisma.BoardRequestOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   members?: Prisma.BoardMinutesMemberOrderByRelationAggregateInput
   attachments?: Prisma.BoardMinutesAttachmentOrderByRelationAggregateInput
   resolutions?: Prisma.BoardMinutesResolutionOrderByRelationAggregateInput
+  requests?: Prisma.BoardMinutesRequestOrderByRelationAggregateInput
 }
 
 export type BoardMinutesWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  minutesNo?: string
+  minutesYear_minutesSeq?: Prisma.BoardMinutesMinutesYearMinutesSeqCompoundUniqueInput
   AND?: Prisma.BoardMinutesWhereInput | Prisma.BoardMinutesWhereInput[]
   OR?: Prisma.BoardMinutesWhereInput[]
   NOT?: Prisma.BoardMinutesWhereInput | Prisma.BoardMinutesWhereInput[]
-  requestId?: Prisma.StringNullableFilter<"BoardMinutes"> | string | null
+  minutesYear?: Prisma.IntFilter<"BoardMinutes"> | number
+  minutesSeq?: Prisma.IntFilter<"BoardMinutes"> | number
+  status?: Prisma.EnumBoardMinutesStatusFilter<"BoardMinutes"> | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFilter<"BoardMinutes"> | Date | string
   subject?: Prisma.StringFilter<"BoardMinutes"> | string
   body?: Prisma.StringNullableFilter<"BoardMinutes"> | string | null
   createdById?: Prisma.StringFilter<"BoardMinutes"> | string
   createdAt?: Prisma.DateTimeFilter<"BoardMinutes"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BoardMinutes"> | Date | string
-  request?: Prisma.XOR<Prisma.BoardRequestNullableScalarRelationFilter, Prisma.BoardRequestWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   members?: Prisma.BoardMinutesMemberListRelationFilter
   attachments?: Prisma.BoardMinutesAttachmentListRelationFilter
   resolutions?: Prisma.BoardMinutesResolutionListRelationFilter
-}, "id">
+  requests?: Prisma.BoardMinutesRequestListRelationFilter
+}, "id" | "minutesNo" | "minutesYear_minutesSeq">
 
 export type BoardMinutesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  requestId?: Prisma.SortOrderInput | Prisma.SortOrder
+  minutesNo?: Prisma.SortOrder
+  minutesYear?: Prisma.SortOrder
+  minutesSeq?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   heldAt?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -258,8 +330,10 @@ export type BoardMinutesOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BoardMinutesCountOrderByAggregateInput
+  _avg?: Prisma.BoardMinutesAvgOrderByAggregateInput
   _max?: Prisma.BoardMinutesMaxOrderByAggregateInput
   _min?: Prisma.BoardMinutesMinOrderByAggregateInput
+  _sum?: Prisma.BoardMinutesSumOrderByAggregateInput
 }
 
 export type BoardMinutesScalarWhereWithAggregatesInput = {
@@ -267,7 +341,10 @@ export type BoardMinutesScalarWhereWithAggregatesInput = {
   OR?: Prisma.BoardMinutesScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BoardMinutesScalarWhereWithAggregatesInput | Prisma.BoardMinutesScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"BoardMinutes"> | string
-  requestId?: Prisma.StringNullableWithAggregatesFilter<"BoardMinutes"> | string | null
+  minutesNo?: Prisma.StringWithAggregatesFilter<"BoardMinutes"> | string
+  minutesYear?: Prisma.IntWithAggregatesFilter<"BoardMinutes"> | number
+  minutesSeq?: Prisma.IntWithAggregatesFilter<"BoardMinutes"> | number
+  status?: Prisma.EnumBoardMinutesStatusWithAggregatesFilter<"BoardMinutes"> | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeWithAggregatesFilter<"BoardMinutes"> | Date | string
   subject?: Prisma.StringWithAggregatesFilter<"BoardMinutes"> | string
   body?: Prisma.StringNullableWithAggregatesFilter<"BoardMinutes"> | string | null
@@ -278,21 +355,28 @@ export type BoardMinutesScalarWhereWithAggregatesInput = {
 
 export type BoardMinutesCreateInput = {
   id?: string
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  request?: Prisma.BoardRequestCreateNestedOneWithoutMinutesInput
   createdBy: Prisma.UserCreateNestedOneWithoutBoardMinutesCreatedInput
   members?: Prisma.BoardMinutesMemberCreateNestedManyWithoutMinutesInput
   attachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutMinutesInput
   resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesUncheckedCreateInput = {
   id?: string
-  requestId?: string | null
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -302,25 +386,33 @@ export type BoardMinutesUncheckedCreateInput = {
   members?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutMinutesInput
   attachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutMinutesInput
   resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  request?: Prisma.BoardRequestUpdateOneWithoutMinutesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutBoardMinutesCreatedNestedInput
   members?: Prisma.BoardMinutesMemberUpdateManyWithoutMinutesNestedInput
   attachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutMinutesNestedInput
   resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -330,11 +422,15 @@ export type BoardMinutesUncheckedUpdateInput = {
   members?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutMinutesNestedInput
   attachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutMinutesNestedInput
   resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesCreateManyInput = {
   id?: string
-  requestId?: string | null
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -345,6 +441,10 @@ export type BoardMinutesCreateManyInput = {
 
 export type BoardMinutesUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -354,7 +454,10 @@ export type BoardMinutesUpdateManyMutationInput = {
 
 export type BoardMinutesUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -373,9 +476,17 @@ export type BoardMinutesOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type BoardMinutesMinutesYearMinutesSeqCompoundUniqueInput = {
+  minutesYear: number
+  minutesSeq: number
+}
+
 export type BoardMinutesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  requestId?: Prisma.SortOrder
+  minutesNo?: Prisma.SortOrder
+  minutesYear?: Prisma.SortOrder
+  minutesSeq?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   heldAt?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   body?: Prisma.SortOrder
@@ -384,9 +495,17 @@ export type BoardMinutesCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type BoardMinutesAvgOrderByAggregateInput = {
+  minutesYear?: Prisma.SortOrder
+  minutesSeq?: Prisma.SortOrder
+}
+
 export type BoardMinutesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  requestId?: Prisma.SortOrder
+  minutesNo?: Prisma.SortOrder
+  minutesYear?: Prisma.SortOrder
+  minutesSeq?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   heldAt?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   body?: Prisma.SortOrder
@@ -397,13 +516,21 @@ export type BoardMinutesMaxOrderByAggregateInput = {
 
 export type BoardMinutesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  requestId?: Prisma.SortOrder
+  minutesNo?: Prisma.SortOrder
+  minutesYear?: Prisma.SortOrder
+  minutesSeq?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   heldAt?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   body?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type BoardMinutesSumOrderByAggregateInput = {
+  minutesYear?: Prisma.SortOrder
+  minutesSeq?: Prisma.SortOrder
 }
 
 export type BoardMinutesScalarRelationFilter = {
@@ -453,46 +580,22 @@ export type BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.BoardMinutesScalarWhereInput | Prisma.BoardMinutesScalarWhereInput[]
 }
 
-export type BoardMinutesCreateNestedManyWithoutRequestInput = {
-  create?: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestInput> | Prisma.BoardMinutesCreateWithoutRequestInput[] | Prisma.BoardMinutesUncheckedCreateWithoutRequestInput[]
-  connectOrCreate?: Prisma.BoardMinutesCreateOrConnectWithoutRequestInput | Prisma.BoardMinutesCreateOrConnectWithoutRequestInput[]
-  createMany?: Prisma.BoardMinutesCreateManyRequestInputEnvelope
-  connect?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
+export type EnumBoardMinutesStatusFieldUpdateOperationsInput = {
+  set?: $Enums.BoardMinutesStatus
 }
 
-export type BoardMinutesUncheckedCreateNestedManyWithoutRequestInput = {
-  create?: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestInput> | Prisma.BoardMinutesCreateWithoutRequestInput[] | Prisma.BoardMinutesUncheckedCreateWithoutRequestInput[]
-  connectOrCreate?: Prisma.BoardMinutesCreateOrConnectWithoutRequestInput | Prisma.BoardMinutesCreateOrConnectWithoutRequestInput[]
-  createMany?: Prisma.BoardMinutesCreateManyRequestInputEnvelope
-  connect?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
+export type BoardMinutesCreateNestedOneWithoutRequestsInput = {
+  create?: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestsInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestsInput>
+  connectOrCreate?: Prisma.BoardMinutesCreateOrConnectWithoutRequestsInput
+  connect?: Prisma.BoardMinutesWhereUniqueInput
 }
 
-export type BoardMinutesUpdateManyWithoutRequestNestedInput = {
-  create?: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestInput> | Prisma.BoardMinutesCreateWithoutRequestInput[] | Prisma.BoardMinutesUncheckedCreateWithoutRequestInput[]
-  connectOrCreate?: Prisma.BoardMinutesCreateOrConnectWithoutRequestInput | Prisma.BoardMinutesCreateOrConnectWithoutRequestInput[]
-  upsert?: Prisma.BoardMinutesUpsertWithWhereUniqueWithoutRequestInput | Prisma.BoardMinutesUpsertWithWhereUniqueWithoutRequestInput[]
-  createMany?: Prisma.BoardMinutesCreateManyRequestInputEnvelope
-  set?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
-  disconnect?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
-  delete?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
-  connect?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
-  update?: Prisma.BoardMinutesUpdateWithWhereUniqueWithoutRequestInput | Prisma.BoardMinutesUpdateWithWhereUniqueWithoutRequestInput[]
-  updateMany?: Prisma.BoardMinutesUpdateManyWithWhereWithoutRequestInput | Prisma.BoardMinutesUpdateManyWithWhereWithoutRequestInput[]
-  deleteMany?: Prisma.BoardMinutesScalarWhereInput | Prisma.BoardMinutesScalarWhereInput[]
-}
-
-export type BoardMinutesUncheckedUpdateManyWithoutRequestNestedInput = {
-  create?: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestInput> | Prisma.BoardMinutesCreateWithoutRequestInput[] | Prisma.BoardMinutesUncheckedCreateWithoutRequestInput[]
-  connectOrCreate?: Prisma.BoardMinutesCreateOrConnectWithoutRequestInput | Prisma.BoardMinutesCreateOrConnectWithoutRequestInput[]
-  upsert?: Prisma.BoardMinutesUpsertWithWhereUniqueWithoutRequestInput | Prisma.BoardMinutesUpsertWithWhereUniqueWithoutRequestInput[]
-  createMany?: Prisma.BoardMinutesCreateManyRequestInputEnvelope
-  set?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
-  disconnect?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
-  delete?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
-  connect?: Prisma.BoardMinutesWhereUniqueInput | Prisma.BoardMinutesWhereUniqueInput[]
-  update?: Prisma.BoardMinutesUpdateWithWhereUniqueWithoutRequestInput | Prisma.BoardMinutesUpdateWithWhereUniqueWithoutRequestInput[]
-  updateMany?: Prisma.BoardMinutesUpdateManyWithWhereWithoutRequestInput | Prisma.BoardMinutesUpdateManyWithWhereWithoutRequestInput[]
-  deleteMany?: Prisma.BoardMinutesScalarWhereInput | Prisma.BoardMinutesScalarWhereInput[]
+export type BoardMinutesUpdateOneRequiredWithoutRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestsInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestsInput>
+  connectOrCreate?: Prisma.BoardMinutesCreateOrConnectWithoutRequestsInput
+  upsert?: Prisma.BoardMinutesUpsertWithoutRequestsInput
+  connect?: Prisma.BoardMinutesWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardMinutesUpdateToOneWithWhereWithoutRequestsInput, Prisma.BoardMinutesUpdateWithoutRequestsInput>, Prisma.BoardMinutesUncheckedUpdateWithoutRequestsInput>
 }
 
 export type BoardMinutesCreateNestedOneWithoutMembersInput = {
@@ -539,20 +642,27 @@ export type BoardMinutesUpdateOneRequiredWithoutResolutionsNestedInput = {
 
 export type BoardMinutesCreateWithoutCreatedByInput = {
   id?: string
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  request?: Prisma.BoardRequestCreateNestedOneWithoutMinutesInput
   members?: Prisma.BoardMinutesMemberCreateNestedManyWithoutMinutesInput
   attachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutMinutesInput
   resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesUncheckedCreateWithoutCreatedByInput = {
   id?: string
-  requestId?: string | null
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -561,6 +671,7 @@ export type BoardMinutesUncheckedCreateWithoutCreatedByInput = {
   members?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutMinutesInput
   attachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutMinutesInput
   resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesCreateOrConnectWithoutCreatedByInput = {
@@ -594,7 +705,10 @@ export type BoardMinutesScalarWhereInput = {
   OR?: Prisma.BoardMinutesScalarWhereInput[]
   NOT?: Prisma.BoardMinutesScalarWhereInput | Prisma.BoardMinutesScalarWhereInput[]
   id?: Prisma.StringFilter<"BoardMinutes"> | string
-  requestId?: Prisma.StringNullableFilter<"BoardMinutes"> | string | null
+  minutesNo?: Prisma.StringFilter<"BoardMinutes"> | string
+  minutesYear?: Prisma.IntFilter<"BoardMinutes"> | number
+  minutesSeq?: Prisma.IntFilter<"BoardMinutes"> | number
+  status?: Prisma.EnumBoardMinutesStatusFilter<"BoardMinutes"> | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFilter<"BoardMinutes"> | Date | string
   subject?: Prisma.StringFilter<"BoardMinutes"> | string
   body?: Prisma.StringNullableFilter<"BoardMinutes"> | string | null
@@ -603,8 +717,12 @@ export type BoardMinutesScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"BoardMinutes"> | Date | string
 }
 
-export type BoardMinutesCreateWithoutRequestInput = {
+export type BoardMinutesCreateWithoutRequestsInput = {
   id?: string
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -616,8 +734,12 @@ export type BoardMinutesCreateWithoutRequestInput = {
   resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutMinutesInput
 }
 
-export type BoardMinutesUncheckedCreateWithoutRequestInput = {
+export type BoardMinutesUncheckedCreateWithoutRequestsInput = {
   id?: string
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -629,48 +751,79 @@ export type BoardMinutesUncheckedCreateWithoutRequestInput = {
   resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutMinutesInput
 }
 
-export type BoardMinutesCreateOrConnectWithoutRequestInput = {
+export type BoardMinutesCreateOrConnectWithoutRequestsInput = {
   where: Prisma.BoardMinutesWhereUniqueInput
-  create: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestInput>
+  create: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestsInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestsInput>
 }
 
-export type BoardMinutesCreateManyRequestInputEnvelope = {
-  data: Prisma.BoardMinutesCreateManyRequestInput | Prisma.BoardMinutesCreateManyRequestInput[]
-  skipDuplicates?: boolean
+export type BoardMinutesUpsertWithoutRequestsInput = {
+  update: Prisma.XOR<Prisma.BoardMinutesUpdateWithoutRequestsInput, Prisma.BoardMinutesUncheckedUpdateWithoutRequestsInput>
+  create: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestsInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestsInput>
+  where?: Prisma.BoardMinutesWhereInput
 }
 
-export type BoardMinutesUpsertWithWhereUniqueWithoutRequestInput = {
-  where: Prisma.BoardMinutesWhereUniqueInput
-  update: Prisma.XOR<Prisma.BoardMinutesUpdateWithoutRequestInput, Prisma.BoardMinutesUncheckedUpdateWithoutRequestInput>
-  create: Prisma.XOR<Prisma.BoardMinutesCreateWithoutRequestInput, Prisma.BoardMinutesUncheckedCreateWithoutRequestInput>
+export type BoardMinutesUpdateToOneWithWhereWithoutRequestsInput = {
+  where?: Prisma.BoardMinutesWhereInput
+  data: Prisma.XOR<Prisma.BoardMinutesUpdateWithoutRequestsInput, Prisma.BoardMinutesUncheckedUpdateWithoutRequestsInput>
 }
 
-export type BoardMinutesUpdateWithWhereUniqueWithoutRequestInput = {
-  where: Prisma.BoardMinutesWhereUniqueInput
-  data: Prisma.XOR<Prisma.BoardMinutesUpdateWithoutRequestInput, Prisma.BoardMinutesUncheckedUpdateWithoutRequestInput>
+export type BoardMinutesUpdateWithoutRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
+  heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutBoardMinutesCreatedNestedInput
+  members?: Prisma.BoardMinutesMemberUpdateManyWithoutMinutesNestedInput
+  attachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutMinutesNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutMinutesNestedInput
 }
 
-export type BoardMinutesUpdateManyWithWhereWithoutRequestInput = {
-  where: Prisma.BoardMinutesScalarWhereInput
-  data: Prisma.XOR<Prisma.BoardMinutesUpdateManyMutationInput, Prisma.BoardMinutesUncheckedUpdateManyWithoutRequestInput>
+export type BoardMinutesUncheckedUpdateWithoutRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
+  heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutMinutesNestedInput
+  attachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutMinutesNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesCreateWithoutMembersInput = {
   id?: string
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  request?: Prisma.BoardRequestCreateNestedOneWithoutMinutesInput
   createdBy: Prisma.UserCreateNestedOneWithoutBoardMinutesCreatedInput
   attachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutMinutesInput
   resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesUncheckedCreateWithoutMembersInput = {
   id?: string
-  requestId?: string | null
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -679,6 +832,7 @@ export type BoardMinutesUncheckedCreateWithoutMembersInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutMinutesInput
   resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesCreateOrConnectWithoutMembersInput = {
@@ -699,20 +853,27 @@ export type BoardMinutesUpdateToOneWithWhereWithoutMembersInput = {
 
 export type BoardMinutesUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  request?: Prisma.BoardRequestUpdateOneWithoutMinutesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutBoardMinutesCreatedNestedInput
   attachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutMinutesNestedInput
   resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -721,24 +882,32 @@ export type BoardMinutesUncheckedUpdateWithoutMembersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutMinutesNestedInput
   resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesCreateWithoutAttachmentsInput = {
   id?: string
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  request?: Prisma.BoardRequestCreateNestedOneWithoutMinutesInput
   createdBy: Prisma.UserCreateNestedOneWithoutBoardMinutesCreatedInput
   members?: Prisma.BoardMinutesMemberCreateNestedManyWithoutMinutesInput
   resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesUncheckedCreateWithoutAttachmentsInput = {
   id?: string
-  requestId?: string | null
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -747,6 +916,7 @@ export type BoardMinutesUncheckedCreateWithoutAttachmentsInput = {
   updatedAt?: Date | string
   members?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutMinutesInput
   resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesCreateOrConnectWithoutAttachmentsInput = {
@@ -767,20 +937,27 @@ export type BoardMinutesUpdateToOneWithWhereWithoutAttachmentsInput = {
 
 export type BoardMinutesUpdateWithoutAttachmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  request?: Prisma.BoardRequestUpdateOneWithoutMinutesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutBoardMinutesCreatedNestedInput
   members?: Prisma.BoardMinutesMemberUpdateManyWithoutMinutesNestedInput
   resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesUncheckedUpdateWithoutAttachmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -789,24 +966,32 @@ export type BoardMinutesUncheckedUpdateWithoutAttachmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutMinutesNestedInput
   resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesCreateWithoutResolutionsInput = {
   id?: string
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  request?: Prisma.BoardRequestCreateNestedOneWithoutMinutesInput
   createdBy: Prisma.UserCreateNestedOneWithoutBoardMinutesCreatedInput
   members?: Prisma.BoardMinutesMemberCreateNestedManyWithoutMinutesInput
   attachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesUncheckedCreateWithoutResolutionsInput = {
   id?: string
-  requestId?: string | null
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -815,6 +1000,7 @@ export type BoardMinutesUncheckedCreateWithoutResolutionsInput = {
   updatedAt?: Date | string
   members?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutMinutesInput
   attachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutMinutesInput
+  requests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutMinutesInput
 }
 
 export type BoardMinutesCreateOrConnectWithoutResolutionsInput = {
@@ -835,20 +1021,27 @@ export type BoardMinutesUpdateToOneWithWhereWithoutResolutionsInput = {
 
 export type BoardMinutesUpdateWithoutResolutionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  request?: Prisma.BoardRequestUpdateOneWithoutMinutesNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutBoardMinutesCreatedNestedInput
   members?: Prisma.BoardMinutesMemberUpdateManyWithoutMinutesNestedInput
   attachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesUncheckedUpdateWithoutResolutionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -857,11 +1050,15 @@ export type BoardMinutesUncheckedUpdateWithoutResolutionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutMinutesNestedInput
   attachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesCreateManyCreatedByInput = {
   id?: string
-  requestId?: string | null
+  minutesNo: string
+  minutesYear: number
+  minutesSeq: number
+  status?: $Enums.BoardMinutesStatus
   heldAt: Date | string
   subject: string
   body?: string | null
@@ -871,20 +1068,27 @@ export type BoardMinutesCreateManyCreatedByInput = {
 
 export type BoardMinutesUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  request?: Prisma.BoardRequestUpdateOneWithoutMinutesNestedInput
   members?: Prisma.BoardMinutesMemberUpdateManyWithoutMinutesNestedInput
   attachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutMinutesNestedInput
   resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -893,60 +1097,18 @@ export type BoardMinutesUncheckedUpdateWithoutCreatedByInput = {
   members?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutMinutesNestedInput
   attachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutMinutesNestedInput
   resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutMinutesNestedInput
+  requests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutMinutesNestedInput
 }
 
 export type BoardMinutesUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  minutesNo?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesYear?: Prisma.IntFieldUpdateOperationsInput | number
+  minutesSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardMinutesStatusFieldUpdateOperationsInput | $Enums.BoardMinutesStatus
   heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type BoardMinutesCreateManyRequestInput = {
-  id?: string
-  heldAt: Date | string
-  subject: string
-  body?: string | null
-  createdById: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type BoardMinutesUpdateWithoutRequestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
-  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdBy?: Prisma.UserUpdateOneRequiredWithoutBoardMinutesCreatedNestedInput
-  members?: Prisma.BoardMinutesMemberUpdateManyWithoutMinutesNestedInput
-  attachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutMinutesNestedInput
-  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutMinutesNestedInput
-}
-
-export type BoardMinutesUncheckedUpdateWithoutRequestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
-  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutMinutesNestedInput
-  attachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutMinutesNestedInput
-  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutMinutesNestedInput
-}
-
-export type BoardMinutesUncheckedUpdateManyWithoutRequestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  heldAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  subject?: Prisma.StringFieldUpdateOperationsInput | string
-  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -960,12 +1122,14 @@ export type BoardMinutesCountOutputType = {
   members: number
   attachments: number
   resolutions: number
+  requests: number
 }
 
 export type BoardMinutesCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   members?: boolean | BoardMinutesCountOutputTypeCountMembersArgs
   attachments?: boolean | BoardMinutesCountOutputTypeCountAttachmentsArgs
   resolutions?: boolean | BoardMinutesCountOutputTypeCountResolutionsArgs
+  requests?: boolean | BoardMinutesCountOutputTypeCountRequestsArgs
 }
 
 /**
@@ -999,53 +1163,70 @@ export type BoardMinutesCountOutputTypeCountResolutionsArgs<ExtArgs extends runt
   where?: Prisma.BoardMinutesResolutionWhereInput
 }
 
+/**
+ * BoardMinutesCountOutputType without action
+ */
+export type BoardMinutesCountOutputTypeCountRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardMinutesRequestWhereInput
+}
+
 
 export type BoardMinutesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  requestId?: boolean
+  minutesNo?: boolean
+  minutesYear?: boolean
+  minutesSeq?: boolean
+  status?: boolean
   heldAt?: boolean
   subject?: boolean
   body?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  request?: boolean | Prisma.BoardMinutes$requestArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   members?: boolean | Prisma.BoardMinutes$membersArgs<ExtArgs>
   attachments?: boolean | Prisma.BoardMinutes$attachmentsArgs<ExtArgs>
   resolutions?: boolean | Prisma.BoardMinutes$resolutionsArgs<ExtArgs>
+  requests?: boolean | Prisma.BoardMinutes$requestsArgs<ExtArgs>
   _count?: boolean | Prisma.BoardMinutesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boardMinutes"]>
 
 export type BoardMinutesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  requestId?: boolean
+  minutesNo?: boolean
+  minutesYear?: boolean
+  minutesSeq?: boolean
+  status?: boolean
   heldAt?: boolean
   subject?: boolean
   body?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  request?: boolean | Prisma.BoardMinutes$requestArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boardMinutes"]>
 
 export type BoardMinutesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  requestId?: boolean
+  minutesNo?: boolean
+  minutesYear?: boolean
+  minutesSeq?: boolean
+  status?: boolean
   heldAt?: boolean
   subject?: boolean
   body?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  request?: boolean | Prisma.BoardMinutes$requestArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boardMinutes"]>
 
 export type BoardMinutesSelectScalar = {
   id?: boolean
-  requestId?: boolean
+  minutesNo?: boolean
+  minutesYear?: boolean
+  minutesSeq?: boolean
+  status?: boolean
   heldAt?: boolean
   subject?: boolean
   body?: boolean
@@ -1054,36 +1235,37 @@ export type BoardMinutesSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BoardMinutesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "requestId" | "heldAt" | "subject" | "body" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["boardMinutes"]>
+export type BoardMinutesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "minutesNo" | "minutesYear" | "minutesSeq" | "status" | "heldAt" | "subject" | "body" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["boardMinutes"]>
 export type BoardMinutesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  request?: boolean | Prisma.BoardMinutes$requestArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   members?: boolean | Prisma.BoardMinutes$membersArgs<ExtArgs>
   attachments?: boolean | Prisma.BoardMinutes$attachmentsArgs<ExtArgs>
   resolutions?: boolean | Prisma.BoardMinutes$resolutionsArgs<ExtArgs>
+  requests?: boolean | Prisma.BoardMinutes$requestsArgs<ExtArgs>
   _count?: boolean | Prisma.BoardMinutesCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BoardMinutesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  request?: boolean | Prisma.BoardMinutes$requestArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type BoardMinutesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  request?: boolean | Prisma.BoardMinutes$requestArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $BoardMinutesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BoardMinutes"
   objects: {
-    request: Prisma.$BoardRequestPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs>
     members: Prisma.$BoardMinutesMemberPayload<ExtArgs>[]
     attachments: Prisma.$BoardMinutesAttachmentPayload<ExtArgs>[]
     resolutions: Prisma.$BoardMinutesResolutionPayload<ExtArgs>[]
+    requests: Prisma.$BoardMinutesRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    requestId: string | null
+    minutesNo: string
+    minutesYear: number
+    minutesSeq: number
+    status: $Enums.BoardMinutesStatus
     heldAt: Date
     subject: string
     body: string | null
@@ -1484,11 +1666,11 @@ readonly fields: BoardMinutesFieldRefs;
  */
 export interface Prisma__BoardMinutesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  request<T extends Prisma.BoardMinutes$requestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutes$requestArgs<ExtArgs>>): Prisma.Prisma__BoardRequestClient<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   members<T extends Prisma.BoardMinutes$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutes$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attachments<T extends Prisma.BoardMinutes$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutes$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   resolutions<T extends Prisma.BoardMinutes$resolutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutes$resolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requests<T extends Prisma.BoardMinutes$requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutes$requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1519,7 +1701,10 @@ export interface Prisma__BoardMinutesClient<T, Null = never, ExtArgs extends run
  */
 export interface BoardMinutesFieldRefs {
   readonly id: Prisma.FieldRef<"BoardMinutes", 'String'>
-  readonly requestId: Prisma.FieldRef<"BoardMinutes", 'String'>
+  readonly minutesNo: Prisma.FieldRef<"BoardMinutes", 'String'>
+  readonly minutesYear: Prisma.FieldRef<"BoardMinutes", 'Int'>
+  readonly minutesSeq: Prisma.FieldRef<"BoardMinutes", 'Int'>
+  readonly status: Prisma.FieldRef<"BoardMinutes", 'BoardMinutesStatus'>
   readonly heldAt: Prisma.FieldRef<"BoardMinutes", 'DateTime'>
   readonly subject: Prisma.FieldRef<"BoardMinutes", 'String'>
   readonly body: Prisma.FieldRef<"BoardMinutes", 'String'>
@@ -1927,25 +2112,6 @@ export type BoardMinutesDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * BoardMinutes.request
- */
-export type BoardMinutes$requestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the BoardRequest
-   */
-  select?: Prisma.BoardRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the BoardRequest
-   */
-  omit?: Prisma.BoardRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BoardRequestInclude<ExtArgs> | null
-  where?: Prisma.BoardRequestWhereInput
-}
-
-/**
  * BoardMinutes.members
  */
 export type BoardMinutes$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2015,6 +2181,30 @@ export type BoardMinutes$resolutionsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.BoardMinutesResolutionScalarFieldEnum | Prisma.BoardMinutesResolutionScalarFieldEnum[]
+}
+
+/**
+ * BoardMinutes.requests
+ */
+export type BoardMinutes$requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardMinutesRequest
+   */
+  select?: Prisma.BoardMinutesRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardMinutesRequest
+   */
+  omit?: Prisma.BoardMinutesRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardMinutesRequestInclude<ExtArgs> | null
+  where?: Prisma.BoardMinutesRequestWhereInput
+  orderBy?: Prisma.BoardMinutesRequestOrderByWithRelationInput | Prisma.BoardMinutesRequestOrderByWithRelationInput[]
+  cursor?: Prisma.BoardMinutesRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardMinutesRequestScalarFieldEnum | Prisma.BoardMinutesRequestScalarFieldEnum[]
 }
 
 /**

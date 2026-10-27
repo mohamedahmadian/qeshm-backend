@@ -64,12 +64,24 @@ export const boardRequestSortFields = [
 
 export const MAX_BOARD_ATTACHMENTS = 20;
 export const MAX_BOARD_MINUTES_MEMBERS = 80;
+export const MAX_BOARD_MINUTES_SMS_LENGTH = 700;
+export const MAX_BOARD_RESOLUTION_SIGNATORIES = 40;
+export const MAX_BOARD_RESOLUTION_UNITS = 40;
+
+export const boardResolutionDueKinds = ['DATE', 'ASAP'] as const;
+export const boardResolutionProposerKinds = ['TEXT', 'UNIT'] as const;
+export const boardResolutionStatuses = ['NOT_NOTIFIED', 'NOTIFIED'] as const;
+export const MAX_BOARD_MINUTES_REQUESTS = 200;
 
 export const boardMinutesAttendances = ['PRESENT', 'ABSENT'] as const;
 
+export const boardMinutesStatuses = ['NOT_HELD', 'HELD', 'NOTIFIED'] as const;
+
 export const boardMinutesSortFields = [
+  'minutesNo',
   'heldAt',
   'subject',
+  'status',
   'request',
   'memberCount',
   'resolutionCount',
@@ -79,6 +91,7 @@ export const boardMinutesSortFields = [
 export const boardMinutesResolutionSortFields = [
   'title',
   'unit',
+  'status',
   'dueDate',
   'minutes',
   'request',

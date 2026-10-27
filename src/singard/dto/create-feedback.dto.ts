@@ -3,7 +3,6 @@ import {
   ArrayMaxSize,
   IsArray,
   IsBoolean,
-  IsIn,
   IsLatitude,
   IsLongitude,
   IsOptional,
@@ -18,7 +17,6 @@ import {
   SINGARD_MAX_AUDIO,
   SINGARD_MAX_IMAGES,
   SINGARD_MAX_VIDEO,
-  singardFeedbackKinds,
 } from '../singard.constants';
 
 function trimString(value: unknown) {
@@ -26,8 +24,8 @@ function trimString(value: unknown) {
 }
 
 export class CreateSingardFeedbackDto {
-  @IsIn([...singardFeedbackKinds])
-  kind: (typeof singardFeedbackKinds)[number];
+  @IsUUID('4')
+  kindId: string;
 
   @IsUUID('4')
   categoryId: string;

@@ -16,7 +16,9 @@ import { emptyToNull } from '../../common/dto-transform';
 import {
   MAX_BOARD_ATTACHMENTS,
   MAX_BOARD_MINUTES_MEMBERS,
+  MAX_BOARD_MINUTES_REQUESTS,
   boardMinutesAttendances,
+  boardMinutesStatuses,
 } from '../board.constants';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
@@ -53,10 +55,14 @@ export class CreateBoardMinutesDto {
   body?: string | null;
 
   @IsOptional()
-  @Transform(({ value }) => emptyToNull(value))
-  @ValidateIf((_, value) => value != null)
-  @IsUUID('4')
-  requestId?: string | null;
+  @IsIn([...boardMinutesStatuses])
+  status?: (typeof boardMinutesStatuses)[number];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(MAX_BOARD_MINUTES_REQUESTS)
+  @IsUUID('4', { each: true })
+  requestIds?: string[];
 
   @IsOptional()
   @IsArray()

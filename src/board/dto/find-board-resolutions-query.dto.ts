@@ -3,7 +3,7 @@ import { IsIn, IsOptional } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
-import { boardMinutesResolutionSortFields } from '../board.constants';
+import { boardMinutesResolutionSortFields, boardResolutionStatuses } from '../board.constants';
 
 export class FindBoardResolutionsQueryDto extends PaginationQueryDto {
   @IsOptional()
@@ -15,4 +15,9 @@ export class FindBoardResolutionsQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...sortDirections])
   sortDir?: (typeof sortDirections)[number];
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...boardResolutionStatuses])
+  status?: (typeof boardResolutionStatuses)[number];
 }

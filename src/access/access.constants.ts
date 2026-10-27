@@ -28,14 +28,24 @@ export const SINGARD_SELF_PERMISSION_CODES = [
   'singard.mine',
 ] as const;
 
+/** ثبت شکایت و پیگیری پروندهٔ خود؛ بقیهٔ منوهای بازرسی فقط از مدیریت نقش‌ها. */
+export const INSPECTION_SELF_PERMISSION_CODES = [
+  'inspection.submit',
+  'inspection.mine',
+] as const;
+
 export const EMPLOYEE_PERMISSION_CODES = [
   'food-reservation.reserve',
   'food-reservation.my-orders',
   'food-reservation.my-report',
   ...SINGARD_SELF_PERMISSION_CODES,
+  ...INSPECTION_SELF_PERMISSION_CODES,
 ] as const;
 
-export const CITIZEN_PERMISSION_CODES = [...SINGARD_SELF_PERMISSION_CODES] as const;
+export const CITIZEN_PERMISSION_CODES = [
+  ...SINGARD_SELF_PERMISSION_CODES,
+  ...INSPECTION_SELF_PERMISSION_CODES,
+] as const;
 
 export const BOARD_ADMIN_PERMISSION_CODES = [
   'board',
@@ -91,7 +101,7 @@ export const SYSTEM_ROLES = [
   {
     code: CITIZEN_ROLE_CODE,
     name: 'شهروند و گردشگر',
-    description: 'ثبت نظر در سینگارد و پیگیری نظرهای خود',
+    description: 'ثبت نظر در سینگارد یا بازرسی و پیگیری پرونده‌های خود',
   },
   {
     code: BOARD_ADMIN_ROLE_CODE,

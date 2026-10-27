@@ -400,13 +400,7 @@ export class BoardService {
       throw new NotFoundException('درخواست یافت نشد');
     }
     await this.assertCanView(actor, current);
-    await this.prisma.$transaction(async (tx) => {
-      await tx.boardMinutes.updateMany({
-        where: { requestId: id },
-        data: { requestId: null },
-      });
-      await tx.boardRequest.delete({ where: { id } });
-    });
+    await this.prisma.boardRequest.delete({ where: { id } });
   }
 
   async review(id: string, dto: ReviewBoardRequestDto, userId: string) {

@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { CONTRACTOR_ROLE_CODE } from './access.constants';
 import { hasAnyPermission } from './access.util';
-import { isSingardApiPath, resolveAccessDecision } from './route-permissions';
+import { isInspectionApiPath, isSingardApiPath, resolveAccessDecision } from './route-permissions';
 
 type RequestAccessUser = {
   id?: string;
@@ -42,14 +42,22 @@ export class PermissionsGuard implements CanActivate {
     }
 
     const permissionCodes = user.permissionCodes ?? [];
+    const requestPath = request.originalUrl ?? request.url ?? '/';
     const contractorWithoutSingard =
       !user.isAdmin &&
       user.roleCodes?.includes(CONTRACTOR_ROLE_CODE) &&
-      isSingardApiPath(request.originalUrl ?? request.url ?? '/') &&
+      isSingardApiPath(requestPath) &&
       !permissionCodes.some(
         (code) => code === 'singard' || code.startsWith('singard.'),
       );
-    if (contractorWithoutSingard) {
+    const contractorWithoutInspection =
+      !user.isAdmin &&
+      user.roleCodes?.includes(CONTRACTOR_ROLE_CODE) &&
+      isInspectionApiPath(requestPath) &&
+      !permissionCodes.some(
+        (code) => code === 'inspection' || code.startsWith('inspection.'),
+      );
+    if (contractorWithoutSingard || contractorWithoutInspection) {
       throw new ForbiddenException('دسترسی مجاز نیست');
     }
 

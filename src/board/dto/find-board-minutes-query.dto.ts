@@ -3,7 +3,7 @@ import { IsIn, IsOptional, IsUUID, Matches, ValidateIf } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
-import { boardMinutesSortFields } from '../board.constants';
+import { boardMinutesSortFields, boardMinutesStatuses } from '../board.constants';
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -30,6 +30,11 @@ export class FindBoardMinutesQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...boardMinutesKinds])
   kind?: (typeof boardMinutesKinds)[number];
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...boardMinutesStatuses])
+  status?: (typeof boardMinutesStatuses)[number];
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

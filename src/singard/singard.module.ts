@@ -5,15 +5,18 @@ import { SingardCategoriesController } from './categories.controller';
 import { SingardCategoriesService } from './categories.service';
 import { SingardFeedbacksController } from './feedbacks.controller';
 import { SingardFeedbacksService } from './feedbacks.service';
+import { SingardKindsController } from './kinds.controller';
+import { SingardKindsService } from './kinds.service';
 import { PublicSingardController } from './public-singard.controller';
 
 @Module({
   imports: [ImagesModule, FilesModule],
   controllers: [
     PublicSingardController,
+    SingardKindsController,
     SingardCategoriesController,
     SingardFeedbacksController,
   ],
-  providers: [SingardCategoriesService, SingardFeedbacksService],
+  providers: [SingardKindsService, SingardCategoriesService, SingardFeedbacksService],
 })
 export class SingardModule {}

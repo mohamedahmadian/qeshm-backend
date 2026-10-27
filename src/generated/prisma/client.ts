@@ -245,6 +245,11 @@ export type UserRole = Prisma.UserRoleModel
  */
 export type RolePermission = Prisma.RolePermissionModel
 /**
+ * Model SingardKind
+ * 
+ */
+export type SingardKind = Prisma.SingardKindModel
+/**
  * Model SingardCategory
  * 
  */
@@ -264,6 +269,31 @@ export type SingardAttachment = Prisma.SingardAttachmentModel
  * 
  */
 export type SingardActivity = Prisma.SingardActivityModel
+/**
+ * Model InspectionKind
+ * 
+ */
+export type InspectionKind = Prisma.InspectionKindModel
+/**
+ * Model InspectionCategory
+ * 
+ */
+export type InspectionCategory = Prisma.InspectionCategoryModel
+/**
+ * Model InspectionFeedback
+ * 
+ */
+export type InspectionFeedback = Prisma.InspectionFeedbackModel
+/**
+ * Model InspectionAttachment
+ * 
+ */
+export type InspectionAttachment = Prisma.InspectionAttachmentModel
+/**
+ * Model InspectionActivity
+ * 
+ */
+export type InspectionActivity = Prisma.InspectionActivityModel
 /**
  * Model BoardRequest
  * 
@@ -295,6 +325,11 @@ export type BoardStagePosition = Prisma.BoardStagePositionModel
  */
 export type BoardMinutes = Prisma.BoardMinutesModel
 /**
+ * Model BoardMinutesRequest
+ * 
+ */
+export type BoardMinutesRequest = Prisma.BoardMinutesRequestModel
+/**
  * Model BoardMinutesMember
  * 
  */
@@ -309,6 +344,16 @@ export type BoardMinutesAttachment = Prisma.BoardMinutesAttachmentModel
  * 
  */
 export type BoardMinutesResolution = Prisma.BoardMinutesResolutionModel
+/**
+ * Model BoardMinutesResolutionUnit
+ * 
+ */
+export type BoardMinutesResolutionUnit = Prisma.BoardMinutesResolutionUnitModel
+/**
+ * Model BoardResolutionSignatory
+ * 
+ */
+export type BoardResolutionSignatory = Prisma.BoardResolutionSignatoryModel
 /**
  * Model PortSalesReport
  * 

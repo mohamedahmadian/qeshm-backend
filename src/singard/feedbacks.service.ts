@@ -33,6 +33,15 @@ import {
   SINGARD_DEFAULT_PASSWORD,
 } from './singard.constants';
 
+const kindSelect = {
+  id: true,
+  title: true,
+  description: true,
+  icon: true,
+  sortOrder: true,
+  isActive: true,
+} satisfies Prisma.SingardKindSelect;
+
 const categorySelect = {
   id: true,
   name: true,
@@ -76,7 +85,8 @@ const activitySelect = {
 const feedbackListSelect = {
   id: true,
   trackingCode: true,
-  kind: true,
+  kindId: true,
+  kind: { select: kindSelect },
   status: true,
   categoryId: true,
   category: { select: categorySelect },
@@ -160,7 +170,7 @@ export class SingardFeedbacksService {
       query.sortDir,
       {
         trackingCode: (dir) => ({ trackingCode: dir }),
-        kind: (dir) => ({ kind: dir }),
+        kind: (dir) => ({ kind: { title: dir } }),
         status: (dir) => ({ status: dir }),
         category: (dir) => ({ category: { name: dir } }),
         submitter: (dir) => [{ lastName: dir }, { firstName: dir }],
@@ -206,6 +216,7 @@ export class SingardFeedbacksService {
   }
 
   async create(dto: CreateSingardFeedbackDto, actorUserId?: string) {
+    await this.assertActiveKind(dto.kindId);
     await this.assertLeafOrExistingCategory(dto.categoryId);
     const imageIds = dto.imageIds ?? [];
     const audioIds = dto.audioIds ?? [];
@@ -245,7 +256,7 @@ export class SingardFeedbacksService {
 
     const created = await this.prisma.$transaction(async (tx) => {
       const row = await this.insertWithCode(tx, {
-        kind: dto.kind,
+        kindId: dto.kindId,
         categoryId: dto.categoryId,
         userId,
         isAnonymous,
@@ -375,7 +386,7 @@ export class SingardFeedbacksService {
     const [total, byKind, byStatus, byCategory] = await Promise.all([
       this.prisma.singardFeedback.count({ where }),
       this.prisma.singardFeedback.groupBy({
-        by: ['kind'],
+        by: ['kindId'],
         where,
         _count: { _all: true },
       }),
@@ -390,11 +401,19 @@ export class SingardFeedbacksService {
         _count: { _all: true },
       }),
     ]);
-    const categories = await this.prisma.singardCategory.findMany({
-      where: { id: { in: byCategory.map((row) => row.categoryId) } },
-      select: { id: true, name: true },
-    });
+    const [categories, kinds] = await Promise.all([
+      this.prisma.singardCategory.findMany({
+        where: { id: { in: byCategory.map((row) => row.categoryId) } },
+        select: { id: true, name: true },
+      }),
+      this.prisma.singardKind.findMany({
+        where: { id: { in: byKind.map((row) => row.kindId) } },
+        select: { id: true, title: true, icon: true, sortOrder: true },
+        orderBy: [{ sortOrder: 'asc' }, { title: 'asc' }],
+      }),
+    ]);
     const categoryName = new Map(categories.map((item) => [item.id, item.name]));
+    const kindCount = new Map(byKind.map((row) => [row.kindId, row._count._all]));
     const answered = byStatus.find((row) => row.status === 'ANSWERED')?._count._all ?? 0;
     const pending = byStatus
       .filter((row) => row.status === 'NEW' || row.status === 'IN_PROGRESS')
@@ -405,12 +424,13 @@ export class SingardFeedbacksService {
         pending,
         answered,
         closed: byStatus.find((row) => row.status === 'CLOSED')?._count._all ?? 0,
-        suggestions: byKind.find((row) => row.kind === 'SUGGESTION')?._count._all ?? 0,
-        complaints: byKind.find((row) => row.kind === 'COMPLAINT')?._count._all ?? 0,
-        criticisms: byKind.find((row) => row.kind === 'CRITICISM')?._count._all ?? 0,
-        reports: byKind.find((row) => row.kind === 'REPORT')?._count._all ?? 0,
       },
-      byKind: byKind.map((row) => ({ key: row.kind, count: row._count._all })),
+      byKind: kinds.map((item) => ({
+        id: item.id,
+        title: item.title,
+        icon: item.icon,
+        count: kindCount.get(item.id) ?? 0,
+      })),
       byStatus: byStatus.map((row) => ({ key: row.status, count: row._count._all })),
       byCategory: byCategory.map((row) => ({
         id: row.categoryId,
@@ -425,7 +445,7 @@ export class SingardFeedbacksService {
     const to = query.to ? new Date(`${query.to}T23:59:59.999Z`) : undefined;
     const where: Prisma.SingardFeedbackWhereInput = {
       userId: onlyUserId,
-      kind: query.kind,
+      kindId: query.kindId,
       status: query.status,
       categoryId: query.categoryId,
       createdAt: from || to ? { gte: from, lte: to } : undefined,
@@ -447,7 +467,7 @@ export class SingardFeedbacksService {
   private async insertWithCode(
     tx: Prisma.TransactionClient,
     data: {
-      kind: CreateSingardFeedbackDto['kind'];
+      kindId: string;
       categoryId: string;
       userId: string | null;
       isAnonymous: boolean;
@@ -530,6 +550,16 @@ export class SingardFeedbacksService {
   private assertCoordinates(latitude?: number | null, longitude?: number | null) {
     if ((latitude == null) !== (longitude == null)) {
       throw new BadRequestException('موقعیت مکانی باید هر دو مختصات را داشته باشد');
+    }
+  }
+
+  private async assertActiveKind(kindId: string) {
+    const kind = await this.prisma.singardKind.findUnique({
+      where: { id: kindId },
+      select: { id: true, isActive: true },
+    });
+    if (!kind || !kind.isActive) {
+      throw new BadRequestException('نوع پیام معتبر نیست');
     }
   }
 
