@@ -15,9 +15,11 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import type { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
+import { ChangeUserPasswordDto } from './dto/change-user-password.dto';
 import { CheckIdentityDto } from './dto/check-identity.dto';
 import { SearchQeshmondiQueryDto } from './dto/search-qeshmondi-query.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { SendUserSmsDto } from './dto/send-user-sms.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { FindUsersQueryDto } from './dto/find-users-query.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -116,6 +118,16 @@ export class UsersController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.users.findOne(id);
+  }
+
+  @Post(':id/password')
+  setPassword(@Param('id') id: string, @Body() dto: ChangeUserPasswordDto) {
+    return this.users.setPassword(id, dto);
+  }
+
+  @Post(':id/sms')
+  sendSms(@Param('id') id: string, @Body() dto: SendUserSmsDto) {
+    return this.users.sendSms(id, dto);
   }
 
   @Post()

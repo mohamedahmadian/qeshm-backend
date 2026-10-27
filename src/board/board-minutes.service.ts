@@ -488,9 +488,12 @@ export class BoardMinutesService {
           )
         : [];
       const addedResolutions = await this.resolutionsFromRequestIds(tx, addedRequestIds);
+      const defaultSignatories = addedResolutions.length
+        ? await this.defaultResolutionSignatories(tx)
+        : [];
       for (const row of addedResolutions) {
         await tx.boardMinutesResolution.create({
-          data: { minutesId: id, ...this.resolutionCreateData(row) },
+          data: { minutesId: id, ...this.resolutionCreateData(row, defaultSignatories) },
         });
       }
       return tx.boardMinutes.update({
@@ -534,11 +537,23 @@ export class BoardMinutesService {
       throw new BadRequestException('این صورت‌جلسه عضوی ندارد');
     }
 
+    let selectedMembers = item.members;
+    if (dto.memberIds) {
+      const allowed = new Set(item.members.map((row) => row.id));
+      if (dto.memberIds.some((memberId) => !allowed.has(memberId))) {
+        throw new BadRequestException('عضو انتخاب‌شده در این صورت‌جلسه نیست');
+      }
+      selectedMembers = item.members.filter((row) => dto.memberIds!.includes(row.id));
+      if (!selectedMembers.length) {
+        throw new BadRequestException('هیچ عضوی انتخاب نشده است');
+      }
+    }
+
     const unique = new Map<
       string,
       { userId: string; fullName: string; phone: string }
     >();
-    for (const row of item.members) {
+    for (const row of selectedMembers) {
       if (unique.has(row.userId)) continue;
       unique.set(row.userId, {
         userId: row.userId,
@@ -604,7 +619,10 @@ export class BoardMinutesService {
     const proposer = this.resolveResolutionProposer(dto);
     const unitIds = await this.normalizeResolutionUnitIds(dto.unitIds);
     if (proposer.proposerUnitId) await this.assertUnitExists(proposer.proposerUnitId);
-    const signatories = await this.normalizeResolutionSignatories(dto.signatories);
+    const signatories =
+      dto.signatories === undefined
+        ? await this.defaultResolutionSignatories()
+        : await this.normalizeResolutionSignatories(dto.signatories);
     const created = await this.prisma.boardMinutesResolution.create({
       data: {
         minutesId,
@@ -777,6 +795,9 @@ export class BoardMinutesService {
           });
           const minutesSeq = (last?.minutesSeq ?? 0) + 1;
           const resolutions = await this.resolutionsFromRequestIds(tx, data.requestIds);
+          const defaultSignatories = resolutions.length
+            ? await this.defaultResolutionSignatories(tx)
+            : [];
           return tx.boardMinutes.create({
             data: {
               minutesYear,
@@ -793,7 +814,11 @@ export class BoardMinutesService {
                 ? { create: data.requestIds.map((requestId) => ({ requestId })) }
                 : undefined,
               resolutions: resolutions.length
-                ? { create: resolutions.map((row) => this.resolutionCreateData(row)) }
+                ? {
+                    create: resolutions.map((row) =>
+                      this.resolutionCreateData(row, defaultSignatories),
+                    ),
+                  }
                 : undefined,
             },
             include: minutesInclude,
@@ -857,13 +882,16 @@ export class BoardMinutesService {
     };
   }
 
-  private resolutionCreateData(row: {
-    title: string;
-    description: string;
-    unitIds: string[];
-    dueKind: BoardResolutionDueKind;
-    dueDate: Date | null;
-  }) {
+  private resolutionCreateData(
+    row: {
+      title: string;
+      description: string;
+      unitIds: string[];
+      dueKind: BoardResolutionDueKind;
+      dueDate: Date | null;
+    },
+    signatories: Prisma.BoardResolutionSignatoryCreateWithoutResolutionInput[],
+  ) {
     return {
       title: row.title,
       description: row.description,
@@ -872,7 +900,32 @@ export class BoardMinutesService {
       executors: row.unitIds.length
         ? { create: row.unitIds.map((unitId) => ({ unitId })) }
         : undefined,
+      signatories: signatories.length ? { create: signatories } : undefined,
     };
+  }
+
+  private async defaultResolutionSignatories(
+    db: Prisma.TransactionClient | PrismaService = this.prisma,
+  ): Promise<Prisma.BoardResolutionSignatoryCreateWithoutResolutionInput[]> {
+    const rows = await db.boardSignatory.findMany({
+      orderBy: [{ sortOrder: 'asc' }, { lastName: 'asc' }, { firstName: 'asc' }, { id: 'asc' }],
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        title: true,
+        signatureImageId: true,
+      },
+    });
+    return rows.map((row, index) => ({
+      sourceSignatoryId: row.id,
+      firstName: row.firstName,
+      lastName: row.lastName,
+      title: row.title,
+      signatureImageId: row.signatureImageId,
+      signedAt: null,
+      sortOrder: index,
+    }));
   }
 
   private async normalizeResolutionUnitIds(unitIds?: string[]) {
@@ -1383,7 +1436,7 @@ export class BoardMinutesService {
       const proposerUnitId =
         dto.proposerUnitId !== undefined ? dto.proposerUnitId : current?.proposerUnitId;
       if (!proposerUnitId) {
-        throw new BadRequestException('واحد پیشنهاددهنده را انتخاب کنید');
+        throw new BadRequestException('واحد پیشنهاد دهنده را انتخاب کنید');
       }
       return { proposerKind, proposerText: null as string | null, proposerUnitId };
     }
@@ -1392,7 +1445,7 @@ export class BoardMinutesService {
         ? dto.proposerText?.trim() || null
         : (current?.proposerText ?? null);
     if (!proposerText) {
-      throw new BadRequestException('پیشنهاددهنده را وارد کنید');
+      throw new BadRequestException('پیشنهاد دهنده را وارد کنید');
     }
     return { proposerKind, proposerText, proposerUnitId: null as string | null };
   }

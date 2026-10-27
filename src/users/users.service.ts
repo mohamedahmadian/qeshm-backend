@@ -55,7 +55,9 @@ import {
   type QeshmondiValidityFilter,
 } from './dto/find-users-query.dto';
 import { SearchQeshmondiQueryDto } from './dto/search-qeshmondi-query.dto';
+import { ChangeUserPasswordDto } from './dto/change-user-password.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { SendUserSmsDto } from './dto/send-user-sms.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { UpdateUserLocationDto } from './dto/update-user-location.dto';
@@ -226,6 +228,23 @@ const userSelect = {
   city: { select: { ...geoNameSelect, provinceId: true } },
   locationProvince: { select: { ...geoNameSelect, countryId: true } },
   locationCity: { select: { ...geoNameSelect, provinceId: true } },
+} satisfies Prisma.UserSelect;
+
+const userLookupSelect = {
+  id: true,
+  username: true,
+  firstName: true,
+  lastName: true,
+  fullName: true,
+  status: true,
+  nationalId: true,
+  phone: true,
+  latitude: true,
+  longitude: true,
+  orgUnitId: true,
+  positionId: true,
+  orgUnit: { select: { id: true, name: true } },
+  position: { select: { id: true, name: true } },
 } satisfies Prisma.UserSelect;
 
 function toCoord(value: Prisma.Decimal | null) {
@@ -564,7 +583,7 @@ export class UsersService {
       const items = await this.prisma.user.findMany({
         where,
         orderBy,
-        select: userSelect,
+        select: userLookupSelect,
       });
       return items.map(mapUser);
     }
@@ -1843,6 +1862,52 @@ export class UsersService {
       await this.ensureCitizenAssigned(id);
     }
     return this.findOne(id);
+  }
+
+  async setPassword(id: string, dto: ChangeUserPasswordDto) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      select: { id: true, phone: true },
+    });
+    if (!user) {
+      throw new NotFoundException('کاربر یافت نشد');
+    }
+    const password = toLatinDigits(dto.password);
+    const phone = user.phone?.trim();
+    if (dto.sendSms && !phone) {
+      throw new BadRequestException('شماره همراه برای ارسال پیامک ثبت نشده است');
+    }
+    await this.prisma.user.update({
+      where: { id },
+      data: { passwordHash: await bcrypt.hash(password, 10) },
+    });
+    if (!dto.sendSms || !phone) {
+      return { ok: true as const };
+    }
+    const sms = await this.sms.send({
+      phone,
+      body: `رمز عبور جدید شما: ${password}`,
+    });
+    return { ok: true as const, sms };
+  }
+
+  async sendSms(id: string, dto: SendUserSmsDto) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      select: { id: true, phone: true },
+    });
+    if (!user) {
+      throw new NotFoundException('کاربر یافت نشد');
+    }
+    const phone = user.phone?.trim();
+    if (!phone) {
+      throw new BadRequestException('شماره همراه برای ارسال پیامک ثبت نشده است');
+    }
+    const sms = await this.sms.send({
+      phone,
+      body: dto.body,
+    });
+    return { ok: true as const, sms };
   }
 
   async updateOwnAccount(id: string, dto: UpdateUserDto) {
