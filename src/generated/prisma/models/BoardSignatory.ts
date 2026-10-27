@@ -251,6 +251,7 @@ export type BoardSignatoryWhereInput = {
   signatureImage?: Prisma.XOR<Prisma.StoredImageScalarRelationFilter, Prisma.StoredImageWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   resolutionCopies?: Prisma.BoardResolutionSignatoryListRelationFilter
+  minutesMemberships?: Prisma.BoardMinutesMemberListRelationFilter
 }
 
 export type BoardSignatoryOrderByWithRelationInput = {
@@ -266,6 +267,7 @@ export type BoardSignatoryOrderByWithRelationInput = {
   signatureImage?: Prisma.StoredImageOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   resolutionCopies?: Prisma.BoardResolutionSignatoryOrderByRelationAggregateInput
+  minutesMemberships?: Prisma.BoardMinutesMemberOrderByRelationAggregateInput
 }
 
 export type BoardSignatoryWhereUniqueInput = Prisma.AtLeast<{
@@ -284,6 +286,7 @@ export type BoardSignatoryWhereUniqueInput = Prisma.AtLeast<{
   signatureImage?: Prisma.XOR<Prisma.StoredImageScalarRelationFilter, Prisma.StoredImageWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   resolutionCopies?: Prisma.BoardResolutionSignatoryListRelationFilter
+  minutesMemberships?: Prisma.BoardMinutesMemberListRelationFilter
 }, "id" | "userId">
 
 export type BoardSignatoryOrderByWithAggregationInput = {
@@ -329,6 +332,7 @@ export type BoardSignatoryCreateInput = {
   signatureImage: Prisma.StoredImageCreateNestedOneWithoutBoardSignatorySignaturesInput
   user?: Prisma.UserCreateNestedOneWithoutBoardSignatoryInput
   resolutionCopies?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutSourceSignatoryInput
+  minutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutSignatoryInput
 }
 
 export type BoardSignatoryUncheckedCreateInput = {
@@ -342,6 +346,7 @@ export type BoardSignatoryUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolutionCopies?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutSourceSignatoryInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutSignatoryInput
 }
 
 export type BoardSignatoryUpdateInput = {
@@ -355,6 +360,7 @@ export type BoardSignatoryUpdateInput = {
   signatureImage?: Prisma.StoredImageUpdateOneRequiredWithoutBoardSignatorySignaturesNestedInput
   user?: Prisma.UserUpdateOneWithoutBoardSignatoryNestedInput
   resolutionCopies?: Prisma.BoardResolutionSignatoryUpdateManyWithoutSourceSignatoryNestedInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutSignatoryNestedInput
 }
 
 export type BoardSignatoryUncheckedUpdateInput = {
@@ -368,6 +374,7 @@ export type BoardSignatoryUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolutionCopies?: Prisma.BoardResolutionSignatoryUncheckedUpdateManyWithoutSourceSignatoryNestedInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutSignatoryNestedInput
 }
 
 export type BoardSignatoryCreateManyInput = {
@@ -537,6 +544,22 @@ export type BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BoardSignatoryUpdateToOneWithWhereWithoutUserInput, Prisma.BoardSignatoryUpdateWithoutUserInput>, Prisma.BoardSignatoryUncheckedUpdateWithoutUserInput>
 }
 
+export type BoardSignatoryCreateNestedOneWithoutMinutesMembershipsInput = {
+  create?: Prisma.XOR<Prisma.BoardSignatoryCreateWithoutMinutesMembershipsInput, Prisma.BoardSignatoryUncheckedCreateWithoutMinutesMembershipsInput>
+  connectOrCreate?: Prisma.BoardSignatoryCreateOrConnectWithoutMinutesMembershipsInput
+  connect?: Prisma.BoardSignatoryWhereUniqueInput
+}
+
+export type BoardSignatoryUpdateOneWithoutMinutesMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardSignatoryCreateWithoutMinutesMembershipsInput, Prisma.BoardSignatoryUncheckedCreateWithoutMinutesMembershipsInput>
+  connectOrCreate?: Prisma.BoardSignatoryCreateOrConnectWithoutMinutesMembershipsInput
+  upsert?: Prisma.BoardSignatoryUpsertWithoutMinutesMembershipsInput
+  disconnect?: Prisma.BoardSignatoryWhereInput | boolean
+  delete?: Prisma.BoardSignatoryWhereInput | boolean
+  connect?: Prisma.BoardSignatoryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardSignatoryUpdateToOneWithWhereWithoutMinutesMembershipsInput, Prisma.BoardSignatoryUpdateWithoutMinutesMembershipsInput>, Prisma.BoardSignatoryUncheckedUpdateWithoutMinutesMembershipsInput>
+}
+
 export type BoardSignatoryCreateNestedOneWithoutResolutionCopiesInput = {
   create?: Prisma.XOR<Prisma.BoardSignatoryCreateWithoutResolutionCopiesInput, Prisma.BoardSignatoryUncheckedCreateWithoutResolutionCopiesInput>
   connectOrCreate?: Prisma.BoardSignatoryCreateOrConnectWithoutResolutionCopiesInput
@@ -563,6 +586,7 @@ export type BoardSignatoryCreateWithoutSignatureImageInput = {
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutBoardSignatoryInput
   resolutionCopies?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutSourceSignatoryInput
+  minutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutSignatoryInput
 }
 
 export type BoardSignatoryUncheckedCreateWithoutSignatureImageInput = {
@@ -575,6 +599,7 @@ export type BoardSignatoryUncheckedCreateWithoutSignatureImageInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolutionCopies?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutSourceSignatoryInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutSignatoryInput
 }
 
 export type BoardSignatoryCreateOrConnectWithoutSignatureImageInput = {
@@ -628,6 +653,7 @@ export type BoardSignatoryCreateWithoutUserInput = {
   updatedAt?: Date | string
   signatureImage: Prisma.StoredImageCreateNestedOneWithoutBoardSignatorySignaturesInput
   resolutionCopies?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutSourceSignatoryInput
+  minutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutSignatoryInput
 }
 
 export type BoardSignatoryUncheckedCreateWithoutUserInput = {
@@ -640,6 +666,7 @@ export type BoardSignatoryUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolutionCopies?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutSourceSignatoryInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutSignatoryInput
 }
 
 export type BoardSignatoryCreateOrConnectWithoutUserInput = {
@@ -668,6 +695,7 @@ export type BoardSignatoryUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   signatureImage?: Prisma.StoredImageUpdateOneRequiredWithoutBoardSignatorySignaturesNestedInput
   resolutionCopies?: Prisma.BoardResolutionSignatoryUpdateManyWithoutSourceSignatoryNestedInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutSignatoryNestedInput
 }
 
 export type BoardSignatoryUncheckedUpdateWithoutUserInput = {
@@ -676,6 +704,75 @@ export type BoardSignatoryUncheckedUpdateWithoutUserInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   signatureImageId?: Prisma.StringFieldUpdateOperationsInput | string
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolutionCopies?: Prisma.BoardResolutionSignatoryUncheckedUpdateManyWithoutSourceSignatoryNestedInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutSignatoryNestedInput
+}
+
+export type BoardSignatoryCreateWithoutMinutesMembershipsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  title: string
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  signatureImage: Prisma.StoredImageCreateNestedOneWithoutBoardSignatorySignaturesInput
+  user?: Prisma.UserCreateNestedOneWithoutBoardSignatoryInput
+  resolutionCopies?: Prisma.BoardResolutionSignatoryCreateNestedManyWithoutSourceSignatoryInput
+}
+
+export type BoardSignatoryUncheckedCreateWithoutMinutesMembershipsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  title: string
+  signatureImageId: string
+  userId?: string | null
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolutionCopies?: Prisma.BoardResolutionSignatoryUncheckedCreateNestedManyWithoutSourceSignatoryInput
+}
+
+export type BoardSignatoryCreateOrConnectWithoutMinutesMembershipsInput = {
+  where: Prisma.BoardSignatoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardSignatoryCreateWithoutMinutesMembershipsInput, Prisma.BoardSignatoryUncheckedCreateWithoutMinutesMembershipsInput>
+}
+
+export type BoardSignatoryUpsertWithoutMinutesMembershipsInput = {
+  update: Prisma.XOR<Prisma.BoardSignatoryUpdateWithoutMinutesMembershipsInput, Prisma.BoardSignatoryUncheckedUpdateWithoutMinutesMembershipsInput>
+  create: Prisma.XOR<Prisma.BoardSignatoryCreateWithoutMinutesMembershipsInput, Prisma.BoardSignatoryUncheckedCreateWithoutMinutesMembershipsInput>
+  where?: Prisma.BoardSignatoryWhereInput
+}
+
+export type BoardSignatoryUpdateToOneWithWhereWithoutMinutesMembershipsInput = {
+  where?: Prisma.BoardSignatoryWhereInput
+  data: Prisma.XOR<Prisma.BoardSignatoryUpdateWithoutMinutesMembershipsInput, Prisma.BoardSignatoryUncheckedUpdateWithoutMinutesMembershipsInput>
+}
+
+export type BoardSignatoryUpdateWithoutMinutesMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  signatureImage?: Prisma.StoredImageUpdateOneRequiredWithoutBoardSignatorySignaturesNestedInput
+  user?: Prisma.UserUpdateOneWithoutBoardSignatoryNestedInput
+  resolutionCopies?: Prisma.BoardResolutionSignatoryUpdateManyWithoutSourceSignatoryNestedInput
+}
+
+export type BoardSignatoryUncheckedUpdateWithoutMinutesMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  signatureImageId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -692,6 +789,7 @@ export type BoardSignatoryCreateWithoutResolutionCopiesInput = {
   updatedAt?: Date | string
   signatureImage: Prisma.StoredImageCreateNestedOneWithoutBoardSignatorySignaturesInput
   user?: Prisma.UserCreateNestedOneWithoutBoardSignatoryInput
+  minutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutSignatoryInput
 }
 
 export type BoardSignatoryUncheckedCreateWithoutResolutionCopiesInput = {
@@ -704,6 +802,7 @@ export type BoardSignatoryUncheckedCreateWithoutResolutionCopiesInput = {
   sortOrder?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  minutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutSignatoryInput
 }
 
 export type BoardSignatoryCreateOrConnectWithoutResolutionCopiesInput = {
@@ -732,6 +831,7 @@ export type BoardSignatoryUpdateWithoutResolutionCopiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   signatureImage?: Prisma.StoredImageUpdateOneRequiredWithoutBoardSignatorySignaturesNestedInput
   user?: Prisma.UserUpdateOneWithoutBoardSignatoryNestedInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutSignatoryNestedInput
 }
 
 export type BoardSignatoryUncheckedUpdateWithoutResolutionCopiesInput = {
@@ -744,6 +844,7 @@ export type BoardSignatoryUncheckedUpdateWithoutResolutionCopiesInput = {
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  minutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutSignatoryNestedInput
 }
 
 export type BoardSignatoryCreateManySignatureImageInput = {
@@ -767,6 +868,7 @@ export type BoardSignatoryUpdateWithoutSignatureImageInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutBoardSignatoryNestedInput
   resolutionCopies?: Prisma.BoardResolutionSignatoryUpdateManyWithoutSourceSignatoryNestedInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutSignatoryNestedInput
 }
 
 export type BoardSignatoryUncheckedUpdateWithoutSignatureImageInput = {
@@ -779,6 +881,7 @@ export type BoardSignatoryUncheckedUpdateWithoutSignatureImageInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolutionCopies?: Prisma.BoardResolutionSignatoryUncheckedUpdateManyWithoutSourceSignatoryNestedInput
+  minutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutSignatoryNestedInput
 }
 
 export type BoardSignatoryUncheckedUpdateManyWithoutSignatureImageInput = {
@@ -799,10 +902,12 @@ export type BoardSignatoryUncheckedUpdateManyWithoutSignatureImageInput = {
 
 export type BoardSignatoryCountOutputType = {
   resolutionCopies: number
+  minutesMemberships: number
 }
 
 export type BoardSignatoryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resolutionCopies?: boolean | BoardSignatoryCountOutputTypeCountResolutionCopiesArgs
+  minutesMemberships?: boolean | BoardSignatoryCountOutputTypeCountMinutesMembershipsArgs
 }
 
 /**
@@ -822,6 +927,13 @@ export type BoardSignatoryCountOutputTypeCountResolutionCopiesArgs<ExtArgs exten
   where?: Prisma.BoardResolutionSignatoryWhereInput
 }
 
+/**
+ * BoardSignatoryCountOutputType without action
+ */
+export type BoardSignatoryCountOutputTypeCountMinutesMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardMinutesMemberWhereInput
+}
+
 
 export type BoardSignatorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -836,6 +948,7 @@ export type BoardSignatorySelect<ExtArgs extends runtime.Types.Extensions.Intern
   signatureImage?: boolean | Prisma.StoredImageDefaultArgs<ExtArgs>
   user?: boolean | Prisma.BoardSignatory$userArgs<ExtArgs>
   resolutionCopies?: boolean | Prisma.BoardSignatory$resolutionCopiesArgs<ExtArgs>
+  minutesMemberships?: boolean | Prisma.BoardSignatory$minutesMembershipsArgs<ExtArgs>
   _count?: boolean | Prisma.BoardSignatoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boardSignatory"]>
 
@@ -884,6 +997,7 @@ export type BoardSignatoryInclude<ExtArgs extends runtime.Types.Extensions.Inter
   signatureImage?: boolean | Prisma.StoredImageDefaultArgs<ExtArgs>
   user?: boolean | Prisma.BoardSignatory$userArgs<ExtArgs>
   resolutionCopies?: boolean | Prisma.BoardSignatory$resolutionCopiesArgs<ExtArgs>
+  minutesMemberships?: boolean | Prisma.BoardSignatory$minutesMembershipsArgs<ExtArgs>
   _count?: boolean | Prisma.BoardSignatoryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BoardSignatoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -901,6 +1015,7 @@ export type $BoardSignatoryPayload<ExtArgs extends runtime.Types.Extensions.Inte
     signatureImage: Prisma.$StoredImagePayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
     resolutionCopies: Prisma.$BoardResolutionSignatoryPayload<ExtArgs>[]
+    minutesMemberships: Prisma.$BoardMinutesMemberPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1309,6 +1424,7 @@ export interface Prisma__BoardSignatoryClient<T, Null = never, ExtArgs extends r
   signatureImage<T extends Prisma.StoredImageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImageDefaultArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.BoardSignatory$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardSignatory$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   resolutionCopies<T extends Prisma.BoardSignatory$resolutionCopiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardSignatory$resolutionCopiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardResolutionSignatoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  minutesMemberships<T extends Prisma.BoardSignatory$minutesMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardSignatory$minutesMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1788,6 +1904,30 @@ export type BoardSignatory$resolutionCopiesArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.BoardResolutionSignatoryScalarFieldEnum | Prisma.BoardResolutionSignatoryScalarFieldEnum[]
+}
+
+/**
+ * BoardSignatory.minutesMemberships
+ */
+export type BoardSignatory$minutesMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardMinutesMember
+   */
+  select?: Prisma.BoardMinutesMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardMinutesMember
+   */
+  omit?: Prisma.BoardMinutesMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardMinutesMemberInclude<ExtArgs> | null
+  where?: Prisma.BoardMinutesMemberWhereInput
+  orderBy?: Prisma.BoardMinutesMemberOrderByWithRelationInput | Prisma.BoardMinutesMemberOrderByWithRelationInput[]
+  cursor?: Prisma.BoardMinutesMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardMinutesMemberScalarFieldEnum | Prisma.BoardMinutesMemberScalarFieldEnum[]
 }
 
 /**

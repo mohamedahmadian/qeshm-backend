@@ -75,6 +75,8 @@ export const MAX_BOARD_MINUTES_REQUESTS = 200;
 
 export const boardMinutesAttendances = ['PRESENT', 'ABSENT'] as const;
 
+export const boardMinutesMemberKinds = ['USER', 'SIGNATORY', 'GUEST'] as const;
+
 export const boardMinutesStatuses = ['NOT_HELD', 'HELD', 'NOTIFIED'] as const;
 
 export const boardMinutesSortFields = [

@@ -1139,7 +1139,12 @@ export type BoardMinutesRequestScalarFieldEnum = (typeof BoardMinutesRequestScal
 export const BoardMinutesMemberScalarFieldEnum = {
   id: 'id',
   minutesId: 'minutesId',
+  kind: 'kind',
   userId: 'userId',
+  signatoryId: 'signatoryId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  title: 'title',
   attendance: 'attendance',
   createdAt: 'createdAt'
 } as const

@@ -18,6 +18,7 @@ import {
   MAX_BOARD_MINUTES_MEMBERS,
   MAX_BOARD_MINUTES_REQUESTS,
   boardMinutesAttendances,
+  boardMinutesMemberKinds,
   boardMinutesStatuses,
 } from '../board.constants';
 
@@ -28,8 +29,42 @@ function trimString(value: unknown) {
 }
 
 export class BoardMinutesMemberDto {
+  @IsOptional()
+  @IsIn([...boardMinutesMemberKinds])
+  kind?: (typeof boardMinutesMemberKinds)[number];
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
   @IsUUID('4')
-  userId: string;
+  userId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  signatoryId?: string | null;
+
+  @ValidateIf((row: BoardMinutesMemberDto) => !row.userId && !row.signatoryId)
+  @Transform(({ value }) => trimString(value))
+  @IsString()
+  @MinLength(1)
+  @MaxLength(80)
+  firstName?: string;
+
+  @ValidateIf((row: BoardMinutesMemberDto) => !row.userId && !row.signatoryId)
+  @Transform(({ value }) => trimString(value))
+  @IsString()
+  @MinLength(1)
+  @MaxLength(80)
+  lastName?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(160)
+  title?: string | null;
 
   @IsOptional()
   @IsIn([...boardMinutesAttendances])

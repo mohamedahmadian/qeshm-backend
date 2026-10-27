@@ -303,6 +303,15 @@ export const BoardMinutesAttendance = {
 export type BoardMinutesAttendance = (typeof BoardMinutesAttendance)[keyof typeof BoardMinutesAttendance]
 
 
+export const BoardMinutesMemberKind = {
+  USER: 'USER',
+  SIGNATORY: 'SIGNATORY',
+  GUEST: 'GUEST'
+} as const
+
+export type BoardMinutesMemberKind = (typeof BoardMinutesMemberKind)[keyof typeof BoardMinutesMemberKind]
+
+
 export const BoardMinutesAttachmentKind = {
   IMAGE: 'IMAGE',
   AUDIO: 'AUDIO'

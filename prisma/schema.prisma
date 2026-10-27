@@ -1488,9 +1488,10 @@ model BoardSignatory {
   userId           String?     @unique
   user             User?       @relation("BoardSignatoryUser", fields: [userId], references: [id], onDelete: SetNull)
   sortOrder        Int         @default(0)
-  resolutionCopies BoardResolutionSignatory[]
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
+  resolutionCopies   BoardResolutionSignatory[]
+  minutesMemberships BoardMinutesMember[]
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
 
   @@index([lastName, firstName])
   @@index([sortOrder])
@@ -1544,6 +1545,12 @@ model BoardStagePosition {
 enum BoardMinutesAttendance {
   PRESENT
   ABSENT
+}
+
+enum BoardMinutesMemberKind {
+  USER
+  SIGNATORY
+  GUEST
 }
 
 enum BoardMinutesAttachmentKind {
@@ -1613,16 +1620,24 @@ model BoardMinutesRequest {
 }
 
 model BoardMinutesMember {
-  id         String                 @id @default(uuid())
-  minutesId  String
-  minutes    BoardMinutes           @relation(fields: [minutesId], references: [id], onDelete: Cascade)
-  userId     String
-  user       User                   @relation(fields: [userId], references: [id], onDelete: Restrict)
-  attendance BoardMinutesAttendance @default(PRESENT)
-  createdAt  DateTime               @default(now())
+  id          String                 @id @default(uuid())
+  minutesId   String
+  minutes     BoardMinutes           @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  kind        BoardMinutesMemberKind @default(USER)
+  userId      String?
+  user        User?                  @relation(fields: [userId], references: [id], onDelete: Restrict)
+  signatoryId String?
+  signatory   BoardSignatory?        @relation(fields: [signatoryId], references: [id], onDelete: SetNull)
+  firstName   String
+  lastName    String
+  title       String?
+  attendance  BoardMinutesAttendance @default(PRESENT)
+  createdAt   DateTime               @default(now())
 
   @@unique([minutesId, userId])
+  @@unique([minutesId, signatoryId])
   @@index([userId])
+  @@index([signatoryId])
   @@index([minutesId])
   @@map("board_minutes_members")
 }

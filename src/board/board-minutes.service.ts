@@ -17,6 +17,7 @@ import { resolveSortOrder } from '../common/sort-query';
 import {
   BoardMinutesAttachmentKind,
   BoardMinutesAttendance,
+  BoardMinutesMemberKind,
   BoardMinutesStatus,
   BoardRequestStatus,
   BoardResolutionDueKind,
@@ -48,6 +49,15 @@ import { FindBoardMinutesQueryDto } from './dto/find-board-minutes-query.dto';
 import { FindBoardResolutionsQueryDto } from './dto/find-board-resolutions-query.dto';
 import { UpdateBoardMinutesDto } from './dto/update-board-minutes.dto';
 import { UpdateBoardResolutionDto } from './dto/update-board-resolution.dto';
+
+function memberDisplayName(row: {
+  firstName?: string | null;
+  lastName?: string | null;
+  user?: { fullName?: string | null } | null;
+}) {
+  const name = `${row.firstName ?? ''} ${row.lastName ?? ''}`.trim();
+  return name || row.user?.fullName?.trim() || '';
+}
 
 const personSelect = {
   id: true,
@@ -549,16 +559,12 @@ export class BoardMinutesService {
       }
     }
 
-    const unique = new Map<
-      string,
-      { userId: string; fullName: string; phone: string }
-    >();
+    const unique = new Map<string, { fullName: string; phone: string }>();
     for (const row of selectedMembers) {
-      if (unique.has(row.userId)) continue;
-      unique.set(row.userId, {
-        userId: row.userId,
-        fullName: row.user.fullName,
-        phone: row.user.phone?.trim() ?? '',
+      if (unique.has(row.id)) continue;
+      unique.set(row.id, {
+        fullName: memberDisplayName(row),
+        phone: row.user?.phone?.trim() ?? '',
       });
     }
     const recipients = [...unique.values()];
@@ -773,7 +779,15 @@ export class BoardMinutesService {
     status: BoardMinutesStatus;
     createdById: string;
     requestIds: string[];
-    members: { userId: string; attendance: BoardMinutesAttendance }[];
+    members: {
+      kind: BoardMinutesMemberKind;
+      userId: string | null;
+      signatoryId: string | null;
+      firstName: string;
+      lastName: string;
+      title: string | null;
+      attendance: BoardMinutesAttendance;
+    }[];
     attachments: {
       kind: BoardMinutesAttachmentKind;
       imageId?: string;
@@ -972,28 +986,109 @@ export class BoardMinutesService {
     if (list.length > MAX_BOARD_MINUTES_MEMBERS) {
       throw new BadRequestException('تعداد اعضا بیش از حد مجاز است');
     }
-    const unique = new Map<string, BoardMinutesAttendance>();
-    for (const row of list) {
-      unique.set(
-        row.userId,
+    const userIds = [
+      ...new Set(list.map((row) => row.userId).filter((id): id is string => Boolean(id))),
+    ];
+    const signatoryIds = [
+      ...new Set(
+        list.map((row) => row.signatoryId).filter((id): id is string => Boolean(id)),
+      ),
+    ];
+    const [users, signatories] = await Promise.all([
+      userIds.length
+        ? this.prisma.user.findMany({
+            where: { id: { in: userIds } },
+            select: { id: true, firstName: true, lastName: true },
+          })
+        : Promise.resolve([]),
+      signatoryIds.length
+        ? this.prisma.boardSignatory.findMany({
+            where: { id: { in: signatoryIds } },
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              title: true,
+              userId: true,
+            },
+          })
+        : Promise.resolve([]),
+    ]);
+    if (users.length !== userIds.length) {
+      throw new BadRequestException('یکی از اعضای انتخاب‌شده معتبر نیست');
+    }
+    if (signatories.length !== signatoryIds.length) {
+      throw new BadRequestException('دارنده حق امضای انتخاب‌شده معتبر نیست');
+    }
+    const userMap = new Map(users.map((row) => [row.id, row]));
+    const signatoryMap = new Map(signatories.map((row) => [row.id, row]));
+    const seenUsers = new Set<string>();
+    const seenSignatories = new Set<string>();
+    return list.map((row) => {
+      const attendance =
         row.attendance === 'ABSENT'
           ? BoardMinutesAttendance.ABSENT
-          : BoardMinutesAttendance.PRESENT,
-      );
-    }
-    const userIds = [...unique.keys()];
-    if (!userIds.length) return [];
-    const users = await this.prisma.user.findMany({
-      where: { id: { in: userIds }, orgUnitId: { not: null } },
-      select: { id: true },
+          : BoardMinutesAttendance.PRESENT;
+      if (row.signatoryId) {
+        const source = signatoryMap.get(row.signatoryId);
+        if (!source) {
+          throw new BadRequestException('دارنده حق امضای انتخاب‌شده معتبر نیست');
+        }
+        if (seenSignatories.has(source.id)) {
+          throw new BadRequestException('یک دارنده حق امضا بیش از یک بار انتخاب شده است');
+        }
+        seenSignatories.add(source.id);
+        const linkedUserId = source.userId ?? row.userId ?? null;
+        if (linkedUserId) {
+          if (seenUsers.has(linkedUserId)) {
+            throw new BadRequestException('یک نفر بیش از یک بار به جلسه اضافه شده است');
+          }
+          seenUsers.add(linkedUserId);
+        }
+        return {
+          kind: BoardMinutesMemberKind.SIGNATORY,
+          userId: linkedUserId,
+          signatoryId: source.id,
+          firstName: row.firstName?.trim() || source.firstName,
+          lastName: row.lastName?.trim() || source.lastName,
+          title: row.title?.trim() || source.title,
+          attendance,
+        };
+      }
+      if (row.userId) {
+        const user = userMap.get(row.userId);
+        if (!user) {
+          throw new BadRequestException('یکی از اعضای انتخاب‌شده معتبر نیست');
+        }
+        if (seenUsers.has(user.id)) {
+          throw new BadRequestException('یک نفر بیش از یک بار به جلسه اضافه شده است');
+        }
+        seenUsers.add(user.id);
+        return {
+          kind: BoardMinutesMemberKind.USER,
+          userId: user.id,
+          signatoryId: null,
+          firstName: row.firstName?.trim() || user.firstName,
+          lastName: row.lastName?.trim() || user.lastName,
+          title: row.title?.trim() || null,
+          attendance,
+        };
+      }
+      const firstName = row.firstName?.trim() ?? '';
+      const lastName = row.lastName?.trim() ?? '';
+      if (!firstName || !lastName) {
+        throw new BadRequestException('نام و نام خانوادگی مهمان را وارد کنید');
+      }
+      return {
+        kind: BoardMinutesMemberKind.GUEST,
+        userId: null,
+        signatoryId: null,
+        firstName,
+        lastName,
+        title: row.title?.trim() || null,
+        attendance,
+      };
     });
-    if (users.length !== userIds.length) {
-      throw new BadRequestException('یکی از اعضای انتخاب‌شده کارمند معتبر نیست');
-    }
-    return userIds.map((userId) => ({
-      userId,
-      attendance: unique.get(userId) ?? BoardMinutesAttendance.PRESENT,
-    }));
   }
 
   private async buildAttachments(imageIds?: string[], audioIds?: string[]) {
@@ -1048,7 +1143,7 @@ export class BoardMinutesService {
       { notes: text },
       { legalBasis: text },
       { proposerText: text },
-      { unit: { name: text } },
+      { executors: { some: { unit: { name: text } } } },
       { proposerUnit: { name: text } },
     ];
   }
@@ -1081,6 +1176,9 @@ export class BoardMinutesService {
       { minutesNo: text },
       { createdBy: { fullName: text } },
       { members: { some: { user: { fullName: text } } } },
+      { members: { some: { firstName: text } } },
+      { members: { some: { lastName: text } } },
+      { members: { some: { title: text } } },
       { requests: { some: { request: { subject: text } } } },
       { requests: { some: { request: { trackingNo: text } } } },
       { requests: { some: { request: { justification: text } } } },
@@ -1091,7 +1189,7 @@ export class BoardMinutesService {
       { resolutions: { some: { title: text } } },
       { resolutions: { some: { description: text } } },
       { resolutions: { some: { notes: text } } },
-      { resolutions: { some: { unit: { name: text } } } },
+      { resolutions: { some: { executors: { some: { unit: { name: text } } } } } },
     ];
   }
 
@@ -1122,7 +1220,11 @@ export class BoardMinutesService {
       includesInsensitive(item.body, q) ||
       includesInsensitive(item.minutesNo, q) ||
       includesInsensitive(item.createdBy.fullName, q) ||
-      item.members.some((row) => includesInsensitive(row.user.fullName, q))
+      item.members.some(
+        (row) =>
+          includesInsensitive(memberDisplayName(row), q) ||
+          includesInsensitive(row.user?.fullName, q),
+      )
         ? (['minutes'] as const)
         : []),
       ...(matchedRequest ? (['request'] as const) : []),
@@ -1252,7 +1354,12 @@ export class BoardMinutesService {
       createdBy: item.createdBy,
       members: item.members.map((row) => ({
         id: row.id,
+        kind: row.kind,
         userId: row.userId,
+        signatoryId: row.signatoryId,
+        firstName: row.firstName,
+        lastName: row.lastName,
+        title: row.title,
         attendance: row.attendance,
         user: row.user,
       })),

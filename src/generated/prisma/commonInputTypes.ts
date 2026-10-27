@@ -925,11 +925,28 @@ export type EnumBoardMinutesStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumBoardMinutesStatusFilter<$PrismaModel>
 }
 
+export type EnumBoardMinutesMemberKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardMinutesMemberKind | Prisma.EnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  in?: $Enums.BoardMinutesMemberKind[] | Prisma.ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoardMinutesMemberKind[] | Prisma.ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoardMinutesMemberKindFilter<$PrismaModel> | $Enums.BoardMinutesMemberKind
+}
+
 export type EnumBoardMinutesAttendanceFilter<$PrismaModel = never> = {
   equals?: $Enums.BoardMinutesAttendance | Prisma.EnumBoardMinutesAttendanceFieldRefInput<$PrismaModel>
   in?: $Enums.BoardMinutesAttendance[] | Prisma.ListEnumBoardMinutesAttendanceFieldRefInput<$PrismaModel>
   notIn?: $Enums.BoardMinutesAttendance[] | Prisma.ListEnumBoardMinutesAttendanceFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumBoardMinutesAttendanceFilter<$PrismaModel> | $Enums.BoardMinutesAttendance
+}
+
+export type EnumBoardMinutesMemberKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardMinutesMemberKind | Prisma.EnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  in?: $Enums.BoardMinutesMemberKind[] | Prisma.ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoardMinutesMemberKind[] | Prisma.ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoardMinutesMemberKindWithAggregatesFilter<$PrismaModel> | $Enums.BoardMinutesMemberKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoardMinutesMemberKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoardMinutesMemberKindFilter<$PrismaModel>
 }
 
 export type EnumBoardMinutesAttendanceWithAggregatesFilter<$PrismaModel = never> = {
@@ -2053,11 +2070,28 @@ export type NestedEnumBoardMinutesStatusWithAggregatesFilter<$PrismaModel = neve
   _max?: Prisma.NestedEnumBoardMinutesStatusFilter<$PrismaModel>
 }
 
+export type NestedEnumBoardMinutesMemberKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardMinutesMemberKind | Prisma.EnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  in?: $Enums.BoardMinutesMemberKind[] | Prisma.ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoardMinutesMemberKind[] | Prisma.ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoardMinutesMemberKindFilter<$PrismaModel> | $Enums.BoardMinutesMemberKind
+}
+
 export type NestedEnumBoardMinutesAttendanceFilter<$PrismaModel = never> = {
   equals?: $Enums.BoardMinutesAttendance | Prisma.EnumBoardMinutesAttendanceFieldRefInput<$PrismaModel>
   in?: $Enums.BoardMinutesAttendance[] | Prisma.ListEnumBoardMinutesAttendanceFieldRefInput<$PrismaModel>
   notIn?: $Enums.BoardMinutesAttendance[] | Prisma.ListEnumBoardMinutesAttendanceFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumBoardMinutesAttendanceFilter<$PrismaModel> | $Enums.BoardMinutesAttendance
+}
+
+export type NestedEnumBoardMinutesMemberKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardMinutesMemberKind | Prisma.EnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  in?: $Enums.BoardMinutesMemberKind[] | Prisma.ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoardMinutesMemberKind[] | Prisma.ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoardMinutesMemberKindWithAggregatesFilter<$PrismaModel> | $Enums.BoardMinutesMemberKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoardMinutesMemberKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoardMinutesMemberKindFilter<$PrismaModel>
 }
 
 export type NestedEnumBoardMinutesAttendanceWithAggregatesFilter<$PrismaModel = never> = {

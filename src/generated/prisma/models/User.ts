@@ -3359,10 +3359,12 @@ export type UserCreateNestedOneWithoutBoardMinutesMembershipsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutBoardMinutesMembershipsNestedInput = {
+export type UserUpdateOneWithoutBoardMinutesMembershipsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBoardMinutesMembershipsInput, Prisma.UserUncheckedCreateWithoutBoardMinutesMembershipsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardMinutesMembershipsInput
   upsert?: Prisma.UserUpsertWithoutBoardMinutesMembershipsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardMinutesMembershipsInput, Prisma.UserUpdateWithoutBoardMinutesMembershipsInput>, Prisma.UserUncheckedUpdateWithoutBoardMinutesMembershipsInput>
 }

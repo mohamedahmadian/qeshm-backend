@@ -2092,13 +2092,13 @@ export class UsersService {
       return { status: 'no_phone' as const };
     }
     const password = randomTempPassword();
-    await this.prisma.user.update({
-      where: { id: user.id },
-      data: { passwordHash: await bcrypt.hash(password, 10) },
-    });
     const sms = await this.sms.send({
       phone: user.phone,
       body: `رمز عبور موقت شما: ${password}`,
+    });
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: { passwordHash: await bcrypt.hash(password, 10) },
     });
     return {
       status: 'sent' as const,

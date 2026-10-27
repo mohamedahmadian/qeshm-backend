@@ -27,7 +27,12 @@ export type AggregateBoardMinutesMember = {
 export type BoardMinutesMemberMinAggregateOutputType = {
   id: string | null
   minutesId: string | null
+  kind: $Enums.BoardMinutesMemberKind | null
   userId: string | null
+  signatoryId: string | null
+  firstName: string | null
+  lastName: string | null
+  title: string | null
   attendance: $Enums.BoardMinutesAttendance | null
   createdAt: Date | null
 }
@@ -35,7 +40,12 @@ export type BoardMinutesMemberMinAggregateOutputType = {
 export type BoardMinutesMemberMaxAggregateOutputType = {
   id: string | null
   minutesId: string | null
+  kind: $Enums.BoardMinutesMemberKind | null
   userId: string | null
+  signatoryId: string | null
+  firstName: string | null
+  lastName: string | null
+  title: string | null
   attendance: $Enums.BoardMinutesAttendance | null
   createdAt: Date | null
 }
@@ -43,7 +53,12 @@ export type BoardMinutesMemberMaxAggregateOutputType = {
 export type BoardMinutesMemberCountAggregateOutputType = {
   id: number
   minutesId: number
+  kind: number
   userId: number
+  signatoryId: number
+  firstName: number
+  lastName: number
+  title: number
   attendance: number
   createdAt: number
   _all: number
@@ -53,7 +68,12 @@ export type BoardMinutesMemberCountAggregateOutputType = {
 export type BoardMinutesMemberMinAggregateInputType = {
   id?: true
   minutesId?: true
+  kind?: true
   userId?: true
+  signatoryId?: true
+  firstName?: true
+  lastName?: true
+  title?: true
   attendance?: true
   createdAt?: true
 }
@@ -61,7 +81,12 @@ export type BoardMinutesMemberMinAggregateInputType = {
 export type BoardMinutesMemberMaxAggregateInputType = {
   id?: true
   minutesId?: true
+  kind?: true
   userId?: true
+  signatoryId?: true
+  firstName?: true
+  lastName?: true
+  title?: true
   attendance?: true
   createdAt?: true
 }
@@ -69,7 +94,12 @@ export type BoardMinutesMemberMaxAggregateInputType = {
 export type BoardMinutesMemberCountAggregateInputType = {
   id?: true
   minutesId?: true
+  kind?: true
   userId?: true
+  signatoryId?: true
+  firstName?: true
+  lastName?: true
+  title?: true
   attendance?: true
   createdAt?: true
   _all?: true
@@ -150,7 +180,12 @@ export type BoardMinutesMemberGroupByArgs<ExtArgs extends runtime.Types.Extensio
 export type BoardMinutesMemberGroupByOutputType = {
   id: string
   minutesId: string
-  userId: string
+  kind: $Enums.BoardMinutesMemberKind
+  userId: string | null
+  signatoryId: string | null
+  firstName: string
+  lastName: string
+  title: string | null
   attendance: $Enums.BoardMinutesAttendance
   createdAt: Date
   _count: BoardMinutesMemberCountAggregateOutputType | null
@@ -179,41 +214,65 @@ export type BoardMinutesMemberWhereInput = {
   NOT?: Prisma.BoardMinutesMemberWhereInput | Prisma.BoardMinutesMemberWhereInput[]
   id?: Prisma.StringFilter<"BoardMinutesMember"> | string
   minutesId?: Prisma.StringFilter<"BoardMinutesMember"> | string
-  userId?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFilter<"BoardMinutesMember"> | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
+  signatoryId?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
+  firstName?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  lastName?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  title?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFilter<"BoardMinutesMember"> | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFilter<"BoardMinutesMember"> | Date | string
   minutes?: Prisma.XOR<Prisma.BoardMinutesScalarRelationFilter, Prisma.BoardMinutesWhereInput>
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  signatory?: Prisma.XOR<Prisma.BoardSignatoryNullableScalarRelationFilter, Prisma.BoardSignatoryWhereInput> | null
 }
 
 export type BoardMinutesMemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   minutesId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  signatoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   attendance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   minutes?: Prisma.BoardMinutesOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  signatory?: Prisma.BoardSignatoryOrderByWithRelationInput
 }
 
 export type BoardMinutesMemberWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   minutesId_userId?: Prisma.BoardMinutesMemberMinutesIdUserIdCompoundUniqueInput
+  minutesId_signatoryId?: Prisma.BoardMinutesMemberMinutesIdSignatoryIdCompoundUniqueInput
   AND?: Prisma.BoardMinutesMemberWhereInput | Prisma.BoardMinutesMemberWhereInput[]
   OR?: Prisma.BoardMinutesMemberWhereInput[]
   NOT?: Prisma.BoardMinutesMemberWhereInput | Prisma.BoardMinutesMemberWhereInput[]
   minutesId?: Prisma.StringFilter<"BoardMinutesMember"> | string
-  userId?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFilter<"BoardMinutesMember"> | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
+  signatoryId?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
+  firstName?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  lastName?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  title?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFilter<"BoardMinutesMember"> | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFilter<"BoardMinutesMember"> | Date | string
   minutes?: Prisma.XOR<Prisma.BoardMinutesScalarRelationFilter, Prisma.BoardMinutesWhereInput>
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "minutesId_userId">
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  signatory?: Prisma.XOR<Prisma.BoardSignatoryNullableScalarRelationFilter, Prisma.BoardSignatoryWhereInput> | null
+}, "id" | "minutesId_userId" | "minutesId_signatoryId">
 
 export type BoardMinutesMemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   minutesId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  signatoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   attendance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.BoardMinutesMemberCountOrderByAggregateInput
@@ -227,39 +286,64 @@ export type BoardMinutesMemberScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BoardMinutesMemberScalarWhereWithAggregatesInput | Prisma.BoardMinutesMemberScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"BoardMinutesMember"> | string
   minutesId?: Prisma.StringWithAggregatesFilter<"BoardMinutesMember"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"BoardMinutesMember"> | string
+  kind?: Prisma.EnumBoardMinutesMemberKindWithAggregatesFilter<"BoardMinutesMember"> | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.StringNullableWithAggregatesFilter<"BoardMinutesMember"> | string | null
+  signatoryId?: Prisma.StringNullableWithAggregatesFilter<"BoardMinutesMember"> | string | null
+  firstName?: Prisma.StringWithAggregatesFilter<"BoardMinutesMember"> | string
+  lastName?: Prisma.StringWithAggregatesFilter<"BoardMinutesMember"> | string
+  title?: Prisma.StringNullableWithAggregatesFilter<"BoardMinutesMember"> | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceWithAggregatesFilter<"BoardMinutesMember"> | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BoardMinutesMember"> | Date | string
 }
 
 export type BoardMinutesMemberCreateInput = {
   id?: string
+  kind?: $Enums.BoardMinutesMemberKind
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
   minutes: Prisma.BoardMinutesCreateNestedOneWithoutMembersInput
-  user: Prisma.UserCreateNestedOneWithoutBoardMinutesMembershipsInput
+  user?: Prisma.UserCreateNestedOneWithoutBoardMinutesMembershipsInput
+  signatory?: Prisma.BoardSignatoryCreateNestedOneWithoutMinutesMembershipsInput
 }
 
 export type BoardMinutesMemberUncheckedCreateInput = {
   id?: string
   minutesId: string
-  userId: string
+  kind?: $Enums.BoardMinutesMemberKind
+  userId?: string | null
+  signatoryId?: string | null
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
 }
 
 export type BoardMinutesMemberUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   minutes?: Prisma.BoardMinutesUpdateOneRequiredWithoutMembersNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutBoardMinutesMembershipsNestedInput
+  user?: Prisma.UserUpdateOneWithoutBoardMinutesMembershipsNestedInput
+  signatory?: Prisma.BoardSignatoryUpdateOneWithoutMinutesMembershipsNestedInput
 }
 
 export type BoardMinutesMemberUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   minutesId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -267,13 +351,22 @@ export type BoardMinutesMemberUncheckedUpdateInput = {
 export type BoardMinutesMemberCreateManyInput = {
   id?: string
   minutesId: string
-  userId: string
+  kind?: $Enums.BoardMinutesMemberKind
+  userId?: string | null
+  signatoryId?: string | null
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
 }
 
 export type BoardMinutesMemberUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -281,7 +374,12 @@ export type BoardMinutesMemberUpdateManyMutationInput = {
 export type BoardMinutesMemberUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   minutesId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -301,10 +399,20 @@ export type BoardMinutesMemberMinutesIdUserIdCompoundUniqueInput = {
   userId: string
 }
 
+export type BoardMinutesMemberMinutesIdSignatoryIdCompoundUniqueInput = {
+  minutesId: string
+  signatoryId: string
+}
+
 export type BoardMinutesMemberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   minutesId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  signatoryId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   attendance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -312,7 +420,12 @@ export type BoardMinutesMemberCountOrderByAggregateInput = {
 export type BoardMinutesMemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   minutesId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  signatoryId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   attendance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -320,7 +433,12 @@ export type BoardMinutesMemberMaxOrderByAggregateInput = {
 export type BoardMinutesMemberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   minutesId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  signatoryId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   attendance?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -367,6 +485,48 @@ export type BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.BoardMinutesMemberScalarWhereInput | Prisma.BoardMinutesMemberScalarWhereInput[]
 }
 
+export type BoardMinutesMemberCreateNestedManyWithoutSignatoryInput = {
+  create?: Prisma.XOR<Prisma.BoardMinutesMemberCreateWithoutSignatoryInput, Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput> | Prisma.BoardMinutesMemberCreateWithoutSignatoryInput[] | Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput[]
+  connectOrCreate?: Prisma.BoardMinutesMemberCreateOrConnectWithoutSignatoryInput | Prisma.BoardMinutesMemberCreateOrConnectWithoutSignatoryInput[]
+  createMany?: Prisma.BoardMinutesMemberCreateManySignatoryInputEnvelope
+  connect?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+}
+
+export type BoardMinutesMemberUncheckedCreateNestedManyWithoutSignatoryInput = {
+  create?: Prisma.XOR<Prisma.BoardMinutesMemberCreateWithoutSignatoryInput, Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput> | Prisma.BoardMinutesMemberCreateWithoutSignatoryInput[] | Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput[]
+  connectOrCreate?: Prisma.BoardMinutesMemberCreateOrConnectWithoutSignatoryInput | Prisma.BoardMinutesMemberCreateOrConnectWithoutSignatoryInput[]
+  createMany?: Prisma.BoardMinutesMemberCreateManySignatoryInputEnvelope
+  connect?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+}
+
+export type BoardMinutesMemberUpdateManyWithoutSignatoryNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardMinutesMemberCreateWithoutSignatoryInput, Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput> | Prisma.BoardMinutesMemberCreateWithoutSignatoryInput[] | Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput[]
+  connectOrCreate?: Prisma.BoardMinutesMemberCreateOrConnectWithoutSignatoryInput | Prisma.BoardMinutesMemberCreateOrConnectWithoutSignatoryInput[]
+  upsert?: Prisma.BoardMinutesMemberUpsertWithWhereUniqueWithoutSignatoryInput | Prisma.BoardMinutesMemberUpsertWithWhereUniqueWithoutSignatoryInput[]
+  createMany?: Prisma.BoardMinutesMemberCreateManySignatoryInputEnvelope
+  set?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+  disconnect?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+  delete?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+  connect?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+  update?: Prisma.BoardMinutesMemberUpdateWithWhereUniqueWithoutSignatoryInput | Prisma.BoardMinutesMemberUpdateWithWhereUniqueWithoutSignatoryInput[]
+  updateMany?: Prisma.BoardMinutesMemberUpdateManyWithWhereWithoutSignatoryInput | Prisma.BoardMinutesMemberUpdateManyWithWhereWithoutSignatoryInput[]
+  deleteMany?: Prisma.BoardMinutesMemberScalarWhereInput | Prisma.BoardMinutesMemberScalarWhereInput[]
+}
+
+export type BoardMinutesMemberUncheckedUpdateManyWithoutSignatoryNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardMinutesMemberCreateWithoutSignatoryInput, Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput> | Prisma.BoardMinutesMemberCreateWithoutSignatoryInput[] | Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput[]
+  connectOrCreate?: Prisma.BoardMinutesMemberCreateOrConnectWithoutSignatoryInput | Prisma.BoardMinutesMemberCreateOrConnectWithoutSignatoryInput[]
+  upsert?: Prisma.BoardMinutesMemberUpsertWithWhereUniqueWithoutSignatoryInput | Prisma.BoardMinutesMemberUpsertWithWhereUniqueWithoutSignatoryInput[]
+  createMany?: Prisma.BoardMinutesMemberCreateManySignatoryInputEnvelope
+  set?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+  disconnect?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+  delete?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+  connect?: Prisma.BoardMinutesMemberWhereUniqueInput | Prisma.BoardMinutesMemberWhereUniqueInput[]
+  update?: Prisma.BoardMinutesMemberUpdateWithWhereUniqueWithoutSignatoryInput | Prisma.BoardMinutesMemberUpdateWithWhereUniqueWithoutSignatoryInput[]
+  updateMany?: Prisma.BoardMinutesMemberUpdateManyWithWhereWithoutSignatoryInput | Prisma.BoardMinutesMemberUpdateManyWithWhereWithoutSignatoryInput[]
+  deleteMany?: Prisma.BoardMinutesMemberScalarWhereInput | Prisma.BoardMinutesMemberScalarWhereInput[]
+}
+
 export type BoardMinutesMemberCreateNestedManyWithoutMinutesInput = {
   create?: Prisma.XOR<Prisma.BoardMinutesMemberCreateWithoutMinutesInput, Prisma.BoardMinutesMemberUncheckedCreateWithoutMinutesInput> | Prisma.BoardMinutesMemberCreateWithoutMinutesInput[] | Prisma.BoardMinutesMemberUncheckedCreateWithoutMinutesInput[]
   connectOrCreate?: Prisma.BoardMinutesMemberCreateOrConnectWithoutMinutesInput | Prisma.BoardMinutesMemberCreateOrConnectWithoutMinutesInput[]
@@ -409,20 +569,34 @@ export type BoardMinutesMemberUncheckedUpdateManyWithoutMinutesNestedInput = {
   deleteMany?: Prisma.BoardMinutesMemberScalarWhereInput | Prisma.BoardMinutesMemberScalarWhereInput[]
 }
 
+export type EnumBoardMinutesMemberKindFieldUpdateOperationsInput = {
+  set?: $Enums.BoardMinutesMemberKind
+}
+
 export type EnumBoardMinutesAttendanceFieldUpdateOperationsInput = {
   set?: $Enums.BoardMinutesAttendance
 }
 
 export type BoardMinutesMemberCreateWithoutUserInput = {
   id?: string
+  kind?: $Enums.BoardMinutesMemberKind
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
   minutes: Prisma.BoardMinutesCreateNestedOneWithoutMembersInput
+  signatory?: Prisma.BoardSignatoryCreateNestedOneWithoutMinutesMembershipsInput
 }
 
 export type BoardMinutesMemberUncheckedCreateWithoutUserInput = {
   id?: string
   minutesId: string
+  kind?: $Enums.BoardMinutesMemberKind
+  signatoryId?: string | null
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
 }
@@ -459,21 +633,86 @@ export type BoardMinutesMemberScalarWhereInput = {
   NOT?: Prisma.BoardMinutesMemberScalarWhereInput | Prisma.BoardMinutesMemberScalarWhereInput[]
   id?: Prisma.StringFilter<"BoardMinutesMember"> | string
   minutesId?: Prisma.StringFilter<"BoardMinutesMember"> | string
-  userId?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFilter<"BoardMinutesMember"> | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
+  signatoryId?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
+  firstName?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  lastName?: Prisma.StringFilter<"BoardMinutesMember"> | string
+  title?: Prisma.StringNullableFilter<"BoardMinutesMember"> | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFilter<"BoardMinutesMember"> | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFilter<"BoardMinutesMember"> | Date | string
 }
 
-export type BoardMinutesMemberCreateWithoutMinutesInput = {
+export type BoardMinutesMemberCreateWithoutSignatoryInput = {
   id?: string
+  kind?: $Enums.BoardMinutesMemberKind
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutBoardMinutesMembershipsInput
+  minutes: Prisma.BoardMinutesCreateNestedOneWithoutMembersInput
+  user?: Prisma.UserCreateNestedOneWithoutBoardMinutesMembershipsInput
+}
+
+export type BoardMinutesMemberUncheckedCreateWithoutSignatoryInput = {
+  id?: string
+  minutesId: string
+  kind?: $Enums.BoardMinutesMemberKind
+  userId?: string | null
+  firstName: string
+  lastName: string
+  title?: string | null
+  attendance?: $Enums.BoardMinutesAttendance
+  createdAt?: Date | string
+}
+
+export type BoardMinutesMemberCreateOrConnectWithoutSignatoryInput = {
+  where: Prisma.BoardMinutesMemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardMinutesMemberCreateWithoutSignatoryInput, Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput>
+}
+
+export type BoardMinutesMemberCreateManySignatoryInputEnvelope = {
+  data: Prisma.BoardMinutesMemberCreateManySignatoryInput | Prisma.BoardMinutesMemberCreateManySignatoryInput[]
+  skipDuplicates?: boolean
+}
+
+export type BoardMinutesMemberUpsertWithWhereUniqueWithoutSignatoryInput = {
+  where: Prisma.BoardMinutesMemberWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoardMinutesMemberUpdateWithoutSignatoryInput, Prisma.BoardMinutesMemberUncheckedUpdateWithoutSignatoryInput>
+  create: Prisma.XOR<Prisma.BoardMinutesMemberCreateWithoutSignatoryInput, Prisma.BoardMinutesMemberUncheckedCreateWithoutSignatoryInput>
+}
+
+export type BoardMinutesMemberUpdateWithWhereUniqueWithoutSignatoryInput = {
+  where: Prisma.BoardMinutesMemberWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoardMinutesMemberUpdateWithoutSignatoryInput, Prisma.BoardMinutesMemberUncheckedUpdateWithoutSignatoryInput>
+}
+
+export type BoardMinutesMemberUpdateManyWithWhereWithoutSignatoryInput = {
+  where: Prisma.BoardMinutesMemberScalarWhereInput
+  data: Prisma.XOR<Prisma.BoardMinutesMemberUpdateManyMutationInput, Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutSignatoryInput>
+}
+
+export type BoardMinutesMemberCreateWithoutMinutesInput = {
+  id?: string
+  kind?: $Enums.BoardMinutesMemberKind
+  firstName: string
+  lastName: string
+  title?: string | null
+  attendance?: $Enums.BoardMinutesAttendance
+  createdAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutBoardMinutesMembershipsInput
+  signatory?: Prisma.BoardSignatoryCreateNestedOneWithoutMinutesMembershipsInput
 }
 
 export type BoardMinutesMemberUncheckedCreateWithoutMinutesInput = {
   id?: string
-  userId: string
+  kind?: $Enums.BoardMinutesMemberKind
+  userId?: string | null
+  signatoryId?: string | null
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
 }
@@ -507,20 +746,35 @@ export type BoardMinutesMemberUpdateManyWithWhereWithoutMinutesInput = {
 export type BoardMinutesMemberCreateManyUserInput = {
   id?: string
   minutesId: string
+  kind?: $Enums.BoardMinutesMemberKind
+  signatoryId?: string | null
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
 }
 
 export type BoardMinutesMemberUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   minutes?: Prisma.BoardMinutesUpdateOneRequiredWithoutMembersNestedInput
+  signatory?: Prisma.BoardSignatoryUpdateOneWithoutMinutesMembershipsNestedInput
 }
 
 export type BoardMinutesMemberUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   minutesId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  signatoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -528,34 +782,107 @@ export type BoardMinutesMemberUncheckedUpdateWithoutUserInput = {
 export type BoardMinutesMemberUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   minutesId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  signatoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardMinutesMemberCreateManySignatoryInput = {
+  id?: string
+  minutesId: string
+  kind?: $Enums.BoardMinutesMemberKind
+  userId?: string | null
+  firstName: string
+  lastName: string
+  title?: string | null
+  attendance?: $Enums.BoardMinutesAttendance
+  createdAt?: Date | string
+}
+
+export type BoardMinutesMemberUpdateWithoutSignatoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  minutes?: Prisma.BoardMinutesUpdateOneRequiredWithoutMembersNestedInput
+  user?: Prisma.UserUpdateOneWithoutBoardMinutesMembershipsNestedInput
+}
+
+export type BoardMinutesMemberUncheckedUpdateWithoutSignatoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardMinutesMemberUncheckedUpdateManyWithoutSignatoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  minutesId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BoardMinutesMemberCreateManyMinutesInput = {
   id?: string
-  userId: string
+  kind?: $Enums.BoardMinutesMemberKind
+  userId?: string | null
+  signatoryId?: string | null
+  firstName: string
+  lastName: string
+  title?: string | null
   attendance?: $Enums.BoardMinutesAttendance
   createdAt?: Date | string
 }
 
 export type BoardMinutesMemberUpdateWithoutMinutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutBoardMinutesMembershipsNestedInput
+  user?: Prisma.UserUpdateOneWithoutBoardMinutesMembershipsNestedInput
+  signatory?: Prisma.BoardSignatoryUpdateOneWithoutMinutesMembershipsNestedInput
 }
 
 export type BoardMinutesMemberUncheckedUpdateWithoutMinutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BoardMinutesMemberUncheckedUpdateManyWithoutMinutesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardMinutesMemberKindFieldUpdateOperationsInput | $Enums.BoardMinutesMemberKind
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attendance?: Prisma.EnumBoardMinutesAttendanceFieldUpdateOperationsInput | $Enums.BoardMinutesAttendance
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -565,65 +892,97 @@ export type BoardMinutesMemberUncheckedUpdateManyWithoutMinutesInput = {
 export type BoardMinutesMemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   minutesId?: boolean
+  kind?: boolean
   userId?: boolean
+  signatoryId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  title?: boolean
   attendance?: boolean
   createdAt?: boolean
   minutes?: boolean | Prisma.BoardMinutesDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.BoardMinutesMember$userArgs<ExtArgs>
+  signatory?: boolean | Prisma.BoardMinutesMember$signatoryArgs<ExtArgs>
 }, ExtArgs["result"]["boardMinutesMember"]>
 
 export type BoardMinutesMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   minutesId?: boolean
+  kind?: boolean
   userId?: boolean
+  signatoryId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  title?: boolean
   attendance?: boolean
   createdAt?: boolean
   minutes?: boolean | Prisma.BoardMinutesDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.BoardMinutesMember$userArgs<ExtArgs>
+  signatory?: boolean | Prisma.BoardMinutesMember$signatoryArgs<ExtArgs>
 }, ExtArgs["result"]["boardMinutesMember"]>
 
 export type BoardMinutesMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   minutesId?: boolean
+  kind?: boolean
   userId?: boolean
+  signatoryId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  title?: boolean
   attendance?: boolean
   createdAt?: boolean
   minutes?: boolean | Prisma.BoardMinutesDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.BoardMinutesMember$userArgs<ExtArgs>
+  signatory?: boolean | Prisma.BoardMinutesMember$signatoryArgs<ExtArgs>
 }, ExtArgs["result"]["boardMinutesMember"]>
 
 export type BoardMinutesMemberSelectScalar = {
   id?: boolean
   minutesId?: boolean
+  kind?: boolean
   userId?: boolean
+  signatoryId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  title?: boolean
   attendance?: boolean
   createdAt?: boolean
 }
 
-export type BoardMinutesMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "minutesId" | "userId" | "attendance" | "createdAt", ExtArgs["result"]["boardMinutesMember"]>
+export type BoardMinutesMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "minutesId" | "kind" | "userId" | "signatoryId" | "firstName" | "lastName" | "title" | "attendance" | "createdAt", ExtArgs["result"]["boardMinutesMember"]>
 export type BoardMinutesMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   minutes?: boolean | Prisma.BoardMinutesDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.BoardMinutesMember$userArgs<ExtArgs>
+  signatory?: boolean | Prisma.BoardMinutesMember$signatoryArgs<ExtArgs>
 }
 export type BoardMinutesMemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   minutes?: boolean | Prisma.BoardMinutesDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.BoardMinutesMember$userArgs<ExtArgs>
+  signatory?: boolean | Prisma.BoardMinutesMember$signatoryArgs<ExtArgs>
 }
 export type BoardMinutesMemberIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   minutes?: boolean | Prisma.BoardMinutesDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.BoardMinutesMember$userArgs<ExtArgs>
+  signatory?: boolean | Prisma.BoardMinutesMember$signatoryArgs<ExtArgs>
 }
 
 export type $BoardMinutesMemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BoardMinutesMember"
   objects: {
     minutes: Prisma.$BoardMinutesPayload<ExtArgs>
-    user: Prisma.$UserPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs> | null
+    signatory: Prisma.$BoardSignatoryPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     minutesId: string
-    userId: string
+    kind: $Enums.BoardMinutesMemberKind
+    userId: string | null
+    signatoryId: string | null
+    firstName: string
+    lastName: string
+    title: string | null
     attendance: $Enums.BoardMinutesAttendance
     createdAt: Date
   }, ExtArgs["result"]["boardMinutesMember"]>
@@ -1021,7 +1380,8 @@ readonly fields: BoardMinutesMemberFieldRefs;
 export interface Prisma__BoardMinutesMemberClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   minutes<T extends Prisma.BoardMinutesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutesDefaultArgs<ExtArgs>>): Prisma.Prisma__BoardMinutesClient<runtime.Types.Result.GetResult<Prisma.$BoardMinutesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.BoardMinutesMember$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutesMember$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  signatory<T extends Prisma.BoardMinutesMember$signatoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutesMember$signatoryArgs<ExtArgs>>): Prisma.Prisma__BoardSignatoryClient<runtime.Types.Result.GetResult<Prisma.$BoardSignatoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1053,7 +1413,12 @@ export interface Prisma__BoardMinutesMemberClient<T, Null = never, ExtArgs exten
 export interface BoardMinutesMemberFieldRefs {
   readonly id: Prisma.FieldRef<"BoardMinutesMember", 'String'>
   readonly minutesId: Prisma.FieldRef<"BoardMinutesMember", 'String'>
+  readonly kind: Prisma.FieldRef<"BoardMinutesMember", 'BoardMinutesMemberKind'>
   readonly userId: Prisma.FieldRef<"BoardMinutesMember", 'String'>
+  readonly signatoryId: Prisma.FieldRef<"BoardMinutesMember", 'String'>
+  readonly firstName: Prisma.FieldRef<"BoardMinutesMember", 'String'>
+  readonly lastName: Prisma.FieldRef<"BoardMinutesMember", 'String'>
+  readonly title: Prisma.FieldRef<"BoardMinutesMember", 'String'>
   readonly attendance: Prisma.FieldRef<"BoardMinutesMember", 'BoardMinutesAttendance'>
   readonly createdAt: Prisma.FieldRef<"BoardMinutesMember", 'DateTime'>
 }
@@ -1454,6 +1819,44 @@ export type BoardMinutesMemberDeleteManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many BoardMinutesMembers to delete.
    */
   limit?: number
+}
+
+/**
+ * BoardMinutesMember.user
+ */
+export type BoardMinutesMember$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * BoardMinutesMember.signatory
+ */
+export type BoardMinutesMember$signatoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardSignatory
+   */
+  select?: Prisma.BoardSignatorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardSignatory
+   */
+  omit?: Prisma.BoardSignatoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardSignatoryInclude<ExtArgs> | null
+  where?: Prisma.BoardSignatoryWhereInput
 }
 
 /**

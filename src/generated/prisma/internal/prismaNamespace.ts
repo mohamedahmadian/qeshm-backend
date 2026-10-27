@@ -6927,7 +6927,12 @@ export type BoardMinutesRequestScalarFieldEnum = (typeof BoardMinutesRequestScal
 export const BoardMinutesMemberScalarFieldEnum = {
   id: 'id',
   minutesId: 'minutesId',
+  kind: 'kind',
   userId: 'userId',
+  signatoryId: 'signatoryId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  title: 'title',
   attendance: 'attendance',
   createdAt: 'createdAt'
 } as const
@@ -7752,6 +7757,20 @@ export type EnumBoardMinutesStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
  * Reference to a field of type 'BoardMinutesStatus[]'
  */
 export type ListEnumBoardMinutesStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMinutesStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardMinutesMemberKind'
+ */
+export type EnumBoardMinutesMemberKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMinutesMemberKind'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardMinutesMemberKind[]'
+ */
+export type ListEnumBoardMinutesMemberKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardMinutesMemberKind[]'>
     
 
 

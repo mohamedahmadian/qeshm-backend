@@ -334,16 +334,13 @@ export class BoardService {
     if (!current) {
       throw new NotFoundException('درخواست یافت نشد');
     }
-    const canEdit =
-      current.status === BoardRequestStatus.PENDING_REVIEW ||
-      (current.kind === BoardRequestKind.MANAGEMENT &&
-        current.status === BoardRequestStatus.PENDING_CEO &&
-        !current.ceoAt);
-    if (!canEdit) {
+    if (!this.canEditRequestContent(actor, current)) {
+      if (current.createdById !== actor.id) {
+        throw new ForbiddenException(
+          'فقط ثبت‌کننده می‌تواند این درخواست را ویرایش کند',
+        );
+      }
       throw new ConflictException('پس از تأیید اولیه امکان ویرایش وجود ندارد');
-    }
-    if (current.createdById !== actor.id && !actor.isAdmin) {
-      throw new ForbiddenException('فقط ثبت‌کننده می‌تواند این درخواست را ویرایش کند');
     }
     const unitId =
       dto.unitId !== undefined ? this.resolveRequestUnit(actor, dto.unitId) : undefined;
@@ -758,6 +755,29 @@ export class BoardService {
 
   private canDeleteRequests(actor: Actor) {
     return actor.isAdmin || actor.isBoardAdmin;
+  }
+
+  private canOverrideRequestLock(actor: Actor) {
+    return actor.isAdmin || actor.isBoardAdmin;
+  }
+
+  private canEditRequestContent(
+    actor: Actor,
+    current: {
+      createdById: string;
+      kind: BoardRequestKind;
+      status: BoardRequestStatus;
+      ceoAt: Date | null;
+    },
+  ) {
+    if (this.canOverrideRequestLock(actor)) return true;
+    if (current.createdById !== actor.id) return false;
+    return (
+      current.status === BoardRequestStatus.PENDING_REVIEW ||
+      (current.kind === BoardRequestKind.MANAGEMENT &&
+        current.status === BoardRequestStatus.PENDING_CEO &&
+        !current.ceoAt)
+    );
   }
 
   private resolveRequestKind(actor: Actor, kind?: BoardRequestKind) {
