@@ -12,7 +12,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
-    "prisma:seed": "prisma db seed"
+    "prisma:seed": "prisma db seed",
+    "seed:board-demo": "npx tsx prisma/seed-board-demo.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
