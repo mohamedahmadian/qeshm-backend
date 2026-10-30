@@ -461,6 +461,7 @@ export const ModelName = {
   BoardMinutesResolutionUnit: 'BoardMinutesResolutionUnit',
   BoardResolutionSignatory: 'BoardResolutionSignatory',
   BoardResolutionProgressReport: 'BoardResolutionProgressReport',
+  BoardResolutionContract: 'BoardResolutionContract',
   PortSalesReport: 'PortSalesReport',
   PortTicketSale: 'PortTicketSale',
   PortTicketWeeklyQuota: 'PortTicketWeeklyQuota',
@@ -486,7 +487,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "advancedFoodOrder" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardKind" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "inspectionKind" | "inspectionCategory" | "inspectionFeedback" | "inspectionAttachment" | "inspectionActivity" | "boardRequest" | "boardSignatory" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesRequest" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "boardMinutesResolutionUnit" | "boardResolutionSignatory" | "boardResolutionProgressReport" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
+    modelProps: "storedImage" | "country" | "province" | "city" | "user" | "qeshmondiSqlConnection" | "qeshmondiSyncLog" | "qeshmondiFeedEvent" | "qeshmondiLookup" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "projectChecklistItem" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractorType" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "advancedFoodOrder" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardKind" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "inspectionKind" | "inspectionCategory" | "inspectionFeedback" | "inspectionAttachment" | "inspectionActivity" | "boardRequest" | "boardSignatory" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesRequest" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "boardMinutesResolutionUnit" | "boardResolutionSignatory" | "boardResolutionProgressReport" | "boardResolutionContract" | "portSalesReport" | "portTicketSale" | "portTicketWeeklyQuota" | "portTicketPersonalQuota" | "stakeholderProgressReport" | "stakeholderCorrespondence" | "stakeholderMessage" | "stakeholderAttachment" | "ticketTariff" | "port"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5226,6 +5227,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BoardResolutionContract: {
+      payload: Prisma.$BoardResolutionContractPayload<ExtArgs>
+      fields: Prisma.BoardResolutionContractFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoardResolutionContractFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoardResolutionContractFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>
+        }
+        findFirst: {
+          args: Prisma.BoardResolutionContractFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoardResolutionContractFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>
+        }
+        findMany: {
+          args: Prisma.BoardResolutionContractFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>[]
+        }
+        create: {
+          args: Prisma.BoardResolutionContractCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>
+        }
+        createMany: {
+          args: Prisma.BoardResolutionContractCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoardResolutionContractCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>[]
+        }
+        delete: {
+          args: Prisma.BoardResolutionContractDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>
+        }
+        update: {
+          args: Prisma.BoardResolutionContractUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoardResolutionContractDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoardResolutionContractUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoardResolutionContractUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoardResolutionContractUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoardResolutionContractPayload>
+        }
+        aggregate: {
+          args: Prisma.BoardResolutionContractAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoardResolutionContract>
+        }
+        groupBy: {
+          args: Prisma.BoardResolutionContractGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardResolutionContractGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoardResolutionContractCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoardResolutionContractCountAggregateOutputType> | number
+        }
+      }
+    }
     PortSalesReport: {
       payload: Prisma.$PortSalesReportPayload<ExtArgs>
       fields: Prisma.PortSalesReportFieldRefs
@@ -7032,6 +7107,7 @@ export type BoardMinutesAttachmentScalarFieldEnum = (typeof BoardMinutesAttachme
 export const BoardMinutesResolutionScalarFieldEnum = {
   id: 'id',
   minutesId: 'minutesId',
+  requestId: 'requestId',
   title: 'title',
   description: 'description',
   status: 'status',
@@ -7083,12 +7159,44 @@ export const BoardResolutionProgressReportScalarFieldEnum = {
   title: 'title',
   category: 'category',
   body: 'body',
+  actionsDone: 'actionsDone',
+  nextPlan: 'nextPlan',
+  blockers: 'blockers',
+  needs: 'needs',
   progressAmount: 'progressAmount',
+  createdById: 'createdById',
+  contractorId: 'contractorId',
+  contractId: 'contractId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type BoardResolutionProgressReportScalarFieldEnum = (typeof BoardResolutionProgressReportScalarFieldEnum)[keyof typeof BoardResolutionProgressReportScalarFieldEnum]
+
+
+export const BoardResolutionContractScalarFieldEnum = {
+  id: 'id',
+  resolutionId: 'resolutionId',
+  title: 'title',
+  contractNo: 'contractNo',
+  contractorId: 'contractorId',
+  kind: 'kind',
+  kindOther: 'kindOther',
+  amount: 'amount',
+  signedAt: 'signedAt',
+  duration: 'duration',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  paidAmount: 'paidAmount',
+  supervisor: 'supervisor',
+  fileId: 'fileId',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardResolutionContractScalarFieldEnum = (typeof BoardResolutionContractScalarFieldEnum)[keyof typeof BoardResolutionContractScalarFieldEnum]
 
 
 export const PortSalesReportScalarFieldEnum = {
@@ -7935,6 +8043,34 @@ export type ListEnumBoardResolutionProposerKindFieldRefInput<$PrismaModel> = Fie
 
 
 /**
+ * Reference to a field of type 'BoardResolutionContractKind'
+ */
+export type EnumBoardResolutionContractKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardResolutionContractKind'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardResolutionContractKind[]'
+ */
+export type ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardResolutionContractKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardResolutionContractStatus'
+ */
+export type EnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardResolutionContractStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BoardResolutionContractStatus[]'
+ */
+export type ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BoardResolutionContractStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'PortSalesReportApprovalStatus'
  */
 export type EnumPortSalesReportApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PortSalesReportApprovalStatus'>
@@ -8260,6 +8396,7 @@ export type GlobalOmitConfig = {
   boardMinutesResolutionUnit?: Prisma.BoardMinutesResolutionUnitOmit
   boardResolutionSignatory?: Prisma.BoardResolutionSignatoryOmit
   boardResolutionProgressReport?: Prisma.BoardResolutionProgressReportOmit
+  boardResolutionContract?: Prisma.BoardResolutionContractOmit
   portSalesReport?: Prisma.PortSalesReportOmit
   portTicketSale?: Prisma.PortTicketSaleOmit
   portTicketWeeklyQuota?: Prisma.PortTicketWeeklyQuotaOmit

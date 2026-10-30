@@ -35,6 +35,8 @@ const LOOKUP_COLLECTIONS = new Set([
   '/projects',
   '/projects/lookups',
   '/projects/groups',
+  '/contractors',
+  '/contractor-types',
   '/singard/categories',
   '/inspection/categories',
   '/inspection/kinds',
@@ -75,6 +77,11 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/projects/reports', permissions: ['projects.reports'] },
   { prefix: '/projects/live-board', permissions: ['projects.liveBoard'] },
   { prefix: '/projects/groups', permissions: ['projects.groups'] },
+  {
+    method: 'POST',
+    prefix: '/contractors',
+    permissions: ['projects.contractors', 'board.minutes', 'board.resolutions'],
+  },
   { prefix: '/contractors', permissions: ['projects.contractors'] },
   { prefix: '/projects', permissions: ['projects.list'] },
   { prefix: '/foods', permissions: ['food-reservation.foods'] },
@@ -191,10 +198,21 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
     prefix: '/stakeholders/contractors',
     permissions: ['management.users', 'stakeholders.inbox', 'stakeholders.reports'],
   },
-  { prefix: '/stakeholders/projects', permissions: ['stakeholders.projects'] },
+  {
+    prefix: '/stakeholders/projects',
+    permissions: ['stakeholders.projects', 'stakeholders.reports'],
+  },
+  {
+    prefix: '/stakeholders/resolution-progress',
+    permissions: ['stakeholders.progress', 'stakeholders.reports'],
+  },
+  {
+    prefix: '/stakeholders/resolution-contracts',
+    permissions: ['stakeholders.progress', 'stakeholders.reports'],
+  },
   {
     prefix: '/stakeholders/progress',
-    permissions: ['stakeholders.progress'],
+    permissions: ['stakeholders.progress', 'stakeholders.reports'],
   },
   {
     prefix: '/stakeholders/reports',

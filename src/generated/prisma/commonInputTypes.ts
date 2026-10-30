@@ -1027,6 +1027,40 @@ export type EnumBoardResolutionProposerKindWithAggregatesFilter<$PrismaModel = n
   _max?: Prisma.NestedEnumBoardResolutionProposerKindFilter<$PrismaModel>
 }
 
+export type EnumBoardResolutionContractKindNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardResolutionContractKind | Prisma.EnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BoardResolutionContractKind[] | Prisma.ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BoardResolutionContractKind[] | Prisma.ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBoardResolutionContractKindNullableFilter<$PrismaModel> | $Enums.BoardResolutionContractKind | null
+}
+
+export type EnumBoardResolutionContractStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardResolutionContractStatus | Prisma.EnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BoardResolutionContractStatus[] | Prisma.ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BoardResolutionContractStatus[] | Prisma.ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBoardResolutionContractStatusNullableFilter<$PrismaModel> | $Enums.BoardResolutionContractStatus | null
+}
+
+export type EnumBoardResolutionContractKindNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardResolutionContractKind | Prisma.EnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BoardResolutionContractKind[] | Prisma.ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BoardResolutionContractKind[] | Prisma.ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBoardResolutionContractKindNullableWithAggregatesFilter<$PrismaModel> | $Enums.BoardResolutionContractKind | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoardResolutionContractKindNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoardResolutionContractKindNullableFilter<$PrismaModel>
+}
+
+export type EnumBoardResolutionContractStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardResolutionContractStatus | Prisma.EnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BoardResolutionContractStatus[] | Prisma.ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BoardResolutionContractStatus[] | Prisma.ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBoardResolutionContractStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.BoardResolutionContractStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoardResolutionContractStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoardResolutionContractStatusNullableFilter<$PrismaModel>
+}
+
 export type BigIntNullableFilter<$PrismaModel = never> = {
   equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel> | null
   in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel> | null
@@ -2170,6 +2204,40 @@ export type NestedEnumBoardResolutionProposerKindWithAggregatesFilter<$PrismaMod
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumBoardResolutionProposerKindFilter<$PrismaModel>
   _max?: Prisma.NestedEnumBoardResolutionProposerKindFilter<$PrismaModel>
+}
+
+export type NestedEnumBoardResolutionContractKindNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardResolutionContractKind | Prisma.EnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BoardResolutionContractKind[] | Prisma.ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BoardResolutionContractKind[] | Prisma.ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBoardResolutionContractKindNullableFilter<$PrismaModel> | $Enums.BoardResolutionContractKind | null
+}
+
+export type NestedEnumBoardResolutionContractStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardResolutionContractStatus | Prisma.EnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BoardResolutionContractStatus[] | Prisma.ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BoardResolutionContractStatus[] | Prisma.ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBoardResolutionContractStatusNullableFilter<$PrismaModel> | $Enums.BoardResolutionContractStatus | null
+}
+
+export type NestedEnumBoardResolutionContractKindNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardResolutionContractKind | Prisma.EnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BoardResolutionContractKind[] | Prisma.ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BoardResolutionContractKind[] | Prisma.ListEnumBoardResolutionContractKindFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBoardResolutionContractKindNullableWithAggregatesFilter<$PrismaModel> | $Enums.BoardResolutionContractKind | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoardResolutionContractKindNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoardResolutionContractKindNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumBoardResolutionContractStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoardResolutionContractStatus | Prisma.EnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BoardResolutionContractStatus[] | Prisma.ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BoardResolutionContractStatus[] | Prisma.ListEnumBoardResolutionContractStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBoardResolutionContractStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.BoardResolutionContractStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoardResolutionContractStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoardResolutionContractStatusNullableFilter<$PrismaModel>
 }
 
 export type NestedBigIntNullableFilter<$PrismaModel = never> = {

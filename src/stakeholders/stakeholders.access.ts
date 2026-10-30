@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -34,6 +35,12 @@ export class StakeholdersAccess {
       throw new ForbiddenException('این عملیات فقط برای کاربر پیمانکار است');
     }
     return actor.contractorId;
+  }
+
+  writeContractorId(actor: PortalActor, requestedId?: string | null) {
+    if (actor.contractorId) return actor.contractorId;
+    if (requestedId) return requestedId;
+    throw new BadRequestException('پیمانکار را انتخاب کنید');
   }
 
   contractorWhere(actor: PortalActor) {

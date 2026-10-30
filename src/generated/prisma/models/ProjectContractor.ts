@@ -336,6 +336,8 @@ export type ProjectContractorWhereInput = {
   portalUsers?: Prisma.UserListRelationFilter
   stakeholderReports?: Prisma.StakeholderProgressReportListRelationFilter
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceListRelationFilter
+  boardResolutionContracts?: Prisma.BoardResolutionContractListRelationFilter
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportListRelationFilter
 }
 
 export type ProjectContractorOrderByWithRelationInput = {
@@ -366,6 +368,8 @@ export type ProjectContractorOrderByWithRelationInput = {
   portalUsers?: Prisma.UserOrderByRelationAggregateInput
   stakeholderReports?: Prisma.StakeholderProgressReportOrderByRelationAggregateInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceOrderByRelationAggregateInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractOrderByRelationAggregateInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportOrderByRelationAggregateInput
 }
 
 export type ProjectContractorWhereUniqueInput = Prisma.AtLeast<{
@@ -399,6 +403,8 @@ export type ProjectContractorWhereUniqueInput = Prisma.AtLeast<{
   portalUsers?: Prisma.UserListRelationFilter
   stakeholderReports?: Prisma.StakeholderProgressReportListRelationFilter
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceListRelationFilter
+  boardResolutionContracts?: Prisma.BoardResolutionContractListRelationFilter
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportListRelationFilter
 }, "id">
 
 export type ProjectContractorOrderByWithAggregationInput = {
@@ -479,6 +485,8 @@ export type ProjectContractorCreateInput = {
   portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateInput = {
@@ -507,6 +515,8 @@ export type ProjectContractorUncheckedCreateInput = {
   portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUpdateInput = {
@@ -535,6 +545,8 @@ export type ProjectContractorUpdateInput = {
   portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateInput = {
@@ -563,6 +575,8 @@ export type ProjectContractorUncheckedUpdateInput = {
   portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateManyInput = {
@@ -865,6 +879,38 @@ export type ProjectContractorUpdateOneRequiredWithoutPaymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectContractorUpdateToOneWithWhereWithoutPaymentsInput, Prisma.ProjectContractorUpdateWithoutPaymentsInput>, Prisma.ProjectContractorUncheckedUpdateWithoutPaymentsInput>
 }
 
+export type ProjectContractorCreateNestedOneWithoutBoardResolutionProgressReportsInput = {
+  create?: Prisma.XOR<Prisma.ProjectContractorCreateWithoutBoardResolutionProgressReportsInput, Prisma.ProjectContractorUncheckedCreateWithoutBoardResolutionProgressReportsInput>
+  connectOrCreate?: Prisma.ProjectContractorCreateOrConnectWithoutBoardResolutionProgressReportsInput
+  connect?: Prisma.ProjectContractorWhereUniqueInput
+}
+
+export type ProjectContractorUpdateOneWithoutBoardResolutionProgressReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectContractorCreateWithoutBoardResolutionProgressReportsInput, Prisma.ProjectContractorUncheckedCreateWithoutBoardResolutionProgressReportsInput>
+  connectOrCreate?: Prisma.ProjectContractorCreateOrConnectWithoutBoardResolutionProgressReportsInput
+  upsert?: Prisma.ProjectContractorUpsertWithoutBoardResolutionProgressReportsInput
+  disconnect?: Prisma.ProjectContractorWhereInput | boolean
+  delete?: Prisma.ProjectContractorWhereInput | boolean
+  connect?: Prisma.ProjectContractorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectContractorUpdateToOneWithWhereWithoutBoardResolutionProgressReportsInput, Prisma.ProjectContractorUpdateWithoutBoardResolutionProgressReportsInput>, Prisma.ProjectContractorUncheckedUpdateWithoutBoardResolutionProgressReportsInput>
+}
+
+export type ProjectContractorCreateNestedOneWithoutBoardResolutionContractsInput = {
+  create?: Prisma.XOR<Prisma.ProjectContractorCreateWithoutBoardResolutionContractsInput, Prisma.ProjectContractorUncheckedCreateWithoutBoardResolutionContractsInput>
+  connectOrCreate?: Prisma.ProjectContractorCreateOrConnectWithoutBoardResolutionContractsInput
+  connect?: Prisma.ProjectContractorWhereUniqueInput
+}
+
+export type ProjectContractorUpdateOneWithoutBoardResolutionContractsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectContractorCreateWithoutBoardResolutionContractsInput, Prisma.ProjectContractorUncheckedCreateWithoutBoardResolutionContractsInput>
+  connectOrCreate?: Prisma.ProjectContractorCreateOrConnectWithoutBoardResolutionContractsInput
+  upsert?: Prisma.ProjectContractorUpsertWithoutBoardResolutionContractsInput
+  disconnect?: Prisma.ProjectContractorWhereInput | boolean
+  delete?: Prisma.ProjectContractorWhereInput | boolean
+  connect?: Prisma.ProjectContractorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectContractorUpdateToOneWithWhereWithoutBoardResolutionContractsInput, Prisma.ProjectContractorUpdateWithoutBoardResolutionContractsInput>, Prisma.ProjectContractorUncheckedUpdateWithoutBoardResolutionContractsInput>
+}
+
 export type ProjectContractorCreateNestedOneWithoutStakeholderReportsInput = {
   create?: Prisma.XOR<Prisma.ProjectContractorCreateWithoutStakeholderReportsInput, Prisma.ProjectContractorUncheckedCreateWithoutStakeholderReportsInput>
   connectOrCreate?: Prisma.ProjectContractorCreateOrConnectWithoutStakeholderReportsInput
@@ -918,6 +964,8 @@ export type ProjectContractorCreateWithoutPortalUsersInput = {
   projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutPortalUsersInput = {
@@ -945,6 +993,8 @@ export type ProjectContractorUncheckedCreateWithoutPortalUsersInput = {
   projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutPortalUsersInput = {
@@ -988,6 +1038,8 @@ export type ProjectContractorUpdateWithoutPortalUsersInput = {
   projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutPortalUsersInput = {
@@ -1015,6 +1067,8 @@ export type ProjectContractorUncheckedUpdateWithoutPortalUsersInput = {
   projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateWithoutProjectInput = {
@@ -1042,6 +1096,8 @@ export type ProjectContractorCreateWithoutProjectInput = {
   portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutProjectInput = {
@@ -1069,6 +1125,8 @@ export type ProjectContractorUncheckedCreateWithoutProjectInput = {
   portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutProjectInput = {
@@ -1147,6 +1205,8 @@ export type ProjectContractorCreateWithoutTypeInput = {
   portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutTypeInput = {
@@ -1174,6 +1234,8 @@ export type ProjectContractorUncheckedCreateWithoutTypeInput = {
   portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutTypeInput = {
@@ -1227,6 +1289,8 @@ export type ProjectContractorCreateWithoutProjectLinksInput = {
   portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutProjectLinksInput = {
@@ -1254,6 +1318,8 @@ export type ProjectContractorUncheckedCreateWithoutProjectLinksInput = {
   portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutProjectLinksInput = {
@@ -1297,6 +1363,8 @@ export type ProjectContractorUpdateWithoutProjectLinksInput = {
   portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutProjectLinksInput = {
@@ -1324,6 +1392,8 @@ export type ProjectContractorUncheckedUpdateWithoutProjectLinksInput = {
   portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateWithoutMembersInput = {
@@ -1351,6 +1421,8 @@ export type ProjectContractorCreateWithoutMembersInput = {
   portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutMembersInput = {
@@ -1378,6 +1450,8 @@ export type ProjectContractorUncheckedCreateWithoutMembersInput = {
   portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutMembersInput = {
@@ -1421,6 +1495,8 @@ export type ProjectContractorUpdateWithoutMembersInput = {
   portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutMembersInput = {
@@ -1448,6 +1524,8 @@ export type ProjectContractorUncheckedUpdateWithoutMembersInput = {
   portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateWithoutPaymentsInput = {
@@ -1475,6 +1553,8 @@ export type ProjectContractorCreateWithoutPaymentsInput = {
   portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutPaymentsInput = {
@@ -1502,6 +1582,8 @@ export type ProjectContractorUncheckedCreateWithoutPaymentsInput = {
   portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutPaymentsInput = {
@@ -1545,6 +1627,8 @@ export type ProjectContractorUpdateWithoutPaymentsInput = {
   portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutPaymentsInput = {
@@ -1572,6 +1656,272 @@ export type ProjectContractorUncheckedUpdateWithoutPaymentsInput = {
   portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
+}
+
+export type ProjectContractorCreateWithoutBoardResolutionProgressReportsInput = {
+  id?: string
+  name: string
+  nationalId?: string | null
+  registrationNumber?: string | null
+  phone?: string | null
+  email?: string | null
+  website?: string | null
+  description?: string | null
+  ceoName?: string | null
+  timeEstimate?: string | null
+  costEstimate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  supportStartDate?: Date | string | null
+  supportEndDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutContractorsInput
+  type?: Prisma.ProjectContractorTypeCreateNestedOneWithoutContractorsInput
+  members?: Prisma.ProjectContractorMemberCreateNestedManyWithoutContractorInput
+  payments?: Prisma.ProjectContractorPaymentCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
+  portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+}
+
+export type ProjectContractorUncheckedCreateWithoutBoardResolutionProgressReportsInput = {
+  id?: string
+  projectId: string
+  typeId?: string | null
+  name: string
+  nationalId?: string | null
+  registrationNumber?: string | null
+  phone?: string | null
+  email?: string | null
+  website?: string | null
+  description?: string | null
+  ceoName?: string | null
+  timeEstimate?: string | null
+  costEstimate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  supportStartDate?: Date | string | null
+  supportEndDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.ProjectContractorMemberUncheckedCreateNestedManyWithoutContractorInput
+  payments?: Prisma.ProjectContractorPaymentUncheckedCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
+  portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+}
+
+export type ProjectContractorCreateOrConnectWithoutBoardResolutionProgressReportsInput = {
+  where: Prisma.ProjectContractorWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectContractorCreateWithoutBoardResolutionProgressReportsInput, Prisma.ProjectContractorUncheckedCreateWithoutBoardResolutionProgressReportsInput>
+}
+
+export type ProjectContractorUpsertWithoutBoardResolutionProgressReportsInput = {
+  update: Prisma.XOR<Prisma.ProjectContractorUpdateWithoutBoardResolutionProgressReportsInput, Prisma.ProjectContractorUncheckedUpdateWithoutBoardResolutionProgressReportsInput>
+  create: Prisma.XOR<Prisma.ProjectContractorCreateWithoutBoardResolutionProgressReportsInput, Prisma.ProjectContractorUncheckedCreateWithoutBoardResolutionProgressReportsInput>
+  where?: Prisma.ProjectContractorWhereInput
+}
+
+export type ProjectContractorUpdateToOneWithWhereWithoutBoardResolutionProgressReportsInput = {
+  where?: Prisma.ProjectContractorWhereInput
+  data: Prisma.XOR<Prisma.ProjectContractorUpdateWithoutBoardResolutionProgressReportsInput, Prisma.ProjectContractorUncheckedUpdateWithoutBoardResolutionProgressReportsInput>
+}
+
+export type ProjectContractorUpdateWithoutBoardResolutionProgressReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEstimate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costEstimate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supportStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supportEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutContractorsNestedInput
+  type?: Prisma.ProjectContractorTypeUpdateOneWithoutContractorsNestedInput
+  members?: Prisma.ProjectContractorMemberUpdateManyWithoutContractorNestedInput
+  payments?: Prisma.ProjectContractorPaymentUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
+  portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+}
+
+export type ProjectContractorUncheckedUpdateWithoutBoardResolutionProgressReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  typeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEstimate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costEstimate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supportStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supportEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.ProjectContractorMemberUncheckedUpdateManyWithoutContractorNestedInput
+  payments?: Prisma.ProjectContractorPaymentUncheckedUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
+  portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+}
+
+export type ProjectContractorCreateWithoutBoardResolutionContractsInput = {
+  id?: string
+  name: string
+  nationalId?: string | null
+  registrationNumber?: string | null
+  phone?: string | null
+  email?: string | null
+  website?: string | null
+  description?: string | null
+  ceoName?: string | null
+  timeEstimate?: string | null
+  costEstimate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  supportStartDate?: Date | string | null
+  supportEndDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutContractorsInput
+  type?: Prisma.ProjectContractorTypeCreateNestedOneWithoutContractorsInput
+  members?: Prisma.ProjectContractorMemberCreateNestedManyWithoutContractorInput
+  payments?: Prisma.ProjectContractorPaymentCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
+  portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
+}
+
+export type ProjectContractorUncheckedCreateWithoutBoardResolutionContractsInput = {
+  id?: string
+  projectId: string
+  typeId?: string | null
+  name: string
+  nationalId?: string | null
+  registrationNumber?: string | null
+  phone?: string | null
+  email?: string | null
+  website?: string | null
+  description?: string | null
+  ceoName?: string | null
+  timeEstimate?: string | null
+  costEstimate?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Date | string | null
+  contractEndDate?: Date | string | null
+  supportStartDate?: Date | string | null
+  supportEndDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.ProjectContractorMemberUncheckedCreateNestedManyWithoutContractorInput
+  payments?: Prisma.ProjectContractorPaymentUncheckedCreateNestedManyWithoutContractorInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
+  portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
+}
+
+export type ProjectContractorCreateOrConnectWithoutBoardResolutionContractsInput = {
+  where: Prisma.ProjectContractorWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectContractorCreateWithoutBoardResolutionContractsInput, Prisma.ProjectContractorUncheckedCreateWithoutBoardResolutionContractsInput>
+}
+
+export type ProjectContractorUpsertWithoutBoardResolutionContractsInput = {
+  update: Prisma.XOR<Prisma.ProjectContractorUpdateWithoutBoardResolutionContractsInput, Prisma.ProjectContractorUncheckedUpdateWithoutBoardResolutionContractsInput>
+  create: Prisma.XOR<Prisma.ProjectContractorCreateWithoutBoardResolutionContractsInput, Prisma.ProjectContractorUncheckedCreateWithoutBoardResolutionContractsInput>
+  where?: Prisma.ProjectContractorWhereInput
+}
+
+export type ProjectContractorUpdateToOneWithWhereWithoutBoardResolutionContractsInput = {
+  where?: Prisma.ProjectContractorWhereInput
+  data: Prisma.XOR<Prisma.ProjectContractorUpdateWithoutBoardResolutionContractsInput, Prisma.ProjectContractorUncheckedUpdateWithoutBoardResolutionContractsInput>
+}
+
+export type ProjectContractorUpdateWithoutBoardResolutionContractsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEstimate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costEstimate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supportStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supportEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutContractorsNestedInput
+  type?: Prisma.ProjectContractorTypeUpdateOneWithoutContractorsNestedInput
+  members?: Prisma.ProjectContractorMemberUpdateManyWithoutContractorNestedInput
+  payments?: Prisma.ProjectContractorPaymentUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
+  portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
+}
+
+export type ProjectContractorUncheckedUpdateWithoutBoardResolutionContractsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  typeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEstimate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  costEstimate?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  contractStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  contractEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supportStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  supportEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.ProjectContractorMemberUncheckedUpdateManyWithoutContractorNestedInput
+  payments?: Prisma.ProjectContractorPaymentUncheckedUpdateManyWithoutContractorNestedInput
+  projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
+  portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateWithoutStakeholderReportsInput = {
@@ -1599,6 +1949,8 @@ export type ProjectContractorCreateWithoutStakeholderReportsInput = {
   projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
   portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutStakeholderReportsInput = {
@@ -1626,6 +1978,8 @@ export type ProjectContractorUncheckedCreateWithoutStakeholderReportsInput = {
   projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
   portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutStakeholderReportsInput = {
@@ -1669,6 +2023,8 @@ export type ProjectContractorUpdateWithoutStakeholderReportsInput = {
   projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
   portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutStakeholderReportsInput = {
@@ -1696,6 +2052,8 @@ export type ProjectContractorUncheckedUpdateWithoutStakeholderReportsInput = {
   projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
   portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateWithoutStakeholderCorrespondencesInput = {
@@ -1723,6 +2081,8 @@ export type ProjectContractorCreateWithoutStakeholderCorrespondencesInput = {
   projectLinks?: Prisma.ProjectContractorProjectCreateNestedManyWithoutContractorInput
   portalUsers?: Prisma.UserCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorUncheckedCreateWithoutStakeholderCorrespondencesInput = {
@@ -1750,6 +2110,8 @@ export type ProjectContractorUncheckedCreateWithoutStakeholderCorrespondencesInp
   projectLinks?: Prisma.ProjectContractorProjectUncheckedCreateNestedManyWithoutContractorInput
   portalUsers?: Prisma.UserUncheckedCreateNestedManyWithoutContractorInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutContractorInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput
 }
 
 export type ProjectContractorCreateOrConnectWithoutStakeholderCorrespondencesInput = {
@@ -1793,6 +2155,8 @@ export type ProjectContractorUpdateWithoutStakeholderCorrespondencesInput = {
   projectLinks?: Prisma.ProjectContractorProjectUpdateManyWithoutContractorNestedInput
   portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
@@ -1820,6 +2184,8 @@ export type ProjectContractorUncheckedUpdateWithoutStakeholderCorrespondencesInp
   projectLinks?: Prisma.ProjectContractorProjectUncheckedUpdateManyWithoutContractorNestedInput
   portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorCreateManyProjectInput = {
@@ -1868,6 +2234,8 @@ export type ProjectContractorUpdateWithoutProjectInput = {
   portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutProjectInput = {
@@ -1895,6 +2263,8 @@ export type ProjectContractorUncheckedUpdateWithoutProjectInput = {
   portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateManyWithoutProjectInput = {
@@ -1964,6 +2334,8 @@ export type ProjectContractorUpdateWithoutTypeInput = {
   portalUsers?: Prisma.UserUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateWithoutTypeInput = {
@@ -1991,6 +2363,8 @@ export type ProjectContractorUncheckedUpdateWithoutTypeInput = {
   portalUsers?: Prisma.UserUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutContractorNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutContractorNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput
 }
 
 export type ProjectContractorUncheckedUpdateManyWithoutTypeInput = {
@@ -2026,6 +2400,8 @@ export type ProjectContractorCountOutputType = {
   portalUsers: number
   stakeholderReports: number
   stakeholderCorrespondences: number
+  boardResolutionContracts: number
+  boardResolutionProgressReports: number
 }
 
 export type ProjectContractorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2035,6 +2411,8 @@ export type ProjectContractorCountOutputTypeSelect<ExtArgs extends runtime.Types
   portalUsers?: boolean | ProjectContractorCountOutputTypeCountPortalUsersArgs
   stakeholderReports?: boolean | ProjectContractorCountOutputTypeCountStakeholderReportsArgs
   stakeholderCorrespondences?: boolean | ProjectContractorCountOutputTypeCountStakeholderCorrespondencesArgs
+  boardResolutionContracts?: boolean | ProjectContractorCountOutputTypeCountBoardResolutionContractsArgs
+  boardResolutionProgressReports?: boolean | ProjectContractorCountOutputTypeCountBoardResolutionProgressReportsArgs
 }
 
 /**
@@ -2089,6 +2467,20 @@ export type ProjectContractorCountOutputTypeCountStakeholderCorrespondencesArgs<
   where?: Prisma.StakeholderCorrespondenceWhereInput
 }
 
+/**
+ * ProjectContractorCountOutputType without action
+ */
+export type ProjectContractorCountOutputTypeCountBoardResolutionContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardResolutionContractWhereInput
+}
+
+/**
+ * ProjectContractorCountOutputType without action
+ */
+export type ProjectContractorCountOutputTypeCountBoardResolutionProgressReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardResolutionProgressReportWhereInput
+}
+
 
 export type ProjectContractorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2118,6 +2510,8 @@ export type ProjectContractorSelect<ExtArgs extends runtime.Types.Extensions.Int
   portalUsers?: boolean | Prisma.ProjectContractor$portalUsersArgs<ExtArgs>
   stakeholderReports?: boolean | Prisma.ProjectContractor$stakeholderReportsArgs<ExtArgs>
   stakeholderCorrespondences?: boolean | Prisma.ProjectContractor$stakeholderCorrespondencesArgs<ExtArgs>
+  boardResolutionContracts?: boolean | Prisma.ProjectContractor$boardResolutionContractsArgs<ExtArgs>
+  boardResolutionProgressReports?: boolean | Prisma.ProjectContractor$boardResolutionProgressReportsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectContractorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectContractor"]>
 
@@ -2201,6 +2595,8 @@ export type ProjectContractorInclude<ExtArgs extends runtime.Types.Extensions.In
   portalUsers?: boolean | Prisma.ProjectContractor$portalUsersArgs<ExtArgs>
   stakeholderReports?: boolean | Prisma.ProjectContractor$stakeholderReportsArgs<ExtArgs>
   stakeholderCorrespondences?: boolean | Prisma.ProjectContractor$stakeholderCorrespondencesArgs<ExtArgs>
+  boardResolutionContracts?: boolean | Prisma.ProjectContractor$boardResolutionContractsArgs<ExtArgs>
+  boardResolutionProgressReports?: boolean | Prisma.ProjectContractor$boardResolutionProgressReportsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectContractorCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectContractorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2223,6 +2619,8 @@ export type $ProjectContractorPayload<ExtArgs extends runtime.Types.Extensions.I
     portalUsers: Prisma.$UserPayload<ExtArgs>[]
     stakeholderReports: Prisma.$StakeholderProgressReportPayload<ExtArgs>[]
     stakeholderCorrespondences: Prisma.$StakeholderCorrespondencePayload<ExtArgs>[]
+    boardResolutionContracts: Prisma.$BoardResolutionContractPayload<ExtArgs>[]
+    boardResolutionProgressReports: Prisma.$BoardResolutionProgressReportPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2646,6 +3044,8 @@ export interface Prisma__ProjectContractorClient<T, Null = never, ExtArgs extend
   portalUsers<T extends Prisma.ProjectContractor$portalUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$portalUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stakeholderReports<T extends Prisma.ProjectContractor$stakeholderReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$stakeholderReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderProgressReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stakeholderCorrespondences<T extends Prisma.ProjectContractor$stakeholderCorrespondencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$stakeholderCorrespondencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderCorrespondencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardResolutionContracts<T extends Prisma.ProjectContractor$boardResolutionContractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$boardResolutionContractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardResolutionContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardResolutionProgressReports<T extends Prisma.ProjectContractor$boardResolutionProgressReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectContractor$boardResolutionProgressReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardResolutionProgressReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3255,6 +3655,54 @@ export type ProjectContractor$stakeholderCorrespondencesArgs<ExtArgs extends run
   take?: number
   skip?: number
   distinct?: Prisma.StakeholderCorrespondenceScalarFieldEnum | Prisma.StakeholderCorrespondenceScalarFieldEnum[]
+}
+
+/**
+ * ProjectContractor.boardResolutionContracts
+ */
+export type ProjectContractor$boardResolutionContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardResolutionContract
+   */
+  select?: Prisma.BoardResolutionContractSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardResolutionContract
+   */
+  omit?: Prisma.BoardResolutionContractOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardResolutionContractInclude<ExtArgs> | null
+  where?: Prisma.BoardResolutionContractWhereInput
+  orderBy?: Prisma.BoardResolutionContractOrderByWithRelationInput | Prisma.BoardResolutionContractOrderByWithRelationInput[]
+  cursor?: Prisma.BoardResolutionContractWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardResolutionContractScalarFieldEnum | Prisma.BoardResolutionContractScalarFieldEnum[]
+}
+
+/**
+ * ProjectContractor.boardResolutionProgressReports
+ */
+export type ProjectContractor$boardResolutionProgressReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardResolutionProgressReport
+   */
+  select?: Prisma.BoardResolutionProgressReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardResolutionProgressReport
+   */
+  omit?: Prisma.BoardResolutionProgressReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardResolutionProgressReportInclude<ExtArgs> | null
+  where?: Prisma.BoardResolutionProgressReportWhereInput
+  orderBy?: Prisma.BoardResolutionProgressReportOrderByWithRelationInput | Prisma.BoardResolutionProgressReportOrderByWithRelationInput[]
+  cursor?: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardResolutionProgressReportScalarFieldEnum | Prisma.BoardResolutionProgressReportScalarFieldEnum[]
 }
 
 /**

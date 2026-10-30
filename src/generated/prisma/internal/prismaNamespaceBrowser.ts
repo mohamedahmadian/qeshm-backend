@@ -115,6 +115,7 @@ export const ModelName = {
   BoardMinutesResolutionUnit: 'BoardMinutesResolutionUnit',
   BoardResolutionSignatory: 'BoardResolutionSignatory',
   BoardResolutionProgressReport: 'BoardResolutionProgressReport',
+  BoardResolutionContract: 'BoardResolutionContract',
   PortSalesReport: 'PortSalesReport',
   PortTicketSale: 'PortTicketSale',
   PortTicketWeeklyQuota: 'PortTicketWeeklyQuota',
@@ -1170,6 +1171,7 @@ export type BoardMinutesAttachmentScalarFieldEnum = (typeof BoardMinutesAttachme
 export const BoardMinutesResolutionScalarFieldEnum = {
   id: 'id',
   minutesId: 'minutesId',
+  requestId: 'requestId',
   title: 'title',
   description: 'description',
   status: 'status',
@@ -1221,12 +1223,44 @@ export const BoardResolutionProgressReportScalarFieldEnum = {
   title: 'title',
   category: 'category',
   body: 'body',
+  actionsDone: 'actionsDone',
+  nextPlan: 'nextPlan',
+  blockers: 'blockers',
+  needs: 'needs',
   progressAmount: 'progressAmount',
+  createdById: 'createdById',
+  contractorId: 'contractorId',
+  contractId: 'contractId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type BoardResolutionProgressReportScalarFieldEnum = (typeof BoardResolutionProgressReportScalarFieldEnum)[keyof typeof BoardResolutionProgressReportScalarFieldEnum]
+
+
+export const BoardResolutionContractScalarFieldEnum = {
+  id: 'id',
+  resolutionId: 'resolutionId',
+  title: 'title',
+  contractNo: 'contractNo',
+  contractorId: 'contractorId',
+  kind: 'kind',
+  kindOther: 'kindOther',
+  amount: 'amount',
+  signedAt: 'signedAt',
+  duration: 'duration',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  paidAmount: 'paidAmount',
+  supervisor: 'supervisor',
+  fileId: 'fileId',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BoardResolutionContractScalarFieldEnum = (typeof BoardResolutionContractScalarFieldEnum)[keyof typeof BoardResolutionContractScalarFieldEnum]
 
 
 export const PortSalesReportScalarFieldEnum = {

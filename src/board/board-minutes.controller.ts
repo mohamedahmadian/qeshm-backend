@@ -13,6 +13,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { BoardMinutesService } from './board-minutes.service';
 import { CreateBoardMinutesDto } from './dto/create-board-minutes.dto';
 import { CreateBoardResolutionDto } from './dto/create-board-resolution.dto';
+import { CreateBoardResolutionContractDto } from './dto/create-board-resolution-contract.dto';
 import { CreateBoardResolutionProgressDto } from './dto/create-board-resolution-progress.dto';
 import { FindBoardMinutesQueryDto } from './dto/find-board-minutes-query.dto';
 import { FindBoardResolutionsQueryDto } from './dto/find-board-resolutions-query.dto';
@@ -20,6 +21,7 @@ import { SendBoardMinutesSmsDto } from './dto/send-board-minutes-sms.dto';
 import { SendBoardResolutionSmsDto } from './dto/send-board-resolution-sms.dto';
 import { UpdateBoardMinutesDto } from './dto/update-board-minutes.dto';
 import { UpdateBoardResolutionDto } from './dto/update-board-resolution.dto';
+import { UpdateBoardResolutionContractDto } from './dto/update-board-resolution-contract.dto';
 import { UpdateBoardResolutionProgressDto } from './dto/update-board-resolution-progress.dto';
 
 type RequestUser = { id: string };
@@ -151,6 +153,50 @@ export class BoardMinutesController {
   ) {
     if (!user) throw new UnauthorizedException();
     return this.minutes.removeProgressReport(id, resolutionId, reportId, user.id);
+  }
+
+  @Get(':id/resolutions/:resolutionId/contracts')
+  findContracts(
+    @Param('id') id: string,
+    @Param('resolutionId') resolutionId: string,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.minutes.findContracts(id, resolutionId, user.id);
+  }
+
+  @Post(':id/resolutions/:resolutionId/contracts')
+  createContract(
+    @Param('id') id: string,
+    @Param('resolutionId') resolutionId: string,
+    @Body() dto: CreateBoardResolutionContractDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.minutes.createContract(id, resolutionId, dto, user.id);
+  }
+
+  @Patch(':id/resolutions/:resolutionId/contracts/:contractId')
+  updateContract(
+    @Param('id') id: string,
+    @Param('resolutionId') resolutionId: string,
+    @Param('contractId') contractId: string,
+    @Body() dto: UpdateBoardResolutionContractDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.minutes.updateContract(id, resolutionId, contractId, dto, user.id);
+  }
+
+  @Delete(':id/resolutions/:resolutionId/contracts/:contractId')
+  removeContract(
+    @Param('id') id: string,
+    @Param('resolutionId') resolutionId: string,
+    @Param('contractId') contractId: string,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    if (!user) throw new UnauthorizedException();
+    return this.minutes.removeContract(id, resolutionId, contractId, user.id);
   }
 
   @Post(':id/resolutions/:resolutionId/sms')

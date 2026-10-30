@@ -70,6 +70,32 @@ export const MAX_BOARD_RESOLUTION_UNITS = 40;
 export const MAX_BOARD_RESOLUTION_SMS_LENGTH = 700;
 export const MAX_BOARD_RESOLUTION_PROGRESS_REPORTS = 200;
 export const MAX_BOARD_RESOLUTION_PROGRESS_AMOUNT = 100;
+export const MAX_BOARD_RESOLUTION_CONTRACTS = 200;
+
+export const boardResolutionContractKinds = [
+  'CONTRACTING',
+  'GOODS_EQUIPMENT',
+  'SERVICES',
+  'CONSULTING',
+  'DESIGN_ENGINEERING',
+  'INFORMATION_TECHNOLOGY',
+  'LEASE',
+  'PARTNERSHIP',
+  'INVESTMENT',
+  'OPERATION',
+  'SUPPLY',
+  'TRANSPORT',
+  'MARKETING',
+  'OTHER',
+] as const;
+
+export const boardResolutionContractStatuses = [
+  'DRAFT',
+  'ACTIVE',
+  'COMPLETED',
+  'TERMINATED',
+  'SUSPENDED',
+] as const;
 
 export const boardResolutionDueKinds = ['DATE', 'ASAP'] as const;
 export const boardResolutionProposerKinds = ['TEXT', 'UNIT'] as const;
@@ -94,12 +120,12 @@ export const boardMinutesSortFields = [
 ] as const;
 
 export const boardMinutesResolutionSortFields = [
+  'minutesNo',
+  'request',
   'title',
   'unit',
   'status',
   'dueDate',
-  'minutes',
-  'request',
   'createdAt',
 ] as const;
 

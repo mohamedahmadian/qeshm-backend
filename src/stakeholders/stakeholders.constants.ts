@@ -23,6 +23,8 @@ export const progressSortFields = [
   'contractor',
   'author',
   'createdAt',
+  'title',
+  'contract',
 ] as const;
 
 export const correspondenceSortFields = [

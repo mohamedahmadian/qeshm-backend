@@ -11,8 +11,10 @@ import {
 } from '@nestjs/common';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import {
+  ContractorScopeQueryDto,
   CreateCorrespondenceDto,
   CreateProgressReportDto,
+  CreateResolutionProgressDto,
   CreateStakeholderMessageDto,
   FindCorrespondencesQueryDto,
   FindPortalProjectsQueryDto,
@@ -20,6 +22,7 @@ import {
   UpdateCorrespondenceDto,
   UpdateCorrespondenceWorkflowDto,
   UpdateProgressReportDto,
+  UpdateResolutionProgressDto,
 } from './dto/stakeholder.dto';
 import { StakeholdersService } from './stakeholders.service';
 
@@ -45,8 +48,8 @@ export class StakeholderProjectsController {
   }
 
   @Get('options')
-  options(@CurrentUser() user: Actor | undefined) {
-    return this.stakeholders.projectOptions(user?.id);
+  options(@CurrentUser() user: Actor | undefined, @Query() query: ContractorScopeQueryDto) {
+    return this.stakeholders.projectOptions(user?.id, query.contractorId);
   }
 
   @Get(':id')
@@ -98,9 +101,28 @@ export class StakeholderReportsController {
     return this.stakeholders.listProgress(user?.id, query);
   }
 
+  @Post()
+  create(@CurrentUser() user: Actor | undefined, @Body() dto: CreateProgressReportDto) {
+    return this.stakeholders.createProgress(user?.id, dto);
+  }
+
   @Get(':id')
   find(@CurrentUser() user: Actor | undefined, @Param('id', ParseUUIDPipe) id: string) {
     return this.stakeholders.findProgress(user?.id, id);
+  }
+
+  @Patch(':id')
+  update(
+    @CurrentUser() user: Actor | undefined,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: UpdateProgressReportDto,
+  ) {
+    return this.stakeholders.updateProgress(user?.id, id, dto);
+  }
+
+  @Delete(':id')
+  remove(@CurrentUser() user: Actor | undefined, @Param('id', ParseUUIDPipe) id: string) {
+    return this.stakeholders.removeProgress(user?.id, id);
   }
 }
 
@@ -177,5 +199,49 @@ export class StakeholderInboxController {
     @Body() dto: CreateStakeholderMessageDto,
   ) {
     return this.stakeholders.addMessage(user?.id, id, dto);
+  }
+}
+
+@Controller('stakeholders/resolution-contracts')
+export class StakeholderResolutionContractsController {
+  constructor(private readonly stakeholders: StakeholdersService) {}
+
+  @Get()
+  list(@CurrentUser() user: Actor | undefined, @Query() query: ContractorScopeQueryDto) {
+    return this.stakeholders.listResolutionContracts(user?.id, query.contractorId);
+  }
+}
+
+@Controller('stakeholders/resolution-progress')
+export class StakeholderResolutionProgressController {
+  constructor(private readonly stakeholders: StakeholdersService) {}
+
+  @Get()
+  list(@CurrentUser() user: Actor | undefined, @Query() query: FindProgressReportsQueryDto) {
+    return this.stakeholders.listResolutionProgress(user?.id, query);
+  }
+
+  @Post()
+  create(@CurrentUser() user: Actor | undefined, @Body() dto: CreateResolutionProgressDto) {
+    return this.stakeholders.createResolutionProgress(user?.id, dto);
+  }
+
+  @Get(':id')
+  find(@CurrentUser() user: Actor | undefined, @Param('id', ParseUUIDPipe) id: string) {
+    return this.stakeholders.findResolutionProgress(user?.id, id);
+  }
+
+  @Patch(':id')
+  update(
+    @CurrentUser() user: Actor | undefined,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: UpdateResolutionProgressDto,
+  ) {
+    return this.stakeholders.updateResolutionProgress(user?.id, id, dto);
+  }
+
+  @Delete(':id')
+  remove(@CurrentUser() user: Actor | undefined, @Param('id', ParseUUIDPipe) id: string) {
+    return this.stakeholders.removeResolutionProgress(user?.id, id);
   }
 }

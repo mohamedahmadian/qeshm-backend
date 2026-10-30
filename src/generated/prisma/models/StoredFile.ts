@@ -241,6 +241,7 @@ export type StoredFileWhereInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentListRelationFilter
   boardAttachments?: Prisma.BoardAttachmentListRelationFilter
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
+  boardResolutionContracts?: Prisma.BoardResolutionContractListRelationFilter
   portSalesReports?: Prisma.PortSalesReportListRelationFilter
   stakeholderAttachments?: Prisma.StakeholderAttachmentListRelationFilter
 }
@@ -258,6 +259,7 @@ export type StoredFileOrderByWithRelationInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentOrderByRelationAggregateInput
   boardAttachments?: Prisma.BoardAttachmentOrderByRelationAggregateInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentOrderByRelationAggregateInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractOrderByRelationAggregateInput
   portSalesReports?: Prisma.PortSalesReportOrderByRelationAggregateInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentOrderByRelationAggregateInput
 }
@@ -278,6 +280,7 @@ export type StoredFileWhereUniqueInput = Prisma.AtLeast<{
   inspectionAttachments?: Prisma.InspectionAttachmentListRelationFilter
   boardAttachments?: Prisma.BoardAttachmentListRelationFilter
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
+  boardResolutionContracts?: Prisma.BoardResolutionContractListRelationFilter
   portSalesReports?: Prisma.PortSalesReportListRelationFilter
   stakeholderAttachments?: Prisma.StakeholderAttachmentListRelationFilter
 }, "id">
@@ -323,6 +326,7 @@ export type StoredFileCreateInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutFileInput
 }
@@ -340,6 +344,7 @@ export type StoredFileUncheckedCreateInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
@@ -357,6 +362,7 @@ export type StoredFileUpdateInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutFileNestedInput
 }
@@ -374,6 +380,7 @@ export type StoredFileUncheckedUpdateInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
@@ -538,6 +545,22 @@ export type StoredFileUpdateOneWithoutBoardMinutesAttachmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredFileUpdateToOneWithWhereWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUpdateWithoutBoardMinutesAttachmentsInput>, Prisma.StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput>
 }
 
+export type StoredFileCreateNestedOneWithoutBoardResolutionContractsInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardResolutionContractsInput, Prisma.StoredFileUncheckedCreateWithoutBoardResolutionContractsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutBoardResolutionContractsInput
+  connect?: Prisma.StoredFileWhereUniqueInput
+}
+
+export type StoredFileUpdateOneWithoutBoardResolutionContractsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardResolutionContractsInput, Prisma.StoredFileUncheckedCreateWithoutBoardResolutionContractsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutBoardResolutionContractsInput
+  upsert?: Prisma.StoredFileUpsertWithoutBoardResolutionContractsInput
+  disconnect?: Prisma.StoredFileWhereInput | boolean
+  delete?: Prisma.StoredFileWhereInput | boolean
+  connect?: Prisma.StoredFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredFileUpdateToOneWithWhereWithoutBoardResolutionContractsInput, Prisma.StoredFileUpdateWithoutBoardResolutionContractsInput>, Prisma.StoredFileUncheckedUpdateWithoutBoardResolutionContractsInput>
+}
+
 export type StoredFileCreateNestedOneWithoutPortSalesReportsInput = {
   create?: Prisma.XOR<Prisma.StoredFileCreateWithoutPortSalesReportsInput, Prisma.StoredFileUncheckedCreateWithoutPortSalesReportsInput>
   connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutPortSalesReportsInput
@@ -580,6 +603,7 @@ export type StoredFileCreateWithoutProgressEntriesInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutFileInput
 }
@@ -596,6 +620,7 @@ export type StoredFileUncheckedCreateWithoutProgressEntriesInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
@@ -628,6 +653,7 @@ export type StoredFileUpdateWithoutProgressEntriesInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutFileNestedInput
 }
@@ -644,6 +670,7 @@ export type StoredFileUncheckedUpdateWithoutProgressEntriesInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
@@ -660,6 +687,7 @@ export type StoredFileCreateWithoutSingardAttachmentsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutFileInput
 }
@@ -676,6 +704,7 @@ export type StoredFileUncheckedCreateWithoutSingardAttachmentsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
@@ -708,6 +737,7 @@ export type StoredFileUpdateWithoutSingardAttachmentsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutFileNestedInput
 }
@@ -724,6 +754,7 @@ export type StoredFileUncheckedUpdateWithoutSingardAttachmentsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
@@ -740,6 +771,7 @@ export type StoredFileCreateWithoutInspectionAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutFileInput
 }
@@ -756,6 +788,7 @@ export type StoredFileUncheckedCreateWithoutInspectionAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
@@ -788,6 +821,7 @@ export type StoredFileUpdateWithoutInspectionAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutFileNestedInput
 }
@@ -804,6 +838,7 @@ export type StoredFileUncheckedUpdateWithoutInspectionAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
@@ -820,6 +855,7 @@ export type StoredFileCreateWithoutBoardAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
   inspectionAttachments?: Prisma.InspectionAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutFileInput
 }
@@ -836,6 +872,7 @@ export type StoredFileUncheckedCreateWithoutBoardAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
@@ -868,6 +905,7 @@ export type StoredFileUpdateWithoutBoardAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
   inspectionAttachments?: Prisma.InspectionAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutFileNestedInput
 }
@@ -884,6 +922,7 @@ export type StoredFileUncheckedUpdateWithoutBoardAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
@@ -900,6 +939,7 @@ export type StoredFileCreateWithoutBoardMinutesAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
   inspectionAttachments?: Prisma.InspectionAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutFileInput
 }
@@ -916,6 +956,7 @@ export type StoredFileUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
@@ -948,6 +989,7 @@ export type StoredFileUpdateWithoutBoardMinutesAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
   inspectionAttachments?: Prisma.InspectionAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutFileNestedInput
 }
@@ -964,6 +1006,91 @@ export type StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutFileNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutFileNestedInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileCreateWithoutBoardResolutionContractsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
+  inspectionAttachments?: Prisma.InspectionAttachmentCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutFileInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileUncheckedCreateWithoutBoardResolutionContractsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  inspectionAttachments?: Prisma.InspectionAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutFileInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileCreateOrConnectWithoutBoardResolutionContractsInput = {
+  where: Prisma.StoredFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardResolutionContractsInput, Prisma.StoredFileUncheckedCreateWithoutBoardResolutionContractsInput>
+}
+
+export type StoredFileUpsertWithoutBoardResolutionContractsInput = {
+  update: Prisma.XOR<Prisma.StoredFileUpdateWithoutBoardResolutionContractsInput, Prisma.StoredFileUncheckedUpdateWithoutBoardResolutionContractsInput>
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutBoardResolutionContractsInput, Prisma.StoredFileUncheckedCreateWithoutBoardResolutionContractsInput>
+  where?: Prisma.StoredFileWhereInput
+}
+
+export type StoredFileUpdateToOneWithWhereWithoutBoardResolutionContractsInput = {
+  where?: Prisma.StoredFileWhereInput
+  data: Prisma.XOR<Prisma.StoredFileUpdateWithoutBoardResolutionContractsInput, Prisma.StoredFileUncheckedUpdateWithoutBoardResolutionContractsInput>
+}
+
+export type StoredFileUpdateWithoutBoardResolutionContractsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
+  inspectionAttachments?: Prisma.InspectionAttachmentUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutFileNestedInput
+  stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileUncheckedUpdateWithoutBoardResolutionContractsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  inspectionAttachments?: Prisma.InspectionAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
@@ -981,6 +1108,7 @@ export type StoredFileCreateWithoutPortSalesReportsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentCreateNestedManyWithoutFileInput
 }
 
@@ -997,6 +1125,7 @@ export type StoredFileUncheckedCreateWithoutPortSalesReportsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutFileInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
@@ -1029,6 +1158,7 @@ export type StoredFileUpdateWithoutPortSalesReportsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUpdateManyWithoutFileNestedInput
 }
 
@@ -1045,6 +1175,7 @@ export type StoredFileUncheckedUpdateWithoutPortSalesReportsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutFileNestedInput
   stakeholderAttachments?: Prisma.StakeholderAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
@@ -1061,6 +1192,7 @@ export type StoredFileCreateWithoutStakeholderAttachmentsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutFileInput
 }
 
@@ -1077,6 +1209,7 @@ export type StoredFileUncheckedCreateWithoutStakeholderAttachmentsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedCreateNestedManyWithoutFileInput
   portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutFileInput
 }
 
@@ -1109,6 +1242,7 @@ export type StoredFileUpdateWithoutStakeholderAttachmentsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutFileNestedInput
 }
 
@@ -1125,6 +1259,7 @@ export type StoredFileUncheckedUpdateWithoutStakeholderAttachmentsInput = {
   inspectionAttachments?: Prisma.InspectionAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardResolutionContracts?: Prisma.BoardResolutionContractUncheckedUpdateManyWithoutFileNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutFileNestedInput
 }
 
@@ -1139,6 +1274,7 @@ export type StoredFileCountOutputType = {
   inspectionAttachments: number
   boardAttachments: number
   boardMinutesAttachments: number
+  boardResolutionContracts: number
   portSalesReports: number
   stakeholderAttachments: number
 }
@@ -1149,6 +1285,7 @@ export type StoredFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   inspectionAttachments?: boolean | StoredFileCountOutputTypeCountInspectionAttachmentsArgs
   boardAttachments?: boolean | StoredFileCountOutputTypeCountBoardAttachmentsArgs
   boardMinutesAttachments?: boolean | StoredFileCountOutputTypeCountBoardMinutesAttachmentsArgs
+  boardResolutionContracts?: boolean | StoredFileCountOutputTypeCountBoardResolutionContractsArgs
   portSalesReports?: boolean | StoredFileCountOutputTypeCountPortSalesReportsArgs
   stakeholderAttachments?: boolean | StoredFileCountOutputTypeCountStakeholderAttachmentsArgs
 }
@@ -1201,6 +1338,13 @@ export type StoredFileCountOutputTypeCountBoardMinutesAttachmentsArgs<ExtArgs ex
 /**
  * StoredFileCountOutputType without action
  */
+export type StoredFileCountOutputTypeCountBoardResolutionContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardResolutionContractWhereInput
+}
+
+/**
+ * StoredFileCountOutputType without action
+ */
 export type StoredFileCountOutputTypeCountPortSalesReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PortSalesReportWhereInput
 }
@@ -1226,6 +1370,7 @@ export type StoredFileSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   inspectionAttachments?: boolean | Prisma.StoredFile$inspectionAttachmentsArgs<ExtArgs>
   boardAttachments?: boolean | Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>
   boardMinutesAttachments?: boolean | Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>
+  boardResolutionContracts?: boolean | Prisma.StoredFile$boardResolutionContractsArgs<ExtArgs>
   portSalesReports?: boolean | Prisma.StoredFile$portSalesReportsArgs<ExtArgs>
   stakeholderAttachments?: boolean | Prisma.StoredFile$stakeholderAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredFileCountOutputTypeDefaultArgs<ExtArgs>
@@ -1268,6 +1413,7 @@ export type StoredFileInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   inspectionAttachments?: boolean | Prisma.StoredFile$inspectionAttachmentsArgs<ExtArgs>
   boardAttachments?: boolean | Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>
   boardMinutesAttachments?: boolean | Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>
+  boardResolutionContracts?: boolean | Prisma.StoredFile$boardResolutionContractsArgs<ExtArgs>
   portSalesReports?: boolean | Prisma.StoredFile$portSalesReportsArgs<ExtArgs>
   stakeholderAttachments?: boolean | Prisma.StoredFile$stakeholderAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredFileCountOutputTypeDefaultArgs<ExtArgs>
@@ -1283,6 +1429,7 @@ export type $StoredFilePayload<ExtArgs extends runtime.Types.Extensions.Internal
     inspectionAttachments: Prisma.$InspectionAttachmentPayload<ExtArgs>[]
     boardAttachments: Prisma.$BoardAttachmentPayload<ExtArgs>[]
     boardMinutesAttachments: Prisma.$BoardMinutesAttachmentPayload<ExtArgs>[]
+    boardResolutionContracts: Prisma.$BoardResolutionContractPayload<ExtArgs>[]
     portSalesReports: Prisma.$PortSalesReportPayload<ExtArgs>[]
     stakeholderAttachments: Prisma.$StakeholderAttachmentPayload<ExtArgs>[]
   }
@@ -1693,6 +1840,7 @@ export interface Prisma__StoredFileClient<T, Null = never, ExtArgs extends runti
   inspectionAttachments<T extends Prisma.StoredFile$inspectionAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$inspectionAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspectionAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardAttachments<T extends Prisma.StoredFile$boardAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesAttachments<T extends Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardResolutionContracts<T extends Prisma.StoredFile$boardResolutionContractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$boardResolutionContractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardResolutionContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   portSalesReports<T extends Prisma.StoredFile$portSalesReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$portSalesReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PortSalesReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stakeholderAttachments<T extends Prisma.StoredFile$stakeholderAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$stakeholderAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2241,6 +2389,30 @@ export type StoredFile$boardMinutesAttachmentsArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.BoardMinutesAttachmentScalarFieldEnum | Prisma.BoardMinutesAttachmentScalarFieldEnum[]
+}
+
+/**
+ * StoredFile.boardResolutionContracts
+ */
+export type StoredFile$boardResolutionContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardResolutionContract
+   */
+  select?: Prisma.BoardResolutionContractSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardResolutionContract
+   */
+  omit?: Prisma.BoardResolutionContractOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardResolutionContractInclude<ExtArgs> | null
+  where?: Prisma.BoardResolutionContractWhereInput
+  orderBy?: Prisma.BoardResolutionContractOrderByWithRelationInput | Prisma.BoardResolutionContractOrderByWithRelationInput[]
+  cursor?: Prisma.BoardResolutionContractWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardResolutionContractScalarFieldEnum | Prisma.BoardResolutionContractScalarFieldEnum[]
 }
 
 /**

@@ -894,6 +894,7 @@ export type UserWhereInput = {
   inspectionActivities?: Prisma.InspectionActivityListRelationFilter
   contractor?: Prisma.XOR<Prisma.ProjectContractorNullableScalarRelationFilter, Prisma.ProjectContractorWhereInput> | null
   stakeholderReports?: Prisma.StakeholderProgressReportListRelationFilter
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportListRelationFilter
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceListRelationFilter
   stakeholderMessages?: Prisma.StakeholderMessageListRelationFilter
   boardRequestsCreated?: Prisma.BoardRequestListRelationFilter
@@ -1027,6 +1028,7 @@ export type UserOrderByWithRelationInput = {
   inspectionActivities?: Prisma.InspectionActivityOrderByRelationAggregateInput
   contractor?: Prisma.ProjectContractorOrderByWithRelationInput
   stakeholderReports?: Prisma.StakeholderProgressReportOrderByRelationAggregateInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportOrderByRelationAggregateInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceOrderByRelationAggregateInput
   stakeholderMessages?: Prisma.StakeholderMessageOrderByRelationAggregateInput
   boardRequestsCreated?: Prisma.BoardRequestOrderByRelationAggregateInput
@@ -1163,6 +1165,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   inspectionActivities?: Prisma.InspectionActivityListRelationFilter
   contractor?: Prisma.XOR<Prisma.ProjectContractorNullableScalarRelationFilter, Prisma.ProjectContractorWhereInput> | null
   stakeholderReports?: Prisma.StakeholderProgressReportListRelationFilter
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportListRelationFilter
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceListRelationFilter
   stakeholderMessages?: Prisma.StakeholderMessageListRelationFilter
   boardRequestsCreated?: Prisma.BoardRequestListRelationFilter
@@ -1469,6 +1472,7 @@ export type UserCreateInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -1589,6 +1593,7 @@ export type UserUncheckedCreateInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -1709,6 +1714,7 @@ export type UserUpdateInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -1829,6 +1835,7 @@ export type UserUncheckedUpdateInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -3369,6 +3376,22 @@ export type UserUpdateOneWithoutBoardMinutesMembershipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardMinutesMembershipsInput, Prisma.UserUpdateWithoutBoardMinutesMembershipsInput>, Prisma.UserUncheckedUpdateWithoutBoardMinutesMembershipsInput>
 }
 
+export type UserCreateNestedOneWithoutBoardResolutionProgressReportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBoardResolutionProgressReportsInput, Prisma.UserUncheckedCreateWithoutBoardResolutionProgressReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardResolutionProgressReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutBoardResolutionProgressReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBoardResolutionProgressReportsInput, Prisma.UserUncheckedCreateWithoutBoardResolutionProgressReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBoardResolutionProgressReportsInput
+  upsert?: Prisma.UserUpsertWithoutBoardResolutionProgressReportsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBoardResolutionProgressReportsInput, Prisma.UserUpdateWithoutBoardResolutionProgressReportsInput>, Prisma.UserUncheckedUpdateWithoutBoardResolutionProgressReportsInput>
+}
+
 export type UserCreateNestedOneWithoutPortSalesReportsApprovedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPortSalesReportsApprovedInput, Prisma.UserUncheckedCreateWithoutPortSalesReportsApprovedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPortSalesReportsApprovedInput
@@ -3558,6 +3581,7 @@ export type UserCreateWithoutPhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -3677,6 +3701,7 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -3806,6 +3831,7 @@ export type UserCreateWithoutNationalCardPhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -3925,6 +3951,7 @@ export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4054,6 +4081,7 @@ export type UserCreateWithoutPassportPhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -4173,6 +4201,7 @@ export type UserUncheckedCreateWithoutPassportPhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4302,6 +4331,7 @@ export type UserCreateWithoutIdentityBookletPhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -4421,6 +4451,7 @@ export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4550,6 +4581,7 @@ export type UserCreateWithoutSignaturePhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -4669,6 +4701,7 @@ export type UserUncheckedCreateWithoutSignaturePhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4970,6 +5003,7 @@ export type UserCreateWithoutCountryInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -5089,6 +5123,7 @@ export type UserUncheckedCreateWithoutCountryInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5234,6 +5269,7 @@ export type UserCreateWithoutProvinceInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -5353,6 +5389,7 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5482,6 +5519,7 @@ export type UserCreateWithoutLocationProvinceInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -5601,6 +5639,7 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5762,6 +5801,7 @@ export type UserCreateWithoutCityInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -5881,6 +5921,7 @@ export type UserUncheckedCreateWithoutCityInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6010,6 +6051,7 @@ export type UserCreateWithoutLocationCityInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -6129,6 +6171,7 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6291,6 +6334,7 @@ export type UserCreateWithoutQeshmondiSqlConnectionsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -6410,6 +6454,7 @@ export type UserUncheckedCreateWithoutQeshmondiSqlConnectionsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6545,6 +6590,7 @@ export type UserUpdateWithoutQeshmondiSqlConnectionsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -6664,6 +6710,7 @@ export type UserUncheckedUpdateWithoutQeshmondiSqlConnectionsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6783,6 +6830,7 @@ export type UserCreateWithoutQeshmondiSyncLogsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -6902,6 +6950,7 @@ export type UserUncheckedCreateWithoutQeshmondiSyncLogsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7037,6 +7086,7 @@ export type UserUpdateWithoutQeshmondiSyncLogsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -7156,6 +7206,7 @@ export type UserUncheckedUpdateWithoutQeshmondiSyncLogsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7275,6 +7326,7 @@ export type UserCreateWithoutQeshmondiFeedEventsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -7394,6 +7446,7 @@ export type UserUncheckedCreateWithoutQeshmondiFeedEventsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7529,6 +7582,7 @@ export type UserUpdateWithoutQeshmondiFeedEventsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -7648,6 +7702,7 @@ export type UserUncheckedUpdateWithoutQeshmondiFeedEventsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7766,6 +7821,7 @@ export type UserCreateWithoutLocationHistoriesInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -7885,6 +7941,7 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8020,6 +8077,7 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -8139,6 +8197,7 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -8258,6 +8317,7 @@ export type UserCreateWithoutContractorInput = {
   inspectionReplies?: Prisma.InspectionFeedbackCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -8377,6 +8437,7 @@ export type UserUncheckedCreateWithoutContractorInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8522,6 +8583,7 @@ export type UserCreateWithoutPositionInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -8641,6 +8703,7 @@ export type UserUncheckedCreateWithoutPositionInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8786,6 +8849,7 @@ export type UserCreateWithoutNutritionUnitsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -8905,6 +8969,7 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9029,6 +9094,7 @@ export type UserCreateWithoutOrgUnitInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -9148,6 +9214,7 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9288,6 +9355,7 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -9407,6 +9475,7 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9542,6 +9611,7 @@ export type UserCreateWithoutFoodReservationsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -9661,6 +9731,7 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9796,6 +9867,7 @@ export type UserUpdateWithoutFoodReservationsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -9915,6 +9987,7 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10034,6 +10107,7 @@ export type UserCreateWithoutAdvancedFoodOrdersInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -10153,6 +10227,7 @@ export type UserUncheckedCreateWithoutAdvancedFoodOrdersInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10288,6 +10363,7 @@ export type UserUpdateWithoutAdvancedFoodOrdersInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -10407,6 +10483,7 @@ export type UserUncheckedUpdateWithoutAdvancedFoodOrdersInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10526,6 +10603,7 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -10645,6 +10723,7 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10780,6 +10859,7 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -10899,6 +10979,7 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11018,6 +11099,7 @@ export type UserCreateWithoutUserRolesInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -11137,6 +11219,7 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11272,6 +11355,7 @@ export type UserUpdateWithoutUserRolesInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -11391,6 +11475,7 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11510,6 +11595,7 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -11629,6 +11715,7 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11753,6 +11840,7 @@ export type UserCreateWithoutSingardRepliesInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -11872,6 +11960,7 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12007,6 +12096,7 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -12126,6 +12216,7 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12256,6 +12347,7 @@ export type UserUpdateWithoutSingardRepliesInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -12375,6 +12467,7 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12494,6 +12587,7 @@ export type UserCreateWithoutSingardActivitiesInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -12613,6 +12707,7 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12748,6 +12843,7 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -12867,6 +12963,7 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12986,6 +13083,7 @@ export type UserCreateWithoutInspectionFeedbacksInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -13105,6 +13203,7 @@ export type UserUncheckedCreateWithoutInspectionFeedbacksInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13229,6 +13328,7 @@ export type UserCreateWithoutInspectionRepliesInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -13348,6 +13448,7 @@ export type UserUncheckedCreateWithoutInspectionRepliesInput = {
   inspectionFeedbacks?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutUserInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13483,6 +13584,7 @@ export type UserUpdateWithoutInspectionFeedbacksInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -13602,6 +13704,7 @@ export type UserUncheckedUpdateWithoutInspectionFeedbacksInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13732,6 +13835,7 @@ export type UserUpdateWithoutInspectionRepliesInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -13851,6 +13955,7 @@ export type UserUncheckedUpdateWithoutInspectionRepliesInput = {
   inspectionFeedbacks?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutUserNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13970,6 +14075,7 @@ export type UserCreateWithoutInspectionActivitiesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackCreateNestedManyWithoutRepliedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -14089,6 +14195,7 @@ export type UserUncheckedCreateWithoutInspectionActivitiesInput = {
   inspectionFeedbacks?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutUserInput
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14224,6 +14331,7 @@ export type UserUpdateWithoutInspectionActivitiesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUpdateManyWithoutRepliedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -14343,6 +14451,7 @@ export type UserUncheckedUpdateWithoutInspectionActivitiesInput = {
   inspectionFeedbacks?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutUserNestedInput
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14463,6 +14572,7 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
@@ -14582,6 +14692,7 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
@@ -14706,6 +14817,7 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -14825,6 +14937,7 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14949,6 +15062,7 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -15068,6 +15182,7 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15192,6 +15307,7 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -15311,6 +15427,7 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15435,6 +15552,7 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -15554,6 +15672,7 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15678,6 +15797,7 @@ export type UserCreateWithoutBoardCeoReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -15797,6 +15917,7 @@ export type UserUncheckedCreateWithoutBoardCeoReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15921,6 +16042,7 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -16040,6 +16162,7 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16175,6 +16298,7 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
@@ -16294,6 +16418,7 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
@@ -16424,6 +16549,7 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -16543,6 +16669,7 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -16673,6 +16800,7 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -16792,6 +16920,7 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -16922,6 +17051,7 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -17041,6 +17171,7 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17171,6 +17302,7 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -17290,6 +17422,7 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17420,6 +17553,7 @@ export type UserUpdateWithoutBoardCeoReviewsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -17539,6 +17673,7 @@ export type UserUncheckedUpdateWithoutBoardCeoReviewsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17669,6 +17804,7 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -17788,6 +17924,7 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17907,6 +18044,7 @@ export type UserCreateWithoutBoardSignatoryInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -18026,6 +18164,7 @@ export type UserUncheckedCreateWithoutBoardSignatoryInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -18161,6 +18300,7 @@ export type UserUpdateWithoutBoardSignatoryInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -18280,6 +18420,7 @@ export type UserUncheckedUpdateWithoutBoardSignatoryInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18399,6 +18540,7 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -18518,6 +18660,7 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -18653,6 +18796,7 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -18772,6 +18916,7 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18891,6 +19036,7 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -19010,6 +19156,7 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19145,6 +19292,7 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -19264,6 +19412,7 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -19274,6 +19423,502 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
   boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
   boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUncheckedUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBoardResolutionProgressReportsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
+  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
+  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
+  signaturePhoto?: Prisma.StoredImageCreateNestedOneWithoutSignatureUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderCreateNestedManyWithoutCreatedByInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  inspectionFeedbacks?: Prisma.InspectionFeedbackCreateNestedManyWithoutUserInput
+  inspectionReplies?: Prisma.InspectionFeedbackCreateNestedManyWithoutRepliedByInput
+  inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestCreateNestedManyWithoutCeoByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryCreateNestedOneWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBoardResolutionProgressReportsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  fatherName?: string | null
+  birthDate?: Date | string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  nationalCardPhotoId?: string | null
+  passportPhotoId?: string | null
+  identityBookletPhotoId?: string | null
+  signaturePhotoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  isQeshmondi?: boolean
+  qeshmondiStartDate?: Date | string | null
+  qeshmondiEndDate?: Date | string | null
+  occupation?: string | null
+  isResident?: boolean
+  passportNumber?: string | null
+  qeshmondiGroup?: string | null
+  latinFirstName?: string | null
+  latinLastName?: string | null
+  latinFatherName?: string | null
+  identityNumber?: string | null
+  identitySerial?: string | null
+  landlinePhone?: string | null
+  fax?: string | null
+  postalCode?: string | null
+  jobAddress?: string | null
+  jobPhone?: string | null
+  jobFax?: string | null
+  jobPostalCode?: string | null
+  isSingle?: boolean | null
+  nationality?: string | null
+  education?: string | null
+  protectorOffice?: string | null
+  nationalIdExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  bankFullName?: string | null
+  bankFullLatinName?: string | null
+  accountNumber?: string | null
+  cardNumber?: string | null
+  cardSeries?: string | null
+  isBank?: boolean | null
+  accountOpeningDate?: Date | string | null
+  cardIssuanceDate?: Date | string | null
+  cardDeliverDate?: Date | string | null
+  companyName?: string | null
+  companySubject?: string | null
+  companyLicenseNumber?: string | null
+  companyLicenseDate?: Date | string | null
+  companyPaperNumber?: string | null
+  companyPaperDate?: Date | string | null
+  electricitySubscription?: string | null
+  fingerprint?: runtime.Bytes | null
+  individualTicketQuota?: number
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  inspectionFeedbacks?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutUserInput
+  inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCeoByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  boardSignatory?: Prisma.BoardSignatoryUncheckedCreateNestedOneWithoutUserInput
+  portSalesReports?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutCreatedByInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUncheckedCreateNestedManyWithoutApprovedByInput
+  operatedPort?: Prisma.PortUncheckedCreateNestedOneWithoutOperatorUserInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUncheckedCreateNestedManyWithoutActorInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBoardResolutionProgressReportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBoardResolutionProgressReportsInput, Prisma.UserUncheckedCreateWithoutBoardResolutionProgressReportsInput>
+}
+
+export type UserUpsertWithoutBoardResolutionProgressReportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBoardResolutionProgressReportsInput, Prisma.UserUncheckedUpdateWithoutBoardResolutionProgressReportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBoardResolutionProgressReportsInput, Prisma.UserUncheckedCreateWithoutBoardResolutionProgressReportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBoardResolutionProgressReportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBoardResolutionProgressReportsInput, Prisma.UserUncheckedUpdateWithoutBoardResolutionProgressReportsInput>
+}
+
+export type UserUpdateWithoutBoardResolutionProgressReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
+  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
+  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
+  signaturePhoto?: Prisma.StoredImageUpdateOneWithoutSignatureUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  inspectionFeedbacks?: Prisma.InspectionFeedbackUpdateManyWithoutUserNestedInput
+  inspectionReplies?: Prisma.InspectionFeedbackUpdateManyWithoutRepliedByNestedInput
+  inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUpdateManyWithoutCeoByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  boardSignatory?: Prisma.BoardSignatoryUpdateOneWithoutUserNestedInput
+  portSalesReports?: Prisma.PortSalesReportUpdateManyWithoutCreatedByNestedInput
+  portSalesReportsApproved?: Prisma.PortSalesReportUpdateManyWithoutApprovedByNestedInput
+  operatedPort?: Prisma.PortUpdateOneWithoutOperatorUserNestedInput
+  qeshmondiSyncLogs?: Prisma.QeshmondiSyncLogUpdateManyWithoutActorNestedInput
+  qeshmondiSqlConnections?: Prisma.QeshmondiSqlConnectionUpdateManyWithoutUpdatedByNestedInput
+  qeshmondiFeedEvents?: Prisma.QeshmondiFeedEventUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBoardResolutionProgressReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signaturePhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isQeshmondi?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  qeshmondiStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  qeshmondiEndDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isResident?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qeshmondiGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFirstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinLastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latinFatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identitySerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landlinePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobPostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSingle?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  nationality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  education?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  protectorOffice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalIdExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bankFullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankFullLatinName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isBank?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accountOpeningDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardIssuanceDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeliverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companySubject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyLicenseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  companyPaperNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyPaperDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  electricitySubscription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fingerprint?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  individualTicketQuota?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  advancedFoodOrders?: Prisma.AdvancedFoodOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  inspectionFeedbacks?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardCeoReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutCeoByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   boardSignatory?: Prisma.BoardSignatoryUncheckedUpdateOneWithoutUserNestedInput
   portSalesReports?: Prisma.PortSalesReportUncheckedUpdateManyWithoutCreatedByNestedInput
   portSalesReportsApproved?: Prisma.PortSalesReportUncheckedUpdateManyWithoutApprovedByNestedInput
@@ -19383,6 +20028,7 @@ export type UserCreateWithoutPortSalesReportsApprovedInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -19502,6 +20148,7 @@ export type UserUncheckedCreateWithoutPortSalesReportsApprovedInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19626,6 +20273,7 @@ export type UserCreateWithoutPortSalesReportsInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -19745,6 +20393,7 @@ export type UserUncheckedCreateWithoutPortSalesReportsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19880,6 +20529,7 @@ export type UserUpdateWithoutPortSalesReportsApprovedInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -19999,6 +20649,7 @@ export type UserUncheckedUpdateWithoutPortSalesReportsApprovedInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20129,6 +20780,7 @@ export type UserUpdateWithoutPortSalesReportsInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -20248,6 +20900,7 @@ export type UserUncheckedUpdateWithoutPortSalesReportsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20366,6 +21019,7 @@ export type UserCreateWithoutStakeholderReportsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -20485,6 +21139,7 @@ export type UserUncheckedCreateWithoutStakeholderReportsInput = {
   inspectionFeedbacks?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutUserInput
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -20620,6 +21275,7 @@ export type UserUpdateWithoutStakeholderReportsInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -20739,6 +21395,7 @@ export type UserUncheckedUpdateWithoutStakeholderReportsInput = {
   inspectionFeedbacks?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutUserNestedInput
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20859,6 +21516,7 @@ export type UserCreateWithoutStakeholderCorrespondencesInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
   boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
@@ -20978,6 +21636,7 @@ export type UserUncheckedCreateWithoutStakeholderCorrespondencesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
   boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
@@ -21113,6 +21772,7 @@ export type UserUpdateWithoutStakeholderCorrespondencesInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
   boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
@@ -21232,6 +21892,7 @@ export type UserUncheckedUpdateWithoutStakeholderCorrespondencesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
   boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
@@ -21351,6 +22012,7 @@ export type UserCreateWithoutStakeholderMessagesInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
   boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
@@ -21470,6 +22132,7 @@ export type UserUncheckedCreateWithoutStakeholderMessagesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
   boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
@@ -21605,6 +22268,7 @@ export type UserUpdateWithoutStakeholderMessagesInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
   boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
@@ -21724,6 +22388,7 @@ export type UserUncheckedUpdateWithoutStakeholderMessagesInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
   boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
@@ -21843,6 +22508,7 @@ export type UserCreateWithoutOperatedPortInput = {
   inspectionActivities?: Prisma.InspectionActivityCreateNestedManyWithoutCreatedByInput
   contractor?: Prisma.ProjectContractorCreateNestedOneWithoutPortalUsersInput
   stakeholderReports?: Prisma.StakeholderProgressReportCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
@@ -21962,6 +22628,7 @@ export type UserUncheckedCreateWithoutOperatedPortInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedCreateNestedManyWithoutCreatedByInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedCreateNestedManyWithoutAuthorInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
@@ -22097,6 +22764,7 @@ export type UserUpdateWithoutOperatedPortInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -22216,6 +22884,7 @@ export type UserUncheckedUpdateWithoutOperatedPortInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22774,6 +23443,7 @@ export type UserUpdateWithoutPhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -22893,6 +23563,7 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23100,6 +23771,7 @@ export type UserUpdateWithoutNationalCardPhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -23219,6 +23891,7 @@ export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23426,6 +24099,7 @@ export type UserUpdateWithoutPassportPhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -23545,6 +24219,7 @@ export type UserUncheckedUpdateWithoutPassportPhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23752,6 +24427,7 @@ export type UserUpdateWithoutIdentityBookletPhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -23871,6 +24547,7 @@ export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24078,6 +24755,7 @@ export type UserUpdateWithoutSignaturePhotoInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -24197,6 +24875,7 @@ export type UserUncheckedUpdateWithoutSignaturePhotoInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24492,6 +25171,7 @@ export type UserUpdateWithoutCountryInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -24611,6 +25291,7 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24994,6 +25675,7 @@ export type UserUpdateWithoutProvinceInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -25113,6 +25795,7 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25320,6 +26003,7 @@ export type UserUpdateWithoutLocationProvinceInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -25439,6 +26123,7 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25822,6 +26507,7 @@ export type UserUpdateWithoutCityInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -25941,6 +26627,7 @@ export type UserUncheckedUpdateWithoutCityInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26148,6 +26835,7 @@ export type UserUpdateWithoutLocationCityInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -26267,6 +26955,7 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26562,6 +27251,7 @@ export type UserUpdateWithoutContractorInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -26681,6 +27371,7 @@ export type UserUncheckedUpdateWithoutContractorInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26976,6 +27667,7 @@ export type UserUpdateWithoutPositionInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -27095,6 +27787,7 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27390,6 +28083,7 @@ export type UserUpdateWithoutOrgUnitInput = {
   inspectionActivities?: Prisma.InspectionActivityUpdateManyWithoutCreatedByNestedInput
   contractor?: Prisma.ProjectContractorUpdateOneWithoutPortalUsersNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
@@ -27509,6 +28203,7 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   inspectionReplies?: Prisma.InspectionFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
   inspectionActivities?: Prisma.InspectionActivityUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderReports?: Prisma.StakeholderProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardResolutionProgressReports?: Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderCorrespondences?: Prisma.StakeholderCorrespondenceUncheckedUpdateManyWithoutCreatedByNestedInput
   stakeholderMessages?: Prisma.StakeholderMessageUncheckedUpdateManyWithoutAuthorNestedInput
   boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27636,6 +28331,7 @@ export type UserCountOutputType = {
   inspectionReplies: number
   inspectionActivities: number
   stakeholderReports: number
+  boardResolutionProgressReports: number
   stakeholderCorrespondences: number
   stakeholderMessages: number
   boardRequestsCreated: number
@@ -27668,6 +28364,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   inspectionReplies?: boolean | UserCountOutputTypeCountInspectionRepliesArgs
   inspectionActivities?: boolean | UserCountOutputTypeCountInspectionActivitiesArgs
   stakeholderReports?: boolean | UserCountOutputTypeCountStakeholderReportsArgs
+  boardResolutionProgressReports?: boolean | UserCountOutputTypeCountBoardResolutionProgressReportsArgs
   stakeholderCorrespondences?: boolean | UserCountOutputTypeCountStakeholderCorrespondencesArgs
   stakeholderMessages?: boolean | UserCountOutputTypeCountStakeholderMessagesArgs
   boardRequestsCreated?: boolean | UserCountOutputTypeCountBoardRequestsCreatedArgs
@@ -27785,6 +28482,13 @@ export type UserCountOutputTypeCountInspectionActivitiesArgs<ExtArgs extends run
  */
 export type UserCountOutputTypeCountStakeholderReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.StakeholderProgressReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBoardResolutionProgressReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardResolutionProgressReportWhereInput
 }
 
 /**
@@ -28013,6 +28717,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   inspectionActivities?: boolean | Prisma.User$inspectionActivitiesArgs<ExtArgs>
   contractor?: boolean | Prisma.User$contractorArgs<ExtArgs>
   stakeholderReports?: boolean | Prisma.User$stakeholderReportsArgs<ExtArgs>
+  boardResolutionProgressReports?: boolean | Prisma.User$boardResolutionProgressReportsArgs<ExtArgs>
   stakeholderCorrespondences?: boolean | Prisma.User$stakeholderCorrespondencesArgs<ExtArgs>
   stakeholderMessages?: boolean | Prisma.User$stakeholderMessagesArgs<ExtArgs>
   boardRequestsCreated?: boolean | Prisma.User$boardRequestsCreatedArgs<ExtArgs>
@@ -28355,6 +29060,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   inspectionActivities?: boolean | Prisma.User$inspectionActivitiesArgs<ExtArgs>
   contractor?: boolean | Prisma.User$contractorArgs<ExtArgs>
   stakeholderReports?: boolean | Prisma.User$stakeholderReportsArgs<ExtArgs>
+  boardResolutionProgressReports?: boolean | Prisma.User$boardResolutionProgressReportsArgs<ExtArgs>
   stakeholderCorrespondences?: boolean | Prisma.User$stakeholderCorrespondencesArgs<ExtArgs>
   stakeholderMessages?: boolean | Prisma.User$stakeholderMessagesArgs<ExtArgs>
   boardRequestsCreated?: boolean | Prisma.User$boardRequestsCreatedArgs<ExtArgs>
@@ -28435,6 +29141,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     inspectionActivities: Prisma.$InspectionActivityPayload<ExtArgs>[]
     contractor: Prisma.$ProjectContractorPayload<ExtArgs> | null
     stakeholderReports: Prisma.$StakeholderProgressReportPayload<ExtArgs>[]
+    boardResolutionProgressReports: Prisma.$BoardResolutionProgressReportPayload<ExtArgs>[]
     stakeholderCorrespondences: Prisma.$StakeholderCorrespondencePayload<ExtArgs>[]
     stakeholderMessages: Prisma.$StakeholderMessagePayload<ExtArgs>[]
     boardRequestsCreated: Prisma.$BoardRequestPayload<ExtArgs>[]
@@ -28961,6 +29668,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   inspectionActivities<T extends Prisma.User$inspectionActivitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inspectionActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspectionActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contractor<T extends Prisma.User$contractorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contractorArgs<ExtArgs>>): Prisma.Prisma__ProjectContractorClient<runtime.Types.Result.GetResult<Prisma.$ProjectContractorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   stakeholderReports<T extends Prisma.User$stakeholderReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stakeholderReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderProgressReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boardResolutionProgressReports<T extends Prisma.User$boardResolutionProgressReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardResolutionProgressReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardResolutionProgressReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stakeholderCorrespondences<T extends Prisma.User$stakeholderCorrespondencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stakeholderCorrespondencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderCorrespondencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stakeholderMessages<T extends Prisma.User$stakeholderMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stakeholderMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StakeholderMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardRequestsCreated<T extends Prisma.User$boardRequestsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$boardRequestsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -30051,6 +30759,30 @@ export type User$stakeholderReportsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.StakeholderProgressReportScalarFieldEnum | Prisma.StakeholderProgressReportScalarFieldEnum[]
+}
+
+/**
+ * User.boardResolutionProgressReports
+ */
+export type User$boardResolutionProgressReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardResolutionProgressReport
+   */
+  select?: Prisma.BoardResolutionProgressReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardResolutionProgressReport
+   */
+  omit?: Prisma.BoardResolutionProgressReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardResolutionProgressReportInclude<ExtArgs> | null
+  where?: Prisma.BoardResolutionProgressReportWhereInput
+  orderBy?: Prisma.BoardResolutionProgressReportOrderByWithRelationInput | Prisma.BoardResolutionProgressReportOrderByWithRelationInput[]
+  cursor?: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardResolutionProgressReportScalarFieldEnum | Prisma.BoardResolutionProgressReportScalarFieldEnum[]
 }
 
 /**

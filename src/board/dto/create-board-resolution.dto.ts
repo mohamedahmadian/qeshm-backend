@@ -79,6 +79,12 @@ export class CreateBoardResolutionDto {
   description?: string | null;
 
   @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  requestId?: string | null;
+
+  @IsOptional()
   @IsArray()
   @ArrayMaxSize(MAX_BOARD_RESOLUTION_UNITS)
   @IsUUID('4', { each: true })

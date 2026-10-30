@@ -71,9 +71,23 @@ export class FindProgressReportsQueryDto extends PaginationQueryDto {
   contractorId?: string;
 }
 
+export class ContractorScopeQueryDto {
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  contractorId?: string;
+}
+
 export class CreateProgressReportDto {
   @IsUUID('4')
   projectId!: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  contractorId?: string;
 
   @Matches(isoDate, { message: 'تاریخ گزارش معتبر نیست' })
   occurredAt!: string;
@@ -215,3 +229,55 @@ export class UpdateCorrespondenceWorkflowDto {
   @IsIn([...stakeholderActionResults])
   actionResult?: (typeof stakeholderActionResults)[number] | null;
 }
+
+export class CreateResolutionProgressDto {
+  @IsUUID('4')
+  contractId!: string;
+
+  @Matches(isoDate, { message: 'تاریخ گزارش معتبر نیست' })
+  occurredAt!: string;
+
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @IsString()
+  @MinLength(1)
+  @MaxLength(240)
+  title!: string;
+
+  @IsOptional()
+  @Transform(({ value }) => (value === '' || value == null ? null : Number(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsInt()
+  @Min(0)
+  @Max(100)
+  progressPercent?: number | null;
+
+  @IsOptional()
+  @Transform(({ value }) => optionalText(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  actionsDone?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => optionalText(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  nextPlan?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => optionalText(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  blockers?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => optionalText(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  needs?: string | null;
+}
+
+export class UpdateResolutionProgressDto extends PartialType(CreateResolutionProgressDto) {}

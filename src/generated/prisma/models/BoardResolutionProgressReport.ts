@@ -41,7 +41,14 @@ export type BoardResolutionProgressReportMinAggregateOutputType = {
   title: string | null
   category: string | null
   body: string | null
+  actionsDone: string | null
+  nextPlan: string | null
+  blockers: string | null
+  needs: string | null
   progressAmount: number | null
+  createdById: string | null
+  contractorId: string | null
+  contractId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,7 +60,14 @@ export type BoardResolutionProgressReportMaxAggregateOutputType = {
   title: string | null
   category: string | null
   body: string | null
+  actionsDone: string | null
+  nextPlan: string | null
+  blockers: string | null
+  needs: string | null
   progressAmount: number | null
+  createdById: string | null
+  contractorId: string | null
+  contractId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -65,7 +79,14 @@ export type BoardResolutionProgressReportCountAggregateOutputType = {
   title: number
   category: number
   body: number
+  actionsDone: number
+  nextPlan: number
+  blockers: number
+  needs: number
   progressAmount: number
+  createdById: number
+  contractorId: number
+  contractId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -87,7 +108,14 @@ export type BoardResolutionProgressReportMinAggregateInputType = {
   title?: true
   category?: true
   body?: true
+  actionsDone?: true
+  nextPlan?: true
+  blockers?: true
+  needs?: true
   progressAmount?: true
+  createdById?: true
+  contractorId?: true
+  contractId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -99,7 +127,14 @@ export type BoardResolutionProgressReportMaxAggregateInputType = {
   title?: true
   category?: true
   body?: true
+  actionsDone?: true
+  nextPlan?: true
+  blockers?: true
+  needs?: true
   progressAmount?: true
+  createdById?: true
+  contractorId?: true
+  contractId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -111,7 +146,14 @@ export type BoardResolutionProgressReportCountAggregateInputType = {
   title?: true
   category?: true
   body?: true
+  actionsDone?: true
+  nextPlan?: true
+  blockers?: true
+  needs?: true
   progressAmount?: true
+  createdById?: true
+  contractorId?: true
+  contractId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -210,7 +252,14 @@ export type BoardResolutionProgressReportGroupByOutputType = {
   title: string
   category: string | null
   body: string | null
+  actionsDone: string | null
+  nextPlan: string | null
+  blockers: string | null
+  needs: string | null
   progressAmount: number
+  createdById: string | null
+  contractorId: string | null
+  contractId: string | null
   createdAt: Date
   updatedAt: Date
   _count: BoardResolutionProgressReportCountAggregateOutputType | null
@@ -245,10 +294,20 @@ export type BoardResolutionProgressReportWhereInput = {
   title?: Prisma.StringFilter<"BoardResolutionProgressReport"> | string
   category?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
   body?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  actionsDone?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  nextPlan?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  blockers?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  needs?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
   progressAmount?: Prisma.IntFilter<"BoardResolutionProgressReport"> | number
+  createdById?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  contractorId?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  contractId?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
   resolution?: Prisma.XOR<Prisma.BoardMinutesResolutionScalarRelationFilter, Prisma.BoardMinutesResolutionWhereInput>
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  contractor?: Prisma.XOR<Prisma.ProjectContractorNullableScalarRelationFilter, Prisma.ProjectContractorWhereInput> | null
+  contract?: Prisma.XOR<Prisma.BoardResolutionContractNullableScalarRelationFilter, Prisma.BoardResolutionContractWhereInput> | null
 }
 
 export type BoardResolutionProgressReportOrderByWithRelationInput = {
@@ -258,10 +317,20 @@ export type BoardResolutionProgressReportOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   category?: Prisma.SortOrderInput | Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
+  actionsDone?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextPlan?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockers?: Prisma.SortOrderInput | Prisma.SortOrder
+  needs?: Prisma.SortOrderInput | Prisma.SortOrder
   progressAmount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
+  contractorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  contractId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   resolution?: Prisma.BoardMinutesResolutionOrderByWithRelationInput
+  createdBy?: Prisma.UserOrderByWithRelationInput
+  contractor?: Prisma.ProjectContractorOrderByWithRelationInput
+  contract?: Prisma.BoardResolutionContractOrderByWithRelationInput
 }
 
 export type BoardResolutionProgressReportWhereUniqueInput = Prisma.AtLeast<{
@@ -274,10 +343,20 @@ export type BoardResolutionProgressReportWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"BoardResolutionProgressReport"> | string
   category?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
   body?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  actionsDone?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  nextPlan?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  blockers?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  needs?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
   progressAmount?: Prisma.IntFilter<"BoardResolutionProgressReport"> | number
+  createdById?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  contractorId?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  contractId?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
   resolution?: Prisma.XOR<Prisma.BoardMinutesResolutionScalarRelationFilter, Prisma.BoardMinutesResolutionWhereInput>
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  contractor?: Prisma.XOR<Prisma.ProjectContractorNullableScalarRelationFilter, Prisma.ProjectContractorWhereInput> | null
+  contract?: Prisma.XOR<Prisma.BoardResolutionContractNullableScalarRelationFilter, Prisma.BoardResolutionContractWhereInput> | null
 }, "id">
 
 export type BoardResolutionProgressReportOrderByWithAggregationInput = {
@@ -287,7 +366,14 @@ export type BoardResolutionProgressReportOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   category?: Prisma.SortOrderInput | Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
+  actionsDone?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextPlan?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockers?: Prisma.SortOrderInput | Prisma.SortOrder
+  needs?: Prisma.SortOrderInput | Prisma.SortOrder
   progressAmount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
+  contractorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  contractId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BoardResolutionProgressReportCountOrderByAggregateInput
@@ -307,7 +393,14 @@ export type BoardResolutionProgressReportScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"BoardResolutionProgressReport"> | string
   category?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
   body?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
+  actionsDone?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
+  nextPlan?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
+  blockers?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
+  needs?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
   progressAmount?: Prisma.IntWithAggregatesFilter<"BoardResolutionProgressReport"> | number
+  createdById?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
+  contractorId?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
+  contractId?: Prisma.StringNullableWithAggregatesFilter<"BoardResolutionProgressReport"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BoardResolutionProgressReport"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BoardResolutionProgressReport"> | Date | string
 }
@@ -318,10 +411,17 @@ export type BoardResolutionProgressReportCreateInput = {
   title: string
   category?: string | null
   body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
   progressAmount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   resolution: Prisma.BoardMinutesResolutionCreateNestedOneWithoutProgressReportsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutBoardResolutionProgressReportsInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutBoardResolutionProgressReportsInput
+  contract?: Prisma.BoardResolutionContractCreateNestedOneWithoutProgressReportsInput
 }
 
 export type BoardResolutionProgressReportUncheckedCreateInput = {
@@ -331,7 +431,14 @@ export type BoardResolutionProgressReportUncheckedCreateInput = {
   title: string
   category?: string | null
   body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
   progressAmount?: number
+  createdById?: string | null
+  contractorId?: string | null
+  contractId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -342,10 +449,17 @@ export type BoardResolutionProgressReportUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolution?: Prisma.BoardMinutesResolutionUpdateOneRequiredWithoutProgressReportsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutBoardResolutionProgressReportsNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutBoardResolutionProgressReportsNestedInput
+  contract?: Prisma.BoardResolutionContractUpdateOneWithoutProgressReportsNestedInput
 }
 
 export type BoardResolutionProgressReportUncheckedUpdateInput = {
@@ -355,7 +469,14 @@ export type BoardResolutionProgressReportUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -367,7 +488,14 @@ export type BoardResolutionProgressReportCreateManyInput = {
   title: string
   category?: string | null
   body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
   progressAmount?: number
+  createdById?: string | null
+  contractorId?: string | null
+  contractId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -378,6 +506,10 @@ export type BoardResolutionProgressReportUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -390,7 +522,14 @@ export type BoardResolutionProgressReportUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -412,7 +551,14 @@ export type BoardResolutionProgressReportCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   category?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  actionsDone?: Prisma.SortOrder
+  nextPlan?: Prisma.SortOrder
+  blockers?: Prisma.SortOrder
+  needs?: Prisma.SortOrder
   progressAmount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  contractorId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -428,7 +574,14 @@ export type BoardResolutionProgressReportMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   category?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  actionsDone?: Prisma.SortOrder
+  nextPlan?: Prisma.SortOrder
+  blockers?: Prisma.SortOrder
+  needs?: Prisma.SortOrder
   progressAmount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  contractorId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -440,13 +593,104 @@ export type BoardResolutionProgressReportMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   category?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  actionsDone?: Prisma.SortOrder
+  nextPlan?: Prisma.SortOrder
+  blockers?: Prisma.SortOrder
+  needs?: Prisma.SortOrder
   progressAmount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  contractorId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type BoardResolutionProgressReportSumOrderByAggregateInput = {
   progressAmount?: Prisma.SortOrder
+}
+
+export type BoardResolutionProgressReportCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput> | Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyCreatedByInputEnvelope
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+}
+
+export type BoardResolutionProgressReportUncheckedCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput> | Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyCreatedByInputEnvelope
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+}
+
+export type BoardResolutionProgressReportUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput> | Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyCreatedByInputEnvelope
+  set?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  disconnect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  delete?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  update?: Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutCreatedByInput | Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput> | Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyCreatedByInputEnvelope
+  set?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  disconnect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  delete?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  update?: Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutCreatedByInput | Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
+}
+
+export type BoardResolutionProgressReportCreateNestedManyWithoutContractorInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractorInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput> | Prisma.BoardResolutionProgressReportCreateWithoutContractorInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractorInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractorInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyContractorInputEnvelope
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+}
+
+export type BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractorInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractorInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput> | Prisma.BoardResolutionProgressReportCreateWithoutContractorInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractorInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractorInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyContractorInputEnvelope
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+}
+
+export type BoardResolutionProgressReportUpdateManyWithoutContractorNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractorInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput> | Prisma.BoardResolutionProgressReportCreateWithoutContractorInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractorInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractorInput[]
+  upsert?: Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractorInput | Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractorInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyContractorInputEnvelope
+  set?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  disconnect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  delete?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  update?: Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractorInput | Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractorInput[]
+  updateMany?: Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutContractorInput | Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutContractorInput[]
+  deleteMany?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractorInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput> | Prisma.BoardResolutionProgressReportCreateWithoutContractorInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractorInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractorInput[]
+  upsert?: Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractorInput | Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractorInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyContractorInputEnvelope
+  set?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  disconnect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  delete?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  update?: Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractorInput | Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractorInput[]
+  updateMany?: Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutContractorInput | Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutContractorInput[]
+  deleteMany?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
 }
 
 export type BoardResolutionProgressReportCreateNestedManyWithoutResolutionInput = {
@@ -491,15 +735,210 @@ export type BoardResolutionProgressReportUncheckedUpdateManyWithoutResolutionNes
   deleteMany?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
 }
 
+export type BoardResolutionProgressReportCreateNestedManyWithoutContractInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput> | Prisma.BoardResolutionProgressReportCreateWithoutContractInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyContractInputEnvelope
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+}
+
+export type BoardResolutionProgressReportUncheckedCreateNestedManyWithoutContractInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput> | Prisma.BoardResolutionProgressReportCreateWithoutContractInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyContractInputEnvelope
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+}
+
+export type BoardResolutionProgressReportUpdateManyWithoutContractNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput> | Prisma.BoardResolutionProgressReportCreateWithoutContractInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractInput[]
+  upsert?: Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractInput | Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyContractInputEnvelope
+  set?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  disconnect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  delete?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  update?: Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractInput | Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractInput[]
+  updateMany?: Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutContractInput | Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutContractInput[]
+  deleteMany?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateManyWithoutContractNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput> | Prisma.BoardResolutionProgressReportCreateWithoutContractInput[] | Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput[]
+  connectOrCreate?: Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractInput | Prisma.BoardResolutionProgressReportCreateOrConnectWithoutContractInput[]
+  upsert?: Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractInput | Prisma.BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractInput[]
+  createMany?: Prisma.BoardResolutionProgressReportCreateManyContractInputEnvelope
+  set?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  disconnect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  delete?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  connect?: Prisma.BoardResolutionProgressReportWhereUniqueInput | Prisma.BoardResolutionProgressReportWhereUniqueInput[]
+  update?: Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractInput | Prisma.BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractInput[]
+  updateMany?: Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutContractInput | Prisma.BoardResolutionProgressReportUpdateManyWithWhereWithoutContractInput[]
+  deleteMany?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
+}
+
+export type BoardResolutionProgressReportCreateWithoutCreatedByInput = {
+  id?: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolution: Prisma.BoardMinutesResolutionCreateNestedOneWithoutProgressReportsInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutBoardResolutionProgressReportsInput
+  contract?: Prisma.BoardResolutionContractCreateNestedOneWithoutProgressReportsInput
+}
+
+export type BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput = {
+  id?: string
+  resolutionId: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  contractorId?: string | null
+  contractId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BoardResolutionProgressReportCreateOrConnectWithoutCreatedByInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput>
+}
+
+export type BoardResolutionProgressReportCreateManyCreatedByInputEnvelope = {
+  data: Prisma.BoardResolutionProgressReportCreateManyCreatedByInput | Prisma.BoardResolutionProgressReportCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type BoardResolutionProgressReportUpsertWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateWithoutCreatedByInput, Prisma.BoardResolutionProgressReportUncheckedUpdateWithoutCreatedByInput>
+  create: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutCreatedByInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutCreatedByInput>
+}
+
+export type BoardResolutionProgressReportUpdateWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateWithoutCreatedByInput, Prisma.BoardResolutionProgressReportUncheckedUpdateWithoutCreatedByInput>
+}
+
+export type BoardResolutionProgressReportUpdateManyWithWhereWithoutCreatedByInput = {
+  where: Prisma.BoardResolutionProgressReportScalarWhereInput
+  data: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateManyMutationInput, Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByInput>
+}
+
+export type BoardResolutionProgressReportScalarWhereInput = {
+  AND?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
+  OR?: Prisma.BoardResolutionProgressReportScalarWhereInput[]
+  NOT?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
+  id?: Prisma.StringFilter<"BoardResolutionProgressReport"> | string
+  resolutionId?: Prisma.StringFilter<"BoardResolutionProgressReport"> | string
+  reportedAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
+  title?: Prisma.StringFilter<"BoardResolutionProgressReport"> | string
+  category?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  body?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  actionsDone?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  nextPlan?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  blockers?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  needs?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  progressAmount?: Prisma.IntFilter<"BoardResolutionProgressReport"> | number
+  createdById?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  contractorId?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  contractId?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
+}
+
+export type BoardResolutionProgressReportCreateWithoutContractorInput = {
+  id?: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolution: Prisma.BoardMinutesResolutionCreateNestedOneWithoutProgressReportsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutBoardResolutionProgressReportsInput
+  contract?: Prisma.BoardResolutionContractCreateNestedOneWithoutProgressReportsInput
+}
+
+export type BoardResolutionProgressReportUncheckedCreateWithoutContractorInput = {
+  id?: string
+  resolutionId: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  createdById?: string | null
+  contractId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BoardResolutionProgressReportCreateOrConnectWithoutContractorInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractorInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput>
+}
+
+export type BoardResolutionProgressReportCreateManyContractorInputEnvelope = {
+  data: Prisma.BoardResolutionProgressReportCreateManyContractorInput | Prisma.BoardResolutionProgressReportCreateManyContractorInput[]
+  skipDuplicates?: boolean
+}
+
+export type BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractorInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateWithoutContractorInput, Prisma.BoardResolutionProgressReportUncheckedUpdateWithoutContractorInput>
+  create: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractorInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractorInput>
+}
+
+export type BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractorInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateWithoutContractorInput, Prisma.BoardResolutionProgressReportUncheckedUpdateWithoutContractorInput>
+}
+
+export type BoardResolutionProgressReportUpdateManyWithWhereWithoutContractorInput = {
+  where: Prisma.BoardResolutionProgressReportScalarWhereInput
+  data: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateManyMutationInput, Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorInput>
+}
+
 export type BoardResolutionProgressReportCreateWithoutResolutionInput = {
   id?: string
   reportedAt: Date | string
   title: string
   category?: string | null
   body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
   progressAmount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  createdBy?: Prisma.UserCreateNestedOneWithoutBoardResolutionProgressReportsInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutBoardResolutionProgressReportsInput
+  contract?: Prisma.BoardResolutionContractCreateNestedOneWithoutProgressReportsInput
 }
 
 export type BoardResolutionProgressReportUncheckedCreateWithoutResolutionInput = {
@@ -508,7 +947,14 @@ export type BoardResolutionProgressReportUncheckedCreateWithoutResolutionInput =
   title: string
   category?: string | null
   body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
   progressAmount?: number
+  createdById?: string | null
+  contractorId?: string | null
+  contractId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -539,19 +985,210 @@ export type BoardResolutionProgressReportUpdateManyWithWhereWithoutResolutionInp
   data: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateManyMutationInput, Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutResolutionInput>
 }
 
-export type BoardResolutionProgressReportScalarWhereInput = {
-  AND?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
-  OR?: Prisma.BoardResolutionProgressReportScalarWhereInput[]
-  NOT?: Prisma.BoardResolutionProgressReportScalarWhereInput | Prisma.BoardResolutionProgressReportScalarWhereInput[]
-  id?: Prisma.StringFilter<"BoardResolutionProgressReport"> | string
-  resolutionId?: Prisma.StringFilter<"BoardResolutionProgressReport"> | string
-  reportedAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
-  title?: Prisma.StringFilter<"BoardResolutionProgressReport"> | string
-  category?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
-  body?: Prisma.StringNullableFilter<"BoardResolutionProgressReport"> | string | null
-  progressAmount?: Prisma.IntFilter<"BoardResolutionProgressReport"> | number
-  createdAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"BoardResolutionProgressReport"> | Date | string
+export type BoardResolutionProgressReportCreateWithoutContractInput = {
+  id?: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  resolution: Prisma.BoardMinutesResolutionCreateNestedOneWithoutProgressReportsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutBoardResolutionProgressReportsInput
+  contractor?: Prisma.ProjectContractorCreateNestedOneWithoutBoardResolutionProgressReportsInput
+}
+
+export type BoardResolutionProgressReportUncheckedCreateWithoutContractInput = {
+  id?: string
+  resolutionId: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  createdById?: string | null
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BoardResolutionProgressReportCreateOrConnectWithoutContractInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput>
+}
+
+export type BoardResolutionProgressReportCreateManyContractInputEnvelope = {
+  data: Prisma.BoardResolutionProgressReportCreateManyContractInput | Prisma.BoardResolutionProgressReportCreateManyContractInput[]
+  skipDuplicates?: boolean
+}
+
+export type BoardResolutionProgressReportUpsertWithWhereUniqueWithoutContractInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateWithoutContractInput, Prisma.BoardResolutionProgressReportUncheckedUpdateWithoutContractInput>
+  create: Prisma.XOR<Prisma.BoardResolutionProgressReportCreateWithoutContractInput, Prisma.BoardResolutionProgressReportUncheckedCreateWithoutContractInput>
+}
+
+export type BoardResolutionProgressReportUpdateWithWhereUniqueWithoutContractInput = {
+  where: Prisma.BoardResolutionProgressReportWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateWithoutContractInput, Prisma.BoardResolutionProgressReportUncheckedUpdateWithoutContractInput>
+}
+
+export type BoardResolutionProgressReportUpdateManyWithWhereWithoutContractInput = {
+  where: Prisma.BoardResolutionProgressReportScalarWhereInput
+  data: Prisma.XOR<Prisma.BoardResolutionProgressReportUpdateManyMutationInput, Prisma.BoardResolutionProgressReportUncheckedUpdateManyWithoutContractInput>
+}
+
+export type BoardResolutionProgressReportCreateManyCreatedByInput = {
+  id?: string
+  resolutionId: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  contractorId?: string | null
+  contractId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BoardResolutionProgressReportUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.BoardMinutesResolutionUpdateOneRequiredWithoutProgressReportsNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutBoardResolutionProgressReportsNestedInput
+  contract?: Prisma.BoardResolutionContractUpdateOneWithoutProgressReportsNestedInput
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  resolutionId?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  resolutionId?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardResolutionProgressReportCreateManyContractorInput = {
+  id?: string
+  resolutionId: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  createdById?: string | null
+  contractId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BoardResolutionProgressReportUpdateWithoutContractorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.BoardMinutesResolutionUpdateOneRequiredWithoutProgressReportsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutBoardResolutionProgressReportsNestedInput
+  contract?: Prisma.BoardResolutionContractUpdateOneWithoutProgressReportsNestedInput
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateWithoutContractorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  resolutionId?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateManyWithoutContractorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  resolutionId?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BoardResolutionProgressReportCreateManyResolutionInput = {
@@ -560,7 +1197,14 @@ export type BoardResolutionProgressReportCreateManyResolutionInput = {
   title: string
   category?: string | null
   body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
   progressAmount?: number
+  createdById?: string | null
+  contractorId?: string | null
+  contractId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -571,9 +1215,16 @@ export type BoardResolutionProgressReportUpdateWithoutResolutionInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.UserUpdateOneWithoutBoardResolutionProgressReportsNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutBoardResolutionProgressReportsNestedInput
+  contract?: Prisma.BoardResolutionContractUpdateOneWithoutProgressReportsNestedInput
 }
 
 export type BoardResolutionProgressReportUncheckedUpdateWithoutResolutionInput = {
@@ -582,7 +1233,14 @@ export type BoardResolutionProgressReportUncheckedUpdateWithoutResolutionInput =
   title?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -593,7 +1251,86 @@ export type BoardResolutionProgressReportUncheckedUpdateManyWithoutResolutionInp
   title?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardResolutionProgressReportCreateManyContractInput = {
+  id?: string
+  resolutionId: string
+  reportedAt: Date | string
+  title: string
+  category?: string | null
+  body?: string | null
+  actionsDone?: string | null
+  nextPlan?: string | null
+  blockers?: string | null
+  needs?: string | null
+  progressAmount?: number
+  createdById?: string | null
+  contractorId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BoardResolutionProgressReportUpdateWithoutContractInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resolution?: Prisma.BoardMinutesResolutionUpdateOneRequiredWithoutProgressReportsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutBoardResolutionProgressReportsNestedInput
+  contractor?: Prisma.ProjectContractorUpdateOneWithoutBoardResolutionProgressReportsNestedInput
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateWithoutContractInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  resolutionId?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BoardResolutionProgressReportUncheckedUpdateManyWithoutContractInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  resolutionId?: Prisma.StringFieldUpdateOperationsInput | string
+  reportedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionsDone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextPlan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockers?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  needs?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  progressAmount?: Prisma.IntFieldUpdateOperationsInput | number
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contractorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -607,10 +1344,20 @@ export type BoardResolutionProgressReportSelect<ExtArgs extends runtime.Types.Ex
   title?: boolean
   category?: boolean
   body?: boolean
+  actionsDone?: boolean
+  nextPlan?: boolean
+  blockers?: boolean
+  needs?: boolean
   progressAmount?: boolean
+  createdById?: boolean
+  contractorId?: boolean
+  contractId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   resolution?: boolean | Prisma.BoardMinutesResolutionDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.BoardResolutionProgressReport$createdByArgs<ExtArgs>
+  contractor?: boolean | Prisma.BoardResolutionProgressReport$contractorArgs<ExtArgs>
+  contract?: boolean | Prisma.BoardResolutionProgressReport$contractArgs<ExtArgs>
 }, ExtArgs["result"]["boardResolutionProgressReport"]>
 
 export type BoardResolutionProgressReportSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -620,10 +1367,20 @@ export type BoardResolutionProgressReportSelectCreateManyAndReturn<ExtArgs exten
   title?: boolean
   category?: boolean
   body?: boolean
+  actionsDone?: boolean
+  nextPlan?: boolean
+  blockers?: boolean
+  needs?: boolean
   progressAmount?: boolean
+  createdById?: boolean
+  contractorId?: boolean
+  contractId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   resolution?: boolean | Prisma.BoardMinutesResolutionDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.BoardResolutionProgressReport$createdByArgs<ExtArgs>
+  contractor?: boolean | Prisma.BoardResolutionProgressReport$contractorArgs<ExtArgs>
+  contract?: boolean | Prisma.BoardResolutionProgressReport$contractArgs<ExtArgs>
 }, ExtArgs["result"]["boardResolutionProgressReport"]>
 
 export type BoardResolutionProgressReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -633,10 +1390,20 @@ export type BoardResolutionProgressReportSelectUpdateManyAndReturn<ExtArgs exten
   title?: boolean
   category?: boolean
   body?: boolean
+  actionsDone?: boolean
+  nextPlan?: boolean
+  blockers?: boolean
+  needs?: boolean
   progressAmount?: boolean
+  createdById?: boolean
+  contractorId?: boolean
+  contractId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   resolution?: boolean | Prisma.BoardMinutesResolutionDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.BoardResolutionProgressReport$createdByArgs<ExtArgs>
+  contractor?: boolean | Prisma.BoardResolutionProgressReport$contractorArgs<ExtArgs>
+  contract?: boolean | Prisma.BoardResolutionProgressReport$contractArgs<ExtArgs>
 }, ExtArgs["result"]["boardResolutionProgressReport"]>
 
 export type BoardResolutionProgressReportSelectScalar = {
@@ -646,26 +1413,45 @@ export type BoardResolutionProgressReportSelectScalar = {
   title?: boolean
   category?: boolean
   body?: boolean
+  actionsDone?: boolean
+  nextPlan?: boolean
+  blockers?: boolean
+  needs?: boolean
   progressAmount?: boolean
+  createdById?: boolean
+  contractorId?: boolean
+  contractId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BoardResolutionProgressReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "resolutionId" | "reportedAt" | "title" | "category" | "body" | "progressAmount" | "createdAt" | "updatedAt", ExtArgs["result"]["boardResolutionProgressReport"]>
+export type BoardResolutionProgressReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "resolutionId" | "reportedAt" | "title" | "category" | "body" | "actionsDone" | "nextPlan" | "blockers" | "needs" | "progressAmount" | "createdById" | "contractorId" | "contractId" | "createdAt" | "updatedAt", ExtArgs["result"]["boardResolutionProgressReport"]>
 export type BoardResolutionProgressReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resolution?: boolean | Prisma.BoardMinutesResolutionDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.BoardResolutionProgressReport$createdByArgs<ExtArgs>
+  contractor?: boolean | Prisma.BoardResolutionProgressReport$contractorArgs<ExtArgs>
+  contract?: boolean | Prisma.BoardResolutionProgressReport$contractArgs<ExtArgs>
 }
 export type BoardResolutionProgressReportIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resolution?: boolean | Prisma.BoardMinutesResolutionDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.BoardResolutionProgressReport$createdByArgs<ExtArgs>
+  contractor?: boolean | Prisma.BoardResolutionProgressReport$contractorArgs<ExtArgs>
+  contract?: boolean | Prisma.BoardResolutionProgressReport$contractArgs<ExtArgs>
 }
 export type BoardResolutionProgressReportIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resolution?: boolean | Prisma.BoardMinutesResolutionDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.BoardResolutionProgressReport$createdByArgs<ExtArgs>
+  contractor?: boolean | Prisma.BoardResolutionProgressReport$contractorArgs<ExtArgs>
+  contract?: boolean | Prisma.BoardResolutionProgressReport$contractArgs<ExtArgs>
 }
 
 export type $BoardResolutionProgressReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BoardResolutionProgressReport"
   objects: {
     resolution: Prisma.$BoardMinutesResolutionPayload<ExtArgs>
+    createdBy: Prisma.$UserPayload<ExtArgs> | null
+    contractor: Prisma.$ProjectContractorPayload<ExtArgs> | null
+    contract: Prisma.$BoardResolutionContractPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -674,7 +1460,14 @@ export type $BoardResolutionProgressReportPayload<ExtArgs extends runtime.Types.
     title: string
     category: string | null
     body: string | null
+    actionsDone: string | null
+    nextPlan: string | null
+    blockers: string | null
+    needs: string | null
     progressAmount: number
+    createdById: string | null
+    contractorId: string | null
+    contractId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["boardResolutionProgressReport"]>
@@ -1072,6 +1865,9 @@ readonly fields: BoardResolutionProgressReportFieldRefs;
 export interface Prisma__BoardResolutionProgressReportClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   resolution<T extends Prisma.BoardMinutesResolutionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardMinutesResolutionDefaultArgs<ExtArgs>>): Prisma.Prisma__BoardMinutesResolutionClient<runtime.Types.Result.GetResult<Prisma.$BoardMinutesResolutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.BoardResolutionProgressReport$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardResolutionProgressReport$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  contractor<T extends Prisma.BoardResolutionProgressReport$contractorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardResolutionProgressReport$contractorArgs<ExtArgs>>): Prisma.Prisma__ProjectContractorClient<runtime.Types.Result.GetResult<Prisma.$ProjectContractorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  contract<T extends Prisma.BoardResolutionProgressReport$contractArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardResolutionProgressReport$contractArgs<ExtArgs>>): Prisma.Prisma__BoardResolutionContractClient<runtime.Types.Result.GetResult<Prisma.$BoardResolutionContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1107,7 +1903,14 @@ export interface BoardResolutionProgressReportFieldRefs {
   readonly title: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
   readonly category: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
   readonly body: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
+  readonly actionsDone: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
+  readonly nextPlan: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
+  readonly blockers: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
+  readonly needs: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
   readonly progressAmount: Prisma.FieldRef<"BoardResolutionProgressReport", 'Int'>
+  readonly createdById: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
+  readonly contractorId: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
+  readonly contractId: Prisma.FieldRef<"BoardResolutionProgressReport", 'String'>
   readonly createdAt: Prisma.FieldRef<"BoardResolutionProgressReport", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"BoardResolutionProgressReport", 'DateTime'>
 }
@@ -1508,6 +2311,63 @@ export type BoardResolutionProgressReportDeleteManyArgs<ExtArgs extends runtime.
    * Limit how many BoardResolutionProgressReports to delete.
    */
   limit?: number
+}
+
+/**
+ * BoardResolutionProgressReport.createdBy
+ */
+export type BoardResolutionProgressReport$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * BoardResolutionProgressReport.contractor
+ */
+export type BoardResolutionProgressReport$contractorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectContractor
+   */
+  select?: Prisma.ProjectContractorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectContractor
+   */
+  omit?: Prisma.ProjectContractorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectContractorInclude<ExtArgs> | null
+  where?: Prisma.ProjectContractorWhereInput
+}
+
+/**
+ * BoardResolutionProgressReport.contract
+ */
+export type BoardResolutionProgressReport$contractArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardResolutionContract
+   */
+  select?: Prisma.BoardResolutionContractSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardResolutionContract
+   */
+  omit?: Prisma.BoardResolutionContractOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardResolutionContractInclude<ExtArgs> | null
+  where?: Prisma.BoardResolutionContractWhereInput
 }
 
 /**

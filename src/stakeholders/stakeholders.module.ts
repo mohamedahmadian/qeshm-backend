@@ -7,6 +7,8 @@ import {
   StakeholderProgressController,
   StakeholderProjectsController,
   StakeholderReportsController,
+  StakeholderResolutionContractsController,
+  StakeholderResolutionProgressController,
 } from './stakeholders.controller';
 import { StakeholdersService } from './stakeholders.service';
 
@@ -16,6 +18,8 @@ import { StakeholdersService } from './stakeholders.service';
     StakeholderProjectsController,
     StakeholderProgressController,
     StakeholderReportsController,
+    StakeholderResolutionContractsController,
+    StakeholderResolutionProgressController,
     StakeholderCorrespondenceController,
     StakeholderInboxController,
   ],

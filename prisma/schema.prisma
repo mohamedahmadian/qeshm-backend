@@ -339,6 +339,7 @@ model User {
   contractorId               String?
   contractor                 ProjectContractor?          @relation("ContractorPortalUsers", fields: [contractorId], references: [id], onDelete: Restrict)
   stakeholderReports         StakeholderProgressReport[]
+  boardResolutionProgressReports BoardResolutionProgressReport[] @relation("BoardResolutionProgressAuthor")
   stakeholderCorrespondences StakeholderCorrespondence[] @relation("StakeholderCorrespondenceAuthor")
   stakeholderMessages        StakeholderMessage[]
   boardRequestsCreated       BoardRequest[]              @relation("BoardRequestAuthor")
@@ -612,10 +613,11 @@ model StoredFile {
   progressEntries         ProjectProgressEntry[]
   singardAttachments      SingardAttachment[]
   inspectionAttachments   InspectionAttachment[]
-  boardAttachments        BoardAttachment[]
-  boardMinutesAttachments BoardMinutesAttachment[]
-  portSalesReports        PortSalesReport[]
-  stakeholderAttachments  StakeholderAttachment[]
+  boardAttachments           BoardAttachment[]
+  boardMinutesAttachments    BoardMinutesAttachment[]
+  boardResolutionContracts   BoardResolutionContract[]
+  portSalesReports           PortSalesReport[]
+  stakeholderAttachments     StakeholderAttachment[]
 
   @@map("stored_files")
 }
@@ -697,6 +699,8 @@ model ProjectContractor {
   portalUsers                User[]                      @relation("ContractorPortalUsers")
   stakeholderReports         StakeholderProgressReport[]
   stakeholderCorrespondences StakeholderCorrespondence[]
+  boardResolutionContracts   BoardResolutionContract[]
+  boardResolutionProgressReports BoardResolutionProgressReport[]
   createdAt                  DateTime                    @default(now())
   updatedAt                  DateTime                    @updatedAt
 
@@ -1464,6 +1468,7 @@ model BoardRequest {
   rejectedBy               User?              @relation("BoardRequestRejecter", fields: [rejectedById], references: [id], onDelete: SetNull)
   attachments              BoardAttachment[]
   minutesRequests          BoardMinutesRequest[]
+  resolutions              BoardMinutesResolution[]
   createdAt                DateTime           @default(now())
   updatedAt                DateTime           @updatedAt
 
@@ -1573,6 +1578,31 @@ enum BoardResolutionProposerKind {
   UNIT
 }
 
+enum BoardResolutionContractKind {
+  CONTRACTING
+  GOODS_EQUIPMENT
+  SERVICES
+  CONSULTING
+  DESIGN_ENGINEERING
+  INFORMATION_TECHNOLOGY
+  LEASE
+  PARTNERSHIP
+  INVESTMENT
+  OPERATION
+  SUPPLY
+  TRANSPORT
+  MARKETING
+  OTHER
+}
+
+enum BoardResolutionContractStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  TERMINATED
+  SUSPENDED
+}
+
 enum BoardMinutesStatus {
   NOT_HELD
   HELD
@@ -1665,6 +1695,8 @@ model BoardMinutesResolution {
   id              String                      @id @default(uuid())
   minutesId       String
   minutes         BoardMinutes                @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  requestId       String?
+  request         BoardRequest?               @relation(fields: [requestId], references: [id], onDelete: SetNull)
   title           String
   description     String?
   status          BoardResolutionStatus       @default(NOT_NOTIFIED)
@@ -1680,10 +1712,12 @@ model BoardMinutesResolution {
   notes           String?
   signatories     BoardResolutionSignatory[]
   progressReports BoardResolutionProgressReport[]
+  contracts       BoardResolutionContract[]
   createdAt       DateTime                    @default(now())
   updatedAt       DateTime                    @updatedAt
 
   @@index([minutesId])
+  @@index([requestId])
   @@index([status])
   @@index([dueKind])
   @@index([dueDate])
@@ -1728,21 +1762,66 @@ model BoardResolutionSignatory {
 }
 
 model BoardResolutionProgressReport {
-  id             String                 @id @default(uuid())
+  id             String                   @id @default(uuid())
   resolutionId   String
-  resolution     BoardMinutesResolution @relation(fields: [resolutionId], references: [id], onDelete: Cascade)
-  reportedAt     DateTime               @db.Date
+  resolution     BoardMinutesResolution   @relation(fields: [resolutionId], references: [id], onDelete: Cascade)
+  reportedAt     DateTime                 @db.Date
   title          String
   category       String?
   body           String?
-  progressAmount Int                    @default(0)
-  createdAt      DateTime               @default(now())
-  updatedAt      DateTime               @updatedAt
+  actionsDone    String?
+  nextPlan       String?
+  blockers       String?
+  needs          String?
+  progressAmount Int                      @default(0)
+  createdById    String?
+  createdBy      User?                    @relation("BoardResolutionProgressAuthor", fields: [createdById], references: [id], onDelete: SetNull)
+  contractorId   String?
+  contractor     ProjectContractor?       @relation(fields: [contractorId], references: [id], onDelete: SetNull)
+  contractId     String?
+  contract       BoardResolutionContract? @relation(fields: [contractId], references: [id], onDelete: SetNull)
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
 
   @@index([resolutionId, reportedAt])
   @@index([resolutionId, createdAt])
   @@index([title])
+  @@index([createdById])
+  @@index([contractorId])
+  @@index([contractId])
   @@map("board_resolution_progress_reports")
+}
+
+model BoardResolutionContract {
+  id           String                         @id @default(uuid())
+  resolutionId String
+  resolution   BoardMinutesResolution         @relation(fields: [resolutionId], references: [id], onDelete: Cascade)
+  title        String
+  contractNo   String?
+  contractorId String?
+  contractor   ProjectContractor?             @relation(fields: [contractorId], references: [id], onDelete: SetNull)
+  kind         BoardResolutionContractKind?
+  kindOther    String?
+  amount       Decimal?                       @db.Decimal(18, 0)
+  signedAt     DateTime?                      @db.Date
+  duration     String?
+  startDate    DateTime?                      @db.Date
+  endDate      DateTime?                      @db.Date
+  status       BoardResolutionContractStatus?
+  paidAmount   Decimal?                       @db.Decimal(18, 0)
+  supervisor   String?
+  fileId       String?
+  file         StoredFile?                    @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  notes        String?
+  progressReports BoardResolutionProgressReport[]
+  createdAt    DateTime                       @default(now())
+  updatedAt    DateTime                       @updatedAt
+
+  @@index([resolutionId, createdAt])
+  @@index([title])
+  @@index([fileId])
+  @@index([contractorId])
+  @@map("board_resolution_contracts")
 }
 
 model PortSalesReport {

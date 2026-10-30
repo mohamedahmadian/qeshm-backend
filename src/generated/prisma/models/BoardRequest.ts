@@ -534,6 +534,7 @@ export type BoardRequestWhereInput = {
   rejectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   attachments?: Prisma.BoardAttachmentListRelationFilter
   minutesRequests?: Prisma.BoardMinutesRequestListRelationFilter
+  resolutions?: Prisma.BoardMinutesResolutionListRelationFilter
 }
 
 export type BoardRequestOrderByWithRelationInput = {
@@ -590,6 +591,7 @@ export type BoardRequestOrderByWithRelationInput = {
   rejectedBy?: Prisma.UserOrderByWithRelationInput
   attachments?: Prisma.BoardAttachmentOrderByRelationAggregateInput
   minutesRequests?: Prisma.BoardMinutesRequestOrderByRelationAggregateInput
+  resolutions?: Prisma.BoardMinutesResolutionOrderByRelationAggregateInput
 }
 
 export type BoardRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -650,6 +652,7 @@ export type BoardRequestWhereUniqueInput = Prisma.AtLeast<{
   rejectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   attachments?: Prisma.BoardAttachmentListRelationFilter
   minutesRequests?: Prisma.BoardMinutesRequestListRelationFilter
+  resolutions?: Prisma.BoardMinutesResolutionListRelationFilter
 }, "id" | "trackingNo" | "trackingYear_trackingSeq">
 
 export type BoardRequestOrderByWithAggregationInput = {
@@ -798,6 +801,7 @@ export type BoardRequestCreateInput = {
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateInput = {
@@ -846,6 +850,7 @@ export type BoardRequestUncheckedCreateInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUpdateInput = {
@@ -894,6 +899,7 @@ export type BoardRequestUpdateInput = {
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateInput = {
@@ -942,6 +948,7 @@ export type BoardRequestUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestCreateManyInput = {
@@ -1240,6 +1247,11 @@ export type BoardRequestSumOrderByAggregateInput = {
 export type BoardRequestScalarRelationFilter = {
   is?: Prisma.BoardRequestWhereInput
   isNot?: Prisma.BoardRequestWhereInput
+}
+
+export type BoardRequestNullableScalarRelationFilter = {
+  is?: Prisma.BoardRequestWhereInput | null
+  isNot?: Prisma.BoardRequestWhereInput | null
 }
 
 export type BoardRequestCreateNestedManyWithoutCreatedByInput = {
@@ -1618,6 +1630,22 @@ export type BoardRequestUpdateOneRequiredWithoutMinutesRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BoardRequestUpdateToOneWithWhereWithoutMinutesRequestsInput, Prisma.BoardRequestUpdateWithoutMinutesRequestsInput>, Prisma.BoardRequestUncheckedUpdateWithoutMinutesRequestsInput>
 }
 
+export type BoardRequestCreateNestedOneWithoutResolutionsInput = {
+  create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutResolutionsInput, Prisma.BoardRequestUncheckedCreateWithoutResolutionsInput>
+  connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutResolutionsInput
+  connect?: Prisma.BoardRequestWhereUniqueInput
+}
+
+export type BoardRequestUpdateOneWithoutResolutionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BoardRequestCreateWithoutResolutionsInput, Prisma.BoardRequestUncheckedCreateWithoutResolutionsInput>
+  connectOrCreate?: Prisma.BoardRequestCreateOrConnectWithoutResolutionsInput
+  upsert?: Prisma.BoardRequestUpsertWithoutResolutionsInput
+  disconnect?: Prisma.BoardRequestWhereInput | boolean
+  delete?: Prisma.BoardRequestWhereInput | boolean
+  connect?: Prisma.BoardRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoardRequestUpdateToOneWithWhereWithoutResolutionsInput, Prisma.BoardRequestUpdateWithoutResolutionsInput>, Prisma.BoardRequestUncheckedUpdateWithoutResolutionsInput>
+}
+
 export type BoardRequestCreateWithoutCreatedByInput = {
   id?: string
   kind?: $Enums.BoardRequestKind
@@ -1663,6 +1691,7 @@ export type BoardRequestCreateWithoutCreatedByInput = {
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutCreatedByInput = {
@@ -1710,6 +1739,7 @@ export type BoardRequestUncheckedCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutCreatedByInput = {
@@ -1767,6 +1797,7 @@ export type BoardRequestCreateWithoutRejectedByInput = {
   ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutRejectedByInput = {
@@ -1814,6 +1845,7 @@ export type BoardRequestUncheckedCreateWithoutRejectedByInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutRejectedByInput = {
@@ -1871,6 +1903,7 @@ export type BoardRequestCreateWithoutManagementByInput = {
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutManagementByInput = {
@@ -1918,6 +1951,7 @@ export type BoardRequestUncheckedCreateWithoutManagementByInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutManagementByInput = {
@@ -1975,6 +2009,7 @@ export type BoardRequestCreateWithoutLegalByInput = {
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutLegalByInput = {
@@ -2022,6 +2057,7 @@ export type BoardRequestUncheckedCreateWithoutLegalByInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutLegalByInput = {
@@ -2079,6 +2115,7 @@ export type BoardRequestCreateWithoutBudgetByInput = {
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutBudgetByInput = {
@@ -2126,6 +2163,7 @@ export type BoardRequestUncheckedCreateWithoutBudgetByInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutBudgetByInput = {
@@ -2183,6 +2221,7 @@ export type BoardRequestCreateWithoutSecretaryByInput = {
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutSecretaryByInput = {
@@ -2230,6 +2269,7 @@ export type BoardRequestUncheckedCreateWithoutSecretaryByInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutSecretaryByInput = {
@@ -2287,6 +2327,7 @@ export type BoardRequestCreateWithoutCeoByInput = {
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutCeoByInput = {
@@ -2334,6 +2375,7 @@ export type BoardRequestUncheckedCreateWithoutCeoByInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutCeoByInput = {
@@ -2552,6 +2594,7 @@ export type BoardRequestCreateWithoutUnitInput = {
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutUnitInput = {
@@ -2599,6 +2642,7 @@ export type BoardRequestUncheckedCreateWithoutUnitInput = {
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutUnitInput = {
@@ -2672,6 +2716,7 @@ export type BoardRequestCreateWithoutAttachmentsInput = {
   ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutAttachmentsInput = {
@@ -2719,6 +2764,7 @@ export type BoardRequestUncheckedCreateWithoutAttachmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutAttachmentsInput = {
@@ -2782,6 +2828,7 @@ export type BoardRequestUpdateWithoutAttachmentsInput = {
   ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutAttachmentsInput = {
@@ -2829,6 +2876,7 @@ export type BoardRequestUncheckedUpdateWithoutAttachmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestCreateWithoutMinutesRequestsInput = {
@@ -2876,6 +2924,7 @@ export type BoardRequestCreateWithoutMinutesRequestsInput = {
   ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
   rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
   attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestUncheckedCreateWithoutMinutesRequestsInput = {
@@ -2923,6 +2972,7 @@ export type BoardRequestUncheckedCreateWithoutMinutesRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type BoardRequestCreateOrConnectWithoutMinutesRequestsInput = {
@@ -2986,6 +3036,7 @@ export type BoardRequestUpdateWithoutMinutesRequestsInput = {
   ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutMinutesRequestsInput = {
@@ -3033,6 +3084,215 @@ export type BoardRequestUncheckedUpdateWithoutMinutesRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
+}
+
+export type BoardRequestCreateWithoutResolutionsInput = {
+  id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
+  status?: $Enums.BoardRequestStatus
+  requestedAt: Date | string
+  orgPositionText: string
+  subject: string
+  justification?: string | null
+  topicHistory?: string | null
+  description?: string | null
+  managementComment?: string | null
+  managementAt?: Date | string | null
+  legalReferredAt?: Date | string | null
+  legalOrgMatch?: boolean | null
+  legalRegulationsMatch?: boolean | null
+  legalComment?: string | null
+  legalAt?: Date | string | null
+  budgetReferredAt?: Date | string | null
+  budgetProgramHistory?: boolean | null
+  budgetCurrentYearFunding?: boolean | null
+  budgetComment?: string | null
+  budgetAt?: Date | string | null
+  secretaryReferredAt?: Date | string | null
+  secretaryComment?: string | null
+  secretaryAt?: Date | string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  rejectedStage?: $Enums.BoardStage | null
+  rejectedComment?: string | null
+  rejectedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  unit: Prisma.OrganizationUnitCreateNestedOneWithoutBoardRequestsInput
+  createdBy: Prisma.UserCreateNestedOneWithoutBoardRequestsCreatedInput
+  managementBy?: Prisma.UserCreateNestedOneWithoutBoardManagementReviewsInput
+  legalBy?: Prisma.UserCreateNestedOneWithoutBoardLegalReviewsInput
+  budgetBy?: Prisma.UserCreateNestedOneWithoutBoardBudgetReviewsInput
+  secretaryBy?: Prisma.UserCreateNestedOneWithoutBoardSecretaryReviewsInput
+  ceoBy?: Prisma.UserCreateNestedOneWithoutBoardCeoReviewsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutBoardRequestsRejectedInput
+  attachments?: Prisma.BoardAttachmentCreateNestedManyWithoutRequestInput
+  minutesRequests?: Prisma.BoardMinutesRequestCreateNestedManyWithoutRequestInput
+}
+
+export type BoardRequestUncheckedCreateWithoutResolutionsInput = {
+  id?: string
+  kind?: $Enums.BoardRequestKind
+  trackingNo: string
+  trackingYear: number
+  trackingSeq: number
+  status?: $Enums.BoardRequestStatus
+  requestedAt: Date | string
+  unitId: string
+  orgPositionText: string
+  subject: string
+  justification?: string | null
+  topicHistory?: string | null
+  description?: string | null
+  createdById: string
+  managementComment?: string | null
+  managementAt?: Date | string | null
+  managementById?: string | null
+  legalReferredAt?: Date | string | null
+  legalOrgMatch?: boolean | null
+  legalRegulationsMatch?: boolean | null
+  legalComment?: string | null
+  legalAt?: Date | string | null
+  legalById?: string | null
+  budgetReferredAt?: Date | string | null
+  budgetProgramHistory?: boolean | null
+  budgetCurrentYearFunding?: boolean | null
+  budgetComment?: string | null
+  budgetAt?: Date | string | null
+  budgetById?: string | null
+  secretaryReferredAt?: Date | string | null
+  secretaryComment?: string | null
+  secretaryAt?: Date | string | null
+  secretaryById?: string | null
+  ceoReferredAt?: Date | string | null
+  ceoComment?: string | null
+  ceoAt?: Date | string | null
+  ceoById?: string | null
+  rejectedStage?: $Enums.BoardStage | null
+  rejectedComment?: string | null
+  rejectedAt?: Date | string | null
+  rejectedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutRequestInput
+  minutesRequests?: Prisma.BoardMinutesRequestUncheckedCreateNestedManyWithoutRequestInput
+}
+
+export type BoardRequestCreateOrConnectWithoutResolutionsInput = {
+  where: Prisma.BoardRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoardRequestCreateWithoutResolutionsInput, Prisma.BoardRequestUncheckedCreateWithoutResolutionsInput>
+}
+
+export type BoardRequestUpsertWithoutResolutionsInput = {
+  update: Prisma.XOR<Prisma.BoardRequestUpdateWithoutResolutionsInput, Prisma.BoardRequestUncheckedUpdateWithoutResolutionsInput>
+  create: Prisma.XOR<Prisma.BoardRequestCreateWithoutResolutionsInput, Prisma.BoardRequestUncheckedCreateWithoutResolutionsInput>
+  where?: Prisma.BoardRequestWhereInput
+}
+
+export type BoardRequestUpdateToOneWithWhereWithoutResolutionsInput = {
+  where?: Prisma.BoardRequestWhereInput
+  data: Prisma.XOR<Prisma.BoardRequestUpdateWithoutResolutionsInput, Prisma.BoardRequestUncheckedUpdateWithoutResolutionsInput>
+}
+
+export type BoardRequestUpdateWithoutResolutionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  justification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  topicHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
+  rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unit?: Prisma.OrganizationUnitUpdateOneRequiredWithoutBoardRequestsNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutBoardRequestsCreatedNestedInput
+  managementBy?: Prisma.UserUpdateOneWithoutBoardManagementReviewsNestedInput
+  legalBy?: Prisma.UserUpdateOneWithoutBoardLegalReviewsNestedInput
+  budgetBy?: Prisma.UserUpdateOneWithoutBoardBudgetReviewsNestedInput
+  secretaryBy?: Prisma.UserUpdateOneWithoutBoardSecretaryReviewsNestedInput
+  ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
+  attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
+  minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+}
+
+export type BoardRequestUncheckedUpdateWithoutResolutionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumBoardRequestKindFieldUpdateOperationsInput | $Enums.BoardRequestKind
+  trackingNo?: Prisma.StringFieldUpdateOperationsInput | string
+  trackingYear?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingSeq?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBoardRequestStatusFieldUpdateOperationsInput | $Enums.BoardRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  unitId?: Prisma.StringFieldUpdateOperationsInput | string
+  orgPositionText?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  justification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  topicHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  managementComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  managementAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  managementById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalOrgMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalRegulationsMatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  legalComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  legalAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  legalById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetProgramHistory?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetCurrentYearFunding?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  budgetComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budgetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  budgetById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secretaryAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  secretaryById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoReferredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ceoAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ceoById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedStage?: Prisma.NullableEnumBoardStageFieldUpdateOperationsInput | $Enums.BoardStage | null
+  rejectedComment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
+  minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestCreateManyCreatedByInput = {
@@ -3395,6 +3655,7 @@ export type BoardRequestUpdateWithoutCreatedByInput = {
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutCreatedByInput = {
@@ -3442,6 +3703,7 @@ export type BoardRequestUncheckedUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateManyWithoutCreatedByInput = {
@@ -3534,6 +3796,7 @@ export type BoardRequestUpdateWithoutRejectedByInput = {
   ceoBy?: Prisma.UserUpdateOneWithoutBoardCeoReviewsNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutRejectedByInput = {
@@ -3581,6 +3844,7 @@ export type BoardRequestUncheckedUpdateWithoutRejectedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateManyWithoutRejectedByInput = {
@@ -3673,6 +3937,7 @@ export type BoardRequestUpdateWithoutManagementByInput = {
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutManagementByInput = {
@@ -3720,6 +3985,7 @@ export type BoardRequestUncheckedUpdateWithoutManagementByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateManyWithoutManagementByInput = {
@@ -3812,6 +4078,7 @@ export type BoardRequestUpdateWithoutLegalByInput = {
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutLegalByInput = {
@@ -3859,6 +4126,7 @@ export type BoardRequestUncheckedUpdateWithoutLegalByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateManyWithoutLegalByInput = {
@@ -3951,6 +4219,7 @@ export type BoardRequestUpdateWithoutBudgetByInput = {
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutBudgetByInput = {
@@ -3998,6 +4267,7 @@ export type BoardRequestUncheckedUpdateWithoutBudgetByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateManyWithoutBudgetByInput = {
@@ -4090,6 +4360,7 @@ export type BoardRequestUpdateWithoutSecretaryByInput = {
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutSecretaryByInput = {
@@ -4137,6 +4408,7 @@ export type BoardRequestUncheckedUpdateWithoutSecretaryByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateManyWithoutSecretaryByInput = {
@@ -4229,6 +4501,7 @@ export type BoardRequestUpdateWithoutCeoByInput = {
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutCeoByInput = {
@@ -4276,6 +4549,7 @@ export type BoardRequestUncheckedUpdateWithoutCeoByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateManyWithoutCeoByInput = {
@@ -4413,6 +4687,7 @@ export type BoardRequestUpdateWithoutUnitInput = {
   rejectedBy?: Prisma.UserUpdateOneWithoutBoardRequestsRejectedNestedInput
   attachments?: Prisma.BoardAttachmentUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateWithoutUnitInput = {
@@ -4460,6 +4735,7 @@ export type BoardRequestUncheckedUpdateWithoutUnitInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutRequestNestedInput
   minutesRequests?: Prisma.BoardMinutesRequestUncheckedUpdateManyWithoutRequestNestedInput
+  resolutions?: Prisma.BoardMinutesResolutionUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type BoardRequestUncheckedUpdateManyWithoutUnitInput = {
@@ -4515,11 +4791,13 @@ export type BoardRequestUncheckedUpdateManyWithoutUnitInput = {
 export type BoardRequestCountOutputType = {
   attachments: number
   minutesRequests: number
+  resolutions: number
 }
 
 export type BoardRequestCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attachments?: boolean | BoardRequestCountOutputTypeCountAttachmentsArgs
   minutesRequests?: boolean | BoardRequestCountOutputTypeCountMinutesRequestsArgs
+  resolutions?: boolean | BoardRequestCountOutputTypeCountResolutionsArgs
 }
 
 /**
@@ -4544,6 +4822,13 @@ export type BoardRequestCountOutputTypeCountAttachmentsArgs<ExtArgs extends runt
  */
 export type BoardRequestCountOutputTypeCountMinutesRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BoardMinutesRequestWhereInput
+}
+
+/**
+ * BoardRequestCountOutputType without action
+ */
+export type BoardRequestCountOutputTypeCountResolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoardMinutesResolutionWhereInput
 }
 
 
@@ -4601,6 +4886,7 @@ export type BoardRequestSelect<ExtArgs extends runtime.Types.Extensions.Internal
   rejectedBy?: boolean | Prisma.BoardRequest$rejectedByArgs<ExtArgs>
   attachments?: boolean | Prisma.BoardRequest$attachmentsArgs<ExtArgs>
   minutesRequests?: boolean | Prisma.BoardRequest$minutesRequestsArgs<ExtArgs>
+  resolutions?: boolean | Prisma.BoardRequest$resolutionsArgs<ExtArgs>
   _count?: boolean | Prisma.BoardRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boardRequest"]>
 
@@ -4770,6 +5056,7 @@ export type BoardRequestInclude<ExtArgs extends runtime.Types.Extensions.Interna
   rejectedBy?: boolean | Prisma.BoardRequest$rejectedByArgs<ExtArgs>
   attachments?: boolean | Prisma.BoardRequest$attachmentsArgs<ExtArgs>
   minutesRequests?: boolean | Prisma.BoardRequest$minutesRequestsArgs<ExtArgs>
+  resolutions?: boolean | Prisma.BoardRequest$resolutionsArgs<ExtArgs>
   _count?: boolean | Prisma.BoardRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BoardRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4806,6 +5093,7 @@ export type $BoardRequestPayload<ExtArgs extends runtime.Types.Extensions.Intern
     rejectedBy: Prisma.$UserPayload<ExtArgs> | null
     attachments: Prisma.$BoardAttachmentPayload<ExtArgs>[]
     minutesRequests: Prisma.$BoardMinutesRequestPayload<ExtArgs>[]
+    resolutions: Prisma.$BoardMinutesResolutionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5255,6 +5543,7 @@ export interface Prisma__BoardRequestClient<T, Null = never, ExtArgs extends run
   rejectedBy<T extends Prisma.BoardRequest$rejectedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$rejectedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   attachments<T extends Prisma.BoardRequest$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   minutesRequests<T extends Prisma.BoardRequest$minutesRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$minutesRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resolutions<T extends Prisma.BoardRequest$resolutionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoardRequest$resolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesResolutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5887,6 +6176,30 @@ export type BoardRequest$minutesRequestsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.BoardMinutesRequestScalarFieldEnum | Prisma.BoardMinutesRequestScalarFieldEnum[]
+}
+
+/**
+ * BoardRequest.resolutions
+ */
+export type BoardRequest$resolutionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoardMinutesResolution
+   */
+  select?: Prisma.BoardMinutesResolutionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoardMinutesResolution
+   */
+  omit?: Prisma.BoardMinutesResolutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoardMinutesResolutionInclude<ExtArgs> | null
+  where?: Prisma.BoardMinutesResolutionWhereInput
+  orderBy?: Prisma.BoardMinutesResolutionOrderByWithRelationInput | Prisma.BoardMinutesResolutionOrderByWithRelationInput[]
+  cursor?: Prisma.BoardMinutesResolutionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoardMinutesResolutionScalarFieldEnum | Prisma.BoardMinutesResolutionScalarFieldEnum[]
 }
 
 /**

@@ -9,8 +9,9 @@ import {
   paginatedResult,
   paginationArgs,
 } from '../common/pagination';
-import { parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
+import { parseIsoDate, parseOptionalIsoDate, toIsoDateOnly } from '../common/iso-date';
 import { resolveSortOrder } from '../common/sort-query';
+import { MAX_BOARD_RESOLUTION_PROGRESS_REPORTS } from '../board/board.constants';
 import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import {
@@ -21,6 +22,7 @@ import { StakeholdersAccess } from './stakeholders.access';
 import {
   CreateCorrespondenceDto,
   CreateProgressReportDto,
+  CreateResolutionProgressDto,
   CreateStakeholderMessageDto,
   FindCorrespondencesQueryDto,
   FindPortalProjectsQueryDto,
@@ -28,6 +30,7 @@ import {
   UpdateCorrespondenceDto,
   UpdateCorrespondenceWorkflowDto,
   UpdateProgressReportDto,
+  UpdateResolutionProgressDto,
 } from './dto/stakeholder.dto';
 
 const personSelect = { id: true, fullName: true } as const;
@@ -174,9 +177,9 @@ export class StakeholdersService {
     );
   }
 
-  async projectOptions(userId: string | undefined) {
+  async projectOptions(userId: string | undefined, contractorIdQuery?: string) {
     const actor = await this.access.actor(userId);
-    const contractorId = this.access.contractorId(actor);
+    const contractorId = this.access.writeContractorId(actor, contractorIdQuery);
     const ids = await this.assignedProjectIds(contractorId);
     return this.prisma.project.findMany({
       where: { id: { in: ids } },
@@ -298,7 +301,7 @@ export class StakeholdersService {
 
   async createProgress(userId: string | undefined, dto: CreateProgressReportDto) {
     const actor = await this.access.actor(userId);
-    const contractorId = this.access.contractorId(actor);
+    const contractorId = this.access.writeContractorId(actor, dto.contractorId);
     await this.access.assertAssignedProject(contractorId, dto.projectId);
     const attachments = await buildStakeholderAttachments(
       this.prisma,
@@ -333,12 +336,12 @@ export class StakeholdersService {
 
   async updateProgress(userId: string | undefined, id: string, dto: UpdateProgressReportDto) {
     const actor = await this.access.actor(userId);
-    const contractorId = this.access.contractorId(actor);
     const current = await this.prisma.stakeholderProgressReport.findFirst({
-      where: { id, contractorId },
+      where: { id, createdById: actor.id, ...this.access.contractorWhere(actor) },
       select: {
         id: true,
         projectId: true,
+        contractorId: true,
         progressPercent: true,
         actionsDone: true,
         nextPlan: true,
@@ -350,7 +353,14 @@ export class StakeholdersService {
     if (!current) {
       throw new NotFoundException('گزارش یافت نشد');
     }
-    if (dto.projectId && dto.projectId !== current.projectId) {
+    const contractorId = this.access.writeContractorId(
+      actor,
+      dto.contractorId ?? current.contractorId,
+    );
+    if (
+      dto.projectId &&
+      (dto.projectId !== current.projectId || contractorId !== current.contractorId)
+    ) {
       await this.access.assertAssignedProject(contractorId, dto.projectId);
     }
     const attachments =
@@ -370,6 +380,7 @@ export class StakeholdersService {
       where: { id },
       data: {
         projectId: dto.projectId,
+        contractorId: actor.contractorId ? undefined : contractorId,
         occurredAt:
           dto.occurredAt === undefined ? undefined : parseOptionalIsoDate(dto.occurredAt)!,
         progressPercent: dto.progressPercent,
@@ -385,15 +396,204 @@ export class StakeholdersService {
 
   async removeProgress(userId: string | undefined, id: string) {
     const actor = await this.access.actor(userId);
-    const contractorId = this.access.contractorId(actor);
     const current = await this.prisma.stakeholderProgressReport.findFirst({
-      where: { id, contractorId },
+      where: { id, createdById: actor.id, ...this.access.contractorWhere(actor) },
       select: { id: true },
     });
     if (!current) {
       throw new NotFoundException('گزارش یافت نشد');
     }
     await this.prisma.stakeholderProgressReport.delete({ where: { id } });
+    return { ok: true };
+  }
+
+  async listResolutionContracts(userId: string | undefined, contractorIdQuery?: string) {
+    const actor = await this.access.actor(userId);
+    const contractorId = actor.contractorId ?? contractorIdQuery;
+    return this.prisma.boardResolutionContract.findMany({
+      where: contractorId ? { contractorId } : { contractorId: { not: null } },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+      select: {
+        id: true,
+        title: true,
+        contractNo: true,
+        resolution: {
+          select: {
+            id: true,
+            title: true,
+            minutesId: true,
+            minutes: { select: { id: true, minutesNo: true, subject: true } },
+          },
+        },
+      },
+    });
+  }
+
+  async listResolutionProgress(userId: string | undefined, query: FindProgressReportsQueryDto) {
+    const actor = await this.access.actor(userId);
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    const where = this.resolutionProgressWhere(actor.contractorId, query);
+    const orderBy = resolveSortOrder<Prisma.BoardResolutionProgressReportOrderByWithRelationInput>(
+      query.sortBy,
+      query.sortDir,
+      {
+        occurredAt: (dir) => ({ reportedAt: dir }),
+        progressPercent: (dir) => ({ progressAmount: dir }),
+        project: (dir) => ({ resolution: { title: dir } }),
+        contractor: (dir) => ({ contractor: { name: dir } }),
+        author: (dir) => ({ createdBy: { fullName: dir } }),
+        createdAt: (dir) => ({ createdAt: dir }),
+        title: (dir) => ({ title: dir }),
+        contract: (dir) => ({ contract: { title: dir } }),
+      },
+      [{ reportedAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
+    );
+    const [items, total, aggregate] = await this.prisma.$transaction([
+      this.prisma.boardResolutionProgressReport.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        include: {
+          createdBy: { select: personSelect },
+          contractor: { select: { id: true, name: true } },
+          contract: { select: { id: true, title: true } },
+          resolution: { select: { id: true, title: true, minutesId: true } },
+        },
+      }),
+      this.prisma.boardResolutionProgressReport.count({ where }),
+      this.prisma.boardResolutionProgressReport.aggregate({
+        where,
+        _avg: { progressAmount: true },
+      }),
+    ]);
+    const average = aggregate._avg.progressAmount;
+    return {
+      ...paginatedResult(
+        items.map((row) => this.mapResolutionProgress(row)),
+        total,
+        page,
+        pageSize,
+      ),
+      avgProgressPercent: average == null ? null : Math.round(average),
+    };
+  }
+
+  async findResolutionProgress(userId: string | undefined, id: string) {
+    const actor = await this.access.actor(userId);
+    const row = await this.prisma.boardResolutionProgressReport.findFirst({
+      where: { id, ...this.access.contractorWhere(actor) },
+      include: {
+        createdBy: { select: personSelect },
+        contractor: { select: { id: true, name: true } },
+        contract: { select: { id: true, title: true } },
+        resolution: { select: { id: true, title: true, minutesId: true } },
+      },
+    });
+    if (!row) throw new NotFoundException('گزارش یافت نشد');
+    return this.mapResolutionProgress(row);
+  }
+
+  async createResolutionProgress(userId: string | undefined, dto: CreateResolutionProgressDto) {
+    const actor = await this.access.actor(userId);
+    const contract = await this.prisma.boardResolutionContract.findFirst({
+      where: {
+        id: dto.contractId,
+        ...(actor.contractorId ? { contractorId: actor.contractorId } : {}),
+      },
+      select: { id: true, contractorId: true, resolutionId: true },
+    });
+    if (!contract?.contractorId) {
+      throw new ForbiddenException('این قرارداد به پیمانکار تخصیص داده نشده است');
+    }
+    const contractorId = contract.contractorId;
+    const count = await this.prisma.boardResolutionProgressReport.count({
+      where: { resolutionId: contract.resolutionId },
+    });
+    if (count >= MAX_BOARD_RESOLUTION_PROGRESS_REPORTS) {
+      throw new BadRequestException('تعداد گزارش‌های پیشرفت این مصوبه به سقف رسیده است');
+    }
+    const created = await this.prisma.boardResolutionProgressReport.create({
+      data: {
+        resolutionId: contract.resolutionId,
+        reportedAt: parseIsoDate(dto.occurredAt),
+        title: dto.title,
+        actionsDone: blankToNull(dto.actionsDone),
+        nextPlan: blankToNull(dto.nextPlan),
+        blockers: blankToNull(dto.blockers),
+        needs: blankToNull(dto.needs),
+        progressAmount: dto.progressPercent ?? 0,
+        createdById: actor.id,
+        contractorId,
+        contractId: contract.id,
+      },
+      select: { id: true },
+    });
+    return this.findResolutionProgress(userId, created.id);
+  }
+
+  async updateResolutionProgress(
+    userId: string | undefined,
+    id: string,
+    dto: UpdateResolutionProgressDto,
+  ) {
+    const actor = await this.access.actor(userId);
+    const current = await this.prisma.boardResolutionProgressReport.findFirst({
+      where: { id, createdById: actor.id, ...this.access.contractorWhere(actor) },
+      select: { id: true, resolutionId: true },
+    });
+    if (!current) throw new NotFoundException('گزارش یافت نشد');
+    if (dto.contractId) {
+      const contract = await this.prisma.boardResolutionContract.findFirst({
+        where: {
+          id: dto.contractId,
+          ...(actor.contractorId ? { contractorId: actor.contractorId } : {}),
+        },
+        select: { id: true, contractorId: true, resolutionId: true },
+      });
+      if (!contract?.contractorId) {
+        throw new ForbiddenException('این قرارداد به پیمانکار تخصیص داده نشده است');
+      }
+      await this.prisma.boardResolutionProgressReport.update({
+        where: { id },
+        data: {
+          resolutionId: contract.resolutionId,
+          contractId: contract.id,
+          contractorId: contract.contractorId,
+          reportedAt: dto.occurredAt ? parseOptionalIsoDate(dto.occurredAt) : undefined,
+          title: dto.title,
+          actionsDone: dto.actionsDone === undefined ? undefined : blankToNull(dto.actionsDone),
+          nextPlan: dto.nextPlan === undefined ? undefined : blankToNull(dto.nextPlan),
+          blockers: dto.blockers === undefined ? undefined : blankToNull(dto.blockers),
+          needs: dto.needs === undefined ? undefined : blankToNull(dto.needs),
+          progressAmount: dto.progressPercent === undefined ? undefined : (dto.progressPercent ?? 0),
+        },
+      });
+      return this.findResolutionProgress(userId, id);
+    }
+    await this.prisma.boardResolutionProgressReport.update({
+      where: { id },
+      data: {
+        reportedAt: dto.occurredAt ? parseOptionalIsoDate(dto.occurredAt) : undefined,
+        title: dto.title,
+        actionsDone: dto.actionsDone === undefined ? undefined : blankToNull(dto.actionsDone),
+        nextPlan: dto.nextPlan === undefined ? undefined : blankToNull(dto.nextPlan),
+        blockers: dto.blockers === undefined ? undefined : blankToNull(dto.blockers),
+        needs: dto.needs === undefined ? undefined : blankToNull(dto.needs),
+        progressAmount: dto.progressPercent === undefined ? undefined : (dto.progressPercent ?? 0),
+      },
+    });
+    return this.findResolutionProgress(userId, id);
+  }
+
+  async removeResolutionProgress(userId: string | undefined, id: string) {
+    const actor = await this.access.actor(userId);
+    const current = await this.prisma.boardResolutionProgressReport.findFirst({
+      where: { id, createdById: actor.id, ...this.access.contractorWhere(actor) },
+      select: { id: true },
+    });
+    if (!current) throw new NotFoundException('گزارش یافت نشد');
+    await this.prisma.boardResolutionProgressReport.delete({ where: { id } });
     return { ok: true };
   }
 
@@ -650,6 +850,33 @@ export class StakeholdersService {
     return [...new Set([contractor.projectId, ...contractor.projectLinks.map((item) => item.projectId)])];
   }
 
+  private resolutionProgressWhere(
+    contractorId: string | null,
+    query: FindProgressReportsQueryDto,
+  ): Prisma.BoardResolutionProgressReportWhereInput {
+    const q = query.q?.trim();
+    return {
+      ...(contractorId ? { contractorId } : {}),
+      ...(!contractorId && query.contractorId ? { contractorId: query.contractorId } : {}),
+      ...(q
+        ? {
+            OR: [
+              { title: containsInsensitive(q) },
+              { body: containsInsensitive(q) },
+              { actionsDone: containsInsensitive(q) },
+              { nextPlan: containsInsensitive(q) },
+              { blockers: containsInsensitive(q) },
+              { needs: containsInsensitive(q) },
+              { contract: { title: containsInsensitive(q) } },
+              { contract: { contractNo: containsInsensitive(q) } },
+              { resolution: { title: containsInsensitive(q) } },
+              { contractor: { name: containsInsensitive(q) } },
+            ],
+          }
+        : {}),
+    };
+  }
+
   private progressWhere(
     contractorId: string | null,
     query: FindProgressReportsQueryDto,
@@ -750,6 +977,45 @@ export class StakeholdersService {
       },
     },
   } satisfies Prisma.StakeholderCorrespondenceSelect;
+
+  private mapResolutionProgress(row: {
+    id: string;
+    reportedAt: Date;
+    title: string;
+    body: string | null;
+    actionsDone: string | null;
+    nextPlan: string | null;
+    blockers: string | null;
+    needs: string | null;
+    progressAmount: number;
+    createdAt: Date;
+    updatedAt: Date;
+    createdBy: { id: string; fullName: string } | null;
+    contractor: { id: string; name: string } | null;
+    contract: { id: string; title: string } | null;
+    resolution: { id: string; title: string; minutesId: string };
+  }) {
+    return {
+      id: row.id,
+      occurredAt: toIsoDateOnly(row.reportedAt),
+      title: row.title,
+      body: row.body,
+      actionsDone: row.actionsDone,
+      nextPlan: row.nextPlan,
+      blockers: row.blockers,
+      needs: row.needs,
+      progressPercent: row.progressAmount,
+      createdAt: row.createdAt.toISOString(),
+      updatedAt: row.updatedAt.toISOString(),
+      createdBy: row.createdBy,
+      contractor: row.contractor,
+      contract: row.contract,
+      resolution: row.resolution,
+      project: row.resolution
+        ? { id: row.resolution.id, systemName: row.resolution.title, code: '' }
+        : undefined,
+    };
+  }
 
   private mapProgress<T extends { occurredAt: Date }>(row: T) {
     return { ...row, occurredAt: toIsoDateOnly(row.occurredAt) };

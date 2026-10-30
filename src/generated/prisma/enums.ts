@@ -344,6 +344,37 @@ export const BoardResolutionProposerKind = {
 export type BoardResolutionProposerKind = (typeof BoardResolutionProposerKind)[keyof typeof BoardResolutionProposerKind]
 
 
+export const BoardResolutionContractKind = {
+  CONTRACTING: 'CONTRACTING',
+  GOODS_EQUIPMENT: 'GOODS_EQUIPMENT',
+  SERVICES: 'SERVICES',
+  CONSULTING: 'CONSULTING',
+  DESIGN_ENGINEERING: 'DESIGN_ENGINEERING',
+  INFORMATION_TECHNOLOGY: 'INFORMATION_TECHNOLOGY',
+  LEASE: 'LEASE',
+  PARTNERSHIP: 'PARTNERSHIP',
+  INVESTMENT: 'INVESTMENT',
+  OPERATION: 'OPERATION',
+  SUPPLY: 'SUPPLY',
+  TRANSPORT: 'TRANSPORT',
+  MARKETING: 'MARKETING',
+  OTHER: 'OTHER'
+} as const
+
+export type BoardResolutionContractKind = (typeof BoardResolutionContractKind)[keyof typeof BoardResolutionContractKind]
+
+
+export const BoardResolutionContractStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  TERMINATED: 'TERMINATED',
+  SUSPENDED: 'SUSPENDED'
+} as const
+
+export type BoardResolutionContractStatus = (typeof BoardResolutionContractStatus)[keyof typeof BoardResolutionContractStatus]
+
+
 export const BoardMinutesStatus = {
   NOT_HELD: 'NOT_HELD',
   HELD: 'HELD',

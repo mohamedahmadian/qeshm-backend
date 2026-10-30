@@ -20,6 +20,8 @@ import {
   BoardMinutesMemberKind,
   BoardMinutesStatus,
   BoardRequestStatus,
+  BoardResolutionContractKind,
+  BoardResolutionContractStatus,
   BoardResolutionDueKind,
   BoardResolutionProposerKind,
   BoardResolutionStatus,
@@ -32,12 +34,17 @@ import {
   MAX_BOARD_ATTACHMENTS,
   MAX_BOARD_MINUTES_MEMBERS,
   MAX_BOARD_MINUTES_REQUESTS,
+  MAX_BOARD_RESOLUTION_CONTRACTS,
   MAX_BOARD_RESOLUTION_PROGRESS_REPORTS,
   MAX_BOARD_RESOLUTION_UNITS,
   boardMinutesStatuses,
+  boardResolutionContractKinds,
+  boardResolutionContractStatuses,
   boardResolutionStatuses,
 } from './board.constants';
+import { CreateBoardResolutionContractDto } from './dto/create-board-resolution-contract.dto';
 import { CreateBoardResolutionProgressDto } from './dto/create-board-resolution-progress.dto';
+import { UpdateBoardResolutionContractDto } from './dto/update-board-resolution-contract.dto';
 import { SendBoardMinutesSmsDto } from './dto/send-board-minutes-sms.dto';
 import { SendBoardResolutionSmsDto } from './dto/send-board-resolution-sms.dto';
 import { UpdateBoardResolutionProgressDto } from './dto/update-board-resolution-progress.dto';
@@ -80,6 +87,28 @@ const unitSelect = {
   phone: true,
 } satisfies Prisma.OrganizationUnitSelect;
 
+const contractFileSelect = {
+  id: true,
+  originalName: true,
+  mimeType: true,
+  byteSize: true,
+} satisfies Prisma.StoredFileSelect;
+
+const contractorNameSelect = {
+  id: true,
+  name: true,
+} satisfies Prisma.ProjectContractorSelect;
+
+const progressAuthorSelect = {
+  id: true,
+  fullName: true,
+} satisfies Prisma.UserSelect;
+
+const contractProgressSelect = {
+  id: true,
+  title: true,
+} satisfies Prisma.BoardResolutionContractSelect;
+
 const requestSummarySelect = {
   id: true,
   subject: true,
@@ -110,6 +139,7 @@ const minutesInclude = {
 } satisfies Prisma.BoardMinutesInclude;
 
 const resolutionInclude = {
+  request: { select: requestSummarySelect },
   executors: {
     orderBy: { createdAt: 'asc' as const },
     include: { unit: { select: unitSelect } },
@@ -171,6 +201,11 @@ const searchInclude = {
     include: {
       executors: {
         include: { unit: { select: unitSelect } },
+      },
+      contracts: {
+        include: {
+          contractor: { select: contractorNameSelect },
+        },
       },
     },
   },
@@ -351,11 +386,12 @@ export class BoardMinutesService {
         minutesCount: 0,
         requestCount: 0,
         resolutionCount: 0,
+        contractCount: 0,
       };
     }
     const minutesWhere: Prisma.BoardMinutesWhereInput = { OR: this.smartSearchWhere(q) };
     const requestWhere: Prisma.BoardRequestWhereInput = { OR: this.requestSearchWhere(q) };
-    const [minuteRows, requestRows, resolutionCount] = await Promise.all([
+    const [minuteRows, requestRows, resolutionCount, contractCount] = await Promise.all([
       this.prisma.boardMinutes.findMany({
         where: minutesWhere,
         select: { id: true, heldAt: true },
@@ -368,6 +404,9 @@ export class BoardMinutesService {
       }),
       this.prisma.boardMinutesResolution.count({
         where: { OR: this.resolutionTextWhere(q) },
+      }),
+      this.prisma.boardResolutionContract.count({
+        where: { OR: this.contractTextWhere(q) },
       }),
     ]);
     const mixed = [
@@ -418,6 +457,7 @@ export class BoardMinutesService {
       ...paginatedResult(items, mixed.length, page, pageSize),
       minutesCount: minuteRows.length,
       requestCount: requestRows.length,
+      contractCount,
       resolutionCount,
     };
   }
@@ -439,6 +479,29 @@ export class BoardMinutesService {
         include: resolutionInclude,
       }),
     ]);
+    const resolutionIds = resolutions.map((item) => item.id);
+    const resolutionTitleById = new Map(resolutions.map((item) => [item.id, item.title]));
+    const [contractRows, progressRows] = resolutionIds.length
+      ? await Promise.all([
+          this.prisma.boardResolutionContract.findMany({
+            where: { resolutionId: { in: resolutionIds } },
+            include: {
+              file: { select: contractFileSelect },
+              contractor: { select: contractorNameSelect },
+            },
+            orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+          }),
+          this.prisma.boardResolutionProgressReport.findMany({
+            where: { resolutionId: { in: resolutionIds } },
+            include: {
+              createdBy: { select: progressAuthorSelect },
+              contractor: { select: contractorNameSelect },
+              contract: { select: contractProgressSelect },
+            },
+            orderBy: [{ reportedAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
+          }),
+        ])
+      : [[], []];
     const requestsById = new Map(requestRows.map((row) => [row.id, row]));
     const requests = linkedIds
       .map((requestId) => requestsById.get(requestId))
@@ -449,6 +512,20 @@ export class BoardMinutesService {
       request: requests[0] ?? null,
       requests,
       resolutions: resolutions.map((item) => this.serializeResolution(item)),
+      contracts: contractRows.map((row) => ({
+        ...this.serializeContract(row),
+        resolution: {
+          id: row.resolutionId,
+          title: resolutionTitleById.get(row.resolutionId) ?? '',
+        },
+      })),
+      progressReports: progressRows.map((row) => ({
+        ...this.serializeProgressReport(row),
+        resolution: {
+          id: row.resolutionId,
+          title: resolutionTitleById.get(row.resolutionId) ?? '',
+        },
+      })),
     };
   }
 
@@ -533,7 +610,12 @@ export class BoardMinutesService {
   async remove(id: string, userId: string) {
     await this.requireMinutesActor(userId);
     await this.loadMinutes(id);
+    const files = await this.prisma.boardResolutionContract.findMany({
+      where: { resolution: { minutesId: id }, fileId: { not: null } },
+      select: { fileId: true },
+    });
     await this.prisma.boardMinutes.delete({ where: { id } });
+    await this.deleteStoredFiles(files.map((row) => row.fileId));
   }
 
   async sendSms(id: string, dto: SendBoardMinutesSmsDto, userId: string) {
@@ -694,6 +776,11 @@ export class BoardMinutesService {
     await this.loadResolution(minutesId, resolutionId);
     const items = await this.prisma.boardResolutionProgressReport.findMany({
       where: { resolutionId },
+      include: {
+        createdBy: { select: progressAuthorSelect },
+        contractor: { select: contractorNameSelect },
+        contract: { select: contractProgressSelect },
+      },
       orderBy: [{ reportedAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
     });
     return {
@@ -716,6 +803,7 @@ export class BoardMinutesService {
     if (count >= MAX_BOARD_RESOLUTION_PROGRESS_REPORTS) {
       throw new BadRequestException('تعداد گزارش‌های پیشرفت این مصوبه به سقف رسیده است');
     }
+    const link = await this.resolveProgressLink(resolutionId, dto);
     const created = await this.prisma.boardResolutionProgressReport.create({
       data: {
         resolutionId,
@@ -723,7 +811,19 @@ export class BoardMinutesService {
         title: dto.title,
         category: dto.category ?? null,
         body: dto.body ?? null,
+        actionsDone: dto.actionsDone ?? null,
+        nextPlan: dto.nextPlan ?? null,
+        blockers: dto.blockers ?? null,
+        needs: dto.needs ?? null,
         progressAmount: dto.progressAmount,
+        createdById: userId,
+        contractorId: link.contractorId,
+        contractId: link.contractId,
+      },
+      include: {
+        createdBy: { select: progressAuthorSelect },
+        contractor: { select: contractorNameSelect },
+        contract: { select: contractProgressSelect },
       },
     });
     return this.serializeProgressReport(created);
@@ -738,6 +838,10 @@ export class BoardMinutesService {
   ) {
     await this.requireMinutesActor(userId);
     await this.loadProgressReport(minutesId, resolutionId, reportId);
+    const link =
+      dto.contractId !== undefined || dto.contractorId !== undefined
+        ? await this.resolveProgressLink(resolutionId, dto)
+        : undefined;
     const updated = await this.prisma.boardResolutionProgressReport.update({
       where: { id: reportId },
       data: {
@@ -745,7 +849,18 @@ export class BoardMinutesService {
         title: dto.title,
         category: dto.category === undefined ? undefined : dto.category,
         body: dto.body === undefined ? undefined : dto.body,
+        actionsDone: dto.actionsDone === undefined ? undefined : dto.actionsDone,
+        nextPlan: dto.nextPlan === undefined ? undefined : dto.nextPlan,
+        blockers: dto.blockers === undefined ? undefined : dto.blockers,
+        needs: dto.needs === undefined ? undefined : dto.needs,
         progressAmount: dto.progressAmount,
+        contractorId: link ? link.contractorId : undefined,
+        contractId: link ? link.contractId : undefined,
+      },
+      include: {
+        createdBy: { select: progressAuthorSelect },
+        contractor: { select: contractorNameSelect },
+        contract: { select: contractProgressSelect },
       },
     });
     return this.serializeProgressReport(updated);
@@ -762,12 +877,134 @@ export class BoardMinutesService {
     await this.prisma.boardResolutionProgressReport.delete({ where: { id: reportId } });
   }
 
+  async findContracts(minutesId: string, resolutionId: string, userId: string) {
+    await this.requireMinutesActor(userId);
+    await this.loadResolution(minutesId, resolutionId);
+    const items = await this.prisma.boardResolutionContract.findMany({
+      where: { resolutionId },
+      include: {
+        file: { select: contractFileSelect },
+        contractor: { select: contractorNameSelect },
+      },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+    });
+    return { items: items.map((row) => this.serializeContract(row)) };
+  }
+
+  async createContract(
+    minutesId: string,
+    resolutionId: string,
+    dto: CreateBoardResolutionContractDto,
+    userId: string,
+  ) {
+    await this.requireMinutesActor(userId);
+    await this.loadResolution(minutesId, resolutionId);
+    const count = await this.prisma.boardResolutionContract.count({ where: { resolutionId } });
+    if (count >= MAX_BOARD_RESOLUTION_CONTRACTS) {
+      throw new BadRequestException('تعداد قراردادهای این مصوبه به سقف رسیده است');
+    }
+    const kind = this.resolveContractKind(dto.kind);
+    const kindOther = this.resolveContractKindOther(kind, dto.kindOther);
+    this.assertContractDates(dto.startDate, dto.endDate);
+    if (dto.fileId) await this.assertContractFile(dto.fileId);
+    if (dto.contractorId) await this.assertContractor(dto.contractorId);
+    const created = await this.prisma.boardResolutionContract.create({
+      data: {
+        resolutionId,
+        title: dto.title,
+        contractNo: dto.contractNo ?? null,
+        contractorId: dto.contractorId ?? null,
+        kind,
+        kindOther,
+        amount: dto.amount ?? null,
+        signedAt: parseOptionalIsoDate(dto.signedAt) ?? null,
+        duration: dto.duration ?? null,
+        startDate: parseOptionalIsoDate(dto.startDate) ?? null,
+        endDate: parseOptionalIsoDate(dto.endDate) ?? null,
+        status: this.resolveContractStatus(dto.status),
+        paidAmount: dto.paidAmount ?? null,
+        supervisor: dto.supervisor ?? null,
+        fileId: dto.fileId ?? null,
+        notes: dto.notes ?? null,
+      },
+      include: {
+        file: { select: contractFileSelect },
+        contractor: { select: contractorNameSelect },
+      },
+    });
+    return this.serializeContract(created);
+  }
+
+  async updateContract(
+    minutesId: string,
+    resolutionId: string,
+    contractId: string,
+    dto: UpdateBoardResolutionContractDto,
+    userId: string,
+  ) {
+    await this.requireMinutesActor(userId);
+    const current = await this.loadContract(minutesId, resolutionId, contractId);
+    const kindFields = this.contractKindUpdate(dto, current);
+    const startDate =
+      dto.startDate !== undefined ? parseOptionalIsoDate(dto.startDate) ?? null : current.startDate;
+    const endDate =
+      dto.endDate !== undefined ? parseOptionalIsoDate(dto.endDate) ?? null : current.endDate;
+    this.assertContractDates(
+      startDate ? toIsoDateOnly(startDate) : null,
+      endDate ? toIsoDateOnly(endDate) : null,
+    );
+    if (dto.fileId) await this.assertContractFile(dto.fileId);
+    if (dto.contractorId) await this.assertContractor(dto.contractorId);
+    const previousFileId = current.fileId;
+    const updated = await this.prisma.boardResolutionContract.update({
+      where: { id: contractId },
+      data: {
+        title: dto.title,
+        contractNo: dto.contractNo === undefined ? undefined : dto.contractNo,
+        contractorId: dto.contractorId === undefined ? undefined : dto.contractorId,
+        ...kindFields,
+        amount: dto.amount === undefined ? undefined : dto.amount,
+        signedAt:
+          dto.signedAt !== undefined ? parseOptionalIsoDate(dto.signedAt) ?? null : undefined,
+        duration: dto.duration === undefined ? undefined : dto.duration,
+        startDate: dto.startDate !== undefined ? parseOptionalIsoDate(dto.startDate) ?? null : undefined,
+        endDate: dto.endDate !== undefined ? parseOptionalIsoDate(dto.endDate) ?? null : undefined,
+        status: dto.status !== undefined ? this.resolveContractStatus(dto.status) : undefined,
+        paidAmount: dto.paidAmount === undefined ? undefined : dto.paidAmount,
+        supervisor: dto.supervisor === undefined ? undefined : dto.supervisor,
+        fileId: dto.fileId === undefined ? undefined : dto.fileId,
+        notes: dto.notes === undefined ? undefined : dto.notes,
+      },
+      include: {
+        file: { select: contractFileSelect },
+        contractor: { select: contractorNameSelect },
+      },
+    });
+    if (dto.fileId !== undefined && previousFileId && previousFileId !== updated.fileId) {
+      await this.deleteStoredFiles([previousFileId]);
+    }
+    return this.serializeContract(updated);
+  }
+
+  async removeContract(
+    minutesId: string,
+    resolutionId: string,
+    contractId: string,
+    userId: string,
+  ) {
+    await this.requireMinutesActor(userId);
+    const current = await this.loadContract(minutesId, resolutionId, contractId);
+    await this.prisma.boardResolutionContract.delete({ where: { id: contractId } });
+    await this.deleteStoredFiles([current.fileId]);
+  }
+
   async createResolution(minutesId: string, dto: CreateBoardResolutionDto, userId: string) {
     await this.requireMinutesActor(userId);
     await this.loadMinutes(minutesId);
     const due = this.resolveResolutionDue(dto);
     const proposer = this.resolveResolutionProposer(dto);
     const unitIds = await this.normalizeResolutionUnitIds(dto.unitIds);
+    const requestId = await this.resolveResolutionRequestId(minutesId, dto.requestId);
     if (proposer.proposerUnitId) await this.assertUnitExists(proposer.proposerUnitId);
     const signatories =
       dto.signatories === undefined
@@ -776,6 +1013,7 @@ export class BoardMinutesService {
     const created = await this.prisma.boardMinutesResolution.create({
       data: {
         minutesId,
+        requestId,
         title: dto.title,
         description: dto.description ?? null,
         status: this.resolveResolutionStatus(dto.status),
@@ -809,6 +1047,10 @@ export class BoardMinutesService {
     const proposer = this.resolveResolutionProposer(dto, current);
     const unitIds =
       dto.unitIds !== undefined ? await this.normalizeResolutionUnitIds(dto.unitIds) : undefined;
+    const requestId =
+      dto.requestId !== undefined
+        ? await this.resolveResolutionRequestId(minutesId, dto.requestId)
+        : undefined;
     if (proposer.proposerUnitId) await this.assertUnitExists(proposer.proposerUnitId);
     const signatories = await this.normalizeResolutionSignatories(dto.signatories);
     const updated = await this.prisma.$transaction(async (tx) => {
@@ -822,6 +1064,7 @@ export class BoardMinutesService {
         where: { id },
         data: {
           title: dto.title,
+          requestId,
           description: dto.description === undefined ? undefined : dto.description,
           status: dto.status !== undefined ? this.resolveResolutionStatus(dto.status) : undefined,
           executors: unitIds?.length
@@ -846,7 +1089,12 @@ export class BoardMinutesService {
   async removeResolution(minutesId: string, id: string, userId: string) {
     await this.requireMinutesActor(userId);
     await this.loadResolution(minutesId, id);
+    const files = await this.prisma.boardResolutionContract.findMany({
+      where: { resolutionId: id, fileId: { not: null } },
+      select: { fileId: true },
+    });
     await this.prisma.boardMinutesResolution.delete({ where: { id } });
+    await this.deleteStoredFiles(files.map((row) => row.fileId));
   }
 
   async assertMinutesAccess(userId: string) {
@@ -900,6 +1148,118 @@ export class BoardMinutesService {
     return item;
   }
 
+  private async loadContract(minutesId: string, resolutionId: string, contractId: string) {
+    await this.loadResolution(minutesId, resolutionId);
+    const item = await this.prisma.boardResolutionContract.findFirst({
+      where: { id: contractId, resolutionId },
+      include: {
+        file: { select: contractFileSelect },
+        contractor: { select: contractorNameSelect },
+      },
+    });
+    if (!item) throw new NotFoundException('قرارداد یافت نشد');
+    return item;
+  }
+
+  private async assertContractor(contractorId: string) {
+    const item = await this.prisma.projectContractor.findUnique({
+      where: { id: contractorId },
+      select: { id: true },
+    });
+    if (!item) throw new BadRequestException('پیمانکار یافت نشد');
+  }
+
+  private async resolveProgressLink(
+    resolutionId: string,
+    dto: { contractId?: string | null; contractorId?: string | null },
+  ) {
+    if (dto.contractId) {
+      const contract = await this.prisma.boardResolutionContract.findFirst({
+        where: { id: dto.contractId, resolutionId },
+        select: { id: true, contractorId: true },
+      });
+      if (!contract) throw new BadRequestException('قرارداد این مصوبه یافت نشد');
+      return { contractId: contract.id, contractorId: contract.contractorId };
+    }
+    if (dto.contractorId) {
+      const contract = await this.prisma.boardResolutionContract.findFirst({
+        where: { resolutionId, contractorId: dto.contractorId },
+        select: { id: true, contractorId: true },
+      });
+      if (!contract) {
+        throw new BadRequestException('این پیمانکار طرف قرارداد این مصوبه نیست');
+      }
+      return { contractId: contract.id, contractorId: contract.contractorId };
+    }
+    return { contractId: null, contractorId: null };
+  }
+
+  private async assertContractFile(fileId: string) {
+    const file = await this.prisma.storedFile.findUnique({
+      where: { id: fileId },
+      select: { id: true },
+    });
+    if (!file) throw new BadRequestException('فایل قرارداد یافت نشد');
+  }
+
+  private async deleteStoredFiles(ids: Array<string | null | undefined>) {
+    const fileIds = [...new Set(ids.filter((id): id is string => Boolean(id)))];
+    if (!fileIds.length) return;
+    await this.prisma.storedFile.deleteMany({ where: { id: { in: fileIds } } }).catch(() => undefined);
+  }
+
+  private resolveContractKind(kind?: string | null) {
+    if (
+      kind &&
+      boardResolutionContractKinds.includes(kind as (typeof boardResolutionContractKinds)[number])
+    ) {
+      return kind as BoardResolutionContractKind;
+    }
+    return null;
+  }
+
+  private resolveContractStatus(status?: string | null) {
+    if (
+      status &&
+      boardResolutionContractStatuses.includes(
+        status as (typeof boardResolutionContractStatuses)[number],
+      )
+    ) {
+      return status as BoardResolutionContractStatus;
+    }
+    return null;
+  }
+
+  private resolveContractKindOther(
+    kind: BoardResolutionContractKind | null,
+    kindOther?: string | null,
+  ) {
+    if (kind !== BoardResolutionContractKind.OTHER) return null;
+    const text = kindOther?.trim() || null;
+    if (!text) {
+      throw new BadRequestException('برای نوع سایر، عنوان نوع قرارداد را وارد کنید');
+    }
+    return text;
+  }
+
+  private contractKindUpdate(
+    dto: Pick<UpdateBoardResolutionContractDto, 'kind' | 'kindOther'>,
+    current: { kind: BoardResolutionContractKind | null; kindOther: string | null },
+  ) {
+    if (dto.kind === undefined && dto.kindOther === undefined) return {};
+    const kind = dto.kind !== undefined ? this.resolveContractKind(dto.kind) : current.kind;
+    return {
+      kind: dto.kind !== undefined ? kind : undefined,
+      kindOther: this.resolveContractKindOther(kind, dto.kindOther ?? current.kindOther),
+    };
+  }
+
+  private assertContractDates(startDate?: string | null, endDate?: string | null) {
+    if (startDate && endDate && startDate > endDate) {
+      throw new BadRequestException('تاریخ شروع نباید بعد از تاریخ پایان باشد');
+    }
+  }
+
   private serializeProgressReport(row: {
     id: string;
     resolutionId: string;
@@ -907,9 +1267,19 @@ export class BoardMinutesService {
     title: string;
     category: string | null;
     body: string | null;
+    actionsDone?: string | null;
+    nextPlan?: string | null;
+    blockers?: string | null;
+    needs?: string | null;
     progressAmount: number;
+    createdById?: string | null;
+    contractorId?: string | null;
+    contractId?: string | null;
     createdAt: Date;
     updatedAt: Date;
+    createdBy?: { id: string; fullName: string } | null;
+    contractor?: { id: string; name: string } | null;
+    contract?: { id: string; title: string } | null;
   }) {
     return {
       id: row.id,
@@ -918,7 +1288,77 @@ export class BoardMinutesService {
       title: row.title,
       category: row.category,
       body: row.body,
+      actionsDone: row.actionsDone ?? null,
+      nextPlan: row.nextPlan ?? null,
+      blockers: row.blockers ?? null,
+      needs: row.needs ?? null,
       progressAmount: row.progressAmount,
+      createdById: row.createdById ?? null,
+      contractorId: row.contractorId ?? null,
+      contractId: row.contractId ?? null,
+      createdBy: row.createdBy ?? null,
+      contractor: row.contractor ?? null,
+      contract: row.contract ?? null,
+      createdAt: row.createdAt.toISOString(),
+      updatedAt: row.updatedAt.toISOString(),
+    };
+  }
+
+  private serializeContract(row: {
+    id: string;
+    resolutionId: string;
+    title: string;
+    contractNo: string | null;
+    contractorId?: string | null;
+    contractor?: { id: string; name: string } | null;
+    kind: BoardResolutionContractKind | null;
+    kindOther: string | null;
+    amount: Prisma.Decimal | null;
+    signedAt: Date | null;
+    duration: string | null;
+    startDate: Date | null;
+    endDate: Date | null;
+    status: BoardResolutionContractStatus | null;
+    paidAmount: Prisma.Decimal | null;
+    supervisor: string | null;
+    fileId: string | null;
+    notes: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+    file?: {
+      id: string;
+      originalName: string | null;
+      mimeType: string;
+      byteSize: number;
+    } | null;
+  }) {
+    return {
+      id: row.id,
+      resolutionId: row.resolutionId,
+      title: row.title,
+      contractNo: row.contractNo,
+      contractorId: row.contractorId ?? null,
+      contractor: row.contractor ?? null,
+      kind: row.kind,
+      kindOther: row.kindOther,
+      amount: row.amount == null ? null : Number(row.amount),
+      signedAt: toIsoDateOnly(row.signedAt),
+      duration: row.duration,
+      startDate: toIsoDateOnly(row.startDate),
+      endDate: toIsoDateOnly(row.endDate),
+      status: row.status,
+      paidAmount: row.paidAmount == null ? null : Number(row.paidAmount),
+      supervisor: row.supervisor,
+      fileId: row.fileId,
+      file: row.file
+        ? {
+            id: row.file.id,
+            originalName: row.file.originalName,
+            mimeType: row.file.mimeType,
+            byteSize: row.file.byteSize,
+          }
+        : null,
+      notes: row.notes,
       createdAt: row.createdAt.toISOString(),
       updatedAt: row.updatedAt.toISOString(),
     };
@@ -1053,6 +1493,7 @@ export class BoardMinutesService {
   }
 
   private resolutionDataFromRequest(request: {
+    id: string;
     subject: string;
     description: string | null;
     justification: string | null;
@@ -1065,6 +1506,7 @@ export class BoardMinutesService {
       request.subject.trim()
     ).slice(0, 8000);
     return {
+      requestId: request.id,
       title,
       description,
       unitIds: request.unitId ? [request.unitId] : [],
@@ -1075,6 +1517,7 @@ export class BoardMinutesService {
 
   private resolutionCreateData(
     row: {
+      requestId?: string | null;
       title: string;
       description: string;
       unitIds: string[];
@@ -1084,6 +1527,7 @@ export class BoardMinutesService {
     signatories: Prisma.BoardResolutionSignatoryCreateWithoutResolutionInput[],
   ) {
     return {
+      requestId: row.requestId ?? null,
       title: row.title,
       description: row.description,
       dueKind: row.dueKind,
@@ -1132,6 +1576,18 @@ export class BoardMinutesService {
       throw new BadRequestException('یکی از واحدهای مجری معتبر نیست');
     }
     return unique;
+  }
+
+  private async resolveResolutionRequestId(minutesId: string, requestId?: string | null) {
+    if (!requestId) return null;
+    const linked = await this.prisma.boardMinutesRequest.findUnique({
+      where: { minutesId_requestId: { minutesId, requestId } },
+      select: { requestId: true },
+    });
+    if (!linked) {
+      throw new BadRequestException('این درخواست به این صورت‌جلسه وصل نیست');
+    }
+    return requestId;
   }
 
   private async resolveRequestIds(requestIds?: string[], existingIds: string[] = []) {
@@ -1322,7 +1778,32 @@ export class BoardMinutesService {
       { proposerText: text },
       { executors: { some: { unit: { name: text } } } },
       { proposerUnit: { name: text } },
+      { contracts: { some: { OR: this.contractTextWhere(q) } } },
     ];
+  }
+
+  private contractTextWhere(q: string): Prisma.BoardResolutionContractWhereInput['OR'] {
+    const text = containsInsensitive(q);
+    return [
+      { title: text },
+      { contractNo: text },
+      { contractor: { name: text } },
+    ];
+  }
+
+  private contractMatches(
+    row: {
+      title: string;
+      contractNo?: string | null;
+      contractor?: { name: string } | null;
+    },
+    q: string,
+  ) {
+    return (
+      includesInsensitive(row.title, q) ||
+      includesInsensitive(row.contractNo, q) ||
+      includesInsensitive(row.contractor?.name, q)
+    );
   }
 
   private requestSearchWhere(q: string): Prisma.BoardRequestWhereInput['OR'] {
@@ -1367,6 +1848,9 @@ export class BoardMinutesService {
       { resolutions: { some: { description: text } } },
       { resolutions: { some: { notes: text } } },
       { resolutions: { some: { executors: { some: { unit: { name: text } } } } } },
+      { resolutions: { some: { contracts: { some: { title: text } } } } },
+      { resolutions: { some: { contracts: { some: { contractNo: text } } } } },
+      { resolutions: { some: { contracts: { some: { contractor: { name: text } } } } } },
     ];
   }
 
@@ -1374,12 +1858,24 @@ export class BoardMinutesService {
     item: Prisma.BoardMinutesGetPayload<{ include: typeof searchInclude }>,
     q: string,
   ) {
+    const matchedContracts = item.resolutions.flatMap((row) =>
+      row.contracts
+        .filter((contract) => this.contractMatches(contract, q))
+        .map((contract) => ({
+          id: contract.id,
+          title: contract.title,
+          contractNo: contract.contractNo,
+          contractorName: contract.contractor?.name ?? null,
+          resolutionId: row.id,
+        })),
+    );
     const matchedResolutions = item.resolutions.filter(
       (row) =>
         includesInsensitive(row.title, q) ||
         includesInsensitive(row.description, q) ||
         includesInsensitive(row.notes, q) ||
-        row.executors.some((link) => includesInsensitive(link.unit.name, q)),
+        row.executors.some((link) => includesInsensitive(link.unit.name, q)) ||
+        row.contracts.some((contract) => this.contractMatches(contract, q)),
     );
     const linkedRequests = item.requests.map((row) => row.request);
     const matchedRequest = linkedRequests.find(
@@ -1406,6 +1902,7 @@ export class BoardMinutesService {
         : []),
       ...(matchedRequest ? (['request'] as const) : []),
       ...(matchedResolutions.length ? (['resolution'] as const) : []),
+      ...(matchedContracts.length ? (['contract'] as const) : []),
     ];
     const snippet =
       makeSnippet(item.subject, q) ||
@@ -1418,6 +1915,9 @@ export class BoardMinutesService {
       makeSnippet(matchedResolutions[0]?.title, q) ||
       makeSnippet(matchedResolutions[0]?.description, q) ||
       makeSnippet(matchedResolutions[0]?.notes, q) ||
+      makeSnippet(matchedContracts[0]?.title, q) ||
+      makeSnippet(matchedContracts[0]?.contractNo, q) ||
+      makeSnippet(matchedContracts[0]?.contractorName, q) ||
       null;
     const requests = linkedRequests.map((request) => ({
       id: request.id,
@@ -1433,6 +1933,7 @@ export class BoardMinutesService {
       subject: item.subject,
       heldAt: toIsoDateOnly(item.heldAt),
       body: item.body,
+      createdBy: item.createdBy,
       request: requests[0] ?? null,
       requests,
       resolutionCount: item._count.resolutions,
@@ -1442,6 +1943,7 @@ export class BoardMinutesService {
         id: row.id,
         title: row.title,
       })),
+      matchedContracts: matchedContracts.slice(0, 5),
     };
   }
 
@@ -1470,7 +1972,9 @@ export class BoardMinutesService {
       subject: item.subject,
       requestedAt: toIsoDateOnly(item.requestedAt),
       status: item.status,
+      trackingNo: item.trackingNo,
       unit: item.unit,
+      createdBy: item.createdBy,
       snippet,
       matchIn: ['request'] as const,
       minutesCount: item._count.minutesRequests,
@@ -1573,7 +2077,10 @@ export class BoardMinutesService {
       { minutes: { subject: containsInsensitive(q) } },
       { minutes: { body: containsInsensitive(q) } },
       { minutes: { minutesNo: containsInsensitive(q) } },
+      { request: { subject: containsInsensitive(q) } },
+      { request: { trackingNo: containsInsensitive(q) } },
       { minutes: { requests: { some: { request: { subject: containsInsensitive(q) } } } } },
+      { minutes: { requests: { some: { request: { trackingNo: containsInsensitive(q) } } } } },
     ];
   }
 
@@ -1588,12 +2095,12 @@ export class BoardMinutesService {
       query.sortBy,
       query.sortDir,
       {
+        minutesNo: (dir) => ({ minutes: { minutesYear: dir, minutesSeq: dir } }),
+        request: (dir) => ({ request: { trackingNo: dir } }),
         title: (dir) => ({ title: dir }),
         unit: (dir) => ({ executors: { _count: dir } }),
         status: (dir) => ({ status: dir }),
         dueDate: (dir) => ({ dueDate: dir }),
-        minutes: (dir) => ({ minutes: { subject: dir } }),
-        request: (dir) => ({ minutes: { requests: { _count: dir } } }),
         createdAt: (dir) => ({ createdAt: dir }),
       },
       fallback,
@@ -1671,14 +2178,16 @@ export class BoardMinutesService {
       })),
       createdAt: item.createdAt.toISOString(),
       updatedAt: item.updatedAt.toISOString(),
+      requestId: item.requestId,
+      request: item.request,
       minutes: {
         id: item.minutes.id,
         subject: item.minutes.subject,
         heldAt: toIsoDateOnly(item.minutes.heldAt),
         minutesNo: item.minutes.minutesNo,
         status: item.minutes.status,
-        requestId: item.minutes.requests[0]?.request.id ?? null,
-        request: item.minutes.requests[0]?.request ?? null,
+        requestId: item.requestId ?? item.minutes.requests[0]?.request.id ?? null,
+        request: item.request ?? item.minutes.requests[0]?.request ?? null,
         requests: item.minutes.requests.map((row) => row.request),
       },
     };

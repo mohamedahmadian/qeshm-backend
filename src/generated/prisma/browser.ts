@@ -338,6 +338,11 @@ export type BoardResolutionSignatory = Prisma.BoardResolutionSignatoryModel
  */
 export type BoardResolutionProgressReport = Prisma.BoardResolutionProgressReportModel
 /**
+ * Model BoardResolutionContract
+ * 
+ */
+export type BoardResolutionContract = Prisma.BoardResolutionContractModel
+/**
  * Model PortSalesReport
  * 
  */

@@ -3,6 +3,7 @@ import {
   IsInt,
   IsOptional,
   IsString,
+  IsUUID,
   Matches,
   Max,
   MaxLength,
@@ -43,6 +44,46 @@ export class CreateBoardResolutionProgressDto {
   @IsString()
   @MaxLength(8000)
   body?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  actionsDone?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  nextPlan?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  blockers?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(8000)
+  needs?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  contractId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(trimString(value)))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  contractorId?: string | null;
 
   @Transform(({ value }) => {
     if (value === undefined) return undefined;
